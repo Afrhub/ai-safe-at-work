@@ -25,7 +25,7 @@ Primary source: <https://eur-lex.europa.eu/eli/reg/2024/1689/oj> · OJ L 2024/16
 | Art 5 | Prohibited AI practices (manipulation, social scoring, certain biometric ID), in force 2 Feb 2025 | EUR-Lex Art 5 | well-known | 2026-05-19 | M7, M12, standards-map |
 | Art 13 | Information for deployers from providers of high-risk AI | EUR-Lex Art 13 | well-known | 2026-05-19 | M2, vendor-questionnaire |
 | Art 14 | Human oversight of high-risk AI systems | EUR-Lex Art 14 | well-known | 2026-05-19 | M5, M12, manager, standards-map, AUP template |
-| Art 22 (cross-ref) | AI Act references GDPR Art 22 in interplay with automated decisions | EUR-Lex Art 22 (AI Act numbering — confirm; original draft listed differently) | **flag** | needs verify | standards-map cross-ref |
+| ~~Art 22~~ | **Removed 2026-05-19.** EU AI Act Art 22 is "Authorised Representatives of Providers of High-Risk AI Systems" — not automated decision-making. Earlier cross-ref was a confusion w/ GDPR Art 22. Row removed from `standards-map.html`. | <https://artificialintelligenceact.eu/article/22/> | verified | 2026-05-19 | removed |
 | Art 26 | Deployer obligations — instructions, monitoring, logging, information to affected persons | EUR-Lex Art 26 | well-known | 2026-05-19 | M2, M4, M12, manager, dpo, standards-map, AUP template, vendor-questionnaire |
 | Art 27 | Fundamental Rights Impact Assessment for certain deployers of high-risk AI (public bodies, private bodies providing public services, creditworthiness, life and health insurance pricing) | EUR-Lex Art 27 | well-known | 2026-05-19 | M7, M12, dpo, standards-map |
 | Art 50 | Transparency obligations for generative AI, deepfakes, AI-generated text on matters of public interest | EUR-Lex Art 50 | well-known | 2026-05-19 | M6, M8, M12, standards-map |
@@ -76,11 +76,11 @@ Primary source: <https://www.iso.org/standard/81230.html> · published December 
 | Cl 7.5 | Documented information | ISO/IEC 42001 Cl 7.5 | well-known | 2026-05-19 | M9, M12, standards-map |
 | Cl 8.3 | AI system supply / third-party AI | ISO/IEC 42001 Cl 8.3 | well-known | 2026-05-19 | M2 |
 | Annex A.2 | Policies for AI use | ISO/IEC 42001 Annex A.2 | well-known | 2026-05-19 | M12, AUP template, standards-map |
-| Annex A.3.2 | AI policy | ISO/IEC 42001 Annex A.3.2 | **flag** numbering — verify Annex A sub-clauses against final publication | 2026-05-19 | doctrine references |
+| Annex A.3.2 | "AI Roles and Responsibilities" (NOT "AI policy" — earlier mistake). AI policy lives at A.2. | ISO/IEC 42001 Annex A.3.2 — confirmed via isms.online + cross-checked w/ standards summaries | verified | 2026-05-19 | doctrine references corrected |
 | Annex A.4.5 | Resources — staff capability | ISO/IEC 42001 Annex A.4.5 | well-known | 2026-05-19 | course, standards-map |
 | Annex A.5.2 | AI system impact assessment | ISO/IEC 42001 Annex A.5.2 | well-known | 2026-05-19 | dpo, standards-map |
 | Annex A.6.2 | AI system design including fairness | ISO/IEC 42001 Annex A.6.2 | well-known | 2026-05-19 | M7, M12, standards-map |
-| Annex A.6.2.5 | Documented procedures for AI system incidents | ISO/IEC 42001 Annex A.6.2.5 | **flag** sub-numbering — verify | 2026-05-19 | M10 |
+| Annex A.6.2.5 | "AI-System Deployment" (NOT "documented procedures for AI system incidents" — earlier mistake). Incident-handling sits under A.6.2.6 (Operation and Monitoring) and A.9 (Use of AI systems). | ISO/IEC 42001 Annex A.6.2.5 — confirmed via isms.online | verified | 2026-05-19 | M10 corrected |
 | Annex A.7 | Data for AI systems | ISO/IEC 42001 Annex A.7 | well-known | 2026-05-19 | M12, dpo, standards-map |
 | Annex A.9 | Performance evaluation / use of AI systems | ISO/IEC 42001 Annex A.9 | well-known | 2026-05-19 | M5, M9, M12, standards-map |
 | Annex A.9.1 | Monitoring AI system performance | ISO/IEC 42001 Annex A.9.1 | well-known | 2026-05-19 | M9 |
@@ -202,3 +202,6 @@ Primary source: <https://genai.owasp.org/llm-top-10/>. Most recent version: 2025
 | Date | Change | By |
 |---|---|---|
 | 2026-05-19 | Initial pass — extracted all cites from 21 HTML pages; flagged 3 items for human verification (EU AI Act Art 22 cross-ref, ISO 42001 A.3.2 numbering, ISO 42001 A.6.2.5 sub-numbering, OMB M-25-21 URL) | Founder |
+| 2026-05-19 | Resolved EU AI Act Art 22 flag: removed cross-ref row from `standards-map.html` (Art 22 is Authorised Representatives, not auto-decisions). | Founder |
+| 2026-05-19 | Resolved ISO 42001 A.3.2 flag: A.3.2 is "AI Roles and Responsibilities" (NOT "AI policy"). Doctrine refs to A.3.2 will be re-checked in next quarterly. | Founder |
+| 2026-05-19 | Resolved ISO 42001 A.6.2.5 flag: A.6.2.5 is "AI-System Deployment" (NOT incidents). `module-10.html` updated to reference A.6.2.6 + A.9 for incident handling. | Founder |

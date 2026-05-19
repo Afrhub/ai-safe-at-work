@@ -29,9 +29,9 @@ Version scheme: `vYYYY.MM` where MM is the month of the release.
 
 **Flagged for verification before next release**
 
-- EU AI Act Art 22 cross-reference numbering (standards-map)
-- ISO/IEC 42001 Annex A sub-clause numbering for A.3.2 and A.6.2.5
-- OMB M-25-21 URL canonical form
+- ~~EU AI Act Art 22 cross-reference numbering (standards-map)~~ — Resolved 2026-05-19. Art 22 is Authorised Representatives; cross-ref to GDPR Art 22 was a confusion. Row removed from standards-map.
+- ~~ISO/IEC 42001 Annex A sub-clause numbering for A.3.2 and A.6.2.5~~ — Resolved 2026-05-19. A.3.2 is "AI Roles and Responsibilities". A.6.2.5 is "AI-System Deployment". M10 reference corrected to A.6.2.6 + A.9 for incident handling.
+- OMB M-25-21 URL canonical form (still open — verify in next quarterly)
 
 ---
 
