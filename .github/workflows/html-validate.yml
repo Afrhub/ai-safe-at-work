@@ -29,6 +29,4 @@ jobs:
 
       - name: Run html-validate
         run: |
-          npx html-validate \
-            --config '{"extends":["html-validate:recommended","html-validate:document"],"rules":{"void-style":"off","wcag/h30":"warn","no-inline-style":"off","no-trailing-whitespace":"off","attribute-boolean-style":"off"}}' \
-            "*.html" "templates/*.html"
+          npx html-validate --config .htmlvalidate.json "*.html" "templates/*.html"
