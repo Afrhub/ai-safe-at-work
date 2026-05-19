@@ -1,0 +1,67 @@
+name: Link check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.html"
+      - "**/*.md"
+      - "sitemap.xml"
+      - "llms.txt"
+  pull_request:
+    paths:
+      - "**/*.html"
+      - "**/*.md"
+      - "sitemap.xml"
+      - "llms.txt"
+  schedule:
+    # Weekly — Monday 07:00 UTC. Catches link rot on external citations.
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  lychee:
+    name: lychee link checker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore lychee cache
+        uses: actions/cache@v4
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
+
+      - name: Run lychee
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >
+            --cache
+            --max-cache-age 1d
+            --no-progress
+            --accept 200,206,429
+            --exclude-mail
+            --exclude-path .audit/inject-jsonld.py
+            --exclude "^https://aisafeatwork\\.org/"
+            --exclude "^https://afrhub\\.github\\.io/"
+            './**/*.html'
+            './**/*.md'
+            './sitemap.xml'
+            './llms.txt'
+          fail: false
+          format: markdown
+          output: ./lychee/out.md
+
+      - name: Create issue on link failure (scheduled run only)
+        if: github.event_name == 'schedule' && steps.lychee.outputs.exit_code != '0'
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: "Weekly link check — broken links detected"
+          content-filepath: ./lychee/out.md
+          labels: link-check, automated

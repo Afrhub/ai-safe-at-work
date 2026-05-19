@@ -1,0 +1,60 @@
+name: Lighthouse smoke
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.html"
+      - "assets/**"
+  pull_request:
+    paths:
+      - "**/*.html"
+      - "assets/**"
+  schedule:
+    # Weekly Lighthouse run against deployed Pages site
+    - cron: "0 8 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli@0.14.x
+
+      - name: Serve site
+        run: |
+          npx -y http-server -p 8090 -s &
+          sleep 3
+
+      - name: Run Lighthouse against landing + course + a module + a template
+        env:
+          BASE: http://127.0.0.1:8090
+        run: |
+          lhci autorun \
+            --collect.url=$BASE/index.html \
+            --collect.url=$BASE/course.html \
+            --collect.url=$BASE/module-1.html \
+            --collect.url=$BASE/standards-map.html \
+            --collect.url=$BASE/templates/aup-template.html \
+            --collect.numberOfRuns=1 \
+            --upload.target=temporary-public-storage \
+            --assert.preset=lighthouse:recommended \
+            --assert.assertions.color-contrast=warn \
+            --assert.assertions.uses-rel-preconnect=warn \
+            --assert.assertions.uses-text-compression=warn \
+            --assert.assertions.unused-javascript=warn \
+            --assert.assertions.csp-xss=warn \
+            --assert.assertions.unsized-images=warn || true
+        # `|| true` because assertions fail the run; we want smoke output without
+        # blocking until we tune the assertion set. Once stable, remove `|| true`.

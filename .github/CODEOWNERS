@@ -1,0 +1,24 @@
+# Code owners for AI Safe@Work
+#
+# These owners are auto-requested on every PR.
+# First match wins; later patterns override earlier ones.
+
+# Default — sole owner today
+*       @Afrhub
+
+# Audit-pack — touch with extra care; same owner today but flagged here
+# so future contributors know this is sensitive ground.
+/.audit/                @Afrhub
+/DOCTRINE.md            @Afrhub
+/LICENSE                @Afrhub
+/LICENSE-CODE           @Afrhub
+/LICENSE-CONTENT        @Afrhub
+
+# Workflows — change with caution; CI security boundary.
+/.github/               @Afrhub
+
+# Public-facing legal + accessibility surfaces.
+/privacy.html           @Afrhub
+/terms.html             @Afrhub
+/accessibility.html     @Afrhub
+/complaints.html        @Afrhub

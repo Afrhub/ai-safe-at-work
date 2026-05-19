@@ -1,0 +1,34 @@
+name: HTML validate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.html"
+  pull_request:
+    paths:
+      - "**/*.html"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: html-validate (anti-pattern + spec lint)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install html-validate
+        run: npm install --no-save html-validate@latest
+
+      - name: Run html-validate
+        run: |
+          npx html-validate \
+            --config '{"extends":["html-validate:recommended","html-validate:document"],"rules":{"void-style":"off","wcag/h30":"warn","no-inline-style":"off","no-trailing-whitespace":"off","attribute-boolean-style":"off"}}' \
+            "*.html" "templates/*.html"
