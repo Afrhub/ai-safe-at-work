@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#060608" />
+<title>Module 9 · Logging, accountability, and "who used what" — AI Safe@Work</title>
+<meta name="description" content="Keeping a paper trail without becoming bureaucratic. The right-to-explanation principle. When an AI-assisted decision needs a human signature." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="AI Safe@Work" />
+<meta property="og:title" content="Module 9 · Logging, accountability, and &quot;who used what&quot; — AI Safe@Work" />
+<meta property="og:description" content="Keeping a paper trail without becoming bureaucratic. The right-to-explanation principle. When an AI-assisted decision needs a human signature." />
+<meta property="og:url" content="https://aisafeatwork.org/module-9.html" />
+<meta property="og:image" content="https://aisafeatwork.org/og-card.png" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Module 9 · Logging, accountability, and &quot;who used what&quot; — AI Safe@Work" />
+<meta name="twitter:description" content="Keeping a paper trail without becoming bureaucratic. The right-to-explanation principle. When an AI-assisted decision needs a human signature." />
+<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/style.css?v=2" />
+<script defer src="assets/cinema.js?v=2"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://aisafeatwork.org/module-9.html#resource",
+      "name": "Module 9 - Logging, accountability, and who used what",
+      "description": "The minimum useful AI-use log; GDPR Article 22; right to explanation.",
+      "url": "https://aisafeatwork.org/module-9.html",
+      "learningResourceType": "Module",
+      "inLanguage": "en",
+      "educationalLevel": "Beginner to intermediate",
+      "isPartOf": {
+        "@type": "Course",
+        "@id": "https://aisafeatwork.org/course.html#course"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "SMB employee using AI tools at work"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://aisafeatwork.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Course",
+          "item": "https://aisafeatwork.org/course.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Module 9 - Logging, accountability, and who used what",
+          "item": "https://aisafeatwork.org/module-9.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="index.html" class="brand">AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="course.html" class="always-show">Modules</a>
+    <a href="standards-map.html">Standards Map</a>
+    <a href="module-11.html">Checklist</a>
+    <a href="module-12.html">Standards</a>
+  </nav>
+</header>
+
+<main>
+  <p class="eyebrow">Module 09 · 6 min read</p>
+  <h1 class="page-title">Logging, accountability, and <em>"who used what"</em>.</h1>
+  <p class="lede">When AI helped you make a decision, six months from now somebody might ask "how was this decided?". The honest answer takes about ten seconds to write down at the time, and is essentially impossible to reconstruct later.</p>
+
+  <div class="objectives">
+    <div class="objectives-title">By the end of this module, you'll</div>
+    <ul>
+      <li>Know what counts as a "significant AI-assisted decision" worth logging</li>
+      <li>Have a minimum logging format you can actually use without slowing your work down</li>
+      <li>Understand GDPR Article 22 and the right to explanation, in plain words</li>
+      <li>Be able to tell the difference between "logging" and "surveillance"</li>
+    </ul>
+  </div>
+
+  <h2>Why this matters</h2>
+  <p>Three pressures converge on the same answer:</p>
+  <ol>
+    <li><strong>The law is increasingly asking.</strong> GDPR's right to explanation (Article 22) and the EU AI Act's logging obligations for high-risk systems (Article 12) both rest on the assumption that there's a record of how AI contributed to a decision.</li>
+    <li><strong>The standards are increasingly asking.</strong> ISO/IEC 42001 requires documented evidence of how AI is used and overseen. ISO/IEC 27001 has long required logging of activities that affect information systems.</li>
+    <li><strong>The business cost of "we don't know" is high.</strong> When a customer complains that an AI-generated decision was wrong, or a regulator asks how you're using AI, or your insurer asks for evidence of AI controls — "we didn't keep track" is the worst answer.</li>
+  </ol>
+
+  <h2>What counts as "significant"</h2>
+  <p>Not every interaction with AI needs a log entry. "I asked ChatGPT to fix this sentence" doesn't. The line is around four properties:</p>
+  <ul>
+    <li><strong>Does the output affect another person?</strong> Customer, employee, candidate, supplier, the public.</li>
+    <li><strong>Does the output represent the business?</strong> Going to a customer, on the website, in a contract, in a marketing campaign.</li>
+    <li><strong>Was the data sensitive?</strong> Anything close to the never-paste list (Module 3), even if handled correctly.</li>
+    <li><strong>Was the decision irreversible or expensive?</strong> Hiring, firing, pricing, contract terms, technical changes to production systems.</li>
+  </ul>
+  <p>If two or more of those are true, log it. If none of them is true, don't bother — over-logging is its own kind of dysfunction.</p>
+
+  <h2>The minimum useful log</h2>
+  <p>Eight fields, no more. Designed to be copied into a spreadsheet, a Notion page, a shared doc — whatever your team already uses. The whole point is that this should take 30 seconds and remain useful in six months.</p>
+
+  <div class="callout note">
+    <span class="callout-icon">i</span>
+    <div>
+      <div class="callout-title">A minimum log row</div>
+      <ol>
+        <li><strong>Date.</strong></li>
+        <li><strong>Who.</strong> Your name or initials.</li>
+        <li><strong>Tool.</strong> Which AI, which tier. ("ChatGPT Team", "Copilot for M365", "Claude Pro".)</li>
+        <li><strong>Task.</strong> One sentence. ("Drafted reply to customer complaint about late delivery.")</li>
+        <li><strong>Inputs.</strong> What kind of data was in the prompt, not the data itself. ("Customer's order history, summarised; no names or contact details.")</li>
+        <li><strong>What the AI produced.</strong> One sentence. ("Three reply drafts, varying in tone.")</li>
+        <li><strong>What you did with it.</strong> ("Picked option 2, edited the apology, removed the offer of a refund — added 'we'll investigate' instead.")</li>
+        <li><strong>Who else reviewed it.</strong> If anyone. ("Sent. No further review — within normal authority for me.")</li>
+      </ol>
+    </div>
+  </div>
+
+  <p>That's it. For most teams, this can live in a single shared spreadsheet. For larger teams, it eventually moves into a proper logging tool. For an individual, a personal note works.</p>
+
+  <h2>What you don't need to do</h2>
+  <p>Logging isn't a transcript. You don't need to keep every prompt, every response, every conversation. You don't need to capture screenshots. You don't need to record what other people in your team did with their AI tools (that's their log, not yours).</p>
+  <p>The goal is "if asked, could I describe what happened?" — not "if asked, could I replay it exactly?".</p>
+
+  <hr class="section-divider" />
+
+  <h2>The right to explanation (GDPR Article 22)</h2>
+  <p>GDPR gives individuals a right not to be subject to a decision "based solely on automated processing... which produces legal effects concerning him or her or similarly significantly affects him or her". And when such decisions <em>are</em> made, the person has the right to "meaningful information about the logic involved".</p>
+  <p>"Solely automated" is the key phrase. If a human meaningfully reviews the AI's output and is empowered to override it (Module 5 — real oversight, not rubber-stamping), the decision isn't "solely automated" and Article 22 doesn't bite in its strongest form. But the obligation to be transparent about how AI was involved still applies.</p>
+  <p>In practice, for an SMB, this means:</p>
+  <ul>
+    <li>If a customer is told no, a candidate is rejected, an employee is disciplined, a price is set, or a service is denied — and AI helped shape that — be prepared to explain the AI's role if asked.</li>
+    <li>"Our AI tool recommended this and we accepted it without thinking" is the answer that gets you in trouble. "We used AI to summarise the application; a human then read the summary, the application, and decided" is the answer that does not.</li>
+  </ul>
+
+  <div class="callout warn">
+    <span class="callout-icon">!</span>
+    <div>
+      <div class="callout-title">Beware "the AI decided"</div>
+      <p>It's tempting to deflect difficult decisions by blaming the AI. Legally, this is exactly backwards: deferring to AI on regulated decisions <em>increases</em> liability, because Article 22 specifically targets automated decisions. Saying "the AI flagged this candidate as low-fit, so we didn't interview them" is admitting to the kind of decision the law most carefully restricts. Saying "we read the application, considered the AI's summary, and chose not to progress" is doing the same work more defensibly.</p>
+    </div>
+  </div>
+
+  <h2>Logging vs. surveillance</h2>
+  <p>Logging your <em>own</em> AI use, as in the eight-field row above, is good practice and protective of you. Your employer logging <em>your</em> AI use without your knowledge or a clear policy is a different thing — it's employee monitoring, and it has its own legal framework.</p>
+  <p>For employers reading this: monitoring of employees' AI use needs the same things any monitoring needs — a lawful basis, transparency to staff, proportionality, and (usually) consultation with employee representatives where they exist. "We installed it without telling people" doesn't fly under GDPR or under employment law in most EU jurisdictions.</p>
+  <p>The healthy pattern: AI tool use is logged at the tool level (in the admin console) for security and compliance purposes; employees know this; the logs aren't used for performance scoring; and there's a clear policy.</p>
+
+  <h2>Annual review</h2>
+  <p>Once a year, look back at the log:</p>
+  <ul>
+    <li>What did we actually use AI for, in volume?</li>
+    <li>Were the right tools used at the right tiers?</li>
+    <li>Are there categories of use we should formalise as policy?</li>
+    <li>Are there categories we should stop doing?</li>
+  </ul>
+  <p>This is exactly the kind of evidence ISO 42001 expects, but it's also genuinely useful as a management exercise. Most small businesses, when they do this, discover their AI use is concentrated in two or three task types — which makes choosing the right enterprise tool dramatically easier.</p>
+
+  <div class="callout do">
+    <span class="callout-icon">✓</span>
+    <div>
+      <div class="callout-title">Do this today</div>
+      <p>Open whatever you use for your day-to-day notes. Create one document called "AI use log". Add a header row with the eight fields above. Next time you use AI for anything that meets the "significant" test, add a row. You'll have a useful artefact within a fortnight and audit-grade evidence within a year.</p>
+    </div>
+  </div>
+
+  <div class="callout standard">
+    <span class="callout-icon">§</span>
+    <div>
+      <div class="callout-title">Where the standards land</div>
+      <p><strong>GDPR Article 22</strong>: rights related to automated decision-making. <strong>Article 13–14</strong>: information to be provided to data subjects, including "the existence of automated decision-making" and "meaningful information about the logic involved". <strong>Article 30</strong>: records of processing activities (RoPA) — for larger businesses, AI uses belong in this register. <strong>EU AI Act Article 12</strong>: high-risk AI systems must keep automated logs. <strong>Article 26(5–6)</strong>: deployers must retain logs and inform affected persons. <strong>ISO/IEC 42001:2023 Clause 7.5</strong>: documented information; <strong>Annex A.9.1</strong>: monitoring AI system performance. <strong>ISO/IEC 27001:2022 Annex A.8.15</strong>: logging.</p>
+    </div>
+  </div>
+</main>
+
+<nav class="module-bottom-nav">
+  <a class="nav-btn" href="module-8.html">
+    <span class="nav-dir">Previous</span>
+    <span class="nav-title">← 08 · Copyright and IP</span>
+  </a>
+  <a class="nav-btn next" href="module-10.html">
+    <span class="nav-dir">Next module</span>
+    <span class="nav-title">10 · When something goes wrong →</span>
+  </a>
+</nav>
+
+<footer class="site-foot">
+  <span>AI Safe@Work · Module 09 of 12</span>
+  <span class="foot-right">
+    <a href="course.html">All modules</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </span>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#060608" />
+<title>Module 3 · The never-paste list — AI Safe@Work</title>
+<meta name="description" content="Concrete categories of data you should never put into a public AI tool — with the reasons, and the GDPR / ISO 27001 connection." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="AI Safe@Work" />
+<meta property="og:title" content="Module 3 · The never-paste list — AI Safe@Work" />
+<meta property="og:description" content="Concrete categories of data you should never put into a public AI tool — with the reasons, and the GDPR / ISO 27001 connection." />
+<meta property="og:url" content="https://aisafeatwork.org/module-3.html" />
+<meta property="og:image" content="https://aisafeatwork.org/og-card.png" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Module 3 · The never-paste list — AI Safe@Work" />
+<meta name="twitter:description" content="Concrete categories of data you should never put into a public AI tool — with the reasons, and the GDPR / ISO 27001 connection." />
+<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/style.css?v=2" />
+<script defer src="assets/cinema.js?v=2"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://aisafeatwork.org/module-3.html#resource",
+      "name": "Module 3 - The never-paste list",
+      "description": "Nine categories of data that should never go in a public AI tool.",
+      "url": "https://aisafeatwork.org/module-3.html",
+      "learningResourceType": "Module",
+      "inLanguage": "en",
+      "educationalLevel": "Beginner to intermediate",
+      "isPartOf": {
+        "@type": "Course",
+        "@id": "https://aisafeatwork.org/course.html#course"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "SMB employee using AI tools at work"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://aisafeatwork.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Course",
+          "item": "https://aisafeatwork.org/course.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Module 3 - The never-paste list",
+          "item": "https://aisafeatwork.org/module-3.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="index.html" class="brand">AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="course.html" class="always-show">Modules</a>
+    <a href="standards-map.html">Standards Map</a>
+    <a href="module-11.html">Checklist</a>
+    <a href="module-12.html">Standards</a>
+  </nav>
+</header>
+
+<main>
+  <p class="eyebrow">Module 03 · 9 min read</p>
+  <h1 class="page-title">The never-paste <em>list</em>.</h1>
+  <p class="lede">If you take one thing from this course, take this module. The categories below should never go into a free or paid-individual AI tool. Anywhere. For any reason. Even "just to format it" or "just to summarise it".</p>
+
+  <div class="objectives">
+    <div class="objectives-title">By the end of this module, you'll</div>
+    <ul>
+      <li>Recognise the nine categories of "never paste this into a consumer AI tool" data</li>
+      <li>Understand which GDPR articles and ISO 27001 controls back each one up</li>
+      <li>Know what to do when the AI tool would genuinely help, but the data is off-limits</li>
+    </ul>
+  </div>
+
+  <div class="callout note">
+    <span class="callout-icon">i</span>
+    <div>
+      <div class="callout-title">"Never" with one footnote</div>
+      <p>"Never paste this" means never into a free or paid-individual consumer AI tool. The same content may be fine in a properly-configured enterprise-tier tool your business has procured — see Module 4. The rule isn't "AI is forbidden". The rule is "the wrong tier of tool is forbidden for this kind of data".</p>
+    </div>
+  </div>
+
+  <h2>1. Customer and contact personal data</h2>
+  <p>Names, email addresses, phone numbers, postal addresses, dates of birth, account numbers, customer IDs. Even one row. Even "I'll just anonymise it first" — you usually don't, and even when you try, the AI's response often reconstructs enough context to identify the person.</p>
+  <p><strong>Why it's a problem:</strong> personal data under GDPR. Pasting it into a tool whose terms don't establish a controller-processor relationship is, in itself, a personal data breach.</p>
+  <p><strong>What to do instead:</strong> describe the shape of the data in the abstract ("I have a CSV with three columns: name, email, last-purchase date"), ask the AI for the logic, then run that logic locally.</p>
+
+  <h2>2. Special-category personal data</h2>
+  <p>Health, ethnicity, religion, sexual orientation, political views, trade-union membership, genetic data, biometric data used to identify someone. Anything that could be used to discriminate.</p>
+  <p><strong>Why it's a problem:</strong> GDPR Article 9 makes this category of data essentially forbidden to process without one of nine specific legal grounds, and "I pasted it into a chatbot for convenience" isn't one of them.</p>
+  <p><strong>What to do instead:</strong> if you're working with HR records, medical information, or DEI data, the only legitimate AI tool is one your business has procured under a proper DPA, configured for special-category data, with logging on.</p>
+
+  <h2>3. Contracts and legal documents you didn't draft</h2>
+  <p>Draft contracts, signed contracts, NDAs, term sheets, settlement agreements. Other people's lawyers wrote them, often under confidentiality obligations.</p>
+  <p><strong>Why it's a problem:</strong> most professional services contracts explicitly forbid disclosing them to third parties without consent. The AI vendor is a third party. Pasting a counterparty's confidential terms is a breach of contract, and possibly of professional ethics if you're a lawyer.</p>
+  <p><strong>What to do instead:</strong> redact identifying information, paste only the clause you're trying to understand, and ask in the abstract ("what does this kind of indemnity clause typically mean in a SaaS context"). Better: use a contract-review tool your firm has procured.</p>
+
+  <h2>4. Source code from systems you don't own</h2>
+  <p>Internal applications, your employer's code, code from a client engagement, proprietary algorithms, anything from a private repository.</p>
+  <p><strong>Why it's a problem:</strong> source code is intellectual property. Multiple major companies (Samsung is the public example) have had engineers paste proprietary code into ChatGPT and seen it appear in suggestions to other users. Even where it doesn't leak, the IP arguably ceases to be a trade secret the moment it's been disclosed to an uncontrolled third party.</p>
+  <p><strong>What to do instead:</strong> rewrite the snippet to be generic — strip business logic, function names, variable names — until what remains is a generic programming problem. Or use a coding assistant configured for your organisation (GitHub Copilot Business, Cursor with private-repo controls, etc.).</p>
+
+  <h2>5. Financial figures that aren't public</h2>
+  <p>Internal P&L, draft management accounts, pricing models, forecasts, customer-specific pricing, vendor cost data, cap tables, salary information, equity details.</p>
+  <p><strong>Why it's a problem:</strong> price-sensitive information from a private company is commercially confidential, and from a public company may be material non-public information (MNPI) — which has criminal implications if it leaks before announcement.</p>
+  <p><strong>What to do instead:</strong> work with the shape of the numbers, not the numbers. "I have monthly revenue figures for the last 24 months; how should I structure a chart that shows growth and seasonality?" doesn't require pasting the figures themselves.</p>
+
+  <h2>6. Authentication secrets</h2>
+  <p>Passwords. API keys. SSH keys. Database connection strings. OAuth tokens. Anything that grants access.</p>
+  <p><strong>Why it's a problem:</strong> any secret that's been pasted into a chat is no longer a secret. Rotate it immediately.</p>
+  <p><strong>What to do instead:</strong> if you're trying to debug an authentication problem, describe what's happening without the secret itself. "My API returns 401 when I include the bearer token in the Authorization header" is enough.</p>
+
+  <div class="callout warn">
+    <span class="callout-icon">!</span>
+    <div>
+      <div class="callout-title">If a secret has been pasted</div>
+      <p>Don't panic, but don't wait. Rotate the credential in the system it belongs to <em>before</em> you finish this module. Delete the chat. Tell your IT or security team. Most credentials can be rotated in minutes; the cost of the rotation is much smaller than the cost of the secret being in a vendor's training pipeline.</p>
+    </div>
+  </div>
+
+  <h2>7. Internal documents marked confidential</h2>
+  <p>Board papers, strategy documents, M&A discussions, layoff plans, restructuring memos, customer churn analysis, anything with a "Confidential" classification on it.</p>
+  <p><strong>Why it's a problem:</strong> the classification exists for a reason. If your business has a document classification scheme, treating the highest tier as "internal only" implies "don't paste into external services". If it doesn't have a scheme, the existence of the word "confidential" on the document is the scheme.</p>
+  <p><strong>What to do instead:</strong> ask the AI for the structure of the work, not the content. "How should I structure a board memo about a strategic pivot?" is a fine prompt. Pasting the draft of the pivot itself is not.</p>
+
+  <h2>8. HR records and employee information</h2>
+  <p>Performance reviews, disciplinary records, salary letters, sickness records, references, exit interviews, complaints.</p>
+  <p><strong>Why it's a problem:</strong> employee data is personal data (GDPR), and HR data carries some of the highest sensitivity — getting it wrong has direct human consequences. Hallucinated tone in a performance review, leaked salary figures, biased AI-generated assessments all create employment-law risk on top of data-protection risk.</p>
+  <p><strong>What to do instead:</strong> draft people-related communications in your own words first, then ask AI to <em>tighten</em> the wording, not <em>create</em> the substance. And don't paste the employee's actual data.</p>
+
+  <h2>9. Anything from a client engagement</h2>
+  <p>If you're a consultant, agency, accountant, lawyer, or contractor, your client's information is held under a duty of confidence and usually under specific contractual confidentiality clauses. Project briefs, deliverables, internal documents you've been shown, anything you wouldn't show to another client.</p>
+  <p><strong>Why it's a problem:</strong> you're not the data controller — your client is. They haven't agreed for their information to go to the AI vendor. Pasting it isn't yours to do.</p>
+  <p><strong>What to do instead:</strong> ask the client. Many will say yes. Many will name a specific tool they want you to use. Some will say no — and then you genuinely cannot use AI for that part of the engagement. Get used to that conversation.</p>
+
+  <hr class="section-divider" />
+
+  <h2>The "but I'm pressed for time" answer</h2>
+  <p>The pressure to use AI on forbidden data almost always comes from a deadline. The solution to a deadline isn't an unsafe shortcut. It's one of three things: (1) escalate the deadline, (2) use the same AI tool on the generic shape of the problem, (3) get the enterprise-tier tool that's actually licensed for this work. None of these is "paste it in anyway and hope".</p>
+
+  <div class="callout standard">
+    <span class="callout-icon">§</span>
+    <div>
+      <div class="callout-title">Where the standards land</div>
+      <p><strong>GDPR Articles 5, 6, 9, 32</strong>: principles of processing, lawful basis, special-category data, security of processing. The "never paste" list is mostly a translation of these into practical rules. <strong>ISO 27001:2022 Annex A.5.10</strong>: acceptable use of information and assets — your business should have an acceptable use policy, and AI tools belong in it. <strong>Annex A.5.13</strong>: labelling of information — the "confidential" stamp on a document means something. <strong>Annex A.8.12</strong>: data leakage prevention.</p>
+    </div>
+  </div>
+
+  <div class="callout do">
+    <span class="callout-icon">✓</span>
+    <div>
+      <div class="callout-title">The "describe the shape" trick</div>
+      <p>Most useful work with AI doesn't actually need the real data. The reformulation is:</p>
+      <p><strong>Instead of:</strong> "Here is our customer list, sort by region."</p>
+      <p><strong>Try:</strong> "I have a list of around 400 customers in a spreadsheet. The columns are: name, email, country, last purchase date. Give me the Excel formula to sort by country and then by last purchase date, descending."</p>
+      <p>You got the answer. The data never left your laptop. This works for code, copy, analysis, summaries, plans — almost anything. Master this and 80% of the never-paste list stops being a constraint.</p>
+    </div>
+  </div>
+</main>
+
+<nav class="module-bottom-nav">
+  <a class="nav-btn" href="module-2.html">
+    <span class="nav-dir">Previous</span>
+    <span class="nav-title">← 02 · What AI tools do with what you type</span>
+  </a>
+  <a class="nav-btn next" href="module-4.html">
+    <span class="nav-dir">Next module</span>
+    <span class="nav-title">04 · Picking the right tool →</span>
+  </a>
+</nav>
+
+<footer class="site-foot">
+  <span>AI Safe@Work · Module 03 of 12</span>
+  <span class="foot-right">
+    <a href="course.html">All modules</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </span>
+</footer>
+
+</body>
+</html>

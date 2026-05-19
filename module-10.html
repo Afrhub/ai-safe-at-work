@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#060608" />
+<title>Module 10 · When something goes wrong — AI Safe@Work</title>
+<meta name="description" content="Incident response in plain English. How to escalate. What to write to your manager or DPO. Preserving evidence. The 72-hour GDPR breach clock." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="AI Safe@Work" />
+<meta property="og:title" content="Module 10 · When something goes wrong — AI Safe@Work" />
+<meta property="og:description" content="Incident response in plain English. How to escalate. What to write to your manager or DPO. Preserving evidence. The 72-hour GDPR breach clock." />
+<meta property="og:url" content="https://aisafeatwork.org/module-10.html" />
+<meta property="og:image" content="https://aisafeatwork.org/og-card.png" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Module 10 · When something goes wrong — AI Safe@Work" />
+<meta name="twitter:description" content="Incident response in plain English. How to escalate. What to write to your manager or DPO. Preserving evidence. The 72-hour GDPR breach clock." />
+<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/style.css?v=2" />
+<script defer src="assets/cinema.js?v=2"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HowTo",
+      "@id": "https://aisafeatwork.org/module-10.html#resource",
+      "name": "Module 10 - When something goes wrong",
+      "description": "Incident response in plain English; the 72-hour breach clock; how to escalate.",
+      "url": "https://aisafeatwork.org/module-10.html",
+      "learningResourceType": "Checklist",
+      "inLanguage": "en",
+      "educationalLevel": "Beginner to intermediate",
+      "isPartOf": {
+        "@type": "Course",
+        "@id": "https://aisafeatwork.org/course.html#course"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "SMB employee using AI tools at work"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://aisafeatwork.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Course",
+          "item": "https://aisafeatwork.org/course.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Module 10 - When something goes wrong",
+          "item": "https://aisafeatwork.org/module-10.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="index.html" class="brand">AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="course.html" class="always-show">Modules</a>
+    <a href="standards-map.html">Standards Map</a>
+    <a href="module-11.html">Checklist</a>
+    <a href="module-12.html">Standards</a>
+  </nav>
+</header>
+
+<main>
+  <p class="eyebrow">Module 10 · 7 min read</p>
+  <h1 class="page-title">When something goes <em>wrong</em>.</h1>
+  <p class="lede">No matter how careful, sometimes it happens. The thing that matters most isn't whether something went wrong — it's what happens in the first hour after you notice. This module is what to do.</p>
+
+  <div class="objectives">
+    <div class="objectives-title">By the end of this module, you'll</div>
+    <ul>
+      <li>Know the four kinds of "something went wrong" in AI use and what each one needs</li>
+      <li>Be able to write a clear escalation note to your manager or DPO without sounding panicked or evasive</li>
+      <li>Understand the 72-hour GDPR breach clock and what it means in practice</li>
+      <li>Know what to preserve and what not to touch in the first hour</li>
+    </ul>
+  </div>
+
+  <h2>The four categories</h2>
+  <p>Different incidents need different responses. Categorising it correctly in the first ten minutes will save days of confusion later.</p>
+
+  <div class="compare">
+    <div class="compare-cell bad">
+      <h4>1. Data leak</h4>
+      <p>You (or someone on your team) put sensitive data into an AI tool that shouldn't have received it. Customer records pasted into ChatGPT. Source code in a public model. A confidential document summarised by a free tier.</p>
+    </div>
+    <div class="compare-cell bad">
+      <h4>2. Bad output acted upon</h4>
+      <p>The AI's output was used in a decision, and the output was wrong. Hallucinated legal citation filed with a court. Biased screening rejected a candidate. Made-up product features published on the website.</p>
+    </div>
+    <div class="compare-cell bad">
+      <h4>3. Successful attack</h4>
+      <p>An AI-powered scam landed. Money was transferred. Credentials were given up. Software was installed. A deepfake call was acted on.</p>
+    </div>
+    <div class="compare-cell bad">
+      <h4>4. Vendor incident</h4>
+      <p>Your AI vendor suffered a breach, or changed their terms without notice, or had an outage that affected an important workflow. The data you sent them is at unexpected risk through no fault of yours.</p>
+    </div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <h2>The first ten minutes (any category)</h2>
+  <ol>
+    <li><strong>Stop the bleeding, if you can do it safely.</strong> Pause whatever process is currently sending more data, taking more actions, or sending more money. Don't yet "fix" anything, just stop adding to the problem.</li>
+    <li><strong>Don't delete the evidence.</strong> The reflex to delete the chat, the email, the file is understandable. Don't. Investigators will need it.</li>
+    <li><strong>Tell someone.</strong> Your manager and/or whoever covers IT or security. The first sentence is enough: "I think we have an AI-related incident — can we talk in five minutes?" You're not asking for permission. You're not confessing. You're flagging.</li>
+    <li><strong>Write down what happened, while it's fresh.</strong> Five lines, plain language, no spin. You'll thank yourself two days from now.</li>
+  </ol>
+
+  <h2>Category 1 — data leak</h2>
+
+  <h3>If the data is personal data of EU residents</h3>
+  <p>This may be a personal data breach under GDPR. Article 33 requires the controller (usually the business, not you personally) to notify the supervisory authority — ICO in the UK, CNIL in France, etc. — within <strong>72 hours of becoming aware</strong>, where the breach is likely to result in a risk to the rights and freedoms of natural persons.</p>
+  <p>"Becoming aware" is from the moment the business — not the regulator — has a reasonable degree of certainty that a breach has occurred. The clock starts then. Three calendar days, not three working days. Holidays count.</p>
+  <p>You, the individual, are not the one notifying the regulator. Your DPO or your business's nominated person does that. But your speed of telling them is what makes that 72-hour clock survivable.</p>
+
+  <div class="callout warn">
+    <span class="callout-icon">!</span>
+    <div>
+      <div class="callout-title">"It might not be a breach" is not an excuse to wait</div>
+      <p>The breach-notification clock starts when the business has reasonable awareness, not when the business is certain. If you think there's a real possibility — escalate today. Your DPO has 72 hours to investigate and decide whether to notify; they can't use any of those hours if they don't know yet.</p>
+    </div>
+  </div>
+
+  <h3>What to preserve</h3>
+  <ul>
+    <li>The original conversation with the AI tool, including timestamps. (Take a screenshot. Don't delete the chat history.)</li>
+    <li>What you pasted (the source document or query — keep it).</li>
+    <li>Any output the AI produced.</li>
+    <li>Your own recollection of when and why.</li>
+  </ul>
+
+  <h3>What to do at the AI vendor</h3>
+  <p>Once you've informed your manager / DPO, they may instruct you to:</p>
+  <ul>
+    <li>Submit a data-deletion request to the vendor (most have a dedicated form).</li>
+    <li>Turn off any "use my data for training" setting that may have been on, if you haven't already.</li>
+    <li>Export and then delete the conversation from your account.</li>
+  </ul>
+  <p>Don't do these unilaterally before your DPO/manager has agreed — for breach-investigation purposes they may want to preserve the originals first, even though preservation in a third-party system is itself imperfect.</p>
+
+  <h2>Category 2 — bad output acted upon</h2>
+  <p>The fix here depends on how far the bad output has travelled.</p>
+  <ul>
+    <li><strong>If it's still in your draft</strong>: easy. Fix it, learn, log it, move on.</li>
+    <li><strong>If it's been sent to one person</strong>: write a clear correction. Don't blame the AI; own it. ("I sent you an inaccurate citation in my message yesterday — the case I referenced doesn't exist. The correct authority is...")</li>
+    <li><strong>If it's been published or filed somewhere formal</strong>: this is a bigger correction. Tell your manager. Most professional settings have a "correction-of-record" procedure — court filings, regulatory submissions, formal client deliverables. Use it.</li>
+    <li><strong>If a decision was made on the basis of bad output</strong>: depending on what kind of decision, the affected person may have a right to ask for it to be reconsidered (Module 9). Be prepared to reconsider it without the AI's input.</li>
+  </ul>
+
+  <h2>Category 3 — successful attack</h2>
+  <p>Module 6 covered the prevention side. The response side:</p>
+  <ol>
+    <li><strong>If money moved</strong>: call the bank within minutes, not hours. UK Faster Payments and SEPA Instant transfers can sometimes be recalled in the first hour. After that, recovery rates drop sharply.</li>
+    <li><strong>If credentials were compromised</strong>: change them. Then enable MFA if it wasn't on. Then rotate any other credentials that reused the same password.</li>
+    <li><strong>If software was installed</strong>: assume the device is compromised. Disconnect it from the network. Call IT.</li>
+    <li><strong>Tell your manager and IT/security immediately.</strong> Same minute, not same day. Same attack is probably still active in the inbox of someone else in the business.</li>
+    <li><strong>For UK businesses</strong>: report to Action Fraud (0300 123 2040) and consider reporting to the NCSC. For EU businesses: report to your national police cybercrime unit and your supervisory data-protection authority if personal data was involved.</li>
+  </ol>
+
+  <h2>Category 4 — vendor incident</h2>
+  <p>The vendor will (or should) publish a notification. Your job is:</p>
+  <ul>
+    <li>Read what they actually say about the incident. Don't rely on the press summary — read the vendor's status page or incident report.</li>
+    <li>Identify what your business had with them — what kinds of data, in which workspace, at which time.</li>
+    <li>If personal data was involved, this is now a Category 1 problem in disguise: your business may itself have a notification obligation to its own customers.</li>
+    <li>Treat the vendor's terms-change as a procurement event: if they've materially changed how they handle data, decide whether the relationship can continue.</li>
+  </ul>
+
+  <hr class="section-divider" />
+
+  <h2>What to write to your manager or DPO</h2>
+  <p>Use this template. Short. Factual. No hedging. No drama.</p>
+
+  <div class="callout do">
+    <span class="callout-icon">✉</span>
+    <div>
+      <div class="callout-title">A clean incident note</div>
+      <p><strong>Subject:</strong> Possible AI-related incident — needs review today</p>
+      <p>Hi [name],</p>
+      <p>I want to flag a possible incident from this morning. Brief facts:</p>
+      <ul>
+        <li>What happened: [one sentence — "I pasted a customer spreadsheet into ChatGPT to deduplicate it"]</li>
+        <li>When: [date and approximate time]</li>
+        <li>What data was involved: [type and rough volume — "approx 400 rows including names, emails, order dates"]</li>
+        <li>Which AI tool / tier: [be specific — "ChatGPT, free tier, my personal account"]</li>
+        <li>What I've done so far: [stopped, screenshotted the chat, didn't delete, haven't told anyone else yet]</li>
+      </ul>
+      <p>I think this may need to be treated as a personal data breach. I'm available any time today to talk through what's next.</p>
+      <p>Thanks,<br/>[Your name]</p>
+    </div>
+  </div>
+
+  <h2>After the dust settles</h2>
+  <p>Three things, none of them optional:</p>
+  <ol>
+    <li><strong>A short written record</strong> — what happened, what was done, what was decided. Goes into your AI-use log (Module 9) and, if material, into the business's incident register.</li>
+    <li><strong>One thing that changes</strong>. Process, policy, tool tier, training, settings. The lesson has to land somewhere outside your own head.</li>
+    <li><strong>No blame, no scapegoat</strong>. The point of incident response is to learn faster than the next incident happens. Cultures that punish the person who reports are cultures that don't get reports.</li>
+  </ol>
+
+  <div class="callout standard">
+    <span class="callout-icon">§</span>
+    <div>
+      <div class="callout-title">Where the standards land</div>
+      <p><strong>GDPR Article 33</strong>: 72-hour breach notification to the supervisory authority. <strong>Article 34</strong>: notification to data subjects when the breach is likely to result in high risk to their rights. <strong>ISO/IEC 27001:2022 Annex A.5.24</strong>: information security incident planning and preparation. <strong>Annex A.5.25</strong>: assessment of and decision on information security events. <strong>Annex A.5.26</strong>: response to information security incidents. <strong>EU AI Act Article 73</strong>: providers must report serious incidents to authorities; <strong>Article 26(5)</strong>: deployers should monitor and, where relevant, inform their providers. <strong>ISO/IEC 42001:2023 Annex A.6.2.5</strong>: documented procedures for AI system incidents.</p>
+    </div>
+  </div>
+</main>
+
+<nav class="module-bottom-nav">
+  <a class="nav-btn" href="module-9.html">
+    <span class="nav-dir">Previous</span>
+    <span class="nav-title">← 09 · Logging and accountability</span>
+  </a>
+  <a class="nav-btn next" href="module-11.html">
+    <span class="nav-dir">Next module</span>
+    <span class="nav-title">11 · The 60-second checklist →</span>
+  </a>
+</nav>
+
+<footer class="site-foot">
+  <span>AI Safe@Work · Module 10 of 12</span>
+  <span class="foot-right">
+    <a href="course.html">All modules</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </span>
+</footer>
+
+</body>
+</html>

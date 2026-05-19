@@ -1,0 +1,63 @@
+# ── Stray skill-installer pollution (not course content) ──
+01-cinematic/
+02-3d-cgi/
+03-cartoon/
+04-comic-to-video/
+05-fight-scenes/
+06-motion-design-ad/
+07-ecommerce-ad/
+08-anime-action/
+09-product-360/
+10-music-video/
+11-social-hook/
+12-brand-story/
+13-fashion-lookbook/
+14-food-beverage/
+15-real-estate/
+ckm-banner-design/
+ckm-brand/
+ckm-design/
+ckm-design-system/
+ckm-slides/
+ckm-ui-styling/
+higgsfield-image-auto/
+pentest/
+promo-video/
+remotion-best-practices/
+seedance-auto-generate/
+ugc-hot-girl/
+ugc-video-auto/
+ui-ux-pro-max/
+
+# ── OS noise ──
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editor noise ──
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.cursor/
+.aider*
+.claude/
+
+# ── Secrets / env ──
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# ── Build / runtime cruft ──
+node_modules/
+dist/
+build/
+*.log
+.cache/
+
+# ── Local-only preview state ──
+.preview/

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#060608" />
+<title>Acceptable Use Policy template — AI Safe@Work</title>
+<meta name="description" content="A starter Acceptable Use Policy for AI tools at work. Edit the bracketed sections, get it signed off, communicate it. Aligns with EU AI Act Article 4, GDPR Article 5, ISO/IEC 42001 Clause 5.2 and ISO/IEC 27001 Annex A.5.10." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="AI Safe@Work" />
+<meta property="og:title" content="Acceptable Use Policy template — AI Safe@Work" />
+<meta property="og:description" content="A starter Acceptable Use Policy for AI tools at work. Edit the bracketed sections, get it signed off, communicate it. Aligns with EU AI Act Article 4, GDPR Article 5, ISO/IEC 42001 Clause 5.2 and ISO/IEC 27001 Annex A.5.10." />
+<meta property="og:url" content="https://aisafeatwork.org/templates/aup-template.html" />
+<meta property="og:image" content="https://aisafeatwork.org/og-card.png" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Acceptable Use Policy template — AI Safe@Work" />
+<meta name="twitter:description" content="A starter Acceptable Use Policy for AI tools at work. Edit the bracketed sections, get it signed off, communicate it. Aligns with EU AI Act Article 4, GDPR Article 5, ISO/IEC 42001 Clause 5.2 and ISO/IEC 27001 Annex A.5.10." />
+<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/style.css?v=2" />
+<script defer src="../assets/cinema.js?v=2"></script>
+<style>
+.template-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 100px;
+  background: rgba(232, 167, 38, 0.08);
+  border: 1px solid rgba(232, 167, 38, 0.32);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.template-tag::before {
+  content: '§';
+  color: var(--accent);
+  font-weight: 800;
+}
+.print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0 2rem; align-items: center; flex-wrap: wrap; }
+.print-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--accent); color: #1a1407;
+  font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.7rem 1.25rem; border-radius: 100px;
+  border: none; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 0 1px rgba(232,167,38,0.4), 0 8px 24px rgba(232,167,38,0.2);
+}
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(232,167,38,0.55), 0 12px 32px rgba(232,167,38,0.3); }
+.print-btn:active { transform: translateY(-1px) scale(0.97); }
+.print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
+.fill {
+  display: inline-block;
+  padding: 0.1rem 0.55rem;
+  border-radius: 5px;
+  background: rgba(232, 167, 38, 0.10);
+  color: var(--accent);
+  border: 1px dashed rgba(232, 167, 38, 0.42);
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+}
+.policy-doc {
+  margin: 1.5rem 0;
+  padding: 2rem 2.2rem;
+  background: rgba(10,10,16,0.85);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+}
+.policy-doc h2 { margin-top: 2.2rem; }
+.policy-doc h2:first-child { margin-top: 0; }
+.policy-doc h3 { margin-top: 1.6rem; }
+.policy-doc ol, .policy-doc ul { padding-left: 1.4rem; }
+.policy-doc li { margin-bottom: 0.55rem; }
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+.signoff {
+  margin-top: 2.4rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+.signoff .field { color: var(--text2); }
+.signoff .field strong { display: block; color: var(--accent); font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 0.4rem; }
+.signoff .field .line { display: block; min-height: 1.6rem; border-bottom: 1px solid var(--border-bold); margin-top: 0.4rem; }
+@media (max-width: 640px) { .signoff { grid-template-columns: 1fr; } }
+@media print {
+  .policy-doc { background: white !important; border: 1px solid #ccc !important; box-shadow: none !important; padding: 1rem 0 !important; }
+  .signoff .field strong { color: #b67700 !important; }
+  .fill { background: white !important; color: #1a1407 !important; border-color: #b67700 !important; }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HowTo",
+      "name": "Acceptable Use Policy template",
+      "description": "Starter AUP for AI tools at work; edit the bracketed fields and ship.",
+      "url": "https://aisafeatwork.org/templates/aup-template.html",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://aisafeatwork.org/#organization"
+      },
+      "totalTime": "PT45M",
+      "dateModified": "2026-05-19"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://aisafeatwork.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Templates",
+          "item": "https://aisafeatwork.org/templates/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Acceptable Use Policy template \u2014 AI Safe@Work",
+          "item": "https://aisafeatwork.org/templates/aup-template.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="topbar no-print">
+  <a href="../index.html" class="brand">AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="../course.html" class="always-show">Modules</a>
+    <a href="../standards-map.html">Standards Map</a>
+    <a href="../module-11.html">Checklist</a>
+    <a href="../module-12.html">Standards</a>
+  </nav>
+</header>
+
+<main>
+  <span class="template-tag no-print">Template · Acceptable Use Policy v1.0</span>
+  <p class="eyebrow no-print">Editable policy starter</p>
+  <h1 class="page-title">Acceptable Use of AI <em>Tools</em>.</h1>
+  <p class="lede no-print">A complete, opinionated starter AUP. Replace the bracketed fields, walk it through approval, communicate it to staff. Aligns with EU AI Act Art 4, GDPR Art 5, ISO/IEC 42001 Cl 5.2 and ISO/IEC 27001 A.5.10.</p>
+
+  <div class="print-row no-print">
+    <button class="print-btn" onclick="window.print()">Print / Save as PDF →</button>
+    <span class="print-hint">Designed to print clean. Sign at the bottom. File alongside your information-security policy.</span>
+  </div>
+
+  <article class="policy-doc">
+
+    <span class="section-tag">Policy statement</span>
+    <h2>Acceptable Use of AI Tools at <span class="fill">[Company Name]</span></h2>
+    <p><strong>Effective:</strong> <span class="fill">[Date]</span> · <strong>Version:</strong> 1.0 · <strong>Owner:</strong> <span class="fill">[Role — e.g. DPO / CISO / Head of IT]</span> · <strong>Review cycle:</strong> Quarterly</p>
+
+    <h2>1. Purpose</h2>
+    <p>This policy describes how staff at <span class="fill">[Company Name]</span> may use generative AI tools (such as ChatGPT, Microsoft Copilot, Claude, Gemini, Perplexity, or any other AI assistant) in the course of their work. It sets out what is encouraged, what is permitted with conditions, and what is forbidden, in order to protect the business, our customers, our employees, and ourselves.</p>
+
+    <h2>2. Scope</h2>
+    <ol>
+      <li>This policy applies to all employees, contractors, interns, consultants, and any other person performing work for <span class="fill">[Company Name]</span>.</li>
+      <li>It applies on company-owned and personally-owned devices when used for work.</li>
+      <li>It covers all AI tools, whether procured by the company or used personally for work purposes.</li>
+    </ol>
+
+    <h2>3. Approved tools</h2>
+    <p>The following AI tools have been procured and may be used for work, subject to the rules below:</p>
+    <ol>
+      <li><span class="fill">[Tool 1 — e.g. ChatGPT Enterprise tenant XYZ, EU region]</span></li>
+      <li><span class="fill">[Tool 2 — e.g. Microsoft 365 Copilot]</span></li>
+      <li><span class="fill">[Tool 3]</span></li>
+    </ol>
+    <p>Other tools require explicit approval from <span class="fill">[Approver role]</span> before being used for any work-related task. Free or paid-individual versions of consumer AI tools (such as the free tier of ChatGPT, Claude Pro on a personal account, the consumer Gemini app) are <strong>not approved</strong> for work that involves any of the data categories listed in section 5.</p>
+
+    <h2>4. Permitted uses</h2>
+    <p>Subject to sections 5 and 6, AI tools may be used to:</p>
+    <ul>
+      <li>Draft documents, emails, presentations, code, copy, and other written work — followed by human review and editing.</li>
+      <li>Summarise notes, research, and meetings — where the source material is appropriate for the tool's tier (see section 5).</li>
+      <li>Translate or rephrase content.</li>
+      <li>Brainstorm, generate options, and structure thinking.</li>
+      <li>Explain concepts, surface counter-arguments, and provide learning support.</li>
+      <li>Assist with technical tasks (code, scripts, data formulas) on appropriate data.</li>
+    </ul>
+
+    <h2>5. Forbidden inputs</h2>
+    <p>The following categories of data <strong>must not be entered into any free or paid-individual AI tool</strong>, including by upload, paste, screenshot, or voice. These categories may only be processed using approved enterprise-tier tools listed in section 3, and only where the lawful basis and data-handling arrangements have been confirmed:</p>
+    <ol>
+      <li>Customer or contact personal data — names, emails, phone numbers, addresses, account numbers.</li>
+      <li>Special-category personal data — health, ethnicity, religion, sexual orientation, political views, trade-union membership, biometric data, genetic data.</li>
+      <li>Contracts or legal documents prepared by external parties (counterparty drafts, NDAs, settlement agreements).</li>
+      <li>Source code from systems we do not own or licence appropriately.</li>
+      <li>Non-public financial data — internal P&amp;L, pricing models, customer-specific pricing, vendor cost data, salary information, equity details.</li>
+      <li>Authentication secrets — passwords, API keys, SSH keys, tokens, connection strings.</li>
+      <li>Internal documents classified as Confidential or higher.</li>
+      <li>HR records — performance reviews, disciplinary records, salary letters, sickness records.</li>
+      <li>Anything received from a client under a duty of confidence.</li>
+    </ol>
+
+    <h2>6. Output handling</h2>
+    <ol>
+      <li>AI-generated content used in any work product must be reviewed by a human before it is sent, published, filed, or acted upon.</li>
+      <li>Claims and citations in AI output that affect a decision must be verified against at least one independent source. For legal, medical, financial, regulatory, or scientific claims, against two.</li>
+      <li>AI-generated images, video, or audio used in customer-facing materials must be reviewed for accuracy, representation, and rights to publish. Where applicable, AI involvement must be disclosed in line with EU AI Act Article 50.</li>
+      <li>Decisions that affect a person's livelihood, access to services, or legal position must not be made solely on the basis of AI output. A named human must apply judgement and retain the authority to override.</li>
+    </ol>
+
+    <h2>7. Logging</h2>
+    <p>Significant AI-assisted work must be logged in <span class="fill">[Log location — e.g. Notion AI Use Register, shared spreadsheet]</span>. "Significant" means any AI use that meets two or more of:</p>
+    <ul>
+      <li>It affected another person (customer, employee, supplier).</li>
+      <li>It represented the company externally.</li>
+      <li>It touched sensitive data.</li>
+      <li>It supported an irreversible or expensive decision.</li>
+    </ul>
+    <p>The log entry records: date, person, tool and tier, task summary, data categories used, what the AI produced, what the human did with it, who else reviewed.</p>
+
+    <h2>8. Settings and configuration</h2>
+    <ol>
+      <li>Where the AI tool offers a "do not use my data for training" setting, it must be turned off for any work-related account or workspace.</li>
+      <li>Where conversation retention is configurable, the company's procurement contract determines retention; staff should not change retention away from the procured setting.</li>
+      <li>Multi-factor authentication is required on any AI tool account used for work.</li>
+    </ol>
+
+    <h2>9. Vendor changes</h2>
+    <p>If an approved AI tool changes its terms of service, data-handling, sub-processors, or model in a way that materially affects how our data is treated, that change must be reviewed by <span class="fill">[DPO / Head of IT / Security]</span> before continued use. Staff should report material changes they become aware of, including major model updates.</p>
+
+    <h2>10. Incidents</h2>
+    <p>If you suspect that data has been pasted into a tool it shouldn't have been, that AI output has caused harm, that an AI-powered scam was attempted against you, or that an AI vendor has had a security incident affecting our data — report it immediately to <span class="fill">[Contact — e.g. security@company.com / IT desk extension X]</span>. Do not delete the chat, the email, or the file. The first ten minutes of disclosure matter more than perfection.</p>
+
+    <h2>11. Training</h2>
+    <p>All staff are required to complete <span class="fill">[Training reference — e.g. the AI Safe@Work course]</span> within thirty days of joining and to refresh annually. Managers and DPO / compliance leads complete the relevant role-track modules in addition.</p>
+
+    <h2>12. Roles and responsibilities</h2>
+    <ul>
+      <li><strong>Every member of staff</strong> — comply with this policy and report concerns promptly.</li>
+      <li><strong>Managers and approvers</strong> — apply meaningful human oversight to AI-assisted submissions; ensure team members are trained.</li>
+      <li><strong>DPO / compliance lead</strong> — maintain RoPA entries for AI use cases, run DPIA / FRIA where required, advise on vendor diligence.</li>
+      <li><strong>IT / Security</strong> — administer approved tools, manage settings, run incident response.</li>
+      <li><strong>Procurement</strong> — engage <span class="fill">[DPO / Security]</span> before adopting a new AI tool.</li>
+    </ul>
+
+    <h2>13. Consequences of non-compliance</h2>
+    <p>Breach of this policy may result in disciplinary action up to and including termination. Where a breach results in a personal-data breach under GDPR or a serious AI incident under EU AI Act Article 73, mandatory notification and remediation procedures apply.</p>
+
+    <h2>14. Standards referenced</h2>
+    <ul>
+      <li>Regulation (EU) 2024/1689 — EU AI Act, in particular Article 4 (AI literacy) and Article 26 (deployer obligations).</li>
+      <li>Regulation (EU) 2016/679 — GDPR, in particular Articles 5, 6, 9, 22, 32–34, 35.</li>
+      <li>ISO/IEC 42001:2023 — Clause 5.2 (AI policy), Clause 7.2–7.3 (competence, awareness), Annex A.2 (AI policies).</li>
+      <li>ISO/IEC 27001:2022 — Annex A.5.10 (acceptable use), A.5.13 (information labelling), A.5.23 (cloud services), A.6.3 (awareness training).</li>
+    </ul>
+
+    <div class="signoff">
+      <div class="field">
+        <strong>Approved by</strong>
+        <span class="fill">[Name and role]</span>
+        <span class="line"></span>
+      </div>
+      <div class="field">
+        <strong>Date</strong>
+        <span class="fill">[YYYY-MM-DD]</span>
+        <span class="line"></span>
+      </div>
+      <div class="field">
+        <strong>Next review</strong>
+        <span class="fill">[YYYY-MM-DD]</span>
+        <span class="line"></span>
+      </div>
+      <div class="field">
+        <strong>Version</strong>
+        1.0
+        <span class="line"></span>
+      </div>
+    </div>
+
+  </article>
+
+  <div class="callout note no-print">
+    <span class="callout-icon">i</span>
+    <div>
+      <div class="callout-title">How to roll this out</div>
+      <ol>
+        <li>Replace every <span class="fill">[bracketed]</span> field with your organisation's specifics. Don't leave any in place.</li>
+        <li>Walk the draft through your DPO, IT lead, and one front-line manager. Three readers catch most clarity issues.</li>
+        <li>Get formal sign-off — board / leadership / equivalent for your size of organisation.</li>
+        <li>Communicate to all staff with a calendar event, not just an email. Five minutes of explanation prevents fifty hours of misinterpretation.</li>
+        <li>Calendar the quarterly review. Vendor terms change quietly; your policy should not.</li>
+      </ol>
+    </div>
+  </div>
+</main>
+
+<nav class="module-bottom-nav no-print">
+  <a class="nav-btn" href="../module-dpo.html">
+    <span class="nav-dir">Back to</span>
+    <span class="nav-title">← DPO / compliance track</span>
+  </a>
+  <a class="nav-btn next" href="vendor-questionnaire.html">
+    <span class="nav-dir">Next template</span>
+    <span class="nav-title">Vendor questionnaire →</span>
+  </a>
+</nav>
+
+<footer class="site-foot no-print">
+  <span>AI Safe@Work · AUP template v1.0 · v2026.05</span>
+  <span class="foot-right">
+    <a href="../course.html">All modules</a>
+    <a href="../privacy.html">Privacy</a>
+    <a href="../terms.html">Terms</a>
+  </span>
+</footer>
+
+</body>
+</html>

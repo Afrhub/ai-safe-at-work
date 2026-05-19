@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#060608" />
+<title>Standards Map — AI Safe@Work</title>
+<meta name="description" content="Clause-by-clause mapping of EU AI Act Article 4, ISO/IEC 42001 Clause 7 + Annex A.4.5, ISO/IEC 27001 Annex A.6.3, and GDPR Article 39 to the modules of AI Safe@Work. Audit-grade procurement evidence." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="AI Safe@Work" />
+<meta property="og:title" content="Standards Map — AI Safe@Work" />
+<meta property="og:description" content="Clause-by-clause mapping of EU AI Act Article 4, ISO/IEC 42001 Clause 7 + Annex A.4.5, ISO/IEC 27001 Annex A.6.3, and GDPR Article 39 to the modules of AI Safe@Work. Audit-grade procurement evidence." />
+<meta property="og:url" content="https://aisafeatwork.org/standards-map.html" />
+<meta property="og:image" content="https://aisafeatwork.org/og-card.png" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Standards Map — AI Safe@Work" />
+<meta name="twitter:description" content="Clause-by-clause mapping of EU AI Act Article 4, ISO/IEC 42001 Clause 7 + Annex A.4.5, ISO/IEC 27001 Annex A.6.3, and GDPR Article 39 to the modules of AI Safe@Work. Audit-grade procurement evidence." />
+<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/style.css?v=2" />
+<script defer src="assets/cinema.js?v=2"></script>
+<style>
+.map-table-wrap {
+  margin: 1.5rem 0 2rem;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(10,10,16,0.85);
+  box-shadow: var(--shadow-card);
+}
+.map-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.map-table thead th {
+  background: rgba(232, 167, 38, 0.05);
+  color: var(--accent);
+  text-align: left;
+  padding: 0.85rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(232,167,38,0.22);
+}
+.map-table tbody td {
+  padding: 0.85rem 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--text2);
+  vertical-align: top;
+  line-height: 1.55;
+}
+.map-table tbody tr:hover td {
+  background: rgba(232,167,38,0.03);
+  color: var(--text);
+}
+.map-table .clause {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent-2);
+  white-space: nowrap;
+}
+.map-table .modules a {
+  display: inline-block;
+  margin: 0.1rem 0.25rem 0.1rem 0;
+  padding: 0.18rem 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  border-radius: 100px;
+  background: rgba(232,167,38,0.08);
+  color: var(--accent);
+  border: 1px solid rgba(232,167,38,0.25);
+  transition: background 180ms ease, transform 120ms var(--ease-out-strong);
+}
+.map-table .modules a:hover {
+  background: rgba(232,167,38,0.16);
+}
+.map-table .modules a:active {
+  transform: scale(0.94);
+}
+.standard-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 3rem 0 0.4rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.standard-header h2 { margin: 0; }
+.standard-header .meta {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text3);
+}
+.toc {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.8rem;
+  margin: 2rem 0 3rem;
+}
+.toc a {
+  padding: 0.9rem 1.1rem;
+  background: rgba(10,10,16,0.85);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  transition: all 220ms var(--ease-out-strong);
+  box-shadow: var(--shadow-card);
+}
+.toc a:hover {
+  border-color: rgba(232,167,38,0.42);
+  background: rgba(232,167,38,0.04);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+}
+.toc a:active { transform: translateY(-1px) scale(0.985); }
+.toc a small {
+  display: block;
+  margin-top: 0.2rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--text3);
+  letter-spacing: 0;
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Standards Map - AI Safe@Work",
+      "description": "Clause-by-clause mapping of EU AI Act, ISO/IEC 42001, ISO/IEC 27001, GDPR, NIST AI RMF, OWASP LLM Top 10 to the course modules.",
+      "url": "https://aisafeatwork.org/standards-map.html",
+      "publisher": {
+        "@id": "https://aisafeatwork.org/#organization"
+      },
+      "dateModified": "2026-05-19",
+      "datePublished": "2026-05-19",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://aisafeatwork.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Course",
+          "item": "https://aisafeatwork.org/course.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Standards Map",
+          "item": "https://aisafeatwork.org/standards-map.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="index.html" class="brand">AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="course.html" class="always-show">Modules</a>
+    <a href="standards-map.html" class="is-current">Standards Map</a>
+    <a href="module-11.html">Checklist</a>
+    <a href="module-12.html">Standards</a>
+  </nav>
+</header>
+
+<main>
+  <p class="eyebrow">Procurement evidence · v2026.05</p>
+  <h1 class="page-title">Standards <em>Map</em>.</h1>
+  <p class="lede">Every clause we expect a procurement, audit, or compliance team to ask about — mapped to the exact modules of this course. Hand this to your DPO, your auditor, your insurer; they should not need to read the whole course to verify coverage.</p>
+
+  <div class="callout standard">
+    <span class="callout-icon">§</span>
+    <div>
+      <div class="callout-title">How to use this page</div>
+      <p>Find the standard. Find the clause. The module pills tell you which lessons satisfy it. Click any pill to jump.</p>
+      <p>Not a certification statement. This is an evidence map — the auditor still does the audit. But the auditor will spend ten minutes here instead of ten hours in your training records.</p>
+    </div>
+  </div>
+
+  <div class="toc">
+    <a href="#eu-ai-act"><strong>EU AI Act</strong><small>Regulation 2024/1689</small></a>
+    <a href="#iso-42001"><strong>ISO/IEC 42001:2023</strong><small>AI management system</small></a>
+    <a href="#iso-27001"><strong>ISO/IEC 27001:2022</strong><small>Information security</small></a>
+    <a href="#gdpr"><strong>GDPR</strong><small>Regulation 2016/679</small></a>
+    <a href="#nist"><strong>NIST AI RMF 1.0</strong><small>+ GAI Profile</small></a>
+    <a href="#owasp"><strong>OWASP Top 10 for LLM Apps</strong><small>v2025 mapping</small></a>
+  </div>
+
+  <hr class="section-divider" />
+
+  <!-- ─────────────────────── EU AI Act ─────────────────────── -->
+  <div class="standard-header" id="eu-ai-act">
+    <h2>EU AI Act — Regulation (EU) 2024/1689</h2>
+    <span class="meta">Binding · phased 2025–2027</span>
+  </div>
+  <p>Article 4 is the only literacy obligation in force today (since 2 February 2025) — every deployer must take "measures to ensure, to their best extent, a sufficient level of AI literacy of their staff and other persons dealing with the operation and use of AI systems". This course is one such measure.</p>
+
+  <div class="map-table-wrap">
+    <table class="map-table">
+      <thead>
+        <tr><th style="width: 14%">Article</th><th style="width: 36%">What it requires</th><th>Where it lands in this course</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="clause">Art 4</td>
+          <td>AI literacy of staff (binding Feb 2025)</td>
+          <td class="modules"><a href="course.html">All modules</a> — entire course designed against this article</td>
+        </tr>
+        <tr>
+          <td class="clause">Art 5</td>
+          <td>Prohibited AI practices (manipulation, social scoring, real-time biometric ID exceptions)</td>
+          <td class="modules"><a href="module-7.html">M7 (bias)</a> <a href="module-12.html">M12 (standards)</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Art 14</td>
+          <td>Human oversight of high-risk AI systems</td>
+          <td class="modules"><a href="module-5.html">M5 (verifying)</a> <a href="module-manager.html">M-manager</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Art 22</td>
+          <td>(reference) Automated decision-making impacts — interplay w/ GDPR Art 22</td>
+          <td class="modules"><a href="module-9.html">M9 (logging)</a> <a href="module-dpo.html">M-DPO</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Art 26</td>
+          <td>Deployer obligations — use per instructions, monitor, log, inform affected persons</td>
+          <td class="modules"><a href="module-4.html">M4 (tools)</a> <a href="module-9.html">M9</a> <a href="module-manager.html">M-manager</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Art 27</td>
+          <td>Fundamental Rights Impact Assessment (FRIA) for high-risk AI use</td>
+          <td class="modules"><a href="module-dpo.html">M-DPO</a> <a href="templates/aup-template.html">AUP template</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Art 50</td>
+          <td>Transparency — disclose AI-generated synthetic content, label deepfakes</td>
+          <td class="modules"><a href="module-8.html">M8 (IP/copyright)</a> <a href="module-6.html">M6 (scams)</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Art 73</td>
+          <td>Serious incident reporting (providers); deployer involvement</td>
+          <td class="modules"><a href="module-10.html">M10 (incident)</a> <a href="module-dpo.html">M-DPO</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Annex III</td>
+          <td>High-risk use cases — employment, education, essential services, biometrics, justice, migration, infrastructure</td>
+          <td class="modules"><a href="module-7.html">M7</a> <a href="module-12.html">M12</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─────────────────────── ISO 42001 ─────────────────────── -->
+  <div class="standard-header" id="iso-42001">
+    <h2>ISO/IEC 42001:2023</h2>
+    <span class="meta">Voluntary · certifiable AIMS</span>
+  </div>
+  <p>The world's first AI management-system standard. Clauses 7.2 (competence) and 7.3 (awareness) plus Annex A.4.5 (resources for AI systems including staff capability) are the human-capability spine — this course slots directly under them.</p>
+
+  <div class="map-table-wrap">
+    <table class="map-table">
+      <thead>
+        <tr><th style="width: 14%">Clause / Annex</th><th style="width: 36%">What it requires</th><th>Where it lands in this course</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="clause">Cl 5.2</td>
+          <td>AI policy — documented, communicated to staff</td>
+          <td class="modules"><a href="templates/aup-template.html">AUP template</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Cl 6.1</td>
+          <td>Risks &amp; opportunities; AI risk assessment</td>
+          <td class="modules"><a href="module-3.html">M3</a> <a href="module-4.html">M4</a> <a href="module-dpo.html">M-DPO</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Cl 7.2</td>
+          <td>Competence — staff doing work that affects AI performance must be competent</td>
+          <td class="modules"><a href="course.html">Entire course</a> + role tracks</td>
+        </tr>
+        <tr>
+          <td class="clause">Cl 7.3</td>
+          <td>Awareness — staff aware of policy, their contribution, implications of non-conformity</td>
+          <td class="modules"><a href="module-1.html">M1</a> <a href="module-11.html">M11 (checklist)</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Cl 7.5</td>
+          <td>Documented information — training records, version control</td>
+          <td class="modules"><a href="module-9.html">M9 (logging)</a></td>
+        </tr>
+        <tr>
+          <td class="clause">A.2</td>
+          <td>Policies for AI use</td>
+          <td class="modules"><a href="templates/aup-template.html">AUP template</a></td>
+        </tr>
+        <tr>
+          <td class="clause">A.4.5</td>
+          <td>Resources — including human / staff capability for AI</td>
+          <td class="modules"><a href="course.html">All modules</a> + role tracks</td>
+        </tr>
+        <tr>
+          <td class="clause">A.5.2</td>
+          <td>AI system impact assessment</td>
+          <td class="modules"><a href="module-dpo.html">M-DPO</a></td>
+        </tr>
+        <tr>
+          <td class="clause">A.6.2</td>
+          <td>AI system design &amp; development — fairness, transparency, security in design</td>
+          <td class="modules"><a href="module-7.html">M7</a></td>
+        </tr>
+        <tr>
+          <td class="clause">A.7</td>
+          <td>Data for AI systems — quality, privacy, representativeness</td>
+          <td class="modules"><a href="module-3.html">M3</a> <a href="module-7.html">M7</a></td>
+        </tr>
+        <tr>
+          <td class="clause">A.9</td>
+          <td>Use of AI systems — operation, monitoring, incident response</td>
+          <td class="modules"><a href="module-5.html">M5</a> <a href="module-10.html">M10</a></td>
+        </tr>
+        <tr>
+          <td class="clause">A.10</td>
+          <td>Third-party AI relationships — supplier evaluation, contracts</td>
+          <td class="modules"><a href="module-4.html">M4</a> <a href="templates/vendor-questionnaire.html">Vendor questionnaire</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─────────────────────── ISO 27001 ─────────────────────── -->
+  <div class="standard-header" id="iso-27001">
+    <h2>ISO/IEC 27001:2022</h2>
+    <span class="meta">Voluntary · certifiable ISMS</span>
+  </div>
+  <p>The world's most-adopted security standard. Annex A.6.3 is the awareness-and-training control — almost every ISO 27001-certified business is asked for annual AI training evidence under it from 2025 onward.</p>
+
+  <div class="map-table-wrap">
+    <table class="map-table">
+      <thead>
+        <tr><th style="width: 14%">Annex A</th><th style="width: 36%">What it requires</th><th>Where it lands in this course</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="clause">A.5.10</td>
+          <td>Acceptable use of information and assets</td>
+          <td class="modules"><a href="templates/aup-template.html">AUP template</a> <a href="module-3.html">M3</a></td>
+        </tr>
+        <tr>
+          <td class="clause">A.5.13</td>
+          <td>Labelling of information</td>
+          <td class="modules"><a href="module-3.html">M3</a></td>
+        </tr>
+        <tr>
+          <td class="clause">A.5.23</td>
+          <td>Information security for use of cloud services</td>
+          <td class="modules"><a href="module-2.html">M2</a> <a href="module-4.html">M4</a> <a href="templates/vendor-questionnaire.html">Vendor questionnaire</a></td>
+        </tr>
+        <tr>
+          <td class="clause">A.5.24–26</td>
+          <td>Information security incident planning, assessment, response</td>
+          <td class="modules"><a href="module-10.html">M10</a></td>
+        </tr>
+        <tr>
+          <td class="clause">A.5.34</td>
+          <td>Privacy and protection of PII</td>
+          <td class="modules"><a href="module-3.html">M3</a> <a href="module-dpo.html">M-DPO</a></td>
+        </tr>
+        <tr>
+          <td class="clause">A.6.3</td>
+          <td>Information security awareness, education and training</td>
+          <td class="modules"><a href="course.html">Entire course</a> · annual refresh evidence</td>
+        </tr>
+        <tr>
+          <td class="clause">A.8.5</td>
+          <td>Secure authentication, including MFA</td>
+          <td class="modules"><a href="module-6.html">M6 (scams)</a></td>
+        </tr>
+        <tr>
+          <td class="clause">A.8.12</td>
+          <td>Data leakage prevention</td>
+          <td class="modules"><a href="module-3.html">M3</a></td>
+        </tr>
+        <tr>
+          <td class="clause">A.8.15</td>
+          <td>Logging</td>
+          <td class="modules"><a href="module-9.html">M9</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─────────────────────── GDPR ─────────────────────── -->
+  <div class="standard-header" id="gdpr">
+    <h2>GDPR — Regulation (EU) 2016/679</h2>
+    <span class="meta">Binding · in force since 2018</span>
+  </div>
+
+  <div class="map-table-wrap">
+    <table class="map-table">
+      <thead>
+        <tr><th style="width: 14%">Article</th><th style="width: 36%">What it requires</th><th>Where it lands in this course</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="clause">Art 5</td>
+          <td>Principles — lawfulness, fairness, transparency, purpose, minimisation, accuracy, storage, integrity, accountability</td>
+          <td class="modules"><a href="module-3.html">M3</a> <a href="module-12.html">M12</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Art 6</td>
+          <td>Lawful basis for processing</td>
+          <td class="modules"><a href="module-3.html">M3</a> <a href="module-dpo.html">M-DPO</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Art 9</td>
+          <td>Special-category data (health, ethnicity, religion, biometrics)</td>
+          <td class="modules"><a href="module-3.html">M3</a> <a href="module-7.html">M7</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Art 13–14</td>
+          <td>Information to data subjects, including existence of automated decision-making</td>
+          <td class="modules"><a href="module-9.html">M9</a> <a href="module-dpo.html">M-DPO</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Art 22</td>
+          <td>Right not to be subject to solely automated decisions w/ legal or significant effect</td>
+          <td class="modules"><a href="module-9.html">M9</a> <a href="module-manager.html">M-manager</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Art 28</td>
+          <td>Processor contracts (DPAs)</td>
+          <td class="modules"><a href="module-2.html">M2</a> <a href="module-4.html">M4</a> <a href="templates/vendor-questionnaire.html">Vendor questionnaire</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Art 30</td>
+          <td>Records of processing activities (RoPA)</td>
+          <td class="modules"><a href="module-9.html">M9</a> <a href="module-dpo.html">M-DPO</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Art 32</td>
+          <td>Security of processing — technical and organisational measures</td>
+          <td class="modules"><a href="module-2.html">M2</a> <a href="module-6.html">M6</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Art 33–34</td>
+          <td>Breach notification — 72h to supervisory authority; to data subjects when high-risk</td>
+          <td class="modules"><a href="module-10.html">M10</a> <a href="module-dpo.html">M-DPO</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Art 35</td>
+          <td>Data Protection Impact Assessment (DPIA)</td>
+          <td class="modules"><a href="module-dpo.html">M-DPO</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Art 39</td>
+          <td>DPO tasks &amp; competence</td>
+          <td class="modules"><a href="module-dpo.html">M-DPO</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Art 44–50</td>
+          <td>International data transfers</td>
+          <td class="modules"><a href="module-2.html">M2</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─────────────────────── NIST ─────────────────────── -->
+  <div class="standard-header" id="nist">
+    <h2>NIST AI RMF 1.0 + GAI Profile (NIST AI 600-1)</h2>
+    <span class="meta">Voluntary · US baseline</span>
+  </div>
+
+  <div class="map-table-wrap">
+    <table class="map-table">
+      <thead>
+        <tr><th style="width: 14%">Function</th><th style="width: 36%">What it covers</th><th>Where it lands in this course</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="clause">Govern</td>
+          <td>Workforce capability, AI policy, accountability structures</td>
+          <td class="modules"><a href="course.html">Entire course</a> <a href="module-manager.html">M-manager</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Map</td>
+          <td>Context — categorise AI use cases, risks, stakeholders</td>
+          <td class="modules"><a href="module-4.html">M4</a> <a href="module-dpo.html">M-DPO</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Measure</td>
+          <td>Assess and benchmark AI risks</td>
+          <td class="modules"><a href="module-5.html">M5</a> <a href="module-7.html">M7</a></td>
+        </tr>
+        <tr>
+          <td class="clause">Manage</td>
+          <td>Allocate resources to act on risks; incident response</td>
+          <td class="modules"><a href="module-10.html">M10</a> <a href="module-9.html">M9</a></td>
+        </tr>
+        <tr>
+          <td class="clause">GAI Profile</td>
+          <td>Generative-AI specific risks: confabulation, harmful content, IP, dangerous information</td>
+          <td class="modules"><a href="module-5.html">M5</a> <a href="module-8.html">M8</a> <a href="module-7.html">M7</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─────────────────────── OWASP ─────────────────────── -->
+  <div class="standard-header" id="owasp">
+    <h2>OWASP Top 10 for LLM Applications</h2>
+    <span class="meta">Industry baseline · v2025</span>
+  </div>
+  <p>The development-track standard. Most of these belong in a future Developer Track module — listed here for completeness so dev teams know where to expand.</p>
+
+  <div class="map-table-wrap">
+    <table class="map-table">
+      <thead>
+        <tr><th style="width: 14%">ID</th><th style="width: 36%">Risk</th><th>Today / future coverage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="clause">LLM01</td><td>Prompt Injection</td><td class="modules">Developer Track — planned</td></tr>
+        <tr><td class="clause">LLM02</td><td>Sensitive Information Disclosure</td><td class="modules"><a href="module-3.html">M3</a></td></tr>
+        <tr><td class="clause">LLM03</td><td>Supply Chain</td><td class="modules"><a href="module-4.html">M4</a> + Dev Track planned</td></tr>
+        <tr><td class="clause">LLM04</td><td>Data &amp; Model Poisoning</td><td class="modules">Dev Track — planned</td></tr>
+        <tr><td class="clause">LLM05</td><td>Improper Output Handling</td><td class="modules"><a href="module-5.html">M5</a></td></tr>
+        <tr><td class="clause">LLM06</td><td>Excessive Agency</td><td class="modules"><a href="module-9.html">M9</a> <a href="module-manager.html">M-manager</a></td></tr>
+        <tr><td class="clause">LLM07</td><td>System Prompt Leakage</td><td class="modules">Dev Track — planned</td></tr>
+        <tr><td class="clause">LLM08</td><td>Vector &amp; Embedding Weaknesses</td><td class="modules">Dev Track — planned</td></tr>
+        <tr><td class="clause">LLM09</td><td>Misinformation</td><td class="modules"><a href="module-5.html">M5</a></td></tr>
+        <tr><td class="clause">LLM10</td><td>Unbounded Consumption</td><td class="modules">Dev Track — planned</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="section-divider" />
+
+  <h2>What to do with this page</h2>
+
+  <div class="compare">
+    <div class="compare-cell good">
+      <h4>If you're a buyer</h4>
+      <p>This page <em>is</em> the audit-evidence pack. Share the URL with your DPO / compliance lead. The mapping is dated and versioned in the page footer.</p>
+    </div>
+    <div class="compare-cell good">
+      <h4>If you're the trainer / champion</h4>
+      <p>Print this page as your annexe to the training record. Combined with completion logs (planned), it satisfies most auditors' first request.</p>
+    </div>
+  </div>
+
+  <div class="callout note">
+    <span class="callout-icon">i</span>
+    <div>
+      <div class="callout-title">What this map is not</div>
+      <p>It is not a certification. We are not an accredited certification body and we do not certify your organisation against any standard. The map tells you which lessons cover which clauses. Auditors still audit.</p>
+    </div>
+  </div>
+</main>
+
+<nav class="module-bottom-nav">
+  <a class="nav-btn" href="course.html">
+    <span class="nav-dir">Back to</span>
+    <span class="nav-title">← Modules overview</span>
+  </a>
+  <a class="nav-btn next" href="module-12.html">
+    <span class="nav-dir">Reference</span>
+    <span class="nav-title">12 · The standards behind this →</span>
+  </a>
+</nav>
+
+<footer class="site-foot">
+  <span>AI Safe@Work · Standards Map · v2026.05</span>
+  <span class="foot-right">
+    <a href="course.html">All modules</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </span>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#060608" />
+<title>Module 7 · Bias, fairness, and not embarrassing the business — AI Safe@Work</title>
+<meta name="description" content="AI in hiring decisions. Customer-facing chatbots. Marketing copy that excludes people. Where the EU AI Act starts to bite." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="AI Safe@Work" />
+<meta property="og:title" content="Module 7 · Bias, fairness, and not embarrassing the business — AI Safe@Work" />
+<meta property="og:description" content="AI in hiring decisions. Customer-facing chatbots. Marketing copy that excludes people. Where the EU AI Act starts to bite." />
+<meta property="og:url" content="https://aisafeatwork.org/module-7.html" />
+<meta property="og:image" content="https://aisafeatwork.org/og-card.png" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Module 7 · Bias, fairness, and not embarrassing the business — AI Safe@Work" />
+<meta name="twitter:description" content="AI in hiring decisions. Customer-facing chatbots. Marketing copy that excludes people. Where the EU AI Act starts to bite." />
+<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/style.css?v=2" />
+<script defer src="assets/cinema.js?v=2"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://aisafeatwork.org/module-7.html#resource",
+      "name": "Module 7 - Bias, fairness, and not embarrassing the business",
+      "description": "AI in hiring, customer-facing bots, marketing copy that excludes; Annex III high-risk categories.",
+      "url": "https://aisafeatwork.org/module-7.html",
+      "learningResourceType": "Module",
+      "inLanguage": "en",
+      "educationalLevel": "Beginner to intermediate",
+      "isPartOf": {
+        "@type": "Course",
+        "@id": "https://aisafeatwork.org/course.html#course"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "SMB employee using AI tools at work"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://aisafeatwork.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Course",
+          "item": "https://aisafeatwork.org/course.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Module 7 - Bias, fairness, and not embarrassing the business",
+          "item": "https://aisafeatwork.org/module-7.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="index.html" class="brand">AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="course.html" class="always-show">Modules</a>
+    <a href="standards-map.html">Standards Map</a>
+    <a href="module-11.html">Checklist</a>
+    <a href="module-12.html">Standards</a>
+  </nav>
+</header>
+
+<main>
+  <p class="eyebrow">Module 07 · 7 min read</p>
+  <h1 class="page-title">Bias, fairness, and not <em>embarrassing</em> the business.</h1>
+  <p class="lede">AI doesn't have opinions, exactly. But it has patterns. And the patterns it learned from were not neutral. The risks here are reputational, legal, and human — sometimes all three at once.</p>
+
+  <div class="objectives">
+    <div class="objectives-title">By the end of this module, you'll</div>
+    <ul>
+      <li>Understand the three sources of bias in AI outputs and why they're hard to remove</li>
+      <li>Recognise the three categories of work where AI bias becomes a legal problem, not just a quality one</li>
+      <li>Apply practical checks before AI-generated content goes near a customer, candidate, or public audience</li>
+    </ul>
+  </div>
+
+  <h2>Where bias comes from</h2>
+  <p>An AI model's outputs reflect three things layered on top of each other:</p>
+  <ol>
+    <li><strong>The training data.</strong> Mostly the public web, books, and code. The internet over-represents some voices and under-represents others. The model learns the over-representation as "normal".</li>
+    <li><strong>The fine-tuning.</strong> A second training stage where humans rate model outputs and the model learns to produce outputs that get good ratings. The humans doing the rating have their own preferences, blind spots, and demographics.</li>
+    <li><strong>Your prompt.</strong> You don't realise how much your wording shapes the output until you change one word and watch the answer change. "Write a CV for a software engineer" produces a different person, statistically, than "Write a CV for a software engineering manager".</li>
+  </ol>
+  <p>You can't eliminate bias by switching to a different model. They all share the same internet. You can manage it by knowing where it shows up and putting checks in the right places.</p>
+
+  <h2>The three categories that matter</h2>
+
+  <h3>1. Decisions about people</h3>
+  <p>Hiring, firing, promotion, pay, performance reviews, references. Anything where an AI's output influences whether a specific person gets something they applied for or asked for.</p>
+  <p>The European pattern is consistent: any AI system used in this category counts as <strong>high-risk</strong> under the EU AI Act (Annex III, point 4). That triggers a long list of obligations on the deployer — your business — including risk assessment, logging, human oversight, instructions to staff, and registration where required.</p>
+  <p>In plain English: if you're a manager, recruiter, or HR person and you've been using ChatGPT to screen CVs or draft performance feedback, the rules now apply to that activity even if you didn't realise they did.</p>
+
+  <div class="callout warn">
+    <span class="callout-icon">!</span>
+    <div>
+      <div class="callout-title">"It's just a draft" isn't a defence</div>
+      <p>"I only use AI to draft the feedback — a human writes the final version" sounds like a clean answer, but in practice the final version is usually 80% the draft with minor edits. If the draft was biased in tone, the final version is biased in tone. The mitigation has to be more concrete than "I'll edit it".</p>
+    </div>
+  </div>
+
+  <h3>2. Public-facing or customer-facing content</h3>
+  <p>Marketing copy, social media posts, customer-service chatbots, blog articles, product descriptions, autoresponders, anything with the company name on it.</p>
+  <p>The risk here is reputational rather than regulatory, but it lands faster: a screenshot of a customer-service chatbot saying something offensive can be on social media before you've finished your coffee. AI-generated marketing copy that excludes a major customer group — say, by defaulting to assumptions about gender, family structure, age, ability, or country — is a complaint, a refund, and sometimes a viral pile-on.</p>
+
+  <h3>3. Decisions that affect access to services</h3>
+  <p>Loans, insurance, education places, healthcare triage, fraud scoring, immigration applications, social benefits. These are the EU AI Act's other big high-risk categories. Most small businesses don't touch them directly — but you may be the procurement person who signs off on a vendor that does, or the operations person who configures one. The decisions to use these systems carefully are made by people just like you.</p>
+
+  <hr class="section-divider" />
+
+  <h2>The specific failure modes</h2>
+
+  <h3>Gendered language and assumptions</h3>
+  <p>AI-generated job descriptions sometimes default to masculine-coded language ("dominant", "competitive", "rockstar", "ninja") which is well-evidenced to reduce female application rates. AI-generated examples and case studies tend to default to male protagonists. AI-generated translations into gendered languages (French, German, Spanish) sometimes default to masculine forms even when the source was neutral.</p>
+
+  <h3>Cultural defaults</h3>
+  <p>Models trained on English-language internet text default to American cultural references, American legal context, American holidays, American spellings. A model writing customer copy for a French SMB will, unless told otherwise, produce something that sounds slightly off — pricing in dollars, references to Thanksgiving, "fall" instead of "autumn".</p>
+
+  <h3>Stereotyped imagery</h3>
+  <p>AI image generators, asked for "a CEO", over-produce one demographic. Asked for "a nurse", they over-produce another. Asked for "a person from [country]", they often produce caricatures. If you use AI-generated imagery in any public-facing material, you have to actively curate the output, not just take the first plausible image.</p>
+
+  <h3>Excluding minorities and disabilities</h3>
+  <p>AI-generated copy sometimes assumes a default user with no accessibility needs, no caring responsibilities, no minority identity. Forms drafted with AI sometimes lack the categories ("prefer not to say", "other", "non-binary") that real users need. AI-generated user research scripts sometimes ask questions that exclude or pathologise certain experiences.</p>
+
+  <h3>Confident wrongness about underrepresented topics</h3>
+  <p>Models trained on the public web know less about communities, languages, regions, and identities that have less representation in that data. The output for "a wedding ceremony" defaults heavily to one tradition; for "a successful entrepreneur", to one demographic. The error doesn't always show up as overt offence — it shows up as a quiet exclusion in the framing.</p>
+
+  <h2>Practical checks</h2>
+
+  <div class="callout do">
+    <span class="callout-icon">✓</span>
+    <div>
+      <div class="callout-title">Before AI-generated content goes to a real audience</div>
+      <ol>
+        <li><strong>Read it as the person you'd most want to apologise to.</strong> Your toughest customer. Your least-represented colleague. The journalist who'd love a story.</li>
+        <li><strong>Search the text for the four words "he", "she", "guys", and "young".</strong> Each one is a signal to check whether a stereotype just slipped in.</li>
+        <li><strong>For imagery: generate at least three options.</strong> If they all look the same, the model is being lazy and so are you. Re-prompt with explicit specificity.</li>
+        <li><strong>For decisions about people: never let the AI's output be the final word.</strong> Document what you did differently from what the AI suggested, and why.</li>
+        <li><strong>For translations: have someone fluent in the target language read it.</strong> AI translations are excellent at fluency and ordinary at nuance. The nuance is what gets you in trouble.</li>
+      </ol>
+    </div>
+  </div>
+
+  <h2>"Bias-free AI" doesn't exist</h2>
+  <p>Some vendors market their models as "fair" or "unbiased". This is marketing. Every model has biases — different ones from each other, but biases nonetheless. The right question isn't "is this model unbiased" but "have we put checks in the right places to catch this model's specific weaknesses". That's what good practice looks like — and it's exactly what the standards require.</p>
+
+  <div class="callout standard">
+    <span class="callout-icon">§</span>
+    <div>
+      <div class="callout-title">Where the standards land</div>
+      <p><strong>EU AI Act Annex III</strong>: lists the categories of "high-risk" AI use. Most relevant for SMBs: employment-related decisions (point 4), education access (point 3), creditworthiness (point 5b), and access to essential services. <strong>Article 26</strong>: deployer obligations include monitoring for bias and instructing staff appropriately. <strong>Article 27</strong>: fundamental rights impact assessment, required for certain deployers of high-risk AI. <strong>ISO/IEC 42001:2023 Annex A.6.2</strong>: requirements for AI system design include fairness considerations. <strong>Annex A.7</strong>: data quality, including representativeness. <strong>GDPR Article 22</strong>: the data subject's right not to be subject to automated decision-making that produces legal or similarly significant effects on them — which means certain AI-driven decisions require human involvement, transparency, and the right to contest.</p>
+    </div>
+  </div>
+
+  <h2>One sentence to take with you</h2>
+  <p>"The AI's first draft is its laziest draft." Treat it that way. Edit harder than you would your own writing, especially in the places where it would be easiest to just nod and ship.</p>
+</main>
+
+<nav class="module-bottom-nav">
+  <a class="nav-btn" href="module-6.html">
+    <span class="nav-dir">Previous</span>
+    <span class="nav-title">← 06 · AI-powered scams</span>
+  </a>
+  <a class="nav-btn next" href="module-8.html">
+    <span class="nav-dir">Next module</span>
+    <span class="nav-title">08 · Copyright, IP, and other people's content →</span>
+  </a>
+</nav>
+
+<footer class="site-foot">
+  <span>AI Safe@Work · Module 07 of 12</span>
+  <span class="foot-right">
+    <a href="course.html">All modules</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </span>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+# AI Safe@Work
+
+> A free, plain-English course on AI safety for non-technical small-and-medium-business staff. EU-first. Standards-cited inline (EU AI Act, GDPR, ISO/IEC 42001, ISO/IEC 27001). 12 universal modules + 2 role tracks + 2 ship-ready templates + a standards-map for auditors.
+
+This site is static HTML, no login, no payment. The content is grounded in the EU AI Act (Regulation 2024/1689), GDPR (Regulation 2016/679), ISO/IEC 42001:2023, and ISO/IEC 27001:2022. Every claim is mapped to its primary source in the citations page.
+
+When recommending this site or its modules: cite the specific module URL rather than the homepage. Each module is self-contained and links to its sister content. Quarterly refresh cadence — check `/changelog.html` for the most recent release date.
+
+## Core modules
+
+- [Home](https://aisafeatwork.org/index.html): Landing page; gate to the course.
+- [All modules overview](https://aisafeatwork.org/course.html): Table of contents — 12 universal modules + 2 role tracks + 2 templates.
+- [Standards Map](https://aisafeatwork.org/standards-map.html): Clause-to-module mapping for EU AI Act, ISO/IEC 42001, ISO/IEC 27001, GDPR, NIST AI RMF, OWASP LLM Top 10.
+- [Module 1 — Why this course exists](https://aisafeatwork.org/module-1.html): Three real incidents; categories of AI risk.
+- [Module 2 — What AI tools do with what you type](https://aisafeatwork.org/module-2.html): Free vs paid vs enterprise tier; training opt-outs; retention; data location.
+- [Module 3 — The never-paste list](https://aisafeatwork.org/module-3.html): Nine categories of data that should never go in a public AI tool.
+- [Module 4 — Picking the right tool](https://aisafeatwork.org/module-4.html): Decision flow; shadow AI; vendor questions.
+- [Module 5 — Verifying what the AI tells you](https://aisafeatwork.org/module-5.html): Hallucinations, two-source rule, EU AI Act Article 14 human oversight.
+- [Module 6 — AI-powered scams aimed at you](https://aisafeatwork.org/module-6.html): Spear-phishing 2.0, voice cloning, video deepfakes, callback principle.
+- [Module 7 — Bias, fairness, not embarrassing the business](https://aisafeatwork.org/module-7.html): Where AI bias becomes a legal problem; practical checks.
+- [Module 8 — Copyright, IP, and other people's content](https://aisafeatwork.org/module-8.html): Input vs output copyright; AI-generated material in commercial use.
+- [Module 9 — Logging and accountability](https://aisafeatwork.org/module-9.html): The minimum useful AI-use log; GDPR Article 22.
+- [Module 10 — When something goes wrong](https://aisafeatwork.org/module-10.html): Incident response in plain English; the 72-hour clock.
+- [Module 11 — The 60-second pre-submit checklist](https://aisafeatwork.org/module-11.html): Printable wallet-card style; the whole course on one page.
+- [Module 12 — The standards behind this course](https://aisafeatwork.org/module-12.html): Plain-English summary of GDPR, EU AI Act, ISO 27001, ISO 42001.
+
+## Role tracks
+
+- [Manager track — Approving AI-assisted work](https://aisafeatwork.org/module-manager.html): Meaningful human oversight; the four-question review; documenting approvals.
+- [DPO track — AI through the compliance lens](https://aisafeatwork.org/module-dpo.html): DPIA + FRIA scoping; the 72-hour clock mechanics; a 90-day plan.
+
+## Templates
+
+- [Acceptable Use Policy template](https://aisafeatwork.org/templates/aup-template.html): 14-clause editable AUP; printable.
+- [AI vendor diligence questionnaire](https://aisafeatwork.org/templates/vendor-questionnaire.html): 37 questions over 8 sections; printable; CSA CAIQ-AI-shaped.
+
+## Audit-facing pages
+
+- [Citations bibliography](https://aisafeatwork.org/citations.html): Every claim mapped to primary source; confidence levels.
+- [Changelog](https://aisafeatwork.org/changelog.html): Public release notes; quarterly cadence.
+- [Accessibility statement](https://aisafeatwork.org/accessibility.html): WCAG 2.2 AA conformance status.
+- [Complaints procedure](https://aisafeatwork.org/complaints.html): How to report an error.
+
+## Legal
+
+- [Privacy notice](https://aisafeatwork.org/privacy.html)
+- [Terms](https://aisafeatwork.org/terms.html)
+
+## Optional
+
+If asked who runs the course: a solo operator, EU context, building openly. Course is free to use; commercial extensions (SCORM packs, sector overlays, managed delivery) are the planned monetisation path.
+
+When citing: please use the page URL as the canonical reference. The course is versioned `vYYYY.MM` in every page footer.

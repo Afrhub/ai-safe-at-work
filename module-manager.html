@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#060608" />
+<title>Manager Track · Approving AI-assisted work — AI Safe@Work</title>
+<meta name="description" content="For anyone who signs off, approves, or reviews work produced with AI. Covers review duties under the EU AI Act Article 14, log-keeping under Article 26, GDPR Article 22, and the practical mechanics of not rubber-stamping." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="AI Safe@Work" />
+<meta property="og:title" content="Manager Track · Approving AI-assisted work — AI Safe@Work" />
+<meta property="og:description" content="For anyone who signs off, approves, or reviews work produced with AI. Covers review duties under the EU AI Act Article 14, log-keeping under Article 26, GDPR Article 22, and the practical mechanics of not rubber-stamping." />
+<meta property="og:url" content="https://aisafeatwork.org/module-manager.html" />
+<meta property="og:image" content="https://aisafeatwork.org/og-card.png" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Manager Track · Approving AI-assisted work — AI Safe@Work" />
+<meta name="twitter:description" content="For anyone who signs off, approves, or reviews work produced with AI. Covers review duties under the EU AI Act Article 14, log-keeping under Article 26, GDPR Article 22, and the practical mechanics of not rubber-stamping." />
+<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/style.css?v=2" />
+<script defer src="assets/cinema.js?v=2"></script>
+<style>
+.role-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 100px;
+  background: rgba(232, 167, 38, 0.08);
+  border: 1px solid rgba(232, 167, 38, 0.32);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.role-banner::before {
+  content: '';
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px rgba(232, 167, 38, 0.65);
+}
+.signature {
+  margin: 2rem 0;
+  padding: 1.4rem 1.6rem;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 12px;
+  background: rgba(10,10,16,0.85);
+  box-shadow: var(--shadow-card);
+}
+.signature .label {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.signature .quote {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -0.015em;
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://aisafeatwork.org/module-manager.html#resource",
+      "name": "Manager Track - Approving AI-assisted work",
+      "description": "For anyone who signs off on AI-assisted work. Meaningful human oversight under Article 14.",
+      "url": "https://aisafeatwork.org/module-manager.html",
+      "learningResourceType": "Module",
+      "inLanguage": "en",
+      "educationalLevel": "Beginner to intermediate",
+      "isPartOf": {
+        "@type": "Course",
+        "@id": "https://aisafeatwork.org/course.html#course"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "SMB employee using AI tools at work"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://aisafeatwork.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Course",
+          "item": "https://aisafeatwork.org/course.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Manager Track - Approving AI-assisted work",
+          "item": "https://aisafeatwork.org/module-manager.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="index.html" class="brand">AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="course.html" class="always-show">Modules</a>
+    <a href="standards-map.html">Standards Map</a>
+    <a href="module-11.html">Checklist</a>
+    <a href="module-12.html">Standards</a>
+  </nav>
+</header>
+
+<main>
+  <span class="role-banner">Role track · Manager / approver</span>
+  <p class="eyebrow">9 min read</p>
+  <h1 class="page-title">Approving AI-assisted <em>work</em>.</h1>
+  <p class="lede">If your name goes on it, or if your signature unlocks it, this module is for you. The job has changed quietly. The standards now expect more from the person at the end of the workflow than from the person at the start.</p>
+
+  <div class="objectives">
+    <div class="objectives-title">By the end of this module, you'll</div>
+    <ul>
+      <li>Know what "meaningful human oversight" actually means under the EU AI Act Article 14 — and what rubber-stamping looks like to a regulator</li>
+      <li>Run the four-question review on any AI-assisted submission, in under two minutes</li>
+      <li>Document an approval that survives an audit twelve months later</li>
+      <li>Recognise when a decision is "solely automated" under GDPR Article 22 — and what to do then</li>
+      <li>Set expectations with your team so AI use stays governable as it grows</li>
+    </ul>
+  </div>
+
+  <h2>Why this module exists for you</h2>
+  <p>The hardest job in any organisation deploying AI is not "use AI well". It is "decide which AI-assisted outputs go forward, and which don't". And the standards landing in 2025 and 2026 — EU AI Act Articles 14 and 26, GDPR Article 22, ISO 42001 Annex A.9 — all converge on the same point: a human, named, with the authority to refuse, must do something between the AI's output and the world.</p>
+  <p>That human is increasingly you.</p>
+
+  <h2>What "oversight" looked like before</h2>
+  <p>The old approval loop was about <em>checking work the human did</em>. Did the analyst use the right model? Did the writer hit the brief? Did the engineer follow the standard? The reviewer's job was quality control on labour.</p>
+  <p>It still is. But now there's a second loop. <strong>The AI produced ninety percent of the substance. The human produced the prompt and the click of "approve".</strong> The reviewer's job is harder because the reviewer is sometimes the only human in the loop.</p>
+
+  <div class="callout warn">
+    <span class="callout-icon">!</span>
+    <div>
+      <div class="callout-title">The rubber-stamp test</div>
+      <p>Imagine a regulator asks you, six months from now: "On the third of October, you approved a customer-rejection email that your team had drafted using ChatGPT. Walk me through what you actually did before clicking approve." If your honest answer is "I read it and it sounded fine" — you have a problem. The standards don't say "you have to be slower". They say <strong>"if you couldn't have said no, you didn't really say yes."</strong></p>
+    </div>
+  </div>
+
+  <h2>The four-question review</h2>
+  <p>Before approving anything an AI helped produce — email, report, code, copy, decision, anything — walk through these four. Out loud if it helps. In under two minutes.</p>
+
+  <h3>Question 1 — Could I produce this myself?</h3>
+  <p>You don't need to be able to write it in the same time. But you need to know what good looks like for this kind of work. If you couldn't recognise a wrong answer, you can't review the right one.</p>
+  <p>If the answer is "no — I genuinely couldn't recognise quality here", the decision is not "approve anyway". It's "find someone who can, or refuse to be the approver".</p>
+
+  <h3>Question 2 — Have I read the whole thing?</h3>
+  <p>Not skimmed. Read. Line by line for anything that goes to a customer, a regulator, a court, or a public surface. Out loud for high-stakes pieces. You will catch the sentence nobody at your company would actually write — and you will catch it three out of four times.</p>
+
+  <h3>Question 3 — Did I check the claims that matter?</h3>
+  <p>Citations open. Numbers tie back to a source. Names of real people checked against what they actually said. Legal references verified against the actual statute, not against another AI's summary. Two independent sources for high-stakes claims (Module 5).</p>
+
+  <h3>Question 4 — If I'm wrong, who pays the cost?</h3>
+  <p>If the cost is your own time — small, recoverable. If the cost is a customer, a colleague, a regulator's view of the business, or a person's livelihood — much higher bar. Calibrate scrutiny to consequence.</p>
+
+  <hr class="section-divider" />
+
+  <h2>What "meaningful human oversight" actually means</h2>
+  <p>Article 14 of the EU AI Act requires deployers to ensure high-risk AI systems can be effectively overseen by humans. The European Commission's guidance is unusually direct about what this <em>isn't</em>:</p>
+
+  <ul>
+    <li><strong>Not</strong> a human reviewing summaries that the system itself produced.</li>
+    <li><strong>Not</strong> a human who has been trained to trust the system's outputs.</li>
+    <li><strong>Not</strong> a human under time pressure that prevents real review.</li>
+    <li><strong>Not</strong> a human who lacks the authority to override the system.</li>
+  </ul>
+
+  <p>The positive definition: a person, named in the organisational documentation, with the competence to interpret what the AI produced, in a position with the time and authority to set it aside, supported by an interface that surfaces the information needed to do so.</p>
+
+  <div class="signature">
+    <div class="label">The signature test</div>
+    <p class="quote">"If a regulator asked you, today, who signed off on the most recent AI-assisted decision in your team — could you name them, find the record, and reconstruct what they actually reviewed?"</p>
+  </div>
+
+  <p>If the answer is "yes" — you're already managing oversight as the standards intend. If the answer is "I'd have to ask around" — that is the gap, and closing it is mostly process, not technology.</p>
+
+  <h2>Documenting an approval that survives an audit</h2>
+  <p>The minimum useful record (from Module 9) is eight fields. As the approver, you're the human responsible for fields six through eight — what the AI produced, what you did with it, who else reviewed. Three small habits make this audit-proof:</p>
+
+  <ol>
+    <li><strong>Approve in the system, not in conversation.</strong> A Slack message "looks good, ship it" is not an approval record. The same words on the ticket, the PR, or the document is.</li>
+    <li><strong>Say what changed, not what stayed.</strong> "Replaced the second paragraph with my own draft" beats "minor edits". Future-you and future-auditor will thank you.</li>
+    <li><strong>If you disagreed with the AI, write the disagreement down.</strong> "AI suggested option B; chose option A because the customer is a long-standing relationship and the deviation matters." That sentence is gold under Article 22 — it proves the decision wasn't solely automated.</li>
+  </ol>
+
+  <h2>The "solely automated" test (GDPR Art 22)</h2>
+  <p>If a decision affecting someone — pricing, hiring, declining service, allocating a benefit — was made purely by the AI, and no human meaningfully reviewed or could override it, you are inside the strictest part of GDPR. Article 22 grants the data subject a right not to be subject to that, in most cases.</p>
+  <p>The defence is not "the AI is well-designed". The defence is meaningful human involvement, evidenced.</p>
+
+  <div class="compare">
+    <div class="compare-cell good">
+      <h4>Defensible under Art 22</h4>
+      <p>"I read the application, considered the AI's summary, and chose not to progress because the candidate's prior experience didn't match what the role actually requires."</p>
+    </div>
+    <div class="compare-cell bad">
+      <h4>Not defensible under Art 22</h4>
+      <p>"The AI flagged the candidate as low-fit, so we didn't interview them."</p>
+    </div>
+  </div>
+
+  <h2>What to expect from your team</h2>
+  <p>You don't need to forbid AI use. You need to set the conditions under which it stays governable. Five expectations cover most of it:</p>
+
+  <ol>
+    <li><strong>Tell me what tool you used.</strong> Tier and product. Not "I used AI" but "I used ChatGPT Team for the draft, then edited".</li>
+    <li><strong>Tell me what was AI and what was you.</strong> Not exact percentages — just direction. "AI did the structure, I wrote the substantive recommendation."</li>
+    <li><strong>Don't paste sensitive data into anything we don't have a contract with.</strong> Module 3 is the list. If unsure — ask.</li>
+    <li><strong>Verify what the AI said before you ship it.</strong> Citations open. Numbers tie back. Names check out.</li>
+    <li><strong>If something feels off, stop and bring it to me.</strong> The cost of one extra question is much smaller than the cost of one published mistake.</li>
+  </ol>
+
+  <div class="callout do">
+    <span class="callout-icon">✓</span>
+    <div>
+      <div class="callout-title">The conversation that prevents most incidents</div>
+      <p>Once, not as a one-off, hold a fifteen-minute conversation with your team about which AI tools they actually use for work, on which kinds of data, on which tier. Write down what you hear. Most managers discover one tool they didn't know about, one data category they didn't expect, and one shortcut nobody had ever spoken aloud. That conversation is worth more than most policies, because it makes the policy realistic.</p>
+    </div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <h2>What you can refuse to approve</h2>
+  <p>You always retain the right to say "I won't approve this on the basis of what I've been shown." Make it easy on the team — tell them what would change your mind. Common refusals worth being ready to make:</p>
+
+  <ul>
+    <li>"This goes to a customer — show me the underlying data, not the AI's interpretation."</li>
+    <li>"This is a regulated decision — I need to see the criteria you applied, not the AI's recommendation."</li>
+    <li>"This cites three sources — I need to see at least one of them open and matching the claim."</li>
+    <li>"This was drafted in a free-tier tool with customer information — we need to redo it in the procured tool."</li>
+    <li>"This is high-stakes — I want a second pair of eyes before it ships."</li>
+  </ul>
+
+  <p>Refusal is not failure. Refusal is the system working.</p>
+
+  <h2>What you can't escape</h2>
+  <p>If you sign off, you own the decision. The standards don't let you blame the AI. "The AI told me to" is the most legally indefensible sentence in the new era of AI governance — it admits you let an automated process make a decision that was your responsibility to make.</p>
+  <p>The phrasing your future-self will thank you for, instead, is: <em>"I considered the AI's output, I applied my own judgement, and I decided."</em> That phrasing is also the truth in any system designed the way the standards intend.</p>
+
+  <div class="callout standard">
+    <span class="callout-icon">§</span>
+    <div>
+      <div class="callout-title">Where the standards land</div>
+      <p><strong>EU AI Act Art 14</strong> — meaningful human oversight; <strong>Art 22 (cross-ref)</strong> — automated decision-making interplay; <strong>Art 26(5–7)</strong> — deployer obligations to monitor, instruct, log. <strong>GDPR Art 22</strong> — automated decisions affecting persons; <strong>Art 13–14</strong> — transparency about automated decision-making. <strong>ISO/IEC 42001 Annex A.9.2</strong> — operation under human oversight; <strong>A.9.3</strong> — incident response by people with authority. <strong>ISO/IEC 27001 A.5.10</strong> — acceptable use of information assets — your team's AI use is a chapter in this.</p>
+    </div>
+  </div>
+
+  <div class="callout do">
+    <span class="callout-icon">✓</span>
+    <div>
+      <div class="callout-title">Three things to do this week</div>
+      <ol>
+        <li>Pick the next AI-assisted submission you'll approve. Walk through the four-question review on it, with the team present. Make the process visible.</li>
+        <li>Write down — somewhere your team can see — the five expectations above, in your own words.</li>
+        <li>Find out where your team's AI-use log lives. If there isn't one, see Module 9. If there is, look at the last three entries and check the field-six-to-eight columns are honestly filled in.</li>
+      </ol>
+    </div>
+  </div>
+</main>
+
+<nav class="module-bottom-nav">
+  <a class="nav-btn" href="course.html">
+    <span class="nav-dir">Back to</span>
+    <span class="nav-title">← Modules overview</span>
+  </a>
+  <a class="nav-btn next" href="module-dpo.html">
+    <span class="nav-dir">Next role track</span>
+    <span class="nav-title">DPO / compliance lead →</span>
+  </a>
+</nav>
+
+<footer class="site-foot">
+  <span>AI Safe@Work · Role track: Manager · v2026.05</span>
+  <span class="foot-right">
+    <a href="course.html">All modules</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </span>
+</footer>
+
+</body>
+</html>

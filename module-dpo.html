@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#060608" />
+<title>DPO Track · AI through the compliance lens — AI Safe@Work</title>
+<meta name="description" content="For Data Protection Officers, compliance leads, and the people who own DPIAs, RoPAs, breach response, and vendor diligence in their organisation. Covers DPIA + FRIA scoping for AI, RoPA entries, the 72-hour clock, and the conversations to have before a tool is procured." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="AI Safe@Work" />
+<meta property="og:title" content="DPO Track · AI through the compliance lens — AI Safe@Work" />
+<meta property="og:description" content="For Data Protection Officers, compliance leads, and the people who own DPIAs, RoPAs, breach response, and vendor diligence in their organisation. Covers DPIA + FRIA scoping for AI, RoPA entries, the 72-hour clock, and the conversations to have before a tool is procured." />
+<meta property="og:url" content="https://aisafeatwork.org/module-dpo.html" />
+<meta property="og:image" content="https://aisafeatwork.org/og-card.png" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="DPO Track · AI through the compliance lens — AI Safe@Work" />
+<meta name="twitter:description" content="For Data Protection Officers, compliance leads, and the people who own DPIAs, RoPAs, breach response, and vendor diligence in their organisation. Covers DPIA + FRIA scoping for AI, RoPA entries, the 72-hour clock, and the conversations to have before a tool is procured." />
+<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/style.css?v=2" />
+<script defer src="assets/cinema.js?v=2"></script>
+<style>
+.role-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 100px;
+  background: rgba(232, 167, 38, 0.08);
+  border: 1px solid rgba(232, 167, 38, 0.32);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.role-banner::before {
+  content: '';
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px rgba(232, 167, 38, 0.65);
+}
+.flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.85rem;
+  margin: 1.5rem 0 2.4rem;
+  counter-reset: flowstep;
+}
+.flow-step {
+  position: relative;
+  padding: 1.2rem 1.25rem 1.1rem 1.25rem;
+  background: rgba(10,10,16,0.85);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+  counter-increment: flowstep;
+}
+.flow-step::before {
+  content: counter(flowstep, decimal-leading-zero);
+  position: absolute;
+  top: 0.7rem; right: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  opacity: 0.6;
+}
+.flow-step h4 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: -0.015em;
+  margin-bottom: 0.45rem;
+  color: var(--text);
+}
+.flow-step p {
+  font-size: 0.84rem;
+  color: var(--text2);
+  line-height: 1.55;
+  margin: 0;
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://aisafeatwork.org/module-dpo.html#resource",
+      "name": "DPO Track - AI through the compliance lens",
+      "description": "For DPOs and compliance leads. DPIA + FRIA, 72-hour clock, 90-day plan.",
+      "url": "https://aisafeatwork.org/module-dpo.html",
+      "learningResourceType": "Module",
+      "inLanguage": "en",
+      "educationalLevel": "Beginner to intermediate",
+      "isPartOf": {
+        "@type": "Course",
+        "@id": "https://aisafeatwork.org/course.html#course"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "SMB employee using AI tools at work"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://aisafeatwork.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Course",
+          "item": "https://aisafeatwork.org/course.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "DPO Track - AI through the compliance lens",
+          "item": "https://aisafeatwork.org/module-dpo.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="index.html" class="brand">AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="course.html" class="always-show">Modules</a>
+    <a href="standards-map.html">Standards Map</a>
+    <a href="module-11.html">Checklist</a>
+    <a href="module-12.html">Standards</a>
+  </nav>
+</header>
+
+<main>
+  <span class="role-banner">Role track · DPO / compliance lead</span>
+  <p class="eyebrow">11 min read</p>
+  <h1 class="page-title">AI through the <em>compliance</em> lens.</h1>
+  <p class="lede">For the person whose job is to know — before everyone else does — what could go wrong, who needs to be told, and within how many hours. This is the module where the standards stop being background and start being your week's calendar.</p>
+
+  <div class="objectives">
+    <div class="objectives-title">By the end of this module, you'll</div>
+    <ul>
+      <li>Know when AI use triggers a DPIA, a FRIA, or both — and how to scope each in under a day</li>
+      <li>Know what an AI entry in the Records of Processing Activities should actually contain</li>
+      <li>Run the 72-hour breach-notification clock with confidence — including the awkward "are we even sure it's a breach?" hours</li>
+      <li>Know which conversations to have with procurement, IT, and the board before a tool is bought</li>
+      <li>Have a defensible answer when a data subject asks "how was this decision about me made?"</li>
+    </ul>
+  </div>
+
+  <h2>What's actually changed for you</h2>
+  <p>The substantive shift since 2024 is small and large at once. GDPR did not get rewritten. ISO 27001 did not get rewritten. But the EU AI Act layered on top, and what changed is that <strong>every existing obligation now has an AI-specific edge case</strong>, and you are the one who's expected to recognise it before the business commits.</p>
+
+  <p>Three buckets of work, each cross-cutting:</p>
+  <ul>
+    <li><strong>Before</strong> — assessments (DPIA, FRIA, vendor diligence), policies (AUP, RoPA entries).</li>
+    <li><strong>During</strong> — oversight of staff use (Module 9 logging), training (this course is one such measure under Art 4), incident readiness.</li>
+    <li><strong>After</strong> — incident response, breach notification, regulator engagement, lessons captured into the next cycle.</li>
+  </ul>
+
+  <hr class="section-divider" />
+
+  <h2>DPIA, FRIA, or both?</h2>
+  <p>The first conversation a business should have with you about a proposed AI use case: do we need a Data Protection Impact Assessment under GDPR Article 35, a Fundamental Rights Impact Assessment under EU AI Act Article 27, or both?</p>
+
+  <div class="compare">
+    <div class="compare-cell good">
+      <h4>DPIA (GDPR Art 35)</h4>
+      <p><strong>Trigger:</strong> processing is likely to result in high risk to rights and freedoms of natural persons. AI use almost always meets this where personal data is involved.</p>
+      <p><strong>Output:</strong> documented assessment, mitigations, prior consultation if residual risk remains.</p>
+    </div>
+    <div class="compare-cell good">
+      <h4>FRIA (EU AI Act Art 27)</h4>
+      <p><strong>Trigger:</strong> deployer of a high-risk AI system that is a body governed by public law, a private body providing public services, or one using high-risk AI for credit-worthiness / life and health insurance pricing.</p>
+      <p><strong>Output:</strong> documented assessment of fundamental-rights impact, complementing the DPIA.</p>
+    </div>
+  </div>
+
+  <p>In practice, for most EU SMBs that deploy AI in HR, customer-facing decisions, or credit/insurance: <strong>both</strong>. Run them together, output a combined document, keep two cross-referenced sections. Saves repetition, saves audit time.</p>
+
+  <h3>The scoping conversation</h3>
+  <p>Before either assessment starts, six questions extracted from a fifteen-minute conversation with the proposing business unit will determine the shape of the work:</p>
+
+  <ol>
+    <li><strong>What problem is this AI solving?</strong> Not the feature — the underlying decision being made.</li>
+    <li><strong>Whose data, whose decisions?</strong> Categories of data subjects, categories of decisions affecting them.</li>
+    <li><strong>What's the volume?</strong> Pilot, departmental rollout, organisation-wide.</li>
+    <li><strong>What does refusal look like?</strong> Can a person opt out? Can they ask for human review?</li>
+    <li><strong>Where does the AI sit?</strong> SaaS, on-premise, in your existing cloud, on the developer's laptop.</li>
+    <li><strong>What's the worst-case incident?</strong> If this misbehaves in front of a regulator, what's the harm to a real person?</li>
+  </ol>
+
+  <p>Those six answers shape the DPIA's depth and tell you whether to escalate to a FRIA, to prior consultation with the supervisory authority (Art 36), or to refuse the use case altogether.</p>
+
+  <hr class="section-divider" />
+
+  <h2>Records of Processing Activities — the AI entry</h2>
+  <p>For each AI use case, your RoPA (Art 30) entry needs five things many entries skip:</p>
+
+  <div class="flow">
+    <div class="flow-step"><h4>The model behind the product</h4><p>Not "ChatGPT" — "OpenAI GPT-4o via ChatGPT Enterprise tenant ABC-123, configured EU region, training opt-out on." Sub-processors disclosed.</p></div>
+    <div class="flow-step"><h4>The data flow</h4><p>What categories go in, what comes out, what is retained where, for how long. Include any vector store, prompt cache, conversation history.</p></div>
+    <div class="flow-step"><h4>Legal basis</h4><p>Specific Art 6 basis, plus Art 9 ground if special-category. "Legitimate interests" requires a documented balancing test — link to it.</p></div>
+    <div class="flow-step"><h4>Decision boundary</h4><p>Where the AI's output ends and the human decision begins. Names of the humans, their authority to override.</p></div>
+    <div class="flow-step"><h4>Incident contact</h4><p>Who at the vendor you call within thirty minutes if something goes wrong. SLA on notification. Vendor's own incident page URL.</p></div>
+    <div class="flow-step"><h4>Review cadence</h4><p>Quarterly check — has the vendor changed terms, changed sub-processors, changed model behaviour, changed retention? Default cadence quarterly; finance / health monthly.</p></div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <h2>The 72-hour breach clock</h2>
+  <p>Article 33 starts the clock when the controller has reasonable awareness — not certainty — that a personal-data breach has occurred. For AI-related incidents (the most common: data pasted into a free-tier tool, vendor security incident, model output disclosing data it shouldn't), the clock is the hardest part of the job.</p>
+
+  <p>Three principles get most teams through:</p>
+
+  <ol>
+    <li><strong>The clock starts at "reasonable awareness", not "certainty".</strong> If your gut says this could be a breach, the clock is running. Use the hours to find out, not to wait.</li>
+    <li><strong>If unsure at 60 hours, notify.</strong> A precautionary notification you later refine or withdraw is much smaller cost than a missed deadline. Supervisory authorities recognise the distinction.</li>
+    <li><strong>Notify in writing, even when the regulator accepts a phone call.</strong> Audit trail. The phone call confirms it; the written notification is the record.</li>
+  </ol>
+
+  <div class="callout warn">
+    <span class="callout-icon">!</span>
+    <div>
+      <div class="callout-title">The most common AI breach scenarios</div>
+      <ul>
+        <li>An employee pasted a customer file into a free-tier AI tool. The tool's terms permit training. The data is now in the vendor's pipeline.</li>
+        <li>An AI vendor announced a security incident. Your team had been sending sensitive data through that vendor for six months. You don't know yet what was exposed.</li>
+        <li>An AI chatbot deployed on your site disclosed another customer's order details to a third party who asked the right question.</li>
+        <li>An AI-generated decision was based on the wrong data category, and a customer complains. Investigation reveals the model had been hallucinating personal data the customer had never shared.</li>
+      </ul>
+      <p>Each of these is a personal data breach. The clock starts when you have enough information to suspect it.</p>
+    </div>
+  </div>
+
+  <h2>The conversation with procurement before a tool is bought</h2>
+  <p>Almost every AI incident at an SMB starts with a tool that was procured before the DPO was involved. The cheapest insurance is to be the first call, not the last. Five questions to send back when a new AI tool is proposed:</p>
+
+  <ol>
+    <li>What categories of personal data will flow through it, in what volume?</li>
+    <li>Where is the data processed (which country, whose servers, with what sub-processors)?</li>
+    <li>What does the vendor's DPA actually say about training, retention, and breach notification?</li>
+    <li>What's the lawful basis for this processing, and have we documented it?</li>
+    <li>What happens if we need to extract our data and exit?</li>
+  </ol>
+
+  <p>Three of the five tend to come back blank. Those blanks <em>are</em> the diligence finding. Use the <a href="templates/vendor-questionnaire.html" class="accent">vendor questionnaire template</a> to structure the answers.</p>
+
+  <h2>The data-subject request you'll get sooner than you think</h2>
+  <p>Article 15 (right of access) plus Article 22 (automated decisions) plus Article 13–14 (information about automated decision-making) combine into a single emerging pattern: <strong>a customer asks "how was the decision about me made, and what role did AI play?"</strong></p>
+
+  <p>The defensible response has three parts:</p>
+
+  <ol>
+    <li>The factual sequence: AI tool X produced output Y; human Z reviewed it; the decision was made on the basis of A, B, and C.</li>
+    <li>The mitigation: human Z had the authority to override; here's evidence of the review.</li>
+    <li>The right: the data subject can ask for re-review without the AI's involvement; here's how.</li>
+  </ol>
+
+  <p>If you can't produce all three from your records, the process needs work, not the response.</p>
+
+  <hr class="section-divider" />
+
+  <h2>The DPO's first 90 days on AI governance</h2>
+
+  <div class="flow">
+    <div class="flow-step"><h4>Week 1 — inventory</h4><p>Across the org: which teams are using which AI tools, at which tiers, on which data. Walk floor. Five-minute conversations. Spreadsheet.</p></div>
+    <div class="flow-step"><h4>Week 2 — gap</h4><p>Match the inventory against existing DPAs, RoPA entries, AUP. Identify the shadow tools, the missing assessments, the unclear data flows.</p></div>
+    <div class="flow-step"><h4>Week 3 — triage</h4><p>Highest-risk uses first. Decide which to formalise (negotiate DPA, run DPIA), which to migrate to a procured alternative, which to stop.</p></div>
+    <div class="flow-step"><h4>Week 4 — policy</h4><p>Draft or update AUP for AI. Use the <a href="templates/aup-template.html" class="accent">AUP template</a>. Circulate, get sign-off, communicate.</p></div>
+    <div class="flow-step"><h4>Weeks 5–8 — DPIAs</h4><p>Run DPIA + FRIA on top three use cases. Document, mitigate, where needed escalate to prior consultation.</p></div>
+    <div class="flow-step"><h4>Weeks 9–12 — train + log</h4><p>Roll out AI literacy training (this course). Establish AI-use logging cadence (Module 9). Calendar the quarterly review.</p></div>
+  </div>
+
+  <div class="callout standard">
+    <span class="callout-icon">§</span>
+    <div>
+      <div class="callout-title">Where the standards land</div>
+      <p><strong>GDPR Art 5, 6, 9, 13–14, 22, 28, 30, 32, 33–34, 35, 36, 39, 44–50.</strong> Almost everything in this module. <strong>EU AI Act Art 4</strong> (literacy), <strong>Art 14</strong> (oversight, your spec), <strong>Art 26</strong> (deployer obligations), <strong>Art 27</strong> (FRIA), <strong>Art 73</strong> (serious incidents). <strong>ISO/IEC 42001 Cl 6.1</strong> (risks &amp; opportunities), <strong>A.5.2</strong> (AI impact assessment), <strong>A.7</strong> (data), <strong>A.9</strong> (use of AI). <strong>ISO/IEC 27001 A.5.34</strong> (PII protection), <strong>A.5.23</strong> (cloud use), <strong>A.5.24–26</strong> (incidents).</p>
+    </div>
+  </div>
+
+  <div class="callout do">
+    <span class="callout-icon">✓</span>
+    <div>
+      <div class="callout-title">Three artefacts to have ready by Friday</div>
+      <ol>
+        <li><strong>AI inventory spreadsheet</strong> — every AI tool your org uses, at what tier, on what data, owned by whom.</li>
+        <li><strong>The AUP draft</strong> — at minimum the never-paste list (Module 3), the tier rules (Module 4), the logging expectations (Module 9). <a href="templates/aup-template.html" class="accent">Template</a>.</li>
+        <li><strong>The breach playbook</strong> — who to call in the first hour, where to log, what to preserve, when the clock starts. Print it. Tape it inside the cupboard, next to the fire-evacuation plan.</li>
+      </ol>
+    </div>
+  </div>
+</main>
+
+<nav class="module-bottom-nav">
+  <a class="nav-btn" href="module-manager.html">
+    <span class="nav-dir">Previous role</span>
+    <span class="nav-title">← Manager track</span>
+  </a>
+  <a class="nav-btn next" href="templates/aup-template.html">
+    <span class="nav-dir">Use the template</span>
+    <span class="nav-title">Acceptable Use Policy →</span>
+  </a>
+</nav>
+
+<footer class="site-foot">
+  <span>AI Safe@Work · Role track: DPO / compliance · v2026.05</span>
+  <span class="foot-right">
+    <a href="course.html">All modules</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </span>
+</footer>
+
+</body>
+</html>
