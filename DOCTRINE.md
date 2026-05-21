@@ -164,6 +164,37 @@ Gates 1, 2, 3, 13, 14 are the **week-one block**. Gates 4–7 are the **quarter-
 4. **No paid marketing** on free core. Distribution earned via standards mapping, embeddability, and the rule-tracking changelog.
 5. **Paid offerings** — SCORM pack, templates pack, sector overlays, manager guide, trainer accreditation, white-label.
 6. **EU-first SEO** — pillar pages target EU-AI-Act + ISO-42001 + GDPR + DORA query space. US queries (NIST AI RMF, NYC LL144) are second-pass.
+7. **Channel partners** — authorised resellers / referrers may sell paid tiers under named partner agreement. See § Sales partners.
+
+---
+
+## § Sales partners
+
+> Authorised resellers / channel partners / referrers permitted to sell or resell paid tiers under named agreement. Free core remains free at point of use regardless of channel. Added 2026-05-19.
+
+| Partner | Type | Status | Territory | Tiers permitted | Margin / commission | Agreement |
+|---|---|---|---|---|---|---|
+| **RORtech Partners Limited** | Authorised reseller (first) | Onboarding · contract pending | TBD (default: global) | TBD (default: all paid tiers) | TBD | reseller agreement TBD |
+
+### Partner-onboarding requirements (every entry)
+
+- Signed reseller / channel agreement on file (`.audit/legal/partners/<partner-name>-agreement.pdf`).
+- Sub-processor disclosure if partner touches customer personal data (RoPA + sub-processor register updated).
+- Branded white-label terms agreed if partner co-brands the course (default: NO white-label without explicit clause).
+- Quarterly partner-revenue reconciliation logged in `.audit/legal/partner-revenue-YYYY-QN.md`.
+- Partner does not modify course content without doctrine review.
+- Partner does not represent the course as accredited until accreditation actually lands.
+
+### Conflict + exclusivity policy
+
+- No exclusivity granted by default. Multiple partners may operate in the same territory.
+- Direct sales by AI Safe@Work remain available at all times.
+- Conflicts (two partners chasing same buyer) resolved by first-registered-deal rule, recorded in a shared deal register.
+
+### Termination
+
+- Either party may terminate w/ 90 days written notice.
+- Termination triggers: misrepresentation of accreditation status, breach of confidentiality, breach of brand guidelines, non-payment, failure to keep AUP applied to own staff handling course data.
 
 ---
 
@@ -315,6 +346,7 @@ People-Also-Ask FAQ candidates (seed `FAQPage` schema): see audit doc.
 | 2026-05-19 | `.audit/` pack established: RoPA, sub-processors, DPIA, breach plan, retention, ISMS, risk, asset, access, incidents, AI inventory, AI training register, AUP for own staff | Audit-readiness foundation; eats own dogfood |
 | 2026-05-19 | accessibility.html + complaints.html published; accessibility-audit-2026.md self-assessment filed | Public-sector + insurance readiness; visible bar for further improvement |
 | 2026-05-19 | Doctrine § audit-readiness and § refresh-cadence-operational locked | Project graduates from "course product" to "course-producing organisation" |
+| 2026-05-19 | Doctrine § Sales partners added. First entry: **RORtech Partners Limited** as authorised reseller (onboarding · contract pending) | Establishes channel-partner model; free core remains free regardless of channel |
 
 Append below as decisions land. Use `/aos-log` for global cross-project decisions.
 
