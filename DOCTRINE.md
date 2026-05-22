@@ -200,30 +200,94 @@ Gates 1, 2, 3, 13, 14 are the **week-one block**. Gates 4–7 are the **quarter-
 
 ## § Anti-scraping + AI-crawler controls
 
-> Added 2026-05-19. Scoped intentionally to **paid + auth'd surfaces only**. Free core (12 modules, 2 role tracks, 2 templates, standards-map, citations, changelog, accessibility, complaints, doctrine) remains open and AI-citable per the wedge and `llms.txt`. The controls below apply once a paid or auth'd surface ships.
+> Added 2026-05-19. Refined 2026-05-19. Strategy: **split AI crawlers into TRAINING-only vs CITATION / answer-engine UAs**. Block training-only site-wide. Allow citation engines on free core (they drive the trust-signal traffic that converts to paid). Block both on paid surfaces.
 
-### Tension to remember
+### The wedge — non-negotiable
 
-- The free core is a **trust signal**. It is supposed to be citable by ChatGPT, Claude, Perplexity, Gemini etc. `llms.txt` explicitly invites this.
-- The **paid surfaces** (SCORM exports, customer-account dashboards, audit-pack CSV exports, certificate verifications, bespoke content built for Enterprise+) are commercially sensitive and **must not** be ingested by AI crawlers or scrapers.
-- These two postures live on the same domain. Path-scoped rules are mandatory; never apply site-wide.
+- The free core is a **trust signal**. ChatGPT, Claude, Perplexity, Gemini citing our content with a link IS the acquisition channel. `llms.txt` is the format that feeds these engines and stays in place.
+- The **paid surfaces** (SCORM exports, customer-account dashboards, audit-pack CSV exports, certificate verifications, bespoke content) must not be ingested by anyone — training crawler, citation crawler, scraper, competitor.
+- Resolution: same-vendor split. OpenAI ships `GPTBot` (training, no return) and `ChatGPT-User` + `OAI-SearchBot` (citation, returns traffic). They are different UAs and we can treat them differently.
 
-### Layer 1 — robots.txt explicit AI-crawler block (paid paths only)
+### Training-only crawlers — block SITE-WIDE
 
-User-agents to deny for paid / auth'd paths:
+| UA | Vendor | What |
+|---|---|---|
+| `GPTBot` | OpenAI | Training corpus for next GPT |
+| `ClaudeBot` · `anthropic-ai` | Anthropic | Training corpus for next Claude |
+| `CCBot` | Common Crawl | Feedstock for every model trainer downstream — biggest leverage block |
+| `Google-Extended` | Google | Opt-out signal for Gemini training (separate from Googlebot, which stays allowed) |
+| `Bytespider` | ByteDance | TikTok / Doubao training |
+| `Amazonbot` | Amazon | Mixed search/training; conservative = block |
+| `Applebot-Extended` | Apple | Apple Intelligence training opt-out (separate from Applebot, which stays allowed) |
+| `Meta-ExternalAgent` | Meta | Llama training |
+| `cohere-ai` · `cohere-training-data-crawler` | Cohere | Training |
+| `omgili` · `omgilibot` · `Webz.io` | Webz | Training-corpus reseller |
+| `ImagesiftBot` · `YouBot` · `Diffbot` · `magpie-crawler` · `AI2Bot` · `Timpibot` · `PetalBot` | various | Training |
 
-- `GPTBot` (OpenAI)
-- `ClaudeBot` and `Claude-Web` and `anthropic-ai` (Anthropic)
-- `CCBot` (Common Crawl)
-- `Google-Extended` (Bard / Gemini training, separate from Googlebot)
-- `PerplexityBot` (Perplexity)
-- `Bytespider` (ByteDance / TikTok)
-- `Amazonbot` (Amazon)
-- `Applebot-Extended` (Apple AI training, separate from Applebot)
-- `Meta-ExternalAgent` (Meta AI training)
-- `cohere-ai`, `omgili`, `omgilibot`, `FacebookBot`, `ImagesiftBot`, `YouBot`, `Diffbot`, `magpie-crawler` — secondary blocklist
+### Citation / answer-engine crawlers — ALLOW free core, block paid
 
-Respectful crawlers obey; the rest are handled by Layer 2+. Block scope: `/paid/`, `/account/`, `/customer/`, `/api/`, `/.audit/`, `/admin/`. Free core stays `Allow: /`.
+| UA | Vendor | Why allow on free |
+|---|---|---|
+| `ChatGPT-User` | OpenAI | On-demand fetch when user pastes URL into ChatGPT or asks it to look something up. Drives citation w/ link. |
+| `OAI-SearchBot` | OpenAI | ChatGPT Search index — cites with link. |
+| `Claude-Web` | Anthropic | On-demand fetch from claude.ai. Cites w/ link. |
+| `PerplexityBot` | Perplexity | Answer-engine index — primary traffic driver for compliance / standards content. Re-check quarterly that they have not merged into training. |
+| `Perplexity-User` | Perplexity | On-demand fetch. |
+| `Meta-ExternalFetcher` | Meta | On-demand fetch for Meta AI answers. |
+| `Googlebot` · `Bingbot` · `Applebot` · `DuckDuckBot` | various | Search engines (and Gemini / Copilot answers cite from their indexes). Keep. |
+| `Slackbot` · `Twitterbot` · `LinkedInBot` · `WhatsApp` · `TelegramBot` · `DiscordBot` · `FacebookExternalHit` | social | Link-preview unfurls — drive traffic. Always allow. |
+
+Re-check this split quarterly per `refresh-cadence.md`. Vendor UA policies change.
+
+### Six-layer defence (operational)
+
+**L1a robots.txt** — site-wide training-bot blocks + citation-bot path-scoped blocks. Honour-system, but catches respectful crawlers (which is most of them). Shipped 2026-05-19 at `robots.txt`.
+
+**L1b llms.txt** — stays as-is. Active invitation for citation engines on free core. Shipped.
+
+**L1c TDMRep `tdm-policy.json`** at site root — formal machine-readable rights reservation per EU CDSM Directive 2019/790 Article 4. Required for legal weight in EU. Reserves training rights site-wide, reserves all TDM rights on paid paths. Shipped 2026-05-19 at `tdm-policy.json`.
+
+**L1d Page-level meta + headers (paid pages only)** — `<meta name="robots" content="noai, noimageai, nosnippet">` + `X-Robots-Tag: noai, noimageai` HTTP header. Per-page opt-out signal honoured by Bing + Adobe + others. To ship with first paid surface.
+
+**L2 Edge bot management** — Cloudflare Bot Management (preferred — already aligned with planned Cloudflare Pages hosting). DataDome / Akamai / HUMAN as alternatives. Fingerprints TLS handshakes, headless-browser quirks, residential-proxy patterns, behavioural anomalies. **This is the real enforcement layer** — catches UA spoofing, which L1 cannot. Whitelist legitimate citation UAs above. Apply strict to paid paths.
+
+**L3 Auth-wall** — customer accounts, SCORM downloads, certificate verifier, audit-pack CSV exports, partner portal, admin. Login + per-account rate limits + session-behaviour anomaly detection. Primary defence for paid surfaces; everything else is belt-and-braces.
+
+**L4 Rate limit + WAF + CAPTCHA** — per-IP and per-ASN at edge. Cloudflare Turnstile or hCaptcha (both work without trackers, both pass WCAG). Distinct policy: free-core gets generous limits (don't penalise legitimate readers); paid paths get strict.
+
+**L5 Client obfuscation (paid product only)** — no clean public API; signed requests; rotate endpoint paths quarterly with rolling deprecation; minify + code-split JS bundles for paid surfaces. Free-core HTML stays clean and accessible.
+
+**L6 Honeypots + canary content** — honeypot URLs reachable only via hidden links (auto-block on hit). Canary strings embedded in customer-account exports + certificate PDFs + SCORM payloads. Monthly search-the-web for canary strings to detect leaks. Rotation log at `.audit/security/canary-tokens.md` (to build).
+
+### Free-core posture summary
+
+- All free pages return 200 to: ChatGPT-User, OAI-SearchBot, Claude-Web, PerplexityBot, Perplexity-User, Meta-ExternalFetcher, Googlebot, Bingbot, Applebot, DuckDuckBot, all social link-preview bots, all humans.
+- All free pages return 403 (via robots + bot-mgmt) to: GPTBot, ClaudeBot, anthropic-ai, CCBot, Bytespider, Amazonbot, Applebot-Extended, Meta-ExternalAgent, every other training-only crawler.
+- `llms.txt` continues to invite citation engines. TDMRep file says "training reserved" — does not block citation.
+- Net effect: ChatGPT users can ask "what does AI Safe@Work say about EU AI Act Art 4?" and get a cited answer with a link, driving traffic. OpenAI cannot ingest our content for GPT-6 training. Common Crawl cannot redistribute it as training feedstock. Best of both.
+
+### Paid-surface posture summary
+
+- All paid pages return 403 to: every named AI crawler (training or citation), every scraper signature, every non-authenticated request.
+- Auth-wall is primary; everything else is layered defence.
+- TDMRep + meta + headers add machine-readable opt-out for the small subset of crawlers that respect them.
+- Edge bot-mgmt enforces against UA spoofing.
+
+### Procurement-facing benefit
+
+- "Is our content ingested by AI models?" → "No. Free educational content is opt-in for AI citation (with link-back) and opt-out for training. Paid surfaces are entirely blocked. Posture published at `tdm-policy.json` and reviewed quarterly."
+- Add to vendor questionnaire response template.
+
+### Open TODOs
+
+- [x] robots.txt with training-vs-citation split — shipped 2026-05-19
+- [x] tdm-policy.json — shipped 2026-05-19
+- [ ] Page-level `noai, noimageai` meta tags on `pricing.html` (since it's currently the closest thing to a paid surface)
+- [ ] `X-Robots-Tag: noai, noimageai` header on paid responses — needs hosting w/ header control (Cloudflare Pages: `_headers` file)
+- [ ] `.audit/security/canary-tokens.md` rotation log
+- [ ] Cloudflare Pages + Bot Management decision
+- [ ] Public-facing `/security.html` posture statement
+- [ ] Quarterly re-review of citation vs training UA split per `refresh-cadence.md`
 
 ### Layer 2 — bot management at the edge
 
@@ -434,6 +498,7 @@ People-Also-Ask FAQ candidates (seed `FAQPage` schema): see audit doc.
 | 2026-05-19 | Doctrine § audit-readiness and § refresh-cadence-operational locked | Project graduates from "course product" to "course-producing organisation" |
 | 2026-05-19 | Doctrine § Sales partners added. First entry: **RORtech Partners Limited** as authorised reseller (onboarding · contract pending) | Establishes channel-partner model; free core remains free regardless of channel |
 | 2026-05-19 | Doctrine § Anti-scraping + AI-crawler controls added. Six-layer defence (robots.txt, edge bot-mgmt, auth-wall, rate-limit + WAF, client obfuscation, honeypots + canary). Scoped to paid + auth'd surfaces only — free core remains AI-citable per `llms.txt`. | Protect commercial surfaces before launch without breaking trust-signal posture |
+| 2026-05-19 | § Anti-scraping refined: split AI crawlers into TRAINING (`GPTBot`, `ClaudeBot`, `CCBot`, `Google-Extended`, `Bytespider`, `Amazonbot`, `Applebot-Extended`, `Meta-ExternalAgent` …) — blocked site-wide — and CITATION / answer-engine (`ChatGPT-User`, `OAI-SearchBot`, `Claude-Web`, `PerplexityBot`, `Perplexity-User`, `Meta-ExternalFetcher`) — allowed on free core, blocked on paid. Ships robots.txt + tdm-policy.json (EU CDSM Art 4 opt-out). | Resolves bot-blocker vs free-core-wedge tension: training drains us, citation drives traffic. Different UAs, treat differently. |
 
 Append below as decisions land. Use `/aos-log` for global cross-project decisions.
 

@@ -1,0 +1,82 @@
+{
+  "@context": "https://www.w3.org/ns/odrl.jsonld",
+  "@type": "Set",
+  "@id": "https://aisafeatwork.org/tdm-policy.json",
+  "uid": "https://aisafeatwork.org/tdm-policy.json",
+  "comment": "TDMRep machine-readable rights reservation for AI Safe@Work. EU CDSM Directive (2019/790) Article 4 opt-out. Reserves rights against text-and-data-mining for any purpose other than non-commercial scientific research per Article 3. Updated 2026-05-19.",
+  "policy": {
+    "tdm-reservation": 1,
+    "tdm-policy": "https://aisafeatwork.org/tdm-policy.json",
+    "tdm-permitted-purposes": [
+      "non-commercial-scientific-research-art-3",
+      "citation-with-link-back",
+      "human-on-demand-fetch-from-conversational-ai"
+    ],
+    "tdm-prohibited-purposes": [
+      "training-of-machine-learning-models",
+      "training-of-generative-ai-systems",
+      "creation-of-derivative-datasets-for-redistribution",
+      "ingestion-into-foundation-model-training-corpora",
+      "ingestion-into-rag-systems-without-attribution-and-link-back",
+      "any-commercial-text-and-data-mining"
+    ]
+  },
+  "permission": [
+    {
+      "target": "https://aisafeatwork.org/",
+      "action": "read",
+      "constraint": [
+        {
+          "leftOperand": "purpose",
+          "operator": "eq",
+          "rightOperand": "human-citation-with-link"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "target": "https://aisafeatwork.org/",
+      "action": "extract",
+      "constraint": [
+        {
+          "leftOperand": "purpose",
+          "operator": "eq",
+          "rightOperand": "ai-training"
+        }
+      ]
+    },
+    {
+      "target": "https://aisafeatwork.org/paid/",
+      "action": "extract"
+    },
+    {
+      "target": "https://aisafeatwork.org/account/",
+      "action": "extract"
+    },
+    {
+      "target": "https://aisafeatwork.org/customer/",
+      "action": "extract"
+    },
+    {
+      "target": "https://aisafeatwork.org/api/",
+      "action": "extract"
+    }
+  ],
+  "rights-holder": {
+    "@id": "https://aisafeatwork.org/#organization",
+    "name": "AI Safe@Work",
+    "contact": "see /complaints.html"
+  },
+  "applies-to": [
+    "all content under https://aisafeatwork.org/ and any mirror domains under operation of the rights holder"
+  ],
+  "scope-notes": [
+    "Free core content (12 modules, 2 role tracks, 2 templates, standards-map, citations, changelog, accessibility, complaints, doctrine) is offered under CC BY-SA 4.0 for human + machine reading WITH attribution and link-back. Use for AI model training is reserved.",
+    "Paid surfaces (when published) are entirely reserved against TDM regardless of purpose.",
+    "Citation engines that fetch on-demand to answer a user query AND link back to source are permitted on free core.",
+    "Bulk crawlers building training corpora are prohibited on all surfaces."
+  ],
+  "last-reviewed": "2026-05-19",
+  "next-review": "2026-08-19"
+}

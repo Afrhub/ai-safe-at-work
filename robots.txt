@@ -1,5 +1,146 @@
-User-agent: *
-Allow: /
+# AI Safe@Work — robots policy
+# Strategy: BLOCK training-only crawlers everywhere; ALLOW citation /
+# answer-engine crawlers on free core (it is the trust signal); BLOCK
+# everything on paid + audit paths. See doctrine § Anti-scraping for
+# rationale. Last reviewed: 2026-05-19. Re-walked quarterly.
+
+# ─── Training-only crawlers — BLOCK SITE-WIDE ─────────────────────────
+# These exist to ingest content for model training with no return path
+# to us (no citation, no traffic). Out of doctrine.
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: cohere-training-data-crawler
+Disallow: /
+
+User-agent: omgili
+Disallow: /
+
+User-agent: omgilibot
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: YouBot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: magpie-crawler
+Disallow: /
+
+User-agent: AI2Bot
+Disallow: /
+
+User-agent: Timpibot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: Webzio-Extended
+Disallow: /
+
+# ─── Citation / answer-engine crawlers — ALLOW free core, BLOCK paid ──
+# These exist to cite our content back to users with a link. They drive
+# traffic, so they are part of the wedge. Keep them out of paid surfaces.
+
+User-agent: ChatGPT-User
+Disallow: /paid/
+Disallow: /account/
+Disallow: /customer/
+Disallow: /api/
+Disallow: /admin/
 Disallow: /.audit/
+Allow: /
+
+User-agent: OAI-SearchBot
+Disallow: /paid/
+Disallow: /account/
+Disallow: /customer/
+Disallow: /api/
+Disallow: /admin/
+Disallow: /.audit/
+Allow: /
+
+User-agent: Claude-Web
+Disallow: /paid/
+Disallow: /account/
+Disallow: /customer/
+Disallow: /api/
+Disallow: /admin/
+Disallow: /.audit/
+Allow: /
+
+User-agent: PerplexityBot
+Disallow: /paid/
+Disallow: /account/
+Disallow: /customer/
+Disallow: /api/
+Disallow: /admin/
+Disallow: /.audit/
+Allow: /
+
+User-agent: Perplexity-User
+Disallow: /paid/
+Disallow: /account/
+Disallow: /customer/
+Disallow: /api/
+Disallow: /admin/
+Disallow: /.audit/
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Disallow: /paid/
+Disallow: /account/
+Disallow: /customer/
+Disallow: /api/
+Disallow: /admin/
+Disallow: /.audit/
+Allow: /
+
+# Mistral, DuckDuckGo Assist, etc. — add as they appear.
+
+# ─── Default (search engines + social link-preview bots + everything else) ─
+# Block paid + audit; allow everything else.
+
+User-agent: *
+Disallow: /paid/
+Disallow: /account/
+Disallow: /customer/
+Disallow: /api/
+Disallow: /admin/
+Disallow: /.audit/
+Allow: /
 
 Sitemap: https://aisafeatwork.org/sitemap.xml
