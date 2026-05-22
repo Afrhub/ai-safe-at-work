@@ -198,6 +198,92 @@ Gates 1, 2, 3, 13, 14 are the **week-one block**. Gates 4–7 are the **quarter-
 
 ---
 
+## § Anti-scraping + AI-crawler controls
+
+> Added 2026-05-19. Scoped intentionally to **paid + auth'd surfaces only**. Free core (12 modules, 2 role tracks, 2 templates, standards-map, citations, changelog, accessibility, complaints, doctrine) remains open and AI-citable per the wedge and `llms.txt`. The controls below apply once a paid or auth'd surface ships.
+
+### Tension to remember
+
+- The free core is a **trust signal**. It is supposed to be citable by ChatGPT, Claude, Perplexity, Gemini etc. `llms.txt` explicitly invites this.
+- The **paid surfaces** (SCORM exports, customer-account dashboards, audit-pack CSV exports, certificate verifications, bespoke content built for Enterprise+) are commercially sensitive and **must not** be ingested by AI crawlers or scrapers.
+- These two postures live on the same domain. Path-scoped rules are mandatory; never apply site-wide.
+
+### Layer 1 — robots.txt explicit AI-crawler block (paid paths only)
+
+User-agents to deny for paid / auth'd paths:
+
+- `GPTBot` (OpenAI)
+- `ClaudeBot` and `Claude-Web` and `anthropic-ai` (Anthropic)
+- `CCBot` (Common Crawl)
+- `Google-Extended` (Bard / Gemini training, separate from Googlebot)
+- `PerplexityBot` (Perplexity)
+- `Bytespider` (ByteDance / TikTok)
+- `Amazonbot` (Amazon)
+- `Applebot-Extended` (Apple AI training, separate from Applebot)
+- `Meta-ExternalAgent` (Meta AI training)
+- `cohere-ai`, `omgili`, `omgilibot`, `FacebookBot`, `ImagesiftBot`, `YouBot`, `Diffbot`, `magpie-crawler` — secondary blocklist
+
+Respectful crawlers obey; the rest are handled by Layer 2+. Block scope: `/paid/`, `/account/`, `/customer/`, `/api/`, `/.audit/`, `/admin/`. Free core stays `Allow: /`.
+
+### Layer 2 — bot management at the edge
+
+- Cloudflare Bot Management (preferred — site already plans to deploy via Cloudflare Pages so layered switch is cheap) · DataDome · Akamai Bot Manager · HUMAN.
+- Fingerprints TLS handshakes, headless-browser quirks, residential-proxy patterns, behavioural anomalies — far stronger than user-agent string matching.
+- Apply to paid + auth'd paths. Whitelist known good (Googlebot, Bingbot, Slackbot, archive.org, plus the AI crawlers above for free paths only).
+
+### Layer 3 — auth-wall every commercially-valuable surface
+
+- Customer accounts, SCORM downloads, certificate verifier, audit-pack CSV exports, partner portal, admin: all behind login.
+- Per-account rate limits.
+- Anomaly detection on session behaviour (login-volume, geo-shift, parallel sessions, scrape-shaped request patterns).
+- Marketing / free-course pages will get scraped — that's fine and is the trust signal.
+
+### Layer 4 — rate limiting + WAF
+
+- Per-IP and per-ASN rate limits at edge.
+- WAF rules for known scraper signatures.
+- CAPTCHA / JS challenge on suspicious traffic (Cloudflare Turnstile or hCaptcha — both work without trackers, both pass WCAG).
+- Distinct policy: free-core paths get generous limits (don't penalise legitimate readers); paid paths get strict.
+
+### Layer 5 — client obfuscation (paid product only)
+
+- No clean public API. Require signed requests on customer APIs.
+- Rotate endpoint paths quarterly with rolling deprecation.
+- Minify and code-split JS bundles for paid product surfaces.
+- Won't stop a determined reverse engineer — raises cost. Free-core HTML stays clean and accessible.
+
+### Layer 6 — honeypots + canary content
+
+- Honeypot URLs reachable only by scrapers that follow hidden links — auto-block on hit.
+- Canary strings embedded in customer-account exports + certificate PDFs + SCORM payloads — search for the canary across the web monthly to detect leaks.
+- Canary records logged in `.audit/security/canary-tokens.md` (to build).
+- Detection + provenance, not prevention.
+
+### Free-core posture (unchanged)
+
+- Free pages: 12 modules + role tracks + templates + standards-map + citations + changelog + accessibility + complaints + privacy + terms + pricing draft + landing + course overview.
+- `llms.txt` continues to invite AI consumption.
+- robots.txt keeps `Allow: /` for these paths even for AI crawlers (Layer 1 blocks apply only to `/paid/` etc).
+- Honeypots may live anywhere (Layer 6 is detection-only and does not break free-core ingestion).
+
+### Why this matters commercially
+
+- Without these, an AI crawler scraping the paid product surface will give buyers a free version of what they paid for, via ChatGPT prompts.
+- Enterprise customers will ask "is our content ingested?" in procurement. Need an honest "no, paid surfaces are blocked" answer.
+- Doctrine § audit-readiness requires controlled data flows. Unbounded scraping of paid material is a controlled-data-flow failure.
+
+### TODO before launching any paid surface
+
+- [ ] Confirm hosting choice (Cloudflare Pages strongly preferred for free-tier Bot Management features).
+- [ ] Write path-scoped robots.txt rules; ship pre-launch.
+- [ ] Enable Cloudflare Bot Management on `*.aisafeatwork.org/{paid,account,customer,api,admin}/*` (or equivalent paths).
+- [ ] Build `.audit/security/canary-tokens.md` with the rotation log.
+- [ ] Add honeypot URL to paid HTML (hidden from humans + free-tier crawlers).
+- [ ] Document the policy on a public-facing page (`/security.html` or extend `accessibility.html` model — short statement of posture).
+- [ ] Add to vendor questionnaire: "we apply X to all paid surfaces" so procurement teams can verify.
+
+---
+
 ## SEO targets
 
 Pillar pages owe ranking against:
@@ -347,6 +433,7 @@ People-Also-Ask FAQ candidates (seed `FAQPage` schema): see audit doc.
 | 2026-05-19 | accessibility.html + complaints.html published; accessibility-audit-2026.md self-assessment filed | Public-sector + insurance readiness; visible bar for further improvement |
 | 2026-05-19 | Doctrine § audit-readiness and § refresh-cadence-operational locked | Project graduates from "course product" to "course-producing organisation" |
 | 2026-05-19 | Doctrine § Sales partners added. First entry: **RORtech Partners Limited** as authorised reseller (onboarding · contract pending) | Establishes channel-partner model; free core remains free regardless of channel |
+| 2026-05-19 | Doctrine § Anti-scraping + AI-crawler controls added. Six-layer defence (robots.txt, edge bot-mgmt, auth-wall, rate-limit + WAF, client obfuscation, honeypots + canary). Scoped to paid + auth'd surfaces only — free core remains AI-citable per `llms.txt`. | Protect commercial surfaces before launch without breaking trust-signal posture |
 
 Append below as decisions land. Use `/aos-log` for global cross-project decisions.
 
