@@ -1,0 +1,18 @@
+# Netlify config for AI Safe@Work
+# Mirror of doctrine §§ Anti-scraping + Audit-readiness postures.
+# Reviewed quarterly per .audit/course-quality/refresh-cadence.md.
+
+[build]
+  publish = "."
+  command = ""
+
+# Don't deploy audit-pack via Netlify even if path is requested
+[[redirects]]
+  from = "/.audit/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# Headers below in _headers (separate file for clarity + per-path scoping).
+# netlify.toml [[headers]] supports glob patterns but per-path detail in
+# _headers reads better and matches Netlify-native pattern.

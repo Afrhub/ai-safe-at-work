@@ -325,15 +325,15 @@ If `ChatGPT-User` shows 403s on free paths → wedge broken, fix immediately.
 
 - [x] robots.txt with training-vs-citation split — shipped 2026-05-19
 - [x] tdm-policy.json — shipped 2026-05-19
-- [ ] Page-level `noai, noimageai` meta tags on `pricing.html` (since it's currently the closest thing to a paid surface)
-- [ ] `X-Robots-Tag: noai, noimageai` header on paid responses — needs hosting w/ header control (Cloudflare Pages: `_headers` file)
+- [x] Page-level `noai, noimageai, nosnippet` meta tags on `pricing.html` + `msp.html` — shipped 2026-05-19
+- [x] `X-Robots-Tag: noai, noimageai, nosnippet, noindex, nofollow` header on paid paths via Netlify `_headers` — shipped 2026-05-19
 - [ ] `.audit/security/canary-tokens.md` rotation log
-- [ ] Cloudflare Pages + Bot Management decision
-- [ ] Public-facing `/security.html` posture statement
+- [ ] Cloudflare Pages + Bot Management decision (currently on Netlify; Cloudflare planned at canonical-domain move)
+- [x] Public-facing `/security.html` posture statement — shipped 2026-05-19
 - [ ] Quarterly re-review of citation vs training UA split per `refresh-cadence.md`
-- [ ] First execution of Test 1 + Test 2 (verification) after canonical domain provisioned + DNS resolves
+- [x] First execution of Test 2 (verification) on Netlify deploy 2026-05-19 — **PASS**. Test 1 deferred until canonical domain indexed (4 weeks post-DNS)
 - [ ] Schedule Test 1 + Test 2 quarterly thereafter (Feb / May / Aug / Nov first week)
-- [ ] Create `.audit/security/anti-scraping-verification-2026-Q3.md` template
+- [x] Create `.audit/security/anti-scraping-verification-2026-Q3.md` template — shipped 2026-05-19
 
 ### Layer 2 — bot management at the edge
 
@@ -803,7 +803,7 @@ Creates **scalable SaaS + recurring MSP revenue + high-margin consultancy upside
 
 - [ ] Draft MSP partner agreement template (extends `.audit/legal/partners/README.md`)
 - [ ] Draft Founding MSP Partner programme spec (5-slot cap, terms, exclusivity rules)
-- [ ] Build `/msp.html` MSP partner page on site (sits alongside `pricing.html`, noindex until launch)
+- [x] Build `/msp.html` MSP partner page on site — shipped 2026-05-19 (noindex draft, 3-tier pricing + revenue-share + Founding Partner programme)
 - [ ] Build per-tier feature matrix (Tier 1 vs Tier 2 vs Tier 3) for MSP onboarding pack
 - [ ] Build MSP sales collateral pack (one-pager + objection-handler + ROI calculator)
 - [ ] Build multi-tenant dashboard spec (Tier 2+ feature) — even a stub static-HTML demo
@@ -858,14 +858,14 @@ Long-term objective: governance-focused SaaS ecosystem · supported by MSP partn
 
 ### § Open strategic TODOs
 
-- [ ] Update `index.html` lede + positioning copy to lead with "AI Governance Awareness + Enablement Platform" (not "course")
+- [x] Update `index.html` lede + positioning copy to lead with "AI Governance Awareness + Enablement Platform" — shipped 2026-05-19
 - [ ] Build Microsoft Copilot governance track outline
 - [ ] Build Shadow AI track outline
 - [ ] Build MSP / IT Admin role track
 - [ ] Build Governance & Procurement role track
 - [ ] Build AI Governance Officer role track
 - [ ] Build remaining governance packs (Risk Register · Incident Process · Approval Workflows · Procurement Pack · Manager Pack · Governance Quick Start)
-- [ ] Build dedicated MSP page (`/msp.html`) — partner programme, white-label terms, MSP-specific pricing
+- [x] Build dedicated MSP page (`/msp.html`) — partner programme, white-label terms, MSP-specific pricing — shipped 2026-05-19
 - [ ] Draft MSP white-label commercial terms (extends `pricing.html` Enterprise tier)
 - [ ] Two-entity (NewCo SaaS + Consultancy) structure decision: when, what jurisdiction, profit split
 - [ ] Advisory / consulting day-rate + retained-advisory pricing
@@ -897,6 +897,7 @@ Long-term objective: governance-focused SaaS ecosystem · supported by MSP partn
 | 2026-05-19 | § Anti-scraping verification protocol added: Test 1 (citation engines reach free core — ChatGPT / Claude / Perplexity / Google / Bing) + Test 2 (robots.txt + tdm-policy.json + llms.txt rules present and correct on served files). Both required quarterly + on any change to robots / tdm-policy. Recorded in `.audit/security/anti-scraping-verification-YYYY-QN.md`. | Verifiable proof both wedge intact and training-drain stopped. Without tests, drift goes undetected until traffic dies. |
 | 2026-05-19 | § Strategic doctrine + growth framework locked. Strategic positioning shifts from "AI training platform" to "**AI Governance Awareness + Enablement Platform**". Three commercial pillars: Awareness SaaS · Governance Packs · Advisory + Consulting. **Primary route to market = MSP partnerships**. Two-entity target structure: NewCo (SaaS) + Consultancy. Existing free-core wedge becomes the acquisition engine for Pillar 1. RORtech Partners Limited reclassified as first MSP partner (was generic reseller). Dedicated tracks planned for Microsoft Copilot · Shadow AI · MSP / IT Admin · Governance & Procurement · AI Governance Officer · Developer + Technical AI. Long-term vision: governance-focused SaaS ecosystem distributed via MSPs with consultancy revenue engine, eventual acquisition target. | Codifies long-arc strategic posture; reconciles direct-to-SMB launch with MSP-first scale; prevents drift into "generic e-learning provider" trap. |
 | 2026-05-19 | § MSP commercial model locked. **Low monthly MSP fee + layered revenue share**. Three tiers: Partner MSP **£499/mo** · Growth MSP **£1,499/mo** · Strategic MSP Partner **£3k–£5k+/mo**. Revenue-share splits — awareness subscriptions **70/30 MSP**; governance packs **50/50**; workshops **30/70 consultancy**; ISO/IEC 42001 projects **20/80 consultancy**; advisory retainers **20–30% MSP referral**. Founding MSP Partner programme: first 3–5 MSPs get 50% Year-1 discount, roadmap input, co-branding, possible territory/sector exclusivity. RORtech Partners Limited = first Founding slot. **Critical rule**: do NOT extract all value from platform subscription up front — slows adoption; revenue lives in distribution + expansion + governance upsells + consulting. | Right pricing posture for MSP psychology: predictable MRR for us, low risk + active upside for them; bundles cleanly into managed IT / cyber / M365 / vCIO stacks → raises MSP contract value without delivery overhead. |
+| 2026-05-19 | **Doctrine guardrails implemented on live deploy** (Netlify `aisafework.netlify.app`). Shipped: `netlify.toml` + `_headers` with site-wide HSTS / CSP / X-Frame-Options / X-Content-Type-Options / Referrer-Policy / Permissions-Policy + path-scoped `X-Robots-Tag: noai, noimageai, nosnippet` on `/paid/`, `/account/`, `/customer/`, `/api/`, `/admin/`, `/pricing.html`, `/msp.html`, `/.audit/`. `noai, noimageai, nosnippet` meta on `pricing.html`. New `/security.html` public posture page + `/msp.html` MSP commercial model page (draft, noindex). Index reframed to lead with "AI Governance Awareness + Enablement Platform". Sitemap updated. `llms.txt` updated with security page. Test 2 (verification) executed against live Netlify deploy: **PASS** — GPTBot blocked, ChatGPT-User path-scoped, CCBot blocked, Sitemap directive present. First verification record filed at `.audit/security/anti-scraping-verification-2026-Q3.md`. | Move doctrine from documented-intent to live-enforced. Auto-deploys to Netlify on push. |
 
 Append below as decisions land. Use `/aos-log` for global cross-project decisions.
 

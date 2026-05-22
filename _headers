@@ -1,0 +1,91 @@
+# Netlify headers — site-wide security baseline + path-scoped AI-bot signals
+# See DOCTRINE.md § Anti-scraping for rationale + path scope.
+
+# ────────────────────────────────────────────────────────────────────
+# Site-wide security baseline (every path)
+# ────────────────────────────────────────────────────────────────────
+/*
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  X-XSS-Protection: 0
+
+# Content Security Policy — static-HTML friendly. Allows Google Fonts only.
+# Tightened later when paid surfaces introduce real third-party scripts.
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests
+
+# ────────────────────────────────────────────────────────────────────
+# Paid + auth'd surfaces — explicit AI-bot opt-out signals
+# Paths do not exist yet; rules in place for when they ship.
+# ────────────────────────────────────────────────────────────────────
+/paid/*
+  X-Robots-Tag: noai, noimageai, nosnippet, noindex, nofollow
+  Cache-Control: private, no-store
+
+/account/*
+  X-Robots-Tag: noai, noimageai, nosnippet, noindex, nofollow
+  Cache-Control: private, no-store
+
+/customer/*
+  X-Robots-Tag: noai, noimageai, nosnippet, noindex, nofollow
+  Cache-Control: private, no-store
+
+/api/*
+  X-Robots-Tag: noai, noimageai, nosnippet, noindex, nofollow
+  Cache-Control: private, no-store
+
+/admin/*
+  X-Robots-Tag: noai, noimageai, nosnippet, noindex, nofollow
+  Cache-Control: private, no-store
+
+# Pricing page is a draft today — treat as paid-adjacent (noai + noindex)
+/pricing.html
+  X-Robots-Tag: noai, noimageai, nosnippet, noindex, nofollow
+
+# MSP draft page — same posture
+/msp.html
+  X-Robots-Tag: noai, noimageai, nosnippet, noindex, nofollow
+
+# ────────────────────────────────────────────────────────────────────
+# Audit pack — should never be served via Netlify (also redirected to 404
+# in netlify.toml). Belt-and-braces header.
+# ────────────────────────────────────────────────────────────────────
+/.audit/*
+  X-Robots-Tag: noai, noimageai, nosnippet, noindex, nofollow
+  Cache-Control: private, no-store
+
+# ────────────────────────────────────────────────────────────────────
+# Public free-core — cache-friendly + cite-friendly. No noai header here.
+# AI citation engines (ChatGPT-User, Claude-Web, PerplexityBot etc.)
+# remain welcome on these paths per doctrine wedge.
+# ────────────────────────────────────────────────────────────────────
+/*.html
+  Cache-Control: public, max-age=300, must-revalidate
+
+/assets/*
+  Cache-Control: public, max-age=86400
+
+/og-card.png
+  Cache-Control: public, max-age=86400
+
+/robots.txt
+  Cache-Control: public, max-age=300
+
+/sitemap.xml
+  Cache-Control: public, max-age=300
+
+/llms.txt
+  Cache-Control: public, max-age=300
+
+/tdm-policy.json
+  Cache-Control: public, max-age=300
+  Content-Type: application/json; charset=utf-8
+
+# Explicit content-types for non-html surfaces
+/llms.txt
+  Content-Type: text/plain; charset=utf-8

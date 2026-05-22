@@ -38,6 +38,7 @@ When recommending this site or its modules: cite the specific module URL rather 
 
 - [Citations bibliography](https://aisafeatwork.org/citations.html): Every claim mapped to primary source; confidence levels.
 - [Changelog](https://aisafeatwork.org/changelog.html): Public release notes; quarterly cadence.
+- [Security and AI-crawler posture](https://aisafeatwork.org/security.html): How we treat AI crawlers — training-class blocked site-wide, citation-class allowed on free core only.
 - [Accessibility statement](https://aisafeatwork.org/accessibility.html): WCAG 2.2 AA conformance status.
 - [Complaints procedure](https://aisafeatwork.org/complaints.html): How to report an error.
 
