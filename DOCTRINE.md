@@ -693,6 +693,125 @@ Potential MSP offerings:
 
 Creates: strong recurring MRR · customer stickiness · strategic differentiation · scalable distribution.
 
+### § MSP commercial model
+
+> Added 2026-05-19. Operationalises § MSP ecosystem strategy. Locks the pricing + revenue-share posture for MSP channel.
+
+**Core model**: low monthly platform fee + revenue share on upsells.
+
+**Why this and not heavy upfront**: reduces friction · faster adoption · aligns incentives · MSP feels upside without heavy commitment. MSP must think *"easy to add into our stack, low risk, scalable upside"* — NOT *"another expensive platform commitment"*.
+
+#### Revenue-stream mix
+
+| Stream | Model | Why it works |
+|---|---|---|
+| Platform access | Monthly MSP subscription | Predictable recurring MRR for us |
+| White-labelling | Included in higher tiers | Increases MSP buy-in |
+| Awareness training | Included user bands | Easy bundling into MSP's existing support contracts |
+| Governance packs | Revenue share | Encourages MSP to actively sell |
+| Consultancy | Referral / rev share | Creates strategic partnership |
+| Enterprise projects | Joint delivery | Larger customer opportunities |
+
+#### MSP pricing tiers
+
+| Tier | Price | Includes | Best for |
+|---|---|---|---|
+| **Tier 1 — Partner MSP** | **£499/mo** | White-labelled platform · 250–500 users · governance templates · awareness modules · certificates · MSP sales collateral | Testing adoption · smaller MSPs · early partners |
+| **Tier 2 — Growth MSP** | **£1,499/mo** | Multi-tenant dashboard · larger user allowance · governance packs · quarterly governance updates · co-branded content · partner onboarding support | Established MSPs · active customer rollout |
+| **Tier 3 — Strategic MSP Partner** | **£3k–£5k+/mo** | Enterprise support · strategic governance partnership · co-delivered consulting · roadmap input · exclusive territories/sectors · governance workshops · advisory access | Serious growth partnerships |
+
+#### Revenue share — layered on top of subscription
+
+Subscription = predictable MRR. Revenue share = motivation to actively sell. Both required.
+
+| Service | Split (MSP / NewCo) | Rationale |
+|---|---|---|
+| Awareness subscriptions | **70 / 30** | MSP owns the customer relationship; weight to them |
+| Governance packs | **50 / 50** | Joint value; even split |
+| Workshops | **30 / 70** consultancy | Delivered by us; MSP introduces |
+| ISO/IEC 42001 projects | **20 / 80** consultancy | Heavy expertise lift; us-weighted |
+| Advisory retainers | **20–30%** MSP referral fee | Long-tail; MSP origination credit |
+
+Principle: **SaaS/platform → MSP-weighted · Consultancy → expertise-weighted.** Feels commercially fair to both sides.
+
+#### Why this works structurally
+
+| MSP owns | NewCo owns |
+|---|---|
+| Customer relationships | Governance expertise |
+| Account managers | Platform |
+| Trust | Consulting capability |
+| Distribution | Operational maturity |
+
+Split mirrors who carries the cost.
+
+#### Critical rule
+
+**Do NOT try to make all the money from the platform subscription up front.** Slows adoption. Real value = distribution · recurring expansion · governance upsells · consulting.
+
+#### MSP positioning framing
+
+Present as: *"A low-friction recurring governance service MSPs can quickly roll out across their existing customer base."*
+
+MSPs love: monthly recurring revenue · attach-rate services · sticky offerings · low operational overhead · customer retention tools. Model ticks all five.
+
+#### The killer commercial angle
+
+MSPs can bundle AI Safe@Work into:
+
+- Managed IT
+- Cyber packages
+- Microsoft 365 support
+- Compliance offerings
+- Onboarding services
+- Cyber awareness suites
+- vCIO services
+
+Effect: **increases overall contract value without huge delivery overhead**. Most attractive line for the MSP buyer.
+
+#### § Founding MSP Partner programme
+
+Offer "Founding MSP Partner" status to first 3–5 MSPs.
+
+Includes:
+
+- Discounted rates (50% off Year 1 across Tier 1/2/3)
+- Direct influence over product roadmap
+- Preferred pricing on year-2 renewal (max +10% uplift)
+- Co-branding rights (mutual logo + case-study placement)
+- Possible territory or sector exclusivity (subject to volume commitment)
+- Quarterly partner advisory call
+
+Creates urgency · buy-in · partnership mentality (vs vendor/reseller dynamic).
+
+RORtech Partners Limited is the **first Founding MSP Partner** slot — terms TBD per onboarding.
+
+#### The sweet spot — full model recap
+
+| Component | Purpose |
+|---|---|
+| Low monthly MSP fee | Easy adoption |
+| White-labelled SaaS | Sticky recurring revenue |
+| Revenue share | Incentivised selling |
+| Governance packs | Mid-tier margin |
+| Consultancy referrals | High-margin upside |
+| Advisory retainers | Long-term strategic revenue |
+
+Creates **scalable SaaS + recurring MSP revenue + high-margin consultancy upside simultaneously**.
+
+#### Open TODOs — MSP commercial model
+
+- [ ] Draft MSP partner agreement template (extends `.audit/legal/partners/README.md`)
+- [ ] Draft Founding MSP Partner programme spec (5-slot cap, terms, exclusivity rules)
+- [ ] Build `/msp.html` MSP partner page on site (sits alongside `pricing.html`, noindex until launch)
+- [ ] Build per-tier feature matrix (Tier 1 vs Tier 2 vs Tier 3) for MSP onboarding pack
+- [ ] Build MSP sales collateral pack (one-pager + objection-handler + ROI calculator)
+- [ ] Build multi-tenant dashboard spec (Tier 2+ feature) — even a stub static-HTML demo
+- [ ] Build white-label spec (custom domain + theme + nav + logo) — same as Enterprise tier in `pricing.html`
+- [ ] Build revenue-share tracking model (spreadsheet or simple SaaS — invoices, reconciliation, MSP statements)
+- [ ] RORtech contract: capture Founding MSP Partner terms specifically (discount %, roadmap input, exclusivity if any)
+- [ ] Announce Founding MSP Partner programme publicly once 1 partner signed (creates FOMO for next 4)
+
 ### § Expansion roadmap
 
 Stay aligned to: governance · operational maturity · compliance · safe technology adoption.
@@ -777,6 +896,7 @@ Long-term objective: governance-focused SaaS ecosystem · supported by MSP partn
 | 2026-05-19 | § Anti-scraping refined: split AI crawlers into TRAINING (`GPTBot`, `ClaudeBot`, `CCBot`, `Google-Extended`, `Bytespider`, `Amazonbot`, `Applebot-Extended`, `Meta-ExternalAgent` …) — blocked site-wide — and CITATION / answer-engine (`ChatGPT-User`, `OAI-SearchBot`, `Claude-Web`, `PerplexityBot`, `Perplexity-User`, `Meta-ExternalFetcher`) — allowed on free core, blocked on paid. Ships robots.txt + tdm-policy.json (EU CDSM Art 4 opt-out). | Resolves bot-blocker vs free-core-wedge tension: training drains us, citation drives traffic. Different UAs, treat differently. |
 | 2026-05-19 | § Anti-scraping verification protocol added: Test 1 (citation engines reach free core — ChatGPT / Claude / Perplexity / Google / Bing) + Test 2 (robots.txt + tdm-policy.json + llms.txt rules present and correct on served files). Both required quarterly + on any change to robots / tdm-policy. Recorded in `.audit/security/anti-scraping-verification-YYYY-QN.md`. | Verifiable proof both wedge intact and training-drain stopped. Without tests, drift goes undetected until traffic dies. |
 | 2026-05-19 | § Strategic doctrine + growth framework locked. Strategic positioning shifts from "AI training platform" to "**AI Governance Awareness + Enablement Platform**". Three commercial pillars: Awareness SaaS · Governance Packs · Advisory + Consulting. **Primary route to market = MSP partnerships**. Two-entity target structure: NewCo (SaaS) + Consultancy. Existing free-core wedge becomes the acquisition engine for Pillar 1. RORtech Partners Limited reclassified as first MSP partner (was generic reseller). Dedicated tracks planned for Microsoft Copilot · Shadow AI · MSP / IT Admin · Governance & Procurement · AI Governance Officer · Developer + Technical AI. Long-term vision: governance-focused SaaS ecosystem distributed via MSPs with consultancy revenue engine, eventual acquisition target. | Codifies long-arc strategic posture; reconciles direct-to-SMB launch with MSP-first scale; prevents drift into "generic e-learning provider" trap. |
+| 2026-05-19 | § MSP commercial model locked. **Low monthly MSP fee + layered revenue share**. Three tiers: Partner MSP **£499/mo** · Growth MSP **£1,499/mo** · Strategic MSP Partner **£3k–£5k+/mo**. Revenue-share splits — awareness subscriptions **70/30 MSP**; governance packs **50/50**; workshops **30/70 consultancy**; ISO/IEC 42001 projects **20/80 consultancy**; advisory retainers **20–30% MSP referral**. Founding MSP Partner programme: first 3–5 MSPs get 50% Year-1 discount, roadmap input, co-branding, possible territory/sector exclusivity. RORtech Partners Limited = first Founding slot. **Critical rule**: do NOT extract all value from platform subscription up front — slows adoption; revenue lives in distribution + expansion + governance upsells + consulting. | Right pricing posture for MSP psychology: predictable MRR for us, low risk + active upside for them; bundles cleanly into managed IT / cyber / M365 / vCIO stacks → raises MSP contract value without delivery overhead. |
 
 Append below as decisions land. Use `/aos-log` for global cross-project decisions.
 
