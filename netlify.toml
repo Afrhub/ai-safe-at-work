@@ -13,6 +13,16 @@
   status = 404
   force = true
 
+# Doctrine: stays public on GitHub (transparency wedge per doctrine
+# § Distribution principle 3), hidden from Netlify marketing site.
+# Marketing site stays sales-shaped; transparency artefact lives on
+# GitHub only. See decision log entry 2026-05-19.
+[[redirects]]
+  from = "/DOCTRINE.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # Headers below in _headers (separate file for clarity + per-path scoping).
 # netlify.toml [[headers]] supports glob patterns but per-path detail in
 # _headers reads better and matches Netlify-native pattern.
