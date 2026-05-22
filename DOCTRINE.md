@@ -526,6 +526,236 @@ People-Also-Ask FAQ candidates (seed `FAQPage` schema): see audit doc.
 
 ---
 
+## § Strategic doctrine + growth framework
+
+> Added 2026-05-19. Locks the long-arc strategic posture on top of the operational doctrine above. Compatible with — not replacing — § Position-the-wedge and § Audience hierarchy. Where text below appears to broaden the wedge, treat the original wedge as the **acquisition engine** and this strategic framework as the **revenue engine**. They co-exist.
+
+### Purpose
+
+AI Safe@Work exists to help organisations adopt AI safely, responsibly and operationally via: awareness training · governance enablement · compliance guidance · operational risk reduction · advisory services.
+
+Sits at the intersection of: AI adoption · cyber awareness · governance · operational maturity · procurement · compliance · safe technology enablement.
+
+Long-term objective: scalable AI governance ecosystem with recurring subscription revenue · MSP distribution partnerships · governance tooling · advisory services · eventual acquisition potential.
+
+### Strategic positioning
+
+**Not**: "AI training platform".
+**Is**: "**AI Governance Awareness & Enablement Platform**".
+
+Strategic differentiator: not AI productivity itself — safe AI adoption · operational governance · accountability · compliance awareness · risk reduction · operational maturity.
+
+Translate governance + compliance concepts into practical operational guidance that employees, managers, MSPs, compliance teams, SMBs can realistically understand + adopt.
+
+### Core market problem
+
+Most organisations already use AI tools (ChatGPT · Microsoft Copilot · Google Gemini · Claude · Perplexity · Meta AI · Grok · AI browser plugins · AI transcription · AI-enabled SaaS) **without** governance · awareness training · AUP · operational controls · approval processes · procurement oversight · accountability structures.
+
+Operational risks: confidential data leakage · GDPR exposure · IP loss · unmanaged "shadow AI" · hallucinated outputs · supplier/vendor risk · reputational damage · inaccurate decisions · governance failures.
+
+AI Safe@Work exists to **operationalise** safe AI usage for SMBs + regulated orgs.
+
+### Strategic market direction
+
+AI governance market expected to evolve like cyber-security awareness · GDPR readiness · governance/compliance maturity services.
+
+Becoming increasingly: procurement-driven · insurer-driven · compliance-driven · audit-driven · operationally expected.
+
+Recurring-revenue opportunities: subscriptions · governance packs · MSP licensing · white-labelled platforms · governance tooling · advisory retainers · enterprise consulting.
+
+### § Primary route to market — MSP-first
+
+**Primary distribution channel: MSP partnerships.** This supersedes the direct-to-SMB Phase-1 launch slice in priority once MSP traction lands.
+
+MSPs already own: trusted customer relationships · IT/security conversations · governance discussions · recurring managed-services models.
+
+AI Safe@Work gives MSPs: immediate AI governance offering · recurring revenue · customer retention/stickiness · strategic differentiation · governance credibility · entry into higher-value advisory conversations.
+
+§ Sales partners section is the operational mechanism for this — MSP partners are the priority class, RORtech Partners Limited is the first authorised reseller in onboarding.
+
+### Target markets
+
+Primary: SMBs · MSP customers · regulated SMEs · professional services · healthcare · recruitment firms · legal/accountancy firms · defence supply chain · public sector suppliers · education orgs.
+
+Aligns with § Market sizing — sector targets prioritise: professional services, DORA-bound financial SMB, healthcare, public sector, education.
+
+### Core platform components — three layers
+
+1. **Awareness platform** (scalable SaaS layer) — employee awareness training · role-based learning · governance awareness · operational guidance · standards mapping · refresher learning · certification · audit evidence.
+2. **Governance enablement** (operational layer) — AUPs · governance templates · AI risk registers · vendor questionnaires · governance checklists · AI incident processes · approval workflows · operational governance guidance.
+3. **Advisory + consultancy** (strategic consulting layer) — governance workshops · AI maturity reviews · governance operating models · ISO/IEC 42001 readiness · governance assessments · operational implementation · retained advisory.
+
+### Role-based learning expansion
+
+Expand beyond employee awareness into operational accountability + governance ownership.
+
+Tracks:
+
+| Track | Status |
+|---|---|
+| Employee Awareness | shipped (12 modules) |
+| Manager / Leadership | shipped (`module-manager.html`) |
+| DPO / Compliance | shipped (`module-dpo.html`) |
+| Governance & Procurement | planned |
+| MSP / IT Admin | planned (priority — feeds MSP-first route) |
+| AI Governance Officer | planned |
+
+Expands buyer surface beyond HR/training budgets into: governance · compliance · operational risk · procurement · leadership.
+
+### AI platform governance coverage — active
+
+Maintain operational governance + awareness coverage around major AI ecosystems currently used inside organisations.
+
+Coverage: ChatGPT · Microsoft Copilot · Google Gemini · Claude · Perplexity · Meta AI · Grok · AI browser extensions · AI note-taking/transcription tools · AI summarisation assistants · AI SaaS integrations.
+
+### Operational governance themes — consistent across platforms
+
+Confidential data handling · "never-paste" guidance · hallucination + output verification · human oversight · IP protection · GDPR/privacy implications · acceptable-use boundaries · AI-generated misinformation · enterprise-vs-free-tier risk differences · operational accountability.
+
+### Microsoft Copilot — dedicated governance track
+
+Build dedicated Microsoft Copilot governance track. Reasons: rapid enterprise adoption · widespread M365 usage · strong MSP alignment.
+
+Focus areas: SharePoint/Teams permissions exposure · oversharing risks · data classification · governance controls · operational rollout guidance · enterprise governance.
+
+= major MSP + enterprise consulting opportunity. Add to expansion roadmap.
+
+### Developer + technical AI governance
+
+Governance awareness around: AI coding assistants · GitHub Copilot · source code/IP exposure · AI-generated scripting · infrastructure automation risks · secure developer AI usage.
+
+Creates MSP governance offerings · development governance · enterprise operational consulting.
+
+### Shadow AI — core strategic theme
+
+Track as platform theme. Covers: unapproved AI tools · personal AI accounts · AI browser extensions · unsanctioned SaaS adoption · unmanaged AI workflows · operational AI sprawl.
+
+Expected to be one of the largest governance + operational risk challenges for SMBs + MSPs over coming years.
+
+### AI tool approval + governance enablement
+
+Help orgs operationalise: approved AI tool lists · AI tool classifications · vendor risk assessments · procurement governance · approval workflows · governance ownership.
+
+Evolves platform from awareness → operational governance enablement.
+
+### § Commercial structure — hybrid SaaS + consultancy
+
+**Two-entity model** (target structure):
+
+| Entity | Responsibilities |
+|---|---|
+| **NewCo** (SaaS) | Platform ownership · SaaS subscriptions · awareness platform · downloadable governance packs · MSP licensing · white-labelled offerings · governance tooling · scalable IP |
+| **Consultancy** | Governance implementation · workshops · maturity reviews · ISO/IEC 42001 readiness · governance operating models · strategic advisory · retained consulting |
+
+Separation protects: SaaS scalability · acquisition potential · high-margin consulting opportunities.
+
+**Current state**: single founder, single legal entity TBD. Two-entity split is a target, not immediate. Document the separation in pricing + delivery now so it survives entity creation.
+
+### § Commercial pillars
+
+| Pillar | Purpose |
+|---|---|
+| **1. Awareness SaaS** | Scalable recurring revenue · market adoption · recurring MRR · customer acquisition |
+| **2. Governance Packs** | Governance enablement · operational tooling · consultancy lead generation |
+| **3. Advisory + Consulting** | High-margin strategic services · enterprise governance · retained advisory · operational implementation |
+
+### § Governance pack strategy
+
+Practical self-service governance tooling · operational templates · implementation starting points.
+
+Key packs:
+
+- AI Acceptable Use Policy (shipped — `templates/aup-template.html`)
+- AI Vendor Questionnaire (shipped — `templates/vendor-questionnaire.html`)
+- AI Risk Register template (planned)
+- AI Incident Process template (planned)
+- Governance Checklists (planned)
+- Approval Workflows (planned)
+- Governance Quick Start Guides (planned)
+- Procurement Governance Pack (planned)
+- Manager Governance Pack (planned)
+
+Packs intentionally enable self-service adoption AND naturally create implementation / governance review / advisory opportunities.
+
+### § MSP ecosystem strategy
+
+Evolve into white-labelled MSP governance enablement ecosystem.
+
+Potential MSP offerings:
+
+- AI governance bundles
+- Governance subscriptions
+- White-labelled awareness portals
+- Governance dashboards
+- Policy libraries
+- Governance assessments
+- Managed governance services
+
+Creates: strong recurring MRR · customer stickiness · strategic differentiation · scalable distribution.
+
+### § Expansion roadmap
+
+Stay aligned to: governance · operational maturity · compliance · safe technology adoption.
+
+Recommended expansion areas:
+
+- Cyber Security Awareness 2.0
+- Secure Microsoft Copilot Adoption
+- Shadow IT + SaaS Governance
+- AI Procurement Governance
+- AI Governance Practitioner Certifications
+- Sector-Specific Governance Packs
+- Governance-as-a-Service
+- Operational Excellence Programmes
+- ITIL + AI Operations Governance
+
+**Avoid**: becoming a generic e-learning provider.
+
+### § Long-term vision
+
+Become: "**the AI governance awareness + enablement platform for SMBs and MSPs**".
+
+Layer roles:
+
+| Layer | Role |
+|---|---|
+| Awareness platform | acquisition engine · trust-building · recurring subscription foundation |
+| Governance tooling + consultancy | strategic revenue engine · enterprise value driver · long-term acquisition opportunity |
+
+Long-term objective: governance-focused SaaS ecosystem · supported by MSP partnerships · governance tooling · operational enablement · recurring subscriptions · high-margin advisory.
+
+**Core business philosophy**: *"Helping organisations adopt emerging technologies safely, responsibly and operationally."*
+
+### Reconciliation with existing doctrine
+
+| Existing section | Status under strategic doctrine |
+|---|---|
+| § Position-the-wedge (non-tech SMB) | Unchanged — wedge is the acquisition engine that feeds Pillar 1. Strategic doctrine expands ABOVE the wedge, not in place of it. |
+| § Pricing-Phase-1 (Pro Cert £49 + Starter £299) | Unchanged — direct-to-SMB launch slice. MSP white-label tier added as separate sales motion (see § Sales partners + § MSP ecosystem strategy). |
+| § Sales partners (RORtech first reseller) | Promoted — MSP is now the **primary route to market** per § Primary route. Sales-partners section becomes the operational mechanism. |
+| § Audience hierarchy | Expanded — add MSP / IT Admin and Governance Officer tracks alongside existing role tracks. P-numbers unchanged. |
+| § Audit-readiness | Strengthened — two-entity NewCo + Consultancy split adds future complexity but maps cleanly (each entity needs its own RoPA, ISMS, etc.). |
+| § Anti-scraping + AI-crawler controls | Unchanged — paid surfaces only; MSP white-label is a paid surface, so already protected by existing scope. |
+
+### § Open strategic TODOs
+
+- [ ] Update `index.html` lede + positioning copy to lead with "AI Governance Awareness + Enablement Platform" (not "course")
+- [ ] Build Microsoft Copilot governance track outline
+- [ ] Build Shadow AI track outline
+- [ ] Build MSP / IT Admin role track
+- [ ] Build Governance & Procurement role track
+- [ ] Build AI Governance Officer role track
+- [ ] Build remaining governance packs (Risk Register · Incident Process · Approval Workflows · Procurement Pack · Manager Pack · Governance Quick Start)
+- [ ] Build dedicated MSP page (`/msp.html`) — partner programme, white-label terms, MSP-specific pricing
+- [ ] Draft MSP white-label commercial terms (extends `pricing.html` Enterprise tier)
+- [ ] Two-entity (NewCo SaaS + Consultancy) structure decision: when, what jurisdiction, profit split
+- [ ] Advisory / consulting day-rate + retained-advisory pricing
+- [ ] Reframe `course.html` to position Awareness Platform as one of three pillars
+- [ ] Sector-specific governance packs (Healthcare · Financial Services · Public Sector · Education · Legal · Defence supply chain)
+- [ ] ITIL + AI Operations Governance positioning paper (Pillar 3 entry into ops-heavy MSPs)
+
+---
+
 ## Decision log
 
 | Date | Decision | Why |
@@ -546,6 +776,7 @@ People-Also-Ask FAQ candidates (seed `FAQPage` schema): see audit doc.
 | 2026-05-19 | Doctrine § Anti-scraping + AI-crawler controls added. Six-layer defence (robots.txt, edge bot-mgmt, auth-wall, rate-limit + WAF, client obfuscation, honeypots + canary). Scoped to paid + auth'd surfaces only — free core remains AI-citable per `llms.txt`. | Protect commercial surfaces before launch without breaking trust-signal posture |
 | 2026-05-19 | § Anti-scraping refined: split AI crawlers into TRAINING (`GPTBot`, `ClaudeBot`, `CCBot`, `Google-Extended`, `Bytespider`, `Amazonbot`, `Applebot-Extended`, `Meta-ExternalAgent` …) — blocked site-wide — and CITATION / answer-engine (`ChatGPT-User`, `OAI-SearchBot`, `Claude-Web`, `PerplexityBot`, `Perplexity-User`, `Meta-ExternalFetcher`) — allowed on free core, blocked on paid. Ships robots.txt + tdm-policy.json (EU CDSM Art 4 opt-out). | Resolves bot-blocker vs free-core-wedge tension: training drains us, citation drives traffic. Different UAs, treat differently. |
 | 2026-05-19 | § Anti-scraping verification protocol added: Test 1 (citation engines reach free core — ChatGPT / Claude / Perplexity / Google / Bing) + Test 2 (robots.txt + tdm-policy.json + llms.txt rules present and correct on served files). Both required quarterly + on any change to robots / tdm-policy. Recorded in `.audit/security/anti-scraping-verification-YYYY-QN.md`. | Verifiable proof both wedge intact and training-drain stopped. Without tests, drift goes undetected until traffic dies. |
+| 2026-05-19 | § Strategic doctrine + growth framework locked. Strategic positioning shifts from "AI training platform" to "**AI Governance Awareness + Enablement Platform**". Three commercial pillars: Awareness SaaS · Governance Packs · Advisory + Consulting. **Primary route to market = MSP partnerships**. Two-entity target structure: NewCo (SaaS) + Consultancy. Existing free-core wedge becomes the acquisition engine for Pillar 1. RORtech Partners Limited reclassified as first MSP partner (was generic reseller). Dedicated tracks planned for Microsoft Copilot · Shadow AI · MSP / IT Admin · Governance & Procurement · AI Governance Officer · Developer + Technical AI. Long-term vision: governance-focused SaaS ecosystem distributed via MSPs with consultancy revenue engine, eventual acquisition target. | Codifies long-arc strategic posture; reconciles direct-to-SMB launch with MSP-first scale; prevents drift into "generic e-learning provider" trap. |
 
 Append below as decisions land. Use `/aos-log` for global cross-project decisions.
 
