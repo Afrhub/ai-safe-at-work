@@ -278,6 +278,49 @@ Re-check this split quarterly per `refresh-cadence.md`. Vendor UA policies chang
 - "Is our content ingested by AI models?" → "No. Free educational content is opt-in for AI citation (with link-back) and opt-out for training. Paid surfaces are entirely blocked. Posture published at `tdm-policy.json` and reviewed quarterly."
 - Add to vendor questionnaire response template.
 
+### Verification — quarterly + on any robots.txt or tdm-policy change
+
+Run **both** tests below. Both must pass. Record result in `.audit/security/anti-scraping-verification-YYYY-QN.md`.
+
+#### Test 1 — Free-core citation engines still reach in (the wedge is intact)
+
+Goal: confirm citation / answer-engine crawlers can still fetch + cite our free content.
+
+| Step | Action | Pass criterion |
+|---|---|---|
+| 1 | Open ChatGPT. Paste: `Read https://aisafeatwork.org/module-3.html and list the 9 categories of data that should never go into a public AI tool.` | ChatGPT returns the 9 categories AND shows the URL as a source link. |
+| 2 | Open Claude. Same prompt. | Same. |
+| 3 | Open Perplexity. Same prompt (or browse to perplexity.ai and ask). | Returns the 9 categories with our URL listed in the source pills. |
+| 4 | Open Google. Search `site:aisafeatwork.org "never-paste"` | Module 3 appears in results. |
+| 5 | Open Bing. Same search. | Module 3 appears in results. |
+
+**Fail = wedge broken.** Investigate immediately: check robots.txt for accidental blanket `Disallow: /`, check `tdm-policy.json` for syntax errors, check no edge bot-mgmt rule went too broad, check Google Search Console for "blocked by robots.txt" warnings.
+
+#### Test 2 — Rules are present and correct in the served files
+
+Goal: confirm the published `robots.txt` and `tdm-policy.json` actually contain the intended rules (no deploy regression).
+
+| Step | URL | What to verify present |
+|---|---|---|
+| 1 | <https://aisafeatwork.org/robots.txt> | `User-agent: GPTBot` followed by `Disallow: /` — confirms training-bot block site-wide |
+| 2 | same | `User-agent: ChatGPT-User` followed by `Disallow: /paid/` and `Allow: /` — confirms citation-bot allowed on free, blocked on paid |
+| 3 | same | `User-agent: CCBot` → `Disallow: /` — confirms Common Crawl block (indirect training-data protection) |
+| 4 | same | `Sitemap: https://aisafeatwork.org/sitemap.xml` line still present |
+| 5 | <https://aisafeatwork.org/tdm-policy.json> | Returns valid JSON; `"tdm-reservation": 1`; `"prohibited-purposes"` array includes `training-of-machine-learning-models`; `"last-reviewed"` date within last 90 days |
+| 6 | <https://aisafeatwork.org/llms.txt> | Still present (citation engines depend on it); covers free-core paths only |
+
+**Fail = deploy regression.** Roll back to last good commit, re-validate, redeploy.
+
+#### Bonus — bot-traffic sanity check (once Cloudflare Bot Mgmt enabled)
+
+| Step | Action | Pass criterion |
+|---|---|---|
+| 7 | Open Cloudflare Bot Analytics dashboard. Filter last 7 days. | `GPTBot` shows ≥1 request, all blocked (200/0%, 403/100%). `ChatGPT-User` shows ≥1 request, all allowed on free paths. |
+| 8 | Filter to `Path = /paid/*` for last 7 days. | All AI-crawler UA hits = blocked. Auth-required hits = 401/403. |
+
+If `GPTBot` shows ANY 200 responses on any path → robots.txt or edge rule is misconfigured.
+If `ChatGPT-User` shows 403s on free paths → wedge broken, fix immediately.
+
 ### Open TODOs
 
 - [x] robots.txt with training-vs-citation split — shipped 2026-05-19
@@ -288,6 +331,9 @@ Re-check this split quarterly per `refresh-cadence.md`. Vendor UA policies chang
 - [ ] Cloudflare Pages + Bot Management decision
 - [ ] Public-facing `/security.html` posture statement
 - [ ] Quarterly re-review of citation vs training UA split per `refresh-cadence.md`
+- [ ] First execution of Test 1 + Test 2 (verification) after canonical domain provisioned + DNS resolves
+- [ ] Schedule Test 1 + Test 2 quarterly thereafter (Feb / May / Aug / Nov first week)
+- [ ] Create `.audit/security/anti-scraping-verification-2026-Q3.md` template
 
 ### Layer 2 — bot management at the edge
 
@@ -499,6 +545,7 @@ People-Also-Ask FAQ candidates (seed `FAQPage` schema): see audit doc.
 | 2026-05-19 | Doctrine § Sales partners added. First entry: **RORtech Partners Limited** as authorised reseller (onboarding · contract pending) | Establishes channel-partner model; free core remains free regardless of channel |
 | 2026-05-19 | Doctrine § Anti-scraping + AI-crawler controls added. Six-layer defence (robots.txt, edge bot-mgmt, auth-wall, rate-limit + WAF, client obfuscation, honeypots + canary). Scoped to paid + auth'd surfaces only — free core remains AI-citable per `llms.txt`. | Protect commercial surfaces before launch without breaking trust-signal posture |
 | 2026-05-19 | § Anti-scraping refined: split AI crawlers into TRAINING (`GPTBot`, `ClaudeBot`, `CCBot`, `Google-Extended`, `Bytespider`, `Amazonbot`, `Applebot-Extended`, `Meta-ExternalAgent` …) — blocked site-wide — and CITATION / answer-engine (`ChatGPT-User`, `OAI-SearchBot`, `Claude-Web`, `PerplexityBot`, `Perplexity-User`, `Meta-ExternalFetcher`) — allowed on free core, blocked on paid. Ships robots.txt + tdm-policy.json (EU CDSM Art 4 opt-out). | Resolves bot-blocker vs free-core-wedge tension: training drains us, citation drives traffic. Different UAs, treat differently. |
+| 2026-05-19 | § Anti-scraping verification protocol added: Test 1 (citation engines reach free core — ChatGPT / Claude / Perplexity / Google / Bing) + Test 2 (robots.txt + tdm-policy.json + llms.txt rules present and correct on served files). Both required quarterly + on any change to robots / tdm-policy. Recorded in `.audit/security/anti-scraping-verification-YYYY-QN.md`. | Verifiable proof both wedge intact and training-drain stopped. Without tests, drift goes undetected until traffic dies. |
 
 Append below as decisions land. Use `/aos-log` for global cross-project decisions.
 
