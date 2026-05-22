@@ -23,6 +23,14 @@
   status = 404
   force = true
 
+# README: dev-docs, not marketing. Same posture as doctrine — public on
+# GitHub, hidden from Netlify marketing surface. Decided 2026-05-19.
+[[redirects]]
+  from = "/README.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # Headers below in _headers (separate file for clarity + per-path scoping).
 # netlify.toml [[headers]] supports glob patterns but per-path detail in
 # _headers reads better and matches Netlify-native pattern.
