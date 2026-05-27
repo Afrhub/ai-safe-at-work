@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#060608" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Module certificate — AI Safe@Work</title>
+<meta name="description" content="Personal printable certificate evidencing AI Safe@Work module completion — generated locally, stored locally, your record only." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/style.css?v=2" />
+<style>
+  /* ── Screen ── */
+  .cert-screen {
+    max-width: 920px;
+    margin: 4rem auto 6rem;
+    padding: 0 1.5rem;
+  }
+  .cert-intro {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .cert-intro h1 {
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin-bottom: 0.7rem;
+    color: var(--text);
+  }
+  .cert-intro h1 em { font-style: normal; color: var(--accent); }
+  .cert-intro p { color: var(--text2); max-width: 60ch; margin: 0 auto; }
+
+  .cert-name-row {
+    display: flex; gap: 0.7rem; align-items: stretch;
+    max-width: 540px; margin: 1.8rem auto 0;
+  }
+  .cert-name-row label {
+    display: none;
+  }
+  .cert-name-row input {
+    flex: 1;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--text);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+  }
+  .cert-name-row input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+    border-color: rgba(232,167,38,0.55);
+  }
+  .cert-name-row button {
+    background: var(--accent);
+    color: #0a0a10;
+    border: none;
+    border-radius: 10px;
+    padding: 0.9rem 1.4rem;
+    font-family: var(--font-display);
+    font-size: 0.95rem; font-weight: 700;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    transition: transform 0.18s var(--ease-out),
+                box-shadow 0.2s var(--ease-out);
+  }
+  .cert-name-row button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(232,167,38,0.30);
+  }
+
+  /* ── Cert card (screen preview) ── */
+  .cert-card {
+    margin: 2.6rem auto 0;
+    background: linear-gradient(160deg, #fff 0%, #fff8e9 55%, #f0c66c33 100%);
+    color: #0a0a0a;
+    border-radius: 22px;
+    padding: 3.4rem 3rem;
+    box-shadow:
+      0 30px 80px rgba(0,0,0,0.55),
+      0 0 0 1px rgba(232,167,38,0.30);
+    aspect-ratio: 1.414 / 1;
+    max-width: 900px;
+    display: flex; flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Manrope', system-ui, sans-serif;
+  }
+  .cert-card .cert-brand {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    font-size: 1rem; font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #b67700;
+  }
+  .cert-card .cert-brand::before {
+    content: '';
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #e8a726;
+    box-shadow: 0 0 8pt #e8a72699;
+  }
+  .cert-card .cert-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #b67700;
+    margin-top: 1.8rem;
+    margin-bottom: 0.7rem;
+  }
+  .cert-card .cert-h {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    font-size: clamp(2.2rem, 4.4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    color: #0a0a0a;
+    margin-bottom: 0.4rem;
+  }
+  .cert-card .cert-h em { font-style: normal; color: #b67700; }
+  .cert-card .cert-sub {
+    font-size: 1.05rem;
+    color: #5c4200;
+    max-width: 70ch;
+    margin-bottom: 2.4rem;
+  }
+  .cert-card .cert-recipient {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #0a0a0a;
+    border-bottom: 1.5pt solid #e8a72677;
+    padding-bottom: 0.4rem;
+    margin-bottom: 1.4rem;
+    word-break: break-word;
+  }
+  .cert-card .cert-module {
+    font-size: 1.15rem;
+    line-height: 1.5;
+    color: #222;
+    margin-bottom: auto;
+  }
+  .cert-card .cert-module strong { color: #0a0a0a; }
+  .cert-card .cert-meta {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 0.5pt solid #e8a72655;
+  }
+  .cert-card .cert-meta-block {
+    flex: 1; min-width: 140px;
+  }
+  .cert-card .cert-meta-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #b67700;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .cert-card .cert-meta-value {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0a0a0a;
+    letter-spacing: -0.01em;
+  }
+  .cert-card .cert-watermark {
+    position: absolute;
+    bottom: -40px; right: -40px;
+    width: 240px; height: 240px;
+    opacity: 0.10;
+    pointer-events: none;
+  }
+
+  .cert-fineprint {
+    margin: 2rem auto 0;
+    text-align: center;
+    color: var(--text3);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    max-width: 60ch;
+  }
+  .cert-actions {
+    display: flex; gap: 0.8rem; justify-content: center;
+    margin-top: 2.2rem;
+  }
+  .cert-actions a, .cert-actions button {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 1.6rem;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.18s var(--ease-out),
+                box-shadow 0.2s var(--ease-out);
+    border: none;
+    text-decoration: none;
+  }
+  .cert-actions .primary {
+    background: var(--accent);
+    color: #0a0a10;
+  }
+  .cert-actions .primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(232,167,38,0.30);
+  }
+  .cert-actions .ghost {
+    background: transparent;
+    color: var(--text2);
+    border: 1px solid rgba(255,255,255,0.14);
+  }
+  .cert-actions .ghost:hover {
+    color: var(--text);
+    border-color: rgba(232,167,38,0.40);
+    background: rgba(232,167,38,0.04);
+  }
+
+  .cert-error {
+    margin: 3rem auto;
+    max-width: 480px;
+    padding: 1.4rem 1.6rem;
+    background: rgba(224,62,62,0.08);
+    border: 1px solid rgba(224,62,62,0.35);
+    border-radius: 12px;
+    color: var(--text);
+    text-align: center;
+  }
+  .cert-error a { color: var(--accent); text-decoration: underline; }
+
+  /* ── Print ── */
+  @page {
+    size: A4 landscape;
+    margin: 14mm;
+  }
+  @media print {
+    body { background: #fff !important; }
+    .cinema, .topbar, .cert-screen > .cert-intro, .cert-screen > .cert-fineprint,
+    .cert-screen > .cert-actions, .cert-name-row, .site-foot, .cert-error {
+      display: none !important;
+    }
+    .cert-screen { margin: 0; padding: 0; max-width: none; }
+    .cert-card {
+      margin: 0; max-width: none; aspect-ratio: auto;
+      box-shadow: none; border-radius: 0;
+      min-height: calc(297mm - 28mm - 4mm);
+      page-break-after: always;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand-mini" href="index.html">AI Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="course.html">All modules</a>
+    <a href="standards-map.html">Standards Map</a>
+    <a href="module-11.html">Checklist</a>
+    <a href="module-12.html">Standards</a>
+  </nav>
+</header>
+
+<main class="cert-screen">
+  <div id="cert-root"></div>
+</main>
+
+<footer class="site-foot">
+  <span>AI Safe@Work · personal training record</span>
+  <span class="foot-right">
+    <a href="course.html">All modules</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </span>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  const MODULE_TITLES = {
+    1: 'Why this course exists',
+    2: 'What AI tools do with what you type',
+    3: 'The never-paste list',
+    4: 'Picking the right tool',
+    5: 'Verifying what the AI tells you',
+    6: 'AI-powered scams aimed at you',
+    7: 'Bias, fairness, not embarrassing the business',
+    8: 'Copyright, IP, and other people’s content',
+    9: 'Logging and accountability',
+    10: 'When something goes wrong',
+    11: 'The 60-second pre-submit checklist',
+    12: 'The standards behind this course'
+  };
+
+  function qs(name) {
+    const m = new URLSearchParams(window.location.search).get(name);
+    return m == null ? null : m;
+  }
+
+  const moduleNum = parseInt(qs('m') || '0', 10);
+  const score = parseInt(qs('s') || '0', 10);
+  const total = parseInt(qs('n') || '10', 10);
+  const root = document.getElementById('cert-root');
+
+  if (!moduleNum || moduleNum < 1 || moduleNum > 12) {
+    root.innerHTML = `
+      <div class="cert-error">
+        <strong>No module specified.</strong>
+        <p style="margin-top:0.5rem;">Open this page by passing the quiz at the bottom of any module.</p>
+        <p style="margin-top:1rem;"><a href="course.html">Go to module list →</a></p>
+      </div>`;
+    return;
+  }
+
+  const lsKey = 'aisw-quiz-m' + moduleNum;
+  let stored = null;
+  try { stored = JSON.parse(localStorage.getItem(lsKey) || 'null'); } catch (e) { stored = null; }
+
+  if (!stored || stored.score < stored.threshold) {
+    root.innerHTML = `
+      <div class="cert-error">
+        <strong>No passing score recorded yet for Module ${moduleNum}.</strong>
+        <p style="margin-top:0.5rem;">Pass the quiz at the bottom of <a href="module-${moduleNum}.html">Module ${moduleNum}</a> first. The result is stored on this device only.</p>
+      </div>`;
+    return;
+  }
+
+  let name = '';
+  try { name = localStorage.getItem('aisw-username') || ''; } catch (e) {}
+
+  const issueDate = new Date(stored.t || Date.now());
+  const dateStr = issueDate.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+  const certId  = makeCertId(moduleNum, stored.score, stored.t);
+
+  root.innerHTML = `
+    <div class="cert-intro">
+      <h1>Your <em>certificate</em>.</h1>
+      <p>Personal training record. Saved on this device only — printable for your file. Type your name below, then print or save as PDF.</p>
+      <div class="cert-name-row">
+        <label for="who">Your full name</label>
+        <input id="who" type="text" placeholder="Your full name" autocomplete="name" value="${escapeHtml(name)}">
+        <button type="button" id="save-name">Save name</button>
+      </div>
+    </div>
+
+    <article class="cert-card" id="card">
+      <div class="cert-brand">AI Safe@Work</div>
+
+      <div>
+        <div class="cert-eyebrow">Certificate of Module Completion</div>
+        <h2 class="cert-h">AI literacy at <em>work</em>.</h2>
+        <p class="cert-sub">This certificate evidences that the named individual has completed and passed the knowledge check for the following module. It is one of the records an employer may keep to demonstrate <strong>EU AI Act Article 4 AI literacy</strong> for staff using AI tools.</p>
+      </div>
+
+      <div class="cert-recipient" id="who-display">${escapeHtml(name) || 'Your name here'}</div>
+
+      <p class="cert-module">
+        Has completed <strong>Module ${pad2(moduleNum)} — ${escapeHtml(MODULE_TITLES[moduleNum] || '')}</strong>
+        with a score of <strong>${stored.score} of ${total}</strong>
+        (pass mark ${stored.threshold || 8}).
+      </p>
+
+      <div class="cert-meta">
+        <div class="cert-meta-block">
+          <span class="cert-meta-label">Issued</span>
+          <span class="cert-meta-value">${dateStr}</span>
+        </div>
+        <div class="cert-meta-block">
+          <span class="cert-meta-label">Reference</span>
+          <span class="cert-meta-value">${certId}</span>
+        </div>
+        <div class="cert-meta-block">
+          <span class="cert-meta-label">Standards</span>
+          <span class="cert-meta-value">EU AI Act Art 4 · ISO 42001 · GDPR</span>
+        </div>
+      </div>
+
+      <svg class="cert-watermark" viewBox="0 0 200 200" aria-hidden="true">
+        <g fill="none" stroke="#b67700" stroke-width="2">
+          <circle cx="100" cy="100" r="80"/>
+          <circle cx="100" cy="100" r="55"/>
+          <circle cx="100" cy="100" r="30"/>
+          <path d="M100 20 L100 180 M20 100 L180 100"/>
+        </g>
+      </svg>
+    </article>
+
+    <p class="cert-fineprint">
+      Self-issued personal record. AI Safe@Work does not validate, sign or store this certificate; the score lives in your browser's
+      <code style="background:rgba(232,167,38,0.1); padding:0 0.3rem; border-radius:3px;">localStorage</code>.
+      Hand it to your manager, HR, or training file as one piece of literacy evidence. Reissue any time by retaking the quiz.
+    </p>
+
+    <div class="cert-actions">
+      <a class="ghost" href="module-${moduleNum}.html">← Back to module</a>
+      <button class="primary" type="button" id="print">Print or save as PDF →</button>
+    </div>
+  `;
+
+  const input = document.getElementById('who');
+  const display = document.getElementById('who-display');
+  const saveBtn = document.getElementById('save-name');
+  const printBtn = document.getElementById('print');
+
+  input.addEventListener('input', () => {
+    display.textContent = input.value.trim() || 'Your name here';
+  });
+  saveBtn.addEventListener('click', () => {
+    const v = input.value.trim();
+    if (!v) { input.focus(); return; }
+    try { localStorage.setItem('aisw-username', v); } catch (e) {}
+    saveBtn.textContent = 'Saved ✓';
+    setTimeout(() => { saveBtn.textContent = 'Save name'; }, 1800);
+  });
+  printBtn.addEventListener('click', () => {
+    const v = input.value.trim();
+    if (!v) { input.focus(); return; }
+    try { localStorage.setItem('aisw-username', v); } catch (e) {}
+    window.print();
+  });
+
+  function makeCertId(m, s, iso) {
+    const d = new Date(iso || Date.now());
+    const stamp = d.getFullYear().toString().slice(-2)
+      + pad2(d.getMonth() + 1)
+      + pad2(d.getDate());
+    const rand = Math.abs(hash(String(iso) + ':' + m + ':' + s)).toString(36).slice(0, 4).toUpperCase();
+    return `AISW-M${pad2(m)}-${stamp}-${rand}`;
+  }
+  function hash(s) {
+    let h = 0; for (let i = 0; i < s.length; i++) { h = ((h << 5) - h) + s.charCodeAt(i); h |= 0; }
+    return h;
+  }
+  function pad2(n) { return n < 10 ? '0' + n : String(n); }
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+  }
+})();
+</script>
+
+</body>
+</html>

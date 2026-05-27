@@ -21,7 +21,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/style.css?v=2" />
+<link rel="stylesheet" href="assets/quiz.css?v=1" />
+<link rel="stylesheet" href="assets/widgets.css?v=1" />
 <script defer src="assets/cinema.js?v=2"></script>
+<script defer src="assets/quiz.js?v=1"></script>
+<script defer src="assets/widgets.js?v=1"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -188,6 +192,194 @@
       <p><strong>GDPR Articles 32–34</strong>: security of processing, breach notification — a successful phishing attack often is a personal data breach, and the 72-hour clock starts when you notice. <strong>ISO 27001:2022 Annex A.6.3</strong>: information security awareness, education and training — this module is the kind of awareness that control envisages. <strong>Annex A.8.5</strong>: secure authentication, including MFA. <strong>EU AI Act Article 50</strong>: AI-generated audio, video and images intended to deceive must be marked — a rule attackers will obviously ignore, but one that anchors a future where unmarked deepfakes are themselves evidence of bad faith.</p>
     </div>
   </div>
+
+  <script type="application/json" id="quiz-data">
+  {
+    "module": 6,
+    "passThreshold": 8,
+    "quizTitle": "Test your <em>understanding</em>.",
+    "quizLede": "Ten questions drawn only from the four attack patterns, the callback principle, and the standards callout above. Pass mark 8 out of 10.",
+    "widget": {
+      "type": "scenario",
+      "title": "Walk the <em>callback principle</em>.",
+      "lede": "A live scenario — voice-cloned CFO call. At each step, pick the response that follows the callback principle. Each wrong answer explains why it fails.",
+      "intro": "<strong>You're the accounts-payable clerk.</strong> Your desk phone rings. Caller ID says <strong>CFO</strong>. The voice that picks up sounds <em>exactly</em> like the real CFO — tone, accent, mannerisms — and they want you to process an urgent £80,000 wire to a brand-new supplier <strong>before close of business today</strong>. Four steps.",
+      "steps": [
+        {
+          "prompt": "Step 1 — They say: 'Hi, I need you to process a wire transfer for me. Quickly please. This is confidential — don't tell anyone yet.' What do you say?",
+          "options": [
+            { "label": "'Sure, what's the amount and the account number?'", "correct": false, "why": "You're engaging inside the channel that received the request. The callback principle says: don't act inside the channel." },
+            { "label": "'For confidential urgent wires I have to verify on a different channel — I'm going to hang up and call you back on a number I look up.'", "correct": true, "why": "Exactly the callback principle. Don't act in the channel that received the request.", "cite": "The callback principle" },
+            { "label": "'OK but only if you can give me the budget code first.'", "correct": false, "why": "Still engaging in the same channel. The attacker will absolutely have a plausible-sounding code ready." },
+            { "label": "'Of course CFO, I'll process it right away.'", "correct": false, "why": "Bypasses every check. This is exactly the failure mode the module is trying to prevent." }
+          ]
+        },
+        {
+          "prompt": "Step 2 — You hang up. What do you do next?",
+          "options": [
+            { "label": "Wait for the CFO to call back.", "correct": false, "why": "Passive — and the attacker will absolutely call back. The principle is that <em>you</em> initiate the verification, not them." },
+            { "label": "Look up the CFO's number in your internal directory and call them on that number.", "correct": true, "why": "Module: 'Look up the supposed sender in a different system you initiate — your internal directory, your phone's saved contact, the company website — never the contact details in the message itself.'", "cite": "The callback principle" },
+            { "label": "Call back the number that showed on caller ID.", "correct": false, "why": "Caller ID is trivially spoofed. Calling it back puts you straight back through to the attacker." },
+            { "label": "Email the CFO from your work email.", "correct": false, "why": "If the attacker has access to email infrastructure, this still flows through a channel the attacker can intercept or watch. Voice on a known number is stronger." }
+          ]
+        },
+        {
+          "prompt": "Step 3 — On the internal-directory number, the real CFO picks up and says 'I never called you about a wire.' What do you do?",
+          "options": [
+            { "label": "Hang up and get back to work.", "correct": false, "why": "The attack is still live elsewhere in the business. Speed of reporting is what saves the next victim." },
+            { "label": "Apologise for the false alarm and move on.", "correct": false, "why": "Same problem — you have evidence of an active attack and you are the one with that evidence." },
+            { "label": "Tell IT / security straight away — the same attack is probably trying to reach other people in the business right now.", "correct": true, "why": "Module: 'Your speed of reporting is what stops them.' The first ten minutes after recognition matter.", "cite": "If you think you've been targeted" },
+            { "label": "Process the wire anyway, just in case the original caller was real.", "correct": false, "why": "Two confirmations against (the real CFO denied it; verification on a different channel failed) is enough. Don't second-guess in the attacker's favour." }
+          ]
+        },
+        {
+          "prompt": "Step 4 — While you're on with IT, an email lands in your inbox from 'CFO': 'Have you sent that wire yet? Urgent.' What do you do?",
+          "options": [
+            { "label": "Reply explaining the delay.", "correct": false, "why": "Confirms to the attacker that you've seen the message and gives them a thread to work in. Don't engage." },
+            { "label": "Forward the email to IT / security for analysis; do not reply to it.", "correct": true, "why": "Preserve the evidence (Module 10: 'don't delete the evidence'), don't engage in the attacker's channel, let security analyse the headers.", "cite": "The first ten minutes" },
+            { "label": "Click any links in the email to 'see what they want'.", "correct": false, "why": "Links in a phishing email are how the attacker installs malware or harvests credentials. Don't." },
+            { "label": "Send a screenshot back to 'CFO' to confirm it's really them.", "correct": false, "why": "Still verifying inside the suspect channel. Same principle as Step 1 — don't act in the channel that received the request." }
+          ]
+        }
+      ]
+    },
+    "questions": [
+      {
+        "q": "What does Module 6 identify as the new red flag, replacing typos and weird grammar?",
+        "options": [
+          "Requests that don't match normal channels — your CFO doesn't usually email about wire transfers; your IT lead doesn't usually email to install software",
+          "Emojis in business emails",
+          "British spelling instead of American",
+          "Subject lines in lowercase",
+          "Anything sent before 9am"
+        ],
+        "correct": 0,
+        "why": "Body: <em>What to look for: not typos, but requests that don't match normal channels.</em>",
+        "cite": "1. Spear-phishing 2.0"
+      },
+      {
+        "q": "How long a voice sample is enough for current tools to produce a convincing clone?",
+        "options": [
+          "Three minutes",
+          "About 30 seconds",
+          "An hour",
+          "A full conversation recording",
+          "Just three words: 'I love crypto'"
+        ],
+        "correct": 1,
+        "why": "Body: <em>A 30-second sample of someone's voice … is enough for current tools to produce a convincing clone.</em>",
+        "cite": "2. Voice cloning"
+      },
+      {
+        "q": "What is the callback principle?",
+        "options": [
+          "Asking the AI to call you back later",
+          "Reading the message back to yourself out loud",
+          "Don't act in the channel that received the request; look up the supposed sender in a different system you initiate (never the contact details in the message itself); call them on a known number; ask them something only they would know",
+          "Calling the police first",
+          "Calling your therapist"
+        ],
+        "correct": 2,
+        "why": "Body: the numbered list under 'The callback principle' lays out exactly these four steps.",
+        "cite": "The callback principle"
+      },
+      {
+        "q": "What is the single biggest determinant of how bad a successful phishing attack ends up being?",
+        "options": [
+          "Which AI tool was used to write the phishing email",
+          "How much money was in your account",
+          "Whether your antivirus was up to date",
+          "The time between the moment the victim realises and the moment IT or security finds out — five minutes' delay is fine, five hours' delay can mean the difference between containment and telling every customer",
+          "The phase of the moon"
+        ],
+        "correct": 3,
+        "why": "Body: <em>The single biggest determinant of how bad a successful phishing attack ends up being is the time between the moment the victim realises and the moment IT or security finds out.</em>",
+        "cite": "Why fast reporting is the whole game"
+      },
+      {
+        "q": "Which kind of MFA does the module describe as the weakest and increasingly bypassed?",
+        "options": [
+          "Hardware security keys (YubiKey, Titan)",
+          "Passkeys",
+          "Device-bound app-based MFA",
+          "Biometric MFA",
+          "SMS codes"
+        ],
+        "correct": 4,
+        "why": "Body: <em>SMS codes are now considered the weakest form of MFA and are increasingly bypassed.</em>",
+        "cite": "Things that help, ahead of time"
+      },
+      {
+        "q": "What does the module identify as the AI-driven scam that targets individuals over weeks via dating apps before steering to 'investment opportunities'?",
+        "options": [
+          "'Pig butchering' romance scams using multiple personas, AI-generated photos, and AI-driven messages",
+          "Crypto-mining malware",
+          "Ransomware",
+          "Distributed denial-of-service",
+          "The 'lonely Nigerian prince' classic"
+        ],
+        "correct": 0,
+        "why": "Body: <em>The same patterns are used in romance scams — 'pig butchering' — that target individuals via dating apps. Multiple personas, AI-generated photos, AI-driven messages over weeks, before steering to 'investment opportunities'.</em>",
+        "cite": "Romance scams have gone industrial"
+      },
+      {
+        "q": "What does the module suggest some families and leadership teams adopt as defence against voice-cloned scams?",
+        "options": [
+          "Banning all phone calls",
+          "A private code-word or phrase that anyone calling to ask for money must use first",
+          "A monthly password reset",
+          "Encrypted phones for the whole family",
+          "An oath in Latin"
+        ],
+        "correct": 1,
+        "why": "Body: <em>Some families now have a private code-word or phrase that anyone calling to ask for money must use first.</em>",
+        "cite": "Family code-words"
+      },
+      {
+        "q": "What is the FIRST thing to do if you think you've been targeted?",
+        "options": [
+          "Reply to test the attacker",
+          "Forward the message to your friends to warn them",
+          "Stop — don't click anything else, don't reply, don't try to 'test' the attacker",
+          "Lawyer up",
+          "Cry into a cushion"
+        ],
+        "correct": 2,
+        "why": "Body: <em>Stop. Don't click anything else. Don't reply. Don't try to 'test' the attacker.</em>",
+        "cite": "If you think you've been targeted"
+      },
+      {
+        "q": "If you've moved money and realised it was a scam, what should you do?",
+        "options": [
+          "Wait a day, see if the bank notices",
+          "Tweet about it for awareness",
+          "Ask the attacker nicely for it back",
+          "Call your bank immediately and report the transaction — some transfers can be reversed in the first hour, fewer in the first day",
+          "File it under 'expensive lesson' and move on"
+        ],
+        "correct": 3,
+        "why": "Body: <em>If you've moved money: call your bank immediately and report the transaction. Speed matters — some transfers can be reversed in the first hour, fewer in the first day.</em>",
+        "cite": "If you think you've been targeted"
+      },
+      {
+        "q": "Which EU AI Act article requires AI-generated audio, video and images intended to deceive to be marked?",
+        "options": [
+          "Article 4",
+          "Article 12",
+          "Article 14",
+          "Article 26",
+          "Article 50"
+        ],
+        "correct": 4,
+        "why": "Body: <em>EU AI Act Article 50: AI-generated audio, video and images intended to deceive must be marked.</em>",
+        "cite": "Where the standards land"
+      }
+    ]
+  }
+  </script>
+
+  <div id="widget-mount"></div>
+  <div id="quiz-mount"></div>
 </main>
 
 <nav class="module-bottom-nav">

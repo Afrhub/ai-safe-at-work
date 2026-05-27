@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>AI Safe@Work — Infosec Europe 2026 Cross-Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+@page {
+  size: A4;
+  margin: 18mm 16mm 18mm 16mm;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: #fff; color: #0a0a0a;
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-size: 10.5pt; line-height: 1.55;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.cover {
+  page-break-after: always;
+  height: 250mm;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 24mm 8mm;
+  background: linear-gradient(160deg, #fff 0%, #fff8e9 55%, #f0c66c33 100%);
+  border: 0.5pt solid #e8a72655;
+  position: relative;
+}
+.cover .brand {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-size: 13pt; font-weight: 800;
+  letter-spacing: -0.025em; color: #b67700;
+}
+.cover .brand::before {
+  content: ''; width: 9px; height: 9px; border-radius: 50%;
+  background: #e8a726;
+  box-shadow: 0 0 6pt #e8a72677;
+}
+.cover .eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9pt; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: #b67700;
+  margin-bottom: 10mm;
+}
+.cover h1 {
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-size: 38pt; font-weight: 800;
+  letter-spacing: -0.04em; line-height: 0.98;
+  margin-bottom: 8mm;
+  color: #0a0a0a;
+}
+.cover h1 em { font-style: normal; color: #b67700; }
+.cover .lede {
+  font-size: 13pt; line-height: 1.5; color: #444;
+  max-width: 150mm; margin-bottom: 14mm;
+}
+.cover .meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9pt; color: #777;
+  letter-spacing: 0.08em;
+  display: flex; gap: 6mm; flex-wrap: wrap;
+}
+.cover .meta strong { color: #b67700; font-weight: 800; }
+.cover-foot {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5pt; color: #888;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  display: flex; justify-content: space-between; align-items: end;
+}
+.cover-foot .tags { display: flex; gap: 4mm; flex-wrap: wrap; }
+.cover-foot .tag {
+  padding: 1.5mm 3mm;
+  border: 0.5pt solid #e8a72677;
+  background: #e8a72611;
+  color: #b67700;
+  border-radius: 100pt;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+h1.page-title {
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-size: 22pt; font-weight: 800;
+  letter-spacing: -0.03em; line-height: 1.05;
+  margin: 0 0 4mm; color: #0a0a0a;
+}
+h1.page-title em { font-style: normal; color: #b67700; }
+h2 {
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-size: 15pt; font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: 9mm 0 3mm; color: #0a0a0a;
+  border-bottom: 0.5pt solid #ddd;
+  padding-bottom: 2mm;
+}
+h3 {
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-size: 11.5pt; font-weight: 700;
+  letter-spacing: -0.015em;
+  margin: 5mm 0 2mm; color: #0a0a0a;
+}
+p { margin: 0 0 3mm; color: #222; }
+p.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8pt; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: #b67700;
+  margin-bottom: 3mm;
+}
+strong { color: #0a0a0a; font-weight: 700; }
+ul, ol { margin: 0 0 4mm 5mm; }
+li { margin-bottom: 1mm; color: #222; }
+
+.callout {
+  margin: 4mm 0;
+  padding: 4mm 5mm;
+  border: 0.5pt solid #e8a72655;
+  background: #e8a72608;
+  border-left: 1.5pt solid #b67700;
+  border-radius: 1.5mm;
+}
+.callout strong { color: #b67700; }
+
+.tldr {
+  background: #fff8e9;
+  border: 0.5pt solid #e8a72677;
+  border-radius: 2mm;
+  padding: 5mm 6mm;
+  margin: 4mm 0 8mm;
+}
+.tldr ul { margin: 0 0 0 5mm; padding: 0; }
+.tldr li { margin-bottom: 1.5mm; }
+
+.wedge {
+  background: linear-gradient(140deg, #b67700, #e8a726);
+  color: #fff;
+  border-radius: 3mm;
+  padding: 7mm 8mm;
+  margin: 5mm 0 8mm;
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-size: 14pt; font-weight: 700;
+  letter-spacing: -0.02em; line-height: 1.35;
+}
+.wedge .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8pt; font-weight: 800;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: #fff8e9;
+  margin-bottom: 3mm; display: block;
+}
+
+table {
+  width: 100%; border-collapse: collapse;
+  margin: 3mm 0 6mm;
+  font-size: 9pt;
+  page-break-inside: avoid;
+}
+thead th {
+  background: #fff5dd;
+  color: #b67700;
+  text-align: left;
+  padding: 2.5mm 3mm;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7.5pt; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  border-bottom: 0.6pt solid #e8a72677;
+}
+tbody td {
+  padding: 2.5mm 3mm;
+  border-top: 0.3pt solid #ddd;
+  color: #222;
+  vertical-align: top;
+  line-height: 1.4;
+}
+tbody td:first-child { color: #0a0a0a; font-weight: 600; }
+tbody td .warn {
+  display: inline-block;
+  background: #c1272d;
+  color: #fff;
+  padding: 0.4mm 1.5mm;
+  border-radius: 0.8mm;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7pt; font-weight: 800;
+  letter-spacing: 0.06em;
+  margin-left: 1.5mm;
+}
+
+code {
+  font-family: 'JetBrains Mono', monospace;
+  background: #f6efe0;
+  padding: 0.2mm 1.2mm;
+  border-radius: 1mm;
+  font-size: 0.85em;
+  color: #5c4200;
+}
+
+hr {
+  border: none; border-top: 0.4pt solid #ddd;
+  margin: 6mm 0 5mm;
+}
+
+.section { page-break-before: avoid; }
+.page-break { page-break-before: always; }
+
+.foot-meta {
+  margin-top: 10mm;
+  padding-top: 4mm;
+  border-top: 0.4pt solid #ddd;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8pt; color: #888;
+  letter-spacing: 0.08em;
+}
+.foot-meta strong { color: #b67700; }
+
+.grid2 {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4mm;
+  margin: 3mm 0 5mm;
+}
+.card {
+  border: 0.5pt solid #e8a72655;
+  border-radius: 2mm;
+  padding: 4mm 5mm;
+  background: #fffefb;
+  page-break-inside: avoid;
+}
+.card h3 { margin-top: 0; color: #b67700; }
+.card .stat {
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-size: 24pt; font-weight: 800;
+  color: #0a0a0a; letter-spacing: -0.03em;
+  margin: 1mm 0 1mm;
+}
+.card .stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7.5pt; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: #888;
+}
+</style>
+</head>
+<body>
+
+<!-- ── COVER ── -->
+<section class="cover">
+  <div>
+    <div class="brand">AI Safe@Work</div>
+    <p class="eyebrow" style="margin-top:30mm; margin-bottom:4mm;">Internal · v2026.05 · market intel</p>
+    <h1>Infosecurity <em>Europe</em><br/>2026.</h1>
+    <p class="lede">324 exhibitors. 20 direct competitors. 1 open slot. This is where the niche lives.</p>
+    <div class="meta">
+      <span><strong>Owner</strong> Founder</span>
+      <span><strong>Effective</strong> 2026-05-27</span>
+      <span><strong>Source</strong> Playwright scrape</span>
+      <span><strong>Refresh</strong> annual (post-show)</span>
+    </div>
+  </div>
+  <div class="cover-foot">
+    <span>aisafeatwork.org · ExCeL London · 3-4 June 2026</span>
+    <span class="tags">
+      <span class="tag">EU AI Act Art 4</span>
+      <span class="tag">MSP-Resellable</span>
+      <span class="tag">SMB Literacy</span>
+    </span>
+  </div>
+</section>
+
+<!-- ── TL;DR ── -->
+<section class="section">
+  <p class="eyebrow">TL;DR</p>
+  <h1 class="page-title">The niche, in one breath.</h1>
+
+  <div class="tldr">
+    <ul>
+      <li><strong>324 stands</strong> scraped from Infosec Europe 2026 exhibitor directory · taxonomied into 12 categories.</li>
+      <li><strong>Direct competitive zone</strong>: 14 Security Awareness Training (SAT) vendors + 6 AI-Governance platforms = <strong>20 stands</strong>.</li>
+      <li><strong>Pattern</strong>: SAT vendors bolt AI onto phishing libraries · AI-Gov vendors sell policy engines to enterprise legal teams. <strong>Nobody leads with EU AI Act Article 4 literacy.</strong></li>
+      <li><strong>Closest threat</strong>: Adaptive Security (US, deepfake-led, premium, no MSP shape).</li>
+      <li><strong>Open slot</strong>: SMB-priced · EU-first · plain-English · MSP-resellable · Article-4-anchored literacy.</li>
+    </ul>
+  </div>
+
+  <div class="wedge">
+    <span class="label">Defensible niche</span>
+    The Article 4 AI-literacy pack KnowBe4 doesn't ship and OneTrust doesn't sell — built for SMB staff, priced for MSP resale, evidenced for the EU auditor.
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <span class="stat-label">Total exhibitors</span>
+      <div class="stat">324</div>
+      <p style="margin:0; font-size:9pt; color:#777;">Deduped from advertised 325 (sponsor duplicates removed).</p>
+    </div>
+    <div class="card">
+      <span class="stat-label">Direct competitors</span>
+      <div class="stat">20</div>
+      <p style="margin:0; font-size:9pt; color:#777;">14 SAT + 6 AI-Gov platforms.</p>
+    </div>
+    <div class="card">
+      <span class="stat-label">Out-of-scope adjacents</span>
+      <div class="stat">~250</div>
+      <p style="margin:0; font-size:9pt; color:#777;">EDR · IAM · SIEM · pentest · cloud · backup — partner targets, not threats.</p>
+    </div>
+    <div class="card">
+      <span class="stat-label">Days to show</span>
+      <div class="stat">7</div>
+      <p style="margin:0; font-size:9pt; color:#777;">3-4 June 2026 · ExCeL London. Pre-show outreach window closing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── TAXONOMY ── -->
+<section class="section page-break">
+  <h2>1 · Exhibitor taxonomy — 324 stands across 12 categories</h2>
+  <table>
+    <thead><tr><th>#</th><th>Category</th><th>Count</th><th>Sample names</th><th>Overlap</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Security Awareness Training (SAT)</td><td>~14</td><td>KnowBe4 · MetaCompliance · CybSafe · SucceedLEARN · VIVIDA · Redflags · PhishRod · Adaptive Security · Hornetsecurity · Immersive · TryHackMe · Antisyphon · SANS · SecureFlag</td><td><strong>DIRECT</strong> — core competitive zone</td></tr>
+      <tr><td>2</td><td>AI Governance / AI-GRC</td><td>~6</td><td>Securiti AI · OneTrust · Concentric AI · Diligent · Compyl · Sprinto (AI module)</td><td><strong>DIRECT</strong> but enterprise-shaped</td></tr>
+      <tr><td>3</td><td>AI model security / red-team</td><td>~7</td><td>Mindgard · DeepKeep · Validaitor · NeuralTrust · Noma · Horizon 3 AI · FireTail</td><td>Adjacent — out-of-scope by design</td></tr>
+      <tr><td>4</td><td>AI-aware DLP / prompt-filter</td><td>~7</td><td>Harmonic · LayerX · Cyberhaven · Metomic · Push · Island · Menlo</td><td>Adjacent — referral partners</td></tr>
+      <tr><td>5</td><td>Deepfake / impersonation / voice</td><td>~4</td><td>Doppel · Memcyco · Resemble AI · Abnormal AI</td><td>Module 6 content · referral partners</td></tr>
+      <tr><td>6</td><td>AI-powered SOC analyst</td><td>~6</td><td>Dropzone ai · Qevlar AI · Radiant · Aurigin · Airia · Darktrace</td><td>Out-of-scope · not a competitor</td></tr>
+      <tr><td>7</td><td>GRC / vendor-risk / TPRM</td><td>~22</td><td>Vanta · Sprinto · OneTrust · Risk Ledger · SecurityScorecard · UpGuard · Panorays · Cybervadis · VENDICT · Avertro · FAIR · Setyl · Plainsea · Privicore · Diligent</td><td>Adjacent — AUP + vendor questionnaire intersects</td></tr>
+      <tr><td>8</td><td>Identity / IAM / PAM / MFA</td><td>~25</td><td>Okta · JumpCloud · SailPoint · Saviynt · Sectona · 1Password · Keeper · LastPass · Yubico · Feitian · Specops · Curity · IDEE · heylogin · XFA · Native · Riot · DigiCert · Keyfactor</td><td>Out-of-scope · bundling opportunity</td></tr>
+      <tr><td>9</td><td>Endpoint / EDR / MDR / RMM</td><td>~30</td><td>SentinelOne · Bitdefender · ThreatLocker · Huntress · Arctic Wolf · Acronis · Halcyon · NinjaOne · Tanium · Jamf · Hexnode · Action1 · N-able · Atera · ManageEngine · Patch My PC · Lansweeper · Ontinue · SecurityHQ · Bridewell · ThreatSpike</td><td>Out-of-scope · <strong>MSP-channel goldmine</strong></td></tr>
+      <tr><td>10</td><td>SIEM / SOAR / XDR / TI</td><td>~25</td><td>Exabeam · Gurucul · Sumologic · Senseon · Darktrace · BlinkOps · Torq · Tines · Swimlane · Cyware · Filigran · Recorded Future · Silobreaker · Dataminr · Intel 471 · Silent Push · SOCRadar</td><td>Out-of-scope</td></tr>
+      <tr><td>11</td><td>Pentest / VM / ASM / AppSec</td><td>~30</td><td>HackerOne · Bugcrowd · YesWeHack · Cobalt · Pentera · NetSPI · Pen Test Partners · Detectify · Hadrian · Outpost24 · watchTowr · Rapid7 · Qualys · XBOW · PlexTrac · Rootshell · Nucleus · AttackIQ · XM Cyber · runZero · REVERSINGLABS · Mend.io · Sonatype · Semgrep · SCANOSS · JFrog · Black Duck</td><td>Out-of-scope</td></tr>
+      <tr><td>12</td><td>Network · cloud · backup · distributors · associations · theatres</td><td>~50</td><td>Cloudflare · Cato · Akamai · Infoblox · Cohesity · Rubrik · Bytes · Distology · Northamber · Infinigate · ISC2 · ISACA · OWASP · IASME · UK Cyber Security Council · CSA · Frost & Sullivan · DSIT</td><td>Out-of-scope · channel + cert partners</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:9pt; color:#777;">Counts approximate; pavilions + theatres + organiser stand excluded. Several stands fit multiple categories — counted once at primary fit.</p>
+</section>
+
+<!-- ── DIRECT COMPETITORS — SAT ── -->
+<section class="section page-break">
+  <h2>2a · Direct competitors — Security Awareness Training</h2>
+  <table>
+    <thead><tr><th>Vendor</th><th>What they do</th><th>Where they overlap</th><th>Where they're weak vs us</th></tr></thead>
+    <tbody>
+      <tr><td><strong>KnowBe4</strong></td><td>World's largest SAT library + phishing sim</td><td>Has AI / deepfake modules in library</td><td>Generalist · US-NIST framing · phishing-led not AI-led · premium per-seat</td></tr>
+      <tr><td><strong>MetaCompliance</strong> (UK)</td><td>Compliance-first SAT + policy mgmt</td><td>GDPR + ISO comfort</td><td>Compliance-heavy · not AI-literacy-led · enterprise-shaped</td></tr>
+      <tr><td><strong>CybSafe</strong> (UK)</td><td>Behavioural-science SAT</td><td>UK-EU framing</td><td>No AI Act anchor · no MSP wholesale shape</td></tr>
+      <tr><td><strong>SucceedLEARN</strong></td><td>SAT + phishing</td><td>Generic SAT</td><td>No AI specialism · no standards map</td></tr>
+      <tr><td><strong>VIVIDA</strong></td><td>Security culture at scale</td><td>Culture programme</td><td>Enterprise-only · not staff-literacy</td></tr>
+      <tr><td><strong>ThinkCyber Redflags</strong></td><td>Real-time SAT nudges</td><td>UK · behavioural</td><td>No AI specialism · not MSP-priced</td></tr>
+      <tr><td><strong>PhishRod</strong></td><td>Phishing sim + SAT</td><td>Phishing-led</td><td>No AI · no EU AI Act</td></tr>
+      <tr><td><strong>Adaptive Security</strong><span class="warn">WATCH</span></td><td>AI-aware SAT — deepfake-led</td><td><strong>Closest in messaging</strong></td><td>US-positioned · premium · not EU-AI-Act-led · no MSP wholesale</td></tr>
+      <tr><td><strong>Hornetsecurity</strong> (Proofpoint)</td><td>Email security + SAT bundle</td><td>Cross-sells SAT</td><td>SAT is upsell · not the lede</td></tr>
+      <tr><td><strong>Immersive</strong></td><td>Cyber skills training</td><td>Hands-on technical</td><td>Practitioner audience · not SMB end-user</td></tr>
+      <tr><td><strong>TryHackMe</strong></td><td>Cyber skills labs</td><td>Hands-on technical</td><td>Practitioner audience</td></tr>
+      <tr><td><strong>SANS</strong></td><td>Gold-standard practitioner training</td><td>Cert authority</td><td>$$$$ · practitioner not staff · no EU AI Act course yet</td></tr>
+      <tr><td><strong>SecureFlag</strong></td><td>Secure-coding training</td><td>Developer audience</td><td>Wrong audience</td></tr>
+      <tr><td><strong>Antisyphon</strong></td><td>Pen-test training</td><td>Practitioner</td><td>Wrong audience</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>Pattern:</strong> Awareness vendors treat AI as a <em>module</em> inside a phishing-led library. <strong>Nobody leads with EU AI Act Article 4 literacy as the core product.</strong> Closest is Adaptive Security — US, deepfake-led, premium. Differentiator window stays open.
+  </div>
+</section>
+
+<!-- ── DIRECT COMPETITORS — AI-GOV ── -->
+<section class="section">
+  <h2>2b · Direct competitors — AI Governance platforms</h2>
+  <table>
+    <thead><tr><th>Vendor</th><th>What they do</th><th>Where they overlap</th><th>Where they're weak vs us</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Securiti AI</strong></td><td>Data + AI governance platform</td><td>EU AI Act module</td><td>Enterprise platform sale ($50k+) · not literacy</td></tr>
+      <tr><td><strong>OneTrust</strong></td><td>Privacy + AI Governance suite</td><td>Adds AI Gov to GRC</td><td>Enterprise legal-team buyer · not staff training</td></tr>
+      <tr><td><strong>Concentric AI</strong></td><td>AI-powered data security</td><td>Shadow-AI detection</td><td>Technical · not human-layer</td></tr>
+      <tr><td><strong>Diligent</strong></td><td>Board-level GRC + AI risk</td><td>Board reporting</td><td>Boardroom audience</td></tr>
+      <tr><td><strong>Compyl · Sprinto · Vanta</strong></td><td>ISO 27001 / SOC 2 automation</td><td>AI Gov modules added</td><td>Automates audit evidence · not literacy</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>Pattern:</strong> AI-Governance vendors sell <em>policy engines</em> to <em>legal / compliance teams</em> at <em>enterprise prices</em>. <strong>Nobody delivers AI literacy training to SMB staff at MSP-friendly price points.</strong>
+  </div>
+</section>
+
+<!-- ── GAP ANALYSIS ── -->
+<section class="section page-break">
+  <h2>3 · Coverage gap analysis</h2>
+
+  <h3>3a · Where competitors have something we don't</h3>
+  <table>
+    <thead><tr><th>Gap</th><th>Owned by</th><th>Our position</th></tr></thead>
+    <tbody>
+      <tr><td>Live phishing simulation engine</td><td>KnowBe4 · PhishRod · Sublime · Abnormal</td><td>Have content · no simulator. Out of scope · partner play</td></tr>
+      <tr><td>Per-seat LMS + completion reporting at enterprise scale</td><td>KnowBe4 · MetaCompliance · Immersive</td><td>Static HTML today · Pro Cert tier closes for individuals · SCORM pack on roadmap closes for enterprise</td></tr>
+      <tr><td>AI model red-team / DAST-for-LLM</td><td>Mindgard · DeepKeep · Validaitor · NeuralTrust</td><td><strong>Deliberately out of scope</strong> · wrong audience</td></tr>
+      <tr><td>Technical DLP enforcement on AI prompts</td><td>Harmonic · LayerX · Cyberhaven · Metomic</td><td>Out of scope · we teach behaviour, they enforce it · complementary</td></tr>
+      <tr><td>AI policy automation depth</td><td>OneTrust · Diligent</td><td>Partially covered via AUP template · enterprise-policy depth deliberately not built</td></tr>
+      <tr><td>Deepfake simulation</td><td>Adaptive Security</td><td>Module 6 + 11 teach principle · no simulator · partner play</td></tr>
+    </tbody>
+  </table>
+
+  <h3>3b · Where we have something competitors don't (or downplay)</h3>
+  <table>
+    <thead><tr><th>Differentiator</th><th>Why it holds</th></tr></thead>
+    <tbody>
+      <tr><td><strong>EU AI Act Article 4 literacy as the lede</strong></td><td>Art 4 entered force 2 Feb 2025 · obligation on every deployer · nobody at Infosec Europe leads with it · Adaptive = deepfake · KnowBe4 = phishing · OneTrust = policy</td></tr>
+      <tr><td><strong>EU-first plain-English standards map</strong> (EU AI Act + GDPR + ISO 42001 + ISO 27001 + NIST AI RMF + OWASP LLM Top 10)</td><td>Most SAT vendors stay US-NIST · AI-Gov vendors stay enterprise-policy · free <code>/standards-map.html</code> aimed at auditor is uncommon</td></tr>
+      <tr><td><strong>Non-technical SMB framing for AI specifically</strong></td><td>SANS / Immersive / TryHackMe = practitioner · KnowBe4 = generalist · we are the only "AI specifically" awareness course aimed at SMB end-user staff member</td></tr>
+      <tr><td><strong>Free core + public DOCTRINE.md + citation bibliography + anti-scrape verification log</strong></td><td>Nobody else publishes governance posture publicly · audit-readiness signal differentiates on trust</td></tr>
+      <tr><td><strong>MSP-resellable shape</strong> · £499 / £1,499 / £3-5k tiers · revenue-share · Founding Partner programme</td><td>KnowBe4 has channel but premium · nobody offers SMB-priced AI-literacy + AI-policy bundle MSPs can resell</td></tr>
+      <tr><td><strong>Layered AI-crawler policy</strong> (training-blocked · citation-allowed)</td><td>Cited by ChatGPT / Claude / Perplexity for "EU AI Act SMB literacy" without feeding training corpora · distribution wedge</td></tr>
+      <tr><td><strong>Article 4 + DPIA + FRIA scoping in single deliverable</strong></td><td>DPO track does this · OneTrust does it in $50k+ platform</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ── NICHE ── -->
+<section class="section page-break">
+  <h2>4 · The defensible niche</h2>
+
+  <div class="wedge">
+    <span class="label">One-line wedge</span>
+    The Article 4 AI-literacy pack KnowBe4 doesn't ship and OneTrust doesn't sell — built for SMB staff, priced for MSP resale, evidenced for the EU auditor.
+  </div>
+
+  <p><strong>Three reasons it holds against the 20 direct competitors at Infosec Europe:</strong></p>
+
+  <ol>
+    <li><strong>Regulatory anchor with a date.</strong> EU AI Act Article 4 (literacy obligation) entered force 2 February 2025. Every deployer — SMB included — must demonstrate it. No exhibitor leads with this. We do.</li>
+    <li><strong>Audience nobody serves end-to-end.</strong> SAT vendors serve generalist staff (phishing-led). AI-Gov vendors serve enterprise legal teams. Model-security vendors serve MLOps. <strong>SMB end-user · learning AI specifically · with EU framing — nobody owns it.</strong></li>
+    <li><strong>Price + channel shape no incumbent can match without cannibalising.</strong> KnowBe4 cannot drop to £499/mo wholesale without nuking enterprise margin. OneTrust cannot strip down to staff literacy without diluting platform narrative. Bottom-of-market AI-literacy slot is structurally open.</li>
+  </ol>
+</section>
+
+<!-- ── PARTNERS ── -->
+<section class="section page-break">
+  <h2>5 · Partner targets at Infosec Europe</h2>
+  <p>Stands worth a 15-min pre-show conversation or in-person walk-up. Referral · channel · co-sell, not competitive.</p>
+  <table>
+    <thead><tr><th>Partner type</th><th>Specific stands</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td><strong>MSP-channel tooling</strong></td><td>N-able · NinjaOne · Atera · ManageEngine · ThreatLocker · Huntress · Action1 · Admin By Request</td><td>Their MSP partner directories are our distribution · AI Safe@Work sits on the menu next to RMM + patching</td></tr>
+      <tr><td><strong>UK / EU distributors</strong></td><td>Bytes · Distology · QBS Software · Northamber · Infinigate · Softwerx</td><td>White-label / wholesale route to MSPs at scale</td></tr>
+      <tr><td><strong>GRC + TPRM platforms</strong></td><td>Vanta · Sprinto · Compyl · OneTrust · Risk Ledger · UpGuard · Setyl · Plainsea</td><td>Plug the "AI literacy evidence" gap auditors ask about · they get the artefact · we get the lead</td></tr>
+      <tr><td><strong>Identity bundlers</strong></td><td>1Password · Keeper · LastPass · Yubico · JumpCloud</td><td>Bundle AI literacy with password / MFA training in a single SMB offer</td></tr>
+      <tr><td><strong>AI-policy adjacents</strong></td><td>OneTrust · Diligent · Concentric AI · Securiti</td><td>Refer us their staff-literacy ask · we refer them enterprise-platform deals</td></tr>
+      <tr><td><strong>Insurance / BC adjacents</strong></td><td>Resilience and Cyber Risk · FAIR Institute · KPMG CRI</td><td>Cyber-insurance discount triggers ride literacy evidence</td></tr>
+      <tr><td><strong>UK regulatory + cert</strong></td><td>IASME · UK Cyber Security Council · Cloud Security Alliance · ISC2 · ISACA · CIISec</td><td>CPD credit + Cyber Essentials adjacency · credibility ladder</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ── WATCHLIST + ACTIONS ── -->
+<section class="section page-break">
+  <h2>6 · Competitor watchlist — post-show monitoring</h2>
+  <table>
+    <thead><tr><th>Vendor</th><th>Watch for</th><th>Mitigation if they move</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Adaptive Security</strong><span class="warn">PRIMARY</span></td><td>Pivots from US-deepfake to EU-AI-Act framing</td><td>Lock in EU-first SEO + MSP partner ratchet before Q3</td></tr>
+      <tr><td><strong>CybSafe</strong></td><td>Adds AI module to behavioural-SAT library</td><td>Ship standards-map deeper + Qualiopi cert</td></tr>
+      <tr><td><strong>KnowBe4</strong></td><td>Launches dedicated "AI Act" course inside platform</td><td>Ride MSP wholesale + audit-pack transparency · KnowBe4 won't price-match channel</td></tr>
+      <tr><td><strong>MetaCompliance</strong></td><td>Launches AI Act compliance pack</td><td>Beat on plain-English + free core + citation transparency</td></tr>
+      <tr><td><strong>OneTrust</strong></td><td>Bundles a staff-literacy module into AI Governance</td><td>OneTrust won't ship MSP-friendly · partner instead</td></tr>
+      <tr><td><strong>Securiti AI · Concentric</strong></td><td>Adds awareness front-end to data platform</td><td>Same — partner not compete</td></tr>
+    </tbody>
+  </table>
+
+  <h2>7 · Actions</h2>
+  <table>
+    <thead><tr><th>#</th><th>Action</th><th>Owner</th><th>Due</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Reframe homepage lede to lead with <strong>"EU AI Act Article 4 literacy, plain English, MSP-delivered"</strong> · keep current AI-Gov framing as secondary</td><td>Founder</td><td>2026-06-15</td></tr>
+      <tr><td>2</td><td>Add <code>/article-4.html</code> deep-link page citing Article 4 verbatim + plain-English summary + 5-minute compliance proof</td><td>Founder</td><td>2026-06-30</td></tr>
+      <tr><td>3</td><td>Pre-show outreach to top 8 partner targets (Vanta · Sprinto · N-able · NinjaOne · ThreatLocker · Huntress · 1Password · Yubico) with one-pager + Founding MSP Partner deck</td><td>Founder</td><td>2026-06-03 (pre-show)</td></tr>
+      <tr><td>4</td><td>Visit Infosec Europe in person (3-4 June 2026, ExCeL London) · target 14 SAT stands + 6 AI-Gov stands to confirm positioning gaps · collect collateral for competitive log</td><td>Founder</td><td>2026-06-04</td></tr>
+      <tr><td>5</td><td>Add "Adaptive Security watchlist" entry to <code>.audit/market/competitor-watchlist.md</code> (new file)</td><td>Founder</td><td>2026-06-15</td></tr>
+      <tr><td>6</td><td>Update DOCTRINE.md § Position-wedge to canonicalise Article 4 as the regulatory anchor</td><td>Founder</td><td>2026-06-15</td></tr>
+    </tbody>
+  </table>
+
+  <div class="foot-meta">
+    <p><strong>SOURCE</strong> Infosecurity Europe exhibitor directory · scraped 2026-05-27 via Playwright MCP · 324 dedupe stands</p>
+    <p style="margin-top:2mm;"><strong>CANONICAL</strong> .audit/market/infosec-europe-2026-cross-reference.md · synced to Obsidian agentic-os vault</p>
+    <p style="margin-top:2mm;"><strong>REFRESH</strong> annual (post-show 2026 · pre-show 2027) · or sooner if Adaptive Security shifts EU positioning</p>
+    <p style="margin-top:2mm;"><strong>SIGN-OFF</strong> Founder · 2026-05-27</p>
+  </div>
+</section>
+
+</body>
+</html>

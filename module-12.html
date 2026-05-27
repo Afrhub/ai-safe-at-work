@@ -21,7 +21,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/style.css?v=2" />
+<link rel="stylesheet" href="assets/quiz.css?v=1" />
 <script defer src="assets/cinema.js?v=2"></script>
+<script defer src="assets/quiz.js?v=1"></script>
 <style>
 .standard-card {
   background: rgba(10,10,16,0.9);
@@ -340,6 +342,149 @@
       </ul>
     </div>
   </div>
+
+  <script type="application/json" id="quiz-data">
+  {
+    "module": 12,
+    "passThreshold": 8,
+    "quizTitle": "Test your <em>understanding</em>.",
+    "quizLede": "Ten questions drawn only from the four standard-cards and the 'how they fit together' section above. Pass mark 8 out of 10.",
+    "questions": [
+      {
+        "q": "What is the difference between a regulation and a standard, per Module 12?",
+        "options": [
+          "A regulation is law (must comply, with fines for non-compliance); a standard is a voluntary framework (you can be certified against it but there is no fine for not following it)",
+          "A regulation is shorter than a standard",
+          "A regulation is American; a standard is European",
+          "A regulation costs money; a standard is free",
+          "A regulation has more vowels"
+        ],
+        "correct": 0,
+        "why": "Body: <em>GDPR and the EU AI Act are regulations: laws. … ISO 27001 and ISO 42001 are standards: voluntary frameworks.</em>",
+        "cite": "Regulation vs. standard"
+      },
+      {
+        "q": "What is the maximum GDPR fine?",
+        "options": [
+          "£1 million flat",
+          "€20 million or 4% of annual global turnover, whichever is higher",
+          "€100,000 per incident",
+          "The cost of one Apple keyboard, exactly",
+          "A strongly-worded letter from the Queen"
+        ],
+        "correct": 1,
+        "why": "Body: <em>€20 million or 4% of annual global turnover, whichever is higher.</em>",
+        "cite": "GDPR"
+      },
+      {
+        "q": "What is the maximum EU AI Act fine for the most serious breaches (prohibited AI practices)?",
+        "options": [
+          "€1 million",
+          "€10 million or 2% of turnover",
+          "€35 million or 7% of annual global turnover, whichever is higher",
+          "€100 million flat",
+          "Your soul, plus shipping"
+        ],
+        "correct": 2,
+        "why": "Body: <em>€35 million or 7% of annual global turnover, whichever is higher (for the most serious breaches — prohibited AI practices).</em>",
+        "cite": "EU AI Act"
+      },
+      {
+        "q": "Which is NOT one of the EU AI Act's four risk tiers?",
+        "options": [
+          "Unacceptable risk (banned outright)",
+          "High risk (heavy obligations)",
+          "Limited risk (transparency obligations only)",
+          "Negligible risk requiring an Act of Parliament to deploy",
+          "Minimal risk (most AI use, no specific obligations)"
+        ],
+        "correct": 3,
+        "why": "Body: the four tiers are <em>Unacceptable risk, High risk, Limited risk, Minimal risk.</em> 'Negligible risk requiring an Act of Parliament' is invented.",
+        "cite": "The four-tier risk framework"
+      },
+      {
+        "q": "Which ISO 27001:2022 control covers acceptable use of information and assets — where your AI policy lives?",
+        "options": [
+          "A.5.13",
+          "A.5.23",
+          "A.5.34",
+          "A.6.3",
+          "A.5.10"
+        ],
+        "correct": 4,
+        "why": "Body: <em>A.5.10 — acceptable use of information and assets. Your AI policy lives under this.</em>",
+        "cite": "Annex A controls that come up most in AI use"
+      },
+      {
+        "q": "When was ISO/IEC 42001 published?",
+        "options": [
+          "December 2023",
+          "January 2018",
+          "August 2024",
+          "February 2025",
+          "Sometime in the Bronze Age"
+        ],
+        "correct": 0,
+        "why": "Body: <em>Standard · Voluntary · Published December 2023.</em>",
+        "cite": "ISO/IEC 42001:2023"
+      },
+      {
+        "q": "ISO/IEC 42001:2023 is deliberately structured to integrate with which other standard?",
+        "options": [
+          "ISO 9001",
+          "ISO/IEC 27001 and other 'management system standards'",
+          "SOC 2",
+          "NIST AI RMF",
+          "The ISO of being nice to people"
+        ],
+        "correct": 1,
+        "why": "Body: <em>Deliberately structured to integrate with ISO 27001 and other 'management system standards'.</em>",
+        "cite": "ISO/IEC 42001:2023"
+      },
+      {
+        "q": "Per the 'how they fit together' compare, what layer does ISO 27001 cover?",
+        "options": [
+          "The data layer",
+          "The use-case layer",
+          "The security management layer — how to organise yourself to protect information generally",
+          "The hardware layer",
+          "The vibes layer"
+        ],
+        "correct": 2,
+        "why": "Body, 'how they fit together' compare-cell for ISO 27001: <em>How to organise yourself to protect information generally. The security management layer.</em>",
+        "cite": "How they fit together"
+      },
+      {
+        "q": "Which US framework does Module 12 mention as NIST's voluntary AI framework?",
+        "options": [
+          "ISO 42001 USA",
+          "FedRAMP AI",
+          "FISMA AI",
+          "NIST AI Risk Management Framework (AI RMF 1.0)",
+          "The Pentagon's Big AI Book"
+        ],
+        "correct": 3,
+        "why": "Body: <em>NIST AI Risk Management Framework (AI RMF 1.0) — the US National Institute of Standards and Technology's voluntary framework.</em>",
+        "cite": "Other frameworks worth knowing exist"
+      },
+      {
+        "q": "Which EU-specific financial-services regulation does Module 12 mention as sitting on top of everything in the course?",
+        "options": [
+          "MiFID II",
+          "PSD2",
+          "Basel III",
+          "AML6",
+          "DORA (Digital Operational Resilience Act)"
+        ],
+        "correct": 4,
+        "why": "Body: <em>DORA (Digital Operational Resilience Act) for financial services in the EU.</em>",
+        "cite": "Other frameworks worth knowing exist"
+      }
+    ]
+  }
+  </script>
+
+  <div id="quiz-mount"></div>
 </main>
 
 <nav class="module-bottom-nav">

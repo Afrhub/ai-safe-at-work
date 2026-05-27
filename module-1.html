@@ -21,7 +21,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/style.css?v=2" />
+<link rel="stylesheet" href="assets/quiz.css?v=1" />
 <script defer src="assets/cinema.js?v=2"></script>
+<script defer src="assets/quiz.js?v=1"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -172,6 +174,149 @@
       </ol>
     </div>
   </div>
+
+  <script type="application/json" id="quiz-data">
+  {
+    "module": 1,
+    "passThreshold": 8,
+    "quizTitle": "Test your <em>understanding</em>.",
+    "quizLede": "Ten quick questions drawn only from the three stories above and the standards callout. Pass mark 8 out of 10. Retake as many times as you like.",
+    "questions": [
+      {
+        "q": "In Story one, what task was the intern asked to do with the customer spreadsheet?",
+        "options": [
+          "Deduplicate it, then sort by region",
+          "Translate it into French for an EU office",
+          "Convert it to a PDF for archiving",
+          "Export it as JSON for the engineering team",
+          "Burn it to a CD-ROM and post it to head office"
+        ],
+        "correct": 0,
+        "why": "The body says the intern pasted 40,000 rows into ChatGPT and asked it to <em>deduplicate, then sort by region</em>.",
+        "cite": "Story one: the helpful intern"
+      },
+      {
+        "q": "What was the eventual cost to the logistics company in Story one?",
+        "options": [
+          "A small fine, no further action",
+          "A regulator's letter, mandatory breach notification, twelve months of free identity-monitoring, and one lost enterprise contract",
+          "The company was shut down by the data protection authority",
+          "The intern had to personally pay back every affected customer",
+          "An email saying 'noted, please be more careful next time'"
+        ],
+        "correct": 1,
+        "why": "The module lists exactly these costs in the closing paragraph of Story one.",
+        "cite": "Story one: the helpful intern"
+      },
+      {
+        "q": "In Story two, how many fake case references did ChatGPT produce for the lawyer?",
+        "options": [
+          "Two",
+          "Four",
+          "Six",
+          "Twelve",
+          "Just one, but it was a real banger"
+        ],
+        "correct": 2,
+        "why": "Body: <em>six perfect-looking case references — names, years, court, holding</em>.",
+        "cite": "Story two: the lawyer who didn't read the citations"
+      },
+      {
+        "q": "Which case is named as the first famous example of fake AI-generated citations being filed in court?",
+        "options": [
+          "Brown v. Board of Education",
+          "Roe v. Wade",
+          "R v. ChatGPT",
+          "Mata v. Avianca",
+          "ChatGPT v. The Honourable Judge Reasonable"
+        ],
+        "correct": 3,
+        "why": "Body: <em>Mata v. Avianca was the first famous one. There have been many since.</em>",
+        "cite": "Story two: the lawyer who didn't read the citations"
+      },
+      {
+        "q": "In Story three, what role did the person who joined the deepfake video call have?",
+        "options": [
+          "Chief Technology Officer",
+          "HR business partner",
+          "Receptionist",
+          "Internal auditor",
+          "Accounts-payable clerk"
+        ],
+        "correct": 4,
+        "why": "Body: <em>An accounts-payable clerk at a Hong Kong company joins a video call with the CFO and three other senior leaders.</em>",
+        "cite": "Story three: the deepfake CEO"
+      },
+      {
+        "q": "Which real engineering firm is named as the company in Story three?",
+        "options": [
+          "Arup",
+          "Bechtel",
+          "Foster + Partners",
+          "Hyundai Engineering & Construction",
+          "ACME Buildy Things Ltd"
+        ],
+        "correct": 0,
+        "why": "Body: <em>This happened in February 2024 to Arup, a real engineering firm.</em>",
+        "cite": "Story three: the deepfake CEO"
+      },
+      {
+        "q": "The module groups AI risk into how many primary buckets, before the response layer?",
+        "options": [
+          "Two",
+          "Three — data you give the AI, output you trust, AI used against you",
+          "Five",
+          "Seven, one per day of the week",
+          "Just one, called 'vibes'"
+        ],
+        "correct": 1,
+        "why": "Body: <em>Risk falls into three buckets</em>, followed by the data-in, output-trust, and AI-against-you cards, with a fourth 'response layer' card.",
+        "cite": "What these stories have in common"
+      },
+      {
+        "q": "Which EU AI Act article requires that staff who interact with AI have an appropriate level of AI literacy?",
+        "options": [
+          "Article 1",
+          "Article 2",
+          "Article 4",
+          "Article 22",
+          "Article 99 of the bonus annex"
+        ],
+        "correct": 2,
+        "why": "Body: <em>The EU AI Act (Article 4) requires that employees who interact with AI systems have an appropriate level of AI literacy.</em>",
+        "cite": "Where the standards land"
+      },
+      {
+        "q": "Which GDPR article requires personal data to be processed lawfully, fairly, and transparently?",
+        "options": [
+          "Article 1",
+          "Article 6",
+          "Article 22",
+          "Article 5",
+          "Article 'pretty please'"
+        ],
+        "correct": 3,
+        "why": "Body: <em>GDPR Article 5 says you must process personal data 'lawfully, fairly, and in a transparent manner'.</em>",
+        "cite": "Where the standards land"
+      },
+      {
+        "q": "Per Module 1, which sentence is described as the most expensive in this whole field?",
+        "options": [
+          "'Trust me, I'm a senior engineer'",
+          "'Compliance never actually checks'",
+          "'It worked perfectly in the demo'",
+          "'I'll just paste it quickly'",
+          "'I was just trying to be efficient'"
+        ],
+        "correct": 4,
+        "why": "Body: the objectives list calls out <em>why 'I was just trying to be efficient' is the most expensive sentence in this whole field</em>.",
+        "cite": "By the end of this module, you'll"
+      }
+    ]
+  }
+  </script>
+
+  <div id="quiz-mount"></div>
 </main>
 
 <nav class="module-bottom-nav">

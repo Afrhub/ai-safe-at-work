@@ -21,7 +21,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/style.css?v=2" />
+<link rel="stylesheet" href="assets/quiz.css?v=1" />
+<link rel="stylesheet" href="assets/widgets.css?v=1" />
 <script defer src="assets/cinema.js?v=2"></script>
+<script defer src="assets/quiz.js?v=1"></script>
+<script defer src="assets/widgets.js?v=1"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -229,6 +233,164 @@
       <p><strong>GDPR Article 33</strong>: 72-hour breach notification to the supervisory authority. <strong>Article 34</strong>: notification to data subjects when the breach is likely to result in high risk to their rights. <strong>ISO/IEC 27001:2022 Annex A.5.24</strong>: information security incident planning and preparation. <strong>Annex A.5.25</strong>: assessment of and decision on information security events. <strong>Annex A.5.26</strong>: response to information security incidents. <strong>EU AI Act Article 73</strong>: providers must report serious incidents to authorities; <strong>Article 26(5)</strong>: deployers should monitor and, where relevant, inform their providers. <strong>ISO/IEC 42001:2023 Annex A.6.2.6</strong>: AI system operation and monitoring (incident handling sits in the lifecycle); <strong>A.9</strong>: use of AI systems including incident response by people with authority.</p>
     </div>
   </div>
+
+  <script type="application/json" id="quiz-data">
+  {
+    "module": 10,
+    "passThreshold": 8,
+    "quizTitle": "Test your <em>understanding</em>.",
+    "quizLede": "Ten questions drawn only from the four categories, the first-ten-minutes drill, and the standards callout above. Pass mark 8 out of 10.",
+    "widget": {
+      "type": "order",
+      "title": "Order the <em>72-hour clock</em>.",
+      "lede": "Six events from a real data-leak response. They are presented out of order. Use the arrow buttons to put them into the correct sequence, then check your work.",
+      "intro": "Scenario: a colleague pasted a customer spreadsheet into the free tier of ChatGPT this morning. You've just realised. Put the response in the right order — the breach clock under GDPR Article 33 is ticking.",
+      "events": [
+        { "label": "Stop the bleeding — pause whatever process is still sending more data, taking more actions, or sending more money." },
+        { "label": "Preserve evidence — screenshot the chat, keep the conversation, do not delete anything." },
+        { "label": "Tell your manager / IT / DPO with the one-sentence flag: 'I think we have an AI-related incident — can we talk in five minutes?'" },
+        { "label": "Write down what happened in five plain-language lines, while it's fresh." },
+        { "label": "DPO assesses + notifies the supervisory authority (ICO / CNIL / etc.) within 72 hours under GDPR Article 33." },
+        { "label": "After the dust settles: short written record into the AI-use log + one process change + no-blame culture so the next incident is reported just as fast." }
+      ]
+    },
+    "questions": [
+      {
+        "q": "Module 10 lists four categories of 'something went wrong'. Which is the first?",
+        "options": [
+          "Data leak — you or someone on your team put sensitive data into an AI tool that shouldn't have received it",
+          "Network outage",
+          "Forgotten password",
+          "Email typo",
+          "Spilled coffee on the laptop"
+        ],
+        "correct": 0,
+        "why": "Body: Category 1 in the four-cell compare grid is <em>Data leak — You (or someone on your team) put sensitive data into an AI tool that shouldn't have received it.</em>",
+        "cite": "The four categories"
+      },
+      {
+        "q": "What is the FIRST step in 'the first ten minutes' for any category?",
+        "options": [
+          "Email everyone you've ever worked with",
+          "Stop the bleeding, if you can do it safely — pause whatever process is currently sending more data, taking more actions, or sending more money",
+          "Tweet about it",
+          "Delete the evidence",
+          "Pour yourself a stiff drink"
+        ],
+        "correct": 1,
+        "why": "Body: <em>Stop the bleeding, if you can do it safely. Pause whatever process is currently sending more data, taking more actions, or sending more money.</em>",
+        "cite": "The first ten minutes (any category)"
+      },
+      {
+        "q": "Which GDPR article specifies the 72-hour breach notification to the supervisory authority?",
+        "options": [
+          "Article 12",
+          "Article 22",
+          "Article 33",
+          "Article 34",
+          "Article 'wait til Monday'"
+        ],
+        "correct": 2,
+        "why": "Body: <em>Article 33 requires the controller to notify the supervisory authority … within 72 hours of becoming aware.</em>",
+        "cite": "Category 1 — data leak"
+      },
+      {
+        "q": "When does the 72-hour clock start under GDPR Article 33?",
+        "options": [
+          "From when the breach actually occurred",
+          "From when the regulator finds out",
+          "From when the customer complains",
+          "From when the business has reasonable awareness (not certainty) that a breach has occurred — three calendar days, not three working days, with holidays counting",
+          "From when somebody posts about it on LinkedIn"
+        ],
+        "correct": 3,
+        "why": "Body: <em>'Becoming aware' is from the moment the business … has a reasonable degree of certainty that a breach has occurred. The clock starts then. Three calendar days, not three working days. Holidays count.</em>",
+        "cite": "Category 1 — data leak"
+      },
+      {
+        "q": "Per Module 10, what is the WORST instinct after noticing a data leak?",
+        "options": [
+          "Calling your manager",
+          "Taking a screenshot",
+          "Talking to your DPO",
+          "Reading the vendor's incident report",
+          "Deleting the evidence — the reflex to delete the chat, the email, or the file is understandable but wrong; investigators will need it"
+        ],
+        "correct": 4,
+        "why": "Body: <em>Don't delete the evidence. The reflex to delete the chat, the email, the file is understandable. Don't.</em>",
+        "cite": "The first ten minutes (any category)"
+      },
+      {
+        "q": "If you've installed something that may be malicious, what does the module recommend?",
+        "options": [
+          "Assume the device is compromised — disconnect it from the network (turn off wifi, unplug cable) if you can do it safely, then call IT",
+          "Run another antivirus scan",
+          "Reinstall the OS yourself",
+          "Send the file to friends to see if they get the same problem",
+          "Light a candle for it"
+        ],
+        "correct": 0,
+        "why": "Body: <em>If you've installed something: disconnect the device from the network if you can do it safely (turn off Wi-Fi, unplug cable). Call IT.</em>",
+        "cite": "Category 3 — successful attack"
+      },
+      {
+        "q": "Per the 'clean incident note' template, what is the recommended subject line?",
+        "options": [
+          "'URGENT please read'",
+          "'Possible AI-related incident — needs review today'",
+          "'Quick question'",
+          "'Don't panic but…'",
+          "'I might be in trouble'"
+        ],
+        "correct": 1,
+        "why": "Body: <em>Subject: Possible AI-related incident — needs review today.</em>",
+        "cite": "A clean incident note"
+      },
+      {
+        "q": "Which UK number does the module suggest for reporting successful AI-powered attacks?",
+        "options": [
+          "999",
+          "111",
+          "Action Fraud — 0300 123 2040",
+          "The Samaritans",
+          "The Ghostbusters hotline"
+        ],
+        "correct": 2,
+        "why": "Body: <em>For UK businesses: report to Action Fraud (0300 123 2040).</em>",
+        "cite": "Category 3 — successful attack"
+      },
+      {
+        "q": "Per the 'after the dust settles' section, which is NOT one of the three required follow-ups?",
+        "options": [
+          "A short written record into the AI-use log and, if material, the business's incident register",
+          "One thing that changes — process, policy, tool tier, training, settings",
+          "No blame, no scapegoat",
+          "An immediate disciplinary process for the person who reported",
+          "None — all three above ARE required"
+        ],
+        "correct": 3,
+        "why": "Body: <em>No blame, no scapegoat. The point of incident response is to learn faster than the next incident happens. Cultures that punish the person who reports are cultures that don't get reports.</em>",
+        "cite": "After the dust settles"
+      },
+      {
+        "q": "Which ISO/IEC 42001:2023 Annex A control area covers AI system operation and monitoring (where incident handling sits in the lifecycle)?",
+        "options": [
+          "A.2",
+          "A.3",
+          "A.5",
+          "A.7",
+          "A.6.2.6"
+        ],
+        "correct": 4,
+        "why": "Body: <em>ISO/IEC 42001:2023 Annex A.6.2.6: AI system operation and monitoring (incident handling sits in the lifecycle).</em>",
+        "cite": "Where the standards land"
+      }
+    ]
+  }
+  </script>
+
+  <div id="widget-mount"></div>
+  <div id="quiz-mount"></div>
 </main>
 
 <nav class="module-bottom-nav">

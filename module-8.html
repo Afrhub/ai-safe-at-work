@@ -21,7 +21,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/style.css?v=2" />
+<link rel="stylesheet" href="assets/quiz.css?v=1" />
 <script defer src="assets/cinema.js?v=2"></script>
+<script defer src="assets/quiz.js?v=1"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -194,6 +196,149 @@
       <p><strong>EU AI Act Article 50</strong>: transparency for generative AI — providers must mark outputs as AI-generated where reasonably possible, and deployers using AI to produce "deepfakes" or text on matters of public interest must disclose. <strong>Article 53</strong>: providers of general-purpose AI models must publish a summary of training data used. <strong>Copyright Directive (EU) 2019/790, Articles 3 and 4</strong>: text-and-data-mining exception, including the right of rightholders to opt out — the legal basis many EU publishers are now using to forbid AI training on their content. <strong>ISO/IEC 42001:2023 Annex A.5</strong>: AI policies should cover intellectual property and licensing.</p>
     </div>
   </div>
+
+  <script type="application/json" id="quiz-data">
+  {
+    "module": 8,
+    "passThreshold": 8,
+    "quizTitle": "Test your <em>understanding</em>.",
+    "quizLede": "Ten questions drawn only from the input/output copyright rules, the lawsuits, the practical rules, and the standards callout above. Pass mark 8 out of 10.",
+    "questions": [
+      {
+        "q": "Module 8 separates AI copyright into two questions. What are they?",
+        "options": [
+          "Input copyright (when you feed copyrighted material into an AI) and output copyright (who owns what the AI produces)",
+          "Local copyright and international copyright",
+          "Soft copyright and hard copyright",
+          "Original copyright and derivative copyright",
+          "Old copyright and new copyright"
+        ],
+        "correct": 0,
+        "why": "Body: <em>AI and copyright is two separate problems people often confuse: input copyright … output copyright.</em>",
+        "cite": "Two copyright questions, not one"
+      },
+      {
+        "q": "What is the headline rule on output copyright in most jurisdictions in 2026?",
+        "options": [
+          "Whoever wrote the prompt owns the output",
+          "Fully AI-generated material with no significant human creative input cannot be copyrighted — it's in the public domain by default",
+          "The AI vendor owns the output",
+          "The first person to publish owns the output",
+          "The first user to post about it on Twitter owns it"
+        ],
+        "correct": 1,
+        "why": "Body: <em>fully AI-generated material with no significant human creative input cannot be copyrighted. It's in the public domain by default.</em>",
+        "cite": "Output — who owns what the AI makes"
+      },
+      {
+        "q": "Which authority confirmed the rule on AI-generated material and copyright in 2023?",
+        "options": [
+          "The European Court of Justice",
+          "The UK Supreme Court",
+          "The US Copyright Office",
+          "The Berne Convention secretariat",
+          "The Council of Elrond"
+        ],
+        "correct": 2,
+        "why": "Body: <em>This was confirmed by the US Copyright Office in 2023.</em>",
+        "cite": "Output — who owns what the AI makes"
+      },
+      {
+        "q": "Which is listed as one of the ongoing copyright lawsuits the module flags?",
+        "options": [
+          "Mata v. Avianca",
+          "Schrems II",
+          "Costeja González",
+          "The New York Times v. OpenAI and Microsoft",
+          "Apple v. The Beatles"
+        ],
+        "correct": 3,
+        "why": "Body: lists <em>The New York Times v. OpenAI and Microsoft — the NYT claims its articles were used to train models without permission.</em>",
+        "cite": "The ongoing lawsuits"
+      },
+      {
+        "q": "What do most major AI vendors' terms say about your output and infringement claims?",
+        "options": [
+          "The vendor takes full liability",
+          "The vendor will defend you in court at no cost",
+          "You and the vendor split damages equally",
+          "Indemnification is included as standard",
+          "You keep ownership of the output, but you indemnify the vendor against any third-party claim arising from your use"
+        ],
+        "correct": 4,
+        "why": "Body: <em>'you keep ownership of your output' but also … 'you indemnify the vendor against any third-party claim arising from your use'.</em>",
+        "cite": "3. The vendor's terms"
+      },
+      {
+        "q": "Module 8 names three risks that remain even when you 'own' the output. Which set is correct?",
+        "options": [
+          "Substantial similarity to training data, the right of publicity or personality of a real person, and the vendor's terms",
+          "Inflation, deflation, and recession",
+          "Server downtime, billing errors, account suspension",
+          "Bad reviews on social media",
+          "Mercury, Venus, and Mars all being in retrograde"
+        ],
+        "correct": 0,
+        "why": "Body: the three subheadings under 'Is the output safe to publish?' name exactly these three risks.",
+        "cite": "Is the output safe to publish?"
+      },
+      {
+        "q": "Which EU directive contains the text-and-data-mining exception with a rightholder opt-out — the legal basis many EU publishers use to forbid AI training on their content?",
+        "options": [
+          "GDPR Article 4",
+          "Copyright Directive (EU) 2019/790, Articles 3 and 4",
+          "The Digital Services Act",
+          "The Digital Markets Act",
+          "The Cookie Directive"
+        ],
+        "correct": 1,
+        "why": "Body: <em>Copyright Directive (EU) 2019/790, Articles 3 and 4: text-and-data-mining exception, including the right of rightholders to opt out.</em>",
+        "cite": "Where the standards land"
+      },
+      {
+        "q": "What does EU AI Act Article 50 cover for generative AI?",
+        "options": [
+          "Maximum fines for AI vendors",
+          "Mandatory disclosure of training data sets",
+          "Transparency — providers must mark outputs as AI-generated where reasonably possible; deployers using AI to produce deepfakes or text on matters of public interest must disclose",
+          "Mandatory open-sourcing",
+          "An obligation to send the user a thank-you note"
+        ],
+        "correct": 2,
+        "why": "Body: <em>EU AI Act Article 50: transparency for generative AI — providers must mark outputs as AI-generated where reasonably possible.</em>",
+        "cite": "Where the standards land"
+      },
+      {
+        "q": "What does the module recommend you treat purely AI-generated content as?",
+        "options": [
+          "Your own original work",
+          "Protected by trade-secret law",
+          "Owned by the AI vendor",
+          "Public domain — don't put a copyright notice on something you didn't actually author",
+          "Cursed — touch with gloves only"
+        ],
+        "correct": 3,
+        "why": "Body: <em>Treat purely AI-generated content as public domain. Don't put a copyright notice on something you didn't actually author.</em>",
+        "cite": "A safer use of AI output"
+      },
+      {
+        "q": "Why has 'AI does all our blogging' weakened as an economic case?",
+        "options": [
+          "Because AI got more expensive",
+          "Because internet users stopped reading blogs",
+          "Because SEO experts boycotted it",
+          "Because new laws banned it",
+          "Because pure AI content has no copyright protection (competitors can lift it whole), search engines often derank it in practice, and transparency expectations are rising"
+        ],
+        "correct": 4,
+        "why": "Body: the three bullets under 'My business uses AI to write our blog posts' name exactly these three points.",
+        "cite": "'My business uses AI to write our blog posts'"
+      }
+    ]
+  }
+  </script>
+
+  <div id="quiz-mount"></div>
 </main>
 
 <nav class="module-bottom-nav">
