@@ -90,7 +90,7 @@
 <main>
   <p class="eyebrow">Module 02 · 8 min read</p>
   <h1 class="page-title">What AI tools <em>do</em> with what you type.</h1>
-  <p class="lede">When you paste text into a chatbot, you're not sending it to a robot in a vacuum. You're sending it to a company, on a server, in a country, governed by terms most people never read. Here's what's actually happening.</p>
+  <p class="lede">Pasting into a chatbot sends your words to a company, on a server, in a country, under terms most people never read. This module names what each of those four pieces actually is.</p>
 
   <div class="objectives">
     <div class="objectives-title">By the end of this module, you'll</div>
@@ -110,14 +110,14 @@
     <li><strong>Is it used to train future models?</strong> (Yes by default on many free tiers. No by default on most enterprise tiers.)</li>
     <li><strong>Who at the vendor can read it?</strong> (Engineers debugging. Trust-and-safety reviewers. No one. It varies.)</li>
   </ol>
-  <p>Every major vendor publishes the answers. The answers differ by tier. The answers differ between the same vendor's consumer and business products. The answers occasionally change. Treat this as a thing you check twice a year, not once forever.</p>
+  <p>Every major vendor publishes the answers. They differ by tier. They differ between the same vendor's consumer and business products. They change. Check them twice a year, not once forever.</p>
 
   <h2>The tier ladder</h2>
   <p>From least protected to most:</p>
 
   <h3>1. Free consumer tier</h3>
   <p>Examples: chatgpt.com without a subscription, claude.ai without a paid plan, the free Gemini app, Microsoft Copilot's free web version, Perplexity free.</p>
-  <p>Defaults that often surprise people:</p>
+  <p>Default behaviour that surprises most first-time users:</p>
   <ul>
     <li>Your conversations may be used to train future models, unless you've explicitly opted out in settings.</li>
     <li>Conversations are typically retained for at least 30 days, often longer, even if you "delete" them — the deletion frequently means "removed from your view", not "removed from the vendor's servers".</li>
@@ -129,7 +129,7 @@
     <span class="callout-icon">!</span>
     <div>
       <div class="callout-title">The "free for work" mistake</div>
-      <p>Most data leaks at small and medium businesses don't happen because someone hacked the AI vendor. They happen because someone used a free consumer tier for work — pasted client data, contract drafts, salary information, source code — and that data is now sitting on a server the business has no contract with, no audit rights over, and possibly no legal jurisdiction over.</p>
+      <p>Most data leaks at small and medium businesses come from staff pasting work into a free consumer AI tool: client data, contract drafts, salary information, source code. The data then sits on a server the business has no contract with, no audit rights over, and possibly no legal jurisdiction over.</p>
     </div>
   </div>
 
@@ -141,7 +141,7 @@
   <h3>3. Team / Business tier</h3>
   <p>Examples: ChatGPT Team, ChatGPT Business, Claude for Work, Microsoft 365 Copilot (with Microsoft 365 Business), Google Workspace's Gemini, Notion AI Business.</p>
   <p>This is where the legal posture shifts. Your employer has a Data Processing Agreement (DPA) with the vendor. Training-on-customer-data is usually <strong>off by default</strong>. Retention is configurable. There's an admin console where your IT or security team can set rules.</p>
-  <p>If your business has procured one of these for the team, use it. If your business hasn't, this is the conversation worth having before pasting work data into anything.</p>
+  <p>If your business has procured one of these for the team, use it. If your business hasn't, raise the procurement question with your manager before pasting work data into anything.</p>
 
   <h3>4. Enterprise tier</h3>
   <p>Examples: ChatGPT Enterprise, Microsoft 365 Copilot in enterprise tenants, Claude Enterprise, Azure OpenAI Service, AWS Bedrock, Google Cloud Vertex AI.</p>
@@ -151,9 +151,9 @@
   <hr class="section-divider" />
 
   <h2>"Trained on" — what it actually means</h2>
-  <p>When a vendor says "we may use your conversations to train future models", what they actually do varies, but the most worrying version is the simplest: your prompts and the model's responses become part of a giant dataset, that dataset is used to teach the next model, and there is no reliable technical way to make a model "forget" a specific piece of information once it's been baked in.</p>
-  <p>In practice, the risk isn't usually "the next ChatGPT will quote my client list verbatim". It's that <strong>the next ChatGPT will have absorbed your client list as one of millions of data points</strong>, and someone with the right kind of carefully-crafted prompt may be able to coax small fragments back out. The technical term is "training-data extraction attacks". They're real, they're published, they get more effective every year.</p>
-  <p>You can't fix this by deleting your conversation after it's been used for training. You fix it by not allowing it to be used for training in the first place.</p>
+  <p>When a vendor says "we may use your conversations to train future models", the worst-case version is the simplest. Your prompts and the model's responses join a giant dataset. That dataset trains the next model. No reliable technical method exists to make a model "forget" a specific piece of information once baked in.</p>
+  <p>The likely risk is not that the next ChatGPT quotes your client list back verbatim. It is that <strong>the next ChatGPT absorbs your client list as one of millions of data points</strong>, and someone with a carefully-crafted prompt can coax small fragments back out. The technical term is "training-data extraction attacks". They are real, they are published, they get more effective every year.</p>
+  <p>You cannot fix this by deleting the conversation later. You fix it by stopping the training opt-in before you paste.</p>
 
   <div class="callout do">
     <span class="callout-icon">✓</span>
@@ -165,13 +165,13 @@
         <li>Find "data controls" or "privacy" or "chat history &amp; training".</li>
         <li>Turn off any toggle that says "improve the model", "share with provider for training", "help us get better", or similar.</li>
       </ol>
-      <p>Do this once per tool. Re-check after major updates — vendors occasionally reset preferences.</p>
+      <p>Do this once per tool. Re-check after major vendor updates, since vendors sometimes reset preferences.</p>
     </div>
   </div>
 
   <h2>"Reviewed by humans" — what it actually means</h2>
-  <p>Most major AI vendors run trust-and-safety review programmes. A small fraction of conversations is sampled and reviewed by human reviewers — sometimes employees, sometimes contractors, sometimes overseas — to detect abuse, harmful content, model failures, and policy violations.</p>
-  <p>The probability your specific conversation gets reviewed is low. The point isn't that it's likely — it's that <strong>"no one will see this"</strong> is not a property the system gives you. If you'd be uncomfortable with a stranger reading a transcript of what you typed, don't type it into a tool where strangers can read transcripts of what you typed.</p>
+  <p>Most major AI vendors run trust-and-safety review programmes. They sample a small fraction of conversations and send them to human reviewers (sometimes employees, sometimes contractors, sometimes overseas) to detect abuse, harmful content, model failures and policy violations.</p>
+  <p>The chance your specific conversation gets reviewed is low. The point holds anyway: <strong>"no one will see this"</strong> is not a property the system gives you. If you would be uncomfortable with a stranger reading the transcript, do not type it into a tool where strangers can read transcripts.</p>
 
   <div class="callout note">
     <span class="callout-icon">i</span>
@@ -182,9 +182,9 @@
   </div>
 
   <h2>Where the data physically is</h2>
-  <p>For European businesses, this matters more than for most other reasons. GDPR has rules about transferring personal data outside the European Economic Area, and the rules have got tougher since the Schrems II court ruling in 2020.</p>
-  <p>In the consumer tiers of most major US AI vendors, your data goes to US servers. There are mechanisms (the EU-US Data Privacy Framework, Standard Contractual Clauses) that make this legal in many situations, but those mechanisms only protect <em>your business</em> if you've actually entered into them — which on a free tier, you haven't.</p>
-  <p>The enterprise tiers of most major vendors now offer EU-resident data processing. If your business handles European personal data and uses AI in any volume, this is one of the strongest arguments for paying for the enterprise tier.</p>
+  <p>European businesses face the toughest version of this question. GDPR governs personal-data transfers outside the European Economic Area, and the rules have got tougher since the Schrems II court ruling in 2020.</p>
+  <p>On the consumer tiers of most major US AI vendors, your data goes to US servers. Mechanisms exist (the EU-US Data Privacy Framework, Standard Contractual Clauses) that make this legal in many situations. Those mechanisms protect <em>your business</em> only if your business has signed up to them. On a free tier, your business has not.</p>
+  <p>Most major vendors now offer EU-resident data processing on their enterprise tier. If your business handles European personal data and uses AI in any volume, that is one of the strongest arguments for paying for the enterprise tier.</p>
 
   <div class="callout standard">
     <span class="callout-icon">§</span>
@@ -195,7 +195,7 @@
   </div>
 
   <h2>The takeaway</h2>
-  <p>"Is it OK to use AI for this?" almost always has the same answer: it depends on which tier of which tool, with which settings, on which data. Modules 3 and 4 turn that into a practical rule. For now, just internalise: <strong>the tier matters as much as the prompt.</strong></p>
+  <p>"Is it OK to use AI for this?" has the same answer most of the time: it depends on which tier of which tool, with which settings, on which data. Modules 3 and 4 turn that into a practical rule. Remember the single sentence for now: <strong>the tier matters as much as the prompt.</strong></p>
 
   <script type="application/json" id="quiz-data">
   {
