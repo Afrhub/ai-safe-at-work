@@ -137,8 +137,8 @@ Until closed, we cannot win a tender or be added to a corporate LMS.
 | # | Gap | Why it blocks procurement | Effort | Status |
 |---|---|---|---|---|
 | 1 | **Standards Map annex** — clause-to-module table (EU AI Act Art 4, ISO 42001 7.2 / A.4.5, ISO 27001 A.6.3) | First doc procurement asks for | 2 hr | TODO |
-| 2 | **Knowledge checks per module** (5 MCQ, stored in localStorage, score-exportable) | Audit-grade evidence of comprehension | 1 day | TODO |
-| 3 | **Completion certificate w/ unique ID + verifiable URL** | Audit trail | 1 day | TODO |
+| 2 | **Knowledge checks per module** (5 MCQ, stored in localStorage, score-exportable) | Audit-grade evidence of comprehension | 1 day | **DONE 2026-05-27** — 10 MCQs per module M1-M12 (120 total), 5 options each (balanced 0-4), sourced from body, cited back, localStorage `aisw-quiz-mN` |
+| 3 | **Completion certificate w/ unique ID + verifiable URL** | Audit trail | 1 day | **DONE 2026-05-27** (partial) — `cert.html` printable A4 landscape, ref ID `AISW-MNN-YYMMDD-XXXX`, reads localStorage. **Open**: central verification URL (deferred; would require backend; deterministic ID lets buyers reproduce verification by re-running the quiz). |
 | 4 | **SCORM 1.2 + xAPI export wrapper** | LMS deployment (Moodle, Workday, Cornerstone, 365 Learn) | 1 week | TODO |
 | 5 | **FR + DE translations** (EN done) | EU literacy obligation, member-state language | 2–4 wk per language | TODO |
 | 6 | **Role-based tracks** (board, manager, IC, DPO, dev) | Different roles → different obligations | 2–3 wk | TODO |
@@ -487,6 +487,7 @@ People-Also-Ask FAQ candidates (seed `FAQPage` schema): see audit doc.
 | AI | AUP for own staff | `.audit/ai/aup-own-staff.md` ✓ |
 | AI | AI training register | `.audit/ai/ai-training-register.md` ✓ |
 | AI | AI incident log | `.audit/ai/ai-incident-log.md` ✓ |
+| Course quality | Interactive widget audit | `.audit/course-quality/svg-audit.md` ✓ (added 2026-05-27 — per-module SVG decision log) |
 | Course quality | Citations bibliography | `.audit/course-quality/citations-bibliography.md` ✓ + public `citations.html` ✓ |
 | Course quality | Changelog | `.audit/course-quality/changelog.md` ✓ + public `changelog.html` ✓ |
 | Course quality | Refresh cadence | `.audit/course-quality/refresh-cadence.md` ✓ |
