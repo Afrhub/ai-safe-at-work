@@ -1,0 +1,2797 @@
+# MODULE 01
+# Why AI Governance Matters
+### Duration
+7–10 minutes
+### Learning Outcome
+By the end of this module, learners will:
+* understand why organisations are introducing AI governance,
+* recognise operational risks linked to unmanaged AI usage,
+* understand what “shadow AI” means,
+* and identify how everyday AI usage can create business exposure.
+---
+# Introduction
+## AI is already inside many organisations.
+Employees are increasingly using tools such as:
+* ChatGPT,
+* Microsoft Copilot,
+* Google Gemini,
+* Claude,
+* AI browser extensions,
+* transcription tools,
+* and AI-enabled SaaS platforms
+to:
+* write emails,
+* summarise meetings,
+* analyse information,
+* create content,
+* and improve productivity.
+In many cases, this adoption happens faster than:
+* governance,
+* training,
+* approval processes,
+* or operational oversight.
+This is commonly referred to as:
+## Shadow AI
+Meaning:
+> use of AI systems outside approved governance, procurement or security processes.
+---
+# Why This Matters
+AI can provide significant business benefits.
+However, unmanaged AI usage may also create:
+* confidential data exposure,
+* GDPR/privacy concerns,
+* intellectual property risks,
+* inaccurate outputs,
+* reputational damage,
+* supplier governance issues,
+* and operational risk.
+This course is designed to help employees:
+* use AI more safely,
+* recognise governance boundaries,
+* reduce operational risk,
+* and support responsible AI adoption.
+---
+# Real-World Scenario 1
+## “It was only for five minutes.”
+A sales employee uploads a customer pricing proposal into a public AI chatbot to:
+> “improve the wording before a meeting.”
+The document includes:
+* customer names,
+* pricing information,
+* and commercially sensitive details.
+The employee assumes:
+> “It’s harmless and temporary.”
+### Risks Created
+* confidentiality exposure
+* contractual concerns
+* customer trust issues
+* potential third-party retention
+* governance failures
+### Key Lesson
+Even well-intentioned AI usage may create business risk if employees do not understand:
+* where information goes,
+* what the platform retains,
+* and whether the tool is approved.
+---
+# Real-World Scenario 2
+## “The AI sounded confident.”
+A manager uses AI to summarise new employment legislation before updating internal policy.
+The output:
+* appears professional,
+* includes fabricated references,
+* and contains inaccurate legal guidance.
+The manager assumes:
+> “it looked correct.”
+### Risks Created
+* misinformation
+* poor operational decisions
+* compliance concerns
+* reputational damage
+### Key Lesson
+Generative AI systems generate outputs based on learned patterns and probabilities rather than verified factual reasoning.
+Human oversight remains essential.
+---
+# Real-World Scenario 3
+## “Nobody realised the plugin was using AI.”
+A browser extension used by the marketing team automatically sends webpage content to a third-party AI service for summarisation.
+No governance review has taken place.
+No one understands:
+* what data is processed,
+* where it is stored,
+* or whether the vendor uses submitted data for training purposes.
+### Risks Created
+* shadow AI usage
+* supplier governance failures
+* privacy concerns
+* unknown third-party processing
+### Key Lesson
+AI functionality increasingly exists inside:
+* browsers,
+* productivity tools,
+* SaaS platforms,
+* and collaboration software.
+Employees may use AI-enabled services without fully realising it.
+---
+# The Goal Of This Course
+This course is not designed to:
+* prevent innovation,
+* discourage productivity,
+* or block responsible AI usage.
+The objective is to help organisations:
+* adopt AI safely,
+* improve operational governance,
+* reduce avoidable risk,
+* and establish responsible AI usage practices.
+---
+# What You’ll Learn
+Over the next modules, you’ll learn:
+* what AI tools may do with submitted information,
+* what should not be entered into AI systems,
+* how to identify unsafe AI usage,
+* how to verify AI-generated outputs,
+* how AI-enabled scams are evolving,
+* and how governance and accountability apply to AI usage.
+You will also complete:
+* practical scenarios,
+* knowledge checks,
+* governance exercises,
+* and a final certification assessment.
+---
+# Quick Knowledge Check
+## Which of the following are examples of “shadow AI”?
+* Using an unapproved AI chatbot for work
+* Installing an AI browser extension without approval
+* Uploading company information into a personal AI account
+* Using AI-enabled SaaS tools without governance review
+### Correct Answer
+All of the above.
+---
+# Key Takeaways
+* AI usage is becoming widespread across organisations.
+* Unmanaged AI usage may create operational and governance risks.
+* AI governance supports safe adoption rather than blocking innovation.
+* Human oversight remains essential.
+* Every employee has a role in responsible AI usage.
+---
+# Module Completion Outcome
+You now understand:
+* why AI governance matters,
+* how shadow AI develops,
+* and why organisations are introducing operational controls around AI usage.
+Next module:
+## What AI Tools Actually Do With What You Type
+---
+# MODULE 02
+# What AI Tools Actually Do With What You Type
+### Duration
+8–12 minutes
+### Learning Outcome
+By the end of this module, learners will:
+* understand how generative AI systems process information,
+* recognise the difference between consumer and enterprise AI tools,
+* understand why some data should not be entered into unapproved AI systems,
+* and identify common misunderstandings around AI privacy and retention.
+---
+# Introduction
+## AI tools are not simply search engines.
+When information is entered into an AI system, it may be:
+* processed,
+* transmitted,
+* retained,
+* logged,
+* or reviewed
+depending on:
+* the provider,
+* account type,
+* organisational controls,
+* and platform settings.
+Different AI platforms operate in different ways.
+Understanding these differences is essential for safe AI usage.
+---
+# What Happens When You Type Into AI?
+When a prompt is submitted:
+1. Information is transmitted to the AI provider.
+2. The system processes the request using a large language model.
+3. A response is generated.
+4. Data handling depends on:
+* the platform,
+* governance settings,
+* contractual protections,
+* and organisational controls.
+Some AI systems may retain or process submitted data depending on:
+* platform configuration,
+* enterprise settings,
+* and account type.
+---
+# Consumer vs Enterprise AI
+## Consumer / Free AI Tools
+Examples:
+* free ChatGPT
+* personal Claude accounts
+* public Gemini apps
+* AI browser plugins
+* unapproved AI SaaS tools
+### Potential Risks
+* limited governance controls
+* unclear retention practices
+* personal account ownership
+* limited organisational oversight
+* uncertain data residency
+These tools should not be used for:
+* confidential company information,
+* regulated data,
+* customer records,
+* source code,
+* or commercially sensitive material
+unless explicitly approved by the organisation.
+---
+## Enterprise AI Platforms
+Examples:
+* ChatGPT Enterprise
+* Microsoft Copilot for M365
+* approved enterprise AI environments
+These platforms may provide:
+* stronger governance controls,
+* administrative oversight,
+* auditability,
+* contractual protections,
+* and improved compliance alignment.
+However:
+> organisations remain responsible for configuration, governance and oversight.
+Enterprise AI does not remove:
+* hallucination risk,
+* human error,
+* oversharing,
+* or governance failures.
+---
+# Real-World Scenario
+## “It was only meeting notes.”
+A project manager uploads internal meeting notes into a public AI chatbot to:
+> “summarise action points.”
+The notes contain:
+* customer names,
+* staffing discussions,
+* and commercially sensitive information.
+The employee assumes:
+> “nobody will see it.”
+### Risks Created
+* confidentiality concerns
+* customer trust issues
+* supplier governance exposure
+* operational governance failures
+### Key Lesson
+Information entered into unapproved AI systems may create unnecessary organisational risk.
+---
+# Common Misunderstandings
+## “The AI forgets immediately.”
+Not necessarily.
+Some systems may retain:
+* prompts,
+* logs,
+* or conversation history
+depending on:
+* settings,
+* account type,
+* and platform configuration.
+---
+## “Deleting a chat removes all data.”
+Not always.
+Removing a conversation from the user interface does not necessarily mean:
+* immediate deletion,
+* backend deletion,
+* or removal from logs.
+---
+## “Popular AI tools must be safe.”
+Popularity does not equal governance approval.
+Widely used AI tools may still be:
+* consumer-focused,
+* unmanaged,
+* or unsuitable for regulated business usage.
+---
+## “Enterprise AI removes all risk.”
+Incorrect.
+Enterprise AI may reduce certain risks through stronger governance controls, but organisations still remain responsible for:
+* oversight,
+* permissions,
+* configuration,
+* and safe usage practices.
+---
+# Understanding Shadow AI
+## Shadow AI
+Use of AI systems outside approved governance, procurement or security processes.
+Examples:
+* personal AI accounts used for work
+* AI browser extensions
+* unapproved AI SaaS tools
+* unmanaged automation workflows
+Shadow AI is becoming a major operational governance challenge across many organisations.
+---
+# Red / Amber / Green Exercise
+## GREEN — Generally Lower Risk
+Using approved enterprise AI for:
+* brainstorming
+* grammar improvements
+* generic drafting
+* non-sensitive summarisation
+---
+## AMBER — Requires Governance & Oversight
+Using AI with:
+* internal business information
+* customer communications
+* operational reporting
+* supplier discussions
+Requires:
+* approved tools,
+* governance controls,
+* and human review.
+---
+## RED — Do Not Enter Into Unapproved AI Systems
+* customer personal data
+* passwords
+* contracts
+* pricing models
+* HR information
+* source code
+* regulated data
+* security configurations
+---
+# Quick Knowledge Check
+## Which statement is TRUE?
+### A
+“All AI tools process data in the same way.”
+### B
+“Enterprise AI removes the need for governance.”
+### C
+“Some AI systems may retain or process submitted data depending on platform settings and account type.”
+### D
+“AI browser extensions are always safe.”
+## Correct Answer
+C
+---
+# Practical Workplace Rule
+Before entering information into AI, ask:
+## 1.
+Is this tool approved for business use?
+## 2.
+Does this contain:
+* customer data,
+* confidential information,
+* contracts,
+* HR information,
+* pricing,
+* or intellectual property?
+## 3.
+Would the organisation expect this information to be processed externally?
+If unsure:
+> stop and ask before proceeding.
+---
+# Key Takeaways
+* AI platforms process information differently.
+* Consumer AI tools generally create higher governance risk.
+* Enterprise AI may provide stronger controls but still requires oversight.
+* Shadow AI is becoming a significant operational challenge.
+* Human judgement and governance remain essential.
+---
+# Module Completion Outcome
+You now understand:
+* how AI systems process information,
+* the difference between consumer and enterprise AI,
+* and why governance matters when handling organisational data.
+Next module:
+## The Never-Paste List
+# MODULE 03
+# The Never-Paste List
+### Duration
+8–10 minutes
+### Learning Outcome
+By the end of this module, learners will:
+* understand which information should not be entered into unapproved AI systems,
+* recognise high-risk business data,
+* understand why even small snippets of information may create exposure,
+* and apply safer decision-making before using AI tools.
+---
+# Introduction
+## Most AI-related incidents begin with convenience.
+Usually:
+* someone wanted to save time,
+* improve wording,
+* summarise information,
+* or work more efficiently.
+The issue is often not malicious intent.
+The issue is:
+* misunderstanding what information is sensitive,
+* misunderstanding how AI tools process data,
+* or using unapproved platforms without governance.
+This module explains the categories of information that should not be entered into unapproved or unauthorised AI systems.
+---
+# The Golden Rule
+## If information is:
+* confidential,
+* commercially sensitive,
+* regulated,
+* personal,
+* or security-related,
+do not assume it is safe to enter into AI tools.
+Especially:
+* consumer AI platforms,
+* free AI accounts,
+* browser extensions,
+* or unapproved SaaS tools.
+Only use approved enterprise AI platforms for permitted organisational data classifications.
+---
+# 1. Customer Personal Data
+Examples:
+* names
+* addresses
+* phone numbers
+* email addresses
+* payroll details
+* identification numbers
+* medical information
+* customer tickets
+* CVs
+* account information
+### Why This Matters
+This may create:
+* GDPR/privacy concerns,
+* customer trust issues,
+* regulatory exposure,
+* and governance risk.
+---
+# Real-World Scenario
+## “It was just a customer complaint.”
+A support employee pastes a customer complaint email into a public AI chatbot to:
+> “generate a more professional response.”
+The email contains:
+* names,
+* account details,
+* and personal information.
+The employee believes:
+> “It’s only one email.”
+### Risks Created
+* personal data exposure
+* customer trust concerns
+* governance failures
+* potential privacy breaches
+### Key Lesson
+Even small amounts of personal data may create operational and regulatory exposure.
+---
+# 2. Confidential Business Information
+Examples:
+* pricing models
+* commercial proposals
+* supplier negotiations
+* acquisition discussions
+* internal strategy
+* financial reporting
+* sales forecasts
+* commercial agreements
+### Why This Matters
+Confidential business information may create:
+* competitive exposure,
+* contractual risk,
+* reputational harm,
+* and governance concerns.
+---
+# Real-World Scenario
+## “The AI improved the proposal.”
+A salesperson uploads a draft proposal containing:
+* customer pricing,
+* commercial margins,
+* and supplier comparisons
+into a free AI tool.
+The goal:
+> “make it sound more executive.”
+### Risks Created
+* commercial confidentiality exposure
+* supplier governance concerns
+* reputational risk
+* operational governance failures
+### Key Lesson
+Commercially sensitive information requires governance just as much as personal data.
+---
+# 3. Passwords & Security Information
+Do not enter:
+* passwords
+* MFA codes
+* API keys
+* VPN details
+* certificates
+* firewall configurations
+* penetration test results
+* infrastructure diagrams
+* vulnerability reports
+into unapproved AI systems.
+### Why This Matters
+This information may directly increase:
+* cyber security risk,
+* infrastructure exposure,
+* and operational vulnerability.
+---
+# Real-World Scenario
+## “The AI helped troubleshoot the firewall.”
+An IT administrator pastes:
+* firewall logs,
+* internal IP ranges,
+* and VPN configuration details
+into an AI chatbot to:
+> “help diagnose a network issue.”
+### Risks Created
+* infrastructure exposure
+* attack surface disclosure
+* governance failures
+* operational cyber risk
+### Key Lesson
+AI tools should not become uncontrolled support channels for sensitive infrastructure information.
+---
+# 4. HR & Employment Information
+Examples:
+* disciplinary records
+* salaries
+* grievances
+* sickness records
+* redundancy plans
+* interview notes
+* performance reviews
+* recruitment assessments
+### Why This Matters
+This information may involve:
+* privacy obligations,
+* discrimination concerns,
+* legal exposure,
+* and employee trust issues.
+---
+# Real-World Scenario
+## “The AI scored the candidates.”
+A hiring manager uploads:
+* CVs,
+* interview notes,
+* and candidate rankings
+into an AI tool to:
+> “speed up shortlisting.”
+The manager does not realise:
+* bias may be introduced,
+* candidate data may be processed externally,
+* and governance approval has not taken place.
+### Risks Created
+* discrimination concerns
+* privacy exposure
+* governance failures
+* reputational harm
+### Key Lesson
+AI-assisted recruitment activities may require governance, oversight and organisational approval.
+---
+# 5. Intellectual Property & Source Code
+Examples:
+* source code
+* engineering drawings
+* product designs
+* proprietary methods
+* unreleased content
+* internal documentation
+* customer deliverables
+### Why This Matters
+This may expose:
+* trade secrets,
+* commercially valuable intellectual property,
+* or sensitive technical information.
+---
+# Real-World Scenario
+## “The AI fixed the code.”
+A developer pastes proprietary source code into a public AI assistant to:
+> “debug a performance issue.”
+The code includes:
+* authentication logic,
+* customer integrations,
+* and internal security controls.
+### Risks Created
+* intellectual property exposure
+* security concerns
+* supplier governance issues
+* contractual risk
+### Key Lesson
+AI coding assistants require governance and approval just like any other enterprise technology platform.
+---
+# The “Small Snippet” Problem
+Many employees assume:
+> “It’s only a small amount of information.”
+However:
+* fragments of information may still be sensitive,
+* multiple prompts may create larger exposure,
+* and context may reveal more than expected.
+Examples:
+* partial pricing
+* project references
+* screenshots
+* internal acronyms
+* snippets of contracts
+* customer references
+Even incomplete information may still create risk.
+---
+# Red / Amber / Green Exercise
+# GREEN — Generally Lower Risk
+* brainstorming ideas
+* rewriting public content
+* grammar improvements
+* generic learning support
+---
+# AMBER — Requires Approved Enterprise AI & Oversight
+* internal discussions
+* supplier communications
+* operational summaries
+* customer-related content
+Requires:
+* approved tools,
+* governance controls,
+* and human review.
+---
+# RED — Do Not Enter Into Unapproved AI Systems
+* customer personal data
+* passwords
+* source code
+* contracts
+* pricing
+* HR information
+* regulated data
+* security configurations
+---
+# Quick Knowledge Check
+## Which of the following should not be entered into unapproved AI systems?
+* customer personal data
+* passwords and API keys
+* confidential pricing
+* HR disciplinary records
+* proprietary source code
+### Correct Answer
+All of the above.
+---
+# Practical Workplace Rule
+Before entering information into AI, ask:
+## 1.
+Is this information confidential or commercially sensitive?
+## 2.
+Does it belong to:
+* a customer,
+* employee,
+* supplier,
+* or partner?
+## 3.
+Is the AI platform approved for this type of information?
+## 4.
+Would the organisation expect this information to be processed externally?
+If unsure:
+> stop and escalate before proceeding.
+---
+# Key Takeaways
+* Most AI-related risk comes from oversharing information.
+* Confidential information includes more than passwords and personal data.
+* Commercial information may be highly sensitive.
+* Small snippets of information may still create exposure.
+* Governance and human judgement remain essential.
+---
+# Module Completion Outcome
+You now understand:
+* what information should not be entered into unapproved AI systems,
+* why sensitive data creates operational risk,
+* and how to make safer decisions before using AI tools.
+Next module:
+## Picking The Right Tool For The Job
+# MODULE 04
+# Picking The Right Tool For The Job
+### Duration
+8–12 minutes
+### Learning Outcome
+By the end of this module, learners will:
+* understand that different AI tools carry different levels of risk,
+* recognise when enterprise-approved tools should be used,
+* identify unsafe or unapproved AI usage,
+* and make safer decisions when selecting AI tools for work.
+---
+# Introduction
+## Not all AI tools operate in the same way.
+Some AI platforms are designed with:
+* enterprise governance,
+* security controls,
+* auditability,
+* and organisational management in mind.
+Others are:
+* consumer-focused,
+* lightly governed,
+* or completely outside organisational oversight.
+One of the largest operational AI risks facing organisations today is:
+## using the wrong AI tool for the wrong task.
+This module explains how to:
+* choose safer AI tools,
+* recognise governance boundaries,
+* and reduce unnecessary operational risk.
+---
+# The Core Principle
+## The more sensitive the task,
+the stronger the governance requirement.
+Tool selection should not be based only on:
+* convenience,
+* popularity,
+* or speed.
+It should also consider:
+* governance,
+* data sensitivity,
+* organisational approval,
+* and operational accountability.
+---
+# AI Tool Categories
+# 1. Consumer AI Tools
+Examples:
+* free ChatGPT
+* personal Claude accounts
+* public Gemini apps
+* AI browser extensions
+* consumer AI writing assistants
+### Typical Use Cases
+* brainstorming
+* generic drafting
+* low-risk productivity support
+* public content creation
+### Typical Risks
+* limited governance controls
+* personal account ownership
+* uncertain retention settings
+* reduced organisational oversight
+* unknown data residency
+These tools should generally not be used for:
+* confidential business information,
+* regulated data,
+* customer information,
+* or commercially sensitive material
+unless explicitly approved by the organisation.
+---
+# Real-World Scenario
+## “It was quicker on my phone.”
+A manager uses a personal AI app to summarise:
+* internal strategy discussions,
+* staffing concerns,
+* and financial updates.
+The organisation already provides an approved enterprise AI platform, but the employee chooses the personal app because:
+> “it was faster.”
+### Risks Created
+* shadow AI usage
+* governance bypass
+* loss of auditability
+* unmanaged data exposure
+### Key Lesson
+Convenience should not override governance and approval processes.
+---
+# 2. Enterprise AI Platforms
+Examples:
+* ChatGPT Enterprise
+* Microsoft Copilot for M365
+* approved enterprise AI environments
+These platforms may provide:
+* stronger administrative controls,
+* auditability,
+* retention management,
+* contractual protections,
+* and governance tooling.
+However:
+> organisations still remain responsible for configuration, permissions, oversight and safe usage.
+Enterprise AI does not remove:
+* hallucination risk,
+* human error,
+* oversharing,
+* or governance failures.
+---
+# Real-World Scenario
+## “Copilot already had access.”
+An employee uses Microsoft Copilot to summarise project documentation.
+The employee assumes:
+> “it must be safe because it’s part of Microsoft 365.”
+However:
+* SharePoint permissions were poorly managed,
+* historical folders contained sensitive information,
+* and Copilot surfaced information more broadly than expected.
+### Risks Created
+* oversharing
+* permissions exposure
+* governance weaknesses
+* information leakage
+### Key Lesson
+Enterprise AI security depends heavily on:
+* governance maturity,
+* permissions management,
+* and organisational controls.
+---
+# 3. AI Browser Extensions & Plugins
+Examples:
+* AI writing assistants
+* browser summarisation tools
+* AI email plugins
+* AI note-taking extensions
+### Common Risk
+Employees may not realise:
+* the extension uses AI,
+* information is processed externally,
+* or governance approval has not taken place.
+---
+# Real-World Scenario
+## “Nobody approved the plugin.”
+A marketing employee installs a browser extension that:
+* rewrites customer emails,
+* summarises webpages,
+* and drafts social media posts.
+No vendor review or governance approval occurs.
+The extension automatically sends:
+* webpage content,
+* customer communications,
+* and internal text
+to external AI services.
+### Risks Created
+* supplier governance concerns
+* third-party exposure
+* privacy risk
+* shadow AI growth
+### Key Lesson
+AI risk increasingly exists inside:
+* browser plugins,
+* SaaS integrations,
+* and embedded productivity tools.
+Not only standalone AI chatbots.
+---
+# Choosing The Right Tool
+Before using AI, ask:
+## 1. Is the tool approved?
+Use organisation-approved AI tools wherever possible.
+---
+## 2. What type of information is being processed?
+The more sensitive the information:
+* the stronger the governance requirement.
+---
+## 3. Is this a personal or enterprise-managed account?
+Personal AI accounts generally create higher operational risk.
+---
+## 4. Is the output business-critical?
+If outputs affect:
+* customers,
+* finance,
+* legal matters,
+* HR,
+* or compliance,
+human oversight becomes essential.
+---
+## 5. Does the tool support governance?
+Can the organisation:
+* manage usage,
+* apply controls,
+* or review activity?
+If not:
+risk increases significantly.
+---
+# Red / Amber / Green Exercise
+# GREEN — Generally Lower Risk
+Approved enterprise AI used for:
+* brainstorming
+* non-sensitive drafting
+* productivity support
+* generic summarisation
+---
+# AMBER — Requires Governance & Human Review
+AI used for:
+* customer communications
+* operational reporting
+* supplier discussions
+* internal business summaries
+Requires:
+* approved tools,
+* governance controls,
+* and human oversight.
+---
+# RED — Higher Risk / Unapproved Usage
+* personal AI accounts used for confidential work
+* unapproved browser extensions
+* free AI tools processing sensitive information
+* unmanaged AI SaaS platforms
+* AI-generated outputs used without review
+---
+# Tool Selection Decision Tree
+## LOW-RISK TASK?
+Use:
+* approved enterprise AI,
+* generic prompts,
+* and non-sensitive information.
+---
+## SENSITIVE BUSINESS INFORMATION?
+Use:
+* approved enterprise AI only,
+* minimum necessary information,
+* and human oversight.
+---
+## HIGHLY CONFIDENTIAL OR REGULATED DATA?
+Do not use AI unless:
+* explicitly approved,
+* operationally governed,
+* and authorised by the organisation.
+---
+# Quick Knowledge Check
+## Which statement is TRUE?
+### A
+“All popular AI tools are suitable for business usage.”
+### B
+“Enterprise AI removes the need for governance.”
+### C
+“Browser extensions and plugins may still create AI governance risks.”
+### D
+“Personal AI accounts are safer because only the employee can access them.”
+## Correct Answer
+C
+---
+# Practical Workplace Rule
+Before using any AI tool:
+* check whether it is approved,
+* understand what information it processes,
+* avoid using personal AI accounts for business work,
+* and apply human judgement at all times.
+If unsure:
+> stop and escalate before using the tool.
+---
+# Key Takeaways
+* Different AI tools create different levels of risk.
+* Convenience should not override governance.
+* Enterprise AI may reduce risk but still requires oversight.
+* Browser extensions and SaaS integrations may create hidden AI exposure.
+* Tool approval and governance are critical operational controls.
+* Human oversight remains essential.
+---
+# Module Completion Outcome
+You now understand:
+* how to choose safer AI tools,
+* why governance matters when selecting AI platforms,
+* and how poor tool selection may create operational risk.
+Next module:
+## Verifying What The AI Tells You
+# MODULE 05
+# Verifying What The AI Tells You
+### Duration
+10–12 minutes
+### Learning Outcome
+By the end of this module, learners will:
+* understand why AI systems may generate incorrect information,
+* recognise hallucinations, bias and false confidence,
+* apply practical verification techniques,
+* and understand why human oversight remains essential.
+---
+# Introduction
+## AI can sound convincing while still being incorrect.
+This is one of the biggest operational risks associated with generative AI.
+AI systems are designed to:
+* generate human-like responses,
+* predict likely language patterns,
+* and produce helpful outputs quickly.
+They are not:
+* guaranteed sources of truth,
+* legal authorities,
+* compliance specialists,
+* or replacements for professional judgement.
+Generative AI systems generate outputs based on learned patterns and probabilities rather than verified factual reasoning.
+As a result, AI may:
+* fabricate information,
+* generate inaccurate content,
+* misunderstand context,
+* present outdated information,
+* or produce biased outputs.
+This is commonly referred to as:
+## hallucination.
+---
+# The Core Principle
+## If the output matters,
+it must be verified by a human.
+Especially where outputs affect:
+* customers,
+* finance,
+* legal matters,
+* compliance,
+* HR,
+* operational decisions,
+* or reputational risk.
+---
+# What Is A Hallucination?
+A hallucination occurs when an AI system generates:
+* fabricated,
+* inaccurate,
+* or misleading information
+while presenting it confidently.
+Examples include:
+* invented references,
+* incorrect statistics,
+* fabricated case law,
+* or inaccurate policy guidance.
+The risk is that:
+> the response may still appear highly professional and believable.
+---
+# Real-World Scenario 1
+## “The cases didn’t exist.”
+A lawyer uses AI to help prepare legal arguments.
+The AI generates:
+* legal case references,
+* quotations,
+* and supporting explanations.
+The output:
+* appears authoritative,
+* sounds professional,
+* and includes detailed citations.
+However:
+the legal cases were fabricated by the AI system.
+### Risks Created
+* reputational damage
+* operational embarrassment
+* legal exposure
+* professional conduct concerns
+### Key Lesson
+AI-generated confidence is not proof of accuracy.
+---
+# Real-World Scenario 2
+## “The financial summary was wrong.”
+A manager uses AI to summarise financial reporting for a leadership meeting.
+The AI:
+* misinterprets spreadsheet context,
+* swaps percentages,
+* and generates inaccurate conclusions.
+The manager trusts the output without verification.
+### Risks Created
+* inaccurate reporting
+* poor decision making
+* governance concerns
+* operational disruption
+### Key Lesson
+AI-generated summaries should support human review, not replace it.
+---
+# Real-World Scenario 3
+## “The AI made up the policy.”
+An employee asks AI:
+> “What does our company policy say about customer refunds?”
+The AI generates a convincing response using:
+* formal language,
+* realistic wording,
+* and fabricated policy details.
+The employee acts on the incorrect guidance.
+### Risks Created
+* misinformation
+* customer disputes
+* inconsistent decision making
+* governance failures
+### Key Lesson
+AI should not replace:
+* official documentation,
+* approved policies,
+* or authoritative organisational guidance.
+---
+# Why AI Gets Things Wrong
+Generative AI systems:
+* predict patterns,
+* not verified truth.
+Outputs are influenced by:
+* training data,
+* prompt quality,
+* context,
+* and probability-based language generation.
+This means AI may:
+* misunderstand prompts,
+* combine unrelated information,
+* oversimplify issues,
+* or fill gaps with inaccurate detail.
+---
+# Common AI Failure Types
+# 1. Fabricated Information (“Hallucinations”)
+Examples:
+* fake references
+* invented statistics
+* fabricated case law
+* inaccurate policies
+---
+# 2. Outdated Information
+AI may:
+* rely on historical training data,
+* misunderstand recent changes,
+* or provide outdated guidance.
+---
+# 3. False Confidence
+AI often presents uncertain information using:
+* authoritative tone,
+* professional structure,
+* and convincing wording.
+This can make inaccuracies harder to identify.
+---
+# 4. Bias & Context Errors
+Outputs may reflect:
+* incomplete context,
+* training bias,
+* flawed assumptions,
+* or missing information.
+---
+# 5. Oversimplification
+AI may remove:
+* nuance,
+* exceptions,
+* or important operational context.
+This is particularly risky in:
+* legal,
+* compliance,
+* HR,
+* and financial environments.
+---
+# Verification Rules
+# Rule 1 — Verify Important Outputs
+The greater the business impact,
+the greater the verification requirement.
+Always verify:
+* customer communications
+* legal content
+* financial summaries
+* policy wording
+* compliance advice
+* HR-related outputs
+---
+# Rule 2 — Check Trusted Sources
+Where possible:
+* verify against official documentation,
+* organisational policy,
+* approved systems,
+* or authoritative sources.
+---
+# Rule 3 — Challenge The Output
+Do not assume:
+> “the AI must be correct.”
+Ask:
+* Does this make sense?
+* Is anything missing?
+* Does this match official guidance?
+* Would I trust this without AI involvement?
+---
+# Rule 4 — Understand AI’s Role
+AI may support:
+* drafting,
+* summarisation,
+* brainstorming,
+* and productivity.
+Humans remain accountable for:
+* decisions,
+* approvals,
+* compliance,
+* and operational outcomes.
+---
+# Verification Workflow
+## Before Using AI Output
+### 1.
+Check:
+* factual accuracy
+* names
+* dates
+* references
+* calculations
+* links
+---
+### 2.
+Validate:
+* business context
+* organisational policy
+* legal/compliance implications
+---
+### 3.
+Apply:
+* human judgement
+* operational oversight
+* professional review
+---
+### 4.
+Escalate if:
+* unsure,
+* customer-impacting,
+* high-risk,
+* or governance-sensitive.
+---
+# Red / Amber / Green Exercise
+# GREEN — Lower Risk Usage
+* brainstorming
+* grammar improvements
+* generic drafting
+* idea generation
+Still requires review.
+---
+# AMBER — Requires Careful Verification
+* customer communications
+* operational summaries
+* policy drafts
+* reporting outputs
+Requires:
+* source validation,
+* human oversight,
+* and organisational review.
+---
+# RED — Do Not Rely On Without Expert Validation
+* legal advice
+* regulatory interpretation
+* disciplinary decisions
+* financial reporting
+* medical guidance
+AI may assist,
+but qualified humans remain responsible.
+---
+# Practical Exercise
+## Scenario
+An AI system generates the following statement:
+> “Under GDPR, businesses can freely use customer data in AI systems if the information is anonymised afterwards.”
+### Learner Question
+What should you do next?
+* Trust the answer immediately
+* Verify against official GDPR guidance
+* Escalate to compliance if unsure
+* Check organisational policy
+### Correct Answer
+Everything except:
+“Trust the answer immediately.”
+---
+# Quick Knowledge Check
+## Which statement is TRUE?
+### A
+“If AI sounds confident, it is probably correct.”
+### B
+“Enterprise AI guarantees factual accuracy.”
+### C
+“Humans remain accountable for AI-assisted decisions.”
+### D
+“AI can replace operational judgement.”
+## Correct Answer
+C
+---
+# Practical Workplace Rule
+Treat AI outputs as:
+## draft assistance,
+not:
+## final authority.
+Always apply:
+* verification,
+* oversight,
+* and professional judgement.
+---
+# Key Takeaways
+* AI systems may generate convincing but inaccurate information.
+* Hallucinations are a genuine operational risk.
+* Human oversight remains essential.
+* Important outputs should always be verified.
+* AI should support judgement, not replace it.
+* Accountability remains with the human user and organisation.
+---
+# Module Completion Outcome
+You now understand:
+* why AI systems may generate inaccurate information,
+* how to identify hallucinations and misinformation,
+* and how to safely verify AI-generated outputs.
+Next module:
+## AI-Powered Scams Aimed At You
+# MODULE 06
+# AI-Powered Scams Aimed At You
+### Duration
+10–12 minutes
+### Learning Outcome
+By the end of this module, learners will:
+* understand how AI is changing cyber crime and social engineering,
+* recognise AI-enhanced phishing, impersonation and fraud,
+* identify common manipulation techniques,
+* and apply safer behaviours when handling suspicious communications.
+---
+# Introduction
+## AI is not only helping businesses.
+It is also being used by cyber criminals and fraudsters.
+Attackers increasingly use AI to:
+* write convincing phishing emails,
+* imitate writing styles,
+* generate fake documents,
+* automate scams,
+* create realistic impersonation attempts,
+* and support social engineering attacks at scale.
+This means scams are becoming:
+* more believable,
+* more personalised,
+* and more difficult to identify using traditional warning signs alone.
+The greatest risk is often not:
+> “obviously fake emails.”
+The risk is:
+## realistic, convincing and highly targeted deception.
+---
+# The New Reality
+Historically, phishing messages often contained:
+* spelling mistakes,
+* poor grammar,
+* awkward language,
+* or obvious warning signs.
+AI now allows attackers to generate:
+* professional language,
+* realistic tone,
+* contextual messaging,
+* and targeted communications quickly and cheaply.
+This significantly lowers the barrier for cyber crime.
+---
+# Real-World Scenario 1
+## “The CEO asked urgently.”
+A finance employee receives a Teams message appearing to come from a senior executive.
+The message says:
+> “Need this payment processed urgently before the meeting. I’m travelling and can’t call.”
+The wording:
+* sounds natural,
+* references real projects,
+* and matches the executive’s communication style.
+The employee later discovers:
+* the account was compromised,
+* and the message formed part of a social engineering attack.
+AI-assisted techniques may have been used to:
+* improve wording,
+* imitate communication style,
+* or personalise the request.
+### Risks Created
+* financial fraud
+* business email compromise
+* operational disruption
+* reputational damage
+### Key Lesson
+Urgency and familiarity should not replace verification and process.
+---
+# Real-World Scenario 2
+## “The voice sounded real.”
+An employee receives a phone call from someone sounding very similar to their manager.
+The caller requests:
+* password resets,
+* MFA approvals,
+* and urgent access changes.
+The employee complies because:
+> “it sounded like them.”
+The organisation later suspects the call may have involved AI-generated voice impersonation.
+### Risks Created
+* credential compromise
+* account takeover
+* operational security failures
+* major incident escalation
+### Key Lesson
+Voice and video should no longer be treated as standalone proof of identity.
+Verification processes remain essential.
+---
+# Real-World Scenario 3
+## “The phishing email looked perfect.”
+A staff member receives an email appearing to come from a supplier.
+The message:
+* contains accurate branding,
+* references real projects,
+* and uses highly professional language.
+The employee clicks the link because:
+> “it looked legitimate.”
+The site captures login credentials.
+### Risks Created
+* account compromise
+* supplier impersonation
+* operational disruption
+* potential ransomware exposure
+### Key Lesson
+Professional language and branding do not guarantee legitimacy.
+---
+# Common AI-Enhanced Threats
+# 1. AI-Generated Phishing Emails
+AI can help attackers:
+* personalise emails,
+* imitate writing styles,
+* improve language quality,
+* and generate convincing communications rapidly.
+---
+# 2. Voice Impersonation
+Attackers may use AI-assisted tooling to generate realistic voice impersonations using:
+* publicly available audio,
+* social media clips,
+* meeting recordings,
+* or voicemail samples.
+---
+# 3. Deepfake Video
+AI-generated video may be used to:
+* impersonate executives,
+* support fraud attempts,
+* create fake meetings,
+* or manipulate trust.
+---
+# 4. Fake Documents & Content
+AI can generate convincing but inaccurate or fabricated:
+* invoices
+* contracts
+* reports
+* policies
+* customer communications
+Often using professional formatting and language.
+---
+# 5. AI-Assisted Social Engineering
+Attackers increasingly use AI to:
+* research organisations,
+* profile employees,
+* craft believable messages,
+* and automate deception at scale.
+---
+# Why Humans Are Still The Target
+Even with advanced technology,
+most attacks still succeed because:
+* someone trusts the request,
+* bypasses process,
+* or acts under pressure.
+AI increases realism.
+Human judgement and operational controls remain critical defences.
+---
+# Warning Signs Still Matter
+Even AI-enhanced scams often rely on:
+* urgency,
+* emotional pressure,
+* secrecy,
+* authority,
+* or requests to bypass process.
+Examples:
+* “Do this urgently.”
+* “Don’t tell anyone yet.”
+* “I need this immediately.”
+* “You’re the only person available.”
+These should always trigger caution.
+---
+# Verification Rules
+# Rule 1 — Slow Down
+Urgency is a common manipulation tactic.
+Pause before:
+* clicking,
+* approving,
+* paying,
+* or sharing information.
+---
+# Rule 2 — Verify Through Another Channel
+If unsure:
+* call the individual directly,
+* message them separately,
+* or use approved contact methods.
+Do not rely solely on:
+* incoming email,
+* voice,
+* or video.
+---
+# Rule 3 — Follow Process
+Security and financial controls exist for a reason.
+Do not bypass:
+* approval workflows,
+* MFA controls,
+* payment verification,
+* or identity checks
+because a request appears urgent or senior.
+---
+# Rule 4 — Escalate Suspicious Activity
+If something appears unusual:
+* stop,
+* verify,
+* and escalate.
+It is always safer to check.
+---
+# Red / Amber / Green Exercise
+# GREEN — Safe Behaviour
+* independently verifying requests
+* following approval processes
+* reporting suspicious communications
+* slowing down under pressure
+---
+# AMBER — Requires Additional Verification
+* urgent executive requests
+* supplier payment changes
+* unexpected MFA prompts
+* unusual file-sharing requests
+Requires:
+* verification,
+* oversight,
+* and escalation if unsure.
+---
+# RED — High-Risk Behaviour
+* sharing passwords
+* approving MFA requests without verification
+* bypassing controls due to urgency
+* trusting voice/video automatically
+* processing payments without following process
+---
+# Practical Exercise
+## Scenario
+You receive:
+* a Teams message appearing to come from a senior executive,
+* requesting urgent payment approval,
+* while travelling overseas.
+The message:
+* sounds realistic,
+* references genuine projects,
+* and pressures immediate action.
+### What should you do?
+* approve immediately because the request appears urgent
+* verify using another approved communication method
+* follow payment approval procedures
+* escalate if the request appears suspicious
+### Correct Answer
+Everything except:
+“approve immediately because the request appears urgent.”
+---
+# Quick Knowledge Check
+## Which statement is TRUE?
+### A
+“AI-generated scams are usually easy to spot.”
+### B
+“Voice messages should always be trusted.”
+### C
+“Professional wording guarantees legitimacy.”
+### D
+“Verification and process are increasingly important in the AI era.”
+## Correct Answer
+D
+---
+# Practical Workplace Rule
+Treat:
+* urgent requests,
+* unusual behaviour,
+* payment changes,
+* MFA prompts,
+* and identity-based requests
+with caution.
+AI-assisted attacks increase realism.
+Verification protects the organisation.
+---
+# Key Takeaways
+* AI is making scams more convincing and scalable.
+* Professional language does not prove legitimacy.
+* Voice and video impersonation risks are increasing.
+* Human judgement and process remain critical controls.
+* Verification and escalation are essential operational behaviours.
+* Slowing down reduces risk.
+---
+# Module Completion Outcome
+You now understand:
+* how AI is changing phishing and social engineering,
+* how attackers may use AI-assisted impersonation techniques,
+* and how to apply safer behaviours against modern scams.
+Next module:
+## Bias, Fairness, And Not Embarrassing The Business
+# MODULE 07
+# Bias, Fairness, And Not Embarrassing The Business
+### Duration
+9–12 minutes
+### Learning Outcome
+By the end of this module, learners will:
+* understand how AI systems may produce biased or inappropriate outputs,
+* recognise reputational and operational risks linked to AI-generated content,
+* identify situations requiring additional human oversight,
+* and apply safer decision-making when using AI in customer-facing or people-related activities.
+---
+# Introduction
+## AI does not understand fairness in the way humans do.
+Generative AI systems produce outputs based on:
+* patterns,
+* probabilities,
+* training data,
+* and context.
+This means AI outputs may sometimes:
+* reflect bias,
+* reinforce stereotypes,
+* misinterpret nuance,
+* or generate inappropriate recommendations.
+In a business environment, this may create:
+* reputational damage,
+* customer complaints,
+* discrimination concerns,
+* operational issues,
+* and loss of trust.
+---
+# Important Principle
+## AI-generated content should never be assumed to be:
+* neutral,
+* fair,
+* unbiased,
+* or contextually appropriate.
+Human oversight remains essential.
+---
+# What Is Bias?
+Bias occurs when outputs unfairly favour, disadvantage or stereotype individuals or groups.
+Bias may appear in:
+* recruitment decisions,
+* customer communications,
+* summarisation,
+* recommendations,
+* scoring systems,
+* or generated content.
+Bias is not always intentional.
+Sometimes it results from:
+* incomplete context,
+* training data limitations,
+* assumptions within prompts,
+* or missing human oversight.
+---
+# Real-World Scenario 1
+## “The AI preferred certain candidates.”
+A recruitment manager uses AI to help shortlist CVs.
+The prompts unintentionally favour:
+* specific career paths,
+* certain language styles,
+* and particular educational backgrounds.
+Over time:
+* similar candidate profiles are repeatedly prioritised,
+* while others are filtered out.
+### Risks Created
+* discrimination concerns
+* unfair hiring outcomes
+* reputational damage
+* governance failures
+### Key Lesson
+AI-assisted recruitment decisions require:
+* oversight,
+* governance,
+* and human review.
+---
+# Real-World Scenario 2
+## “The marketing content caused complaints.”
+A marketing employee uses AI to generate social media content for a campaign.
+The AI creates messaging that:
+* unintentionally stereotypes a customer group,
+* uses inappropriate wording,
+* and lacks cultural awareness.
+The content is published without review.
+### Risks Created
+* reputational harm
+* customer complaints
+* brand damage
+* public criticism
+### Key Lesson
+AI-generated content should always be reviewed for:
+* tone,
+* fairness,
+* accuracy,
+* and appropriateness.
+---
+# Real-World Scenario 3
+## “The AI made assumptions.”
+A customer support employee asks AI to summarise a complaint.
+The AI:
+* makes assumptions about customer intent,
+* introduces inaccurate emotional language,
+* and changes the tone of the original issue.
+The employee forwards the summary without checking.
+### Risks Created
+* customer dissatisfaction
+* inaccurate records
+* reputational concerns
+* operational inconsistency
+### Key Lesson
+AI summaries may unintentionally distort context or meaning.
+Human review remains essential.
+---
+# Why AI Bias Happens
+AI systems learn from:
+* existing information,
+* public content,
+* historical patterns,
+* and human-generated data.
+This means outputs may reflect:
+* historical bias,
+* incomplete representation,
+* flawed assumptions,
+* or missing context.
+Generative AI systems do not:
+* understand ethics,
+* understand fairness,
+* or understand organisational values
+in the same way humans do.
+---
+# Areas Requiring Extra Caution
+Additional oversight may be required when AI is used for:
+* recruitment
+* HR processes
+* disciplinary matters
+* customer decisions
+* performance scoring
+* legal interpretation
+* healthcare-related information
+* financial recommendations
+These areas may create:
+* legal,
+* ethical,
+* operational,
+* or reputational risk.
+---
+# Human Oversight Matters
+AI should support:
+* productivity,
+* drafting,
+* summarisation,
+* and idea generation.
+AI should not independently determine:
+* employment outcomes,
+* disciplinary action,
+* customer fairness,
+* or sensitive operational decisions
+without appropriate governance and review.
+---
+# Practical Safeguards
+# 1. Review AI Outputs Carefully
+Check for:
+* inappropriate assumptions
+* stereotypes
+* missing context
+* tone issues
+* exclusionary wording
+---
+# 2. Avoid Blind Automation
+Do not automatically trust:
+* scoring systems,
+* rankings,
+* summaries,
+* or recommendations
+without human oversight.
+---
+# 3. Use Diverse Review
+Where appropriate:
+* involve different perspectives,
+* escalate sensitive outputs,
+* and apply governance review processes.
+---
+# 4. Follow Organisational Policy
+Some AI use cases may require:
+* approval,
+* governance review,
+* or additional oversight
+before deployment.
+---
+# Red / Amber / Green Exercise
+# GREEN — Lower Risk Usage
+* brainstorming ideas
+* drafting generic content
+* grammar improvements
+* summarising non-sensitive information
+Still requires review.
+---
+# AMBER — Requires Human Oversight
+* customer communications
+* employee-related content
+* marketing campaigns
+* operational recommendations
+Requires:
+* fairness review,
+* context validation,
+* and human judgement.
+---
+# RED — High-Risk Usage Without Governance
+* automated hiring decisions
+* disciplinary recommendations
+* AI-only customer outcomes
+* sensitive people-related decisions without oversight
+---
+# Practical Exercise
+## Scenario
+An AI system generates a recruitment summary stating:
+> “Candidate may not be a strong cultural fit.”
+### Learner Question
+What should you do next?
+* accept the statement automatically
+* review the reasoning critically
+* ensure decisions remain evidence-based
+* apply organisational recruitment policy
+* escalate if unsure
+### Correct Answer
+Everything except:
+“accept the statement automatically.”
+---
+# Quick Knowledge Check
+## Which statement is TRUE?
+### A
+“AI outputs are always neutral and unbiased.”
+### B
+“Human oversight is unnecessary if AI improves efficiency.”
+### C
+“AI-generated content may still contain bias or inappropriate assumptions.”
+### D
+“AI should independently make sensitive employment decisions.”
+## Correct Answer
+C
+---
+# Practical Workplace Rule
+Before using AI-generated content:
+* review tone,
+* check fairness,
+* validate context,
+* and apply professional judgement.
+If the output affects:
+* people,
+* customers,
+* employment,
+* or reputation,
+additional oversight may be required.
+---
+# Key Takeaways
+* AI systems may produce biased or inappropriate outputs.
+* Bias may result from training data, assumptions or missing context.
+* Human oversight remains essential.
+* Sensitive decisions require additional governance and review.
+* AI should support judgement, not replace it.
+* Reputational risk can arise from poorly reviewed AI-generated content.
+---
+# Module Completion Outcome
+You now understand:
+* how AI bias and fairness issues may arise,
+* why human oversight remains important,
+* and how to reduce reputational and operational risk when using AI-generated content.
+Next module:
+## Logging, Accountability, And Auditability
+# MODULE 08
+# Logging, Accountability, And Auditability
+### Duration
+8–10 minutes
+### Learning Outcome
+By the end of this module, learners will:
+* understand why accountability matters when using AI,
+* recognise the importance of auditability and record keeping,
+* understand why organisations need visibility over AI usage,
+* and apply safer operational behaviours when using AI tools.
+---
+# Introduction
+## AI usage should not be invisible.
+As organisations increasingly adopt AI tools, they also need to understand:
+* how AI is being used,
+* where it is being used,
+* who is using it,
+* and what business decisions are being influenced by it.
+This is important for:
+* governance,
+* operational oversight,
+* compliance,
+* security,
+* and accountability.
+If an organisation cannot understand how AI is being used, it becomes difficult to:
+* investigate incidents,
+* manage risk,
+* verify decisions,
+* or demonstrate governance maturity.
+---
+# What Is Accountability?
+Accountability means:
+* humans remain responsible for decisions,
+* organisations remain responsible for governance,
+* and AI outputs should be traceable and reviewable where appropriate.
+Even when AI assists with:
+* drafting,
+* analysis,
+* recommendations,
+* or summarisation,
+humans remain accountable for:
+* approvals,
+* operational decisions,
+* customer impact,
+* and compliance obligations.
+---
+# What Is Auditability?
+Auditability means organisations may need the ability to:
+* review AI usage,
+* understand decision-making processes,
+* verify actions,
+* and investigate incidents when necessary.
+This may include:
+* system logs,
+* approval records,
+* policy acknowledgements,
+* governance workflows,
+* and training completion evidence.
+---
+# Real-World Scenario 1
+## “Nobody knew the AI had been used.”
+A customer complaint escalates after incorrect information is provided during a support interaction.
+The employee later explains:
+> “I used AI to generate the response.”
+However:
+* no record exists,
+* no review process was followed,
+* and leadership cannot determine:
+* what information was entered,
+* what the AI generated,
+* or how the response was approved.
+### Risks Created
+* governance failures
+* operational uncertainty
+* reputational damage
+* inability to investigate properly
+### Key Lesson
+Where AI influences business activity, organisations may require visibility and accountability.
+---
+# Real-World Scenario 2
+## “The AI-generated report was challenged.”
+A manager uses AI to create a summary report for leadership.
+Later:
+* figures are questioned,
+* assumptions appear incorrect,
+* and leadership asks:
+> “How was this generated?”
+The employee cannot:
+* explain the prompt,
+* reproduce the process,
+* or verify which information came from AI.
+### Risks Created
+* poor auditability
+* operational confusion
+* reduced trust
+* governance concerns
+### Key Lesson
+AI-assisted work should remain reviewable and explainable where appropriate.
+---
+# Real-World Scenario 3
+## “The organisation had no AI oversight.”
+A business discovers employees are using:
+* multiple AI tools,
+* personal accounts,
+* browser extensions,
+* and AI-enabled SaaS platforms.
+No inventory exists.
+No governance controls are in place.
+No approved AI list exists.
+Leadership cannot determine:
+* which tools are being used,
+* what information is being processed,
+* or which risks exist.
+### Risks Created
+* unmanaged shadow AI
+* supplier governance concerns
+* operational risk
+* compliance exposure
+### Key Lesson
+Organisations require visibility into AI usage to manage operational risk effectively.
+---
+# Why Logging & Oversight Matter
+Organisations may need to:
+* investigate incidents,
+* review customer complaints,
+* validate decisions,
+* support compliance activities,
+* or demonstrate governance maturity.
+Without visibility:
+* problems become harder to investigate,
+* accountability becomes unclear,
+* and governance weakens.
+---
+# Accountability Principles
+# 1. Humans Remain Responsible
+AI may assist with work,
+but humans remain accountable for:
+* decisions,
+* approvals,
+* and business outcomes.
+---
+# 2. Important AI Usage Should Be Traceable
+Where appropriate, organisations may require:
+* logging,
+* approvals,
+* review workflows,
+* or audit evidence.
+Especially for:
+* customer-facing activity,
+* regulated processes,
+* and operational decision making.
+---
+# 3. Governance Requires Visibility
+Organisations cannot effectively govern:
+* unknown tools,
+* unmanaged AI usage,
+* or hidden workflows.
+Visibility supports:
+* oversight,
+* risk management,
+* and operational maturity.
+---
+# 4. Documentation Matters
+Where appropriate:
+* prompts,
+* approvals,
+* review decisions,
+* and AI-assisted outputs
+may need to be documented or retained according to organisational policy.
+---
+# Practical Examples Of Auditability
+Examples may include:
+* AI training completion records
+* policy acknowledgement logs
+* approved AI tool inventories
+* governance approvals
+* prompt review processes
+* workflow approvals
+* AI usage reporting
+* incident records
+---
+# Red / Amber / Green Exercise
+# GREEN — Good Governance Behaviour
+* using approved AI tools
+* documenting important decisions
+* following approval workflows
+* escalating concerns appropriately
+---
+# AMBER — Requires Additional Oversight
+* AI-assisted customer communications
+* operational summaries
+* AI-assisted reporting
+* workflow automation
+Requires:
+* review,
+* accountability,
+* and governance controls.
+---
+# RED — Weak Governance Behaviour
+* using unapproved AI tools without visibility
+* relying on AI outputs without review
+* bypassing approval processes
+* failing to document important AI-assisted activity
+---
+# Practical Exercise
+## Scenario
+A manager uses AI to generate a customer-facing report.
+Later, the customer disputes parts of the content.
+Leadership asks:
+* what AI system was used,
+* whether the output was reviewed,
+* and what information was entered.
+The manager cannot answer confidently.
+### Learner Question
+What governance issues may exist?
+* lack of accountability
+* poor auditability
+* inadequate review processes
+* governance visibility gaps
+### Correct Answer
+All of the above.
+---
+# Quick Knowledge Check
+## Which statement is TRUE?
+### A
+“AI removes the need for accountability.”
+### B
+“Organisations do not need visibility into AI usage.”
+### C
+“Humans remain accountable for AI-assisted business activity.”
+### D
+“AI-assisted decisions never require review.”
+## Correct Answer
+C
+---
+# Practical Workplace Rule
+When using AI:
+* follow organisational policy,
+* use approved tools,
+* maintain appropriate records where required,
+* and ensure important outputs remain reviewable and explainable.
+If unsure:
+> escalate before proceeding.
+---
+# Key Takeaways
+* Organisations require visibility into AI usage.
+* Humans remain accountable for AI-assisted work.
+* Auditability supports governance, compliance and operational oversight.
+* Shadow AI weakens organisational control.
+* Important AI-assisted activity may require documentation and review.
+* Governance maturity depends on visibility and accountability.
+---
+# Module Completion Outcome
+You now understand:
+* why accountability and auditability matter,
+* how governance supports operational oversight,
+* and why organisations need visibility into AI usage.
+Next module:
+## AI Incidents, Escalation, And What To Do When Something Goes Wrong
+# MODULE 09
+# AI Incidents, Escalation, And What To Do When Something Goes Wrong
+### Duration
+8–10 minutes
+### Learning Outcome
+By the end of this module, learners will:
+* understand what an AI-related incident may look like,
+* recognise when escalation is required,
+* understand the importance of rapid reporting,
+* and apply safer behaviours when something goes wrong involving AI.
+---
+# Introduction
+## AI incidents are operational incidents.
+They may involve:
+* data exposure,
+* incorrect outputs,
+* governance failures,
+* security concerns,
+* supplier issues,
+* or reputational risk.
+Importantly:
+many AI incidents begin with:
+* misunderstanding,
+* poor judgement,
+* accidental oversharing,
+* or use of unapproved tools.
+The goal is not:
+> “never make mistakes.”
+The goal is:
+* identify issues quickly,
+* reduce impact,
+* and escalate appropriately.
+Early reporting often reduces:
+* operational damage,
+* compliance exposure,
+* customer impact,
+* and recovery costs.
+---
+# What Is An AI Incident?
+An AI incident is any event involving AI usage that may create:
+* operational risk,
+* governance concerns,
+* security exposure,
+* reputational damage,
+* or compliance issues.
+Examples may include:
+* confidential information entered into an unapproved AI tool
+* AI-generated misinformation shared externally
+* AI-assisted phishing or impersonation
+* use of unapproved AI systems
+* AI-generated biased or inappropriate content
+* customer complaints involving AI-generated responses
+* AI-assisted security misconfiguration
+* unauthorised AI plugins or browser extensions
+---
+# Important Principle
+## Reporting an issue early is usually safer than hiding it.
+Organisations generally prefer:
+* rapid escalation,
+* transparency,
+* and controlled response
+rather than delayed discovery.
+---
+# Real-World Scenario 1
+## “The customer data was pasted accidentally.”
+An employee realises they pasted customer information into a public AI chatbot while trying to summarise a support issue.
+The employee initially considers:
+> “not telling anyone because it was an accident.”
+Several days later:
+* the issue is discovered during an audit review,
+* creating larger governance and operational concerns.
+### Risks Created
+* delayed response
+* governance failures
+* reduced containment options
+* potential compliance exposure
+### Key Lesson
+Early escalation may significantly reduce organisational risk.
+---
+# Real-World Scenario 2
+## “The AI-generated response was incorrect.”
+A customer-facing AI-assisted email contains inaccurate information.
+The response:
+* was not properly reviewed,
+* reaches the customer,
+* and causes confusion and escalation.
+The employee hesitates to report the issue because:
+> “the mistake already happened.”
+### Risks Created
+* customer dissatisfaction
+* reputational harm
+* operational confusion
+* delayed remediation
+### Key Lesson
+Rapid reporting improves the organisation’s ability to:
+* correct errors,
+* support customers,
+* and investigate root causes.
+---
+# Real-World Scenario 3
+## “Nobody approved the AI plugin.”
+An employee installs an AI browser extension that automatically processes internal information.
+The extension:
+* was never reviewed,
+* is not approved,
+* and creates unknown supplier governance risks.
+The issue is only discovered months later.
+### Risks Created
+* unmanaged shadow AI
+* supplier governance concerns
+* operational visibility gaps
+* security uncertainty
+### Key Lesson
+Unapproved AI tooling should be escalated early, even if no incident has yet occurred.
+---
+# Common Types Of AI Incidents
+# 1. Data Exposure Incidents
+Examples:
+* customer information entered into unapproved AI systems
+* confidential information processed externally
+* oversharing through enterprise AI platforms
+---
+# 2. Misinformation Incidents
+Examples:
+* AI-generated inaccuracies shared externally
+* fabricated references or summaries
+* incorrect operational guidance
+---
+# 3. Governance Violations
+Examples:
+* unapproved AI usage
+* bypassing approval processes
+* unauthorised plugins or SaaS tools
+---
+# 4. Security Incidents
+Examples:
+* AI-assisted phishing
+* credential exposure
+* infrastructure information entered into AI systems
+---
+# 5. Reputational Incidents
+Examples:
+* biased AI-generated content
+* inappropriate outputs
+* customer complaints linked to AI usage
+---
+# When To Escalate
+Escalation may be appropriate if:
+* sensitive information was entered into AI,
+* customer impact exists,
+* the output appears incorrect or harmful,
+* an unapproved AI tool is discovered,
+* security concerns exist,
+* or organisational policy may have been breached.
+If unsure:
+> escalate and ask.
+---
+# What Good Escalation Looks Like
+Good escalation is:
+* prompt,
+* factual,
+* transparent,
+* and calm.
+The objective is:
+* containment,
+* risk reduction,
+* and appropriate response.
+---
+# What To Include In An Escalation
+Where possible include:
+* what happened,
+* what AI tool was involved,
+* what information may have been affected,
+* when it occurred,
+* who has been informed,
+* and any immediate containment actions already taken.
+Do not:
+* hide information,
+* attempt to quietly delete evidence,
+* or continue using the affected system without guidance.
+---
+# Human Behaviour Matters
+Many incidents become worse because:
+* employees panic,
+* delay reporting,
+* or try to fix issues alone.
+Good governance culture encourages:
+* transparency,
+* escalation,
+* and learning.
+---
+# Red / Amber / Green Exercise
+# GREEN — Good Incident Behaviour
+* reporting issues quickly
+* escalating uncertainty
+* following governance process
+* documenting concerns appropriately
+---
+# AMBER — Requires Immediate Review
+* accidental data entry into AI
+* suspicious AI-generated outputs
+* unapproved AI tooling
+* customer-facing AI errors
+Requires:
+* escalation,
+* oversight,
+* and governance review.
+---
+# RED — High-Risk Behaviour
+* hiding mistakes
+* bypassing escalation
+* deleting evidence
+* continuing unsafe AI usage
+* ignoring governance concerns
+---
+# Practical Exercise
+## Scenario
+An employee realises they accidentally uploaded commercially sensitive information into a public AI chatbot.
+They are unsure:
+* whether the information was retained,
+* whether organisational policy was breached,
+* or whether reporting is necessary.
+### What should they do?
+* ignore it because it was accidental
+* escalate the issue promptly
+* follow organisational incident procedures
+* provide factual information to the appropriate team
+### Correct Answer
+Everything except:
+“ignore it because it was accidental.”
+---
+# Quick Knowledge Check
+## Which statement is TRUE?
+### A
+“AI incidents only matter if hackers are involved.”
+### B
+“It is usually safer to report concerns early.”
+### C
+“Accidental AI misuse should be hidden if no one noticed.”
+### D
+“Governance incidents are not operational incidents.”
+## Correct Answer
+B
+---
+# Practical Workplace Rule
+If something involving AI:
+* feels wrong,
+* appears risky,
+* or may impact the organisation,
+do not ignore it.
+Escalate early using approved organisational processes.
+---
+# Key Takeaways
+* AI incidents may involve governance, security, operational or reputational risk.
+* Early escalation usually reduces organisational impact.
+* Transparency and accountability support effective response.
+* Unapproved AI usage may itself represent a governance concern.
+* Good governance culture encourages escalation, not blame.
+* Human behaviour strongly influences incident outcomes.
+---
+# Module Completion Outcome
+You now understand:
+* what AI-related incidents may look like,
+* when escalation may be appropriate,
+* and how early reporting supports operational governance and risk reduction.
+Next module:
+## The 60-Second AI Safety Checklist
+# MODULE 10
+# The 60-Second AI Safety Checklist
+### Duration
+5–7 minutes
+### Learning Outcome
+By the end of this module, learners will:
+* understand a simple operational framework for safer AI usage,
+* apply quick decision-making before using AI tools,
+* recognise when escalation or additional oversight may be required,
+* and develop safer day-to-day AI habits.
+---
+# Introduction
+## Most AI-related problems begin before the prompt is entered.
+Usually because someone:
+* rushed,
+* assumed the tool was safe,
+* skipped verification,
+* or used AI without thinking through the risk.
+The purpose of this checklist is not to:
+* slow down productivity,
+* create unnecessary bureaucracy,
+* or block innovation.
+The goal is to create:
+* safer habits,
+* better judgement,
+* and consistent operational behaviour.
+This checklist should take:
+## less than 60 seconds.
+---
+# The 60-Second AI Safety Checklist
+Before using AI, pause and ask:
+---
+# 1. Is The Tool Approved?
+## Ask Yourself:
+* Is this AI platform approved by the organisation?
+* Am I using a personal account or approved enterprise environment?
+* Has this tool gone through governance or security review?
+### Higher-Risk Examples
+* personal ChatGPT accounts
+* AI browser extensions
+* unapproved SaaS tools
+* AI plugins installed without review
+### Safer Practice
+Use approved enterprise AI platforms wherever possible.
+---
+# 2. What Information Am I Entering?
+## Ask Yourself:
+Does this contain:
+* customer data?
+* confidential information?
+* pricing?
+* HR records?
+* source code?
+* contracts?
+* security information?
+If yes:
+* additional controls,
+* approval,
+* or escalation
+may be required.
+---
+# 3. Would I Be Comfortable Explaining This AI Usage?
+## Ask Yourself:
+Would I be comfortable explaining this usage:
+* to leadership,
+* compliance,
+* a customer,
+* or an auditor?
+Would the organisation expect this information to be processed externally?
+If unsure:
+> stop and ask.
+---
+# 4. Does The Output Need Verification?
+## Ask Yourself:
+Could this output affect:
+* customers,
+* finance,
+* legal matters,
+* HR,
+* operations,
+* or reputation?
+If yes:
+* human review,
+* validation,
+* and oversight
+are essential.
+---
+# 5. Could This Create Bias, Harm Or Embarrassment?
+## Ask Yourself:
+Could this:
+* create reputational risk?
+* misrepresent someone?
+* introduce bias?
+* create offensive or inappropriate content?
+* cause customer concern?
+AI-generated outputs should always be reviewed for:
+* fairness,
+* tone,
+* and context.
+---
+# 6. Would I Know What To Do If Something Went Wrong?
+## Ask Yourself:
+If this created:
+* an incident,
+* data exposure,
+* customer issue,
+* or governance concern,
+would I know:
+* who to contact,
+* how to escalate,
+* and what process to follow?
+If not:
+review organisational guidance before proceeding.
+---
+# Real-World Scenario
+## “It only took 30 seconds.”
+An employee uses a public AI chatbot to improve wording in a customer proposal.
+Before submitting the prompt, they pause and apply the checklist.
+They realise:
+* customer information is included,
+* the AI tool is not approved,
+* and the organisation provides a governed enterprise AI alternative.
+The employee switches to the approved platform and removes unnecessary sensitive information before proceeding.
+### Outcome
+* risk reduced
+* governance followed
+* productivity maintained
+* safer operational behaviour applied
+### Key Lesson
+Small pauses often prevent larger incidents.
+---
+# The Purpose Of Governance
+AI governance is not designed to:
+* block productivity,
+* prevent experimentation,
+* or discourage innovation.
+Good governance helps organisations:
+* adopt AI safely,
+* reduce avoidable risk,
+* improve accountability,
+* and scale AI usage responsibly.
+---
+# Red / Amber / Green Exercise
+# GREEN — Safer Behaviour
+* using approved tools
+* checking information sensitivity
+* verifying outputs
+* escalating concerns
+* following governance guidance
+---
+# AMBER — Pause & Review
+* customer-facing outputs
+* internal business summaries
+* AI-generated recommendations
+* new AI tools or plugins
+Requires:
+* additional judgement,
+* review,
+* or oversight.
+---
+# RED — Stop & Escalate
+* confidential information entered into unapproved AI
+* bypassing governance processes
+* using AI outputs without review
+* ignoring operational concerns
+* using unapproved AI tooling
+---
+# Practical Exercise
+## Scenario
+You are about to upload information into an AI tool to:
+* summarise a meeting,
+* generate recommendations,
+* and draft customer communications.
+The meeting notes include:
+* customer names,
+* pricing discussions,
+* and internal staffing concerns.
+### What should you consider first?
+* whether the AI tool is approved
+* whether the information is sensitive
+* whether human review is required
+* whether organisational policy allows this usage
+### Correct Answer
+All of the above.
+---
+# Quick Knowledge Check
+## Which statement is TRUE?
+### A
+“AI governance is designed to block productivity.”
+### B
+“If AI saves time, governance is less important.”
+### C
+“Simple checks before using AI may significantly reduce operational risk.”
+### D
+“Verification is unnecessary if the output looks professional.”
+## Correct Answer
+C
+---
+# Practical Workplace Rule
+Before using AI:
+* pause,
+* think,
+* verify,
+* and apply governance.
+A short review process may prevent:
+* operational incidents,
+* governance failures,
+* customer impact,
+* and reputational damage.
+---
+# Key Takeaways
+* Most AI risks can be reduced through simple behavioural checks.
+* Governance supports safe AI adoption rather than blocking innovation.
+* Human judgement remains essential.
+* Approved tools, verification and escalation reduce operational risk.
+* Small pauses often prevent larger problems.
+* Safe AI usage is a shared organisational responsibility.
+---
+# Module Completion Outcome
+You now understand:
+* how to apply a practical AI safety checklist,
+* how to make safer operational decisions,
+* and how governance supports responsible AI adoption.
+Next module:
+## Final Assessment & AI Safe@Work Certification
+# MODULE 11
+# Final Assessment & AI Safe@Work Certification
+### Duration
+10–15 minutes
+### Learning Outcome
+By the end of this module, learners will:
+* demonstrate understanding of safe AI usage principles,
+* apply governance and operational thinking to realistic scenarios,
+* recognise when escalation and oversight are required,
+* and complete the AI Safe@Work certification assessment.
+---
+# Introduction
+## AI governance is now part of modern workplace responsibility.
+Throughout this course, you have learned:
+* how AI tools process information,
+* why governance matters,
+* how to reduce operational risk,
+* how to identify unsafe usage,
+* and why human oversight remains essential.
+The purpose of this assessment is not to:
+* catch people out,
+* discourage AI usage,
+* or create fear around technology.
+The objective is to confirm that employees can:
+* use AI more safely,
+* recognise governance boundaries,
+* and apply responsible decision-making in day-to-day work.
+---
+# Assessment Overview
+The final assessment contains:
+* multiple choice questions,
+* scenario-based exercises,
+* operational judgement questions,
+* and governance awareness checks.
+Suggested pass mark:
+## 80%
+Assessment outcomes should demonstrate:
+* understanding,
+* judgement,
+* and practical workplace awareness.
+---
+# Scenario-Based Assessment Examples
+# Scenario 1 — Customer Information
+A support employee wants to use AI to summarise a customer complaint email.
+The email contains:
+* names,
+* account references,
+* and sensitive customer information.
+The employee plans to use a free public AI chatbot.
+## Question
+What should the employee do?
+### A
+Use the tool because it improves efficiency.
+### B
+Remove sensitive information and use an approved enterprise AI platform if organisational policy allows.
+### C
+Upload the email without changes because the AI provider is well known.
+### D
+Share the email from a personal account instead.
+## Correct Answer
+B
+---
+# Scenario 2 — AI-Generated Report
+A manager uses AI to generate a business summary for leadership.
+The AI output:
+* looks professional,
+* includes statistics,
+* and provides operational recommendations.
+The manager has not verified the information.
+## Question
+What should happen next?
+### A
+Send the report immediately because the AI sounds confident.
+### B
+Verify important information, review the recommendations and apply human oversight.
+### C
+Assume the AI checked the information automatically.
+### D
+Remove any mention that AI was used.
+## Correct Answer
+B
+---
+# Scenario 3 — Suspicious Request
+An employee receives an urgent Teams message appearing to come from a senior executive requesting immediate payment approval.
+The message:
+* sounds realistic,
+* references genuine projects,
+* and pressures fast action.
+## Question
+What is the safest response?
+### A
+Approve immediately due to urgency.
+### B
+Verify using another approved communication channel and follow organisational process.
+### C
+Ignore approval procedures because the request appears genuine.
+### D
+Forward banking details without verification.
+## Correct Answer
+B
+---
+# Scenario 4 — AI Plugin Discovery
+An employee discovers a browser extension automatically sending webpage content to an external AI service.
+No governance approval exists.
+## Question
+What should the employee do?
+### A
+Ignore it because no issue has happened yet.
+### B
+Continue using it because it saves time.
+### C
+Escalate the issue according to organisational governance or security processes.
+### D
+Recommend everyone else installs it.
+## Correct Answer
+C
+---
+# Scenario 5 — Recruitment Decision
+A hiring manager uses AI to score job candidates automatically.
+The manager notices the AI consistently ranks certain candidates lower without clear reasoning.
+## Question
+What is the safest approach?
+### A
+Trust the AI because it improves efficiency.
+### B
+Review the process critically, apply human oversight and follow organisational recruitment governance.
+### C
+Allow AI to make the final hiring decision independently.
+### D
+Ignore fairness concerns because the tool is automated.
+## Correct Answer
+B
+---
+# Operational Judgement Questions
+# Question
+Which statement is TRUE?
+### A
+“Enterprise AI removes the need for governance.”
+### B
+“Human oversight remains essential when using AI.”
+### C
+“Professional wording guarantees AI accuracy.”
+### D
+“Unapproved AI usage is acceptable if productivity improves.”
+## Correct Answer
+B
+---
+# Question
+What is an example of “shadow AI”?
+### A
+Using approved enterprise AI within policy.
+### B
+Following governance review processes.
+### C
+Using unapproved AI tools or personal AI accounts for business activity.
+### D
+Completing AI awareness training.
+## Correct Answer
+C
+---
+# Question
+Which type of information should generally not be entered into unapproved AI systems?
+### A
+Confidential customer information
+### B
+Passwords and API keys
+### C
+Commercial pricing
+### D
+All of the above
+## Correct Answer
+D
+---
+# Certification Outcome
+Employees who successfully complete the assessment may receive:
+## AI Safe@Work Certification
+The certificate may include:
+* learner name
+* organisation
+* completion date
+* certificate ID
+* expiry/review date
+* course version reference
+---
+# Organisational Benefits
+Completion records may support:
+* governance evidence,
+* workforce awareness tracking,
+* audit readiness,
+* operational maturity,
+* and AI governance initiatives.
+---
+# Continuing Responsibility
+Completing this course does not mean:
+* AI is risk free,
+* governance is no longer required,
+* or human oversight can be removed.
+Safe AI usage requires:
+* ongoing awareness,
+* good judgement,
+* operational governance,
+* and responsible behaviour.
+---
+# Final Workplace Reminder
+Before using AI:
+* pause,
+* think,
+* verify,
+* and follow organisational guidance.
+If unsure:
+> ask before proceeding.
+---
+# Final Key Takeaways
+* AI can provide significant productivity and business benefits.
+* Governance supports safe and responsible AI adoption.
+* Human oversight remains essential.
+* Approved tools, verification and escalation reduce operational risk.
+* Accountability stays with people and organisations, not the AI system.
+* Safe AI usage is a shared organisational responsibility.
+---
+# Course Completion Outcome
+You have completed:
+## AI Safe@Work — Safe AI Usage & Governance Awareness
+You should now be able to:
+* recognise common AI-related risks,
+* apply safer operational behaviours,
+* identify governance concerns,
+* and use AI tools more responsibly within a workplace environment.
+## Congratulations on completing the course.
