@@ -1,6 +1,6 @@
 # Standards refresh cadence
 
-> **Owner:** Founder · **Effective:** 2026-05-19 · **Review:** annual
+> **Owner:** Founder · **Effective:** 2026-05-19 · **Last logged action:** 2026-06-02 · **Review:** annual
 
 ## Cadence
 
@@ -52,3 +52,29 @@ Run through this every quarter. Each ✓ is a precondition to cutting the MINOR 
 ## Skip / delay protocol
 
 If the founder cannot complete the quarterly review on time, the next review is **prioritised over new content**. We do not ship new modules on top of stale citations. Two consecutive skipped reviews triggers a doctrine emergency entry and a public banner: "Last reviewed: YYYY-MM-DD — pending refresh."
+
+---
+
+## Cadence event log
+
+| Date | Event | Trigger | Owner |
+|---|---|---|---|
+| 2026-05-19 | Document opened. Initial subscribed-mailing-list set published as TODOs. | Initial doctrine release. | Founder |
+| 2026-05-19 | First citations bibliography frozen at `citations-bibliography.md`. | Initial doctrine release. | Founder |
+| 2026-05-27 | Quiz + widget shipment (v1.5). New surface added; pre-launch checklist evidence row logged at `.audit/security/owasp-top10-v2-2026-05-31.md` (the OWASP audit doc filename is 2026-05-31 but covers v1.5 too). | Major content change to surface in scope. | Founder |
+| 2026-05-31 | v2 parallel build shipped (11-module governance refresh) at `/v2/`. OWASP Top 10 audit + rate-limit posture audit + v2 module-content source-doc all committed. | New surface. | Founder |
+| 2026-06-02 | Pre-launch security checklist adopted into doctrine as `§ Pre-launch security checklist`. Compliance evidence log at `.audit/security/pre-launch-checklist-2026-06-02.md`. Verdict: PASS on every applicable item; 7 items N/A with documented architectural triggers. | New doctrine section. | Founder |
+| 2026-06-02 | Canary tokens rotation log opened at `.audit/security/canary-tokens.md`. AISW-CT-004 (this file's self-reference) created; AISW-CT-001/002/003 staged pending surface availability. | Closes the `§ Anti-scraping → Open TODOs → .audit/security/canary-tokens.md rotation log` item. | Founder |
+| 2026-06-02 | MSP partner-agreement template extended at `.audit/legal/partners/README.md`. Founding MSP Partner programme spec at `.audit/legal/founding-msp-partner-programme.md`. MSP tier feature matrix at `.audit/legal/msp-tier-feature-matrix.md`. Two-entity structure decision pending at `.audit/legal/two-entity-structure-pending.md`. | Closes 4 of the `§ MSP commercial model → Open TODOs` + 1 of the `§ Open strategic TODOs`. | Founder |
+| 2026-06-02 | Five role-track outlines locked at `.audit/course-quality/role-track-outlines/`. Three sector-overlay outlines locked at `.audit/course-quality/sector-overlays/`. Each is scope-locking, not full content. | Closes the relevant `§ Open strategic TODOs` items. | Founder |
+| 2026-06-02 | This event log added to refresh-cadence.md. | Doctrine implementation pack. | Founder |
+
+---
+
+## Next quarterly review — pre-conditions
+
+The Q3 2026 review (target first week of August 2026) cannot start until:
+
+- All TODO mailing-list subscriptions are active. Currently zero subscriptions; this is the **first hard prerequisite**.
+- Canonical domain (`aisafeatwork.org`) is live OR a documented decision is made to stay on the Netlify subdomain through Q3.
+- Any commit shipped since 2026-06-02 that introduced a new surface has a pre-launch-checklist evidence row recorded.
