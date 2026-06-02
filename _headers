@@ -52,6 +52,20 @@
   X-Robots-Tag: noai, noimageai, nosnippet, noindex, nofollow
 
 # ────────────────────────────────────────────────────────────────────
+# v2 (MVP rebuild) — parallel-run as the /v2/* path. noindex while in trial.
+# Tighter CSP than the legacy site-wide default: no inline styles, only
+# the manifest.json fetch is permitted via connect-src 'self'.
+# ────────────────────────────────────────────────────────────────────
+/v2/*
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; object-src 'none'; upgrade-insecure-requests
+  X-Robots-Tag: noindex, nofollow
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()
+  Cache-Control: public, max-age=300, must-revalidate
+
+# ────────────────────────────────────────────────────────────────────
 # Audit pack — should never be served via Netlify (also redirected to 404
 # in netlify.toml). Belt-and-braces header.
 # ────────────────────────────────────────────────────────────────────

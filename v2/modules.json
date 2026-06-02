@@ -1,0 +1,84 @@
+{
+  "version": "v2.0.0-mvp",
+  "lastUpdated": "2026-05-31",
+  "doctrineRef": "DOCTRINE.md § Course content v2 — 11-module governance refresh",
+  "modules": [
+    {
+      "id": 1,
+      "file": "module-1.html",
+      "title": "Why AI Governance Matters",
+      "duration": "7–10 min",
+      "summary": "Shadow AI, operational risk, and why governance now sits in every employee's day-to-day work."
+    },
+    {
+      "id": 2,
+      "file": "module-2.html",
+      "title": "What AI Tools Actually Do With What You Type",
+      "duration": "8–12 min",
+      "summary": "How prompts are processed. Consumer vs enterprise AI. Common misunderstandings around retention."
+    },
+    {
+      "id": 3,
+      "file": "module-3.html",
+      "title": "The Never-Paste List",
+      "duration": "8–10 min",
+      "summary": "Five categories of information that do not belong in unapproved AI systems. The small-snippet problem."
+    },
+    {
+      "id": 4,
+      "file": "module-4.html",
+      "title": "Picking The Right Tool For The Job",
+      "duration": "8–12 min",
+      "summary": "Three AI tool categories. A five-question selection check. Decision tree for sensitive work."
+    },
+    {
+      "id": 5,
+      "file": "module-5.html",
+      "title": "Verifying What The AI Tells You",
+      "duration": "10–12 min",
+      "summary": "Why AI hallucinates. Five common failure types. The four verification rules."
+    },
+    {
+      "id": 6,
+      "file": "module-6.html",
+      "title": "AI-Powered Scams Aimed At You",
+      "duration": "10–12 min",
+      "summary": "AI-generated phishing, voice impersonation, deepfakes, and the four verification rules that still work."
+    },
+    {
+      "id": 7,
+      "file": "module-7.html",
+      "title": "Bias, Fairness, And Not Embarrassing The Business",
+      "duration": "9–12 min",
+      "summary": "Where AI bias comes from. Areas requiring extra caution. Four practical safeguards."
+    },
+    {
+      "id": 8,
+      "file": "module-8.html",
+      "title": "Logging, Accountability, And Auditability",
+      "duration": "8–10 min",
+      "summary": "Why AI usage should not be invisible. Four accountability principles. Practical auditability examples."
+    },
+    {
+      "id": 9,
+      "file": "module-9.html",
+      "title": "AI Incidents, Escalation, And What To Do When Something Goes Wrong",
+      "duration": "8–10 min",
+      "summary": "What counts as an AI incident. When to escalate. What good escalation looks like."
+    },
+    {
+      "id": 10,
+      "file": "module-10.html",
+      "title": "The 60-Second AI Safety Checklist",
+      "duration": "5–7 min",
+      "summary": "Six questions to ask before every AI interaction. The pause that prevents most incidents."
+    },
+    {
+      "id": 11,
+      "file": "module-11.html",
+      "title": "Final Assessment & AI Safe@Work Certification",
+      "duration": "10–15 min",
+      "summary": "Five scenario-based assessments + three operational judgement questions. 80% pass mark. Certification on success."
+    }
+  ]
+}

@@ -275,6 +275,61 @@ main.gate {
 </head>
 <body>
 
+<!-- v1 → v2 banner (self-contained, dismissible) -->
+<style>
+.v1-to-v2-banner {
+  position: relative; z-index: 50;
+  background: linear-gradient(90deg, rgba(232,167,38,0.18), rgba(232,167,38,0.06));
+  border-bottom: 1px solid rgba(232,167,38,0.32);
+  padding: 0.55rem 1rem;
+  text-align: center;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: #eef2f7;
+}
+.v1-to-v2-banner strong { color: var(--accent, #e8a726); font-weight: 700; }
+.v1-to-v2-banner a {
+  color: var(--accent, #e8a726);
+  font-weight: 700;
+  margin-left: 0.5rem;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(232,167,38,0.5);
+}
+.v1-to-v2-banner a:hover { border-bottom-style: solid; }
+.v1-to-v2-banner-close {
+  background: none; border: 0;
+  color: #879eb7;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0 0.4rem;
+  margin-left: 0.6rem;
+}
+.v1-to-v2-banner-close:hover { color: #eef2f7; }
+@media print { .v1-to-v2-banner { display: none; } }
+</style>
+<div id="v1-to-v2-banner" class="v1-to-v2-banner" hidden>
+  <strong>New:</strong> a governance-led 11-module rebuild is being trialled in parallel.
+  <a href="/v2/">Try v2 →</a>
+  <button type="button" class="v1-to-v2-banner-close" aria-label="Dismiss banner" id="v1-to-v2-banner-close">×</button>
+</div>
+<script>
+(function () {
+  try {
+    var KEY = 'aisw-v2-banner-dismissed';
+    if (localStorage.getItem(KEY) === '1') return;
+    var b = document.getElementById('v1-to-v2-banner');
+    if (!b) return;
+    b.hidden = false;
+    document.getElementById('v1-to-v2-banner-close').addEventListener('click', function () {
+      try { localStorage.setItem(KEY, '1'); } catch (e) {}
+      b.style.display = 'none';
+    });
+  } catch (e) {}
+})();
+</script>
+
 <main class="gate">
   <header class="gate-header">
     <a href="course.html" class="brand">AI&nbsp;Safe@Work</a>
