@@ -1,84 +1,175 @@
 {
   "version": "v2.0.0-mvp",
-  "lastUpdated": "2026-05-31",
+  "lastUpdated": "2026-06-02",
   "doctrineRef": "DOCTRINE.md § Course content v2 — 11-module governance refresh",
+  "i18n": {
+    "supportedLocales": ["en", "fr", "de"],
+    "defaultLocale": "en",
+    "machineTranslated": ["fr", "de"],
+    "nativeReviewPending": ["fr", "de"]
+  },
+  "ui": {
+    "en": {
+      "previous": "← Previous",
+      "next": "Next →",
+      "atStart": "You are at the start",
+      "courseComplete": "Course complete →",
+      "backToOverview": "Back to overview",
+      "moduleOfN": "Module {n} of {total}",
+      "markComplete": "Mark this module complete →",
+      "marked": "✓ Marked complete",
+      "yourProgress": "Your progress",
+      "ofComplete": "{c} of {n} complete ({pct}%)",
+      "done": "✓ done"
+    },
+    "fr": {
+      "previous": "← Précédent",
+      "next": "Suivant →",
+      "atStart": "Vous êtes au début",
+      "courseComplete": "Cours terminé →",
+      "backToOverview": "Retour au sommaire",
+      "moduleOfN": "Module {n} sur {total}",
+      "markComplete": "Marquer ce module comme terminé →",
+      "marked": "✓ Terminé",
+      "yourProgress": "Votre progression",
+      "ofComplete": "{c} sur {n} terminé ({pct}%)",
+      "done": "✓ terminé"
+    },
+    "de": {
+      "previous": "← Zurück",
+      "next": "Weiter →",
+      "atStart": "Sie sind am Anfang",
+      "courseComplete": "Kurs abgeschlossen →",
+      "backToOverview": "Zurück zur Übersicht",
+      "moduleOfN": "Modul {n} von {total}",
+      "markComplete": "Modul als abgeschlossen markieren →",
+      "marked": "✓ Abgeschlossen",
+      "yourProgress": "Ihr Fortschritt",
+      "ofComplete": "{c} von {n} abgeschlossen ({pct}%)",
+      "done": "✓ erledigt"
+    }
+  },
   "modules": [
     {
       "id": 1,
       "file": "module-1.html",
       "title": "Why AI Governance Matters",
       "duration": "7–10 min",
-      "summary": "Shadow AI, operational risk, and why governance now sits in every employee's day-to-day work."
+      "summary": "Shadow AI, operational risk, and why governance now sits in every employee's day-to-day work.",
+      "locales": {
+        "fr": { "title": "Pourquoi la gouvernance de l'IA compte", "duration": "7–10 min", "summary": "Shadow AI, risque opérationnel, et pourquoi la gouvernance s'invite dans le quotidien de chaque employé." },
+        "de": { "title": "Warum KI-Governance wichtig ist", "duration": "7–10 Min.", "summary": "Schatten-KI, operatives Risiko und warum Governance in den Arbeitsalltag jedes Mitarbeiters gehört." }
+      }
     },
     {
       "id": 2,
       "file": "module-2.html",
       "title": "What AI Tools Actually Do With What You Type",
       "duration": "8–12 min",
-      "summary": "How prompts are processed. Consumer vs enterprise AI. Common misunderstandings around retention."
+      "summary": "How prompts are processed. Consumer vs enterprise AI. Common misunderstandings around retention.",
+      "locales": {
+        "fr": { "title": "Ce que les outils d'IA font réellement avec vos saisies", "duration": "8–12 min", "summary": "Comment les invites sont traitées. IA grand public vs entreprise. Idées reçues sur la rétention." },
+        "de": { "title": "Was KI-Tools wirklich mit Ihren Eingaben tun", "duration": "8–12 Min.", "summary": "Wie Prompts verarbeitet werden. Consumer- vs. Enterprise-KI. Häufige Missverständnisse zur Speicherung." }
+      }
     },
     {
       "id": 3,
       "file": "module-3.html",
       "title": "The Never-Paste List",
       "duration": "8–10 min",
-      "summary": "Five categories of information that do not belong in unapproved AI systems. The small-snippet problem."
+      "summary": "Five categories of information that do not belong in unapproved AI systems. The small-snippet problem.",
+      "locales": {
+        "fr": { "title": "La liste « ne jamais coller »", "duration": "8–10 min", "summary": "Cinq catégories d'informations à ne pas saisir dans des systèmes non approuvés. Le problème du petit extrait." },
+        "de": { "title": "Die „Niemals einfügen\"-Liste", "duration": "8–10 Min.", "summary": "Fünf Kategorien von Informationen, die nicht in nicht genehmigte KI-Systeme gehören. Das Kleinauszug-Problem." }
+      }
     },
     {
       "id": 4,
       "file": "module-4.html",
       "title": "Picking The Right Tool For The Job",
       "duration": "8–12 min",
-      "summary": "Three AI tool categories. A five-question selection check. Decision tree for sensitive work."
+      "summary": "Three AI tool categories. A five-question selection check. Decision tree for sensitive work.",
+      "locales": {
+        "fr": { "title": "Choisir le bon outil pour la tâche", "duration": "8–12 min", "summary": "Trois catégories d'outils d'IA. Cinq questions de sélection. Arbre de décision pour le travail sensible." },
+        "de": { "title": "Das richtige Tool für die Aufgabe wählen", "duration": "8–12 Min.", "summary": "Drei KI-Tool-Kategorien. Fünf Auswahlfragen. Entscheidungsbaum für sensible Arbeit." }
+      }
     },
     {
       "id": 5,
       "file": "module-5.html",
       "title": "Verifying What The AI Tells You",
       "duration": "10–12 min",
-      "summary": "Why AI hallucinates. Five common failure types. The four verification rules."
+      "summary": "Why AI hallucinates. Five common failure types. The four verification rules.",
+      "locales": {
+        "fr": { "title": "Vérifier ce que l'IA vous dit", "duration": "10–12 min", "summary": "Pourquoi l'IA hallucine. Cinq types d'échec courants. Les quatre règles de vérification." },
+        "de": { "title": "Verifizieren, was die KI Ihnen sagt", "duration": "10–12 Min.", "summary": "Warum KI halluziniert. Fünf häufige Fehlertypen. Die vier Verifikationsregeln." }
+      }
     },
     {
       "id": 6,
       "file": "module-6.html",
       "title": "AI-Powered Scams Aimed At You",
       "duration": "10–12 min",
-      "summary": "AI-generated phishing, voice impersonation, deepfakes, and the four verification rules that still work."
+      "summary": "AI-generated phishing, voice impersonation, deepfakes, and the four verification rules that still work.",
+      "locales": {
+        "fr": { "title": "Arnaques alimentées par l'IA contre vous", "duration": "10–12 min", "summary": "Phishing IA, usurpation vocale, deepfakes, et les quatre règles de vérification qui tiennent encore." },
+        "de": { "title": "KI-gestützte Angriffe gegen Sie", "duration": "10–12 Min.", "summary": "KI-Phishing, Stimmen-Identitätsbetrug, Deepfakes und die vier Verifikationsregeln, die noch funktionieren." }
+      }
     },
     {
       "id": 7,
       "file": "module-7.html",
       "title": "Bias, Fairness, And Not Embarrassing The Business",
       "duration": "9–12 min",
-      "summary": "Where AI bias comes from. Areas requiring extra caution. Four practical safeguards."
+      "summary": "Where AI bias comes from. Areas requiring extra caution. Four practical safeguards.",
+      "locales": {
+        "fr": { "title": "Biais, équité, et ne pas embarrasser l'entreprise", "duration": "9–12 min", "summary": "D'où vient le biais IA. Domaines exigeant une vigilance accrue. Quatre garde-fous pratiques." },
+        "de": { "title": "Bias, Fairness und das Unternehmen nicht blamieren", "duration": "9–12 Min.", "summary": "Woher KI-Bias kommt. Bereiche mit erhöhter Aufmerksamkeit. Vier praktische Leitplanken." }
+      }
     },
     {
       "id": 8,
       "file": "module-8.html",
       "title": "Logging, Accountability, And Auditability",
       "duration": "8–10 min",
-      "summary": "Why AI usage should not be invisible. Four accountability principles. Practical auditability examples."
+      "summary": "Why AI usage should not be invisible. Four accountability principles. Practical auditability examples.",
+      "locales": {
+        "fr": { "title": "Journalisation, responsabilité et auditabilité", "duration": "8–10 min", "summary": "Pourquoi l'usage de l'IA ne doit pas être invisible. Quatre principes de responsabilité. Exemples d'auditabilité." },
+        "de": { "title": "Protokollierung, Verantwortung und Auditierbarkeit", "duration": "8–10 Min.", "summary": "Warum KI-Nutzung nicht unsichtbar sein darf. Vier Verantwortungsprinzipien. Praktische Auditierbarkeitsbeispiele." }
+      }
     },
     {
       "id": 9,
       "file": "module-9.html",
       "title": "AI Incidents, Escalation, And What To Do When Something Goes Wrong",
       "duration": "8–10 min",
-      "summary": "What counts as an AI incident. When to escalate. What good escalation looks like."
+      "summary": "What counts as an AI incident. When to escalate. What good escalation looks like.",
+      "locales": {
+        "fr": { "title": "Incidents IA, escalade et que faire quand ça déraille", "duration": "8–10 min", "summary": "Ce qu'est un incident IA. Quand escalader. À quoi ressemble une bonne escalade." },
+        "de": { "title": "KI-Vorfälle, Eskalation und was tun, wenn es schiefgeht", "duration": "8–10 Min.", "summary": "Was ein KI-Vorfall ist. Wann eskalieren. Wie gute Eskalation aussieht." }
+      }
     },
     {
       "id": 10,
       "file": "module-10.html",
       "title": "The 60-Second AI Safety Checklist",
       "duration": "5–7 min",
-      "summary": "Six questions to ask before every AI interaction. The pause that prevents most incidents."
+      "summary": "Six questions to ask before every AI interaction. The pause that prevents most incidents.",
+      "locales": {
+        "fr": { "title": "La check-list 60 secondes pour la sécurité IA", "duration": "5–7 min", "summary": "Six questions avant chaque interaction. La pause qui prévient la plupart des incidents." },
+        "de": { "title": "Die 60-Sekunden-Checkliste für KI-Sicherheit", "duration": "5–7 Min.", "summary": "Sechs Fragen vor jeder KI-Interaktion. Die Pause, die die meisten Vorfälle verhindert." }
+      }
     },
     {
       "id": 11,
       "file": "module-11.html",
       "title": "Final Assessment & AI Safe@Work Certification",
       "duration": "10–15 min",
-      "summary": "Five scenario-based assessments + three operational judgement questions. 80% pass mark. Certification on success."
+      "summary": "Five scenario-based assessments + three operational judgement questions. 80% pass mark. Certification on success.",
+      "locales": {
+        "fr": { "title": "Évaluation finale & certification AI Safe@Work", "duration": "10–15 min", "summary": "Cinq scénarios + trois questions de jugement opérationnel. Note de passage 80%. Certification à la réussite." },
+        "de": { "title": "Abschlussbewertung & AI Safe@Work-Zertifizierung", "duration": "10–15 Min.", "summary": "Fünf Szenariobewertungen + drei Betriebsurteilsfragen. Bestehensschwelle 80%. Zertifizierung bei Erfolg." }
+      }
     }
   ]
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  IMS LRM metadata for the SCORM package above.
+  Kept short on purpose — most LMSs ignore the bulk of LRM. The key fields
+  are title, description, language, version, technical requirements.
+-->
+<lom xmlns="http://www.imsglobal.org/xsd/imsmd_rootv1p2p1"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd">
+  <general>
+    <identifier>aisw-v2-scorm12</identifier>
+    <title><langstring xml:lang="en">AI Safe@Work — Safe AI Usage &amp; Governance Awareness (v2)</langstring></title>
+    <language>en</language>
+    <language>fr</language>
+    <language>de</language>
+    <description><langstring xml:lang="en">Eleven-module governance-led course on safe AI adoption and operational risk for SMB staff. Closes Article 4 AI-literacy obligation under the EU AI Act. SCORM 1.2 + xAPI compatible.</langstring></description>
+    <keyword><langstring xml:lang="en">AI governance</langstring></keyword>
+    <keyword><langstring xml:lang="en">EU AI Act</langstring></keyword>
+    <keyword><langstring xml:lang="en">ISO/IEC 42001</langstring></keyword>
+    <keyword><langstring xml:lang="en">GDPR</langstring></keyword>
+    <keyword><langstring xml:lang="en">Article 4 literacy</langstring></keyword>
+  </general>
+  <lifecycle>
+    <version><langstring>2.0.0</langstring></version>
+    <status><source><langstring>LOMv1.0</langstring></source><value><langstring>final</langstring></value></status>
+    <contribute>
+      <role><source><langstring>LOMv1.0</langstring></source><value><langstring>author</langstring></value></role>
+      <centity>AI Safe@Work (Founder)</centity>
+      <date><datetime>2026-06-02</datetime></date>
+    </contribute>
+  </lifecycle>
+  <technical>
+    <format>text/html</format>
+    <format>text/javascript</format>
+    <format>text/css</format>
+    <format>application/json</format>
+    <requirement>
+      <type><source><langstring>LOMv1.0</langstring></source><value><langstring>browser</langstring></value></type>
+      <name><source><langstring>LOMv1.0</langstring></source><value><langstring>any</langstring></value></name>
+      <minimumversion>modern</minimumversion>
+    </requirement>
+  </technical>
+  <educational>
+    <interactivitytype><source><langstring>LOMv1.0</langstring></source><value><langstring>mixed</langstring></value></interactivitytype>
+    <learningresourcetype><source><langstring>LOMv1.0</langstring></source><value><langstring>narrative text</langstring></value></learningresourcetype>
+    <learningresourcetype><source><langstring>LOMv1.0</langstring></source><value><langstring>self assessment</langstring></value></learningresourcetype>
+    <typicallearningtime><datetime>PT1H30M</datetime></typicallearningtime>
+    <language>en</language>
+  </educational>
+  <rights>
+    <cost><source><langstring>LOMv1.0</langstring></source><value><langstring>no</langstring></value></cost>
+    <copyrightandotherrestrictions><source><langstring>LOMv1.0</langstring></source><value><langstring>yes</langstring></value></copyrightandotherrestrictions>
+    <description><langstring xml:lang="en">Content licensed CC BY-SA 4.0. SCORM package code MIT. See LICENSE files in repo root.</langstring></description>
+  </rights>
+</lom>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SCORM 1.2 manifest for AI Safe@Work v2 (11-module governance refresh).
+  Closes DOCTRINE.md § Procurement-readiness gates → Gate 4 (SCORM 1.2 + xAPI export wrapper).
+
+  Single-SCO package — the entire 11-module course is one Sharable Content Object.
+  Rationale: SCORM 1.2 navigation is brittle; running the whole course as one SCO
+  lets v2.js drive nav internally while we report progress + completion + score
+  back through the SCORM API in a single session.
+
+  Standards posture:
+  - ADL SCORM Content Aggregation Model v1.2 (October 2001)
+  - IMS Content Packaging v1.1.4
+  - Tested against SCORM Cloud (reference) test player schema
+-->
+<manifest identifier="aisw-v2-scorm12"
+          version="2.0.0"
+          xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+          xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                              http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                              http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+    <adlcp:location>metadata.xml</adlcp:location>
+  </metadata>
+
+  <organizations default="AISW-V2-ORG">
+    <organization identifier="AISW-V2-ORG">
+      <title>AI Safe@Work — Safe AI Usage &amp; Governance Awareness</title>
+      <item identifier="AISW-V2-SCO" identifierref="AISW-V2-RES" isvisible="true">
+        <title>AI Safe@Work — full 11-module course</title>
+        <adlcp:masteryscore>80</adlcp:masteryscore>
+        <adlcp:maxtimeallowed>PT2H</adlcp:maxtimeallowed>
+        <adlcp:timelimitaction>continue,no message</adlcp:timelimitaction>
+        <adlcp:datafromlms></adlcp:datafromlms>
+        <adlcp:prerequisites type="aicc_script"></adlcp:prerequisites>
+      </item>
+    </organization>
+  </organizations>
+
+  <resources>
+    <resource identifier="AISW-V2-RES"
+              type="webcontent"
+              adlcp:scormtype="sco"
+              href="index.html">
+      <file href="index.html"/>
+      <file href="course.html"/>
+      <file href="module-1.html"/>
+      <file href="module-2.html"/>
+      <file href="module-3.html"/>
+      <file href="module-4.html"/>
+      <file href="module-5.html"/>
+      <file href="module-6.html"/>
+      <file href="module-7.html"/>
+      <file href="module-8.html"/>
+      <file href="module-9.html"/>
+      <file href="module-10.html"/>
+      <file href="module-11.html"/>
+      <file href="modules.json"/>
+      <file href="assets/v2.css"/>
+      <file href="assets/v2.js"/>
+      <file href="assets/scorm-api.js"/>
+      <file href="assets/xapi-adapter.js"/>
+    </resource>
+  </resources>
+
+</manifest>

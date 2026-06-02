@@ -15,8 +15,63 @@
   // ── Constants ─────────────────────────────────────────────
   var LS_PROGRESS = 'aisw-v2-progress';
   var LS_BANNER_DISMISSED = 'aisw-v2-banner-dismissed';
-  var MANIFEST_URL = 'modules.json';
   var MAX_WRITES_PER_SEC = 10;
+
+  // Manifest path is locale-aware: FR/DE pages live in /v2/{locale}/ so the
+  // manifest is one level up. Computed at runtime — DEFAULT FALLBACK IS 'modules.json'
+  // for the EN root pages.
+  function manifestUrl() {
+    var p = (window.location && window.location.pathname) || '/';
+    if (p.indexOf('/v2/fr/') !== -1 || p.indexOf('/v2/de/') !== -1) {
+      return '../modules.json';
+    }
+    return 'modules.json';
+  }
+
+  // Default UI string fallback (used if manifest.ui[locale] missing).
+  var UI_FALLBACK = {
+    previous: '← Previous',
+    next: 'Next →',
+    atStart: 'You are at the start',
+    courseComplete: 'Course complete →',
+    backToOverview: 'Back to overview',
+    moduleOfN: 'Module {n} of {total}',
+    markComplete: 'Mark this module complete →',
+    marked: '✓ Marked complete',
+    yourProgress: 'Your progress',
+    ofComplete: '{c} of {n} complete ({pct}%)',
+    done: '✓ done'
+  };
+  function fmt(s, vars) {
+    return String(s).replace(/\{(\w+)\}/g, function (_, k) {
+      return vars && vars[k] != null ? String(vars[k]) : '';
+    });
+  }
+  function getUi(manifest) {
+    var loc = detectLocaleFromPath();
+    if (manifest && manifest.ui && manifest.ui[loc]) {
+      // Merge locale strings over fallback to tolerate partial localisation.
+      var merged = {};
+      Object.keys(UI_FALLBACK).forEach(function (k) { merged[k] = UI_FALLBACK[k]; });
+      Object.keys(manifest.ui[loc]).forEach(function (k) { merged[k] = manifest.ui[loc][k]; });
+      return merged;
+    }
+    return UI_FALLBACK;
+  }
+  // Localise a module record: prefer m.locales[loc].{title,summary,duration} when present.
+  function localiseModule(m, loc) {
+    if (loc !== 'en' && m && m.locales && m.locales[loc]) {
+      var l = m.locales[loc];
+      return {
+        id: m.id,
+        file: m.file,
+        title: l.title || m.title,
+        duration: l.duration || m.duration,
+        summary: l.summary || m.summary
+      };
+    }
+    return m;
+  }
 
   // ── Throttled localStorage writer (rate-limit posture) ────
   var lastWriteTimes = [];
@@ -70,6 +125,37 @@
     var progress = loadProgress();
     progress[String(moduleId)] = 'complete';
     saveProgress(progress);
+    // Fan out to SCORM + xAPI adapters if present. Both no-op if not connected.
+    var n = parseInt(moduleId, 10);
+    var completed = Object.keys(progress).map(function (k) { return parseInt(k, 10); }).filter(Boolean);
+    var locale = detectLocaleFromPath();
+    try {
+      if (window.AISW_SCORM && window.AISW_SCORM.isConnected()) {
+        window.AISW_SCORM.markModuleComplete(n, completed);
+      }
+      if (window.AISW_XAPI && window.AISW_XAPI.isConfigured()) {
+        window.AISW_XAPI.moduleCompleted(n, locale);
+      }
+      // If this completion was the 11th module, push the course-completion signal too.
+      if (completed.length >= 11) {
+        var score = 100; // Self-assessment in module 11 caps at 100; real score
+                        // captured per-question is a roadmap item (cmi.interactions).
+        if (window.AISW_SCORM && window.AISW_SCORM.isConnected()) {
+          window.AISW_SCORM.markCourseComplete(score);
+        }
+        if (window.AISW_XAPI && window.AISW_XAPI.isConfigured()) {
+          window.AISW_XAPI.coursePassed(score, locale);
+        }
+      }
+    } catch (e) {
+      console.warn('[v2] SCORM/xAPI fan-out threw', e && e.message);
+    }
+  }
+  function detectLocaleFromPath() {
+    var p = (window.location && window.location.pathname) || '/';
+    if (p.indexOf('/v2/fr/') !== -1) return 'fr';
+    if (p.indexOf('/v2/de/') !== -1) return 'de';
+    return 'en';
   }
   function isComplete(moduleId) {
     var progress = loadProgress();
@@ -83,7 +169,7 @@
   var _manifestCache = null;
   function loadManifest() {
     if (_manifestCache) return Promise.resolve(_manifestCache);
-    return fetch(MANIFEST_URL, { method: 'GET', credentials: 'omit', cache: 'default' })
+    return fetch(manifestUrl(), { method: 'GET', credentials: 'omit', cache: 'default' })
       .then(function (resp) {
         if (!resp.ok) throw new Error('manifest fetch failed: ' + resp.status);
         return resp.json();
@@ -101,12 +187,12 @@
         });
         // Sort by id ascending for nav determinism.
         clean.sort(function (a, b) { return a.id - b.id; });
-        _manifestCache = { version: data.version, modules: clean };
+        _manifestCache = { version: data.version, modules: clean, ui: data.ui || null, i18n: data.i18n || null };
         return _manifestCache;
       })
       .catch(function (e) {
         console.error('[v2] manifest load failed', e);
-        return { version: 'unknown', modules: [] };
+        return { version: 'unknown', modules: [], ui: null, i18n: null };
       });
   }
 
@@ -162,7 +248,9 @@
     var mid = parseInt(document.body.dataset.moduleId || '0', 10);
     if (!mid) return;
     loadManifest().then(function (manifest) {
-      var modules = manifest.modules;
+      var loc = detectLocaleFromPath();
+      var ui = getUi(manifest);
+      var modules = manifest.modules.map(function (m) { return localiseModule(m, loc); });
       var idx = -1;
       for (var i = 0; i < modules.length; i++) {
         if (modules[i].id === mid) { idx = i; break; }
@@ -175,13 +263,13 @@
       if (prevMount) {
         if (prev) {
           prevMount.appendChild(el('a', { class: 'v2-nav-btn', href: prev.file }, [
-            el('span', { class: 'v2-nav-dir' }, ['← Previous']),
+            el('span', { class: 'v2-nav-dir' }, [ui.previous]),
             el('span', {}, ['Module ' + pad2(prev.id) + ' · ' + prev.title])
           ]));
         } else {
           prevMount.appendChild(el('a', { class: 'v2-nav-btn disabled', 'aria-disabled': 'true' }, [
-            el('span', { class: 'v2-nav-dir' }, ['Previous']),
-            el('span', {}, ['You are at the start'])
+            el('span', { class: 'v2-nav-dir' }, [ui.previous.replace(/^[← ]+/, '')]),
+            el('span', {}, [ui.atStart])
           ]));
         }
       }
@@ -191,13 +279,13 @@
       if (nextMount) {
         if (next) {
           nextMount.appendChild(el('a', { class: 'v2-nav-btn', href: next.file }, [
-            el('span', { class: 'v2-nav-dir' }, ['Next →']),
+            el('span', { class: 'v2-nav-dir' }, [ui.next]),
             el('span', {}, ['Module ' + pad2(next.id) + ' · ' + next.title])
           ]));
         } else {
           nextMount.appendChild(el('a', { class: 'v2-nav-btn', href: 'course.html' }, [
-            el('span', { class: 'v2-nav-dir' }, ['Course complete →']),
-            el('span', {}, ['Back to overview'])
+            el('span', { class: 'v2-nav-dir' }, [ui.courseComplete]),
+            el('span', {}, [ui.backToOverview])
           ]));
         }
       }
@@ -208,10 +296,10 @@
         var refreshBtn = function () {
           if (isComplete(mid)) {
             btn.classList.add('is-done');
-            btn.textContent = '✓ Marked complete';
+            btn.textContent = ui.marked;
           } else {
             btn.classList.remove('is-done');
-            btn.textContent = 'Mark this module complete →';
+            btn.textContent = ui.markComplete;
           }
         };
         btn.addEventListener('click', function () {
@@ -225,7 +313,7 @@
       // Module-of-N strip in eyebrow if requested
       var ofN = document.querySelector('[data-mod-of-n]');
       if (ofN) {
-        ofN.textContent = 'Module ' + pad2(mid) + ' of ' + pad2(modules.length);
+        ofN.textContent = fmt(ui.moduleOfN, { n: pad2(mid), total: pad2(modules.length) });
       }
     });
   }
@@ -235,7 +323,9 @@
     var grid = document.getElementById('module-grid-mount');
     if (!grid) return;
     loadManifest().then(function (manifest) {
-      var modules = manifest.modules;
+      var loc = detectLocaleFromPath();
+      var ui = getUi(manifest);
+      var modules = manifest.modules.map(function (m) { return localiseModule(m, loc); });
       var done = loadProgress();
       // Clear via replaceChildren() so the OWASP A03 grep stays clean
       // (no assignment via the DOM string-property anywhere in v2.js).
@@ -246,7 +336,7 @@
             'Module ' + pad2(m.id),
             el('span', {
               class: 'v2-status ' + (done[String(m.id)] === 'complete' ? 'done' : 'todo')
-            }, [done[String(m.id)] === 'complete' ? '✓ done' : m.duration])
+            }, [done[String(m.id)] === 'complete' ? ui.done : m.duration])
           ]),
           el('h3', {}, [m.title]),
           el('p', {}, [m.summary])
@@ -263,8 +353,8 @@
         }).length;
         var pct = n > 0 ? Math.round((c / n) * 100) : 0;
         progressMount.appendChild(el('div', { class: 'v2-overall-progress-label' }, [
-          'Your progress',
-          el('span', {}, [c + ' of ' + n + ' complete (' + pct + '%)'])
+          ui.yourProgress,
+          el('span', {}, [fmt(ui.ofComplete, { c: c, n: n, pct: pct })])
         ]));
         var bar = el('div', { class: 'v2-overall-progress-bar' });
         var fill = el('div', { class: 'v2-overall-progress-fill' });

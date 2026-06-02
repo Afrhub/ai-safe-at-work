@@ -1,0 +1,32 @@
+{
+  "_comment_1": "AI Safe@Work v2 — xAPI LRS configuration template.",
+  "_comment_2": "Closes DOCTRINE.md § Procurement-readiness gates → Gate 4 (xAPI buyer-handoff half).",
+  "_comment_3": "Copy this template, fill the fields, and either (a) host as JSON your LMS can inject into window.AISW_XAPI_CONFIG before xapi-adapter.js loads, or (b) translate into URL params: ?lrs=ENDPOINT&auth=BASE64. The adapter accepts both.",
+  "_comment_4": "Never check the filled version into a public repo — it contains an LRS bearer token or basic-auth credentials.",
+
+  "endpoint": "https://YOUR-LRS-DOMAIN.example.com/xapi/",
+
+  "auth": "Basic BASE64_ENCODED_USER_COLON_PASSWORD",
+
+  "actor": {
+    "objectType": "Agent",
+    "name": "LEARNER FULL NAME",
+    "account": {
+      "homePage": "https://aisafeatwork.org/v2/",
+      "name": "BUYER-STABLE-LEARNER-ID"
+    }
+  },
+
+  "_csp_requirement": "Add the LRS origin to connect-src in your page CSP. The default v2 CSP is `connect-src 'self'` and will block the POST until updated.",
+
+  "_supported_lrs_examples": [
+    "Watershed LRS",
+    "Learning Locker (HT2 Labs)",
+    "Yet Analytics",
+    "Veracity Learning",
+    "SCORM Cloud (xAPI side)",
+    "ADL LRS (open-source reference)"
+  ],
+
+  "_validation_url": "See .audit/integrations/xapi-statements-spec.md for the full statement catalogue and a step-by-step buyer validation procedure."
+}

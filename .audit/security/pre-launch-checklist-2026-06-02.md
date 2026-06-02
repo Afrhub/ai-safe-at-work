@@ -124,8 +124,82 @@ All commands must return zero hits (or, for the last one, the expected line). Re
 | Date | Run by | Result | Notes |
 |---|---|---|---|
 | 2026-06-02 | Founder | All applicable items PASS. All others N/A with documented trigger. No fixes required. | Initial adoption of the checklist; baseline. |
+| 2026-06-02 (eve) | Founder | All applicable items PASS. Gate-bearing change: SCORM 1.2 + xAPI + i18n shell shipped. | Re-run triggered by new surface set (SCORM packaging, xAPI POST emitter, FR + DE locale subdirectories). See § Gate-bearing change log below. |
 | TBD (Q3 2026) | Founder | — | Re-run on canonical-domain move + Cloudflare Pages migration. Expect at least the `Cache-Control` defaults to need re-verifying. |
 | TBD (Q4 2026) | Founder | — | Re-run before any paid surface lifts from `noindex`. Will flip several N/A items to required. |
+
+---
+
+## Gate-bearing change log — 2026-06-02 evening
+
+Per `DOCTRINE.md § Pre-launch security checklist`: any commit introducing a new surface / endpoint / form / dependency / third-party integration MUST log an evidence row before merge.
+
+### Change set
+
+1. **SCORM 1.2 packaging surface** — `v2/scorm/imsmanifest.xml`, `v2/scorm/metadata.xml`, `v2/scorm/README.md`, `v2/assets/scorm-api.js`, `scripts/build-scorm.py`, `dist/ai-safe-at-work-scorm-v2-en.zip`.
+2. **xAPI (Tin Can) emitter surface** — `v2/assets/xapi-adapter.js`, `.audit/integrations/xapi-statements-spec.md`, `.audit/integrations/xapi-config-template.json`.
+3. **i18n locale subdirectories** — `v2/fr/` (13 files), `v2/de/` (13 files), `v2/modules.json` extended with `ui` + `locales` blocks, `v2/assets/v2.js` extended with locale-aware manifest path + UI string lookup.
+
+### Evidence rows
+
+| Item | Status | Evidence |
+|---|---|---|
+| 1.1 Privacy policy still covers new surfaces | PASS | SCORM + xAPI fire only when buyer-side LMS / LRS is detected. Default state on aisafeatwork.org: both silent. No data collection added to the public site. `privacy.html` unchanged; new surfaces do not collect on the public origin. |
+| 1.2 Data storage location | PASS | SCORM `cmi.*` data resides on the buyer's LMS. xAPI statements go to the buyer-configured LRS endpoint, never to our origin. `localStorage` progress unchanged. Documented in `.audit/integrations/xapi-statements-spec.md`. |
+| 1.4 Minimal data collection | PASS | xAPI actor defaults to anonymous (`mbox: mailto:anonymous@aisafeatwork.org`) unless buyer supplies their own. No identifier captured by us. |
+| 2.2 Security headers — new surfaces | PASS | xAPI POSTs use `credentials: 'omit'`. CSP `connect-src 'self'` continues to block xAPI by default; buyer-side requirement to add LRS origin is documented in `.audit/integrations/xapi-statements-spec.md` § CSP. |
+| 2.4 XSS — new surfaces | PASS | `v2/assets/scorm-api.js` + `v2/assets/xapi-adapter.js` use no `innerHTML`, no `document.write`, no `eval`. Grep verified: `grep -nE "innerHTML\s*=\|document\.write\(\|eval\(" v2/assets/scorm-api.js v2/assets/xapi-adapter.js` returns zero hits. v2.js i18n extension uses `textContent` exclusively. |
+| 3.2 No keys in frontend | PASS | xAPI auth header read from URL params (`?lrs=&auth=`) or `window.AISW_XAPI_CONFIG` global. Stripped from URL history after read via `history.replaceState`. No defaults committed. |
+| 4.3 Input validation — new surfaces | PASS | xAPI endpoint must be `https://`; rejected otherwise. SCORM API discovery walks parent chain up to 7 levels then `window.opener`; bounded. Locale detection: pathname substring check, fixed enum `{en, fr, de}`. Module ID still validated `/^\d+$/`. |
+| New: same-origin manifest fetch from locale subdirs | PASS | `manifestUrl()` in `v2.js` returns `'../modules.json'` only for paths containing `/v2/fr/` or `/v2/de/`; root pages still get `'modules.json'`. No cross-origin requests introduced. Smoke confirmed 2026-06-02 against `http://127.0.0.1:8765` — manifest 200 from both `/v2/` and `/v2/fr/` contexts. |
+
+### Verification grep
+
+```bash
+# No new HTML-string injection in any of the new surfaces
+grep -nE "innerHTML\s*=|outerHTML\s*=|insertAdjacentHTML\(|document\.write\(|eval\(|new Function\(|setTimeout\(\s*['\"]" \
+  v2/assets/scorm-api.js v2/assets/xapi-adapter.js v2/assets/v2.js
+
+# xAPI POST is HTTPS-gated
+grep -nE "endpoint.*http:" v2/assets/xapi-adapter.js  # expect zero (only the https check matches)
+
+# SCORM zip-slip guard
+grep -n "_safe_arcname" scripts/build-scorm.py
+
+# Locale routing only via pathname substring (no untrusted URL parameter sets locale)
+grep -n "detectLocaleFromPath" v2/assets/v2.js
+```
+
+### Smoke test — 2026-06-02 evening
+
+| URL | Status | Notes |
+|---|---|---|
+| `/v2/index.html` | 200 | EN root landing |
+| `/v2/course.html` | 200 | EN overview, grid populated from `modules.json` |
+| `/v2/modules.json` | 200 | Manifest, 11 modules, locales `[en, fr, de]` |
+| `/v2/fr/index.html`, `/v2/fr/course.html`, `/v2/fr/module-1.html`, `/v2/fr/module-11.html` | 200 each | FR shell, banner present, `data-module-id` preserved |
+| `/v2/de/index.html`, `/v2/de/course.html`, `/v2/de/module-1.html`, `/v2/de/module-11.html` | 200 each | DE shell, banner present, `data-module-id` preserved |
+| `/v2/assets/{v2.js, scorm-api.js, xapi-adapter.js}` | 200 each | Adapters served at correct path |
+| `/v2/scorm/imsmanifest.xml` | 200 | SCORM CAM v1.2 manifest reachable |
+| Manifest fetch from `/v2/fr/` context (`'../modules.json'`) | 200 | Locale-aware routing works |
+| FR M1 title via manifest | "Pourquoi la gouvernance de l'IA compte" | Locale string lookup wired |
+| DE M1 title via manifest | "Warum KI-Governance wichtig ist" | Locale string lookup wired |
+| FR `markComplete` UI string | "Marquer ce module comme terminé →" | UI dictionary picked correctly |
+| DE `markComplete` UI string | "Modul als abgeschlossen markieren →" | UI dictionary picked correctly |
+| `dist/ai-safe-at-work-scorm-v2-en.zip` | 61227 bytes | SCORM package builds reproducibly |
+
+### Open follow-ups (do not block this commit)
+
+- **Native FR + DE review.** Banner declares machine-translation status on every locale page. Gate 5 closes only after native review.
+- **Locale switcher polish.** Currently appears only in the topbar nav. Acceptable for MVP.
+- **DE SCORM + FR SCORM packages.** `scripts/build-scorm.py --locale all` exists; per-locale zips ship when each locale gates native review.
+
+### Sign-off (gate-bearing change)
+
+| Role | Name | Date |
+|---|---|---|
+| Auditor | Founder (self-audit) | 2026-06-02 (evening) |
+| Verdict | **PASS — SCORM + xAPI + i18n shell production-ready. FR + DE flagged as machine-translation pending native review on every page.** | — |
 
 ---
 
