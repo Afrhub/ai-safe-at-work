@@ -1349,6 +1349,62 @@ Append below as decisions land. Use `/aos-log` for global cross-project decision
 
 ---
 
+## § Pre-launch security checklist (added 2026-06-02)
+
+> Source: external "Ship Products, Not Liabilities" checklist for AI builders shipping with Cursor, GPT, Bolt, Replit and similar tools. Adopted verbatim as doctrine. Treated as a hard gate on every commit that introduces a new surface, endpoint, form, dependency, or third-party integration. Full per-item evidence log lives at `.audit/security/pre-launch-checklist-2026-06-02.md` and is re-walked quarterly per § Refresh cadence — operational.
+
+### 01 — Legal & Privacy
+
+| # | Checklist item | Required by AI Safe@Work | How we comply |
+|---|---|---|---|
+| 1.1 | Add a privacy policy to your app | Yes | `privacy.html` published at site root. Plain English. Lists every data category collected (current answer: none). Reviewed on every quarterly refresh. |
+| 1.2 | Know exactly where user data is stored | Yes | Static-only architecture; no user data is collected by AI Safe@Work itself. The only client-side state is `localStorage` (browser-local, never transmitted). Documented in `privacy.html` and in `.audit/privacy/ropa.md`. |
+| 1.3 | Understand your GDPR / data law obligations | Yes | EU-first project; full RoPA, sub-processor register, DPIA on own AI use, breach-response plan and retention schedule live in `.audit/privacy/`. Public-facing privacy notice covers GDPR + UK GDPR. Cookie consent is N/A — no cookies are set. Data-deletion endpoint is N/A — no data is held. If/when a paid surface adds an account system, all three flip to mandatory; gates 16–20 in § Procurement-readiness gates capture the launch blockers. |
+| 1.4 | Don't collect data you don't need | Yes | Zero-collection by default. New data fields require explicit doctrine sign-off + RoPA update before shipping. |
+| 1.5 | Add a terms of service page | Yes | `terms.html` published at site root. Commercial-tier Terms extension (gates list item 18) is a documented launch blocker before pricing.html comes out of `noindex`. |
+
+### 02 — Security basics
+
+| # | Checklist item | Required by AI Safe@Work | How we comply |
+|---|---|---|---|
+| 2.1 | Scan against OWASP Top 10 | Yes | Full 2021 Top 10 review for v2 at `.audit/security/owasp-top10-v2-2026-05-31.md`. v1 carries forward a lighter posture documented in the same folder; a v1-equivalent review is appended on any v1 architectural change. |
+| 2.2 | Check all security headers | Yes | Site-wide `_headers` block ships HSTS preload + X-Content-Type-Options + X-Frame-Options DENY + Referrer-Policy + Permissions-Policy + Content-Security-Policy + Cross-Origin-Opener-Policy + Cross-Origin-Resource-Policy + X-XSS-Protection:0. `/v2/*` ships a stricter CSP and `Referrer-Policy: no-referrer`. |
+| 2.3 | Test for SQL injection on every input | Yes | N/A by architecture — no database in either v1 or v2. The only persistent state is browser-local `localStorage`, accessed through helpers that shape-validate inputs (`/^\d+$/` on keys, enum check on values). If/when a backend is introduced, parameterised queries and prepared statements are doctrine; never string concatenation. |
+| 2.4 | Test for XSS | Yes | All client-side DOM updates in `v2/assets/v2.js` use `createTextNode()` + `setAttribute()`. No `innerHTML = ...` of user-derived data anywhere; verification grep documented in OWASP doc. Strict CSP (`script-src 'self'`, no inline scripts, no `'unsafe-inline'` in v2 styles, `object-src 'none'`) blocks injected payloads at the browser. `cert.html` user-name input is escaped via `escapeHtml()` before insertion. |
+| 2.5 | Verify authentication and session handling | Yes | N/A by architecture — no auth, no sessions. If/when a paid surface ships, doctrine: device-bound MFA on every account, refresh-token rotation, no opaque tokens in localStorage (httpOnly+SameSite=Strict cookies only), short-TTL access tokens + rotating refresh. Procurement-readiness gate 17 (PI / cyber insurance) captures the wider readiness check. |
+
+### 03 — Secrets & API keys
+
+| # | Checklist item | Required by AI Safe@Work | How we comply |
+|---|---|---|---|
+| 3.1 | Check that `.env` files are in `.gitignore` | Yes | `.gitignore` covers `.env`, `.env.*` (with `!.env.example` allowed for templates), `*.pem`, `*.key`, `secrets/`. Verified by `git ls-files | grep -E "\.env\|secret\|\.pem\|\.key$"` returning empty. |
+| 3.2 | No API keys in frontend / client-side code | Yes | No API keys exist in the project — the static site makes no third-party API calls. Verified by `grep -rE "sk-[a-zA-Z0-9]{20,}"` returning zero tracked-file hits. |
+| 3.3 | Check API responses for sensitive data leaks | Yes | N/A — no API endpoints. When `pricing.html` lifts to commerce, payment intents, customer IDs, internal record IDs and any vendor-side reference numbers stay server-side and never round-trip to the client beyond what the user typed themselves. |
+| 3.4 | Remove secrets from logs and error messages | Yes | The only logging is `console.warn` / `console.error` inside `v2.js`. Messages are about rate-limit triggers and manifest-load failures; nothing dynamic from user input is included. Verified by reading `v2/assets/v2.js`. Server-side logging policy when introduced: never log full request bodies for paths that may carry tokens or PII; structured logs with allow-listed field set only. |
+| 3.5 | Move all keys server-side or behind a proxy | Yes | N/A — no third-party AI vendor is called from the site. When that lands (e.g. cert verification API or a contact-form mailer), keys live in server-side environment variables, validated at boot, never echoed in error responses. |
+
+### 04 — Abuse prevention
+
+| # | Checklist item | Required by AI Safe@Work | How we comply |
+|---|---|---|---|
+| 4.1 | Add rate limiting to all API endpoints | Yes | N/A by architecture — no API endpoints in v1 or v2. Posture document at `.audit/security/v2-rate-limiting-posture.md` records this fact + lists explicit triggers (first API endpoint, first DB query, first auth endpoint, first webhook receiver, first cert-generation endpoint) that flip mandatory rate-limit configuration on. Client-side `localStorage` throttle (10 writes/sec) implemented in `v2.js` as defence-in-depth. |
+| 4.2 | Set up spend alerts and hard caps on paid APIs | Yes | N/A — no paid APIs are called. When the first one ships, doctrine: vendor-side hard cap **and** independent budget alert at 50% / 75% / 90%. Hard cap below founder's monthly burn tolerance. Spend dashboards reviewed weekly. |
+| 4.3 | Add input validation on every user-facing field | Yes | Only user-facing input today is the `cert.html` user-name field; validated for non-empty + length-capped + `escapeHtml()` on output. `localStorage` reads validated by regex + enum check before use. When forms are introduced, validate type + length + format + range on both client (UX) and server (security boundary). |
+| 4.4 | Implement basic bot protection | Yes | N/A today — no signup, no login, no form submission to any endpoint. When signup ships: doctrine requires Cloudflare Turnstile or hCaptcha + honeypot field + rate-limited POST per IP + email verification before account is usable. |
+| 4.5 | Plan for abuse scenarios before they happen | Yes | `.audit/security/incident-log.md`, `.audit/privacy/breach-response-plan.md`, `.audit/ai/ai-incident-log.md` already exist. A surface-specific abuse plan is required before any new commerce / account / upload / API surface ships. |
+
+### 05 — Copy-paste security prompts
+
+The five prompts in the source checklist are kept verbatim in `.audit/security/pre-launch-checklist-2026-06-02.md` for any AI-assisted security re-audit. Founder is to paste them into the assistant of choice as the **first** action on any quarterly refresh that touches a surface listed under § Procurement-readiness gates or any new feature introducing accounts / APIs / DBs / file uploads / paid surfaces.
+
+### Operating rule
+
+> "AI builds the app. You secure it."
+
+This section is doctrine, not aspiration. **A commit that introduces a new surface, endpoint, form, dependency or third-party integration does not ship until every applicable line above is green** and the per-item evidence is recorded in `.audit/security/pre-launch-checklist-YYYY-MM-DD.md` for that change. Items currently marked N/A become hard gates the moment the architecture changes.
+
+---
+
 ## Related
 
 - [[ai-safe-at-work]] — project index
