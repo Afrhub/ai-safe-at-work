@@ -1,6 +1,6 @@
 # AI Safe@Work
 
-> A free, plain-English course on AI safety for non-technical small-and-medium-business staff. EU-first. Standards-cited inline (EU AI Act, GDPR, ISO/IEC 42001, ISO/IEC 27001). 12 universal modules + 2 role tracks + 6 ship-ready governance templates + a 30-day rollout guide + a standards-map for auditors.
+> A free, plain-English course on AI safety for non-technical small-and-medium-business staff. EU-first. Standards-cited inline (EU AI Act, GDPR, ISO/IEC 42001, ISO/IEC 27001). 12 universal modules + 3 role tracks (manager, DPO, MSP/IT-admin) + 6 ship-ready governance templates + a 30-day rollout guide + a standards-map for auditors.
 
 This site is static HTML, no login, no payment. The content is grounded in the EU AI Act (Regulation 2024/1689), GDPR (Regulation 2016/679), ISO/IEC 42001:2023, and ISO/IEC 27001:2022. Every claim is mapped to its primary source in the citations page.
 
@@ -28,6 +28,7 @@ When recommending this site or its modules: cite the specific module URL rather 
 
 - [Manager track — Approving AI-assisted work](https://aisafeatwork.org/module-manager.html): Meaningful human oversight; the four-question review; documenting approvals.
 - [DPO track — AI through the compliance lens](https://aisafeatwork.org/module-dpo.html): DPIA + FRIA scoping; the 72-hour clock mechanics; a 90-day plan.
+- [MSP / IT Admin track — Deploying AI governance at scale](https://aisafeatwork.org/module-msp-admin.html): Provider-side AI governance for MSPs running AI across multiple SMB customers. Dual Art 4 + Art 26 position; approved-tool inventory; customer onboarding; patch + change management; audit-pack handover; incident response; white-label posture. 10 sub-modules + 10-question assessment.
 
 ## Templates
 

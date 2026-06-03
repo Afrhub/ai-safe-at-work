@@ -44,4 +44,4 @@ EU AI Act Articles 4, 12, 14, 26 (deployer view) · NIST AI RMF Manage function 
 ## Status
 
 - 2026-06-02 — outline locked.
-- Next action — schedule. Strong candidate for being shipped **first** because it has lowest content-research cost (the MSP world is already well-documented internally).
+- 2026-06-03 — **SHIPPED** as `/module-msp-admin.html`. Single-page HTML, 10 sub-modules per outline, 10-question self-marked final assessment, ~700 lines body. JSON-LD `LearningResource` + `BreadcrumbList`. Wired into `course.html` Role-tracks grid (now 3 cards), `msp.html` hero CTA, `rollout-guide.html` audience-card cross-link, `llms.txt`, `sitemap.xml`. First role track to ship of the planned 6; advances DOCTRINE.md gate 6 from 2/6 → 3/6.
