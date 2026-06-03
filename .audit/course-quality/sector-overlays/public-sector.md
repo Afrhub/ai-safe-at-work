@@ -56,4 +56,4 @@ Public-sector AI use is uniquely regulated:
 ## Status
 
 - 2026-06-02 — outline locked.
-- Priority — medium-high. Sector with strongest budget per head + highest expectation of public accountability.
+- 2026-06-03 — **SHIPPED** as `/sector-public-sector.html`. 9 sub-modules + 10-question assessment per outline. 522-line single-page HTML. JSON-LD `LearningResource` + `BreadcrumbList`. Blue accent. Wired course.html (Sector overlays section, 3 cards), llms.txt (3rd Sector entry + lede bump), sitemap.xml. Closes DOCTRINE.md gate 10 (3/3 — gate FULLY DONE).
