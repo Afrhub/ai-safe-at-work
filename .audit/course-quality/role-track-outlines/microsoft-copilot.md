@@ -48,4 +48,4 @@ EU AI Act Articles 4, 14, 26, 50 · GDPR Articles 5, 6, 9, 22, 28, 32–34, 44�
 ## Status
 
 - 2026-06-02 — outline locked.
-- Next action — schedule into Phase 2+ build slot.
+- 2026-06-03 — **SHIPPED** as `/module-copilot.html`. Single-page HTML, 12 sub-modules per outline, 10-question self-marked assessment, JSON-LD `LearningResource` + `BreadcrumbList`. Wired into `course.html` Role-tracks grid (now 4 cards), `llms.txt`, `sitemap.xml`. Fourth role track to ship; advances DOCTRINE.md gate 6 from 3/6 → 4/6.

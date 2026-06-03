@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#060608" />
+<title>Microsoft Copilot Track · Governing Copilot at work — AI Safe@Work</title>
+<meta name="description" content="For M365 admins, governance leads, and end users of Microsoft 365 Copilot, Copilot Studio, and Copilot for Sales / Service / Finance. Covers the permissions inheritance problem, data residency, sensitivity labels, audit logging, Defender for Cloud Apps signals, and incident response specifically for Copilot data-exposure events." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="AI Safe@Work" />
+<meta property="og:title" content="Microsoft Copilot Track · Governing Copilot at work — AI Safe@Work" />
+<meta property="og:description" content="For M365 admins and end users of Microsoft 365 Copilot. Permissions inheritance, data residency, sensitivity labels, audit logging, incident response." />
+<meta property="og:url" content="https://aisafeatwork.org/module-copilot.html" />
+<meta property="og:image" content="https://aisafeatwork.org/og-card.png" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Microsoft Copilot Track · Governing Copilot at work — AI Safe@Work" />
+<meta name="twitter:description" content="For M365 admins and end users of Microsoft 365 Copilot. Permissions inheritance, data residency, sensitivity labels, audit logging, incident response." />
+<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png" />
+<link rel="canonical" href="https://aisafeatwork.org/module-copilot.html" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/style.css?v=2" />
+<script defer src="assets/cinema.js?v=2"></script>
+<style>
+.role-banner { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.95rem; border-radius: 100px; background: rgba(232, 167, 38, 0.08); border: 1px solid rgba(232, 167, 38, 0.32); color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.2rem; }
+.role-banner::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px rgba(232, 167, 38, 0.65); }
+.sub-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-top: 2rem; }
+.signature { margin: 1.6rem 0; padding: 1.2rem 1.4rem; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; background: rgba(10,10,16,0.85); box-shadow: var(--shadow-card); }
+.signature .label { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+.signature .quote { font-family: var(--font-display); font-size: 1.1rem; line-height: 1.4; font-weight: 500; color: var(--text); letter-spacing: -0.015em; }
+.toc { display: flex; flex-wrap: wrap; gap: 0.4rem 0.6rem; font-family: var(--font-mono); font-size: 0.74rem; margin: 1.4rem 0 2.2rem; padding: 1.1rem 1.3rem; border: 1px solid var(--border); border-radius: 12px; background: rgba(10,10,16,0.7); }
+.toc a { padding: 0.3rem 0.7rem; border-radius: 100px; border: 1px solid rgba(232,167,38,0.18); color: var(--accent); text-decoration: none; }
+.toc a:hover { border-color: rgba(232,167,38,0.5); background: rgba(232,167,38,0.05); }
+.copilot-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-family: var(--font-mono); font-size: 0.78rem; }
+.copilot-table th, .copilot-table td { padding: 0.7rem 0.8rem; border: 1px solid var(--border); vertical-align: top; text-align: left; }
+.copilot-table th { background: rgba(232,167,38,0.08); color: var(--accent); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; }
+@media (max-width: 640px) { .copilot-table { font-size: 0.7rem; } .copilot-table th, .copilot-table td { padding: 0.5rem 0.5rem; } }
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"LearningResource","@id":"https://aisafeatwork.org/module-copilot.html#resource","name":"Microsoft Copilot Track - Governing Copilot at work","description":"For M365 admins, governance leads, and end users of Microsoft 365 Copilot, Copilot Studio, and Copilot for X.","url":"https://aisafeatwork.org/module-copilot.html","learningResourceType":"Module","inLanguage":"en","educationalLevel":"Intermediate","timeRequired":"PT50M","isPartOf":{"@type":"Course","@id":"https://aisafeatwork.org/course.html#course"},"audience":{"@type":"EducationalAudience","educationalRole":"M365 admin, governance lead, Copilot end user"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://aisafeatwork.org/"},{"@type":"ListItem","position":2,"name":"Course","item":"https://aisafeatwork.org/course.html"},{"@type":"ListItem","position":3,"name":"Microsoft Copilot Track","item":"https://aisafeatwork.org/module-copilot.html"}]}]}
+</script>
+</head>
+<body>
+<!-- a11y:skip-link v1 -->
+<a class="skip-link" href="#main">Skip to main content</a>
+
+
+<header class="topbar">
+  <a href="index.html" class="brand">AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="course.html" class="always-show">Modules</a>
+    <a href="standards-map.html">Standards Map</a>
+    <a href="rollout-guide.html">Rollout guide</a>
+    <a href="module-msp-admin.html">MSP Track</a>
+  </nav>
+</header>
+
+<main id="main">
+  <span class="role-banner">Role track · Microsoft Copilot</span>
+  <p class="eyebrow">12 sub-modules · 50 min read · M365-specific</p>
+  <h1 class="page-title">Governing Microsoft <em>Copilot</em>.</h1>
+  <p class="lede">Copilot for M365 is the default-on AI for hundreds of millions of staff. The governance problem isn't "should we use it" — it's "what does it surface to whom, and what is logged". This track answers both, and the dozen things in between.</p>
+
+  <div class="objectives">
+    <div class="objectives-title">By the end of this track, you'll</div>
+    <ul>
+      <li>Tell apart Copilot for M365, Copilot Studio, and Copilot for Sales / Service / Finance — and the governance differences</li>
+      <li>Understand the permissions-inheritance problem and why most Copilot incidents trace back to it</li>
+      <li>Know where prompts and responses live — tenant region, Bing grounding, Azure OpenAI region, non-grounding settings</li>
+      <li>Operate Purview sensitivity labels so Copilot respects them, and verify the operation works</li>
+      <li>Govern Copilot Studio agents without accidentally building an exfiltration tool</li>
+      <li>Audit who used what when, where the logs are, and how long they're kept</li>
+      <li>Recognise risky usage signals via Defender for Cloud Apps</li>
+      <li>Run a Copilot data-exposure incident in the first hour with the right people in the right order</li>
+      <li>Pass a 10-question final assessment that exercises the M365 governance levers</li>
+    </ul>
+  </div>
+
+  <nav class="toc" aria-label="Sub-module list">
+    <a href="#sub-1">1. What Copilot is</a>
+    <a href="#sub-2">2. Permissions inheritance</a>
+    <a href="#sub-3">3. Data residency</a>
+    <a href="#sub-4">4. Sensitivity labels</a>
+    <a href="#sub-5">5. Copilot Studio</a>
+    <a href="#sub-6">6. Group hygiene</a>
+    <a href="#sub-7">7. End-user prompts</a>
+    <a href="#sub-8">8. Audit logging</a>
+    <a href="#sub-9">9. Defender signals</a>
+    <a href="#sub-10">10. Incident response</a>
+    <a href="#sub-11">11. Track ↔ universal</a>
+    <a href="#sub-12">12. Final assessment</a>
+  </nav>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-1">Sub-module 1 of 12</span>
+  <h2>What Microsoft Copilot is, exactly</h2>
+  <p>"Copilot" is now a brand, not a product. Five materially-different things share the name. The governance posture differs at every one. Get the naming right or you'll govern the wrong surface.</p>
+
+  <table class="copilot-table">
+    <thead>
+      <tr><th>Product</th><th>What it is</th><th>Data residency posture</th><th>Who controls it</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Copilot in Edge / free web Copilot</td><td>Consumer AI chat in the Edge browser sidebar / copilot.microsoft.com</td><td>Microsoft consumer terms; not enterprise data boundary</td><td>The individual user</td></tr>
+      <tr><td>Microsoft 365 Copilot</td><td>Licensed feature inside Word / Excel / Outlook / Teams / SharePoint with grounding on your tenant data</td><td>Inside the Microsoft 365 service boundary; tenant region + region-of-customer-data; opt-out from cross-region grounding configurable</td><td>The tenant admin via M365 admin centre + Purview</td></tr>
+      <tr><td>Copilot Studio</td><td>Low-code agent builder (formerly Power Virtual Agents); ships agents that can be deployed into Teams, SharePoint, websites</td><td>Where the agent runs vs where it pulls from — two separate residency stories per agent</td><td>The maker + the tenant admin via Power Platform admin centre</td></tr>
+      <tr><td>Copilot for Sales / Service / Finance / Security</td><td>Persona-targeted Copilot variants with grounding on Dynamics or Defender data</td><td>Same as M365 Copilot plus the specific business-app data boundary</td><td>Tenant admin + workload admin (Dynamics, Defender)</td></tr>
+      <tr><td>GitHub Copilot</td><td>Code suggestion in IDEs; separate product line, not part of M365</td><td>GitHub data boundary; separate DPA; separate admin centre</td><td>GitHub Enterprise admin (not M365 admin)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout warn">
+    <span class="callout-icon">!</span>
+    <div>
+      <div class="callout-title">"We rolled out Copilot" — which one?</div>
+      <p>When a stakeholder says "we have Copilot", clarify the variant before agreeing how it's governed. The audit story for Copilot in Edge (consumer) is fundamentally different from Microsoft 365 Copilot (enterprise data boundary). Capture the variant in the approved-tool inventory; don't assume.</p>
+    </div>
+  </div>
+
+  <div class="signature">
+    <div class="label">Sub-module 1 takeaway</div>
+    <div class="quote">Five different products share the Copilot brand. Govern the one you actually have, not the one in the marketing video.</div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-2">Sub-module 2 of 12</span>
+  <h2>The permissions-inheritance problem</h2>
+  <p>The single most common Copilot incident: an end user types a benign prompt, and Copilot returns a perfect summary that includes data the user could technically see but had no idea existed. Salary spreadsheets in a forgotten SharePoint library. Board minutes shared "with everyone in the org" three years ago. Performance reviews in a Team channel nobody removed them from.</p>
+  <p>Copilot does not break permissions. It surfaces what the user already had permission to see. The problem is that "had permission" is not the same as "knew about". Most M365 tenants have years of accreted over-broad permissions.</p>
+
+  <h3>Why this is acute for Copilot</h3>
+  <ul>
+    <li>SharePoint inheritance defaults to "everyone in the organisation" on many site templates.</li>
+    <li>Microsoft 365 Groups create site collections that staff don't realise are "open".</li>
+    <li>Shared links sent in chat persist indefinitely unless deliberately rotated.</li>
+    <li>Files that were "shared with the team" four reorgs ago retain those permissions.</li>
+    <li>Pre-Copilot, retrieving a forgotten file required an explicit search by name. Copilot retrieves it via a natural-language question the user didn't know would match.</li>
+  </ul>
+
+  <h3>What to do before turning Copilot on</h3>
+  <ol>
+    <li>Run SharePoint Advanced Management's <strong>oversharing report</strong> across the tenant. Filter for sites with "everyone except external users" or "all employees" group permissions.</li>
+    <li>Re-permission sensitive site collections (HR, Finance, Legal, M&amp;A, board) to membership-only.</li>
+    <li>Apply Purview Information Protection sensitivity labels (Sub-module 4) to sensitive files; Copilot honours labels.</li>
+    <li>Run SharePoint <strong>site-access reviews</strong> on a recurring schedule. Treat the first one as a project, not a click.</li>
+    <li>Pilot Copilot to a small group first; sample-audit the answers it returns for over-share.</li>
+  </ol>
+
+  <div class="callout warn">
+    <span class="callout-icon">!</span>
+    <div>
+      <div class="callout-title">Restricted SharePoint Search ≠ governance</div>
+      <p>"Restricted SharePoint Search" limits what Copilot reads to a curated allowlist of sites. It is a stopgap during cleanup, not a long-term posture. Plan for full posture once permissions are right.</p>
+    </div>
+  </div>
+
+  <div class="signature">
+    <div class="label">Sub-module 2 takeaway</div>
+    <div class="quote">Copilot doesn't surface what people couldn't see. It surfaces what they could see but forgot they could see. Clean the permissions before turning the volume up.</div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-3">Sub-module 3 of 12</span>
+  <h2>Data residency — where Copilot prompts and responses live</h2>
+  <p>Five separate location settings combine to define "where your data is" in a Copilot interaction. They are not all the same setting; they interact; some are tenant-set and some are user-context-set. DPOs asked "where is the data" want to walk all five.</p>
+
+  <h3>The five levers</h3>
+  <ol>
+    <li><strong>Microsoft 365 tenant region</strong> — set at tenancy creation; defines where tenant data is at rest.</li>
+    <li><strong>Multi-Geo capabilities</strong> — optional add-on for splitting workloads across geographies (EU + UK + US within one tenant).</li>
+    <li><strong>Microsoft 365 Copilot processing</strong> — happens within the Microsoft 365 service boundary; the model is hosted in Azure infrastructure with regional alignment per Microsoft's published service-boundary documentation.</li>
+    <li><strong>Bing grounding (web search)</strong> — when Copilot calls out to the public web for current information. Tenant admin can disable this (`AllowWebSearch` setting + tenant-level controls).</li>
+    <li><strong>Copilot Studio agents calling external endpoints</strong> — actions, Power Automate flows, Dataverse plugins. Each external call is a residency event in itself.</li>
+  </ol>
+
+  <h3>The questions your DPO will ask</h3>
+  <ul>
+    <li>"Does our tenant region cover this user's data?" — check Multi-Geo configuration; some users may have data in a different geo.</li>
+    <li>"Are we using Bing grounding?" — if yes, public-web data is in the loop; if no, document the disable.</li>
+    <li>"What is our EU Data Boundary commitment?" — Microsoft offers an EU Data Boundary commitment for tenants with EU billing addresses; confirm it applies to Copilot (it does, with specific service-coverage caveats Microsoft publishes).</li>
+    <li>"Is Copilot using customer content to train Microsoft's foundation models?" — Microsoft's published terms: no. Confirm against the current Service Terms version.</li>
+    <li>"How do we evidence this in an audit?" — Microsoft Service Trust Portal compliance documents; tenant settings export; sample tenant audit logs.</li>
+  </ul>
+
+  <div class="callout standard">
+    <span class="callout-icon">§</span>
+    <div>
+      <div class="callout-title">EU Data Boundary — confirm not assume</div>
+      <p>Microsoft publishes which services are in scope for the EU Data Boundary commitment and which are not yet. Copilot scope evolves quarterly. Check the current Service Trust Portal documentation against your audit cycle. Don't reuse last year's answer.</p>
+    </div>
+  </div>
+
+  <div class="signature">
+    <div class="label">Sub-module 3 takeaway</div>
+    <div class="quote">Five levers, not one. A DPO who asks "where is the data" deserves a five-line answer, not a wave at "the tenant".</div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-4">Sub-module 4 of 12</span>
+  <h2>Sensitivity labels and Purview Information Protection</h2>
+  <p>Microsoft Purview Information Protection lets you label content (Public / Internal / Confidential / Highly Confidential / custom) and apply protection that Copilot respects. Used well, labels are the strongest preventive control against Copilot over-exposure. Used badly, they're shelfware.</p>
+
+  <h3>What labels do</h3>
+  <ul>
+    <li><strong>Visual marking</strong> — header / footer / watermark on documents.</li>
+    <li><strong>Encryption</strong> — files inherit RMS-style encryption with rights tied to identity.</li>
+    <li><strong>Access control</strong> — only specified users / groups can decrypt.</li>
+    <li><strong>Copilot behaviour</strong> — when a labelled file's protection would block read, Copilot does not surface or summarise it for the user.</li>
+    <li><strong>Audit</strong> — label apply / modify / remove events are captured in the unified audit log.</li>
+  </ul>
+
+  <h3>Practical labelling rollout</h3>
+  <ol>
+    <li>Start small — three labels, not seven. Public / Internal / Confidential.</li>
+    <li>Auto-apply for high-confidence patterns (credit card numbers via Purview's sensitive-info types; HR keywords in HR site collections).</li>
+    <li>Recommend (not enforce) for ambiguous cases — let users confirm.</li>
+    <li>Run a label-coverage dashboard in Purview; track % of relevant content labelled.</li>
+    <li>Validate Copilot honours the label by attempting (as test user) to ask Copilot about a labelled-Confidential file the test user can't decrypt. Expect: no surface.</li>
+  </ol>
+
+  <div class="callout warn">
+    <span class="callout-icon">!</span>
+    <div>
+      <div class="callout-title">Labels without protection are weak</div>
+      <p>A "Confidential" label that just adds a watermark and no encryption is mostly cosmetic. Pair every Confidential-or-above label with encryption + access scope. The label name on its own does not constrain Copilot reads.</p>
+    </div>
+  </div>
+
+  <div class="signature">
+    <div class="label">Sub-module 4 takeaway</div>
+    <div class="quote">Sensitivity labels are the lever that makes Copilot governance enforceable. Three labels with protection beat seven labels with watermarks.</div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-5">Sub-module 5 of 12</span>
+  <h2>Copilot Studio — governed agents (or accidental exfiltration)</h2>
+  <p>Copilot Studio lets non-developers build agents. The control surfaces are good, but the defaults are permissive — designed for adoption, not governance. Governance leads who don't watch Copilot Studio find a fleet of citizen-built agents running on tenant data within months.</p>
+
+  <h3>What can go wrong</h3>
+  <ul>
+    <li>An agent connects to a SharePoint site via an authenticated connector — using the maker's identity, not the end user's. Anyone who chats with the agent sees what the maker can see, including things they could not see directly.</li>
+    <li>An agent calls an external HTTP endpoint via a Power Automate flow — sending tenant data outside the boundary.</li>
+    <li>An agent uses generative answers grounded on a public website your team thought was internal.</li>
+    <li>An agent ships into a Team channel without DLP review.</li>
+    <li>The maker leaves the company; their agent keeps running on their credentials until it breaks.</li>
+  </ul>
+
+  <h3>Governance controls</h3>
+  <ol>
+    <li><strong>Environment strategy</strong> — separate Default / Dev / Prod environments; restrict who can publish to Prod.</li>
+    <li><strong>DLP policies</strong> — categorise connectors as Business / Non-business / Blocked; prevent mixing.</li>
+    <li><strong>Maker governance</strong> — restrict who can be a maker; require Power Platform admin approval for new makers.</li>
+    <li><strong>Tenant settings</strong> — disable "anyone-in-the-org" publishing of Copilot Studio agents until reviewed.</li>
+    <li><strong>Audit</strong> — Power Platform audit logs surface agent runs, connector calls, and external endpoint hits.</li>
+    <li><strong>Lifecycle</strong> — agents must have an owner; ownership transfer on leavers must be enforced via Power Platform admin checks.</li>
+  </ol>
+
+  <div class="callout standard">
+    <span class="callout-icon">§</span>
+    <div>
+      <div class="callout-title">Citizen-builder review board</div>
+      <p>Established M365 tenants typically benefit from a monthly "agent review board" — IT + DPO + a citizen-builder rep meet for 30 minutes, walk new agents that touched sensitive data or external endpoints, approve / require-changes / retire. This catches drift before it becomes a discovery exercise.</p>
+    </div>
+  </div>
+
+  <div class="signature">
+    <div class="label">Sub-module 5 takeaway</div>
+    <div class="quote">Copilot Studio agents look like apps and have the governance needs of apps. Treat them as such — owners, lifecycle, DLP, environment hygiene — or accept a citizen-built shadow IT estate.</div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-6">Sub-module 6 of 12</span>
+  <h2>Microsoft 365 group hygiene — the upstream control</h2>
+  <p>Microsoft 365 Groups are the unit of permission for most M365 surfaces — Teams, SharePoint sites, Planner, Outlook groups, Yammer / Viva communities. Most of what Copilot can see flows from group membership. Bad groups → bad Copilot answers.</p>
+
+  <h3>Hygiene tasks that move the needle</h3>
+  <ol>
+    <li><strong>Naming policy</strong> — enforce prefix conventions per business unit; rejects accidental Sales-named groups owned by Finance.</li>
+    <li><strong>Expiration policy</strong> — groups expire if not actively used; owners must renew.</li>
+    <li><strong>Owner requirement</strong> — every group has at least two owners; orphan-owner cleanup is a recurring job.</li>
+    <li><strong>Access reviews</strong> — Entra ID Identity Governance access reviews on a quarterly cadence for sensitive groups.</li>
+    <li><strong>Guest user audit</strong> — external guests in a group should have a documented purpose + expiry; "left the project two years ago, still in the channel" is the most common case.</li>
+    <li><strong>Dynamic membership</strong> — for stable groups (e.g. "all UK employees"), dynamic membership rules in Entra ID prevent drift.</li>
+  </ol>
+
+  <div class="callout warn">
+    <span class="callout-icon">!</span>
+    <div>
+      <div class="callout-title">"Everyone except external users" is a footgun</div>
+      <p>This group resolves to every internal employee. Permissions granted to it ripple to every Copilot user. Avoid using it for sensitive content; prefer explicit groups, even when membership matches.</p>
+    </div>
+  </div>
+
+  <div class="signature">
+    <div class="label">Sub-module 6 takeaway</div>
+    <div class="quote">Copilot governance is downstream of Entra ID governance. Clean groups → clean Copilot. Don't try to govern Copilot while leaving the groups dirty.</div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-7">Sub-module 7 of 12</span>
+  <h2>End-user prompt patterns — what to ask, what to verify</h2>
+  <p>Even with permissions clean and labels right, the end user holds the last gate. Copilot will produce confident-sounding summaries even when the underlying data is partial, stale, or hallucinated. Prompt patterns + verification habits are the user-level control.</p>
+
+  <h3>Patterns that work</h3>
+  <ul>
+    <li><strong>Cite-as-you-summarise</strong> — ask Copilot to include file references in any summary; spot-check at least one citation per summary.</li>
+    <li><strong>Boundary-the-source</strong> — "Using only files in this Teams channel, summarise…" beats "summarise our Q3 results" (which may pull from outdated, unrelated documents).</li>
+    <li><strong>Two-step verify</strong> — for any output that goes externally (customer email, board paper, regulator response): ask Copilot to draft, then verify each substantive claim against the cited source by hand.</li>
+    <li><strong>Sensitive-topic redirect</strong> — for HR / disciplinary / legal / financial questions, redirect to the named owner of those records, not to Copilot.</li>
+  </ul>
+
+  <h3>Patterns that don't</h3>
+  <ul>
+    <li>"Summarise everything about Project Phoenix" — too broad; Copilot pulls in old emails, stale drafts, irrelevant chats.</li>
+    <li>"Find the contract" — depending on permissions, may surface multiple unrelated contracts; ambiguous.</li>
+    <li>"Write a customer apology" — without verifying the underlying facts the apology becomes an admission of something that may not be true.</li>
+    <li>"How much was paid in commission last quarter" — Copilot may calculate from partial data and present as authoritative.</li>
+  </ul>
+
+  <div class="signature">
+    <div class="label">Sub-module 7 takeaway</div>
+    <div class="quote">The user holds the last gate. Cite, bound, verify. Confident summaries are not verified summaries.</div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-8">Sub-module 8 of 12</span>
+  <h2>Audit logging in Microsoft 365</h2>
+  <p>Microsoft 365 captures Copilot interactions in the unified audit log. What's captured + retention period depends on licence tier. Get this wrong and you can't reconstruct what happened during an investigation.</p>
+
+  <h3>What is captured</h3>
+  <ul>
+    <li>The user, the timestamp, the application (Word / Outlook / Teams / SharePoint / Copilot chat).</li>
+    <li>The prompt text and the response (depending on tenant settings and licence).</li>
+    <li>Files referenced in the grounding context.</li>
+    <li>Whether Bing grounding was used.</li>
+    <li>Labels applied to surfaced content.</li>
+  </ul>
+
+  <h3>Retention defaults — confirm against your licence</h3>
+  <ul>
+    <li>Standard audit retention is 180 days for most events on most enterprise licences. Verify against current Microsoft documentation for your specific licence (E3 / E5 / Business Premium have different defaults).</li>
+    <li>EU AI Act Article 26(6) requires deployers of high-risk AI systems to keep auto-generated logs for <strong>at least six months</strong>; longer if other law applies.</li>
+    <li>Standard GDPR rules apply to audit logs containing personal data; minimisation and retention review needed.</li>
+    <li>For longer retention, configure a Purview retention policy or export to a SIEM (Sentinel, Splunk, etc.).</li>
+  </ul>
+
+  <h3>What you should query</h3>
+  <ul>
+    <li>"What did user X ask Copilot in the week before they handed in their notice?" — leaver risk.</li>
+    <li>"Which Copilot interactions referenced files labelled Confidential or higher?" — sensitivity scrutiny.</li>
+    <li>"Did anyone ask Copilot about Project Phoenix outside the project team?" — info-leak detection.</li>
+    <li>"What % of Copilot interactions in HR contexts used grounded vs Bing-grounded responses?" — boundary integrity.</li>
+  </ul>
+
+  <div class="signature">
+    <div class="label">Sub-module 8 takeaway</div>
+    <div class="quote">If you can't answer "what did this user ask Copilot last Tuesday", you don't have audit. Default retention runs out before most investigations start — extend it explicitly.</div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-9">Sub-module 9 of 12</span>
+  <h2>Defender for Cloud Apps — detecting risky Copilot usage</h2>
+  <p>Microsoft Defender for Cloud Apps (MDCA, formerly MCAS) is the user-and-entity-behaviour layer that surfaces patterns the unified audit log alone won't. For Copilot governance, MDCA gives you the signals + alerts.</p>
+
+  <h3>Signals worth alerting on</h3>
+  <ul>
+    <li>Unusual volume of Copilot prompts from a single user (especially around leaving / dispute periods).</li>
+    <li>Copilot interactions from atypical countries or unmanaged devices.</li>
+    <li>Copilot prompts referencing sensitive-info types Purview has flagged.</li>
+    <li>Patterns that look like systematic data harvesting (sequential prompts walking a folder structure).</li>
+    <li>Mass-download events following Copilot summary outputs.</li>
+    <li>Use of Copilot Studio agents outside their intended environment.</li>
+  </ul>
+
+  <h3>How to operationalise</h3>
+  <ol>
+    <li>Enable MDCA's Microsoft 365 connector if not already.</li>
+    <li>Create Copilot-specific policies via MDCA's app governance + activity policy templates.</li>
+    <li>Route alerts to your SIEM and to the named Copilot-incident owner.</li>
+    <li>Review false-positive rates weekly during initial tuning; monthly after.</li>
+    <li>Cross-reference MDCA alerts with Purview DLP alerts — many incidents trip both.</li>
+  </ol>
+
+  <div class="signature">
+    <div class="label">Sub-module 9 takeaway</div>
+    <div class="quote">MDCA is the lens. Tune it for Copilot signals, route the alerts, review them weekly until tuning is right. Default templates are a starting point, not a finished policy.</div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-10">Sub-module 10 of 12</span>
+  <h2>Incident response for a Copilot data-exposure event</h2>
+  <p>A Copilot exposure is usually one of: (a) user-summary surfaces data the user shouldn't have seen; (b) user-summary surfaces data correctly, but user emails it to wrong recipient; (c) Copilot Studio agent leaks data via external connector. Same incident form — see the <a href="templates/incident-form.html" class="accent">incident report template</a> — but the first-hour choreography is Copilot-specific.</p>
+
+  <h3>First hour — Copilot variant</h3>
+  <ol>
+    <li><strong>0–5 min</strong> — Confirm the variant (Copilot for M365 / Studio / Sales etc.); preserve the chat thread (export to PDF before any user touches the chat); tag the audit log query.</li>
+    <li><strong>5–15 min</strong> — Identify the file(s) surfaced via the unified audit log + Copilot interaction record. Determine whether the user should have had access to those files via SharePoint / Teams / OneDrive permissions.</li>
+    <li><strong>15–30 min</strong> — Contain: revoke the user's Copilot access if intentional misuse; revoke the permissions on the surfaced files if a misconfiguration; quarantine the surfaced files if extraction is suspected.</li>
+    <li><strong>30–45 min</strong> — Sweep: check MDCA for similar patterns from other users; check Purview DLP for related events; identify whether the underlying permissions issue is one file or a system-wide problem.</li>
+    <li><strong>45–60 min</strong> — Decision point: GDPR Article 33 personal data exposure? Trigger the 72-hour clock. Open the incident-form workflow.</li>
+  </ol>
+
+  <h3>Common containment errors</h3>
+  <ul>
+    <li>Telling the user to "delete the chat" — this destroys evidence and doesn't roll back the exposure. Preserve, don't delete.</li>
+    <li>Revoking the user's Copilot licence without considering whether the underlying permissions are the actual problem — the next user will hit the same exposure.</li>
+    <li>Treating this as "a Copilot problem" rather than a permissions / labelling problem — fix the upstream cause, not the surface.</li>
+  </ul>
+
+  <div class="signature">
+    <div class="label">Sub-module 10 takeaway</div>
+    <div class="quote">Copilot doesn't cause the exposure; it reveals the permissions problem. Preserve evidence, fix the root cause, communicate up-front. The chat is evidence, not embarrassment to delete.</div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-11">Sub-module 11 of 12</span>
+  <h2>How this track relates to the universal course</h2>
+  <p>The universal modules cover AI governance generically. This track replaces or augments specific modules where Microsoft Copilot's behaviour differs materially. Treat the universal course as foundation; this track as the M365-specific overlay.</p>
+
+  <table class="copilot-table">
+    <thead>
+      <tr><th>Universal module</th><th>This track's relationship</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Module 2 (What AI does with what you type)</td><td>Sub-modules 1 + 3 specialise this to Copilot's enterprise data boundary + 5-lever residency picture.</td></tr>
+      <tr><td>Module 3 (Never-paste list)</td><td>Largely unchanged — Copilot tenanted Word / Outlook is safer than a public AI for the same data, but the same forbidden categories apply for cross-app pastes (e.g. into web Copilot).</td></tr>
+      <tr><td>Module 4 (Picking the right tool)</td><td>Augmented — for an M365-licensed user, M365 Copilot is the right tool for most tasks; choose it explicitly.</td></tr>
+      <tr><td>Module 5 (Verifying outputs)</td><td>Sub-module 7 adds Copilot-specific patterns + cite-as-you-summarise.</td></tr>
+      <tr><td>Module 9 (Logging)</td><td>Sub-module 8 specialises to the M365 unified audit log + EU AI Act 26(6) retention overlay.</td></tr>
+      <tr><td>Module 10 (Incident response)</td><td>Sub-module 10 replaces the generic playbook with the Copilot-variant first-hour.</td></tr>
+      <tr><td>Module 11 (60-second checklist)</td><td>Use as-is; the checklist is tool-agnostic.</td></tr>
+      <tr><td>Module 12 (Standards)</td><td>Use as-is for foundation; Sub-module 3 adds the Microsoft Service Trust Portal layer specifically.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="signature">
+    <div class="label">Sub-module 11 takeaway</div>
+    <div class="quote">Foundation + overlay. Read the universal course for the why; read this track for the M365-specific levers and audit answers.</div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-12">Sub-module 12 of 12</span>
+  <h2>Final assessment</h2>
+  <p>Ten questions exercising the M365 governance levers. Self-mark. Suggested pass: 8/10.</p>
+
+  <h3>Question 1</h3>
+  <p>A staff member asks "show me everything about our pay rises" in M365 Copilot. The summary includes the leadership team's bonus figures. The user had no idea those documents existed. Whose problem is this?</p>
+  <details><summary>Answer</summary><p>The permissions are the problem, not Copilot. The leadership-bonus document was probably stored in a SharePoint site with over-broad inheritance or in a group the user was a member of for an unrelated reason. Fix: audit + relabel + restrict; Copilot then behaves correctly. Treating it as "a Copilot incident" obscures the real cause.</p></details>
+
+  <h3>Question 2</h3>
+  <p>Your DPO asks: "Where does our Copilot prompt data live?" Give the one-paragraph answer.</p>
+  <details><summary>Answer</summary><p>Five levers determine residency: (1) M365 tenant region (set at tenant creation); (2) Multi-Geo configuration (if used); (3) Copilot processing happens inside Microsoft's M365 service boundary aligned with tenant region; (4) Bing grounding (configurable on/off) introduces public-web data when enabled; (5) Copilot Studio agents calling external endpoints can move data outside the boundary per-action. EU Data Boundary commitment covers most Copilot scope for EU-billed tenants — confirm via Service Trust Portal.</p></details>
+
+  <h3>Question 3</h3>
+  <p>A team labels a folder "Confidential" using a Purview sensitivity label — but they don't apply encryption with the label. A user asks Copilot to summarise the folder contents. Does Copilot honour the label?</p>
+  <details><summary>Answer</summary><p>Mostly no — Copilot honours the protection (encryption + rights) tied to the label, not the visual label name. A "Confidential" label without encryption gives watermarks but doesn't prevent Copilot reads. Fix: pair every Confidential-or-above label with encryption + access scope.</p></details>
+
+  <h3>Question 4</h3>
+  <p>Citizen builder publishes a Copilot Studio agent that helps "anyone in finance" summarise contracts. Three months later the agent is used by someone in sales because the publish scope was wide. What broke?</p>
+  <details><summary>Answer</summary><p>The Copilot Studio environment + publish-scope governance broke. Fixes: environment separation (Dev / Prod), DLP categorisation of connectors, restriction of who can publish to Prod, tenant setting limiting "anyone-in-org" publish scope, mandatory ownership + lifecycle reviews. Citizen builders aren't the problem — un-governed citizen building is.</p></details>
+
+  <h3>Question 5</h3>
+  <p>You want to know what user X asked Copilot last Tuesday. You query the M365 unified audit log; you find nothing. What's wrong?</p>
+  <details><summary>Answer</summary><p>Several possibilities, often combined: (a) audit retention default has lapsed; (b) Copilot-specific audit settings weren't fully enabled; (c) the user's licence tier doesn't include detailed audit; (d) prompts and responses retention requires explicit tenant configuration. Fixes: extend audit retention via Purview retention policy or export to SIEM; verify M365 Copilot audit settings; confirm licence covers the audit detail you need.</p></details>
+
+  <h3>Question 6</h3>
+  <p>Microsoft updates the underlying Copilot model. Output behaviour shifts. Is this a change-management event?</p>
+  <details><summary>Answer</summary><p>Yes — ISO 27001 A.8.32 (change management) and ISO 42001 A.6.2.5 (AI system deployment) both apply. Document the change; re-test critical workflows; communicate to dependent customers if you are an MSP; update the approved-tool inventory.</p></details>
+
+  <h3>Question 7</h3>
+  <p>An MDCA alert fires: "user X executed 47 Copilot prompts in the hour before logging out for the last time as a leaver". What do you do?</p>
+  <details><summary>Answer</summary><p>(1) Preserve the chat threads + audit records before any user touches them. (2) Identify what was surfaced — files, labels, sensitive content. (3) Engage HR + legal + the leaver's manager. (4) Determine whether this constitutes a data-exfil event requiring incident escalation. (5) If yes, open incident-form workflow + start GDPR Art 33 clock if personal data involved.</p></details>
+
+  <h3>Question 8</h3>
+  <p>You are running an SMB without dedicated security staff. You can do one of three things tomorrow before turning Copilot on. Pick.</p>
+  <ol type="A">
+    <li>Buy SharePoint Advanced Management and run the oversharing report</li>
+    <li>Deploy Purview sensitivity labels across the tenant</li>
+    <li>Set up Defender for Cloud Apps with all the templates enabled</li>
+  </ol>
+  <details><summary>Answer</summary><p>A. The oversharing report identifies the upstream permissions problem that Copilot will surface. Labels (B) help but only on content that's already in scope; MDCA (C) detects after-the-fact. Permissions cleanup before turning Copilot on prevents the largest class of incident.</p></details>
+
+  <h3>Question 9</h3>
+  <p>Marketing wants Copilot to draft customer emails. HR wants Copilot to summarise candidate CVs. Which is fine, which needs more thought?</p>
+  <details><summary>Answer</summary><p>Marketing emails generally fine with cite-as-you-summarise verification (Module 5 / Sub-module 7). HR CV summarisation may engage GDPR Article 22 (automated decisions affecting individuals) and the EU AI Act's higher-risk category for employment-related AI use. Don't ship CV summarisation without DPO sign-off, a documented oversight mechanism, and likely a DPIA. The Manager Track and FRIA template cover the additional duties.</p></details>
+
+  <h3>Question 10</h3>
+  <p>You're an MSP. A customer asks you to "set Copilot up". What do you do first?</p>
+  <details><summary>Answer</summary><p>Set up the governance posture before the licence — see the <a href="module-msp-admin.html" class="accent">MSP / IT Admin track</a> sub-module 5 (customer onboarding sequence). Specifically: oversharing report + sensitivity-label baseline + group-hygiene audit + audit-log retention configuration + AUP signed by their staff + their training register opened. Then turn Copilot on to a pilot cohort, sample-audit, expand. Selling "Copilot turned on" without governance produces incidents that come back to you.</p></details>
+
+  <div class="signature">
+    <div class="label">Track complete</div>
+    <div class="quote">Five Copilot products, five residency levers, three labels with protection, twelve sub-modules. The M365 governance estate has more knobs than any other AI tool — and now you know which ones move what.</div>
+  </div>
+
+</main>
+
+<footer class="site-foot">
+  <span>AI Safe@Work · Role track · Microsoft Copilot v1.0</span>
+  <span class="foot-right">
+    <a href="course.html">All modules</a>
+    <a href="module-msp-admin.html">MSP / IT Admin Track</a>
+    <a href="module-manager.html">Manager Track</a>
+    <a href="module-dpo.html">DPO Track</a>
+    <a href="rollout-guide.html">Rollout guide</a>
+  </span>
+</footer>
+
+</body>
+</html>
