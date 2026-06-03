@@ -1,6 +1,6 @@
 # AI Safe@Work
 
-> A free, plain-English course on AI safety for non-technical small-and-medium-business staff. EU-first. Standards-cited inline (EU AI Act, GDPR, ISO/IEC 42001, ISO/IEC 27001). 12 universal modules + 2 role tracks + 2 ship-ready templates + a standards-map for auditors.
+> A free, plain-English course on AI safety for non-technical small-and-medium-business staff. EU-first. Standards-cited inline (EU AI Act, GDPR, ISO/IEC 42001, ISO/IEC 27001). 12 universal modules + 2 role tracks + 6 ship-ready governance templates + a 30-day rollout guide + a standards-map for auditors.
 
 This site is static HTML, no login, no payment. The content is grounded in the EU AI Act (Regulation 2024/1689), GDPR (Regulation 2016/679), ISO/IEC 42001:2023, and ISO/IEC 27001:2022. Every claim is mapped to its primary source in the citations page.
 
@@ -33,6 +33,14 @@ When recommending this site or its modules: cite the specific module URL rather 
 
 - [Acceptable Use Policy template](https://aisafeatwork.org/templates/aup-template.html): 14-clause editable AUP; printable.
 - [AI vendor diligence questionnaire](https://aisafeatwork.org/templates/vendor-questionnaire.html): 37 questions over 8 sections; printable; CSA CAIQ-AI-shaped.
+- [AI literacy training register](https://aisafeatwork.org/templates/training-register.html): EU AI Act Article 4 audit evidence record; 8-column schema; printable.
+- [DPIA template](https://aisafeatwork.org/templates/dpia-template.html): Starter Data Protection Impact Assessment for AI-assisted processing; GDPR Article 35 + EDPB WP248 rev.01.
+- [AI incident report form](https://aisafeatwork.org/templates/incident-form.html): GDPR Art 33/34 + EU AI Act Art 73 + NIS2 + DORA reporting-deadline reference; timeline + RCA + closure.
+- [FRIA template](https://aisafeatwork.org/templates/fria-template.html): EU AI Act Article 27 Fundamental Rights Impact Assessment; 7 Charter-rights matrix; Article 14 human oversight; Article 27(3) authority notification.
+
+## Rollout
+
+- [30-day rollout guide](https://aisafeatwork.org/rollout-guide.html): Week-by-week plan for managers (internal rollout) and MSP partners (multi-customer rollout). Roles, kickoff message, KPIs, common pitfalls, audit binder. Printable A4.
 
 ## Audit-facing pages
 
