@@ -51,4 +51,4 @@ EU AI Act Articles 4, 26, 50 · GDPR Articles 5, 6, 28, 32, 33–34, 44–50 · 
 ## Status
 
 - 2026-06-02 — outline locked.
-- Next action — schedule into Phase 2+ build slot. Likely second after Microsoft Copilot given the demand signal at Infosec Europe 2026.
+- 2026-06-03 — **SHIPPED** as `/module-shadow-ai.html`. Single-page HTML, 10 sub-modules + 10-question assessment, two-persona structure (CISO/IT-lead + end-user staff). JSON-LD `LearningResource` + `BreadcrumbList`. Wired into `course.html` Role-tracks grid (now 5 cards), `llms.txt`, `sitemap.xml`. Shipped second after Microsoft Copilot per ordering note. Fifth role track to ship; advances DOCTRINE.md gate 6 from 4/6 → 5/6.
