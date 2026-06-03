@@ -54,4 +54,4 @@ Financial services has three properties that warrant a separate overlay:
 ## Status
 
 - 2026-06-02 — outline locked.
-- Priority — high. Sector with strongest discount-to-pay willingness + most regulator pressure.
+- 2026-06-03 — **FIRST-PASS SHIPPED** as `/sector-financial-services.html`. Single-page HTML, 9 sub-modules + 10-question assessment, JSON-LD `LearningResource` + `BreadcrumbList`. Blue accent (`var(--blue)`) to differentiate sector overlay visually from amber role tracks. Wired into `course.html` (new "Sector overlays" section), `llms.txt` (new "Sector overlays" section), `sitemap.xml`. First of three planned overlays; advances DOCTRINE.md gate 10 from TODO → 1/3.

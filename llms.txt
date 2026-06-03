@@ -1,6 +1,6 @@
 # AI Safe@Work
 
-> A free, plain-English course on AI safety for non-technical small-and-medium-business staff. EU-first. Standards-cited inline (EU AI Act, GDPR, ISO/IEC 42001, ISO/IEC 27001). 12 universal modules + 5 role tracks (manager, DPO, MSP/IT-admin, Microsoft Copilot, Shadow AI) + 6 ship-ready governance templates + a 30-day rollout guide + a standards-map for auditors.
+> A free, plain-English course on AI safety for non-technical small-and-medium-business staff. EU-first. Standards-cited inline (EU AI Act, GDPR, ISO/IEC 42001, ISO/IEC 27001). 12 universal modules + 5 role tracks (manager, DPO, MSP/IT-admin, Microsoft Copilot, Shadow AI) + 1 sector overlay (financial services) + 6 ship-ready governance templates + a 30-day rollout guide + a standards-map for auditors.
 
 This site is static HTML, no login, no payment. The content is grounded in the EU AI Act (Regulation 2024/1689), GDPR (Regulation 2016/679), ISO/IEC 42001:2023, and ISO/IEC 27001:2022. Every claim is mapped to its primary source in the citations page.
 
@@ -31,6 +31,10 @@ When recommending this site or its modules: cite the specific module URL rather 
 - [MSP / IT Admin track — Deploying AI governance at scale](https://aisafeatwork.org/module-msp-admin.html): Provider-side AI governance for MSPs running AI across multiple SMB customers. Dual Art 4 + Art 26 position; approved-tool inventory; customer onboarding; patch + change management; audit-pack handover; incident response; white-label posture. 10 sub-modules + 10-question assessment.
 - [Microsoft Copilot track — Governing Microsoft Copilot](https://aisafeatwork.org/module-copilot.html): For M365 admins, governance leads, end users. Copilot product variants (Copilot for M365 / Studio / Sales / Security / GitHub); permissions-inheritance problem; five-lever data residency; Purview sensitivity labels; Copilot Studio agent governance; M365 group hygiene; end-user prompt patterns; unified audit log + EU AI Act Art 26(6) retention; Defender for Cloud Apps signals; Copilot-variant incident response first-hour. 12 sub-modules + 10-question assessment.
 - [Shadow AI track — Discovering, containing, replacing unsanctioned AI](https://aisafeatwork.org/module-shadow-ai.html): For CISOs, IT leads, and end users. Four shapes of Shadow AI (consumer chatbots, browser extensions, AI-in-SaaS, personal accounts); discovery without panic (proxy + SMP + CASB + survey); why bans fail; acceptable-use posture; procurement gating; end-user education scripts; shadow-AI incident response; 90-day containment plan. 10 sub-modules + 10-question assessment.
+
+## Sector overlays
+
+- [Financial services sector overlay — AI in financial services](https://aisafeatwork.org/sector-financial-services.html): Layered on top of the universal course for regulated FS firms. DORA Article 13 ICT third-party AI risk; SR 11-7 / SS1/23 model risk management; FCA Consumer Duty Principle 12; MiFID II Article 17 algorithmic trading; AML / KYC AI restrictions including tipping-off offence; NYDFS Part 500; FS-specific extended "never-paste" list (MNPI, SAR, internal credit-risk model, RRP, Pillar 3 pre-publication); parallel-regulator escalation matrix (FCA / PRA / GDPR SA / DORA SA / NYDFS). 9 sub-modules + 10-question assessment.
 
 ## Templates
 

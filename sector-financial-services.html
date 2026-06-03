@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#060608" />
+<title>Financial Services Sector Overlay · DORA + EU AI Act + sector guidance — AI Safe@Work</title>
+<meta name="description" content="A sector overlay for financial-services SMBs and mid-market firms. DORA Article 13 ICT third-party AI risk, SR 11-7 model risk management, FCA Consumer Duty, MiFID II algorithmic-trading governance, AML / KYC AI restrictions, customer-facing AI under Principle 12, incident escalation order across FCA / PRA / national regulators." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="AI Safe@Work" />
+<meta property="og:title" content="Financial Services Sector Overlay · DORA + EU AI Act + sector guidance — AI Safe@Work" />
+<meta property="og:description" content="A sector overlay for financial-services SMBs and mid-market. DORA Art 13, SR 11-7 model risk, FCA Consumer Duty, MiFID II, AML/KYC AI restrictions, incident escalation order." />
+<meta property="og:url" content="https://aisafeatwork.org/sector-financial-services.html" />
+<meta property="og:image" content="https://aisafeatwork.org/og-card.png" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Financial Services Sector Overlay · DORA + EU AI Act + sector guidance — AI Safe@Work" />
+<meta name="twitter:description" content="A sector overlay for financial-services SMBs and mid-market. DORA + SR 11-7 + FCA Consumer Duty + MiFID II + AML/KYC restrictions + incident escalation order." />
+<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png" />
+<link rel="canonical" href="https://aisafeatwork.org/sector-financial-services.html" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/style.css?v=2" />
+<script defer src="assets/cinema.js?v=2"></script>
+<style>
+.role-banner { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.95rem; border-radius: 100px; background: rgba(95, 168, 255, 0.10); border: 1px solid rgba(95, 168, 255, 0.32); color: var(--blue); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.2rem; }
+.role-banner::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 10px rgba(95, 168, 255, 0.55); }
+.sub-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); margin-top: 2rem; }
+.signature { margin: 1.6rem 0; padding: 1.2rem 1.4rem; border: 1px solid var(--border); border-left: 3px solid var(--blue); border-radius: 12px; background: rgba(10,10,16,0.85); box-shadow: var(--shadow-card); }
+.signature .label { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.5rem; }
+.signature .quote { font-family: var(--font-display); font-size: 1.1rem; line-height: 1.4; font-weight: 500; color: var(--text); letter-spacing: -0.015em; }
+.toc { display: flex; flex-wrap: wrap; gap: 0.4rem 0.6rem; font-family: var(--font-mono); font-size: 0.74rem; margin: 1.4rem 0 2.2rem; padding: 1.1rem 1.3rem; border: 1px solid var(--border); border-radius: 12px; background: rgba(10,10,16,0.7); }
+.toc a { padding: 0.3rem 0.7rem; border-radius: 100px; border: 1px solid rgba(95,168,255,0.18); color: var(--blue); text-decoration: none; }
+.toc a:hover { border-color: rgba(95,168,255,0.5); background: rgba(95,168,255,0.05); }
+.standards-stack { background: rgba(95,168,255,0.06); border: 1px solid rgba(95,168,255,0.32); border-radius: 12px; padding: 1.2rem 1.4rem; margin: 1.4rem 0; font-family: var(--font-mono); font-size: 0.78rem; }
+.standards-stack h3 { margin-top: 0; color: var(--blue); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; }
+.std-table, .reg-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-family: var(--font-mono); font-size: 0.78rem; }
+.std-table th, .std-table td, .reg-table th, .reg-table td { padding: 0.7rem 0.8rem; border: 1px solid var(--border); vertical-align: top; text-align: left; }
+.std-table th, .reg-table th { background: rgba(95,168,255,0.08); color: var(--blue); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; }
+@media (max-width: 640px) { .std-table, .reg-table { font-size: 0.7rem; } .std-table th, .std-table td, .reg-table th, .reg-table td { padding: 0.5rem 0.5rem; } }
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"LearningResource","@id":"https://aisafeatwork.org/sector-financial-services.html#resource","name":"Financial Services Sector Overlay","description":"Overlay for financial-services SMBs and mid-market firms covering DORA + EU AI Act + FCA / PRA / EBA / MiFID II / SR 11-7 layered on top of the universal course.","url":"https://aisafeatwork.org/sector-financial-services.html","learningResourceType":"Module","inLanguage":"en","educationalLevel":"Intermediate","timeRequired":"PT45M","isPartOf":{"@type":"Course","@id":"https://aisafeatwork.org/course.html#course"},"audience":{"@type":"EducationalAudience","educationalRole":"Financial services compliance officer, MLRO, DPO, risk manager, MSP serving FS"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://aisafeatwork.org/"},{"@type":"ListItem","position":2,"name":"Course","item":"https://aisafeatwork.org/course.html"},{"@type":"ListItem","position":3,"name":"Financial Services Sector Overlay","item":"https://aisafeatwork.org/sector-financial-services.html"}]}]}
+</script>
+</head>
+<body>
+<!-- a11y:skip-link v1 -->
+<a class="skip-link" href="#main">Skip to main content</a>
+
+
+<header class="topbar">
+  <a href="index.html" class="brand">AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="course.html" class="always-show">Modules</a>
+    <a href="standards-map.html">Standards Map</a>
+    <a href="module-dpo.html">DPO Track</a>
+    <a href="module-msp-admin.html">MSP Track</a>
+  </nav>
+</header>
+
+<main id="main">
+  <span class="role-banner">Sector overlay · Financial Services</span>
+  <p class="eyebrow">9 sub-modules · 45 min read · DORA-era</p>
+  <h1 class="page-title">AI in <em>financial services</em>.</h1>
+  <p class="lede">A sector overlay on top of the universal course. Adds the regulatory layer financial-services firms answer to: DORA, FCA / PRA, EBA outsourcing, MiFID II algorithmic-trading governance, SR 11-7 model risk, AML / KYC restrictions, NYDFS Part 500. Does not replace the universal course — supplements it.</p>
+
+  <div class="objectives">
+    <div class="objectives-title">By the end of this overlay, you'll</div>
+    <ul>
+      <li>Understand how DORA Article 13 makes AI vendors ICT third parties under board-reportable risk</li>
+      <li>Know which sector-regulator levers land on top of the EU AI Act for AI use in your firm</li>
+      <li>Map model-risk-management duties (SR 11-7 / PRA SS1/23) to AI models you procure</li>
+      <li>Identify the extended financial-services "never-paste" list (MNPI, AML / KYC, credit-model internals, customer financial PII)</li>
+      <li>Tell when AI use triggers MiFID II Article 17 (algorithmic trading governance)</li>
+      <li>Apply FCA Consumer Duty Principle 12 to customer-facing AI</li>
+      <li>Know which regulator you tell, in what order, in an AI incident</li>
+      <li>Pass a 10-question final assessment on sector-specific judgement calls</li>
+    </ul>
+  </div>
+
+  <div class="standards-stack">
+    <h3>The regulatory stack — read top to bottom</h3>
+    <p>EU AI Act (Regulation 2024/1689) — applies. Article 4 literacy obligation now (2 Feb 2025). Article 26 deployer obligations from August 2026. Article 27 FRIA mandatory for high-risk AI used in creditworthiness scoring + life/health-insurance risk pricing (Annex III §5(b)(c)).</p>
+    <p>GDPR — applies. Article 22 (automated decisions) bites hard in credit + insurance underwriting + AML alerting.</p>
+    <p>DORA (Regulation 2022/2554) — in force <strong>17 January 2025</strong> for ICT third-party risk including AI vendors. Articles 5–6 (governance), 13 (ICT third-party risk management), 28–29 (concentration risk, subcontracting).</p>
+    <p>National + sector regulators:</p>
+    <ul>
+      <li>UK — FCA Handbook (Consumer Duty PRIN 2A; SYSC), PRA SS1/23 (model risk management), FCA / PRA Discussion Paper DP5/22 (AI in financial services), Bank of England FPC reviews of systemic AI risk</li>
+      <li>EU — EBA Guidelines on Outsourcing (EBA/GL/2019/02), ECB SSM expectations on model risk</li>
+      <li>National — BaFin (Germany) MaRisk + AT 9; AMF (France); CNMV (Spain); CONSOB (Italy)</li>
+      <li>USA — SR 11-7 (Fed) model risk management; OCC + FDIC equivalents; NAIC Model Bulletin on AI in insurance; NYDFS Part 500 cybersecurity</li>
+      <li>Singapore — MAS FEAT (Fairness / Ethics / Accountability / Transparency)</li>
+    </ul>
+    <p>NIS2 (Directive 2022/2555) — covers some FS firms in scope as "essential" or "important" entities, particularly payment institutions and certain market infrastructures. Article 21 risk-management measures apply.</p>
+    <p>This overlay sits on top of the universal course. The universal course gives the AI Act / GDPR / ISO baseline. This sector overlay adds the financial-services layer.</p>
+  </div>
+
+  <nav class="toc" aria-label="Sub-module list">
+    <a href="#sub-1">1. The stack</a>
+    <a href="#sub-2">2. FS never-paste</a>
+    <a href="#sub-3">3. SR 11-7 model risk</a>
+    <a href="#sub-4">4. DORA Art 13</a>
+    <a href="#sub-5">5. AML / KYC AI</a>
+    <a href="#sub-6">6. MiFID II algo</a>
+    <a href="#sub-7">7. Consumer Duty</a>
+    <a href="#sub-8">8. Escalation order</a>
+    <a href="#sub-9">9. Final assessment</a>
+  </nav>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-1">Sub-module 1 of 9</span>
+  <h2>The financial-services governance layer — how DORA + EU AI Act + sector guidance combine</h2>
+  <p>The universal AI Act + GDPR baseline is necessary but not sufficient for financial services. Three additional bodies of regulation interact, and they each pull a different lever.</p>
+
+  <table class="std-table">
+    <thead>
+      <tr><th>Regulator</th><th>Instrument</th><th>What it controls for AI</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>EU Commission / national AI authorities</td><td>EU AI Act (Reg 2024/1689)</td><td>Risk classification, deployer duties (Art 26), provider duties (Arts 8–22), FRIA for credit / life-insurance pricing (Art 27)</td></tr>
+      <tr><td>EU Commission + ESAs (EBA / EIOPA / ESMA)</td><td>DORA (Reg 2022/2554)</td><td>ICT third-party risk including AI vendor concentration, contractual provisions, exit strategies, board reporting</td></tr>
+      <tr><td>FCA (UK)</td><td>Consumer Duty (PRIN 2A); SYSC; DP5/22</td><td>Outcome-based duty extends to AI-assisted product and service design; ban on foreseeable harm</td></tr>
+      <tr><td>PRA (UK) / Fed (USA)</td><td>SS1/23 + SR 11-7</td><td>Model risk management framework — applies to AI models used in regulated decisions</td></tr>
+      <tr><td>EBA</td><td>Outsourcing Guidelines (EBA/GL/2019/02)</td><td>AI as an outsourced function under specific scrutiny; intra-group exemptions tightened</td></tr>
+      <tr><td>ESMA</td><td>MiFID II Article 17</td><td>Algorithmic trading governance — algorithmic-trading firms must demonstrate AI is tested, monitored, kill-switched</td></tr>
+      <tr><td>Member-state regulators</td><td>BaFin MaRisk + AT 9; AMF; CNMV; Banca d'Italia</td><td>Outsourcing + model + IT risk overlay; AI specifically called out in 2024 updates</td></tr>
+      <tr><td>NYDFS</td><td>Part 500</td><td>Cybersecurity for NY-licensed FS firms; AI-related cyber controls now in scope</td></tr>
+    </tbody>
+  </table>
+
+  <p>For most SMB-to-mid-market FS firms the priority order is: DORA Art 13 (now live, board-reportable), EU AI Act Art 26 (live by mid-2026), sector-regulator guidance (live now), then niche-specific (MiFID II for algo trading, NAIC for US insurance, NYDFS for NY-licensed).</p>
+
+  <div class="signature">
+    <div class="label">Sub-module 1 takeaway</div>
+    <div class="quote">Universal AI Act + GDPR + ISO is the floor. DORA + FCA Consumer Duty + SR 11-7 + EBA + MiFID II is the ceiling for FS firms. Map your firm to the stack before you map your AI tools.</div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-2">Sub-module 2 of 9</span>
+  <h2>The financial-services never-paste list</h2>
+  <p>The universal "never paste this into a consumer AI" list (Module 3) holds. FS firms extend it with categories that don't appear in the universal list because they're sector-specific or because the regulatory consequence of leaking is multi-million.</p>
+
+  <h3>Categories to add to the universal never-paste list</h3>
+  <ul>
+    <li><strong>Material non-public information (MNPI)</strong> — anything that would affect a security price if known publicly. Insider-trading regimes (UK MAR, US Reg FD, MAD-MAR) make exposure a criminal matter, not just a regulatory one.</li>
+    <li><strong>Customer credit / underwriting data</strong> — affordability assessments, internal ratings, scorecards. Article 22 GDPR + Art 27 FRIA territory.</li>
+    <li><strong>AML / KYC investigation records</strong> — suspicious-activity reports (SARs), unusual-pattern memos, watchlist hits, IDV documentation. Disclosure of an SAR to its subject is "tipping off" — a criminal offence in most regimes.</li>
+    <li><strong>Trading positions / P&amp;L attribution / strategy</strong> — current positions disclose strategy; historical P&amp;L attribution can be reverse-engineered.</li>
+    <li><strong>Customer portfolio composition</strong> — individual portfolios in private banking; aggregate book composition in asset management.</li>
+    <li><strong>Internal credit-risk model code or parameters</strong> — re-running the model against synthetic data outside the controlled environment can leak the model logic.</li>
+    <li><strong>Regulator correspondence + Section 166 / s.166 reviews</strong> — confidential supervisory communications.</li>
+    <li><strong>Recovery and Resolution Plans (RRPs) + Living Wills</strong> — by law these are confidential to the firm and the regulator.</li>
+    <li><strong>Pillar 3 disclosures pre-publication</strong> — capital data ahead of release.</li>
+  </ul>
+
+  <div class="callout warn">
+    <span class="callout-icon">!</span>
+    <div>
+      <div class="callout-title">Tipping off + market abuse are criminal</div>
+      <p>A staff member who pastes an SAR into ChatGPT may have committed an offence under the Proceeds of Crime Act / national equivalent. A staff member who pastes MNPI into a model has done likewise under UK MAR / US Reg FD. These are not "policy violations" — they are criminal. The cultural framing on incident reporting must be even safer than the universal framing because the personal consequence is higher.</p>
+    </div>
+  </div>
+
+  <div class="signature">
+    <div class="label">Sub-module 2 takeaway</div>
+    <div class="quote">FS never-paste extends the universal list by ten categories with criminal-not-just-regulatory edge. Staff need to know the consequence isn't a written warning — and management needs to make reporting safe enough to surface it anyway.</div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-3">Sub-module 3 of 9</span>
+  <h2>SR 11-7 / SS1/23 model risk management — applied to AI</h2>
+  <p>SR 11-7 (US Federal Reserve / OCC, 2011) and PRA SS1/23 (UK, 2023) require firms to identify, measure, monitor and control risk arising from the use of models. "Model" in regulator language now includes AI / ML models. The discipline is mature; it lands on AI as a layered control.</p>
+
+  <h3>Model lifecycle stages SR 11-7 requires</h3>
+  <ol>
+    <li><strong>Identification</strong> — what models are in use; inventory.</li>
+    <li><strong>Development</strong> — documented design, data, assumptions, limitations.</li>
+    <li><strong>Implementation</strong> — controls around deployment to production.</li>
+    <li><strong>Use</strong> — controls + escalation around model output use.</li>
+    <li><strong>Validation</strong> — independent challenge, including ongoing monitoring.</li>
+    <li><strong>Governance</strong> — board / committee oversight + change control.</li>
+  </ol>
+
+  <h3>Where AI models bite differently from traditional statistical models</h3>
+  <ul>
+    <li><strong>Documentation</strong> — generative-AI vendors don't ship the design documentation SR 11-7 expects. Compensating control: vendor questionnaire + independent functional documentation by the firm.</li>
+    <li><strong>Data</strong> — pre-training data is not disclosed by major LLM providers. Compensating control: document what the firm uses the model for and what data it does + doesn't see in production.</li>
+    <li><strong>Validation</strong> — back-testing a generative model against ground-truth is harder. Compensating control: domain-specific evaluation harness + sampled human review + drift monitoring.</li>
+    <li><strong>Change control</strong> — vendor model swaps happen on the vendor's schedule, not yours. Compensating control: model-change-management policy (see <a href="module-copilot.html" class="accent">Microsoft Copilot track sub-module 6</a> for the pattern).</li>
+  </ul>
+
+  <h3>What goes into the model inventory entry for an AI tool</h3>
+  <ol>
+    <li>Model name + provider + version + deployment context (which business process uses it).</li>
+    <li>Model risk tier (high / medium / low) based on impact of error.</li>
+    <li>Owner + validator (must be independent of developer per SR 11-7).</li>
+    <li>Data sent in production + data residency.</li>
+    <li>Last validation event + frequency of re-validation.</li>
+    <li>Known limitations + compensating controls.</li>
+    <li>Change history + vendor notifications.</li>
+  </ol>
+
+  <div class="signature">
+    <div class="label">Sub-module 3 takeaway</div>
+    <div class="quote">SR 11-7 / SS1/23 isn't optional for AI in regulated decisions. Map every AI tool to a model inventory entry; assign independent validators; document compensating controls where vendor opacity prevents standard practice.</div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-4">Sub-module 4 of 9</span>
+  <h2>DORA Article 13 — AI vendors as ICT third-party risk</h2>
+  <p>DORA Article 13 is the lever that makes AI vendor selection a board-reportable matter. It came into force 17 January 2025 across the EU; UK implements through analogous PRA/FCA expectations. AI vendors are ICT third parties under DORA.</p>
+
+  <h3>What Article 13 requires for any ICT third-party (including AI vendors)</h3>
+  <ol>
+    <li><strong>Pre-contract due diligence</strong> — the firm assesses the third party's resilience, security, sub-contracting, and operational performance.</li>
+    <li><strong>Contractual provisions</strong> — specific clauses on availability, security, performance, audit rights, sub-processor approval, termination assistance, data return / deletion.</li>
+    <li><strong>Concentration-risk assessment</strong> — particular scrutiny where the firm depends heavily on a single provider (likely if you're all-in on M365 + Azure + Copilot).</li>
+    <li><strong>Critical-or-important-function designation</strong> — if the AI supports a CIF, additional regulator-notification requirements apply.</li>
+    <li><strong>Ongoing monitoring</strong> — vendor performance is monitored; incidents are recorded; resilience is tested.</li>
+    <li><strong>Exit strategy</strong> — documented plan for replacing the vendor without service disruption.</li>
+    <li><strong>Sub-contracting transparency</strong> — chain of sub-processors made visible up to a level the firm can assess.</li>
+    <li><strong>Register of contracts</strong> — maintained at the firm level + reportable to the regulator.</li>
+  </ol>
+
+  <h3>What changes specifically for AI vendors</h3>
+  <ul>
+    <li>The board's risk-appetite statement now covers AI vendor concentration. The board has to actually consider it; not delegate to procurement.</li>
+    <li>Vendor questionnaire (see <a href="templates/vendor-questionnaire.html" class="accent">our template</a>) becomes the standard pre-contract artefact.</li>
+    <li>The "exit strategy" question gets harder — replacing an AI model after staff have learned its prompt patterns is real switching cost.</li>
+    <li>The "critical-or-important-function" designation gets nuanced — Copilot for general productivity is probably not CIF; Copilot used to draft regulator-correspondence likely is.</li>
+  </ul>
+
+  <div class="callout standard">
+    <span class="callout-icon">§</span>
+    <div>
+      <div class="callout-title">DORA Article 28 — concentration risk</div>
+      <p>Heavy dependence on a single AI provider is exactly the concentration-risk scenario DORA Article 28 contemplates. Firms running all-in on Microsoft (M365 + Azure + Copilot + Entra) need to document the dependency, the alternative providers considered, the operational impact of provider failure, and the contingency plan.</p>
+    </div>
+  </div>
+
+  <div class="signature">
+    <div class="label">Sub-module 4 takeaway</div>
+    <div class="quote">DORA Article 13 ICT-third-party discipline applies to AI vendors. Pre-contract due diligence + contract provisions + concentration assessment + exit strategy + register + board reporting. Not optional, not delegable.</div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-5">Sub-module 5 of 9</span>
+  <h2>AML / KYC investigation records and AI</h2>
+  <p>AI used in financial-crime workflows is a sensitive zone. Two issues combine: (a) the data is the most-protected category in the firm (tipping-off offences); (b) the activity has direct regulatory consequence (under-reporting + over-reporting both attract enforcement).</p>
+
+  <h3>Use cases that work well with AI (with controls)</h3>
+  <ul>
+    <li><strong>Transaction-pattern triage</strong> — AI prioritises alerts for human review. Human investigator decides on SAR. Audit trail is preserved.</li>
+    <li><strong>Adverse-media screening</strong> — AI processes news and surfaces matches for analyst review.</li>
+    <li><strong>Beneficial-ownership mapping</strong> — AI helps disambiguate corporate structures for KYC.</li>
+    <li><strong>Narrative drafting</strong> — AI helps draft SAR narratives from analyst notes (with human review before filing).</li>
+  </ul>
+
+  <h3>Use cases that don't work</h3>
+  <ul>
+    <li><strong>AI auto-files SARs</strong> — no. The decision to file is the human's; the AI surfaces, the human decides.</li>
+    <li><strong>AI uses consumer chatbots to triage</strong> — never. SAR data + investigation memos do not leave the controlled environment.</li>
+    <li><strong>AI is the audit explanation for alert tuning</strong> — your regulator wants the model + its rationale documented; "the AI flagged it" is not an answer.</li>
+    <li><strong>AI tools are used by analysts on personal accounts to translate suspect transcripts</strong> — even paid personal accounts. AML data must not leave the controlled environment.</li>
+  </ul>
+
+  <div class="callout warn">
+    <span class="callout-icon">!</span>
+    <div>
+      <div class="callout-title">Tipping off via AI</div>
+      <p>Tipping off can include AI-mediated channels. A staff member who tells a customer "you've been flagged in our system" — even if the AI didn't ground its answer on the SAR data — risks the offence. AI customer chatbots must be designed to prevent discussion of AML decisions.</p>
+    </div>
+  </div>
+
+  <div class="signature">
+    <div class="label">Sub-module 5 takeaway</div>
+    <div class="quote">AI in AML/KYC is high-value when bounded to triage + drafting under human review, criminal-risk when unbounded. The boundary is non-negotiable.</div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-6">Sub-module 6 of 9</span>
+  <h2>Algorithmic trading + EU AI Act + MiFID II</h2>
+  <p>MiFID II Article 17 governs algorithmic trading. AI used in trade decision-making lands here. EU AI Act applies in parallel — many algo-trading AI systems are Article 6 high-risk in the financial-services Annex III context.</p>
+
+  <h3>What MiFID II Article 17 requires</h3>
+  <ol>
+    <li><strong>Effective systems and risk controls</strong> — including a "kill switch" capability.</li>
+    <li><strong>Pre-trade and post-trade controls</strong> — limits, exposure, cancellation.</li>
+    <li><strong>Resilience testing</strong> — stress tests including disorderly market conditions.</li>
+    <li><strong>Records</strong> — accurate and time-sequenced records of orders.</li>
+    <li><strong>Notification of competent authority</strong> — when engaging in algorithmic trading.</li>
+    <li><strong>Compliance officer authority</strong> — accountability identified and resourced.</li>
+  </ol>
+
+  <h3>What AI specifically adds</h3>
+  <ul>
+    <li>Model risk management duties (SR 11-7 / SS1/23) stack on top.</li>
+    <li>EU AI Act Article 14 (human oversight) requires meaningful oversight — for high-frequency trading AI, this becomes "the human's ability to halt".</li>
+    <li>Article 12 logging requirements specifically demand the system supports auto-generated logs of operation enabling subsequent investigation.</li>
+    <li>Article 13 instructions for use from the provider must be followed; deviations recorded.</li>
+    <li>Article 26(4) requires deployer to inform workers and their representatives — for algo-trading desks, this includes the traders relying on the system.</li>
+  </ul>
+
+  <div class="signature">
+    <div class="label">Sub-module 6 takeaway</div>
+    <div class="quote">Algo trading is one of the few financial-services AI use cases where two regulatory frameworks (MiFID II + EU AI Act) both designate it explicitly. Document under both; satisfy both.</div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-7">Sub-module 7 of 9</span>
+  <h2>Customer-facing AI + FCA Consumer Duty</h2>
+  <p>The FCA Consumer Duty (UK) — Principle 12 + PRIN 2A — applies to firms whose actions or omissions may affect retail customer outcomes. It is outcome-based: the firm must deliver "good outcomes" in four areas (products and services, price and value, consumer understanding, consumer support). AI is in scope wherever it affects those outcomes.</p>
+
+  <h3>AI use cases that engage Consumer Duty</h3>
+  <ul>
+    <li>Customer chatbots that answer product / service questions.</li>
+    <li>AI-assisted financial promotions ("Section 21" content under FSMA).</li>
+    <li>AI-driven product recommendations / nudges in apps.</li>
+    <li>AI-screened applications (lending, mortgages, insurance) where the screen affects outcome.</li>
+    <li>AI summarisation of customer communications where the summary affects support quality.</li>
+    <li>AI-driven retention / churn workflows where the customer's offers depend on segmentation.</li>
+  </ul>
+
+  <h3>What the firm must demonstrate</h3>
+  <ol>
+    <li><strong>Foreseeable harm prevention</strong> — the firm has considered how the AI could harm retail customers and has controls.</li>
+    <li><strong>Good consumer understanding</strong> — AI-generated explanations are tested for comprehension by the target customer.</li>
+    <li><strong>Vulnerable-customer treatment</strong> — AI doesn't disadvantage vulnerable customers; the firm has identification + adjustment mechanisms.</li>
+    <li><strong>Price and value</strong> — AI-personalised pricing doesn't extract value without delivering fair value.</li>
+    <li><strong>Consumer support</strong> — AI customer support meets the same response-quality bar as human support.</li>
+    <li><strong>Monitoring</strong> — outcomes monitored over time; remediation when outcomes deteriorate.</li>
+  </ol>
+
+  <div class="callout warn">
+    <span class="callout-icon">!</span>
+    <div>
+      <div class="callout-title">Consumer Duty + Section 21</div>
+      <p>AI-generated financial promotions need the same approval process as human-generated ones. A chatbot recommending a product engages Section 21 if the recommendation is a financial promotion. Don't ship AI customer chat into product space without compliance review of the prompts and likely outputs.</p>
+    </div>
+  </div>
+
+  <div class="signature">
+    <div class="label">Sub-module 7 takeaway</div>
+    <div class="quote">Consumer Duty makes AI customer-impact a firm-level reportable. Map every customer-facing AI use case to the four outcome areas; build the monitoring; brief the board.</div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-8">Sub-module 8 of 9</span>
+  <h2>Incident escalation — which regulator hears, in what order</h2>
+  <p>An AI incident in a financial-services firm triggers multiple regulator escalation paths in parallel. Get the order wrong and you miss one of them. The <a href="templates/incident-form.html" class="accent">incident form</a> covers the universal flow; this sub-module adds the FS-specific sequencing.</p>
+
+  <h3>Within the first hour</h3>
+  <ol>
+    <li>Internal incident team + DPO + MLRO + Compliance Officer + CRO.</li>
+    <li>Decide initial classification — is this an ICT-related incident under DORA? An operational-resilience event under PRA SS1/21 / FCA SUP 15? A personal-data breach under GDPR? A serious AI incident under EU AI Act Article 73 (if you are an AI provider)?</li>
+    <li>Open the audit log immediately; preserve evidence.</li>
+  </ol>
+
+  <h3>Within the first 24 hours</h3>
+  <ul>
+    <li>If <strong>ICT-related incident under DORA + significant</strong> → initial notification to competent authority. UK firms: FCA / PRA. EU firms: national regulator. Specific timings in RTS.</li>
+    <li>If <strong>personal-data breach under GDPR Article 33</strong> → 72-hour clock to supervisory authority.</li>
+    <li>If <strong>operational-resilience event under FCA SUP 15.3.11R</strong> → notify FCA without delay if material.</li>
+    <li>If <strong>market abuse / suspicious-transaction-and-order-report</strong> → file STOR under MAR.</li>
+    <li>If <strong>customer harm</strong> → consider Consumer Duty review + remediation; potential FCA notification.</li>
+  </ul>
+
+  <h3>Within the first week</h3>
+  <ul>
+    <li>Follow-up DORA notifications per RTS (intermediate + final report).</li>
+    <li>If data subjects are at high risk → GDPR Article 34 individual notification.</li>
+    <li>Internal board reporting per board-reportable framework (DORA Art 6).</li>
+    <li>Update RoPA, model inventory, vendor register.</li>
+    <li>Brief insurer (E&amp;O / cyber / D&amp;O).</li>
+    <li>External counsel engagement on customer / regulator comms.</li>
+  </ul>
+
+  <h3>What changes if you are NYDFS-licensed</h3>
+  <ul>
+    <li>NYDFS Part 500.17 notification within 72 hours of determining a cybersecurity event has occurred.</li>
+    <li>Different definition of "cybersecurity event" — broader than GDPR breach in some respects.</li>
+    <li>Separate timeline; runs in parallel with GDPR / DORA / FCA.</li>
+  </ul>
+
+  <div class="signature">
+    <div class="label">Sub-module 8 takeaway</div>
+    <div class="quote">FS firms have four to six regulators that may want to hear about the same AI incident. Build the parallel-notification matrix during onboarding, not during the incident.</div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <span class="sub-tag" id="sub-9">Sub-module 9 of 9</span>
+  <h2>Final assessment</h2>
+  <p>Ten judgement questions exercising the financial-services overlay. Self-mark. Suggested pass: 8/10.</p>
+
+  <h3>Question 1</h3>
+  <p>Your firm runs in M365 with Copilot for M365 enabled. Your CIO regards it as a productivity tool. DORA Article 13 — does it apply?</p>
+  <details><summary>Answer</summary><p>Yes. Microsoft + Copilot is an ICT third party providing services to your firm. Article 13 due diligence + contractual provisions + concentration assessment + exit strategy + monitoring all apply. Where Copilot is used in support of a critical or important function (e.g. drafting regulator correspondence, supporting customer-facing decisions), additional scrutiny applies.</p></details>
+
+  <h3>Question 2</h3>
+  <p>Your AML analyst uses ChatGPT free to translate a suspicious Russian-language transcript so they can understand it. They don't include any names. Have they violated anything?</p>
+  <details><summary>Answer</summary><p>Almost certainly. The transcript is AML investigation material. Even without names, transmitting it to a consumer AI takes it outside the controlled environment, breaches your firm's AUP, may breach the SAR confidentiality regime, and may meet the "tipping off" threshold depending on what's in the transcript. Fix: deploy an approved AI translation tool inside the controlled environment; train analysts on AML never-paste rules; treat the historical exposure as a reportable incident.</p></details>
+
+  <h3>Question 3</h3>
+  <p>You use AI to draft a credit-decision explanation that's sent to a declined consumer. Which regulatory frameworks engage?</p>
+  <details><summary>Answer</summary><p>(a) GDPR Article 22 (automated decisions if AI's role is determinative); (b) EU AI Act high-risk classification under Annex III §5(b) (creditworthiness) + Article 27 FRIA mandatory if you are a non-public deployer; (c) Consumer Duty Principle 12 (UK) — the consumer must reasonably understand the explanation; (d) Consumer credit law (national); (e) SR 11-7 / SS1/23 model risk management — the AI is a model; (f) Equality / anti-discrimination law where the decision pattern has disparate impact.</p></details>
+
+  <h3>Question 4</h3>
+  <p>Your firm has an algo-trading desk. The trader replaces the trading algorithm with one that uses an LLM to interpret news. Does MiFID II Article 17 apply?</p>
+  <details><summary>Answer</summary><p>Yes. Article 17 applies to all algorithmic trading. The LLM-based system must demonstrate effective systems + risk controls + kill switch + pre/post-trade controls + resilience testing + records. EU AI Act provider/deployer duties apply on top — this is high-risk AI in a financial-services Annex III context, so Article 26 deployer obligations bite. Combined controls likely include independent validation per SR 11-7 / SS1/23.</p></details>
+
+  <h3>Question 5</h3>
+  <p>Your firm runs a model-risk register per SR 11-7. You procured GitHub Copilot for the dev team. Is the model on the register?</p>
+  <details><summary>Answer</summary><p>Probably yes if engineers are using Copilot to write code that runs in production for regulated decisions. Risk tier likely low-to-medium. Compensating controls: code review + secrets scanning + dependency review + SAST in CI. The register entry need not be heavy, but the model should appear.</p></details>
+
+  <h3>Question 6</h3>
+  <p>Microsoft updates Copilot to use a new model. Output behaviour shifts. You are a regulated FS firm. What's the cascade?</p>
+  <details><summary>Answer</summary><p>(a) Model-change registered per SR 11-7 / SS1/23 change-control; (b) DORA Article 13 ongoing-monitoring + potential vendor-notification trigger; (c) re-validation of any business processes that depend on the model; (d) potential customer-impact review if the model affects regulated decisions; (e) update vendor register entry + critical-function designation if applicable; (f) board notification if material.</p></details>
+
+  <h3>Question 7</h3>
+  <p>Your customer chatbot recommends a savings product. The recommendation triggers Section 21 (financial promotion). What's the workflow?</p>
+  <details><summary>Answer</summary><p>The chatbot's outputs that constitute promotions must be approved by an FCA-authorised person before they go live. AI-generated promotions are not exempt from the approval regime. Practical workflow: (a) prompt-engineer the bot to a set of approved responses; (b) compliance reviews the response set; (c) approved responses go live; (d) bot doesn't deviate (constrained generation); (e) monitoring detects drift; (f) re-approval as content evolves.</p></details>
+
+  <h3>Question 8</h3>
+  <p>You discover the AML triage AI is rejecting alerts at a rate disproportionately higher for one customer segment. What's the right escalation?</p>
+  <details><summary>Answer</summary><p>(1) Halt the model's auto-disposition (or downgrade to human-review-only) immediately. (2) Document the disparate-impact finding. (3) Escalate to MLRO + Head of Compliance + DPO. (4) Re-validate the model per SR 11-7. (5) Consider whether under-reporting has resulted; if so, file required catch-up SARs. (6) Determine whether the disparate impact requires notification to FCA / national regulator under SUP 15. (7) Address upstream training-data bias before re-enabling. (8) Document the lesson for board reporting.</p></details>
+
+  <h3>Question 9</h3>
+  <p>Your firm is the EU subsidiary of a US bank. SR 11-7 and PRA SS1/23 both apply. They differ in scope. Which do you follow?</p>
+  <details><summary>Answer</summary><p>Both — but specifically, you operate to the tighter requirement clause-by-clause, document compliance with each separately, and clearly indicate where one's compensating controls satisfy the other. Don't merge them into a single document; that obscures regulator-by-regulator readability.</p></details>
+
+  <h3>Question 10</h3>
+  <p>An MSP wants to deliver a "DORA + AI Safe@Work" Copilot rollout for a financial-services SMB. What's the standard deliverable?</p>
+  <details><summary>Answer</summary><p>(a) <a href="rollout-guide.html" class="accent">30-day rollout guide</a> + the <a href="module-copilot.html" class="accent">Microsoft Copilot track</a> for the M365 governance; (b) this FS sector overlay for the regulatory layer; (c) <a href="templates/aup-template.html" class="accent">AUP</a> extended with the FS never-paste list (Sub-module 2); (d) <a href="templates/dpia-template.html" class="accent">DPIA</a> + <a href="templates/fria-template.html" class="accent">FRIA</a> where credit / insurance pricing in scope; (e) Article 13 due-diligence pack on Microsoft as ICT third party; (f) model-inventory entries for Copilot per SR 11-7 / SS1/23; (g) updated incident-form (Sub-module 8 escalation order); (h) <a href="templates/training-register.html" class="accent">training register</a> with the FS overlay assessment recorded. End state: an audit binder that satisfies the firm's auditor, the DPO, and the supervisory regulator visit.</p></details>
+
+  <div class="signature">
+    <div class="label">Overlay complete</div>
+    <div class="quote">Universal AI literacy + DORA Article 13 + SR 11-7 model risk + sector-regulator overlay + AML / MAR criminal-risk floor. Record yourself in the training register with the overlay name + version. Then run the 90-day Shadow AI plan if you haven't.</div>
+  </div>
+
+</main>
+
+<footer class="site-foot">
+  <span>AI Safe@Work · Sector overlay · Financial Services v1.0</span>
+  <span class="foot-right">
+    <a href="course.html">All modules</a>
+    <a href="module-dpo.html">DPO Track</a>
+    <a href="module-msp-admin.html">MSP / IT Admin Track</a>
+    <a href="module-copilot.html">Microsoft Copilot Track</a>
+    <a href="module-shadow-ai.html">Shadow AI Track</a>
+    <a href="rollout-guide.html">Rollout guide</a>
+  </span>
+</footer>
+
+</body>
+</html>
