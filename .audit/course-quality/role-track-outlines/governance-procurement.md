@@ -44,4 +44,4 @@ EU AI Act Articles 13, 25, 26, 27 (provider + deployer interaction) · GDPR Arti
 ## Status
 
 - 2026-06-02 — outline locked.
-- Next action — schedule. Strong-fit follow-up to the MSP / IT Admin track because the procurement persona is the natural extension of the MSP-customer governance owner.
+- 2026-06-03 — **SHIPPED** as `/module-procurement.html`. 10 sub-modules + 10-question assessment. 491-line single-page HTML. JSON-LD `LearningResource` + `BreadcrumbList`. Amber accent (role track). Wired course.html (Role tracks 6 cards), llms.txt (6th Role entry + lede bump), sitemap.xml priority 0.88. Closes DOCTRINE.md gate 6 (6/6 — gate FULLY DONE).
