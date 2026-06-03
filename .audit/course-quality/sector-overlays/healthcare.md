@@ -54,4 +54,4 @@ Healthcare data is special-category data under GDPR Article 9 by default. Add to
 ## Status
 
 - 2026-06-02 — outline locked.
-- Priority — high. Sector with strongest regulatory urgency + lowest current AI-governance maturity.
+- 2026-06-03 — **SHIPPED** as `/sector-healthcare.html`. 9 sub-modules + 10-question assessment per outline. JSON-LD `LearningResource` + `BreadcrumbList`. Blue accent (sector overlay differentiator). 515-line single-page HTML. Wired into `course.html` (Sector overlays section, now 2 cards), `llms.txt` (2nd Sector entry + lede bump to "2 sector overlays"), `sitemap.xml`. Second of three planned overlays; advances DOCTRINE.md gate 10 from 1/3 → 2/3.
