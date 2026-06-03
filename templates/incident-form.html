@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#060608" />
+<title>AI incident report form — AI Safe@Work</title>
+<meta name="description" content="A starter AI incident report form. Captures what happened, what was exposed, who was notified, what was fixed, and what will change. Designed to satisfy GDPR Article 33/34, EU AI Act Article 73, NIS2 Article 23 reporting flows." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="AI Safe@Work" />
+<meta property="og:title" content="AI incident report form — AI Safe@Work" />
+<meta property="og:description" content="Audit-ready AI incident report form aligned with GDPR Art 33/34 + EU AI Act Art 73." />
+<meta property="og:url" content="https://aisafeatwork.org/templates/incident-form.html" />
+<meta property="og:image" content="https://aisafeatwork.org/og-card.png" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI incident report form — AI Safe@Work" />
+<meta name="twitter:description" content="Audit-ready AI incident report form aligned with GDPR Art 33/34 + EU AI Act Art 73." />
+<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png" />
+<link rel="canonical" href="https://aisafeatwork.org/templates/incident-form.html" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/style.css?v=2" />
+<script defer src="../assets/cinema.js?v=2"></script>
+<style>
+.template-tag { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.95rem; border-radius: 100px; background: rgba(232, 167, 38, 0.08); border: 1px solid rgba(232, 167, 38, 0.32); color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.2rem; }
+.template-tag::before { content: '§'; color: var(--accent); font-weight: 800; }
+.print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0 2rem; align-items: center; flex-wrap: wrap; }
+.print-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #1a1407; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.7rem 1.25rem; border-radius: 100px; border: none; cursor: pointer; box-shadow: 0 0 0 1px rgba(232,167,38,0.4), 0 8px 24px rgba(232,167,38,0.2); }
+.print-btn:hover { transform: translateY(-2px); }
+.print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
+.fill { display: inline-block; padding: 0.1rem 0.55rem; border-radius: 5px; background: rgba(232, 167, 38, 0.10); color: var(--accent); border: 1px dashed rgba(232, 167, 38, 0.42); font-family: var(--font-mono); font-size: 0.88em; }
+.policy-doc { margin: 1.5rem 0; padding: 2rem 2.2rem; background: rgba(10,10,16,0.85); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-card); }
+.policy-doc h2 { margin-top: 2.2rem; }
+.policy-doc h2:first-child { margin-top: 0; }
+.policy-doc h3 { margin-top: 1.6rem; }
+.policy-doc ol, .policy-doc ul { padding-left: 1.4rem; }
+.policy-doc li { margin-bottom: 0.55rem; }
+.section-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+.deadline-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.8rem; margin: 1rem 0 1.6rem; font-family: var(--font-mono); font-size: 0.78rem; }
+.deadline-card { border: 1px solid var(--border); border-radius: 10px; padding: 0.9rem 1rem; background: rgba(255,255,255,0.02); }
+.deadline-card strong { display: block; color: var(--accent); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.4rem; }
+.timeline-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-family: var(--font-mono); font-size: 0.78rem; }
+.timeline-table th, .timeline-table td { padding: 0.7rem 0.8rem; border: 1px solid var(--border); vertical-align: top; text-align: left; }
+.timeline-table th { background: rgba(232,167,38,0.08); color: var(--accent); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.signoff { margin-top: 2.4rem; padding-top: 1.5rem; border-top: 1px dashed var(--border); display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; font-family: var(--font-mono); font-size: 0.8rem; }
+.signoff .field { color: var(--text2); }
+.signoff .field strong { display: block; color: var(--accent); font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 0.4rem; }
+.signoff .field .line { display: block; min-height: 1.6rem; border-bottom: 1px solid var(--border-bold); margin-top: 0.4rem; }
+@media (max-width: 640px) { .signoff { grid-template-columns: 1fr; } }
+@media print {
+  .policy-doc { background: white !important; border: 1px solid #ccc !important; box-shadow: none !important; padding: 1rem 0 !important; }
+  .signoff .field strong { color: #b67700 !important; }
+  .fill { background: white !important; color: #1a1407 !important; border-color: #b67700 !important; }
+  .timeline-table th, .deadline-card strong { background: #f4ead0 !important; color: #1a1407 !important; }
+}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"HowTo","name":"AI incident report form","description":"Audit-ready incident report form for AI-involved incidents — aligned with GDPR Art 33/34 and EU AI Act Art 73.","url":"https://aisafeatwork.org/templates/incident-form.html","inLanguage":"en","publisher":{"@id":"https://aisafeatwork.org/#organization"},"totalTime":"PT1H","dateModified":"2026-06-03"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://aisafeatwork.org/"},{"@type":"ListItem","position":2,"name":"Templates","item":"https://aisafeatwork.org/templates/"},{"@type":"ListItem","position":3,"name":"AI incident report form","item":"https://aisafeatwork.org/templates/incident-form.html"}]}]}
+</script>
+</head>
+<body>
+
+<header class="topbar no-print">
+  <a href="../index.html" class="brand">AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="../course.html" class="always-show">Modules</a>
+    <a href="../module-10.html">Incident response</a>
+    <a href="aup-template.html">AUP</a>
+    <a href="dpia-template.html">DPIA</a>
+  </nav>
+</header>
+
+<main>
+  <span class="template-tag no-print">Template · Incident report v1.0</span>
+  <p class="eyebrow no-print">Audit-grade incident record</p>
+  <h1 class="page-title">AI incident <em>report form</em>.</h1>
+  <p class="lede no-print">For any incident where AI was involved — data exposure, harmful output, governance breach, security event. Captures the answers the regulator, the insurer, and the post-mortem will all want. Start filling it the moment you confirm an incident.</p>
+
+  <div class="print-row no-print">
+    <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF →</button>
+    <span class="print-hint">Print A4 portrait. File with your incident register. Retain seven years (insurance + regulator norms).</span>
+  </div>
+
+  <article class="policy-doc">
+
+    <span class="section-tag">Identification</span>
+    <h2>Incident <span class="fill">[INC-YYYYMMDD-XXXX]</span></h2>
+    <p><strong>Reporter:</strong> <span class="fill">[Name + role + contact]</span> · <strong>Discovered:</strong> <span class="fill">[YYYY-MM-DD HH:MM TZ]</span> · <strong>Form opened:</strong> <span class="fill">[YYYY-MM-DD HH:MM TZ]</span> · <strong>Status:</strong> <span class="fill">[Open / Contained / Closed]</span></p>
+
+    <h2>1. Reporting deadlines — start the clock now</h2>
+    <p>Different regulators have different reporting windows. The table below is a quick reference. Note the trigger for each and the deadline from awareness, not from incident occurrence.</p>
+
+    <div class="deadline-grid">
+      <div class="deadline-card">
+        <strong>GDPR Art 33 — controller → supervisory authority</strong>
+        Personal-data breach likely to result in a risk: <strong>72 hours</strong> from awareness.
+      </div>
+      <div class="deadline-card">
+        <strong>GDPR Art 34 — controller → data subjects</strong>
+        Personal-data breach likely to result in a <em>high</em> risk: without undue delay.
+      </div>
+      <div class="deadline-card">
+        <strong>EU AI Act Art 73 — provider of high-risk AI</strong>
+        Serious incident: <strong>15 days</strong> (immediate if widespread or fatal: 2 days).
+      </div>
+      <div class="deadline-card">
+        <strong>NIS2 Art 23 — essential / important entity → CSIRT</strong>
+        Significant incident: early warning <strong>24 hours</strong>, notification <strong>72 hours</strong>, final report <strong>1 month</strong>.
+      </div>
+      <div class="deadline-card">
+        <strong>DORA Art 19 — financial entity → competent authority</strong>
+        Major ICT-related incident: initial notification within hours per RTS.
+      </div>
+      <div class="deadline-card">
+        <strong>Insurer notification</strong>
+        Cyber / E&amp;O policy clauses commonly require <strong>72 hours</strong> from awareness.
+      </div>
+    </div>
+
+    <h2>2. Incident classification</h2>
+    <ul>
+      <li><strong>Type:</strong> <span class="fill">[Data exposure / harmful or hallucinated output / governance breach / unauthorised tool use / sub-processor issue / model abuse / other]</span></li>
+      <li><strong>Severity:</strong> <span class="fill">[Low / Medium / High / Critical]</span></li>
+      <li><strong>AI involvement:</strong> <span class="fill">[Tool name + version + tenant region + free/enterprise tier]</span></li>
+      <li><strong>Channel:</strong> <span class="fill">[Web UI / API / browser extension / SaaS feature / internal RAG / agent / other]</span></li>
+      <li><strong>Personal data involved:</strong> <span class="fill">[None / Standard / Special-category (Art 9) / Criminal-offence (Art 10)]</span></li>
+      <li><strong>Data subjects affected:</strong> <span class="fill">[Categories + estimated count + countries]</span></li>
+      <li><strong>Confidential business information involved:</strong> <span class="fill">[None / Customer / Pricing / Source code / Strategy / Other]</span></li>
+    </ul>
+
+    <h2>3. What happened</h2>
+
+    <h3>3.1 Factual summary</h3>
+    <p>One paragraph, plain English, no speculation. Who did what, with what tool, on what data, with what outcome.</p>
+    <p><span class="fill">[Free text — 100-200 words]</span></p>
+
+    <h3>3.2 Detection</h3>
+    <ul>
+      <li><strong>How detected:</strong> <span class="fill">[User report / monitoring alert / external party / regulator / journalist]</span></li>
+      <li><strong>Detected by:</strong> <span class="fill">[Name + role]</span></li>
+      <li><strong>Time from incident to detection:</strong> <span class="fill">[Best estimate]</span></li>
+    </ul>
+
+    <h3>3.3 Timeline</h3>
+    <table class="timeline-table">
+      <thead>
+        <tr><th>Timestamp (TZ)</th><th>Actor</th><th>Event</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="fill">[YYYY-MM-DD HH:MM]</span></td><td><span class="fill">[Who]</span></td><td><span class="fill">[Action / event]</span></td></tr>
+        <tr><td><span class="fill">[YYYY-MM-DD HH:MM]</span></td><td><span class="fill">[Who]</span></td><td><span class="fill">[Action / event]</span></td></tr>
+        <tr><td><span class="fill">[YYYY-MM-DD HH:MM]</span></td><td><span class="fill">[Who]</span></td><td><span class="fill">[Action / event]</span></td></tr>
+        <tr><td><span class="fill">[YYYY-MM-DD HH:MM]</span></td><td><span class="fill">[Who]</span></td><td><span class="fill">[Action / event]</span></td></tr>
+      </tbody>
+    </table>
+
+    <h2>4. Impact</h2>
+    <ul>
+      <li><strong>Data subjects affected:</strong> <span class="fill">[Count + category + countries]</span></li>
+      <li><strong>Likely consequences:</strong> <span class="fill">[Financial / reputational / discrimination / loss of confidentiality / physical / other]</span></li>
+      <li><strong>Severity assessment:</strong> <span class="fill">[Likelihood + magnitude — reasoning]</span></li>
+      <li><strong>Business systems affected:</strong> <span class="fill">[Systems / processes / customers]</span></li>
+    </ul>
+
+    <h2>5. Containment</h2>
+    <ol>
+      <li><strong>Immediate action taken:</strong> <span class="fill">[Tool access revoked / data deleted / credentials rotated / vendor notified / etc.]</span> at <span class="fill">[HH:MM]</span> by <span class="fill">[Name]</span>.</li>
+      <li><strong>Subsequent action:</strong> <span class="fill">[Free text]</span></li>
+      <li><strong>Containment confirmed:</strong> <span class="fill">[Yes / Partial / No — by whom + when]</span></li>
+    </ol>
+
+    <h2>6. Notifications</h2>
+    <ul>
+      <li><strong>Internal escalation:</strong> <span class="fill">[Manager / DPO / CISO / CEO — names + times]</span></li>
+      <li><strong>DPO assessment:</strong> <span class="fill">[Risk-level conclusion + whether SA notification required + reasoning]</span></li>
+      <li><strong>Supervisory authority (GDPR Art 33):</strong> <span class="fill">[Notified / Not required / By when — reference number when issued]</span></li>
+      <li><strong>Data subjects (GDPR Art 34):</strong> <span class="fill">[Notified / Not required / By when — method]</span></li>
+      <li><strong>AI provider:</strong> <span class="fill">[Notified — ticket reference + contact]</span></li>
+      <li><strong>EU AI Act competent authority (Art 73):</strong> <span class="fill">[If we are provider of high-risk AI: notified / N/A]</span></li>
+      <li><strong>NIS2 CSIRT:</strong> <span class="fill">[If in-scope: early warning sent + ref / N/A]</span></li>
+      <li><strong>Customers:</strong> <span class="fill">[Where contractually required — list + dates]</span></li>
+      <li><strong>Insurer:</strong> <span class="fill">[Policy + reference + notified date]</span></li>
+      <li><strong>Law enforcement:</strong> <span class="fill">[If criminal — force + ref / N/A]</span></li>
+    </ul>
+
+    <h2>7. Root cause</h2>
+    <p>What allowed this to happen. Be honest. "User error" is rarely the root cause — usually it points to a missing control, a missing piece of training, a confusing UI, or a missing approved tool. Apply five-whys or a similar technique.</p>
+    <p><span class="fill">[Free text]</span></p>
+
+    <h2>8. Lessons and changes</h2>
+    <ol>
+      <li><strong>Policy change required:</strong> <span class="fill">[None / Detail + owner + due date]</span></li>
+      <li><strong>Training change required:</strong> <span class="fill">[None / Detail + owner + due date]</span></li>
+      <li><strong>Technical control change required:</strong> <span class="fill">[None / Detail + owner + due date]</span></li>
+      <li><strong>Vendor or sub-processor action required:</strong> <span class="fill">[None / Detail + owner + due date]</span></li>
+      <li><strong>Communications / customer-relations action:</strong> <span class="fill">[None / Detail + owner + due date]</span></li>
+    </ol>
+
+    <h2>9. Closure</h2>
+    <ul>
+      <li><strong>Containment verified:</strong> <span class="fill">[Yes / No — by whom + when]</span></li>
+      <li><strong>Notifications complete:</strong> <span class="fill">[Yes / Partial — outstanding]</span></li>
+      <li><strong>Actions tracked to closure:</strong> <span class="fill">[Reference in action register]</span></li>
+      <li><strong>Post-incident review held:</strong> <span class="fill">[Date + participants]</span></li>
+      <li><strong>Incident closed:</strong> <span class="fill">[YYYY-MM-DD by Name]</span></li>
+    </ul>
+
+    <h2>10. Standards mapping</h2>
+    <ul>
+      <li><strong>GDPR</strong> — Articles 33 (controller notification), 34 (data subject notification), 32 (security obligations).</li>
+      <li><strong>EU AI Act</strong> — Article 73 (serious incident reporting by providers of high-risk AI systems).</li>
+      <li><strong>NIS2</strong> — Article 23 (incident reporting for essential and important entities).</li>
+      <li><strong>DORA</strong> — Article 19 (major ICT-related incident reporting) for in-scope financial entities.</li>
+      <li><strong>ISO/IEC 42001:2023</strong> — Annex A.6.2.6 (AI system operation: incident handling).</li>
+      <li><strong>ISO/IEC 27001:2022</strong> — Clause 6.1.3 (information security risk treatment); Annex A.5.24–A.5.28 (incident management); A.5.30 (ICT readiness for business continuity).</li>
+      <li><strong>NIST AI RMF</strong> — Manage 4.1 (incident response and recovery).</li>
+    </ul>
+
+    <div class="signoff">
+      <div class="field">
+        <strong>Reporter</strong>
+        <span class="line"></span>
+        Name + role + date
+      </div>
+      <div class="field">
+        <strong>DPO</strong>
+        <span class="line"></span>
+        Name + date
+      </div>
+      <div class="field">
+        <strong>Incident owner</strong>
+        <span class="line"></span>
+        Name + role + date
+      </div>
+      <div class="field">
+        <strong>Closure approver</strong>
+        <span class="line"></span>
+        Name + role + date
+      </div>
+    </div>
+
+  </article>
+
+  <p class="lede no-print" style="margin-top: 2.4rem;">If you have to fill this in for real for the first time, don't worry about polish — get the facts down, then circulate. Notifications, then containment, then narrative. Auditors care more about timeline accuracy than prose quality.</p>
+
+</main>
+
+<footer class="site-foot no-print">
+  <span>AI Safe@Work · Templates · Incident report v1.0</span>
+  <span class="foot-right">
+    <a href="aup-template.html">AUP</a>
+    <a href="dpia-template.html">DPIA</a>
+    <a href="fria-template.html">FRIA</a>
+    <a href="vendor-questionnaire.html">Vendor questionnaire</a>
+  </span>
+</footer>
+
+</body>
+</html>
