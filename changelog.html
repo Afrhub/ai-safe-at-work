@@ -17,6 +17,8 @@
 <meta name="twitter:title" content="Changelog — AI Safe@Work" />
 <meta name="twitter:description" content="Public release notes for AI Safe@Work. Quarterly cadence — each release walks every citation against its primary source, refreshes against regulator updates, and is dated in every page footer." />
 <meta name="twitter:image" content="https://aisafeatwork.org/og-card.png" />
+<link rel="alternate" type="application/rss+xml" title="AI Safe@Work — Changelog (RSS)" href="https://aisafeatwork.org/changelog.xml" />
+<link rel="alternate" type="application/feed+json" title="AI Safe@Work — Changelog (JSON Feed)" href="https://aisafeatwork.org/changelog.json" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -100,6 +102,10 @@
   <h1 class="page-title">Changelog.</h1>
   <p class="lede">Each quarterly release walks every citation against its primary source and refreshes against regulator publications. Auditing a buyer who used a previous version? This page tells you what they had at the time.</p>
 
+  <p style="font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em; color: var(--text3); margin: 0.4rem 0 1.6rem;">
+    Subscribe: <a class="accent" href="changelog.xml">RSS</a> · <a class="accent" href="changelog.json">JSON&nbsp;Feed</a>
+  </p>
+
   <div class="callout standard">
     <span class="callout-icon">§</span>
     <div>
@@ -109,7 +115,38 @@
     </div>
   </div>
 
-  <article class="release">
+  <article class="release" id="v2026.06">
+    <span class="release-meta">v2026.06 · LMS distribution + EU-language shells</span>
+    <h2>v2026.06</h2>
+    <p class="when">Released 2026-06-03</p>
+
+    <h3>What's new</h3>
+    <ul>
+      <li><strong>SCORM 1.2 package</strong> — IMS Content Aggregation Model v1.2 manifest, single-SCO, 80% mastery score, 2-hour session cap. API discovery walks parent <code>opener</code> chains; <code>cmi.suspend_data</code> persists per-module completion across sessions. Builder script under <code>scripts/build-scorm.py</code> (stdlib zip, zip-slip safe, <code>--locale en|fr|de|all</code>). Deployable on Moodle, Cornerstone, Workday Learning, SCORM Cloud.</li>
+      <li><strong>xAPI (Tin Can) adapter</strong> — HTTPS-gated POST to any conformant LRS. Anonymous-actor default, no auth-in-URL, <code>credentials: 'omit'</code>. IRI namespace lives at <code>https://aisafeatwork.org/xapi/v2/</code>. Spec + LRS config template under <code>.audit/integrations/</code>.</li>
+      <li><strong>FR and DE language shells</strong> — full v2 site rendered in French and German (<code>/v2/fr/</code> and <code>/v2/de/</code>). Banner on every page declares machine-translation status and links to canonical EN. <code>modules.json</code> extended with locale dictionaries; <code>v2.js</code> auto-detects locale from path.</li>
+      <li><strong>SEO + AEO metadata pass</strong> — JSON-LD <code>WebSite</code> / <code>Course</code> / <code>LearningResource</code> / <code>BreadcrumbList</code> + canonical + <code>hreflang</code> (en/fr/de/x-default) + OpenGraph + Twitter card across all 39 v2 pages. Repeatable splicer: <code>scripts/inject-v2-seo.py</code> (idempotent, marker-based).</li>
+    </ul>
+
+    <h3>Procurement gates closed this release</h3>
+    <ul>
+      <li>Gate 4 — SCORM 1.2 + xAPI export wrapper.</li>
+      <li>Gate 5 — FR + DE translations (shells; native-speaker review pending).</li>
+      <li>Gate 13 — JSON-LD + hreflang + sitemap (v2 deferred until <code>noindex</code> lifted).</li>
+      <li>Gate 14 — OpenGraph + Twitter card meta (v2).</li>
+    </ul>
+
+    <h3>Open flags <span class="flag-pill">to resolve before next release</span></h3>
+    <ul>
+      <li>Native-speaker review of FR + DE shells before procurement deployment.</li>
+      <li>Custom domain (<code>aisafeatwork.org</code>) purchase + DNS — recipe filed at <code>.audit/legal/domain-procurement-2026-06-03.md</code>.</li>
+      <li>OMB M-25-21 URL canonical form (carried over from v2026.05).</li>
+    </ul>
+  </article>
+
+  <hr class="section-divider" />
+
+  <article class="release" id="v2026.05">
     <span class="release-meta">v2026.05 · Initial release</span>
     <h2>v2026.05</h2>
     <p class="when">Released 2026-05-19</p>

@@ -1,0 +1,34 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "AI Safe@Work — Changelog",
+  "home_page_url": "https://aisafeatwork.org/changelog.html",
+  "feed_url": "https://aisafeatwork.org/changelog.json",
+  "description": "Public release notes for AI Safe@Work — quarterly minor releases, patch fixes as needed. Each release walks every citation against its primary source and refreshes against regulator publications.",
+  "language": "en-GB",
+  "authors": [
+    {
+      "name": "AI Safe@Work editorial",
+      "url": "https://aisafeatwork.org/"
+    }
+  ],
+  "items": [
+    {
+      "id": "https://aisafeatwork.org/changelog.html#v2026.06",
+      "url": "https://aisafeatwork.org/changelog.html#v2026.06",
+      "title": "v2026.06 — LMS distribution + EU-language shells",
+      "date_published": "2026-06-03T12:00:00Z",
+      "tags": ["release", "distribution", "i18n"],
+      "content_html": "<p><strong>Procurement gates 4, 5, 13, 14 closed.</strong></p><ul><li>SCORM 1.2 package — IMS CAM v1.2 manifest, single-SCO, 80% mastery, 2-hour cap. Deployable on Moodle, Cornerstone, Workday Learning, SCORM Cloud.</li><li>xAPI (Tin Can) adapter — HTTPS-gated POST to any conformant LRS. Anonymous-actor default, no auth-in-URL.</li><li>French and German language shells under /v2/fr/ and /v2/de/ — machine-translation banner pending native review.</li><li>JSON-LD (WebSite / Course / LearningResource / BreadcrumbList) + canonical + hreflang + OpenGraph + Twitter card across 39 v2 pages.</li></ul><p><strong>Open</strong>: native-speaker review of FR + DE; custom-domain purchase + DNS.</p>",
+      "summary": "Procurement gates 4 (SCORM + xAPI), 5 (FR + DE shells), 13 (JSON-LD + hreflang), and 14 (OG + Twitter) closed."
+    },
+    {
+      "id": "https://aisafeatwork.org/changelog.html#v2026.05",
+      "url": "https://aisafeatwork.org/changelog.html#v2026.05",
+      "title": "v2026.05 — Initial release",
+      "date_published": "2026-05-19T12:00:00Z",
+      "tags": ["release", "initial"],
+      "content_html": "<p><strong>Initial public release.</strong></p><ul><li>12 universal modules.</li><li>2 role tracks — Manager and DPO / compliance lead.</li><li>2 ship-ready templates — Acceptable Use Policy and AI vendor diligence questionnaire.</li><li>Standards Map (57 clause-to-module rows). Citations bibliography (every claim → primary source with confidence flag).</li><li>Standards baseline: EU AI Act 2024/1689, GDPR, ISO/IEC 42001:2023, ISO/IEC 27001:2022, NIST AI RMF 1.0 + GAI Profile, OWASP LLM Top 10 (2025).</li></ul>",
+      "summary": "Initial public release — 12 modules, 2 role tracks, 2 templates, standards map, citations bibliography."
+    }
+  ]
+}

@@ -61,3 +61,11 @@ build/
 
 # ── Local-only preview state ──
 .preview/
+
+# ── Founder content-source binaries (captured as text under .audit/) ──
+*.docx
+*.doc
+*.pages
+
+# ── Build artefacts ──
+dist/

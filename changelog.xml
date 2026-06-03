@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>AI Safe@Work — Changelog</title>
+    <link>https://aisafeatwork.org/changelog.html</link>
+    <atom:link href="https://aisafeatwork.org/changelog.xml" rel="self" type="application/rss+xml" />
+    <description>Public release notes for AI Safe@Work — quarterly minor releases, patch fixes as needed. Each release walks every citation against its primary source and refreshes against regulator publications.</description>
+    <language>en-GB</language>
+    <copyright>Content CC BY-SA 4.0 · Code MIT</copyright>
+    <managingEditor>noreply@aisafeatwork.org (AI Safe@Work editorial)</managingEditor>
+    <webMaster>noreply@aisafeatwork.org (AI Safe@Work editorial)</webMaster>
+    <lastBuildDate>Wed, 03 Jun 2026 12:00:00 +0000</lastBuildDate>
+    <pubDate>Wed, 03 Jun 2026 12:00:00 +0000</pubDate>
+    <ttl>1440</ttl>
+    <generator>hand-authored — see DOCTRINE.md § Refresh cadence</generator>
+
+    <item>
+      <title>v2026.06 — LMS distribution + EU-language shells</title>
+      <link>https://aisafeatwork.org/changelog.html#v2026.06</link>
+      <guid isPermaLink="true">https://aisafeatwork.org/changelog.html#v2026.06</guid>
+      <pubDate>Wed, 03 Jun 2026 12:00:00 +0000</pubDate>
+      <dc:creator>AI Safe@Work editorial</dc:creator>
+      <category>release</category>
+      <category>distribution</category>
+      <category>i18n</category>
+      <description><![CDATA[
+        <p><strong>Procurement gates 4, 5, 13, 14 closed.</strong></p>
+        <ul>
+          <li>SCORM 1.2 package — IMS CAM v1.2 manifest, single-SCO, 80% mastery, 2-hour cap. Deployable on Moodle, Cornerstone, Workday Learning, SCORM Cloud.</li>
+          <li>xAPI (Tin Can) adapter — HTTPS-gated POST to any conformant LRS. Anonymous-actor default, no auth-in-URL.</li>
+          <li>French and German language shells under /v2/fr/ and /v2/de/ — machine-translation banner pending native review.</li>
+          <li>JSON-LD (WebSite / Course / LearningResource / BreadcrumbList) + canonical + hreflang + OpenGraph + Twitter card across 39 v2 pages.</li>
+        </ul>
+        <p><strong>Open</strong>: native-speaker review of FR + DE; custom-domain purchase + DNS.</p>
+      ]]></description>
+    </item>
+
+    <item>
+      <title>v2026.05 — Initial release</title>
+      <link>https://aisafeatwork.org/changelog.html#v2026.05</link>
+      <guid isPermaLink="true">https://aisafeatwork.org/changelog.html#v2026.05</guid>
+      <pubDate>Tue, 19 May 2026 12:00:00 +0000</pubDate>
+      <dc:creator>AI Safe@Work editorial</dc:creator>
+      <category>release</category>
+      <category>initial</category>
+      <description><![CDATA[
+        <p><strong>Initial public release.</strong></p>
+        <ul>
+          <li>12 universal modules — why this course exists, what AI tools do with data, the never-paste list, picking the right tool, verifying outputs, AI-powered scams, bias and fairness, copyright and IP, logging, incident response, the 60-second checklist, the standards.</li>
+          <li>2 role tracks — Manager and DPO / compliance lead.</li>
+          <li>2 ship-ready templates — Acceptable Use Policy and AI vendor diligence questionnaire.</li>
+          <li>Standards Map (57 clause-to-module rows, 88 cross-link pills); Citations bibliography (every claim → primary source with confidence flag).</li>
+          <li>Standards baseline: EU AI Act 2024/1689, GDPR, ISO/IEC 42001:2023, ISO/IEC 27001:2022, NIST AI RMF 1.0 + GAI Profile, OWASP LLM Top 10 (2025).</li>
+        </ul>
+      ]]></description>
+    </item>
+  </channel>
+</rss>
