@@ -18,7 +18,8 @@
   --accent-soft: rgba(232,167,38,0.10);
   --text:        #eef2f7;
   --text2:       #9aaec3;
-  --text3:       #5e7286;
+  --text3:       #8595a7;  /* WCAG 2026-06-03 audit: bumped from #5e7286 (~4.1:1) → #8595a7 (~6.7:1 vs --bg) for AA 4.5:1 normal text */
+  --focus-ring:  #f0c66c;  /* WCAG 2.4.7 focus visible — bright amber outline */
   --green:       #1ab86a;
   --red:         #e03e3e;
   --blue:        #5fa8ff;
@@ -49,7 +50,48 @@ body {
 
 a { color: var(--accent); text-decoration: none; }
 a:hover { color: var(--accent-2); }
-a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+/* ── WCAG 2.4.1 Bypass Blocks — skip-to-content link ── */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  z-index: 10000;
+  padding: 0.7rem 1.2rem;
+  background: var(--accent);
+  color: #1a1407;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-decoration: underline;
+  border-radius: 0 0 8px 0;
+  transition: top 120ms ease;
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  top: 0;
+  outline: 2px solid #1a1407;
+  outline-offset: -4px;
+}
+
+/* ── WCAG 2.4.7 Focus Visible — keyboard focus ring across interactive elements ── */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+summary:focus:not(:focus-visible) {
+  outline: none;
+}
 
 /* ── Topbar ── */
 .v2-topbar {
