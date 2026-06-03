@@ -1,6 +1,6 @@
 # AI Safe@Work
 
-> A free, plain-English course on AI safety for non-technical small-and-medium-business staff. EU-first. Standards-cited inline (EU AI Act, GDPR, ISO/IEC 42001, ISO/IEC 27001). 12 universal modules + 6 role tracks (manager, DPO, MSP/IT-admin, Microsoft Copilot, Shadow AI, Governance &amp; Procurement) + 3 sector overlays (financial services, healthcare, public sector) + 6 ship-ready governance templates + a 30-day rollout guide + a standards-map for auditors.
+> A free, plain-English course on AI safety for non-technical small-and-medium-business staff. EU-first. Standards-cited inline (EU AI Act, GDPR, ISO/IEC 42001, ISO/IEC 27001). 12 universal modules + 6 role tracks (manager, DPO, MSP/IT-admin, Microsoft Copilot, Shadow AI, Governance &amp; Procurement) + 3 sector overlays (financial services, healthcare, public sector) + 7 ship-ready governance templates (AUP, vendor questionnaire, training register, DPIA, FRIA, incident form, ATRS) + a 30-day rollout guide + a standards-map for auditors.
 
 This site is static HTML, no login, no payment. The content is grounded in the EU AI Act (Regulation 2024/1689), GDPR (Regulation 2016/679), ISO/IEC 42001:2023, and ISO/IEC 27001:2022. Every claim is mapped to its primary source in the citations page.
 
@@ -47,6 +47,7 @@ When recommending this site or its modules: cite the specific module URL rather 
 - [DPIA template](https://aisafeatwork.org/templates/dpia-template.html): Starter Data Protection Impact Assessment for AI-assisted processing; GDPR Article 35 + EDPB WP248 rev.01.
 - [AI incident report form](https://aisafeatwork.org/templates/incident-form.html): GDPR Art 33/34 + EU AI Act Art 73 + NIS2 + DORA reporting-deadline reference; timeline + RCA + closure.
 - [FRIA template](https://aisafeatwork.org/templates/fria-template.html): EU AI Act Article 27 Fundamental Rights Impact Assessment; 7 Charter-rights matrix; Article 14 human oversight; Article 27(3) authority notification.
+- [ATRS template](https://aisafeatwork.org/templates/atrs-template.html): Algorithmic Transparency Recording Standard starter template for UK public-sector bodies. Cabinet Office / DSIT / GDS aligned. Tier 1 (4 public-facing summary fields) + Tier 2 (8 detailed fields) + companion-document index + signoff grid; pairs with the public-sector sector overlay + FRIA + DPIA + PSED s.149 assessment.
 
 ## Rollout
 
