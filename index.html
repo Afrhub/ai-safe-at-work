@@ -25,13 +25,13 @@
 body { background: var(--bg); }
 main.gate {
   max-width: none;
-  height: 100svh; height: 100dvh;
+  min-height: 100svh; min-height: 100dvh;
   display: grid;
   grid-template-rows: auto 1fr auto;
   padding: 1.25rem 2rem 1rem;
   position: relative;
   isolation: isolate;
-  overflow: hidden;
+  overflow: visible;
 }
 .gate::before {
   content: '';
