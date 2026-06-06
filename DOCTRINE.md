@@ -7,6 +7,14 @@
 >
 > Canonical version: this file (`~/.openclaw/workspace/ai-safe-at-work/DOCTRINE.md`).
 > Obsidian mirror: `second-brain/Projects/ai-safe-at-work/doctrine.md` — keep in sync.
+>
+> **Tightly linked to:** [`SCOPE.md`](./SCOPE.md) — the paid-tier commercial
+> scope (Tiers 1–5). DOCTRINE and SCOPE are co-authoritative for any
+> commercial conversation. Before quoting, scoping, or signing: read both.
+> Any tier or price change in SCOPE requires a doctrine re-check; any
+> doctrine shift (north star, pillars, out-of-scope rules) requires a
+> matching pass over SCOPE. Scope-creep gate lives in SCOPE.md and is
+> mandatory before any quote.
 
 ---
 
@@ -197,6 +205,36 @@ Gates 1, 2, 3, 13, 14 are the **week-one block**. Gates 4–7 are the **quarter-
 
 - Either party may terminate w/ 90 days written notice.
 - Termination triggers: misrepresentation of accreditation status, breach of confidentiality, breach of brand guidelines, non-payment, failure to keep AUP applied to own staff handling course data.
+
+---
+
+## § Commercial scope — paid tiers (canonical pointer)
+
+> Added 2026-06-06. **Authoritative source: [`SCOPE.md`](./SCOPE.md).**
+> This section is a doctrine-side pointer + guardrail summary; it does not
+> replicate the tier deliverables. Read SCOPE.md for the full list and
+> mandatory scope-creep gate.
+
+**Tier list (direct / consultancy pricing, separate from § MSP commercial model channel pricing):**
+
+| Tier | Name | Target price | Doctrine home |
+|---|---|---|---|
+| 1 | AI Governance Foundation | £4,995 | § Commercial pillars → Pillar 2 (Governance Packs); § Governance pack strategy; Procurement-readiness Gate 7 (templates) + Gate 3 (cert) |
+| 2 | AI Governance Assessment | £7,500 – £9,995 | § Commercial pillars → Pillar 3 (Advisory); § Audience hierarchy → P1 + P2 |
+| 3 | AI Governance Readiness Programme | £12,500 – £20,000 | § Commercial structure → Consultancy entity; § Commercial pillars → Pillar 3 |
+| 4 | ISO 42001 Readiness | £15,000 – £30,000+ | § Standards hierarchy → ISO/IEC 42001 cite + **"Out of scope to certify against"** hard guardrail |
+| 5 | Fractional AI Governance Advisor | £1,500 – £5,000 / mo | § Commercial pillars → Pillar 3 (advisory retainer); § MSP commercial model (referral-fee row if partner-originated) |
+
+**Doctrine guardrails that bite every tier — restate before any quote:**
+
+1. Free-core protection — no tier may paywall the 12 core modules (§ North star · § Product principles — what we do not do).
+2. Tier 4 is **Readiness, not Certification**. Doctrine § Standards hierarchy is explicit: we do not certify against ISO 42001 / 27001. Quotes, contracts, collateral must use "Readiness". Re-quote any buyer who asks for "Certification".
+3. Two-entity split (§ Commercial structure) — Tiers 1–5 sit on the Consultancy side. MSP platform tiers (£499 / £1,499 / £3k–£5k+/mo) are separate and live in § MSP commercial model. Do not conflate.
+4. Standards cited inside any tier deliverable must follow § Standards hierarchy (primary sources only) and § Audit-readiness evidence shape.
+5. Partner-sold tiers route through § Sales partners onboarding requirements (signed agreement on file, sub-processor disclosure if applicable, no white-label without explicit clause).
+6. Scope-creep gate in SCOPE.md is **mandatory** before any quote. Every flagged creep logged in `.audit/commercial/scope-creep-log.md`.
+
+**When DOCTRINE moves, SCOPE re-checks. When SCOPE moves, DOCTRINE re-checks.** Append to SCOPE change-control table and (where it shifts doctrine) to § Decision log here.
 
 ---
 
