@@ -187,216 +187,23 @@
     </div>
   </div>
 
-  <script type="application/json" id="quiz-data">
-  {
-    "module": 3,
-    "passThreshold": 8,
-    "quizTitle": "Test your <em>understanding</em>.",
-    "quizLede": "Ten multiple-choice questions drawn only from the nine categories and the standards callout above. Pass mark 8 out of 10.",
-    "classifier": {
-      "eyebrow": "Interactive · Demonstrate understanding",
-      "title": "Classify the <em>data</em>.",
-      "lede": "Ten realistic snippets. For each, decide whether it is safe to paste into a free or paid-individual consumer AI tool, or whether it belongs on the never-paste list. Each answer gives you instant feedback citing the relevant category.",
-      "items": [
-        {
-          "label": "A spreadsheet of 40,000 customer records: name, email, address, order history.",
-          "answer": "never",
-          "why": "This is customer personal data under GDPR. Pasting it into a tool whose terms don't establish a controller–processor relationship is, in itself, a personal data breach.",
-          "cite": "Category 1 · Customer and contact personal data"
-        },
-        {
-          "label": "An abstract question about Excel sort syntax: \"how do I sort a sheet by column A then column C, descending?\"",
-          "answer": "safe",
-          "why": "No real personal data, no secrets, no client information. This is exactly the 'describe the shape' technique the module recommends — get the logic, run it on the data locally.",
-          "cite": "The 'describe the shape' trick"
-        },
-        {
-          "label": "A patient's blood test result from your dental practice, pasted to ask the AI to summarise it.",
-          "answer": "never",
-          "why": "Health information is special-category data under GDPR Article 9. Pasting it into a chatbot for convenience is not one of the nine legal grounds.",
-          "cite": "Category 2 · Special-category personal data"
-        },
-        {
-          "label": "A quarterly earnings number that was published yesterday in the public investor announcement.",
-          "answer": "safe",
-          "why": "Public information is not 'financial figures that aren't public'. It already left the building when the company filed it. Pasting it carries no additional confidentiality risk.",
-          "cite": "Category 5 · Financial figures that aren't public"
-        },
-        {
-          "label": "A draft NDA your prospect's lawyer just emailed you, pasted in to ask 'is this a fair term sheet?'.",
-          "answer": "never",
-          "why": "Other people's contracts, drafted under confidentiality obligations, are exactly the category the module forbids. The AI vendor is a third party your counterparty did not consent to.",
-          "cite": "Category 3 · Contracts and legal documents you didn't draft"
-        },
-        {
-          "label": "An abstract question: \"what does an uncapped indemnity clause typically mean in a SaaS contract?\"",
-          "answer": "safe",
-          "why": "No counterparty's text, no identifying detail. The module explicitly suggests this 'redact and ask in the abstract' reformulation as the safer alternative.",
-          "cite": "Category 3 · Contracts and legal documents you didn't draft"
-        },
-        {
-          "label": "Your live production API key, pasted into ChatGPT to debug why an authentication request keeps returning 401.",
-          "answer": "never",
-          "why": "Any secret that has been pasted into a chat is no longer a secret. The module's advice is unambiguous: rotate the credential immediately before doing anything else.",
-          "cite": "Category 6 · Authentication secrets"
-        },
-        {
-          "label": "A 401 error message and a request header description — with the bearer token itself redacted out.",
-          "answer": "safe",
-          "why": "Describing what is happening without the secret itself is precisely the workaround the module gives. The AI doesn't need the live token to help you debug the request shape.",
-          "cite": "Category 6 · Authentication secrets"
-        },
-        {
-          "label": "Your team's draft Q4 P&L with named customers and per-customer revenue, pasted in to format a board chart.",
-          "answer": "never",
-          "why": "Internal P&L plus customer-specific revenue equals non-public financial data plus customer personal data — two never-paste categories at once. The 'shape, not the numbers' rule applies.",
-          "cite": "Category 5 · Financial figures that aren't public"
-        },
-        {
-          "label": "An abstract chart-design question: \"how should I structure a chart that shows growth and seasonality across 24 months of revenue?\"",
-          "answer": "safe",
-          "why": "This is the 'work with the shape of the numbers, not the numbers' approach the module gives as the worked example for non-public financial data.",
-          "cite": "Category 5 · Financial figures that aren't public"
-        }
-      ]
-    },
-    "questions": [
-      {
-        "q": "How many categories does the never-paste list contain?",
-        "options": [
-          "Nine",
-          "Five",
-          "Twelve",
-          "Seven",
-          "Just one, in 96pt red"
-        ],
-        "correct": 0,
-        "why": "Body and objectives both call out the <em>nine categories</em> of never-paste data.",
-        "cite": "By the end of this module, you'll"
-      },
-      {
-        "q": "The word 'never' in the never-paste list has one footnote. What is it?",
-        "options": [
-          "Never only applies to paid AI tools",
-          "'Never' applies to free or paid-individual consumer tools; a properly-configured enterprise tool your business has procured may be fine",
-          "The rule expires after thirty days",
-          "The rule doesn't apply if you ask the AI politely first",
-          "It doesn't apply on Fridays"
-        ],
-        "correct": 1,
-        "why": "Body: <em>'Never paste this' means never into a free or paid-individual consumer AI tool. The same content may be fine in a properly-configured enterprise-tier tool your business has procured.</em>",
-        "cite": "'Never' with one footnote"
-      },
-      {
-        "q": "Under GDPR, which article makes special-category data essentially forbidden to process without a specific legal ground?",
-        "options": [
-          "Article 5",
-          "Article 6",
-          "Article 9",
-          "Article 22",
-          "Article 'asterisk'"
-        ],
-        "correct": 2,
-        "why": "Body: <em>GDPR Article 9 makes this category of data essentially forbidden to process without one of nine specific legal grounds.</em>",
-        "cite": "Category 2 · Special-category personal data"
-      },
-      {
-        "q": "Which real company is named as the public example of engineers pasting proprietary source code into ChatGPT?",
-        "options": [
-          "Apple",
-          "Google",
-          "IBM",
-          "Samsung",
-          "Steve from the accounts team"
-        ],
-        "correct": 3,
-        "why": "Body: <em>Multiple major companies (Samsung is the public example) have had engineers paste proprietary code into ChatGPT and seen it appear in suggestions to other users.</em>",
-        "cite": "Category 4 · Source code from systems you don't own"
-      },
-      {
-        "q": "Financial figures from a public company that haven't been announced carry what specific risk that has criminal implications?",
-        "options": [
-          "Trademark dilution",
-          "Vexatious litigation",
-          "Breach of contract only",
-          "Trespass to a chattel",
-          "Material non-public information (MNPI)"
-        ],
-        "correct": 4,
-        "why": "Body: <em>from a public company may be material non-public information (MNPI) — which has criminal implications if it leaks before announcement.</em>",
-        "cite": "Category 5 · Financial figures that aren't public"
-      },
-      {
-        "q": "What is the recommended immediate action if a password or API key has been pasted into a chat?",
-        "options": [
-          "Rotate the credential in the system it belongs to before finishing the module",
-          "Email the AI vendor and politely ask them to delete it",
-          "Leave it thirty days and see if anything goes wrong",
-          "Change the wifi password",
-          "Light a candle for it"
-        ],
-        "correct": 0,
-        "why": "Body: <em>Rotate the credential in the system it belongs to before you finish this module. Delete the chat. Tell your IT or security team.</em>",
-        "cite": "If a secret has been pasted"
-      },
-      {
-        "q": "Which ISO 27001:2022 Annex A control covers acceptable use of information and assets?",
-        "options": [
-          "A.5.34",
-          "A.5.10",
-          "A.8.12",
-          "A.5.13",
-          "A.42 — Don't Panic"
-        ],
-        "correct": 1,
-        "why": "Body: <em>ISO 27001:2022 Annex A.5.10: acceptable use of information and assets — your business should have an acceptable use policy, and AI tools belong in it.</em>",
-        "cite": "Where the standards land"
-      },
-      {
-        "q": "Which Annex A control covers data leakage prevention?",
-        "options": [
-          "A.5.10",
-          "A.5.13",
-          "A.8.12",
-          "A.5.34",
-          "A.404 — Not Found"
-        ],
-        "correct": 2,
-        "why": "Body: <em>Annex A.8.12: data leakage prevention.</em>",
-        "cite": "Where the standards land"
-      },
-      {
-        "q": "The 'describe the shape' trick recommends doing what instead of pasting real data?",
-        "options": [
-          "Encrypt the data first, then paste it",
-          "Wait until tomorrow and try again",
-          "Use a smaller AI model that can't remember much",
-          "Describe the shape of the data (columns, count, types) in the abstract, then ask the AI for the logic and run it on the data locally",
-          "Hire a freelancer to do it for you"
-        ],
-        "correct": 3,
-        "why": "Body: <em>describe the shape of the data in the abstract … ask the AI for the logic, then run that logic locally.</em>",
-        "cite": "The 'describe the shape' trick"
-      },
-      {
-        "q": "Module 3 says the never-paste list is mostly a translation of which GDPR articles into practical rules?",
-        "options": [
-          "Articles 1, 2, 3 and 4",
-          "Articles 12 and 13",
-          "Articles 22 and 23",
-          "Articles 88 and 89",
-          "Articles 5, 6, 9 and 32"
-        ],
-        "correct": 4,
-        "why": "Body: <em>GDPR Articles 5, 6, 9, 32: principles of processing, lawful basis, special-category data, security of processing. The 'never paste' list is mostly a translation of these into practical rules.</em>",
-        "cite": "Where the standards land"
-      }
-    ]
-  }
-  </script>
+  <section class="quiz-block" aria-labelledby="kc-q-3">
+    <div class="quiz-eyebrow">Quick knowledge check</div>
+    <h2 class="quiz-q-text" id="kc-q-3">Which of the following should not be entered into unapproved AI systems?</h2>
+    <ol class="quiz-options">
+      <li class="quiz-option" aria-hidden="false"><span class="key">A</span><span class="body">customer personal data</span></li>
+      <li class="quiz-option" aria-hidden="false"><span class="key">B</span><span class="body">passwords and API keys</span></li>
+      <li class="quiz-option" aria-hidden="false"><span class="key">C</span><span class="body">confidential pricing</span></li>
+      <li class="quiz-option" aria-hidden="false"><span class="key">D</span><span class="body">HR disciplinary records</span></li>
+      <li class="quiz-option" aria-hidden="false"><span class="key">E</span><span class="body">proprietary source code</span></li>
+    </ol>
+    <details class="quiz-reveal">
+      <summary class="quiz-btn ghost">Show answer</summary>
+      <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>All of the above.</p>
+    </details>
+  </section>
 
   <div id="classifier-mount"></div>
-  <div id="quiz-mount"></div>
 </main>
 
 <nav class="module-bottom-nav">

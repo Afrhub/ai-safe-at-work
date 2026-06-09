@@ -200,170 +200,22 @@
   <h2>The takeaway</h2>
   <p>"Is it OK to use AI for this?" has the same answer most of the time: it depends on which tier of which tool, with which settings, on which data. Modules 3 and 4 turn that into a practical rule. Remember the single sentence for now: <strong>the tier matters as much as the prompt.</strong></p>
 
-  <script type="application/json" id="quiz-data">
-  {
-    "module": 2,
-    "passThreshold": 8,
-    "quizTitle": "Test your <em>understanding</em>.",
-    "quizLede": "Ten questions drawn only from the four-tier ladder and the standards callout above. Pass mark 8 out of 10.",
-    "widget": {
-      "type": "bucket",
-      "title": "Sort each feature by <em>tier</em>.",
-      "lede": "Eight features from the four-tier ladder. Drop each one into the tier where it actually lives. Feedback cites which subsection of the module to look at.",
-      "buckets": [
-        { "id": "free",       "label": "Free consumer" },
-        { "id": "paid-ind",   "label": "Paid individual" },
-        { "id": "team",       "label": "Team / Business" },
-        { "id": "enterprise", "label": "Enterprise" }
-      ],
-      "items": [
-        { "label": "Your conversations may be used to train future models unless you've explicitly opted out in settings.", "answer": "free", "why": "Body: <em>Your conversations may be used to train future models, unless you've explicitly opted out in settings.</em>", "cite": "1. Free consumer tier" },
-        { "label": "A subset of conversations is reviewed by human reviewers for safety, abuse and quality purposes.", "answer": "free", "why": "Body: <em>A subset of conversations is reviewed by human reviewers for safety, abuse, and quality purposes.</em>", "cite": "1. Free consumer tier" },
-        { "label": "Same legal posture as free — no contract between your employer and the vendor — but a more obvious 'do not train' toggle.", "answer": "paid-ind", "why": "Body: <em>Still no contract between your employer and the vendor. Paying for it personally and using it for work doesn't change the legal status. Most paid tiers give you an obvious 'do not train' toggle.</em>", "cite": "2. Paid individual tier" },
-        { "label": "Better models and longer conversations than free, but otherwise mostly the same consumer-grade product.", "answer": "paid-ind", "why": "Body: <em>Mostly the same as free, with better models and longer conversations. Crucially: still a consumer product.</em>", "cite": "2. Paid individual tier" },
-        { "label": "Your employer has a Data Processing Agreement (DPA) with the vendor; training-on-customer-data is usually off by default; retention is configurable.", "answer": "team", "why": "Body: <em>This is where the legal posture shifts. Your employer has a Data Processing Agreement (DPA) with the vendor. Training-on-customer-data is usually off by default. Retention is configurable.</em>", "cite": "3. Team / Business tier" },
-        { "label": "An admin console where IT or security can set rules across the team.", "answer": "team", "why": "Body: <em>There's an admin console where your IT or security team can set rules.</em>", "cite": "3. Team / Business tier" },
-        { "label": "Choice of EU-resident data processing, full audit logging, SSO and role-based controls.", "answer": "enterprise", "why": "Body: <em>Everything the team tier offers, plus: choice of where the data is stored (often EU-only for European customers), full audit logging, SSO and role-based controls.</em>", "cite": "4. Enterprise tier" },
-        { "label": "Encryption at rest with customer-managed keys; SOC 2 / ISO 27001 attestations available to the procurement team.", "answer": "enterprise", "why": "Body: <em>encryption at rest with customer-managed keys in some cases, SOC 2 / ISO 27001 attestations available to the procurement team.</em>", "cite": "4. Enterprise tier" }
-      ]
-    },
-    "questions": [
-      {
-        "q": "What are the four questions the module says you should ask of any AI tool before pasting anything sensitive?",
-        "options": [
-          "Where is my data stored, how long is it kept, is it used to train future models, who at the vendor can read it",
-          "What does it cost, who founded the company, when was it released, what model does it use",
-          "Is the interface modern, does it have dark mode, does it have keyboard shortcuts, does it have a mobile app",
-          "How many users does it have, what is its valuation, who are its investors, what is its uptime",
-          "What is the meaning of life, the universe, everything, and lunch"
-        ],
-        "correct": 0,
-        "why": "Body: the four questions listed in the 'four-question test' are exactly these — where stored, how long, used to train, who can read it.",
-        "cite": "The four-question test"
-      },
-      {
-        "q": "On the free consumer tier of most AI tools, what does 'deleting' a conversation usually mean?",
-        "options": [
-          "The conversation is permanently scrubbed from all servers",
-          "Removed from your view but typically retained on the vendor's servers for at least 30 days, often longer",
-          "Encrypted with a customer-managed key",
-          "Moved to long-term archive storage you can later recall",
-          "Read aloud one final time and then ceremoniously burned"
-        ],
-        "correct": 1,
-        "why": "Body: <em>'deletion' frequently means 'removed from your view', not 'removed from the vendor's servers'.</em>",
-        "cite": "1. Free consumer tier"
-      },
-      {
-        "q": "What is the underlying problem in the 'free for work mistake' callout?",
-        "options": [
-          "Free tiers don't have enough features",
-          "Free tiers run out of credits quickly",
-          "There is no contract between your employer and the vendor, so your employer has no legal grip on what happens to the data",
-          "Free tiers are slower than paid tiers",
-          "Free tiers are pure evil"
-        ],
-        "correct": 2,
-        "why": "Body: <em>that data is now sitting on a server the business has no contract with, no audit rights over, and possibly no legal jurisdiction over.</em>",
-        "cite": "The 'free for work' mistake"
-      },
-      {
-        "q": "What changes legally at the Team / Business tier compared with paid-individual?",
-        "options": [
-          "Nothing — it's just more expensive",
-          "You get longer conversations",
-          "Dark mode is enabled",
-          "Your employer has a Data Processing Agreement (DPA) with the vendor; training is usually off by default; retention is configurable",
-          "It unlocks a secret AI that only billionaires can use"
-        ],
-        "correct": 3,
-        "why": "Body: <em>This is where the legal posture shifts. Your employer has a Data Processing Agreement (DPA) with the vendor. Training-on-customer-data is usually off by default. Retention is configurable.</em>",
-        "cite": "3. Team / Business tier"
-      },
-      {
-        "q": "Which 2020 court ruling tightened the rules around transferring personal data outside the European Economic Area?",
-        "options": [
-          "Snowden v. NSA",
-          "Costeja González (right to be forgotten)",
-          "Cambridge Analytica disclosure",
-          "Schrems I",
-          "Schrems II"
-        ],
-        "correct": 4,
-        "why": "Body: <em>the rules have got tougher since the Schrems II court ruling in 2020.</em>",
-        "cite": "Where the data physically is"
-      },
-      {
-        "q": "What is a 'training-data extraction attack' as described in the module?",
-        "options": [
-          "A carefully-crafted prompt that can coax small fragments of training data back out of a model",
-          "An attack where the model refuses to respond",
-          "An attack on the model's hosting infrastructure",
-          "An attack on the vendor's billing system",
-          "An attack where you hire a model to be your training coach"
-        ],
-        "correct": 0,
-        "why": "Body: <em>The technical term is 'training-data extraction attacks'. They're real, they're published, they get more effective every year.</em>",
-        "cite": "'Trained on' — what it actually means"
-      },
-      {
-        "q": "Which GDPR articles cover giving personal data to a third-party processor and transferring it outside the EU/EEA?",
-        "options": [
-          "Articles 1 and 5",
-          "Articles 28 and 44–50",
-          "Articles 6 and 22",
-          "Articles 83 and 84",
-          "Articles 'somewhere over there'"
-        ],
-        "correct": 1,
-        "why": "Body: <em>GDPR Articles 28 and 44–50: when you give personal data to a third party that processes it on your behalf, there must be a contract.</em>",
-        "cite": "Where the standards land"
-      },
-      {
-        "q": "Which ISO/IEC 27001:2022 Annex A control covers information security in the use of cloud services?",
-        "options": [
-          "A.5.10",
-          "A.5.34",
-          "A.5.23",
-          "A.8.12",
-          "A.42.7 — Cloud Storage of Pet Photos"
-        ],
-        "correct": 2,
-        "why": "Body: <em>ISO/IEC 27001:2022 Annex A.5.23: information security must be considered in the use of cloud services.</em>",
-        "cite": "Where the standards land"
-      },
-      {
-        "q": "Which ISO/IEC 42001:2023 references cover AI system suppliers and third-party AI components?",
-        "options": [
-          "Clause 4 and Annex A.3",
-          "Clause 5 and Annex A.4",
-          "Clause 6 and Annex A.5",
-          "Clause 8.3 and Annex A.10",
-          "Clause 'whatever feels right'"
-        ],
-        "correct": 3,
-        "why": "Body: <em>ISO/IEC 42001:2023 Clause 8.3 and Annex A.10: AI system suppliers and third-party AI components must be evaluated and managed.</em>",
-        "cite": "Where the standards land"
-      },
-      {
-        "q": "The 'postcard' mental model suggests you should treat anything pasted into a free or paid-individual AI tool like what?",
-        "options": [
-          "A diary kept in a locked drawer",
-          "A confidential whisper to a close colleague",
-          "An email to one person",
-          "A message in a sealed envelope",
-          "Something written on a postcard — the probability a specific one is read is low, but the probability it could be read is one hundred percent"
-        ],
-        "correct": 4,
-        "why": "Body: <em>Treat anything you paste into a free or paid-individual AI tool the way you'd treat anything you'd written on a postcard.</em>",
-        "cite": "A useful mental model"
-      }
-    ]
-  }
-  </script>
+  <section class="quiz-block" aria-labelledby="kc-q-2">
+    <div class="quiz-eyebrow">Quick knowledge check</div>
+    <h2 class="quiz-q-text" id="kc-q-2">Which statement is TRUE?</h2>
+    <ol class="quiz-options">
+      <li class="quiz-option" aria-hidden="false"><span class="key">A</span><span class="body">All AI tools process data in the same way.</span></li>
+      <li class="quiz-option" aria-hidden="false"><span class="key">B</span><span class="body">Enterprise AI removes the need for governance.</span></li>
+      <li class="quiz-option" aria-hidden="false"><span class="key">C</span><span class="body">Some AI systems may retain or process submitted data depending on platform settings and account type.</span></li>
+      <li class="quiz-option" aria-hidden="false"><span class="key">D</span><span class="body">AI browser extensions are always safe.</span></li>
+    </ol>
+    <details class="quiz-reveal">
+      <summary class="quiz-btn ghost">Show answer</summary>
+      <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>C — Some AI systems may retain or process submitted data depending on platform settings and account type.</p>
+    </details>
+  </section>
 
   <div id="widget-mount"></div>
-  <div id="quiz-mount"></div>
 </main>
 
 <nav class="module-bottom-nav">

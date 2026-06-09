@@ -296,163 +296,22 @@
     </div>
   </div>
 
-  <script type="application/json" id="quiz-data">
-  {
-    "module": 11,
-    "passThreshold": 8,
-    "quizTitle": "Test your <em>understanding</em>.",
-    "quizLede": "Ten questions drawn only from the six sections of the pre-submit checklist above. Pass mark 8 out of 10.",
-    "widget": {
-      "type": "ticklist",
-      "title": "Run the wallet card against a <em>real scenario</em>.",
-      "lede": "A worked example. For each of the six checks, tick the box only if the check actually passes for the scenario. Wrong ticks tell you which line of the wallet card to re-read.",
-      "scenario": "You're about to paste a CSV of 200 real customer records (name · email · last purchase date) into the <strong>free tier of ChatGPT</strong> to ask for a deduplication formula. Your business has not procured any AI tool yet. Walk the wallet card.",
-      "checks": [
-        { "label": "The data is OFF the never-paste list.", "shouldTick": false, "hint": "Cat 1 of the never-paste list = customer / contact personal data.", "why": "Customer name + email is exactly Category 1 of the never-paste list. The data is ON the list, not off it. Don't tick." },
-        { "label": "I could describe the shape of the problem instead of pasting the data.", "shouldTick": true, "hint": "'I have a sheet with three columns: name, email, last_purchase. What formula sorts by column C descending then dedupes column B?'", "why": "Yes — this is exactly the 'describe the shape' trick. You get the dedupe formula, the data never leaves your laptop. Tick." },
-        { "label": "I am using the right tier for this kind of data.", "shouldTick": false, "hint": "Free tier = consumer territory, no DPA with your employer.", "why": "Free tier is consumer territory with no contract between your employer and the vendor. Wrong tier for customer personal data. Don't tick." },
-        { "label": "I know where the data will physically be stored.", "shouldTick": false, "hint": "Free tiers default to US servers and rarely give you a residency choice.", "why": "On the free tier you generally don't know — and for EU personal data this matters under GDPR Articles 44–50. Don't tick." },
-        { "label": "If this leaks tomorrow, I would be OK apologising to the people affected.", "shouldTick": false, "hint": "200 customers, plus the regulator if it's personal data.", "why": "200 customers and a regulator under GDPR. The wallet card says if the answer makes you wince, don't paste. Don't tick." },
-        { "label": "If I do proceed, this would qualify as a significant AI use I should log.", "shouldTick": true, "hint": "Two yeses from: affects another person, represents the business, sensitive data, irreversible / expensive.", "why": "Yes — affects another person (customers), touches sensitive data, represents the business. Easy log requirement. Tick." }
-      ]
-    },
-    "questions": [
-      {
-        "q": "Section 1 of the checklist is 'The data — before you paste, ask'. What is its FIRST question?",
-        "options": [
-          "Is this on the never-paste list?",
-          "Have I had coffee?",
-          "What's the AI's mood today?",
-          "Is my keyboard clean?",
-          "Is the office vibe right?"
-        ],
-        "correct": 0,
-        "why": "Body, Section 1, first check-item: <em>Is this on the never-paste list?</em>",
-        "cite": "Section 1 · The data"
-      },
-      {
-        "q": "Per Section 2 of the checklist, which tiers are 'consumer territory' with no DPA with your employer?",
-        "options": [
-          "Team and Business",
-          "Free and paid-individual",
-          "Enterprise only",
-          "Whatever your IT lead approved",
-          "Whichever has the prettiest icon"
-        ],
-        "correct": 1,
-        "why": "Body, Section 2: <em>Free / paid-individual is consumer territory — no DPA with your employer.</em>",
-        "cite": "Section 2 · The tool"
-      },
-      {
-        "q": "Per Section 3, what does the checklist say about reading AI output?",
-        "options": [
-          "Skim is fine",
-          "Skip the first paragraph",
-          "Read the whole thing line by line — not skimmed; AI outputs that sound great often contain one sentence nobody would actually write or believe",
-          "Have someone else read it for you",
-          "Read it backwards for hidden Easter eggs"
-        ],
-        "correct": 2,
-        "why": "Body, Section 3: <em>Did I read the whole thing, line by line? Not skimmed. Read.</em>",
-        "cite": "Section 3 · The output"
-      },
-      {
-        "q": "Per Section 3, what is the rule on citations in AI output?",
-        "options": [
-          "Always cite at least 5",
-          "Citations don't matter much",
-          "Trust them if they look formatted correctly",
-          "Click every reference — if it doesn't open, the source isn't real; two independent sources for anything high-stakes",
-          "Cite them in Comic Sans for maximum credibility"
-        ],
-        "correct": 3,
-        "why": "Body, Section 3: <em>Click every reference. If it doesn't open, the source isn't real. Two independent sources for anything high-stakes.</em>",
-        "cite": "Section 3 · The output"
-      },
-      {
-        "q": "Per Section 4, what is the test for when to log an AI use?",
-        "options": [
-          "Always log everything",
-          "Never log — it's surveillance",
-          "Only log if asked",
-          "Only log every Monday",
-          "Two yeses among: affects another person, represents the business, touched sensitive data, irreversible or expensive — = log it"
-        ],
-        "correct": 4,
-        "why": "Body, Section 4: <em>Affects another person? Represents the business? Touched sensitive data? Irreversible or expensive? Two yeses = log it.</em>",
-        "cite": "Section 4 · The trail"
-      },
-      {
-        "q": "Per Section 5, what is the 'red flag' in modern phishing?",
-        "options": [
-          "The request, not the writing — perfectly-written phishing is the current baseline",
-          "Bad grammar",
-          "Use of capital letters",
-          "Spelling mistakes",
-          "Use of British spelling instead of American"
-        ],
-        "correct": 0,
-        "why": "Body, Section 5: <em>Perfectly-written phishing is the current baseline. The red flag is the request, not the writing.</em>",
-        "cite": "Section 5"
-      },
-      {
-        "q": "Per Section 5, how should you verify the sender of an unusual request?",
-        "options": [
-          "Reply to the same email",
-          "Look them up on a different channel that you initiate — use a number from your directory, not the one in the email; call them on video; ask them something only they would know",
-          "Tweet at them",
-          "Ask the AI to verify",
-          "Trust your gut"
-        ],
-        "correct": 1,
-        "why": "Body, Section 5: <em>Look up their number in your directory — don't use the one in the email. Call them on video. Ask them something only they would know.</em>",
-        "cite": "Section 5"
-      },
-      {
-        "q": "Per Section 6, why does the 72-hour clock figure into the checklist?",
-        "options": [
-          "It's how long the AI keeps your chat history",
-          "It's how long until your subscription renews",
-          "If personal data leaked, the 72-hour GDPR breach clock starts when the business becomes aware — speed of escalation is what saves it",
-          "It's the average phishing email lifespan",
-          "It's how long until you forget the password"
-        ],
-        "correct": 2,
-        "why": "Body, Section 6: <em>If personal data leaked, the 72-hour GDPR breach clock starts when the business becomes aware. Speed of escalation is what saves it.</em>",
-        "cite": "Section 6 · If something goes wrong"
-      },
-      {
-        "q": "Per Section 6, what should you do if money was sent or credentials were shared?",
-        "options": [
-          "Wait and see what happens",
-          "Document it for later",
-          "Email the bank for an appointment next week",
-          "Act on those immediately — call the bank, change the password, disable the access; rotation costs minutes, the breach costs months",
-          "Pretend it never happened"
-        ],
-        "correct": 3,
-        "why": "Body, Section 6: <em>Call the bank. Change the password. Disable the access. Rotation costs minutes; the breach costs months.</em>",
-        "cite": "Section 6 · If something goes wrong"
-      },
-      {
-        "q": "Per the standards callout, which set of frameworks anchors the checklist?",
-        "options": [
-          "GDPR only",
-          "ISO 27001 only",
-          "EU AI Act only",
-          "Only US laws",
-          "GDPR (Articles 5, 6, 9, 22, 32–34), ISO/IEC 27001:2022 (especially A.5, A.6, A.8), ISO/IEC 42001:2023 (Clauses 6–9 and Annex A), and the EU AI Act (Articles 4, 12, 14, 26, 50)"
-        ],
-        "correct": 4,
-        "why": "Body, 'A note on context' callout: lists exactly these standards and articles.",
-        "cite": "A note on context"
-      }
-    ]
-  }
-  </script>
+  <section class="quiz-block" aria-labelledby="kc-q-10">
+    <div class="quiz-eyebrow">Quick knowledge check</div>
+    <h2 class="quiz-q-text" id="kc-q-10">Which statement is TRUE?</h2>
+    <ol class="quiz-options">
+      <li class="quiz-option" aria-hidden="false"><span class="key">A</span><span class="body">AI governance is designed to block productivity.</span></li>
+      <li class="quiz-option" aria-hidden="false"><span class="key">B</span><span class="body">If AI saves time, governance is less important.</span></li>
+      <li class="quiz-option" aria-hidden="false"><span class="key">C</span><span class="body">Simple checks before using AI may significantly reduce operational risk.</span></li>
+      <li class="quiz-option" aria-hidden="false"><span class="key">D</span><span class="body">Verification is unnecessary if the output looks professional.</span></li>
+    </ol>
+    <details class="quiz-reveal">
+      <summary class="quiz-btn ghost">Show answer</summary>
+      <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>C — Simple checks before using AI may significantly reduce operational risk.</p>
+    </details>
+  </section>
 
   <div id="widget-mount" class="no-print"></div>
-  <div id="quiz-mount" class="no-print"></div>
 </main>
 
 <nav class="module-bottom-nav no-print">

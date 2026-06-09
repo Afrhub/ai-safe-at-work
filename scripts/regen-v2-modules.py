@@ -391,20 +391,61 @@ def render_section(s: dict, mod_id: int) -> list[str]:
         return out
 
     if t == "kc":
-        # Knowledge check pattern
-        # head text becomes the prompt; first ## h3 is question; ul of options; ### Correct Answer + answer text
+        # Knowledge check. Two authoring shapes appear in the spec:
+        #   (a) list style — "## question" + "* option" bullets + "### Correct Answer" + answer text
+        #       (e.g. "All of the above.")
+        #   (b) lettered   — "## question" + "### A".."### D" headings each followed by the option
+        #       text line, then "## Correct Answer" + a bare letter (A/B/C/D).
+        # The original parser only handled (a); shape (b) silently dropped its options and answer.
         prompt = None
-        options: list[str] = []
+        list_options: list[str] = []
+        lettered: list[tuple[str, str]] = []  # (letter, text), preserving spec order
         answer: str | None = None
+        pending_letter: str | None = None
+        answer_pending = False
+
+        def _strip_quotes(s: str) -> str:
+            return s.strip().strip("“”‘’\"'").strip()
+
         for kind, payload in items:
-            if kind == "h3" and prompt is None:
-                prompt = payload
-            elif kind == "ul" and not options:
-                options = payload
-            elif kind == "h4" and payload.lower().startswith("correct answer"):
-                answer = "PENDING"
-            elif kind == "p" and answer == "PENDING":
-                answer = payload
+            text = payload if isinstance(payload, str) else ""
+            low = text.lower().strip()
+            if kind in ("h3", "h4"):
+                if low.startswith("correct answer"):
+                    answer_pending = True
+                    pending_letter = None
+                elif text.strip().upper() in ("A", "B", "C", "D", "E"):
+                    pending_letter = text.strip().upper()
+                elif prompt is None and kind == "h3":
+                    prompt = text
+                # any other heading inside the KC block is ignored
+                continue
+            if kind == "ul" and not list_options:
+                list_options = payload
+                continue
+            if kind == "p":
+                if answer_pending:
+                    answer = text.strip()
+                    answer_pending = False
+                elif pending_letter is not None:
+                    lettered.append((pending_letter, _strip_quotes(text)))
+                    pending_letter = None
+                # stray prose inside the KC block is ignored
+                continue
+
+        if lettered:
+            letters: list[str] | None = [l for l, _ in lettered]
+            options = [t for _, t in lettered]
+        else:
+            letters = None
+            options = list_options
+
+        # Expand a bare-letter answer ("C") to "C — <option text>" for clarity.
+        answer_display = answer
+        if answer and letters and len(answer.strip()) == 1 and answer.strip().upper() in letters:
+            idx = letters.index(answer.strip().upper())
+            answer_display = f"{answer.strip().upper()} — {options[idx]}"
+
         out.append('')
         out.append('  <div class="v2-kc">')
         out.append('    <div class="v2-kc-label">Quick knowledge check</div>')
@@ -415,9 +456,9 @@ def render_section(s: dict, mod_id: int) -> list[str]:
             for o in options:
                 out.append(f"      <li>{inline(o)}</li>")
             out.append("    </ol>")
-        if answer:
+        if answer_display:
             out.append('    <details class="v2-kc-answer"><summary>Show answer</summary>')
-            out.append(f"    {inline(answer)}</details>")
+            out.append(f"    {inline(answer_display)}</details>")
         out.append("  </div>")
         return out
 

@@ -199,165 +199,22 @@
     </div>
   </div>
 
-  <script type="application/json" id="quiz-data">
-  {
-    "module": 9,
-    "passThreshold": 8,
-    "quizTitle": "Test your <em>understanding</em>.",
-    "quizLede": "Ten questions drawn only from the four properties, the eight-field log, Article 22, and the standards callout above. Pass mark 8 out of 10.",
-    "widget": {
-      "type": "form",
-      "title": "Fill the <em>log card</em>.",
-      "lede": "Walk through writing a real log row for a worked scenario. The form mirrors the eight fields the module describes. Submit to see whether your entry is audit-ready.",
-      "scenario": "You used <strong>ChatGPT Team</strong> this morning to help you draft a reply to a customer who complained about a late delivery. You looked at their order history (summarised, no names or addresses), asked the AI for three reply drafts in different tones, picked one, and edited it before sending. Capture the log row now.",
-      "fields": [
-        { "id": "date",         "label": "Date",          "placeholder": "2026-05-27",                                                                                       "required": true, "minLength": 6 },
-        { "id": "who",          "label": "Who",           "placeholder": "Your name or initials",                                                                            "required": true, "minLength": 2 },
-        { "id": "tool",         "label": "Tool / tier",   "placeholder": "ChatGPT Team / Copilot M365 / Claude Pro",                                                          "required": true, "minLength": 4 },
-        { "id": "task",         "label": "Task",          "placeholder": "One sentence: drafted reply to customer complaint about late delivery",                            "required": true, "minLength": 8, "multiline": true },
-        { "id": "inputs",       "label": "Inputs",        "placeholder": "What kind of data was in the prompt, not the data itself",                                          "required": true, "minLength": 6, "multiline": true },
-        { "id": "output",       "label": "What the AI produced", "placeholder": "One sentence",                                                                              "required": true, "minLength": 6, "multiline": true },
-        { "id": "whatDone",     "label": "What you did with it", "placeholder": "Picked option 2, edited apology, removed the offer of a refund, added we'll investigate",   "required": true, "minLength": 8, "multiline": true },
-        { "id": "whoReviewed",  "label": "Who else reviewed", "placeholder": "Reviewer name, or: 'within my own authority — no further review'",                              "required": true, "minLength": 4, "multiline": true }
-      ]
-    },
-    "questions": [
-      {
-        "q": "What are the four properties that make an AI use 'significant' enough to log?",
-        "options": [
-          "Does the output affect another person; does it represent the business; was the data sensitive; was the decision irreversible or expensive",
-          "Did it take more than 5 minutes; did it cost more than £5; did you have coffee first; was anyone watching",
-          "Was it on a Monday; was the model paid-tier; did you screenshot it; did you save it locally",
-          "Did the AI sound confident; was the output long; did you copy-paste; did you edit it",
-          "Was Mercury in retrograde, was it raining, were you wearing the lucky socks, did the cat approve"
-        ],
-        "correct": 0,
-        "why": "Body: the four bullets under 'What counts as significant' name exactly these four properties.",
-        "cite": "What counts as 'significant'"
-      },
-      {
-        "q": "How many fields does the 'minimum useful log' contain?",
-        "options": [
-          "Four",
-          "Eight",
-          "Twelve",
-          "Twenty",
-          "Just one called 'feelings'"
-        ],
-        "correct": 1,
-        "why": "Body: <em>Eight fields, no more.</em>",
-        "cite": "The minimum useful log"
-      },
-      {
-        "q": "Which of these is NOT one of the eight log fields described in Module 9?",
-        "options": [
-          "Date",
-          "Who (your name or initials)",
-          "The exact prompt text and full transcript",
-          "Tool (which AI, which tier)",
-          "Inputs (what kind of data was in the prompt, not the data itself)"
-        ],
-        "correct": 2,
-        "why": "Body: <em>Logging isn't a transcript. You don't need to keep every prompt, every response, every conversation.</em>",
-        "cite": "What you don't need to do"
-      },
-      {
-        "q": "Under GDPR Article 22, when does the strongest form of the right against automated decision-making NOT bite?",
-        "options": [
-          "When the decision is about non-EU citizens only",
-          "When the AI tool is open source",
-          "When you got the customer's consent first",
-          "When a human meaningfully reviews the AI's output and is empowered to override it — making the decision not 'solely automated'",
-          "When you wave a special token in front of the screen"
-        ],
-        "correct": 3,
-        "why": "Body: <em>If a human meaningfully reviews the AI's output and is empowered to override it … the decision isn't 'solely automated' and Article 22 doesn't bite in its strongest form.</em>",
-        "cite": "The right to explanation (GDPR Article 22)"
-      },
-      {
-        "q": "Per Module 9, which answer does the module warn AGAINST as the one that gets you in trouble?",
-        "options": [
-          "'A human reviewed the AI's output before action'",
-          "'We used AI as one input among several'",
-          "'We logged the AI use under our normal procedure'",
-          "'We had a clear policy and followed it'",
-          "'Our AI tool recommended this and we accepted it without thinking'"
-        ],
-        "correct": 4,
-        "why": "Body: <em>'Our AI tool recommended this and we accepted it without thinking' is the answer that gets you in trouble.</em>",
-        "cite": "The right to explanation (GDPR Article 22)"
-      },
-      {
-        "q": "Per the 'logging vs surveillance' section, what does an employer's monitoring of employees' AI use need?",
-        "options": [
-          "A lawful basis, transparency to staff, proportionality, and (usually) consultation with employee representatives where they exist",
-          "Just an IT admin's sign-off",
-          "Nothing — employers can monitor anything they want",
-          "A court order",
-          "The cat's approval"
-        ],
-        "correct": 0,
-        "why": "Body: <em>monitoring of employees' AI use needs the same things any monitoring needs — a lawful basis, transparency to staff, proportionality, and (usually) consultation with employee representatives where they exist.</em>",
-        "cite": "Logging vs. surveillance"
-      },
-      {
-        "q": "Which EU AI Act article requires high-risk AI systems to keep automated logs?",
-        "options": [
-          "Article 4",
-          "Article 12",
-          "Article 14",
-          "Article 22",
-          "Article 'forever'"
-        ],
-        "correct": 1,
-        "why": "Body: <em>EU AI Act Article 12: high-risk AI systems must keep automated logs.</em>",
-        "cite": "Where the standards land"
-      },
-      {
-        "q": "Which ISO/IEC 27001:2022 Annex A control covers logging?",
-        "options": [
-          "A.5.10",
-          "A.5.34",
-          "A.8.15",
-          "A.8.12",
-          "A.42"
-        ],
-        "correct": 2,
-        "why": "Body: <em>ISO/IEC 27001:2022 Annex A.8.15: logging.</em>",
-        "cite": "Where the standards land"
-      },
-      {
-        "q": "Which GDPR articles cover information that must be provided to data subjects, including 'the existence of automated decision-making' and 'meaningful information about the logic involved'?",
-        "options": [
-          "Articles 1–2",
-          "Articles 5–6",
-          "Articles 9–10",
-          "Articles 13–14",
-          "Articles whatever you fancy"
-        ],
-        "correct": 3,
-        "why": "Body: <em>Article 13–14: information to be provided to data subjects, including 'the existence of automated decision-making' and 'meaningful information about the logic involved'.</em>",
-        "cite": "Where the standards land"
-      },
-      {
-        "q": "What does the module recommend you do TODAY to start logging?",
-        "options": [
-          "Install enterprise logging software",
-          "Hire a Data Protection Officer",
-          "Build a custom database",
-          "Take a SCORM training course first",
-          "Open whatever you use for your day-to-day notes, create one document called 'AI use log', add a header row with the eight fields, and add a row next time you use AI for anything significant"
-        ],
-        "correct": 4,
-        "why": "Body: <em>Open whatever you use for your day-to-day notes. Create one document called 'AI use log'. Add a header row with the eight fields above. Next time you use AI for anything that meets the 'significant' test, add a row.</em>",
-        "cite": "Do this today"
-      }
-    ]
-  }
-  </script>
+  <section class="quiz-block" aria-labelledby="kc-q-8">
+    <div class="quiz-eyebrow">Quick knowledge check</div>
+    <h2 class="quiz-q-text" id="kc-q-8">Which statement is TRUE?</h2>
+    <ol class="quiz-options">
+      <li class="quiz-option" aria-hidden="false"><span class="key">A</span><span class="body">AI removes the need for accountability.</span></li>
+      <li class="quiz-option" aria-hidden="false"><span class="key">B</span><span class="body">Organisations do not need visibility into AI usage.</span></li>
+      <li class="quiz-option" aria-hidden="false"><span class="key">C</span><span class="body">Humans remain accountable for AI-assisted business activity.</span></li>
+      <li class="quiz-option" aria-hidden="false"><span class="key">D</span><span class="body">AI-assisted decisions never require review.</span></li>
+    </ol>
+    <details class="quiz-reveal">
+      <summary class="quiz-btn ghost">Show answer</summary>
+      <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>C — Humans remain accountable for AI-assisted business activity.</p>
+    </details>
+  </section>
 
   <div id="widget-mount"></div>
-  <div id="quiz-mount"></div>
 </main>
 
 <nav class="module-bottom-nav">

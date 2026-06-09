@@ -203,163 +203,22 @@
     </div>
   </div>
 
-  <script type="application/json" id="quiz-data">
-  {
-    "module": 5,
-    "passThreshold": 8,
-    "quizTitle": "Test your <em>understanding</em>.",
-    "quizLede": "Ten questions drawn only from the hallucination categories, the two-source rule, and the standards callout above. Pass mark 8 out of 10.",
-    "widget": {
-      "type": "multiselect",
-      "title": "Apply the <em>two-source rule</em>.",
-      "lede": "The AI has produced the claim below. Pick the 2 candidates that count as a real, independent second source under the rule in the module above.",
-      "claim": "In Schrems II (2020), the Court of Justice of the EU invalidated the EU-US Privacy Shield framework and held that Standard Contractual Clauses must be supplemented with a transfer impact assessment when sending personal data to the United States.",
-      "target": 2,
-      "options": [
-        { "label": "The CJEU's judgment in Case C-311/18 itself, on curia.europa.eu.", "isCorrect": true,  "why": "Primary source — the actual court document. As real a second source as it gets." },
-        { "label": "Another chatbot's answer to the same question.", "isCorrect": false, "why": "Module: 'Asking a second AI tool the same question often gives you a similar answer because the two models were trained on overlapping data.'" },
-        { "label": "The European Data Protection Board's (EDPB) official guidance on Schrems II implementation.", "isCorrect": true,  "why": "Official regulator's guidance — counts as the kind of 'official register or regulator's website' the module names." },
-        { "label": "A SEO-optimised blog post titled 'What is Schrems II and why you need our compliance product'.", "isCorrect": false, "why": "Module: 'A summary article that doesn't cite primary sources' does not count." },
-        { "label": "The same model rephrasing its own answer after you ask 'are you sure?'", "isCorrect": false, "why": "Module: 'The model double-checking its own answer — it can't.'" }
-      ]
-    },
-    "questions": [
-      {
-        "q": "Why does the module prefer 'confabulating' over 'hallucinating' as the better word?",
-        "options": [
-          "Because the model fills gaps with plausible-shaped material the way a person can confabulate a memory without realising they're doing it",
-          "Because hallucinating is too dramatic a word",
-          "Because the model is fully conscious",
-          "Because hallucinating implies seeing things and models can't see",
-          "Because the marketing department prefers it"
-        ],
-        "correct": 0,
-        "why": "Body: <em>a more accurate word is 'confabulating': the model fills gaps with plausible-shaped material, the way a person can confabulate a memory without realising they're doing it.</em>",
-        "cite": "Why hallucinations happen"
-      },
-      {
-        "q": "What is the 'confidence is not calibrated' principle?",
-        "options": [
-          "Models are always unsure of themselves",
-          "The probability that a model is wrong has no reliable relationship to how certain its answer sounds; the most dangerous outputs are delivered in perfectly fluent, perfectly authoritative English",
-          "Models become more confident as they learn",
-          "Models speak in monotone",
-          "Confidence is a feature you can buy as an add-on"
-        ],
-        "correct": 1,
-        "why": "Body: <em>The probability that a model is wrong has no reliable relationship to how certain its answer sounds. The most dangerous outputs are the ones delivered in perfectly fluent, perfectly authoritative English.</em>",
-        "cite": "Confidence is not calibrated"
-      },
-      {
-        "q": "What is the 'two-source rule'?",
-        "options": [
-          "Always check two AI models",
-          "Always cite two sources in your writing",
-          "Verify anything an AI tells you that you'd put your name to against at least one independent source — for high-stakes claims, two",
-          "Save every conversation to two different cloud providers",
-          "Always have two cups of coffee before reading AI output"
-        ],
-        "correct": 2,
-        "why": "Body: <em>Anything an AI tells you that you'd put your name to … verify against at least one independent source. For high-stakes claims, two.</em>",
-        "cite": "The two-source rule"
-      },
-      {
-        "q": "Which counts as a real second source per Module 5?",
-        "options": [
-          "Another chatbot",
-          "A blog post that may itself have been AI-written",
-          "A summary article that doesn't cite primary sources",
-          "The vendor's actual documentation, an official register, or a trusted colleague who knows the topic",
-          "The AI 'double-checking' its own answer"
-        ],
-        "correct": 3,
-        "why": "Body: the 'counts as a real second source' compare-cell lists primary documents, official registers, vendor documentation, and trusted colleagues.",
-        "cite": "Counts as a real second source"
-      },
-      {
-        "q": "Which EU AI Act article requires that high-risk AI systems be designed and used in a way that allows a human to oversee them effectively?",
-        "options": [
-          "Article 4",
-          "Article 12",
-          "Article 22",
-          "Article 50",
-          "Article 14"
-        ],
-        "correct": 4,
-        "why": "Body: <em>Article 14 of the EU AI Act requires that 'high-risk' AI systems be designed and used in a way that allows a human to oversee them effectively.</em>",
-        "cite": "Human oversight — the EU AI Act in plain English"
-      },
-      {
-        "q": "What does 'rubber-stamping' mean in the context of human oversight?",
-        "options": [
-          "A human reviewed it and approved it without really reading it",
-          "Putting an actual rubber stamp on the document",
-          "Using a stamp made of rubber to test outputs",
-          "An auditor's seal",
-          "The official emoji of the EU AI Act"
-        ],
-        "correct": 0,
-        "why": "Body: <em>The failure mode the law is trying to prevent isn't 'no human reviewed it'. It's 'a human reviewed it and approved it without really reading it'.</em>",
-        "cite": "What rubber-stamping looks like"
-      },
-      {
-        "q": "What does Module 5 describe as the defence against rubber-stamping?",
-        "options": [
-          "A stronger AI",
-          "Friction — if an AI-generated output is about to leave your team, someone needs to read it line by line with the question 'do I actually believe this?' in mind",
-          "Bigger fines for individual reviewers",
-          "Removing humans from the loop entirely",
-          "Cake breaks"
-        ],
-        "correct": 1,
-        "why": "Body: <em>The defence against rubber-stamping is friction.</em>",
-        "cite": "What rubber-stamping looks like"
-      },
-      {
-        "q": "Which categories does the module list as always requiring careful verification?",
-        "options": [
-          "Anything about pets, plants, or paint colours",
-          "Anything about weather, lunch, or office stationery",
-          "Legal claims, medical or health information, financial figures, citations, statements about real people, and technical instructions for operating systems, networks or security",
-          "Only legal claims",
-          "Anything described in fewer than 50 words"
-        ],
-        "correct": 2,
-        "why": "Body: the bulleted list under 'Where verification is mandatory' names exactly these six categories.",
-        "cite": "Where verification is mandatory"
-      },
-      {
-        "q": "What kind of hallucination is described for technical staff: the model writes code that calls a plausible-looking function name that doesn't actually exist?",
-        "options": [
-          "A typo bug",
-          "A syntax error",
-          "A linker error",
-          "Hallucinated APIs and functions — for example, library.doTheThing(x, y) that doesn't exist in that library",
-          "Quantum entanglement"
-        ],
-        "correct": 3,
-        "why": "Body: the 'Hallucinated APIs and functions' subheading describes exactly this code-completion failure mode.",
-        "cite": "Hallucinated APIs and functions"
-      },
-      {
-        "q": "Which ISO/IEC 42001:2023 Annex covers performance evaluation of AI systems — including accuracy and reliability over time?",
-        "options": [
-          "Annex A.2",
-          "Annex A.5",
-          "Annex A.7",
-          "Annex A.8",
-          "Annex A.9"
-        ],
-        "correct": 4,
-        "why": "Body: <em>ISO/IEC 42001:2023 Annex A.9: performance evaluation of AI systems — including their accuracy and reliability over time.</em>",
-        "cite": "Where the standards land"
-      }
-    ]
-  }
-  </script>
+  <section class="quiz-block" aria-labelledby="kc-q-5">
+    <div class="quiz-eyebrow">Quick knowledge check</div>
+    <h2 class="quiz-q-text" id="kc-q-5">Which statement is TRUE?</h2>
+    <ol class="quiz-options">
+      <li class="quiz-option" aria-hidden="false"><span class="key">A</span><span class="body">If AI sounds confident, it is probably correct.</span></li>
+      <li class="quiz-option" aria-hidden="false"><span class="key">B</span><span class="body">Enterprise AI guarantees factual accuracy.</span></li>
+      <li class="quiz-option" aria-hidden="false"><span class="key">C</span><span class="body">Humans remain accountable for AI-assisted decisions.</span></li>
+      <li class="quiz-option" aria-hidden="false"><span class="key">D</span><span class="body">AI can replace operational judgement.</span></li>
+    </ol>
+    <details class="quiz-reveal">
+      <summary class="quiz-btn ghost">Show answer</summary>
+      <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>C — Humans remain accountable for AI-assisted decisions.</p>
+    </details>
+  </section>
 
   <div id="widget-mount"></div>
-  <div id="quiz-mount"></div>
 </main>
 
 <nav class="module-bottom-nav">
