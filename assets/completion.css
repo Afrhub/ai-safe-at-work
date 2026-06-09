@@ -1,0 +1,65 @@
+/* Course completion UI — mark-complete button + lock states */
+.module-complete-bar {
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  margin: 3rem 0 1rem;
+  text-align: center;
+}
+.complete-btn {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  padding: 0.85rem 1.6rem;
+  background: var(--accent);
+  color: #0a0a10;
+  border: none; border-radius: 12px;
+  font-family: var(--font-display);
+  font-size: 0.98rem; font-weight: 700;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 200ms ease, background 200ms ease;
+}
+.complete-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(232,167,38,0.30); }
+.complete-btn:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 3px; }
+.complete-btn.is-done {
+  background: rgba(26,184,106,0.14);
+  color: var(--green, #1ab86a);
+  box-shadow: inset 0 0 0 1px rgba(26,184,106,0.5);
+}
+.complete-hint {
+  font-family: var(--font-mono);
+  font-size: 0.7rem; letter-spacing: 0.06em;
+  color: var(--text3);
+}
+
+/* Locked / unlocked gated tiles (landing box, course final card) */
+[data-locked-until-complete].is-locked { cursor: default; }
+[data-locked-until-complete].is-unlocked { cursor: pointer; }
+[data-locked-until-complete] .lock-state .when-unlocked { display: none; }
+[data-locked-until-complete].is-unlocked .lock-state .when-unlocked { display: inline; }
+[data-locked-until-complete].is-unlocked .lock-state .when-locked { display: none; }
+
+/* Final-tool card on the course hub */
+.module-card.final-tool { display: block; margin: 1.4rem 0 0; position: relative; }
+.module-card.final-tool.is-locked { opacity: 0.6; filter: grayscale(0.5); cursor: default; }
+.module-card.final-tool.is-unlocked { opacity: 1; filter: none; }
+.lock-state .when-unlocked { display: none; }
+.is-unlocked .lock-state .when-unlocked, .is-unlocked.lock-state .when-unlocked { display: inline; }
+.is-unlocked .lock-state .when-locked, .is-unlocked.lock-state .when-locked { display: none; }
+
+/* Checklist gate page */
+.checklist-locked {
+  max-width: 40rem; margin: 3rem auto;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2.4rem 2rem;
+  background: linear-gradient(180deg, rgba(232,167,38,0.04), rgba(232,167,38,0.01));
+}
+.checklist-locked .lock-big { font-size: 2rem; }
+.checklist-locked h2 { margin: 0.6rem 0 0.4rem; }
+.checklist-locked p { color: var(--text2); line-height: 1.6; }
+.checklist-locked .progress-pill {
+  display: inline-block; margin-top: 0.8rem;
+  font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.08em; color: var(--accent);
+  border: 1px solid rgba(232,167,38,0.3); border-radius: 100px;
+  padding: 0.3rem 0.9rem;
+}

@@ -21,6 +21,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/style.css?v=2" />
+<link rel="stylesheet" href="assets/completion.css?v=1" /><!-- completion v1 -->
+<script defer src="assets/completion.js?v=1"></script><!-- completion v1 -->
 <link rel="stylesheet" href="assets/quiz.css?v=1" />
 <link rel="stylesheet" href="assets/widgets.css?v=1" />
 <script defer src="assets/cinema.js?v=2"></script>
@@ -113,8 +115,18 @@
 </header>
 
 <main id="main">
-  <p class="eyebrow no-print">Module 11 · The whole course on one page</p>
+  <p class="eyebrow no-print">Final tool · Unlocked when every module is complete</p>
   <h1 class="page-title">The 60-second <em>pre-submit</em> checklist.</h1>
+
+  <div class="checklist-locked" data-checklist-locked style="display:none">
+    <div class="lock-big" aria-hidden="true">🔒</div>
+    <h2>Finish the course first</h2>
+    <p>This is your reward at the end. It opens once you have marked every module complete. Go back, work through them, then come straight here.</p>
+    <span class="progress-pill"><span data-progress-count>0 / 11</span> modules complete</span>
+    <p style="margin-top:1rem"><a href="course.html" class="accent">← Back to all modules</a></p>
+  </div>
+
+  <div data-checklist-gate>
   <p class="lede">Run this list before you paste anything into an AI tool, including the things that feel safe. It takes a minute. The people who get burned skipped the minute.</p>
 
   <div class="print-row no-print">
@@ -312,16 +324,17 @@
   </section>
 
   <div id="widget-mount" class="no-print"></div>
+  </div><!-- /data-checklist-gate -->
 </main>
 
 <nav class="module-bottom-nav no-print">
-  <a class="nav-btn" href="module-10.html">
+  <a class="nav-btn" href="module-12.html">
     <span class="nav-dir">Previous</span>
-    <span class="nav-title">← 10 · When something goes wrong</span>
+    <span class="nav-title">← 12 · The standards behind this</span>
   </a>
-  <a class="nav-btn next" href="module-12.html">
-    <span class="nav-dir">Next module</span>
-    <span class="nav-title">12 · The standards behind this →</span>
+  <a class="nav-btn next" href="cert.html">
+    <span class="nav-dir">You're done</span>
+    <span class="nav-title">Get your certificate →</span>
   </a>
 </nav>
 

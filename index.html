@@ -18,6 +18,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 
 <link rel="stylesheet" href="assets/style.css?v=2" />
+<link rel="stylesheet" href="assets/completion.css?v=1" /><!-- completion v1 -->
+<script defer src="assets/completion.js?v=1"></script><!-- completion v1 -->
 <script defer src="assets/cinema.js?v=2"></script>
 
 <style>
@@ -25,13 +27,13 @@
 body { background: var(--bg); }
 main.gate {
   max-width: none;
-  height: 100svh; height: 100dvh;
+  min-height: 100svh; min-height: 100dvh;
   display: grid;
   grid-template-rows: auto 1fr auto;
   padding: 1rem 2rem 0.85rem;
   position: relative;
   isolation: isolate;
-  overflow: hidden;
+  overflow: visible;
 }
 .gate::before {
   content: '';
@@ -89,12 +91,55 @@ main.gate {
   line-height: 1.45;
   opacity: 0; animation: fadeUp 0.8s var(--ease-out) 0.42s forwards;
 }
+.audience {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto 1.3rem;
+  text-align: left;
+  opacity: 0; animation: fadeUp 0.8s var(--ease-out) 0.5s forwards;
+}
+.aud-card {
+  background: linear-gradient(160deg, rgba(255,255,255,0.02), rgba(255,255,255,0.004));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.85rem 1rem 0.9rem;
+}
+.aud-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+.aud-card p { font-size: 0.78rem; line-height: 1.45; color: var(--text2); margin: 0; }
+.aud-card em { font-style: normal; color: var(--text); border-bottom: 1px solid rgba(232,167,38,0.4); }
+
 .choices {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.2rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.1rem;
   width: 100%;
-  max-width: 880px;
+  max-width: 1040px;
+}
+.choice:nth-child(3) { animation-delay: 0.69s; }
+.choice.locked {
+  cursor: default;
+  opacity: 0.5;
+  filter: grayscale(0.6);
+  animation-delay: 0.69s;
+}
+.choice.locked .choice-tag { color: var(--text3); }
+.choice.locked .choice-cta { color: var(--text3); }
+.choice.locked.is-unlocked { opacity: 1; filter: none; cursor: pointer; }
+.choice.locked.is-unlocked .choice-tag { color: var(--accent); }
+.choice.locked.is-unlocked .choice-cta { color: var(--text); }
+.choice-lock { display: inline-block; font-size: 0.8rem; }
+@media (max-width: 860px) {
+  .audience { grid-template-columns: 1fr; gap: 0.6rem; margin-bottom: 1rem; }
 }
 .choice {
   position: relative;
@@ -341,30 +386,49 @@ main.gate {
   <section class="gate-stage">
     <p class="gate-eyebrow">AI Governance Awareness + Enablement</p>
     <h1>Safe AI <em>adoption</em>.<br/>Operational governance.</h1>
-    <p class="lede">A platform SMBs and MSPs use to meet EU AI Act Article 4, GDPR, ISO/IEC 42001 and ISO/IEC 27001 in plain English. Free course at the front. Governance packs, role tracks, standards mapping and advisory behind it.</p>
+    <p class="lede">A free, plain-English course that teaches people how to use AI tools at work without leaking data, breaking the law, or getting fooled. Built for small and medium businesses and the MSPs who support them — and mapped to the EU AI Act, GDPR and the ISO standards behind the scenes.</p>
+
+    <div class="audience" aria-label="Who this is for, what it is, why it matters">
+      <div class="aud-card">
+        <span class="aud-label">Who it's for</span>
+        <p>Anyone at work who uses AI tools like ChatGPT, Copilot, Claude or Gemini — in sales, support, HR, finance, marketing or ops. You do <em>not</em> need to be techy. If you've ever pasted something into an AI and thought "should I have done that?", this is for you.</p>
+      </div>
+      <div class="aud-card">
+        <span class="aud-label">What it is</span>
+        <p>A short, free course — twelve small lessons, about 90 minutes in total. Each one shows you, in plain words, how to use AI at work the safe way. No login. Read it on the train, share it with your team.</p>
+      </div>
+      <div class="aud-card">
+        <span class="aud-label">Why it matters</span>
+        <p>One careless paste can leak a customer's private details, break a privacy law, or let a scammer trick the company. A few simple habits keep you, your customers and your business out of trouble.</p>
+      </div>
+    </div>
 
     <div class="choices">
       <a class="choice" href="course.html" aria-labelledby="choice-start-title">
         <span class="choice-tag">For everyone</span>
         <h2 id="choice-start-title">Start the course</h2>
-        <p>12 modules in around 90 minutes. No login, no payment. Read on the train, share with your team.</p>
+        <p>12 modules in around 90 minutes. No login. Read on the train, share with your team.</p>
         <span class="choice-cta">Begin <span class="choice-arrow" aria-hidden="true">→</span></span>
       </a>
 
-      <a class="choice" href="module-11.html" aria-labelledby="choice-check-title">
-        <span class="choice-tag">In a hurry</span>
+      <a class="choice" href="resources.html" aria-labelledby="choice-resources-title">
+        <span class="choice-tag">Reference</span>
+        <h2 id="choice-resources-title">Resources</h2>
+        <p>Everything in one place: the Glossary of terms, the Standards Map, the DPO guide and the Acceptable-Use Policy template.</p>
+        <span class="choice-cta">Open <span class="choice-arrow" aria-hidden="true">→</span></span>
+      </a>
+
+      <a class="choice locked" data-locked-until-complete data-unlock-href="module-11.html" aria-labelledby="choice-check-title">
+        <span class="choice-tag lock-state"><span class="when-locked">Locked</span><span class="when-unlocked">Unlocked</span></span>
         <h2 id="choice-check-title">The 60-second check</h2>
-        <p>The printable pre-submit checklist. Pin it next to your screen and run it before you paste anything into an AI tool.</p>
-        <span class="choice-cta">Skip ahead <span class="choice-arrow" aria-hidden="true">→</span></span>
+        <p class="lock-state"><span class="when-locked">This is available upon successful completion of all modules.</span><span class="when-unlocked">All modules complete — open your printable checklist.</span></p>
+        <span class="choice-cta lock-state"><span class="when-locked">Locked <span class="choice-lock" aria-hidden="true">🔒</span></span><span class="when-unlocked">Open <span class="choice-arrow" aria-hidden="true">→</span></span></span>
       </a>
     </div>
 
     <p class="gate-tertiary">
-      <a href="standards-map.html">Standards Map</a> ·
-      <a href="module-manager.html">Manager</a> ·
-      <a href="module-dpo.html">DPO</a> ·
-      <a href="templates/aup-template.html">AUP</a> ·
-      <a href="templates/vendor-questionnaire.html">Vendor Q</a> ·
+      <a href="module-manager.html">Manager track</a> ·
+      <a href="templates/vendor-questionnaire.html">Vendor questionnaire</a> ·
       <a href="security.html">Security</a> ·
       <a href="msp.html"><strong>MSP programme</strong></a> <span style="color:var(--accent);">· 5 Founding slots</span>
     </p>

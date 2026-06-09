@@ -21,6 +21,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/style.css?v=2" />
+<link rel="stylesheet" href="assets/completion.css?v=1" /><!-- completion v1 -->
+<script defer src="assets/completion.js?v=1"></script><!-- completion v1 -->
 <script defer src="assets/cinema.js?v=2"></script>
 <script type="application/ld+json">
 {
@@ -101,15 +103,7 @@
 <main id="main">
   <p class="eyebrow">The course · twelve modules · six role tracks · three sector overlays · seven templates</p>
   <h1 class="page-title">The whole <em>course</em>, in one place.</h1>
-  <p class="lede">Twelve universal modules, six role tracks (managers, DPOs, MSP / IT admins, Microsoft Copilot, Shadow AI, Governance &amp; Procurement), three sector overlays (financial services, healthcare, public sector), seven ready-to-print templates, and a standards map for the auditor. Around ninety minutes for the core. Longer if you read the role tracks and templates. No login, no payment.</p>
-
-  <div class="callout note">
-    <span class="callout-icon">i</span>
-    <div>
-      <div class="callout-title">Who this is for</div>
-      <p>Anyone in a small or medium business who uses ChatGPT, Copilot, Claude, Gemini or any other AI tool for work in sales, marketing, HR, support, ops, finance or comms. You do not need to be technical. If you have ever pasted something into an AI and wondered "should I have done that?", this course covers you.</p>
-    </div>
-  </div>
+  <p class="lede">Twelve universal modules, six role tracks (managers, DPOs, MSP / IT admins, Microsoft Copilot, Shadow AI, Governance &amp; Procurement), three sector overlays (financial services, healthcare, public sector), seven ready-to-print templates, and a standards map for the auditor. Around ninety minutes for the core. Longer if you read the role tracks and templates. No login.</p>
 
   <hr class="section-divider" />
 
@@ -186,13 +180,6 @@
       <span class="bg-num">10</span>
     </a>
 
-    <a class="module-card" href="module-11.html">
-      <div class="module-num">Module 11</div>
-      <h3>The 60-second pre-submit checklist</h3>
-      <p>Print it. Stick it next to your screen. Run through it before pasting anything into an AI tool. A condensed version of everything above.</p>
-      <span class="bg-num">11</span>
-    </a>
-
     <a class="module-card" href="module-12.html">
       <div class="module-num">Module 12</div>
       <h3>The standards behind this course</h3>
@@ -200,6 +187,13 @@
       <span class="bg-num">12</span>
     </a>
   </div>
+
+  <a class="module-card final-tool is-locked" data-locked-until-complete data-unlock-href="module-11.html">
+    <div class="module-num lock-state"><span class="when-locked">Final tool · Locked</span><span class="when-unlocked">Final tool · Unlocked</span></div>
+    <h3>The 60-second pre-submit checklist</h3>
+    <p class="lock-state"><span class="when-locked">Your reward at the end. Mark every module complete (<span data-progress-count>0 / 11</span>) and this printable checklist unlocks.</span><span class="when-unlocked">All modules complete. Print it, stick it by your screen, and run it before you paste anything into an AI tool.</span></p>
+    <span class="bg-num" aria-hidden="true">🔒</span>
+  </a>
 
   <hr class="section-divider" />
 
@@ -354,7 +348,7 @@
 
   <h2>How to use this course</h2>
   <p>If you have an hour: read in order. Each module builds on the last.</p>
-  <p>If you have five minutes: jump to <a href="module-11.html" class="accent">Module 11 — the 60-second checklist</a>. It's the whole course compressed to one page, designed to be printed.</p>
+  <p>Want the whole course on one printable page? The <a href="module-11.html" class="accent">60-second checklist</a> is the final tool. Finish every module to unlock it.</p>
   <p>If your manager asked you to "do something about AI compliance": start with <a href="module-12.html" class="accent">Module 12 — the standards</a>, then come back to <a href="module-3.html" class="accent">Module 3</a> and <a href="module-9.html" class="accent">Module 9</a>.</p>
   <p>If you are the manager: start with the <a href="rollout-guide.html" class="accent">30-day rollout guide</a>.</p>
 
