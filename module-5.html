@@ -108,8 +108,9 @@
   </div>
 
   <h2>Why hallucinations happen</h2>
-  <p>A large language model is not a database. It does not look things up. It generates text one piece at a time, choosing each next piece from patterns it learned in training. Patterns of facts produce factual output most of the time. Patterns of "what a legal citation looks like" produce something shaped like a legal citation, with no guarantee the citation exists.</p>
-  <p>This is sometimes called "hallucinating", but a more accurate word is "confabulating": the model fills gaps with plausible-shaped material, the way a person can confabulate a memory without realising they're doing it.</p>
+  <p>A large language model does not automatically look things up unless it is connected to external tools or search services. Left to itself, it generates text one piece at a time, choosing each next piece from patterns it learned in training. Patterns of facts produce factual output most of the time. Patterns of "what a legal citation looks like" produce something shaped like a legal citation, with no guarantee the citation exists.</p>
+  <p>Throughout this course we call this a <strong>hallucination</strong> — the term you'll see most often. A more precise word is "confabulation": the model fills gaps with plausible-shaped material, the way a person can confabulate a memory without realising they're doing it. Either way, the behaviour is the same.</p>
+  <p>Connecting a model to live data — web search, your documents, a database — generally <em>reduces</em> the risk, because the model has something real to draw on. It does not remove it: a connected model can still misread a source, blend two of them, or hallucinate around the parts the data didn't cover. "It has access to the document" is not the same as "it read it correctly".</p>
 
   <div class="callout note">
     <span class="callout-icon">i</span>
@@ -122,7 +123,7 @@
   <h2>What hallucinations look like</h2>
 
   <h3>Fake citations</h3>
-  <p>The famous case. A model is asked to find legal precedents or academic references; it produces six that look perfect — names, years, journal, page numbers, holding — and none of them exist. This has produced sanctions for lawyers in at least four countries and retractions for academics. The fix is simple: every citation goes to a primary source before you use it.</p>
+  <p>The famous case. A model is asked to find legal precedents or academic references; it produces six that look perfect — names, years, journal, page numbers, holding — and none of them exist. This has led to sanctions, court criticism and professional embarrassment in multiple jurisdictions, as well as retractions for academics. The fix is simple: every citation goes to a primary source before you use it.</p>
 
   <h3>Fabricated quotes</h3>
   <p>Ask a model "what did [famous person] say about [topic]" and you may get a perfectly believable quote, attributed precisely, that the person never said. The phrasing matches their style. The sentiment matches their public positions. The quote is invented.</p>
@@ -146,6 +147,7 @@
     <div class="compare-cell good">
       <h4>Counts as a real second source</h4>
       <p>The original document. An official register or regulator's website. The vendor's actual documentation. A trusted colleague who knows the topic. An academic paper you can read. A government statistic at its own source.</p>
+      <p>Where the question is about your own organisation, the authoritative source is internal: <strong>company policy, internal procedures, and your contractual obligations</strong>. The model's general answer does not override what your own rules and contracts actually say.</p>
     </div>
     <div class="compare-cell bad">
       <h4>Doesn't count</h4>
@@ -175,10 +177,18 @@
   <h2>Human oversight — the EU AI Act in plain English</h2>
   <p>Article 14 of the EU AI Act requires that "high-risk" AI systems be designed and used in a way that allows a human to oversee them effectively. In practice, for the kind of work covered in this course, that means:</p>
   <ul>
-    <li>A human reads the AI's output <strong>before</strong> it's acted upon, every time, in any decision that affects another person.</li>
+    <li><strong>Appropriate human oversight should be applied before AI-generated outputs are relied upon in decisions affecting individuals.</strong> In plain terms: a person reads it before it's acted upon.</li>
     <li>That human is in a position to <strong>not act</strong> on the AI's output — to override it, correct it, or set it aside.</li>
     <li>The human understands the AI well enough to know <em>when</em> to be suspicious of its output. That's what this module is teaching.</li>
   </ul>
+
+  <div class="callout govern">
+    <span class="callout-icon">G</span>
+    <div>
+      <div class="callout-title">Governance Insight</div>
+      <p>Human oversight is one of the core principles found across <strong>ISO/IEC 42001</strong>, the <strong>EU AI Act</strong> and many emerging AI governance frameworks. It is not a single rule from a single regulator — it is a shared expectation, which is why "a person stays accountable for the decision" is a safe default wherever you operate.</p>
+    </div>
+  </div>
   <p>"Human in the loop" is the slogan version. The substance is: <strong>the human signing off has to actually do the work of signing off</strong>, not click "approve" on autopilot.</p>
 
   <h3>What rubber-stamping looks like</h3>

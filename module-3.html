@@ -112,9 +112,24 @@
     </div>
   </div>
 
+  <div class="callout standard">
+    <span class="callout-icon">§</span>
+    <div>
+      <div class="callout-title">First, classify the data</div>
+      <p>Before you decide where data can go, decide <em>what it is</em>. Most organisations sort information into a few levels:</p>
+      <ul>
+        <li><strong>Public</strong> — already published; safe to share.</li>
+        <li><strong>Internal</strong> — for staff, not the outside world.</li>
+        <li><strong>Confidential</strong> — limited to those who need it; client, commercial or personal data lives here.</li>
+        <li><strong>Restricted</strong> — the most sensitive; tight access, special handling.</li>
+      </ul>
+      <p>This is the data-classification idea behind <strong>ISO/IEC 27001 (A.5.12 &amp; A.5.13)</strong>, and it is exactly the first question in Module 2's five-question test. Everything on the never-paste list below is Confidential or Restricted — which is why a free public tool is the wrong place for it.</p>
+    </div>
+  </div>
+
   <h2>1. Customer and contact details</h2>
   <p>Names, emails, phone numbers, home addresses, birth dates, account numbers, customer IDs. Even one row. Even "I'll hide the names first". You usually don't, and even when you try, the AI's reply often fills in enough to spot the person.</p>
-  <p><strong>Why it's a problem:</strong> this is personal data under GDPR. Paste it into a tool with no proper deal in place, and that is a data breach by itself.</p>
+  <p><strong>Why it's a problem:</strong> this is personal data under GDPR. Paste it into a tool with no proper deal in place, and that may result in a personal data breach or unauthorised disclosure.</p>
   <p><strong>What to do instead:</strong> describe the shape, not the data. "I have a spreadsheet with three columns: name, email, last order date." Ask for the steps, then run them on your own computer.</p>
 
   <h2>2. Sensitive personal data</h2>
@@ -129,17 +144,17 @@
 
   <h2>4. Code from systems you do not own</h2>
   <p>Internal apps, your company's code, a client's code, secret formulas, anything from a private code store.</p>
-  <p><strong>Why it's a problem:</strong> code is valuable property. Big companies (Samsung is the famous one) have had staff paste secret code into ChatGPT. Once code goes to an outside tool you do not control, it may stop counting as a secret at all.</p>
+  <p><strong>Why it's a problem:</strong> code is valuable property. Big companies (Samsung is the famous one) have had staff paste secret code into ChatGPT. Once code goes to an outside tool you do not control, it may reduce legal and commercial protections around confidential information.</p>
   <p><strong>What to do instead:</strong> rewrite the snippet so it is generic. Strip out the business bits, the function names and the variable names, until it is just a plain coding puzzle. Or use a coding helper set up for your company, like GitHub Copilot Business.</p>
 
   <h2>5. Money figures that are not public</h2>
   <p>Internal profit and loss, draft accounts, pricing, forecasts, special customer prices, supplier costs, pay, share details.</p>
-  <p><strong>Why it's a problem:</strong> price-sensitive numbers from a private company are commercial secrets. From a public company, they may be "inside information", which can be a crime if it leaks before it is announced.</p>
+  <p><strong>Why it's a problem:</strong> price-sensitive numbers from a private company are commercial secrets. For a publicly traded company, in specific circumstances they may count as "inside information", and disclosing or acting on it before it is announced can be a criminal offence.</p>
   <p><strong>What to do instead:</strong> work with the shape, not the numbers. "I have monthly sales for the last two years. How should I build a chart that shows growth and seasons?" needs no real numbers.</p>
 
   <h2>6. Passwords and keys</h2>
   <p>Passwords. API keys. SSH keys. Database links. Login tokens. Anything that opens a door.</p>
-  <p><strong>Why it's a problem:</strong> any secret you paste into a chat is no longer a secret. Change it straight away.</p>
+  <p><strong>Why it's a problem:</strong> any secret you paste into a chat should be treated as potentially compromised. Change it straight away.</p>
   <p><strong>What to do instead:</strong> to fix a login bug, describe it without the secret. "My API gives a 401 error when I send the token in the header" is enough.</p>
 
   <div class="callout warn">
@@ -162,8 +177,24 @@
 
   <h2>9. Anything from a client's job</h2>
   <p>If you are a consultant, agency, accountant, lawyer or contractor, your client's information is theirs to protect. Briefs, work you deliver, papers they showed you, anything you would not show another client.</p>
-  <p><strong>Why it's a problem:</strong> you are not the owner of that data, your client is. They never agreed for it to go to an AI company. It is not yours to paste.</p>
+  <p><strong>Why it's a problem:</strong> you are not the owner of that data, your client is. They never agreed for it to go to an AI company. It is not yours to paste. On top of the data-protection angle, most client work sits under contractual confidentiality obligations — an NDA or a confidentiality clause in your engagement terms — and breaching those is often a bigger and faster problem than the privacy breach itself.</p>
   <p><strong>What to do instead:</strong> ask the client. Many will say yes. Some will name a tool they want you to use. Some will say no, and then you simply cannot use AI for that part. Get used to that chat.</p>
+
+  <div class="callout warn">
+    <span class="callout-icon">!</span>
+    <div>
+      <div class="callout-title">This is where Shadow AI bites</div>
+      <p>Using unapproved AI tools to process any of the information above is often referred to as <strong>Shadow AI</strong>, and it creates significant governance and compliance risks. The data leaves through a door no one is watching: no contract, no record, and no way for your organisation to know what was sent or to get it back.</p>
+    </div>
+  </div>
+
+  <div class="callout govern">
+    <span class="callout-icon">G</span>
+    <div>
+      <div class="callout-title">Governance Insight</div>
+      <p><strong>ISO/IEC 42001</strong> encourages organisations to understand the AI systems they use, assess supplier risks and implement appropriate controls over AI-related activities. Knowing which tool a given class of data may go into — and which suppliers stand behind it — is a control, not just good manners.</p>
+    </div>
+  </div>
 
   <hr class="section-divider" />
 

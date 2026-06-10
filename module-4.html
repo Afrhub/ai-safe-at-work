@@ -109,8 +109,17 @@
   <h2>The decision flow</h2>
   <p>Before pasting anything, run the task through these four questions, in order.</p>
 
+  <div class="callout standard">
+    <span class="callout-icon">§</span>
+    <div>
+      <div class="callout-title">Start from the data class</div>
+      <p>The step most people skip sits between Modules 3 and 4: <strong>classify the data first</strong>. Public, Internal, Confidential or Restricted (Module 3). The class sets the bar — Public data can go almost anywhere; Confidential or Restricted data needs an approved, contracted tool. The four questions below are how you act on that classification.</p>
+    </div>
+  </div>
+
   <h3>Question 1 — Is the data on the never-paste list?</h3>
   <p>(Module 3.) If yes, you're already in the right place: either reformulate the task to use the "shape" of the data rather than the data itself, or escalate to the enterprise tool. Don't continue down the flow with sensitive data in hand.</p>
+  <p>Remember the footnote from Module 3: "never-paste" means never into a <strong>free or personal</strong> AI tool. It does not necessarily rule out an approved enterprise AI platform your company has set up with a contract and the right controls — that is often exactly where this work should go.</p>
 
   <h3>Question 2 — Does my business have a procured AI tool for this?</h3>
   <p>Most businesses, even small ones, now have at least one. Microsoft 365 Copilot if you're on Microsoft 365. ChatGPT Team or Enterprise. Claude for Work. Notion AI Business. Google Workspace's Gemini. If your business has paid for one, use it. The contract, the DPA, the retention controls, the training opt-out — they're all already in place for you.</p>
@@ -118,11 +127,11 @@
 
   <h3>Question 3 — Is the data internal but low-sensitivity?</h3>
   <p>Examples: marketing copy you're drafting, a presentation outline, a generic question about how to use a piece of software, brainstorming for a blog post.</p>
-  <p>For these, even a consumer-tier AI tool is usually fine — provided training is opted off (Module 2), and you're not pasting anything that falls into the never-paste list. The risk surface is small.</p>
+  <p>For these, a consumer-tier AI tool may be acceptable, subject to company policy and data classification — provided training is opted off (Module 2), and you're not pasting anything that falls into the never-paste list. The risk surface is small, but "low-sensitivity" is a classification decision, not a gut feeling.</p>
 
   <h3>Question 4 — Is there a regulated decision involved?</h3>
   <p>"Regulated decision" sounds heavy, but the categories are concrete: anything affecting someone's hiring, firing, pay, promotion, benefits, credit, insurance, education, immigration, health, criminal justice, or access to essential services.</p>
-  <p>If the AI is helping shape a decision in any of these categories, you're in EU AI Act territory (Module 7 and Module 12). The right answer is rarely "I'll just use ChatGPT". It's either an enterprise tool with logging, or a human-only process.</p>
+  <p>If the AI is helping shape a decision in any of these categories, you're in EU AI Act territory (Module 7 and Module 12). The right answer is unlikely to be a consumer AI tool without appropriate governance, oversight and logging. It's either an enterprise tool with those controls in place, or a human-only process.</p>
 
   <hr class="section-divider" />
 
@@ -164,15 +173,27 @@
       <h4>Incident response</h4>
       <p>What is the vendor's commitment to notify us in the event of a breach, and within how many hours? How are model failures (a hallucination causing harm) handled?</p>
     </div>
+    <div class="compare-cell good">
+      <h4>Contract &amp; assurance</h4>
+      <p>Is a Data Processing Agreement (DPA) available? Is EU data residency available? Do we retain ownership of our data and outputs? Is there a right to audit, or independent assurance reporting (e.g. a SOC 2 report) in its place?</p>
+    </div>
   </div>
 
   <p>If the vendor's marketing page leads with "powered by GPT-4 / Claude / Gemini" but the trust page doesn't say which one or under what terms, that's a flag. The model provider is a sub-processor. You're entitled to know.</p>
+
+  <div class="callout govern">
+    <span class="callout-icon">G</span>
+    <div>
+      <div class="callout-title">Governance Insight</div>
+      <p><strong>ISO/IEC 42001</strong> encourages organisations to understand the AI systems they use, assess supplier risks and implement appropriate controls over AI-related activities. The questions above are exactly that assessment: knowing who processes your data, under what terms, and how you would get assurance — before the tool is in daily use, not after an incident.</p>
+    </div>
+  </div>
 
   <div class="callout warn">
     <span class="callout-icon">!</span>
     <div>
       <div class="callout-title">The "AI wrapper" risk</div>
-      <p>Many "AI tools" advertised to SMBs are thin wrappers around a major model provider's API. That isn't bad in itself — but it does mean your data flows through two companies: the wrapper, and the underlying model provider. Both need DPAs. Both have terms. Both can change them. If a vendor can't tell you who's at the other end of the API call, they probably shouldn't be processing your customer data.</p>
+      <p>Many "AI tools" advertised to SMBs are thin wrappers around a major model provider's API. That isn't bad in itself — but it does mean your data flows through two companies: the wrapper, and the underlying model provider. Appropriate contractual and data protection arrangements should exist across the processing chain. Both have terms. Both can change them. If a vendor can't tell you who's at the other end of the API call, they probably shouldn't be processing your customer data.</p>
     </div>
   </div>
 
@@ -198,6 +219,7 @@
   <h2>A note on local / offline AI</h2>
   <p>You may have heard about "running AI locally" — Ollama, LM Studio, llama.cpp, Apple Intelligence's on-device models, Microsoft's local Copilot+ models. For sensitive work, this is a genuinely powerful option: the data never leaves the device, so most of the never-paste-list concerns evaporate.</p>
   <p>Caveats: the models are smaller, often less capable; you still need to make sure backup and disk encryption are sorted; and "local" doesn't help if the laptop itself isn't well managed. But for some kinds of work — summarising sensitive notes, drafting things you'd rather not send anywhere — a local model is a genuine fit.</p>
+  <p>One thing local AI does <strong>not</strong> remove: governance. A model running on your laptop still needs an acceptable-use policy, a record of what it's used for, logging where the work matters, and human oversight of its output (Module 5). "The data stayed on the device" answers the privacy question, not the accountability one.</p>
 
   <section class="quiz-block" aria-labelledby="kc-q-4">
     <div class="quiz-eyebrow">Quick knowledge check</div>

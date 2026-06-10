@@ -339,6 +339,12 @@ hr.section-divider {
 }
 .callout.standard .callout-icon { background: rgba(232,167,38,0.16); color: var(--accent); }
 
+.callout.govern {
+  border-color: rgba(150,120,255,0.34);
+  background: rgba(150,120,255,0.045);
+}
+.callout.govern .callout-icon { background: rgba(150,120,255,0.16); color: #b9a6ff; }
+
 /* ════════════════════════════════════════════════════════════
    PILL TAGS
    ════════════════════════════════════════════════════════════ */
@@ -859,11 +865,13 @@ h1.page-title em,
    ════════════════════════════════════════════════════════════ */
 .callout.standard .callout-icon,
 .callout.do .callout-icon,
+.callout.govern .callout-icon,
 .callout.warn .callout-icon {
   position: relative;
 }
 .callout.standard .callout-icon::after,
 .callout.do .callout-icon::after,
+.callout.govern .callout-icon::after,
 .callout.warn .callout-icon::after {
   content: '';
   position: absolute;

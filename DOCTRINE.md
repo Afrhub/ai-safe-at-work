@@ -963,7 +963,103 @@ Long-term objective: governance-focused SaaS ecosystem · supported by MSP partn
 
 | 2026-06-03 | **Gate 11 closed — 30-day rollout guide shipped.** `/rollout-guide.html` is the dual-audience adoption playbook: internal managers AND MSP partners. Structure = preparation (week 0) + launch (week 1, includes sample sponsor kickoff message) + completion drive (week 2) + assessment & cert (week 3) + embed & handover (week 4). Includes: 7-role responsibility matrix with time-per-week estimates; sample sponsor kickoff message; 7-KPI scoreboard (completion / pass-rate / AUP / register / incidents / time-to-escalate / refresh); 9-row common-pitfalls table; 8-item end-state artefact checklist. Each week has an MSP-variant purple callout (multi-customer cohort cadence, staggered kickoffs, per-customer registers, white-label posture, customer-side sponsor protection). JSON-LD `HowTo` with 5 step IRIs. Wired into `course.html` (callout pre-"How to use this course"), `msp.html` (CTA line under lede), `llms.txt` (new "Rollout" section + lede bump to "6 templates + 30-day rollout guide"), `sitemap.xml`. Procurement-gate state: only gate 6 (role-tracks-build) remains in quarter-one block. | Smallest enabler for MSP-first commercial motion: gives every Founding MSP Partner an out-of-the-box per-customer rollout playbook that produces an audit binder, reducing onboarding friction from "we need to figure this out" to "we run this 4-week plan". |
 
+| 2026-06-10 | **Governance-led content refinement pass (modules 2–5 + shared CSS).** See § Content doctrine — governance-led refinements below for the standing rules. Shipped: five-question test (M2), softened retention + model-training language (M2), enterprise-version justification list (M2), Shadow AI named + defined and threaded through M2/M3 (already in M1/M4), ISO/IEC 42001 "Governance Insight" callout variant (`.callout.govern` in `style.css`) added to M3/M4/M5, Data Classification callout aligned to ISO 27001 (M3/M4), and the legal-accuracy edits to M3 (§1,4,5,6,9) + M4 (Q1/Q3/Q4, vendor due-diligence, AI-wrapper, local-AI) + M5 (not-a-database, hallucination-primary, sanctions phrasing, internal sources, human-oversight wording). Founder-directed. | Moves the course voice from awareness-led to **governance-led**, and removes absolute claims that vary by vendor/product/setting (legal-accuracy + defensibility). Aligns the "what do I paste" decision with data classification — the missing step between M3 and M4. |
+
 Append below as decisions land. Use `/aos-log` for global cross-project decisions.
+
+---
+
+## § Content doctrine — governance-led refinements (added 2026-06-10)
+
+> Standing content rules from the founder's 2026-06-10 review. These bind every
+> module rewrite (modules 4–12 still pending the plain-English pass) and any
+> translation. Position: **governance-led, not awareness-led.** The course
+> teaches people to make a governed decision, not just to be careful.
+
+### The five-question test (was four)
+
+The pre-paste test in Module 2 keeps its four tool-interrogation questions and
+adds a fifth, asked **first in spirit** because it is the real decision point in
+most organisations:
+
+**"What type of data am I about to paste?"** — Public · Internal · Confidential ·
+Personal · Special category.
+
+Classification drives the answer to everything that follows. Keep the original
+four (where kept · how long · used to train · who can read).
+
+### Shadow AI — named, defined, repeated
+
+"Shadow AI" is a **named, recurring term** across the course (not a one-off).
+Canonical definition to reuse:
+
+> When employees use AI tools outside approved company processes, this is often
+> referred to as **Shadow AI**. Shadow AI reduces visibility, increases risk and
+> makes governance significantly more difficult.
+
+Thread it wherever unapproved/free/personal tool use appears (M1, M2, M3, M4 at
+minimum; glossary entry already exists).
+
+### ISO 42001 Governance Insight boxes
+
+Reusable callout variant `.callout.govern` ("Governance Insight"). Standing copy:
+
+> **ISO/IEC 42001** encourages organisations to understand the AI systems they
+> use, assess supplier risks and implement appropriate controls over
+> AI-related activities.
+
+Use it to position governance points (suppliers, data handling, controls, human
+oversight) as framework-backed, not opinion. Human oversight specifically is
+"one of the core principles found across ISO 42001, the EU AI Act and many
+emerging AI governance frameworks."
+
+### Soften absolutes — retention + model training
+
+Vendor/product/setting variance must not be stated as universal fact. Approved
+replacements:
+
+- ~~"Chats are usually kept for at least 30 days, often longer, even after you
+  delete them."~~ → **"Retention periods vary between vendors, products and
+  settings. Some providers may retain data for a period after deletion for
+  operational, legal or security purposes."**
+- ~~"Your chats may be used to train the next AI."~~ → **"Depending on the
+  provider and your settings, conversations may be used to improve future
+  models, services or safety systems."**
+
+### Enterprise version — justify the buy
+
+Where the enterprise tier is covered, state **why organisations buy it**:
+administrative control · data governance · identity integration · auditability ·
+compliance requirements. This justifies the spend rather than just listing
+features.
+
+### Legal-accuracy refinements (standing)
+
+- "data breach by itself" → "may result in a **personal data breach or
+  unauthorised disclosure**".
+- Code: "may stop counting as a secret at all" → "may **reduce legal and
+  commercial protections around confidential information**".
+- "Inside information" applies to **publicly traded companies in specific
+  circumstances** — do not imply it covers all private financial data.
+- Secrets pasted into a chat → "should be treated as **potentially
+  compromised**" (not "no longer a secret").
+- Client information → reference **contractual confidentiality obligations**,
+  often a bigger issue than data protection.
+- **Data Classification** callout (Public · Internal · Confidential · Restricted),
+  aligned to ISO/IEC 27001 — reinforces governance principles.
+- LLMs: "does not look things up" → "**does not automatically look things up
+  unless connected to external tools or search services**". Hallucinations can
+  still occur with external data sources, though the risk is generally reduced.
+- **"Hallucination" stays the primary term** (most recognised); "confabulation"
+  is the more precise secondary term, not the headline.
+- Avoid unsourced specifics (e.g. "sanctions in at least four countries") →
+  "**sanctions, court criticism and professional embarrassment in multiple
+  jurisdictions**".
+- Verification sources include **company policy, internal procedures and
+  contractual obligations** where applicable — not only external sources.
+- Human oversight wording tracks the regulation: "**Appropriate human oversight
+  should be applied before AI-generated outputs are relied upon in decisions
+  affecting individuals.**"
 
 ---
 
