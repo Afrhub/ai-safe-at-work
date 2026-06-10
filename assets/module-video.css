@@ -1,0 +1,28 @@
+/* Large embedded module explainer video */
+.module-video {
+  margin: 2.2rem 0 2.6rem;
+  width: min(100vw - 3rem, 1440px);
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+.module-video-el {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #060608;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
+}
+.module-video-cap {
+  margin-top: 0.75rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.05em;
+  color: var(--text3);
+}
+@media (max-width: 720px) {
+  .module-video { width: 100%; margin-left: 0; transform: none; }
+  .module-video-el { border-radius: 12px; }
+}

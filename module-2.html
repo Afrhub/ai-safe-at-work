@@ -95,112 +95,111 @@
 <main id="main">
   <p class="eyebrow">Module 02 · 8 min read</p>
   <h1 class="page-title">What AI tools <em>do</em> with what you type.</h1>
-  <p class="lede">Pasting into a chatbot sends your words to a company, on a server, in a country, under terms most people never read. This module names what each of those four pieces actually is.</p>
+  <p class="lede">When you paste something into a chatbot, your words travel to a company, onto a computer, in some country, under rules almost nobody reads. This module explains those four things, in plain words.</p>
 
   <div class="objectives">
-    <div class="objectives-title">By the end of this module, you'll</div>
+    <div class="objectives-title">By the end of this module, you will</div>
     <ul>
-      <li>Know the difference between free, paid-individual, team, and enterprise tiers — and what changes about your data at each level</li>
-      <li>Understand what "model training" means and how to opt out where you can</li>
-      <li>Be able to find the data-retention setting in any major AI tool in under 60 seconds</li>
-      <li>Know what "your conversation may be reviewed by humans" actually means</li>
+      <li>Tell the difference between the free, paid, team and work versions of an AI tool, and what each does with your data</li>
+      <li>Understand what "training the model" means, and how to switch it off where you can</li>
+      <li>Find the "how long is my data kept" setting in any big AI tool in under a minute</li>
+      <li>Know what "a human may read your chat" really means</li>
     </ul>
   </div>
 
   <h2>The four-question test</h2>
-  <p>For any AI tool, before you paste anything more sensitive than a recipe, you want to know:</p>
+  <p>Before you paste anything more private than a recipe into an AI tool, ask four things:</p>
   <ol>
-    <li><strong>Where is my data stored?</strong> (Which country, which region, on whose servers.)</li>
-    <li><strong>How long is it kept?</strong> (Until you delete it. For 30 days. Forever. It varies.)</li>
-    <li><strong>Is it used to train future models?</strong> (Yes by default on many free tiers. No by default on most enterprise tiers.)</li>
-    <li><strong>Who at the vendor can read it?</strong> (Engineers debugging. Trust-and-safety reviewers. No one. It varies.)</li>
+    <li><strong>Where is my data kept?</strong> Which country, whose computers.</li>
+    <li><strong>How long is it kept?</strong> Until you delete it? 30 days? Forever? It changes from tool to tool.</li>
+    <li><strong>Is it used to train the next AI?</strong> On many free tools, yes, unless you turn it off. On most work tools, no.</li>
+    <li><strong>Who at the company can read it?</strong> Engineers fixing bugs? Safety staff? Nobody? It changes.</li>
   </ol>
-  <p>Every major vendor publishes the answers. They differ by tier. They differ between the same vendor's consumer and business products. They change. Check them twice a year, not once forever.</p>
+  <p>Every big AI company puts the answers online. They are different for each version, and they change. Check them twice a year, not once and never again.</p>
 
-  <h2>The tier ladder</h2>
-  <p>From least protected to most:</p>
+  <h2>The four versions, weakest to safest</h2>
 
-  <h3>1. Free consumer tier</h3>
-  <p>Examples: chatgpt.com without a subscription, claude.ai without a paid plan, the free Gemini app, Microsoft Copilot's free web version, Perplexity free.</p>
-  <p>Default behaviour that surprises most first-time users:</p>
+  <h3>1. Free version</h3>
+  <p>Like ChatGPT, Claude, Gemini or Copilot when you have not paid.</p>
+  <p>Things that surprise most people the first time:</p>
   <ul>
-    <li>Your conversations may be used to train future models, unless you've explicitly opted out in settings.</li>
-    <li>Conversations are typically retained for at least 30 days, often longer, even if you "delete" them — the deletion frequently means "removed from your view", not "removed from the vendor's servers".</li>
-    <li>A subset of conversations is reviewed by human reviewers for safety, abuse, and quality purposes. The vendor's policy will say so, usually in language designed not to alarm you.</li>
-    <li>There is no contract between your employer and the vendor. You are a consumer using a consumer service for work, which means your employer has no legal grip on what happens to the data.</li>
+    <li>Your chats may be used to train the next AI, unless you turn that off in settings.</li>
+    <li>Chats are usually kept for at least 30 days, often longer, even after you "delete" them. "Delete" often means "hidden from you", not "gone from their computers".</li>
+    <li>A few chats get read by real people to check for abuse and problems. The rules say so, in gentle words.</li>
+    <li>There is no deal between your company and the AI company. You are a member of the public using a public tool for work. So your company has no say over what happens to the data.</li>
   </ul>
 
   <div class="callout warn">
     <span class="callout-icon">!</span>
     <div>
       <div class="callout-title">The "free for work" mistake</div>
-      <p>Most data leaks at small and medium businesses come from staff pasting work into a free consumer AI tool: client data, contract drafts, salary information, source code. The data then sits on a server the business has no contract with, no audit rights over, and possibly no legal jurisdiction over.</p>
+      <p>Most data leaks at small companies start the same way: someone pastes work into a free AI tool. Client details, a draft contract, pay information, code. The data then sits on a computer your company has no deal with, no right to check, and maybe no legal reach over.</p>
     </div>
   </div>
 
-  <h3>2. Paid individual tier</h3>
-  <p>Examples: ChatGPT Plus, Claude Pro, Gemini Advanced, Perplexity Pro.</p>
-  <p>Mostly the same as free, with better models and longer conversations. Crucially: <strong>still a consumer product.</strong> Still no contract between your employer and the vendor. Paying for it personally and using it for work doesn't change the legal status — it just gets you a faster version of the wrong tool.</p>
-  <p>One genuine improvement: most paid tiers give you an obvious "do not train on my conversations" toggle. Find it. Turn it on. Don't assume it's on by default.</p>
+  <h3>2. Paid version (just you)</h3>
+  <p>Like ChatGPT Plus, Claude Pro or Gemini Advanced.</p>
+  <p>Mostly the same as free, but with better answers and longer chats. The big catch: it is still a public tool. Still no deal between your company and the AI company. Paying for it yourself does not change the rules. It just gives you a faster version of the wrong tool.</p>
+  <p>One real plus: most paid versions have a clear "do not train on my chats" switch. Find it. Turn it on. Do not assume it is already on.</p>
 
-  <h3>3. Team / Business tier</h3>
-  <p>Examples: ChatGPT Team, ChatGPT Business, Claude for Work, Microsoft 365 Copilot (with Microsoft 365 Business), Google Workspace's Gemini, Notion AI Business.</p>
-  <p>This is where the legal posture shifts. Your employer has a Data Processing Agreement (DPA) with the vendor. Training-on-customer-data is usually <strong>off by default</strong>. Retention is configurable. There's an admin console where your IT or security team can set rules.</p>
-  <p>If your business has procured one of these for the team, use it. If your business hasn't, raise the procurement question with your manager before pasting work data into anything.</p>
+  <h3>3. Team or business version</h3>
+  <p>Like ChatGPT Team, Claude for Work, Microsoft 365 Copilot, or Gemini in Google Workspace.</p>
+  <p>Here the rules change. Your company has a proper deal (a Data Processing Agreement) with the AI company. Training on your data is usually <strong>off by default</strong>. You can set how long data is kept. There is an admin panel where your IT or security team makes the rules.</p>
+  <p>If your company has bought one of these, use it. If not, ask your manager before you paste work data into anything.</p>
 
-  <h3>4. Enterprise tier</h3>
-  <p>Examples: ChatGPT Enterprise, Microsoft 365 Copilot in enterprise tenants, Claude Enterprise, Azure OpenAI Service, AWS Bedrock, Google Cloud Vertex AI.</p>
-  <p>Everything the team tier offers, plus: choice of where the data is stored (often EU-only for European customers), full audit logging, SSO and role-based controls, encryption at rest with customer-managed keys in some cases, SOC 2 / ISO 27001 attestations available to the procurement team.</p>
-  <p>This is what the standards (Module 12) effectively assume you're using when AI touches anything regulated, customer-facing at scale, or commercially sensitive.</p>
+  <h3>4. Work (enterprise) version</h3>
+  <p>Like ChatGPT Enterprise, Microsoft 365 Copilot for big companies, Claude Enterprise, Azure OpenAI, AWS Bedrock, or Google Vertex AI.</p>
+  <p>Everything the team version has, plus: you can pick where the data is kept (often EU-only for European firms), full records of who did what, single sign-on, and security certificates the buying team can check.</p>
+  <p>This is the version the rules in Module 12 expect when AI touches anything private, customer-facing at scale, or commercially sensitive.</p>
 
   <hr class="section-divider" />
 
-  <h2>"Trained on" — what it actually means</h2>
-  <p>When a vendor says "we may use your conversations to train future models", the worst-case version is the simplest. Your prompts and the model's responses join a giant dataset. That dataset trains the next model. No reliable technical method exists to make a model "forget" a specific piece of information once baked in.</p>
-  <p>The likely risk is not that the next ChatGPT quotes your client list back verbatim. It is that <strong>the next ChatGPT absorbs your client list as one of millions of data points</strong>, and someone with a carefully-crafted prompt can coax small fragments back out. The technical term is "training-data extraction attacks". They are real, they are published, they get more effective every year.</p>
-  <p>You cannot fix this by deleting the conversation later. You fix it by stopping the training opt-in before you paste.</p>
+  <h2>"Trained on" — what it really means</h2>
+  <p>When a tool says "we may use your chats to train future AI", the simplest version is the worst one. Your words and the AI's replies join a huge pile of data. That pile trains the next AI. And there is no reliable way to make an AI "forget" something once it is baked in.</p>
+  <p>The real risk is not that the next ChatGPT repeats your client list word for word. It is that <strong>your client list becomes one of millions of tiny pieces inside it</strong>, and a clever person with the right question can pull small bits back out. This is a real, known attack, and it gets better every year.</p>
+  <p>You cannot fix this by deleting the chat later. You fix it by turning off training before you paste.</p>
 
   <div class="callout do">
     <span class="callout-icon">✓</span>
     <div>
-      <div class="callout-title">The training-opt-out hunt</div>
-      <p>Right now, on the AI tool you use most for work:</p>
+      <div class="callout-title">Find the training switch</div>
+      <p>Right now, in the AI tool you use most for work:</p>
       <ol>
         <li>Open settings.</li>
-        <li>Find "data controls" or "privacy" or "chat history &amp; training".</li>
-        <li>Turn off any toggle that says "improve the model", "share with provider for training", "help us get better", or similar.</li>
+        <li>Look for "data controls", "privacy", or "chat history &amp; training".</li>
+        <li>Turn off anything that says "improve the model", "help us get better", or "share for training".</li>
       </ol>
-      <p>Do this once per tool. Re-check after major vendor updates, since vendors sometimes reset preferences.</p>
+      <p>Do this once for each tool. Check again after big updates, because some tools reset it.</p>
     </div>
   </div>
 
-  <h2>"Reviewed by humans" — what it actually means</h2>
-  <p>Most major AI vendors run trust-and-safety review programmes. They sample a small fraction of conversations and send them to human reviewers (sometimes employees, sometimes contractors, sometimes overseas) to detect abuse, harmful content, model failures and policy violations.</p>
-  <p>The chance your specific conversation gets reviewed is low. The point holds anyway: <strong>"no one will see this"</strong> is not a property the system gives you. If you would be uncomfortable with a stranger reading the transcript, do not type it into a tool where strangers can read transcripts.</p>
+  <h2>"A human may read your chat" — what it really means</h2>
+  <p>Most big AI companies have safety teams. They look at a small number of chats (sometimes staff, sometimes hired helpers, sometimes abroad) to catch abuse, harm and mistakes.</p>
+  <p>The chance your exact chat gets read is small. But the point still stands: <strong>"no one will ever see this"</strong> is not something the tool promises. If you would not want a stranger reading it, do not type it into a tool where strangers can read chats.</p>
 
   <div class="callout note">
     <span class="callout-icon">i</span>
     <div>
-      <div class="callout-title">A useful mental model</div>
-      <p>Treat anything you paste into a free or paid-individual AI tool the way you'd treat anything you'd written on a postcard. The probability that a specific postcard gets read by an unrelated stranger is low. The probability that a postcard could be read is one hundred percent. So you don't put your bank password on a postcard.</p>
+      <div class="callout-title">A handy way to think about it</div>
+      <p>Treat anything you paste into a free or paid AI tool like writing it on a postcard. The chance a stranger reads one postcard is small. The chance a postcard <em>could</em> be read is total. So you would never write your bank password on a postcard.</p>
     </div>
   </div>
 
-  <h2>Where the data physically is</h2>
-  <p>European businesses face the toughest version of this question. GDPR governs personal-data transfers outside the European Economic Area, and the rules have got tougher since the Schrems II court ruling in 2020.</p>
-  <p>On the consumer tiers of most major US AI vendors, your data goes to US servers. Mechanisms exist (the EU-US Data Privacy Framework, Standard Contractual Clauses) that make this legal in many situations. Those mechanisms protect <em>your business</em> only if your business has signed up to them. On a free tier, your business has not.</p>
-  <p>Most major vendors now offer EU-resident data processing on their enterprise tier. If your business handles European personal data and uses AI in any volume, that is one of the strongest arguments for paying for the enterprise tier.</p>
+  <h2>Where the data actually sits</h2>
+  <p>European companies have the hardest version of this. GDPR controls sending people's personal data outside Europe, and the rules got stricter after a big court case in 2020 (Schrems II).</p>
+  <p>On the free versions of most US AI tools, your data goes to US computers. There are legal ways to make this OK, but they only protect your company if your company has signed up to them. On a free tool, it has not.</p>
+  <p>Most big tools now offer to keep data inside the EU on their work version. If your company handles European personal data and uses AI a lot, that is one of the best reasons to pay for the work version.</p>
 
   <div class="callout standard">
     <span class="callout-icon">§</span>
     <div>
-      <div class="callout-title">Where the standards land</div>
-      <p><strong>GDPR Articles 28 and 44–50</strong>: when you give personal data to a third party that processes it on your behalf (a "processor"), there must be a contract specifying how. International transfers outside the EU/EEA need extra safeguards. <strong>ISO/IEC 27001:2022 Annex A.5.23</strong>: information security must be considered in the use of cloud services. <strong>ISO/IEC 42001:2023 Clause 8.3</strong> and <strong>Annex A.10</strong>: AI system suppliers and third-party AI components must be evaluated and managed. <strong>EU AI Act Article 13</strong>: providers of high-risk AI must give you, the deployer, enough information to actually understand the system you're using.</p>
+      <div class="callout-title">Where the rules land</div>
+      <p><strong>GDPR Articles 28 and 44–50</strong>: when you hand personal data to another company to handle for you, there must be a contract that says how. Sending it outside Europe needs extra protection. <strong>ISO/IEC 27001:2022 (A.5.23)</strong>: think about security when you use cloud tools. <strong>ISO/IEC 42001:2023 (Clause 8.3, Annex A.10)</strong>: check and manage the AI suppliers you use. <strong>EU AI Act Article 13</strong>: makers of high-risk AI must give you enough information to really understand the tool.</p>
     </div>
   </div>
 
   <h2>The takeaway</h2>
-  <p>"Is it OK to use AI for this?" has the same answer most of the time: it depends on which tier of which tool, with which settings, on which data. Modules 3 and 4 turn that into a practical rule. Remember the single sentence for now: <strong>the tier matters as much as the prompt.</strong></p>
+  <p>"Is it OK to use AI for this?" almost always has the same answer: it depends on which version of which tool, with which settings, on which data. Modules 3 and 4 turn that into a simple rule. For now, remember one line: <strong>the version you use matters as much as what you type.</strong></p>
 
   <section class="quiz-block" aria-labelledby="kc-q-2">
     <div class="quiz-eyebrow">Quick knowledge check</div>
