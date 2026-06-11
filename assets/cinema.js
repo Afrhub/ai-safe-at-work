@@ -1,8 +1,8 @@
 /* ────────────────────────────────────────────────────────────
-   cinema.js — ambient background + parallax + reveals + progress
-   No dependencies. Loaded with `defer` from every page.
-   Designed to do nothing harmful if anything fails — degrade to
-   the static layout.
+   cinema.js v3 — "drafting field" background + parallax + reveals
+   Audit-dossier visual language: blueprint grid, ledger rules,
+   giant watermarked clause numbers. Scroll parallax + pointer
+   depth. No dependencies. Degrades to static layout on failure.
    ──────────────────────────────────────────────────────────── */
 (function () {
   'use strict';
@@ -10,26 +10,35 @@
   if (typeof document === 'undefined') return;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ─── 1. Inject cinematic background + progress bar ──────────────────
+  // ─── 1. Inject drafting-field background + progress bar ─────────────
   function injectCinema() {
     if (document.querySelector('.cinema-bg')) return;
     var bg = document.createElement('div');
     bg.className = 'cinema-bg';
     bg.setAttribute('aria-hidden', 'true');
     bg.innerHTML = [
-      '<div class="cinema-parallax" data-parallax-speed="0.05">',
-        '<div class="cinema-aurora"></div>',
+      // deepest layer: warm wash (slowest)
+      '<div class="cinema-parallax" data-parallax-speed="0.04" data-pointer-depth="6">',
+        '<div class="cinema-wash"></div>',
       '</div>',
-      '<div class="cinema-parallax" data-parallax-speed="0.12">',
-        '<div class="cinema-orbs">',
-          '<div class="orb orb-1"></div>',
-          '<div class="orb orb-2"></div>',
-          '<div class="orb orb-3"></div>',
-          '<div class="orb orb-4"></div>',
-          '<div class="orb orb-5"></div>',
+      // blueprint grid
+      '<div class="cinema-parallax" data-parallax-speed="0.07" data-pointer-depth="10">',
+        '<div class="cinema-grid"></div>',
+      '</div>',
+      // ledger rules
+      '<div class="cinema-parallax" data-parallax-speed="0.12" data-pointer-depth="16">',
+        '<div class="cinema-rules"></div>',
+      '</div>',
+      // watermark clauses (nearest, fastest)
+      '<div class="cinema-parallax" data-parallax-speed="0.18" data-pointer-depth="24">',
+        '<div class="cinema-marks">',
+          '<span class="wm wm-1">§4</span>',
+          '<span class="wm wm-2">42001</span>',
+          '<span class="wm wm-3">Art.26</span>',
+          '<span class="wm wm-mono wm-4">EU·AI·ACT·2024/1689</span>',
+          '<span class="wm wm-mono wm-5">ISO/IEC·27001:2022·A.5.10</span>',
         '</div>',
       '</div>',
-      '<div class="cinema-grid"></div>',
       '<div class="cinema-vignette"></div>'
     ].join('');
     document.body.insertBefore(bg, document.body.firstChild);
@@ -41,8 +50,6 @@
   }
 
   // ─── 2. Reveal targets ───────────────────────────────────────────────
-  // Selectors that get [data-reveal] auto-applied. We don't touch the
-  // gate page (index.html) — its choices already have their own animation.
   var REVEAL_SELECTORS = [
     'main h1.page-title',
     'main p.lede',
@@ -68,10 +75,8 @@
       var lastParent = null;
       nodes.forEach(function (el) {
         if (el.hasAttribute('data-reveal')) return;
-        // Skip elements inside the gate page hero card grid
         if (el.closest('.gate')) return;
         el.setAttribute('data-reveal', '');
-        // Stagger within the same parent (for module grids / lists)
         if (el.parentElement === lastParent) {
           seenInGroup++;
         } else {
@@ -79,7 +84,6 @@
           lastParent = el.parentElement;
         }
         if (seenInGroup > 0) {
-          // Cap stagger at ~360ms total so it never feels slow
           var delay = Math.min(seenInGroup * 55, 360);
           el.style.transitionDelay = delay + 'ms';
         }
@@ -89,15 +93,7 @@
 
   // ─── 3. IntersectionObserver to reveal as elements enter ─────────────
   function setupRevealObserver() {
-    if (reduceMotion) {
-      // Make sure everything is visible without animation
-      document.querySelectorAll('[data-reveal]').forEach(function (el) {
-        el.classList.add('is-revealed');
-      });
-      return;
-    }
-    if (!('IntersectionObserver' in window)) {
-      // No IO support — just reveal everything immediately
+    if (reduceMotion || !('IntersectionObserver' in window)) {
       document.querySelectorAll('[data-reveal]').forEach(function (el) {
         el.classList.add('is-revealed');
       });
@@ -119,48 +115,76 @@
     });
   }
 
-  // ─── 4. Parallax + reading progress on scroll ────────────────────────
+  // ─── 4. Parallax (scroll + pointer depth) + reading progress ─────────
   function setupScroll() {
     var parallaxEls = Array.prototype.slice.call(document.querySelectorAll('[data-parallax-speed]'));
     var progressBar = document.querySelector('.reading-progress');
     var ticking = false;
 
+    // Pointer state: -0.5..0.5 from viewport centre, eased toward target.
+    var px = 0, py = 0, tx = 0, ty = 0;
+    var pointerActive = false;
+
     function readAndWrite() {
       var y = window.pageYOffset || document.documentElement.scrollTop;
 
-      // Parallax — only if motion isn't reduced
       if (!reduceMotion) {
+        // ease pointer toward target
+        px += (tx - px) * 0.06;
+        py += (ty - py) * 0.06;
         for (var i = 0; i < parallaxEls.length; i++) {
           var el = parallaxEls[i];
           var speed = parseFloat(el.getAttribute('data-parallax-speed')) || 0;
-          el.style.transform = 'translate3d(0,' + (y * speed * -1).toFixed(2) + 'px,0)';
+          var depth = parseFloat(el.getAttribute('data-pointer-depth')) || 0;
+          var dx = (px * depth).toFixed(2);
+          var dy = (y * speed * -1 + py * depth).toFixed(2);
+          el.style.transform = 'translate3d(' + dx + 'px,' + dy + 'px,0)';
         }
       }
 
-      // Reading progress — always (subtle, not motion-sensitive)
       if (progressBar) {
         var docH = document.documentElement.scrollHeight - window.innerHeight;
         var progress = docH > 0 ? Math.min(1, Math.max(0, y / docH)) : 0;
         progressBar.style.transform = 'scaleX(' + progress.toFixed(4) + ')';
       }
 
+      // keep easing while the pointer hasn't settled
+      if (!reduceMotion && (Math.abs(tx - px) > 0.001 || Math.abs(ty - py) > 0.001)) {
+        window.requestAnimationFrame(readAndWrite);
+        return;
+      }
       ticking = false;
     }
 
-    function onScroll() {
+    function schedule() {
       if (!ticking) {
-        window.requestAnimationFrame(readAndWrite);
         ticking = true;
+        window.requestAnimationFrame(readAndWrite);
       }
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule, { passive: true });
+
+    // Pointer-depth only on fine pointers (desktop), never with reduced motion
+    if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      window.addEventListener('pointermove', function (e) {
+        tx = (e.clientX / window.innerWidth) - 0.5;
+        ty = (e.clientY / window.innerHeight) - 0.5;
+        pointerActive = true;
+        schedule();
+      }, { passive: true });
+      window.addEventListener('pointerleave', function () {
+        if (!pointerActive) return;
+        tx = 0; ty = 0;
+        schedule();
+      }, { passive: true });
+    }
+
     readAndWrite();
   }
 
   // ─── 5. Cursor-following accent for the hero (gate page only) ────────
-  // Subtle pointer-driven warmth on the gate page. Decorative only.
   function setupGatePointer() {
     var gate = document.querySelector('main.gate');
     if (!gate || reduceMotion) return;
@@ -175,7 +199,6 @@
     }, { passive: true });
 
     function tick() {
-      // Smooth easing toward target
       currentX += (targetX - currentX) * 0.08;
       currentY += (targetY - currentY) * 0.08;
       gate.style.setProperty('--pointer-x', currentX.toFixed(2) + '%');

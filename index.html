@@ -17,10 +17,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 
-<link rel="stylesheet" href="assets/style.css?v=2" />
+<link rel="stylesheet" href="assets/style.css?v=3" />
 <link rel="stylesheet" href="assets/completion.css?v=1" /><!-- completion v1 -->
 <script defer src="assets/completion.js?v=1"></script><!-- completion v1 -->
-<script defer src="assets/cinema.js?v=2"></script>
+<script defer src="assets/cinema.js?v=3"></script>
 
 <style>
 /* Page-specific gate styling — overrides shared shell */
@@ -104,7 +104,7 @@ main.gate {
 .aud-card {
   background: linear-gradient(160deg, rgba(255,255,255,0.02), rgba(255,255,255,0.004));
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 3px;
   padding: 0.85rem 1rem 0.9rem;
 }
 .aud-label {
@@ -147,7 +147,7 @@ main.gate {
   align-items: flex-start; text-align: left;
   background: linear-gradient(160deg, rgba(255,255,255,0.025), rgba(255,255,255,0.005));
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 3px;
   padding: 1.1rem 1.3rem 1.05rem;
   cursor: pointer;
   isolation: isolate;
@@ -422,7 +422,7 @@ main.gate {
         <span class="choice-tag lock-state"><span class="when-locked">Locked</span><span class="when-unlocked">Unlocked</span></span>
         <h2 id="choice-check-title">The 60-second check</h2>
         <p class="lock-state"><span class="when-locked">This is available upon successful completion of all modules.</span><span class="when-unlocked">All modules complete — open your printable checklist.</span></p>
-        <span class="choice-cta lock-state"><span class="when-locked">Locked <span class="choice-lock" aria-hidden="true">🔒</span></span><span class="when-unlocked">Open <span class="choice-arrow" aria-hidden="true">→</span></span></span>
+        <span class="choice-cta lock-state"><span class="when-locked">Locked <svg class="choice-lock" aria-hidden="true" width="11" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="5.5" width="10" height="7" rx="1" stroke="currentColor"/><path d="M3 5.5V3.5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" fill="none"/></svg></span><span class="when-unlocked">Open <span class="choice-arrow" aria-hidden="true">→</span></span></span>
       </a>
     </div>
 

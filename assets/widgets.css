@@ -8,7 +8,7 @@
   padding: 2.4rem 2rem 2.6rem;
   background: linear-gradient(180deg, rgba(232,167,38,0.04) 0%, rgba(232,167,38,0.015) 100%);
   border: 1px solid rgba(232,167,38,0.20);
-  border-radius: 18px;
+  border-radius: 3px;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 24px 56px rgba(0,0,0,0.40);
   position: relative;
   scroll-margin-top: 6rem;
@@ -54,7 +54,7 @@
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 0.75rem 1.4rem;
   background: var(--accent); color: #0a0a10; border: none;
-  border-radius: 10px;
+  border-radius: 3px;
   font-family: var(--font-display);
   font-size: 0.92rem; font-weight: 700; letter-spacing: -0.01em;
   cursor: pointer;
@@ -69,14 +69,14 @@
 }
 .widget-btn.ghost:hover { color: var(--text); border-color: rgba(232,167,38,0.40); background: rgba(232,167,38,0.04); box-shadow: none; }
 .widget-bar { display: flex; gap: 0.3rem; margin-top: 1rem; padding-top: 1rem; }
-.widget-bar .pip { flex: 1; height: 5px; background: rgba(255,255,255,0.06); border-radius: 100px; }
+.widget-bar .pip { flex: 1; height: 5px; background: rgba(255,255,255,0.06); border-radius: 2px; }
 .widget-bar .pip.right { background: var(--green); }
 .widget-bar .pip.wrong { background: var(--red); }
 
 .widget-verdict-card {
   background: linear-gradient(160deg, rgba(20,20,28,0.85), rgba(12,12,18,0.95));
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 16px;
+  border-radius: 3px;
   padding: 1.6rem 1.4rem;
   display: flex; flex-direction: column;
   min-height: 320px;
@@ -116,7 +116,7 @@
   position: relative;
   background: linear-gradient(160deg, rgba(20,20,28,0.85), rgba(12,12,18,0.95));
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 16px;
+  border-radius: 3px;
   padding: 1.6rem 1.4rem 1.4rem;
   min-height: 320px;
   display: flex; flex-direction: column;
@@ -132,7 +132,7 @@
   font-size: 1rem; line-height: 1.45; color: var(--text);
   background: rgba(255,255,255,0.03);
   border: 1px dashed rgba(232,167,38,0.30);
-  border-radius: 10px;
+  border-radius: 3px;
   padding: 1rem 1.1rem;
   margin-bottom: 1.2rem;
   flex: 1; display: flex; align-items: center; min-height: 90px;
@@ -144,7 +144,7 @@
   padding: 0.85rem 0.8rem;
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(232,167,38,0.25);
-  border-radius: 10px;
+  border-radius: 3px;
   color: var(--text);
   font-family: var(--font-body);
   font-size: 0.88rem; font-weight: 600;
@@ -164,13 +164,13 @@
   letter-spacing: 0.06em; color: var(--accent);
   background: rgba(232,167,38,0.10);
   border: 1px solid rgba(232,167,38,0.30);
-  padding: 0.25rem 0.7rem; border-radius: 100px;
+  padding: 0.25rem 0.7rem; border-radius: 2px;
 }
 .flow-trail-step + .flow-trail-step::before { content: '→ '; opacity: 0.6; margin-right: 0.3rem; }
 .flow-card {
   background: linear-gradient(160deg, rgba(20,20,28,0.85), rgba(12,12,18,0.95));
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 16px;
+  border-radius: 3px;
   padding: 1.8rem 1.6rem;
   position: relative;
   margin-top: 0.8rem;
@@ -196,7 +196,7 @@
   padding: 1rem 1.2rem;
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 12px;
+  border-radius: 3px;
   color: var(--text);
   font-family: var(--font-body);
   cursor: pointer; text-align: left;
@@ -239,7 +239,7 @@
 .ms-claim {
   background: rgba(95,168,255,0.06);
   border-left: 3px solid var(--blue);
-  border-radius: 8px;
+  border-radius: 2px;
   padding: 1rem 1.2rem;
   margin-bottom: 1.3rem;
 }
@@ -263,7 +263,7 @@
   padding: 0.95rem 1.1rem;
   background: rgba(255,255,255,0.025);
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 10px;
+  border-radius: 3px;
   color: var(--text);
   font-family: var(--font-body);
   font-size: 0.95rem; line-height: 1.45; text-align: left;
@@ -279,7 +279,7 @@
   display: inline-flex; align-items: center; justify-content: center;
   background: rgba(232,167,38,0.10);
   border: 1px solid rgba(232,167,38,0.30);
-  border-radius: 6px;
+  border-radius: 2px;
   font-family: var(--font-mono);
   font-size: 0.82rem; font-weight: 800;
   color: var(--accent);
@@ -299,7 +299,7 @@
 .ms-verdict {
   flex: 1;
   padding: 1rem 1.2rem;
-  border-radius: 10px;
+  border-radius: 3px;
   background: rgba(26,184,106,0.08);
   border: 1px solid rgba(26,184,106,0.35);
   color: var(--text);
@@ -319,7 +319,7 @@
   display: flex; gap: 1rem;
   background: linear-gradient(160deg, rgba(232,167,38,0.06), rgba(12,12,18,0.7));
   border: 1px solid rgba(232,167,38,0.25);
-  border-radius: 12px;
+  border-radius: 3px;
   padding: 1.2rem 1.3rem;
   margin: 1rem 0 1.4rem;
 }
@@ -344,7 +344,7 @@
   padding: 0.9rem 1.1rem;
   background: rgba(255,255,255,0.025);
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 10px;
+  border-radius: 3px;
   color: var(--text);
   text-align: left;
   font-family: var(--font-body); font-size: 0.95rem; line-height: 1.45;
@@ -359,7 +359,7 @@
 .sc-fb {
   margin-top: 1rem;
   padding: 1rem 1.2rem;
-  border-radius: 10px;
+  border-radius: 3px;
   border: 1px solid rgba(255,255,255,0.08);
 }
 .sc-fb.right { background: rgba(26,184,106,0.08); border-color: rgba(26,184,106,0.35); }
@@ -382,7 +382,7 @@
 .sc-end {
   text-align: center;
   padding: 2rem 1.5rem;
-  border-radius: 12px;
+  border-radius: 3px;
 }
 .sc-end.pass { background: rgba(26,184,106,0.06); border: 1px solid rgba(26,184,106,0.35); }
 .sc-end.fail { background: rgba(232,167,38,0.06); border: 1px solid rgba(232,167,38,0.35); }
@@ -402,7 +402,7 @@
 .form-scenario {
   background: rgba(95,168,255,0.06);
   border-left: 3px solid var(--blue);
-  border-radius: 8px;
+  border-radius: 2px;
   padding: 1rem 1.2rem;
   margin: 1rem 0 1.4rem;
 }
@@ -417,7 +417,7 @@
   position: relative;
   background: linear-gradient(160deg, rgba(20,20,28,0.85), rgba(12,12,18,0.95));
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 16px;
+  border-radius: 3px;
   padding: 1.6rem 1.4rem;
   overflow: hidden;
 }
@@ -434,14 +434,14 @@
 .form-req {
   background: rgba(232,167,38,0.15);
   color: var(--accent);
-  padding: 0.1rem 0.5rem; border-radius: 100px;
+  padding: 0.1rem 0.5rem; border-radius: 2px;
   font-size: 0.65rem;
 }
 .form-field input, .form-field textarea {
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.10);
   color: var(--text);
-  border-radius: 8px;
+  border-radius: 2px;
   padding: 0.7rem 0.9rem;
   font-family: var(--font-body); font-size: 0.94rem;
   resize: vertical;
@@ -453,7 +453,7 @@
 .form-verdict {
   flex: 1;
   padding: 1rem 1.2rem;
-  border-radius: 10px;
+  border-radius: 3px;
   background: rgba(26,184,106,0.08);
   border: 1px solid rgba(26,184,106,0.35);
 }
@@ -476,7 +476,7 @@
   padding: 0.9rem 1rem;
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 10px;
+  border-radius: 3px;
   color: var(--text);
 }
 .order-item.right { background: rgba(26,184,106,0.08); border-color: rgba(26,184,106,0.45); }
@@ -486,7 +486,7 @@
   display: inline-flex; align-items: center; justify-content: center;
   background: rgba(232,167,38,0.10);
   border: 1px solid rgba(232,167,38,0.30);
-  border-radius: 8px;
+  border-radius: 2px;
   font-family: var(--font-mono);
   font-weight: 800; color: var(--accent);
 }
@@ -498,7 +498,7 @@
   width: 36px; height: 36px;
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 8px;
+  border-radius: 2px;
   color: var(--text);
   cursor: pointer;
   font-family: var(--font-mono);
@@ -515,7 +515,7 @@
 .order-verdict {
   flex: 1;
   padding: 1rem 1.2rem;
-  border-radius: 10px;
+  border-radius: 3px;
   background: rgba(26,184,106,0.08);
   border: 1px solid rgba(26,184,106,0.35);
 }
@@ -534,7 +534,7 @@
 .tick-scenario {
   background: rgba(95,168,255,0.06);
   border-left: 3px solid var(--blue);
-  border-radius: 8px;
+  border-radius: 2px;
   padding: 1rem 1.2rem;
   margin: 1rem 0 1.4rem;
 }
@@ -549,7 +549,7 @@
 .tick-item {
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 10px;
+  border-radius: 3px;
   transition: background 0.2s, border-color 0.2s;
 }
 .tick-item.ticked { background: rgba(232,167,38,0.06); border-color: rgba(232,167,38,0.30); }
@@ -563,7 +563,7 @@
   text-align: left;
   cursor: pointer;
   font-family: var(--font-body);
-  border-radius: 10px;
+  border-radius: 3px;
 }
 .tick-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .tick-box {
@@ -572,7 +572,7 @@
   display: inline-flex; align-items: center; justify-content: center;
   background: rgba(255,255,255,0.04);
   border: 1.5px solid rgba(232,167,38,0.45);
-  border-radius: 6px;
+  border-radius: 2px;
   font-family: var(--font-mono);
   font-size: 0.92rem; font-weight: 800;
   color: var(--accent);
@@ -592,7 +592,7 @@
 .tick-verdict {
   flex: 1;
   padding: 1rem 1.2rem;
-  border-radius: 10px;
+  border-radius: 3px;
   background: rgba(26,184,106,0.08);
   border: 1px solid rgba(26,184,106,0.35);
 }
