@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════════
-   AI SAFE@WORK — Design System v3 "Audit Dossier"
+   AI SAFE@WORK — Design System v4 "Audit Dossier — Hyperlegible"
    The site reads like a beautifully-set compliance dossier:
    ruled hairlines, crop-mark corners, file tabs, clause numbers,
    classification chips. Warm-amber ink on near-black paper.
@@ -48,9 +48,9 @@
   --ease-quart:  cubic-bezier(0.25, 1, 0.5, 1);
 
   /* ── Typography ── */
-  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
-  --font-body:    'Manrope', system-ui, sans-serif;
-  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+  --font-display: 'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', system-ui, sans-serif;
+  --font-body:    'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', system-ui, sans-serif;
+  --font-mono:    'Atkinson Hyperlegible Mono', ui-monospace, monospace;
 
   /* ── Shadows: flat ink, no glow ── */
   --shadow-card:
@@ -167,7 +167,7 @@ body::before {
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 800;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
   color: var(--accent);
 }
 /* index-card corner mark instead of glowing dot */
@@ -185,9 +185,9 @@ body::before {
   align-items: center;
   gap: 1.5rem;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text2);
   counter-reset: navidx;
@@ -197,7 +197,7 @@ body::before {
   counter-increment: navidx;
   content: counter(navidx, decimal-leading-zero);
   color: rgba(232,167,38,0.55);
-  font-size: 0.58rem;
+  font-size: 0.66rem;
   vertical-align: 0.25em;
   margin-right: 0.35em;
   letter-spacing: 0;
@@ -236,9 +236,9 @@ main {
   align-items: center;
   gap: 0.9rem;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 1.1rem;
@@ -246,7 +246,7 @@ main {
 }
 .eyebrow::before {
   content: 'REF';
-  font-size: 0.56rem;
+  font-size: 0.66rem;
   letter-spacing: 0.18em;
   color: var(--text3);
   border: 1px solid var(--border-bold);
@@ -270,7 +270,7 @@ h1.page-title {
   font-family: var(--font-display);
   font-size: clamp(2rem, 5vw, 3.4rem);
   font-weight: 800;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.01em;
   line-height: 1.02;
   margin-bottom: 1rem;
   max-width: 22ch;
@@ -278,7 +278,7 @@ h1.page-title {
 h1.page-title em { font-style: normal; color: var(--accent); }
 
 .lede {
-  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  font-size: clamp(1.1rem, 1.6vw, 1.25rem);
   color: var(--text2);
   max-width: 60ch;
   margin-bottom: 2.5rem;
@@ -299,7 +299,7 @@ main > h2::before {
   top: -0.2rem;
   left: 0;
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   color: rgba(232,167,38,0.75);
@@ -318,7 +318,7 @@ h2 {
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 2.4vw, 1.85rem);
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.005em;
   line-height: 1.15;
   margin: 3rem 0 1.1rem;
   color: var(--text);
@@ -327,16 +327,16 @@ h3 {
   font-family: var(--font-display);
   font-size: 1.2rem;
   font-weight: 700;
-  letter-spacing: -0.022em;
+  letter-spacing: 0;
   margin: 2.2rem 0 0.7rem;
   color: var(--text);
 }
 
-p { margin-bottom: 0.95rem; color: var(--text2); font-size: 0.965rem; line-height: 1.7; }
+p { margin-bottom: 0.95rem; color: var(--text2); font-size: 1.0625rem; line-height: 1.75; }
 p strong { color: var(--text); font-weight: 700; }
 
 ul, ol { margin: 0.5rem 0 1.2rem 1.4rem; }
-li { margin-bottom: 0.45rem; color: var(--text2); font-size: 0.95rem; line-height: 1.65; }
+li { margin-bottom: 0.5rem; color: var(--text2); font-size: 1.0425rem; line-height: 1.7; }
 li strong { color: var(--text); }
 li::marker { color: rgba(232,167,38,0.7); font-family: var(--font-mono); font-size: 0.85em; }
 
@@ -424,14 +424,14 @@ hr.section-divider {
   font-family: var(--font-display);
   font-size: 0.98rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   margin-bottom: 0.3rem;
   color: var(--text);
 }
 /* classification chip after the title, per callout class */
 .callout-title::after {
   font-family: var(--font-mono);
-  font-size: 0.56rem;
+  font-size: 0.66rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   vertical-align: 0.22em;
@@ -441,7 +441,7 @@ hr.section-divider {
   border-radius: var(--r-sm);
   opacity: 0.85;
 }
-.callout p { margin-bottom: 0.4rem; font-size: 0.9rem; }
+.callout p { margin-bottom: 0.4rem; font-size: 1rem; }
 .callout p:last-child { margin-bottom: 0; }
 .callout ul, .callout ol { margin-bottom: 0; }
 
@@ -479,9 +479,9 @@ hr.section-divider {
 .tag {
   display: inline-block;
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: 0.74rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 0.22rem 0.6rem;
   border-radius: var(--r-sm);
@@ -508,7 +508,7 @@ hr.section-divider {
   font-family: var(--font-display);
   font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: -0.015em;
+  letter-spacing: 0;
   margin-bottom: 0.6rem;
   padding-bottom: 0.5rem;
   border-bottom: var(--rule);
@@ -517,7 +517,7 @@ hr.section-divider {
 .compare-cell.bad  { border-top: 2px solid rgba(224,62,62,0.55); }
 .compare-cell.good h4::before { content: '✓ '; color: var(--green); font-family: var(--font-mono); }
 .compare-cell.bad  h4::before { content: '✗ '; color: var(--red); font-family: var(--font-mono); }
-.compare-cell p { font-size: 0.88rem; margin: 0; }
+.compare-cell p { font-size: 0.98rem; margin: 0; }
 @media (max-width: 640px) {
   .compare { grid-template-columns: 1fr; }
 }
@@ -532,9 +532,9 @@ hr.section-divider {
 }
 .objectives-title {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 0.7rem;
@@ -542,7 +542,7 @@ hr.section-divider {
 .objectives ul { margin: 0; padding-left: 0; list-style: none; counter-reset: obj; }
 .objectives li {
   color: var(--text);
-  font-size: 0.93rem;
+  font-size: 1rem;
   position: relative;
   padding: 0.32rem 0 0.32rem 2.3rem;
   border-bottom: 1px dashed rgba(255,255,255,0.07);
@@ -594,7 +594,7 @@ hr.section-divider {
 .module-card:hover::before { width: 100%; }
 .module-num {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.76rem;
   font-weight: 700;
   color: var(--accent);
   letter-spacing: 0.14em;
@@ -607,13 +607,13 @@ hr.section-divider {
   font-weight: 700;
   margin: 0 0 0.55rem;
   line-height: 1.22;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   color: var(--text);
 }
 .module-card p {
   color: var(--text2);
-  font-size: 0.86rem;
-  line-height: 1.55;
+  font-size: 0.95rem;
+  line-height: 1.6;
   margin: 0 0 0.95rem;
 }
 /* folio numeral: outlined, like a stamped index number */
@@ -655,8 +655,8 @@ hr.section-divider {
 .nav-btn.next { text-align: right; align-items: flex-end; }
 .nav-dir {
   font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.14em;
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text3);
   margin-bottom: 0.25rem;
@@ -665,7 +665,7 @@ hr.section-divider {
   font-family: var(--font-display);
   font-size: 0.92rem;
   font-weight: 700;
-  letter-spacing: -0.015em;
+  letter-spacing: 0;
 }
 .nav-btn.disabled { opacity: 0.35; pointer-events: none; }
 @media (max-width: 640px) {
@@ -698,7 +698,7 @@ hr.section-divider {
   background: transparent;
 }
 .check-item strong { display: block; color: var(--text); font-size: 0.95rem; margin-bottom: 0.15rem; }
-.check-item span { color: var(--text2); font-size: 0.86rem; line-height: 1.5; }
+.check-item span { color: var(--text2); font-size: 0.95rem; line-height: 1.6; }
 
 /* ════════════════════════════════════════════════════════════
    FOOTER — colophon rule
@@ -711,8 +711,8 @@ hr.section-divider {
   display: flex;
   justify-content: space-between;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text3);
   flex-wrap: wrap;
@@ -808,7 +808,7 @@ body { isolation: isolate; }
   position: absolute;
   font-family: var(--font-display);
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.005em;
   color: transparent;
   -webkit-text-stroke: 1px rgba(232,167,38,0.07);
   white-space: nowrap;
