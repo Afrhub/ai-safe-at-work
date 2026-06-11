@@ -9,9 +9,9 @@
   margin: 6rem 0 2rem;
   padding: 2.4rem 2rem 2.6rem;
   background: linear-gradient(180deg,
-    rgba(232,167,38,0.04) 0%,
-    rgba(232,167,38,0.015) 100%);
-  border: 1px solid rgba(232,167,38,0.20);
+    rgba(201,212,227,0.04) 0%,
+    rgba(201,212,227,0.015) 100%);
+  border: 1px solid rgba(201,212,227,0.20);
   border-radius: 3px;
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,0.05),
@@ -26,7 +26,7 @@
   position: absolute; inset: 0;
   border-radius: inherit;
   background: radial-gradient(circle at 20% 0%,
-    rgba(232,167,38,0.10) 0%,
+    rgba(201,212,227,0.10) 0%,
     transparent 60%);
   pointer-events: none;
 }
@@ -92,11 +92,11 @@
   transition: background 0.4s var(--ease-out);
 }
 .quiz-progress .pip.done {
-  background: rgba(232,167,38,0.55);
+  background: rgba(201,212,227,0.55);
 }
 .quiz-progress .pip.current {
-  background: rgba(232,167,38,0.25);
-  box-shadow: 0 0 12px rgba(232,167,38,0.4);
+  background: rgba(201,212,227,0.25);
+  box-shadow: 0 0 12px rgba(201,212,227,0.4);
 }
 .quiz-progress .pip.correct { background: var(--green); }
 .quiz-progress .pip.wrong   { background: var(--red); }
@@ -150,8 +150,8 @@
               box-shadow 0.2s var(--ease-out);
 }
 .quiz-option:hover:not(:disabled) {
-  background: rgba(232,167,38,0.07);
-  border-color: rgba(232,167,38,0.30);
+  background: rgba(201,212,227,0.07);
+  border-color: rgba(201,212,227,0.30);
   transform: translateY(-1px);
 }
 .quiz-option:focus-visible {
@@ -164,8 +164,8 @@
   flex-shrink: 0;
   width: 28px; height: 28px;
   display: inline-flex; align-items: center; justify-content: center;
-  background: rgba(232,167,38,0.10);
-  border: 1px solid rgba(232,167,38,0.30);
+  background: rgba(201,212,227,0.10);
+  border: 1px solid rgba(201,212,227,0.30);
   border-radius: 2px;
   font-family: var(--font-mono);
   font-size: 0.78rem; font-weight: 700;
@@ -254,7 +254,7 @@
 }
 .quiz-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(232,167,38,0.30);
+  box-shadow: 0 12px 28px rgba(201,212,227,0.30);
 }
 .quiz-btn:focus-visible {
   outline: 2px solid var(--accent-2);
@@ -267,8 +267,8 @@
 }
 .quiz-btn.ghost:hover {
   color: var(--text);
-  border-color: rgba(232,167,38,0.40);
-  background: rgba(232,167,38,0.04);
+  border-color: rgba(201,212,227,0.40);
+  background: rgba(201,212,227,0.04);
   box-shadow: none;
 }
 .quiz-btn[disabled] {
@@ -329,8 +329,8 @@
 .quiz-end .ev-note code {
   font-family: var(--font-mono);
   font-size: 0.82rem;
-  background: rgba(232,167,38,0.10);
-  border: 1px solid rgba(232,167,38,0.25);
+  background: rgba(201,212,227,0.10);
+  border: 1px solid rgba(201,212,227,0.25);
   padding: 0.1rem 0.4rem;
   border-radius: 2px;
   color: var(--accent-2);
@@ -385,7 +385,7 @@
   line-height: 1.45;
   color: var(--text);
   background: rgba(255,255,255,0.03);
-  border: 1px dashed rgba(232,167,38,0.30);
+  border: 1px dashed rgba(201,212,227,0.30);
   border-radius: 3px;
   padding: 1rem 1.1rem;
   margin-bottom: 1.2rem;
@@ -517,8 +517,8 @@
 .clip-done {
   margin-top: 1rem;
   padding: 1.2rem 1.4rem;
-  background: rgba(232,167,38,0.08);
-  border: 1px solid rgba(232,167,38,0.30);
+  background: rgba(201,212,227,0.08);
+  border: 1px solid rgba(201,212,227,0.30);
   border-radius: 3px;
   font-family: var(--font-body);
   color: var(--text);

@@ -654,7 +654,7 @@
     svg.setAttribute('class', 'widget-bg-svg');
     svg.setAttribute('viewBox', '0 0 200 200');
     svg.setAttribute('aria-hidden', 'true');
-    svg.innerHTML = '<g fill="none" stroke="#e8a726" stroke-width="2.5"><rect x="30" y="60" width="35" height="100" rx="3"/><rect x="75" y="80" width="35" height="80" rx="3"/><rect x="120" y="100" width="35" height="60" rx="3"/><rect x="165" y="120" width="35" height="40" rx="3"/></g>';
+    svg.innerHTML = '<g fill="none" stroke="#c9d4e3" stroke-width="2.5"><rect x="30" y="60" width="35" height="100" rx="3"/><rect x="75" y="80" width="35" height="80" rx="3"/><rect x="120" y="100" width="35" height="60" rx="3"/><rect x="165" y="120" width="35" height="40" rx="3"/></g>';
     return svg;
   }
   function flowLeafSvg(outcome) {
@@ -663,7 +663,7 @@
     svg.setAttribute('class', 'flow-leaf-svg');
     svg.setAttribute('viewBox', '0 0 64 64');
     svg.setAttribute('aria-hidden', 'true');
-    const colour = outcome === 'green' ? '#1ab86a' : outcome === 'red' ? '#e03e3e' : '#e8a726';
+    const colour = outcome === 'green' ? '#1ab86a' : outcome === 'red' ? '#e03e3e' : '#c9d4e3';
     svg.innerHTML = `<g fill="none" stroke="${colour}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="26"/><path d="M20 32 l8 8 l16 -16"/></g>`;
     return svg;
   }
@@ -673,7 +673,7 @@
     svg.setAttribute('class', 'sc-icon-svg');
     svg.setAttribute('viewBox', '0 0 64 64');
     svg.setAttribute('aria-hidden', 'true');
-    svg.innerHTML = '<g fill="none" stroke="#e8a726" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18 c0 -3 3 -6 6 -6 l4 0 c2 0 4 1 5 3 l4 7 c1 2 0 4 -1 5 l-3 3 c2 5 7 10 12 12 l3 -3 c1 -1 3 -2 5 -1 l7 4 c2 1 3 3 3 5 l0 4 c0 3 -3 6 -6 6 c-21 0 -39 -18 -39 -39 z"/></g>';
+    svg.innerHTML = '<g fill="none" stroke="#c9d4e3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18 c0 -3 3 -6 6 -6 l4 0 c2 0 4 1 5 3 l4 7 c1 2 0 4 -1 5 l-3 3 c2 5 7 10 12 12 l3 -3 c1 -1 3 -2 5 -1 l7 4 c2 1 3 3 3 5 l0 4 c0 3 -3 6 -6 6 c-21 0 -39 -18 -39 -39 z"/></g>';
     return svg;
   }
   function logCardSvg() {
@@ -682,7 +682,7 @@
     svg.setAttribute('class', 'widget-bg-svg');
     svg.setAttribute('viewBox', '0 0 200 200');
     svg.setAttribute('aria-hidden', 'true');
-    svg.innerHTML = '<g fill="none" stroke="#e8a726" stroke-width="2.5"><rect x="30" y="30" width="140" height="160" rx="6"/><line x1="50" y1="60" x2="150" y2="60"/><line x1="50" y1="85" x2="150" y2="85"/><line x1="50" y1="110" x2="150" y2="110"/><line x1="50" y1="135" x2="150" y2="135"/><line x1="50" y1="160" x2="120" y2="160"/></g>';
+    svg.innerHTML = '<g fill="none" stroke="#c9d4e3" stroke-width="2.5"><rect x="30" y="30" width="140" height="160" rx="6"/><line x1="50" y1="60" x2="150" y2="60"/><line x1="50" y1="85" x2="150" y2="85"/><line x1="50" y1="110" x2="150" y2="110"/><line x1="50" y1="135" x2="150" y2="135"/><line x1="50" y1="160" x2="120" y2="160"/></g>';
     return svg;
   }
   function idleSvg() {

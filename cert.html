@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700;800&family=Atkinson+Hyperlegible+Mono:wght@400;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/style.css?v=4" />
+<link rel="stylesheet" href="assets/style.css?v=5" />
 <style>
   /* ── Screen ── */
   .cert-screen {
@@ -54,7 +54,7 @@
   .cert-name-row input:focus {
     outline: 2px solid var(--accent);
     outline-offset: 1px;
-    border-color: rgba(232,167,38,0.55);
+    border-color: rgba(201,212,227,0.55);
   }
   .cert-name-row button {
     background: var(--accent);
@@ -71,19 +71,19 @@
   }
   .cert-name-row button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 28px rgba(232,167,38,0.30);
+    box-shadow: 0 12px 28px rgba(201,212,227,0.30);
   }
 
   /* ── Cert card (screen preview) ── */
   .cert-card {
     margin: 2.6rem auto 0;
-    background: linear-gradient(160deg, #fff 0%, #fff8e9 55%, #f0c66c33 100%);
+    background: linear-gradient(160deg, #ffffff 0%, #f4f6f9 55%, #e9edf2 100%);
     color: #0a0a0a;
     border-radius: 3px;
     padding: 3.4rem 3rem;
     box-shadow:
       0 30px 80px rgba(0,0,0,0.55),
-      0 0 0 1px rgba(232,167,38,0.30);
+      0 0 0 1px rgba(201,212,227,0.30);
     min-height: 560px;
     max-width: 900px;
     display: flex; flex-direction: column;
@@ -96,13 +96,13 @@
     font-family: 'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', system-ui, sans-serif;
     font-size: 1rem; font-weight: 800;
     letter-spacing: -0.02em;
-    color: #b67700;
+    color: #46505e;
   }
   .cert-card .cert-brand::before {
     content: '';
     width: 10px; height: 10px; border-radius: 50%;
-    background: #e8a726;
-    box-shadow: 0 0 8pt #e8a72699;
+    background: #c9d4e3;
+    box-shadow: 0 0 8pt #c9d4e399;
   }
   .cert-card .cert-eyebrow {
     font-family: 'Atkinson Hyperlegible Mono', monospace;
@@ -110,7 +110,7 @@
     font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #b67700;
+    color: #46505e;
     margin-top: 1.8rem;
     margin-bottom: 0.7rem;
   }
@@ -123,11 +123,11 @@
     color: #0a0a0a;
     margin-bottom: 0.4rem;
   }
-  .cert-card .cert-h em { font-style: normal; color: #b67700; }
-  .cert-card .cert-sub strong { color: #3d2c00; }
+  .cert-card .cert-h em { font-style: normal; color: #46505e; }
+  .cert-card .cert-sub strong { color: #1c2330; }
   .cert-card .cert-sub {
     font-size: 1.05rem;
-    color: #5c4200;
+    color: #3f4856;
     max-width: 70ch;
     margin-bottom: 1.6rem;
   }
@@ -137,7 +137,7 @@
     font-weight: 800;
     letter-spacing: -0.03em;
     color: #0a0a0a;
-    border-bottom: 1.5pt solid #e8a72677;
+    border-bottom: 1.5pt solid #c9d4e377;
     padding-bottom: 0.4rem;
     margin-bottom: 1.4rem;
     word-break: break-word;
@@ -155,7 +155,7 @@
     flex-wrap: wrap;
     padding-top: 1.4rem;
     margin-top: 1.4rem;
-    border-top: 0.5pt solid #e8a72655;
+    border-top: 0.5pt solid #c9d4e355;
   }
   .cert-card .cert-meta-block {
     flex: 1; min-width: 140px;
@@ -166,7 +166,7 @@
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #b67700;
+    color: #46505e;
     display: block;
     margin-bottom: 0.3rem;
   }
@@ -217,7 +217,7 @@
   }
   .cert-actions .primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 28px rgba(232,167,38,0.30);
+    box-shadow: 0 12px 28px rgba(201,212,227,0.30);
   }
   .cert-actions .ghost {
     background: transparent;
@@ -226,8 +226,8 @@
   }
   .cert-actions .ghost:hover {
     color: var(--text);
-    border-color: rgba(232,167,38,0.40);
-    background: rgba(232,167,38,0.04);
+    border-color: rgba(201,212,227,0.40);
+    background: rgba(201,212,227,0.04);
   }
 
   .cert-error {
@@ -430,7 +430,7 @@
       </div>
 
       <svg class="cert-watermark" viewBox="0 0 200 200" aria-hidden="true">
-        <g fill="none" stroke="#b67700" stroke-width="2">
+        <g fill="none" stroke="#46505e" stroke-width="2">
           <circle cx="100" cy="100" r="80"/>
           <circle cx="100" cy="100" r="55"/>
           <circle cx="100" cy="100" r="30"/>
@@ -441,7 +441,7 @@
 
     <p class="cert-fineprint">
       Self-issued personal record. AI Safe@Work does not validate, sign or store this certificate; the score lives in your browser's
-      <code style="background:rgba(232,167,38,0.1); padding:0 0.3rem; border-radius:3px;">localStorage</code>.
+      <code style="background:rgba(201,212,227,0.1); padding:0 0.3rem; border-radius:3px;">localStorage</code>.
       Hand it to your manager, HR, or training file as one piece of literacy evidence. Reissue any time by retaking the quiz.
     </p>
 
