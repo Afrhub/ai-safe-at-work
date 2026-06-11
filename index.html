@@ -17,8 +17,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700;800&family=Atkinson+Hyperlegible+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
-<link rel="stylesheet" href="assets/style.css?v=8" />
-<link rel="stylesheet" href="assets/completion.css?v=2" /><!-- completion v1 -->
+<link rel="stylesheet" href="assets/style.css?v=9" />
+<link rel="stylesheet" href="assets/completion.css?v=3" /><!-- completion v1 -->
 <script defer src="assets/completion.js?v=1"></script><!-- completion v1 -->
 <script defer src="assets/cinema.js?v=6"></script>
 
@@ -40,8 +40,8 @@ main.gate {
   position: absolute; inset: 0; z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 55% at 50% 22%, rgba(201,212,227,0.10) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(201,212,227,0.05) 0%, transparent 70%);
+    radial-gradient(ellipse 70% 55% at 50% 22%, rgba(145,162,255,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(145,162,255,0.05) 0%, transparent 70%);
   opacity: 0;
   animation: bgFade 1.2s var(--ease-out) 0.1s forwards;
 }
@@ -116,7 +116,7 @@ main.gate {
   margin-bottom: 0.4rem;
 }
 .aud-card p { font-size: 0.78rem; line-height: 1.45; color: var(--text2); margin: 0; }
-.aud-card em { font-style: normal; color: var(--text); border-bottom: 1px solid rgba(201,212,227,0.4); }
+.aud-card em { font-style: normal; color: var(--text); border-bottom: 1px solid rgba(145,162,255,0.4); }
 
 .choices {
   display: grid;
@@ -159,11 +159,11 @@ main.gate {
 .choice:nth-child(2) { animation-delay: 0.62s; }
 @media (hover: hover) and (pointer: fine) {
   .choice:hover {
-    border-color: rgba(201,212,227,0.45);
-    background: linear-gradient(160deg, rgba(201,212,227,0.06), rgba(201,212,227,0.015));
+    border-color: rgba(145,162,255,0.45);
+    background: linear-gradient(160deg, rgba(145,162,255,0.06), rgba(145,162,255,0.015));
     transform: translateY(-3px);
     box-shadow:
-      0 0 0 1px rgba(201,212,227,0.18),
+      0 0 0 1px rgba(145,162,255,0.18),
       0 24px 60px rgba(0,0,0,0.6),
       inset 0 1px 0 rgba(255,255,255,0.06);
   }
@@ -221,7 +221,7 @@ main.gate {
 }
 .gate-tertiary a {
   color: var(--text2);
-  border-bottom: 1px dashed rgba(201,212,227, 0.32);
+  border-bottom: 1px dashed rgba(145,162,255, 0.32);
   padding-bottom: 1px;
   transition: color 200ms ease, border-color 200ms ease;
 }
@@ -327,8 +327,8 @@ main.gate {
 <style>
 .v1-to-v2-banner {
   position: relative; z-index: 50;
-  background: linear-gradient(90deg, rgba(201,212,227,0.18), rgba(201,212,227,0.06));
-  border-bottom: 1px solid rgba(201,212,227,0.32);
+  background: linear-gradient(90deg, rgba(145,162,255,0.18), rgba(145,162,255,0.06));
+  border-bottom: 1px solid rgba(145,162,255,0.32);
   padding: 0.55rem 1rem;
   text-align: center;
   font-family: 'Atkinson Hyperlegible Mono', ui-monospace, monospace;
@@ -336,13 +336,13 @@ main.gate {
   letter-spacing: 0.02em;
   color: #eef2f7;
 }
-.v1-to-v2-banner strong { color: var(--accent, #c9d4e3); font-weight: 700; }
+.v1-to-v2-banner strong { color: var(--accent, #91a2ff); font-weight: 700; }
 .v1-to-v2-banner a {
-  color: var(--accent, #c9d4e3);
+  color: var(--accent, #91a2ff);
   font-weight: 700;
   margin-left: 0.5rem;
   text-decoration: none;
-  border-bottom: 1px dashed rgba(201,212,227,0.5);
+  border-bottom: 1px dashed rgba(145,162,255,0.5);
 }
 .v1-to-v2-banner a:hover { border-bottom-style: solid; }
 .v1-to-v2-banner-close {

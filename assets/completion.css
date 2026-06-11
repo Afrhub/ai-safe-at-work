@@ -16,7 +16,7 @@
   cursor: pointer;
   transition: transform 180ms ease, box-shadow 200ms ease, background 200ms ease;
 }
-.complete-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(201,212,227,0.30); }
+.complete-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(145,162,255,0.30); }
 .complete-btn:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 3px; }
 .complete-btn.is-done {
   background: rgba(26,184,106,0.14);
@@ -51,7 +51,7 @@
   border: 1px solid var(--border);
   border-radius: 3px;
   padding: 2.4rem 2rem;
-  background: linear-gradient(180deg, rgba(201,212,227,0.04), rgba(201,212,227,0.01));
+  background: linear-gradient(180deg, rgba(145,162,255,0.04), rgba(145,162,255,0.01));
 }
 .checklist-locked .lock-big { font-size: 2rem; }
 .checklist-locked h2 { margin: 0.6rem 0 0.4rem; }
@@ -60,6 +60,6 @@
   display: inline-block; margin-top: 0.8rem;
   font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700;
   letter-spacing: 0.08em; color: var(--accent);
-  border: 1px solid rgba(201,212,227,0.3); border-radius: 2px;
+  border: 1px solid rgba(145,162,255,0.3); border-radius: 2px;
   padding: 0.3rem 0.9rem;
 }

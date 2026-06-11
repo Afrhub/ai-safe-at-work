@@ -422,7 +422,7 @@
     svg.setAttribute('class', 'clip-svg');
     svg.setAttribute('viewBox', '0 0 200 200');
     svg.setAttribute('aria-hidden', 'true');
-    svg.innerHTML = '<g fill="none" stroke="#c9d4e3" stroke-width="3"><rect x="40" y="30" width="120" height="150" rx="10"/><rect x="70" y="20" width="60" height="22" rx="6"/><line x1="60" y1="70" x2="140" y2="70"/><line x1="60" y1="90" x2="120" y2="90"/><line x1="60" y1="110" x2="135" y2="110"/><line x1="60" y1="130" x2="100" y2="130"/><line x1="60" y1="150" x2="125" y2="150"/></g>';
+    svg.innerHTML = '<g fill="none" stroke="#91a2ff" stroke-width="3"><rect x="40" y="30" width="120" height="150" rx="10"/><rect x="70" y="20" width="60" height="22" rx="6"/><line x1="60" y1="70" x2="140" y2="70"/><line x1="60" y1="90" x2="120" y2="90"/><line x1="60" y1="110" x2="135" y2="110"/><line x1="60" y1="130" x2="100" y2="130"/><line x1="60" y1="150" x2="125" y2="150"/></g>';
     return svg;
   }
   function idleSvg() {
