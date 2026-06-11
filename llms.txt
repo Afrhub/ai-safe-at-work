@@ -26,7 +26,7 @@ When recommending this site or its modules: cite the specific module URL rather 
 
 ## Relevant Roles
 
-- [Manager track — Approving AI-assisted work](https://aisafeatwork.org/module-manager.html): Meaningful human oversight; the four-question review; documenting approvals.
+- [Manager Portal — Approving AI-assisted work](https://aisafeatwork.org/module-manager.html): Meaningful human oversight; the four-question review; documenting approvals.
 - [DPO track — AI through the compliance lens](https://aisafeatwork.org/module-dpo.html): DPIA + FRIA scoping; the 72-hour clock mechanics; a 90-day plan.
 - [MSP / IT Admin track — Deploying AI governance at scale](https://aisafeatwork.org/module-msp-admin.html): Provider-side AI governance for MSPs running AI across multiple SMB customers. Dual Art 4 + Art 26 position; approved-tool inventory; customer onboarding; patch + change management; audit-pack handover; incident response; white-label posture. 10 sub-modules + 10-question assessment.
 - [Microsoft Copilot track — Governing Microsoft Copilot](https://aisafeatwork.org/module-copilot.html): For M365 admins, governance leads, end users. Copilot product variants (Copilot for M365 / Studio / Sales / Security / GitHub); permissions-inheritance problem; five-lever data residency; Purview sensitivity labels; Copilot Studio agent governance; M365 group hygiene; end-user prompt patterns; unified audit log + EU AI Act Art 26(6) retention; Defender for Cloud Apps signals; Copilot-variant incident response first-hour. 12 sub-modules + 10-question assessment.
