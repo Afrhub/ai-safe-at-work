@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#060608" />
+<script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
 <title>Pricing — AI Safe@Work</title>
 <meta name="description" content="The course stays free. Optional add-ons fund the work: certificates, SCORM packs, sector overlays, white-label deployment, bespoke content. Transparent ladder from £49 individual to £9,999 enterprise. Draft — not yet final." />
 <meta name="robots" content="noindex, nofollow, noai, noimageai, nosnippet" />
@@ -23,8 +24,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700;800&family=Atkinson+Hyperlegible+Mono:wght@400;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/style.css?v=9" />
-<script defer src="assets/cinema.js?v=6"></script>
+<link rel="stylesheet" href="assets/style.css?v=10" />
+<script defer src="assets/cinema.js?v=7"></script>
 <style>
 .draft-banner {
   display: flex; align-items: center; gap: 0.8rem;
@@ -47,7 +48,7 @@
   gap: 1.1rem; margin: 2rem 0;
 }
 .tier {
-  background: rgba(10,10,16,0.85);
+  background: var(--plate);
   border: 1px solid var(--border);
   border-radius: 3px;
   padding: 1.6rem 1.6rem 1.4rem;
@@ -133,7 +134,7 @@
 .compare-table {
   width: 100%; border-collapse: collapse;
   margin: 2rem 0; font-size: 0.86rem;
-  background: rgba(10,10,16,0.85);
+  background: var(--plate);
   border: 1px solid var(--border); border-radius: 3px; overflow: hidden;
   box-shadow: var(--shadow-card);
 }

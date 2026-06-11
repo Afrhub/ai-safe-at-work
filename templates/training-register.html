@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#060608" />
+<script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
 <title>AI literacy training register — AI Safe@Work</title>
 <meta name="description" content="A starter AI literacy training register. Records who in your organisation has had AI training, when, on what, and with what evidence. Designed as the audit-grade Article 4 evidence record for EU AI Act compliance (in force from 2 February 2025)." />
 <meta property="og:type" content="article" />
@@ -21,8 +22,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700;800&family=Atkinson+Hyperlegible+Mono:wght@400;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="../assets/style.css?v=9" />
-<script defer src="../assets/cinema.js?v=6"></script>
+<link rel="stylesheet" href="../assets/style.css?v=10" />
+<script defer src="../assets/cinema.js?v=7"></script>
 <style>
 .template-tag { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.95rem; border-radius: 2px; background: rgba(145,162,255, 0.08); border: 1px solid rgba(145,162,255, 0.32); color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.2rem; }
 .template-tag::before { content: '§'; color: var(--accent); font-weight: 800; }
@@ -31,7 +32,7 @@
 .print-btn:hover { transform: translateY(-2px); }
 .print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
 .fill { display: inline-block; padding: 0.1rem 0.55rem; border-radius: 2px; background: rgba(145,162,255, 0.10); color: var(--accent); border: 1px dashed rgba(145,162,255, 0.42); font-family: var(--font-mono); font-size: 0.88em; }
-.policy-doc { margin: 1.5rem 0; padding: 2rem 2.2rem; background: rgba(10,10,16,0.85); border: 1px solid var(--border); border-radius: 3px; box-shadow: var(--shadow-card); }
+.policy-doc { margin: 1.5rem 0; padding: 2rem 2.2rem; background: var(--plate); border: 1px solid var(--border); border-radius: 3px; box-shadow: var(--shadow-card); }
 .policy-doc h2 { margin-top: 2.2rem; }
 .policy-doc h2:first-child { margin-top: 0; }
 .policy-doc h3 { margin-top: 1.6rem; }

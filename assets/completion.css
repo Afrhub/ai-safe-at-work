@@ -63,3 +63,7 @@
   border: 1px solid rgba(145,162,255,0.3); border-radius: 2px;
   padding: 0.3rem 0.9rem;
 }
+
+/* light theme */
+html[data-theme="light"] .module-complete-bar { background: var(--plate); border-color: var(--border); }
+html[data-theme="light"] .complete-hint { color: var(--text3); }

@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#060608" />
+<script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
 <title>Security &amp; AI-crawler posture — AI Safe@Work</title>
 <meta name="description" content="What AI Safe@Work does to protect customer data and signal opt-out to AI training. Training crawlers blocked site-wide; citation/answer-engine crawlers welcome on the free course; paid surfaces auth-walled. Verifiable via robots.txt, tdm-policy.json, and llms.txt." />
 <meta name="robots" content="index, follow" />
@@ -21,8 +22,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700;800&family=Atkinson+Hyperlegible+Mono:wght@400;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/style.css?v=9" />
-<script defer src="assets/cinema.js?v=6"></script>
+<link rel="stylesheet" href="assets/style.css?v=10" />
+<script defer src="assets/cinema.js?v=7"></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
   {"@type":"WebPage","name":"Security & AI-crawler posture - AI Safe@Work","url":"https://aisafeatwork.org/security.html","publisher":{"@id":"https://aisafeatwork.org/#organization"},"inLanguage":"en"},
@@ -33,7 +34,7 @@
 ]}
 </script>
 <style>
-.bots-table { width: 100%; border-collapse: collapse; margin: 1.4rem 0 2rem; font-size: 0.86rem; background: rgba(10,10,16,0.85); border: 1px solid var(--border); border-radius: 3px; overflow: hidden; box-shadow: var(--shadow-card); }
+.bots-table { width: 100%; border-collapse: collapse; margin: 1.4rem 0 2rem; font-size: 0.86rem; background: var(--plate); border: 1px solid var(--border); border-radius: 3px; overflow: hidden; box-shadow: var(--shadow-card); }
 .bots-table thead th { background: rgba(145,162,255, 0.05); color: var(--accent); text-align: left; padding: 0.78rem 0.95rem; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; border-bottom: 1px solid rgba(145,162,255,0.22); }
 .bots-table tbody td { padding: 0.78rem 0.95rem; border-top: 1px solid var(--border); color: var(--text2); vertical-align: top; line-height: 1.5; }
 .bots-table .ua { font-family: var(--font-mono); color: var(--accent-2); font-size: 0.78rem; }
@@ -42,7 +43,7 @@
 .pill.allow { background: rgba(26,184,106,0.10); color: var(--green); border-color: rgba(26,184,106,0.32); }
 .pill.paid { background: rgba(145,162,255,0.10); color: var(--accent); border-color: rgba(145,162,255,0.32); }
 .proof-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin: 1.5rem 0 2rem; }
-.proof-card { background: rgba(10,10,16,0.85); border: 1px solid var(--border); border-radius: 3px; padding: 1.2rem 1.3rem; box-shadow: var(--shadow-card); }
+.proof-card { background: var(--plate); border: 1px solid var(--border); border-radius: 3px; padding: 1.2rem 1.3rem; box-shadow: var(--shadow-card); }
 .proof-card h4 { font-family: var(--font-display); font-size: 0.98rem; margin-bottom: 0.4rem; letter-spacing: -0.015em; color: var(--text); }
 .proof-card p { font-size: 0.84rem; color: var(--text2); line-height: 1.55; margin: 0 0 0.6rem; }
 .proof-card a.btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.8rem; background: rgba(145,162,255, 0.08); border: 1px solid rgba(145,162,255, 0.32); border-radius: 2px; color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.2s; }

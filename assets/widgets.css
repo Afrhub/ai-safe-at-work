@@ -612,3 +612,7 @@
     transition: none !important;
   }
 }
+
+/* light theme */
+html[data-theme="light"] .widget { background: var(--plate); border-color: var(--border); }
+html[data-theme="light"] .widget-bar .pip { background: rgba(15,23,42,0.08); }

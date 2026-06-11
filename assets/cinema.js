@@ -1,5 +1,5 @@
 /* ────────────────────────────────────────────────────────────
-   cinema.js v5 — "drafting field" background + parallax + reveals
+   cinema.js v6 — "drafting field" background + parallax + reveals
    Audit-dossier visual language: blueprint grid, ledger rules,
    giant watermarked clause numbers. Scroll parallax + pointer
    depth. No dependencies. Degrades to static layout on failure.
@@ -238,6 +238,45 @@
     }
   }
 
+
+  // ─── 5b. Theme toggle — pill switch in the topbar / gate header ──────
+  function setupThemeToggle() {
+    var host = document.querySelector('.topbar') || document.querySelector('.gate-header');
+    if (!host || host.querySelector('.theme-toggle')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'theme-toggle';
+    btn.setAttribute('type', 'button');
+    btn.setAttribute('role', 'switch');
+    btn.innerHTML =
+      '<span class="tt-knob" aria-hidden="true">' +
+        '<svg class="tt-moon" viewBox="0 0 24 24" fill="none" stroke="#0b0e14" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>' +
+        '<svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="#f2f4f8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.2" y1="4.2" x2="6.3" y2="6.3"/><line x1="17.7" y1="17.7" x2="19.8" y2="19.8"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.2" y1="19.8" x2="6.3" y2="17.7"/><line x1="17.7" y1="6.3" x2="19.8" y2="4.2"/></svg>' +
+      '</span>';
+
+    function syncA11y() {
+      var light = document.documentElement.getAttribute('data-theme') === 'light';
+      btn.setAttribute('aria-checked', light ? 'true' : 'false');
+      btn.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', light ? '#eef0f4' : '#060608');
+    }
+
+    btn.addEventListener('click', function () {
+      var light = document.documentElement.getAttribute('data-theme') === 'light';
+      if (light) {
+        document.documentElement.removeAttribute('data-theme');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+      try { localStorage.setItem('aisw-theme', light ? 'dark' : 'light'); } catch (e) {}
+      syncA11y();
+    });
+
+    syncA11y();
+    host.appendChild(btn);
+  }
+
   // ─── 6. Bootstrap ────────────────────────────────────────────────────
   function start() {
     injectCinema();
@@ -245,6 +284,7 @@
     setupRevealObserver();
     setupScroll();
     setupGatePointer();
+    setupThemeToggle();
   }
 
   if (document.readyState === 'loading') {
