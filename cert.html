@@ -84,7 +84,7 @@
     box-shadow:
       0 30px 80px rgba(0,0,0,0.55),
       0 0 0 1px rgba(232,167,38,0.30);
-    aspect-ratio: 1.414 / 1;
+    min-height: 560px;
     max-width: 900px;
     display: flex; flex-direction: column;
     position: relative;
@@ -124,11 +124,12 @@
     margin-bottom: 0.4rem;
   }
   .cert-card .cert-h em { font-style: normal; color: #b67700; }
+  .cert-card .cert-sub strong { color: #3d2c00; }
   .cert-card .cert-sub {
     font-size: 1.05rem;
     color: #5c4200;
     max-width: 70ch;
-    margin-bottom: 2.4rem;
+    margin-bottom: 1.6rem;
   }
   .cert-card .cert-recipient {
     font-family: 'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', system-ui, sans-serif;
@@ -152,8 +153,8 @@
     display: flex;
     gap: 3rem;
     flex-wrap: wrap;
-    padding-top: 2rem;
-    margin-top: 2rem;
+    padding-top: 1.4rem;
+    margin-top: 1.4rem;
     border-top: 0.5pt solid #e8a72655;
   }
   .cert-card .cert-meta-block {
