@@ -27,8 +27,8 @@
       "title": "v2026.05 — Initial release",
       "date_published": "2026-05-19T12:00:00Z",
       "tags": ["release", "initial"],
-      "content_html": "<p><strong>Initial public release.</strong></p><ul><li>12 universal modules.</li><li>2 role tracks — Manager and DPO / compliance lead.</li><li>2 ship-ready templates — Acceptable Use Policy and AI vendor diligence questionnaire.</li><li>Standards Map (57 clause-to-module rows). Citations bibliography (every claim → primary source with confidence flag).</li><li>Standards baseline: EU AI Act 2024/1689, GDPR, ISO/IEC 42001:2023, ISO/IEC 27001:2022, NIST AI RMF 1.0 + GAI Profile, OWASP LLM Top 10 (2025).</li></ul>",
-      "summary": "Initial public release — 12 modules, 2 role tracks, 2 templates, standards map, citations bibliography."
+      "content_html": "<p><strong>Initial public release.</strong></p><ul><li>12 universal modules.</li><li>2 Relevant Roles — Manager and DPO / compliance lead.</li><li>2 ship-ready templates — Acceptable Use Policy and AI vendor diligence questionnaire.</li><li>Standards Map (57 clause-to-module rows). Citations bibliography (every claim → primary source with confidence flag).</li><li>Standards baseline: EU AI Act 2024/1689, GDPR, ISO/IEC 42001:2023, ISO/IEC 27001:2022, NIST AI RMF 1.0 + GAI Profile, OWASP LLM Top 10 (2025).</li></ul>",
+      "summary": "Initial public release — 12 modules, 2 Relevant Roles, 2 templates, standards map, citations bibliography."
     }
   ]
 }

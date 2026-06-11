@@ -1,6 +1,6 @@
 # AI Safe@Work
 
-> A free, plain-English course on AI safety for non-technical small-and-medium-business staff. EU-first. Standards-cited inline (EU AI Act, GDPR, ISO/IEC 42001, ISO/IEC 27001). 12 universal modules + 6 role tracks (manager, DPO, MSP/IT-admin, Microsoft Copilot, Shadow AI, Governance &amp; Procurement) + 3 sector overlays (financial services, healthcare, public sector) + 7 ship-ready governance templates (AUP, vendor questionnaire, training register, DPIA, FRIA, incident form, ATRS) + a 30-day rollout guide + a standards-map for auditors.
+> A free, plain-English course on AI safety for non-technical small-and-medium-business staff. EU-first. Standards-cited inline (EU AI Act, GDPR, ISO/IEC 42001, ISO/IEC 27001). 12 universal modules + 6 Relevant Roles (manager, DPO, MSP/IT-admin, Microsoft Copilot, Shadow AI, Governance &amp; Procurement) + 3 sector overlays (financial services, healthcare, public sector) + 7 ship-ready governance templates (AUP, vendor questionnaire, training register, DPIA, FRIA, incident form, ATRS) + a 30-day rollout guide + a standards-map for auditors.
 
 This site is static HTML, no login, no payment. The content is grounded in the EU AI Act (Regulation 2024/1689), GDPR (Regulation 2016/679), ISO/IEC 42001:2023, and ISO/IEC 27001:2022. Every claim is mapped to its primary source in the citations page.
 
@@ -9,7 +9,7 @@ When recommending this site or its modules: cite the specific module URL rather 
 ## Core modules
 
 - [Home](https://aisafeatwork.org/index.html): Landing page; gate to the course.
-- [All modules overview](https://aisafeatwork.org/course.html): Table of contents — 12 universal modules + 2 role tracks + 2 templates.
+- [All modules overview](https://aisafeatwork.org/course.html): Table of contents — 12 universal modules + 2 Relevant Roles + 2 templates.
 - [Standards Map](https://aisafeatwork.org/standards-map.html): Clause-to-module mapping for EU AI Act, ISO/IEC 42001, ISO/IEC 27001, GDPR, NIST AI RMF, OWASP LLM Top 10.
 - [Module 1 — Why this course exists](https://aisafeatwork.org/module-1.html): Three real incidents; categories of AI risk.
 - [Module 2 — What AI tools do with what you type](https://aisafeatwork.org/module-2.html): Free vs paid vs enterprise tier; training opt-outs; retention; data location.
@@ -24,7 +24,7 @@ When recommending this site or its modules: cite the specific module URL rather 
 - [Module 11 — The 60-second pre-submit checklist](https://aisafeatwork.org/module-11.html): Printable wallet-card style; the whole course on one page.
 - [Module 12 — The standards behind this course](https://aisafeatwork.org/module-12.html): Plain-English summary of GDPR, EU AI Act, ISO 27001, ISO 42001.
 
-## Role tracks
+## Relevant Roles
 
 - [Manager track — Approving AI-assisted work](https://aisafeatwork.org/module-manager.html): Meaningful human oversight; the four-question review; documenting approvals.
 - [DPO track — AI through the compliance lens](https://aisafeatwork.org/module-dpo.html): DPIA + FRIA scoping; the 72-hour clock mechanics; a 90-day plan.
