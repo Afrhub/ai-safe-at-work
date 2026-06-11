@@ -58,6 +58,7 @@
   var REVEAL_SELECTORS = [
     'main h1.page-title',
     'main p.lede',
+    '.module-banner',
     'main h2',
     'main h3',
     '.callout',

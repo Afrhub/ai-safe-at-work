@@ -390,6 +390,33 @@ hr.section-divider {
 }
 
 /* ════════════════════════════════════════════════════════════
+   MODULE BANNERS — figure plates with line-art SVG per module
+   ════════════════════════════════════════════════════════════ */
+.module-banner {
+  position: relative;
+  margin: 0 0 2.2rem;
+  background: var(--plate);
+  border: var(--rule);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.module-banner::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--border-bold), var(--border-bold)) top left    / 7px 1px,
+    linear-gradient(var(--border-bold), var(--border-bold)) top left    / 1px 7px,
+    linear-gradient(var(--border-bold), var(--border-bold)) bottom right/ 7px 1px,
+    linear-gradient(var(--border-bold), var(--border-bold)) bottom right/ 1px 7px;
+  background-repeat: no-repeat;
+}
+.module-banner svg { display: block; width: 100%; height: auto; }
+@media print { .module-banner { display: none !important; } }
+
+/* ════════════════════════════════════════════════════════════
    CALLOUTS — stamped notices: warn, do, dont, note, standard, govern
    ════════════════════════════════════════════════════════════ */
 .callout {
