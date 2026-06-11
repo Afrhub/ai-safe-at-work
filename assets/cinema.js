@@ -1,5 +1,5 @@
 /* ────────────────────────────────────────────────────────────
-   cinema.js v3 — "drafting field" background + parallax + reveals
+   cinema.js v4 — "drafting field" background + parallax + reveals
    Audit-dossier visual language: blueprint grid, ledger rules,
    giant watermarked clause numbers. Scroll parallax + pointer
    depth. No dependencies. Degrades to static layout on failure.
@@ -29,6 +29,10 @@
       '<div class="cinema-parallax" data-parallax-speed="0.12" data-pointer-depth="16">',
         '<div class="cinema-rules"></div>',
       '</div>',
+      // diagonal light bands — fastest scroll layer, deepest pointer response
+      '<div class="cinema-parallax" data-parallax-speed="0.24" data-pointer-depth="34">',
+        '<div class="cinema-shade"></div>',
+      '</div>',
       // watermark clauses (nearest, fastest)
       '<div class="cinema-parallax" data-parallax-speed="0.18" data-pointer-depth="24">',
         '<div class="cinema-marks">',
@@ -39,6 +43,7 @@
           '<span class="wm wm-mono wm-5">ISO/IEC·27001:2022·A.5.10</span>',
         '</div>',
       '</div>',
+      '<div class="cinema-sheen"></div>',
       '<div class="cinema-vignette"></div>'
     ].join('');
     document.body.insertBefore(bg, document.body.firstChild);
@@ -125,6 +130,12 @@
     var px = 0, py = 0, tx = 0, ty = 0;
     var pointerActive = false;
 
+    // Sheen chases the pointer in viewport px, eased separately (slower —
+    // a light source should lag the hand, not stick to it).
+    var sheen = document.querySelector('.cinema-sheen');
+    var sx = window.innerWidth * 0.3, sy = window.innerHeight * 0.25;
+    var stx = sx, sty = sy;
+
     function readAndWrite() {
       var y = window.pageYOffset || document.documentElement.scrollTop;
 
@@ -132,6 +143,11 @@
         // ease pointer toward target
         px += (tx - px) * 0.06;
         py += (ty - py) * 0.06;
+        if (sheen) {
+          sx += (stx - sx) * 0.045;
+          sy += (sty - sy) * 0.045;
+          sheen.style.transform = 'translate3d(' + sx.toFixed(1) + 'px,' + sy.toFixed(1) + 'px,0)';
+        }
         for (var i = 0; i < parallaxEls.length; i++) {
           var el = parallaxEls[i];
           var speed = parseFloat(el.getAttribute('data-parallax-speed')) || 0;
@@ -149,7 +165,8 @@
       }
 
       // keep easing while the pointer hasn't settled
-      if (!reduceMotion && (Math.abs(tx - px) > 0.001 || Math.abs(ty - py) > 0.001)) {
+      if (!reduceMotion && (Math.abs(tx - px) > 0.001 || Math.abs(ty - py) > 0.001 ||
+          (sheen && (Math.abs(stx - sx) > 0.5 || Math.abs(sty - sy) > 0.5)))) {
         window.requestAnimationFrame(readAndWrite);
         return;
       }
@@ -171,6 +188,8 @@
       window.addEventListener('pointermove', function (e) {
         tx = (e.clientX / window.innerWidth) - 0.5;
         ty = (e.clientY / window.innerHeight) - 0.5;
+        stx = e.clientX;
+        sty = e.clientY;
         pointerActive = true;
         schedule();
       }, { passive: true });

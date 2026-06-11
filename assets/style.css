@@ -856,6 +856,40 @@ body { isolation: isolate; }
   50%      { opacity: 1;    transform: scale(1.05); }
 }
 
+/* ── Layer 4b: shade — diagonal light bands, travel on scroll ── */
+.cinema-shade {
+  position: absolute;
+  inset: -30vh -10vw;
+  background:
+    linear-gradient(115deg,
+      transparent 0%,
+      rgba(201,212,227,0.035) 16%,
+      transparent 30%,
+      transparent 52%,
+      rgba(201,212,227,0.025) 68%,
+      transparent 84%);
+  will-change: transform;
+}
+
+/* ── Layer 4c: sheen — pointer-following light, eased in JS ── */
+.cinema-sheen {
+  position: absolute;
+  top: 0; left: 0;
+  width: 56vmax; height: 56vmax;
+  margin: -28vmax 0 0 -28vmax;
+  background: radial-gradient(circle,
+    rgba(201,212,227,0.06) 0%,
+    rgba(201,212,227,0.02) 38%,
+    transparent 66%);
+  mix-blend-mode: screen;
+  will-change: transform;
+  transform: translate3d(30vw, 25vh, 0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .cinema-shade { transform: none !important; }
+  .cinema-sheen { display: none; }
+}
+
 /* ── Layer 5: vignette ── */
 .cinema-vignette {
   position: absolute;
