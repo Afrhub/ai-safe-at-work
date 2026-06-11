@@ -1,5 +1,5 @@
 /* ────────────────────────────────────────────────────────────
-   cinema.js v4 — "drafting field" background + parallax + reveals
+   cinema.js v5 — "drafting field" background + parallax + reveals
    Audit-dossier visual language: blueprint grid, ledger rules,
    giant watermarked clause numbers. Scroll parallax + pointer
    depth. No dependencies. Degrades to static layout on failure.
@@ -134,6 +134,7 @@
     // Sheen chases the pointer in viewport px, eased separately (slower —
     // a light source should lag the hand, not stick to it).
     var sheen = document.querySelector('.cinema-sheen');
+    var wash = document.querySelector('.cinema-wash');
     var sx = window.innerWidth * 0.3, sy = window.innerHeight * 0.25;
     var stx = sx, sty = sy;
 
@@ -144,6 +145,12 @@
         // ease pointer toward target
         px += (tx - px) * 0.06;
         py += (ty - py) * 0.06;
+        if (wash) {
+          // Ambient light shifts hue as you travel the document —
+          // ~3deg per 100px, full cycle over ~12k px. Paint cost is
+          // limited to this one isolated, blurred layer.
+          wash.style.filter = 'blur(34px) hue-rotate(' + ((y * 0.03) % 360).toFixed(1) + 'deg)';
+        }
         if (sheen) {
           sx += (stx - sx) * 0.045;
           sy += (sty - sy) * 0.045;

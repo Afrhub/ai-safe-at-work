@@ -1,8 +1,10 @@
 /* ════════════════════════════════════════════════════════════
-   AI SAFE@WORK — Design System v5 "Audit Dossier — Carbon"
+   AI SAFE@WORK — Design System v6 "Audit Dossier — Carbon / Spectra"
    The site reads like a beautifully-set compliance dossier:
    ruled hairlines, crop-mark corners, file tabs, clause numbers,
-   classification chips. Monochrome silver ink on near-black paper; colour = signal only.
+   classification chips. Monochrome silver INK on near-black paper; colour = signal only
+   in UI. Background LIGHT may be chromatic: scroll-shifting spectral
+   tints in the wash/shade/sheen layers (never in text or chrome).
    No glass blobs, no gradient orbs, no generic AI-SaaS glow.
    ════════════════════════════════════════════════════════════ */
 
@@ -873,9 +875,11 @@ body { isolation: isolate; }
   position: absolute;
   inset: -20%;
   background:
-    radial-gradient(ellipse 60% 45% at 28% 22%, rgba(201,212,227,0.085) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(140,155,175,0.06) 0%, transparent 65%);
-  filter: blur(30px);
+    radial-gradient(ellipse 55% 42% at 24% 20%, rgba(79,216,196,0.13) 0%, transparent 58%),
+    radial-gradient(ellipse 48% 40% at 82% 76%, rgba(124,140,255,0.115) 0%, transparent 62%),
+    radial-gradient(ellipse 60% 38% at 55% 100%, rgba(216,162,90,0.09) 0%, transparent 65%);
+  filter: blur(34px);
+  will-change: filter, opacity;
   animation: wash-breathe 40s ease-in-out infinite;
 }
 @keyframes wash-breathe {
@@ -890,10 +894,10 @@ body { isolation: isolate; }
   background:
     linear-gradient(115deg,
       transparent 0%,
-      rgba(201,212,227,0.035) 16%,
+      rgba(79,216,196,0.05) 16%,
       transparent 30%,
       transparent 52%,
-      rgba(201,212,227,0.025) 68%,
+      rgba(124,140,255,0.045) 68%,
       transparent 84%);
   will-change: transform;
 }
@@ -905,9 +909,10 @@ body { isolation: isolate; }
   width: 56vmax; height: 56vmax;
   margin: -28vmax 0 0 -28vmax;
   background: radial-gradient(circle,
-    rgba(201,212,227,0.06) 0%,
-    rgba(201,212,227,0.02) 38%,
-    transparent 66%);
+    rgba(201,212,227,0.055) 0%,
+    rgba(124,140,255,0.04) 34%,
+    rgba(79,216,196,0.028) 52%,
+    transparent 68%);
   mix-blend-mode: screen;
   will-change: transform;
   transform: translate3d(30vw, 25vh, 0);
