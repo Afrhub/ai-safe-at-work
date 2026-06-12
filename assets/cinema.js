@@ -1,5 +1,5 @@
 /* ────────────────────────────────────────────────────────────
-   cinema.js v6 — "drafting field" background + parallax + reveals
+   cinema.js v7 — "drafting field" background + parallax + reveals
    Audit-dossier visual language: blueprint grid, ledger rules,
    giant watermarked clause numbers. Scroll parallax + pointer
    depth. No dependencies. Degrades to static layout on failure.
@@ -275,6 +275,24 @@
 
     syncA11y();
     host.appendChild(btn);
+
+    // Re-apply the stored theme whenever this page is shown again.
+    // Covers bfcache restores (back/forward navigation restores the old
+    // DOM without re-running scripts) and keeps multiple tabs in sync.
+    function applyStoredTheme() {
+      var t = null;
+      try { t = localStorage.getItem('aisw-theme'); } catch (e) {}
+      if (t === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else if (t === 'dark') {
+        document.documentElement.removeAttribute('data-theme');
+      }
+      syncA11y();
+    }
+    window.addEventListener('pageshow', function () { applyStoredTheme(); });
+    window.addEventListener('storage', function (ev) {
+      if (!ev || ev.key === null || ev.key === 'aisw-theme') applyStoredTheme();
+    });
   }
 
   // ─── 6. Bootstrap ────────────────────────────────────────────────────
