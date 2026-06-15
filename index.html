@@ -379,6 +379,59 @@ html[data-theme="light"] .choice:hover {
 }
 .v1-to-v2-banner-close:hover { color: #eef2f7; }
 @media print { .v1-to-v2-banner { display: none; } }
+
+/* ════════ Gate enrichment — dossier richness (same language, more crafted) ════════ */
+.gate-stage { position: relative; }
+/* large clause watermark behind the hero — depth, like the module banners */
+.gate-watermark {
+  position: absolute; top: 0.5rem; left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(9rem, 24vw, 22rem); line-height: 1; letter-spacing: -0.05em;
+  white-space: nowrap; color: transparent;
+  -webkit-text-stroke: 1px rgba(145,162,255,0.06);
+  pointer-events: none; z-index: -1; user-select: none;
+}
+html[data-theme="light"] .gate-watermark { -webkit-text-stroke-color: rgba(71,89,199,0.08); }
+/* REF line above the eyebrow — echoes the module file-reference header */
+.gate-refline {
+  display: inline-flex; align-items: center; gap: 0.7rem;
+  margin-bottom: 0.7rem;
+  opacity: 0; animation: fadeUp 0.7s var(--ease-out) 0.18s forwards;
+}
+.gate-refline .ref {
+  font-family: var(--font-mono); font-size: 0.58rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent);
+  border: 1px solid rgba(145,162,255,0.45); border-radius: 2px; padding: 0.24rem 0.6rem;
+}
+.gate-refline .rule {
+  width: 56px; height: 1px;
+  background: repeating-linear-gradient(90deg, rgba(145,162,255,0.5) 0 6px, transparent 6px 12px);
+}
+/* crop-mark corners on every gate card */
+.choice::before, .aud-card::before {
+  content: ''; position: absolute; inset: 5px; pointer-events: none; z-index: 1;
+  background:
+    linear-gradient(var(--border-bold), var(--border-bold)) top left / 8px 1.5px,
+    linear-gradient(var(--border-bold), var(--border-bold)) top left / 1.5px 8px,
+    linear-gradient(var(--border-bold), var(--border-bold)) bottom right / 8px 1.5px,
+    linear-gradient(var(--border-bold), var(--border-bold)) bottom right / 1.5px 8px;
+  background-repeat: no-repeat;
+  opacity: 0.45; transition: opacity 220ms var(--ease-out);
+}
+.choice:hover::before { opacity: 1; }
+/* clause index on the choice cards (§ 01 / 02 / 03) */
+.choices { counter-reset: choiceidx; }
+.choice { counter-increment: choiceidx; }
+.choice::after {
+  content: "§ 0" counter(choiceidx);
+  position: absolute; top: 0.9rem; right: 1.15rem; z-index: 2;
+  font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 0.1em; color: rgba(145,162,255,0.5);
+}
+/* audience cards become ruled index cards (file-tab accent) */
+.aud-card { border-top: 2px solid rgba(145,162,255,0.42); }
+html[data-theme="light"] .aud-card { border-top-color: rgba(71,89,199,0.5); }
 </style>
 <div id="v1-to-v2-banner" class="v1-to-v2-banner" hidden>
   <strong>New:</strong> a governance-led 11-module rebuild is being trialled in parallel.
@@ -407,6 +460,8 @@ html[data-theme="light"] .choice:hover {
   </header>
 
   <section class="gate-stage">
+    <span class="gate-watermark" aria-hidden="true">§4</span>
+    <span class="gate-refline"><span class="rule" aria-hidden="true"></span><span class="ref">REF · EU AI Act 2024/1689</span><span class="rule" aria-hidden="true"></span></span>
     <p class="gate-eyebrow">AI Governance Awareness + Enablement</p>
     <h1>Safe AI <em>adoption</em>.<br/>Operational governance.</h1>
     <p class="lede">A free, plain-English course that teaches people how to use AI tools at work without leaking data, breaking the law, or getting fooled. Built for small and medium businesses and the MSPs who support them — and mapped to the EU AI Act, GDPR and the ISO standards behind the scenes.</p>
