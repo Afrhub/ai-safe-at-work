@@ -38,6 +38,13 @@ export const SCENES: Scene[] = [
       "Before you paste anything more private than a recipe into an A.I. tool, ask five things. One: what type of data am I about to paste? Public, internal, confidential, personal, or special category? If you are not sure, treat it as the most sensitive kind. Two: where is my data kept? Three: how long is it kept? Four: is it used to train the next A.I.? And five: who at the company can read it? Every big A.I. company puts the answers online. They change, so check them twice a year.",
   },
   {
+    id: "02b-versions-intro",
+    kicker: "The four versions",
+    title: "The four versions — weakest to safest",
+    text:
+      "Now, the four versions of an A.I. tool — from weakest to safest. The version you use matters as much as what you type.",
+  },
+  {
     id: "03-free-version",
     kicker: "Version one of four",
     title: "The free version",
