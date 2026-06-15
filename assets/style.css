@@ -653,9 +653,23 @@ hr.section-divider {
   pointer-events: none;
   font-family: var(--font-display);
   color: transparent;
-  -webkit-text-stroke: 1px rgba(145,162,255,0.13);
+  -webkit-text-stroke: 1px rgba(145,162,255,0.17);
   transition: -webkit-text-stroke-color 0.4s ease, transform 0.4s var(--ease-out);
 }
+/* crop-mark corners — the signature dossier detail, sharpen on hover */
+.module-card::after {
+  content: '';
+  position: absolute; inset: 6px; pointer-events: none; z-index: 1;
+  background:
+    linear-gradient(var(--border-bold), var(--border-bold)) top left / 9px 1.5px,
+    linear-gradient(var(--border-bold), var(--border-bold)) top left / 1.5px 9px,
+    linear-gradient(var(--border-bold), var(--border-bold)) bottom right / 9px 1.5px,
+    linear-gradient(var(--border-bold), var(--border-bold)) bottom right / 1.5px 9px;
+  background-repeat: no-repeat;
+  opacity: 0.4; transition: opacity 0.4s var(--ease-out);
+}
+.module-card:hover::after { opacity: 1; }
+.module-card:hover .bg-num { -webkit-text-stroke-color: rgba(145,162,255,0.28); }
 
 /* ════════════════════════════════════════════════════════════
    MODULE NAV (prev / next at bottom)
