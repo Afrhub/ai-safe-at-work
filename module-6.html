@@ -132,7 +132,7 @@
   <h2>The old playbook is dead</h2>
   <p>Until recently, phishing emails were detectable because they were written by people whose first language wasn't the target's, working at scale, with little context. Telltales were everywhere: "Dear Sir/Madam", odd punctuation, an urgent tone, a sender domain almost-but-not-quite-right.</p>
   <p>Today, an attacker can feed a public LinkedIn profile, a few of the target's company emails (perhaps from a previous breach), and a goal into a language model, and produce a perfectly written, contextually appropriate message — referencing the target's recent project, in their boss's voice, with no grammar mistakes whatsoever.</p>
-  <p>This is the current baseline, not a future risk. Half the phishing you see this year was written, edited or refined by AI.</p>
+  <p>This is the current baseline, not a future risk. A significant and growing proportion of phishing attacks are now written, edited or enhanced using AI.</p>
 
   <h2>The four new attack patterns</h2>
 
@@ -145,12 +145,20 @@
   <p><strong>What to look for:</strong> any phone-based request that involves money, credentials, or unusual access, and that pushes urgency. Hang up. Call back on a known number — not a number from the caller's call log.</p>
 
   <h3>3. Video deepfakes</h3>
-  <p>Live video deepfakes have moved from "uncanny valley" to "indistinguishable from real" within two years. The Arup case (Module 1) is the headline example: a clerk joined a video call with four senior leaders, all generated. The same technology is increasingly used for "video voicemails" from impersonated CEOs and for impostor candidates in remote job interviews.</p>
+  <p>Live video deepfakes have moved from "uncanny valley" to "increasingly difficult to distinguish from real" within two years. The Arup case (Module 1) is the headline example: a clerk joined a video call with four senior leaders, all generated. The same technology is increasingly used for "video voicemails" from impersonated CEOs and for impostor candidates in remote job interviews.</p>
   <p><strong>What to look for:</strong> requests over video that bypass normal authorisation flows. A meeting that ends with "approve this now, I'll explain later" should never be acted on without a second channel of verification.</p>
 
   <h3>4. AI-driven social engineering</h3>
   <p>An attacker chats with you over LinkedIn, WhatsApp, or email — possibly for weeks — building rapport, before steering toward a request. The attacker doesn't have to be a skilled social engineer because the AI is doing the cognitive work: maintaining the persona, remembering the previous conversations, sounding right.</p>
   <p><strong>What to look for:</strong> any new contact that progresses toward a financial, credential, or access ask. The relationship being more than a few weeks old doesn't make it real. Long-form rapport is now cheap.</p>
+
+  <div class="callout warn">
+    <span class="callout-icon">!</span>
+    <div>
+      <div class="callout-title">Business Email Compromise: one of the costliest AI-enhanced fraud scenarios</div>
+      <p>Business Email Compromise (BEC) remains one of the most common and costly fraud scenarios affecting organisations today. AI amplifies the risk: attackers use AI to impersonate executives or trusted vendors, research staff on LinkedIn, craft convincing payment requests, and automate follow-ups across multiple targets. A single successful BEC attack can result in significant financial loss and operational disruption. The callback principle above is the primary defence.</p>
+    </div>
+  </div>
 
   <div class="callout warn">
     <span class="callout-icon">!</span>
@@ -216,7 +224,15 @@
     <span class="callout-icon">§</span>
     <div>
       <div class="callout-title">Where the standards land</div>
-      <p><strong>GDPR Articles 32–34</strong>: security of processing, breach notification — a successful phishing attack often is a personal data breach, and the 72-hour clock starts when you notice. <strong>ISO 27001:2022 Annex A.6.3</strong>: information security awareness, education and training — this module is the kind of awareness that control envisages. <strong>Annex A.8.5</strong>: secure authentication, including MFA. <strong>EU AI Act Article 50</strong>: AI-generated audio, video and images intended to deceive must be marked — a rule attackers will obviously ignore, but one that anchors a future where unmarked deepfakes are themselves evidence of bad faith.</p>
+      <p><strong>GDPR Articles 32–34</strong>: security of processing, breach notification — a successful phishing attack often is a personal data breach, and organisations may have reporting obligations once they become aware of a personal data breach. <strong>ISO 27001:2022 Annex A.6.3</strong>: information security awareness, education and training — this module is the kind of awareness that control envisages. <strong>Annex A.8.5</strong>: secure authentication, including MFA. <strong>EU AI Act Article 50</strong>: transparency obligations apply in specific circumstances — for example, certain AI-generated audio, video and images may need to be marked. These obligations are about transparency and do not automatically prevent criminal misuse; an attacker will simply ignore them. Their value is that, over time, unmarked deepfakes become themselves evidence of bad faith.</p>
+    </div>
+  </div>
+
+  <div class="callout note">
+    <span class="callout-icon">i</span>
+    <div>
+      <div class="callout-title">Governance insight: Social engineering remains primarily a human problem</div>
+      <p>AI increases the scale, quality and speed of attacks, but governance, awareness, verification processes and strong authentication remain the most effective controls. Technical defences alone — email filtering, MFA, security keys — are necessary but not sufficient. The human layer still decides whether to click, call back, or escalate.</p>
     </div>
   </div>
 
