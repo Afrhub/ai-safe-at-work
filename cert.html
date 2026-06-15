@@ -326,10 +326,12 @@
   const root = document.getElementById('cert-root');
 
   if (!moduleNum || moduleNum < 1 || moduleNum > 12) {
-    // Certificate register: show pass status for all 12 modules on this device.
+    // Certificate register: show pass status for all 11 modules on this device.
+    // Module 11 (the 60-second checklist) is the gated finale and is not counted.
+    const REGISTER = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12];
     let rows = '';
     let passedCount = 0;
-    for (let m = 1; m <= 12; m++) {
+    for (const m of REGISTER) {
       let rec = null;
       try { rec = JSON.parse(localStorage.getItem('aisw-quiz-m' + m) || 'null'); } catch (e) { rec = null; }
       const passed = rec && rec.score >= rec.threshold;
@@ -354,12 +356,12 @@
       <div class="cert-intro">
         <h1>Certificate <em>register</em>.</h1>
         <p>Each module issues a printable certificate when you pass its knowledge check.
-           Results live in this browser only — nothing is sent anywhere. ${passedCount} of 12 earned on this device.</p>
+           Results live in this browser only — nothing is sent anywhere. ${passedCount} of 11 earned on this device.</p>
       </div>
       <div style="max-width:860px;margin:2rem auto 0;background:var(--plate);border:1px solid var(--border);
                   border-radius:3px;padding:1.2rem 1.4rem;box-shadow:var(--shadow-card);">
         <div style="font-family:var(--font-mono);font-size:0.78rem;font-weight:700;letter-spacing:0.14em;
-                    text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem;">Modules 01–12</div>
+                    text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem;">The 11 modules</div>
         ${rows}
         <p style="margin:1.1rem 0 0.2rem;font-size:0.9rem;color:var(--text3);">
           Pass mark is 8 of 10 on each knowledge check. Retake any quiz at any time — the certificate reissues with the new score.
