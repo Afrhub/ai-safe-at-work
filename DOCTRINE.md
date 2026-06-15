@@ -567,6 +567,46 @@ People-Also-Ask FAQ candidates (seed `FAQPage` schema): see audit doc.
 
 ---
 
+## § Content standards: evidential accuracy and wording precision
+
+> Added 2026-06-13. Establishes the bar for factual claims and the protocol for wording refinement when claims need softening due to evidential limits.
+
+**Core principle**: Claims must be defensible. If a claim cannot be sourced to a named incident (Module 1 style), a published research paper, a court case, or a regulatory position, it gets softened to "significant and growing", "increasingly", "may be", or "depends on how they are used" — language that acknowledges uncertainty while remaining useful to the reader.
+
+**Examples of refinements made 2026-06-13** (following stakeholder review):
+
+| Module | Original wording | Refined wording | Why |
+| --- | --- | --- | --- |
+| 6 | "Half the phishing you see this year was written, edited or refined by AI" | "A significant and growing proportion of phishing attacks are now written, edited or enhanced using AI" | Original claim difficult to evidence. No single study establishes "50%" globally. Refined version acknowledges the trend (evidenced in industry reports) without overstating. |
+| 6 | "indistinguishable from real" (video deepfakes) | "increasingly difficult to distinguish from real" | Current state of deepfakes varies by context. Some are indistinguishable; many are still spotable. Refined version matches the actual technical reality (improving, not arrived). |
+| 6 | "the 72-hour clock starts when you notice" (GDPR breach reporting) | "organisations may have reporting obligations once they become aware of a personal data breach" | Original oversimplified GDPR Art 33 timing and basis. Refined version is more legally precise: obligation starts on awareness, but the clock is from discovery, not necessarily from notice to the individual. |
+| 7 | "any AI system used in this category counts as high-risk" (EU AI Act) | "certain AI systems used in these categories may be classified as high-risk under the EU AI Act, depending on how they are used" | Original was too categorical. EU AI Act Annex III lists categories but application depends on use case. Refined version is more legally precise. |
+| 7 | "the rules now apply to that activity" | "additional governance, oversight and compliance obligations may apply" | Original suggested binary on/off. Refined version acknowledges that obligations vary by use case, data handling, and jurisdiction. |
+
+**Governance insight boxes added 2026-06-13**:
+
+- **Module 6**: "Social engineering remains primarily a human problem. AI increases the scale, quality and speed of attacks, but governance, awareness, verification processes and strong authentication remain the most effective controls."
+- **Module 7**: "Bias management is not about removing all bias from AI. It is about identifying potential sources of unfairness, applying appropriate controls and ensuring accountability for decisions."
+
+**Other wording clarifications 2026-06-13**:
+
+- Module 6: Added section on Business Email Compromise (BEC) as one of the costliest AI-enhanced fraud scenarios, reflecting practitioner feedback that BEC is underrepresented in SMB awareness training.
+- Module 6: Clarified that EU AI Act Article 50 (transparency on AI-generated content) "applies in specific circumstances and does not automatically prevent criminal misuse" — addressing the misconception that labelling alone stops misuse.
+- Module 7: Clarified that GDPR Article 22 (automated decision-making) "applies to certain automated decisions that produce legal or similarly significant effects on them — not all AI-assisted decisions."
+- Module 7: Softened claim on image generation ("Image generation models are improving but still require human review for representation, diversity and appropriateness") to acknowledge progress while maintaining the need for human oversight.
+- Module 7: Added "procurement" as an example audience for high-risk AI decisions, recognising that vendor selection and procurement governance increasingly fall within AI governance responsibilities.
+- Module 6: Clarified that "It's just a draft" defence fails not because AI is used, but because "allowing AI-generated recommendations to influence decisions without appropriate review and challenge" is the risk.
+
+**Protocol for future wording refinements**:
+
+1. **Identify** — When a claim cannot be backed to a primary source (case, paper, regulator statement, incident), flag it for refinement.
+2. **Source check** — Search for named incidents or published evidence. If found, cite it. If not found, soften the language.
+3. **Approve** — Refinements requiring wording change above the typo level go through stakeholder review (DPO, legal counsel if applicable, or community feedback).
+4. **Document** — Record the change, original wording, refined wording, and reason in the changelog and this section.
+5. **Backport** — If the same claim appears in multiple modules, backport the refined wording.
+
+---
+
 ## § Strategic doctrine + growth framework
 
 > Added 2026-05-19. Locks the long-arc strategic posture on top of the operational doctrine above. Compatible with — not replacing — § Position-the-wedge and § Audience hierarchy. Where text below appears to broaden the wedge, treat the original wedge as the **acquisition engine** and this strategic framework as the **revenue engine**. They co-exist.
@@ -978,6 +1018,8 @@ Long-term objective: governance-focused SaaS ecosystem · supported by MSP partn
 | 2026-06-11 | **Palette v7 — "Periwinkle Blueprint" structural accent; heading emphasis de-coloured.** Founder choice from a four-scheme subtle-accent review (Jade, Periwinkle, Brass, Duotone). Accent #91a2ff / #b9c4ff (8.6:1 on bg) applied to structure only: REF/eyebrow chips, § clause numbers, file tabs, lede rules, list markers, manifest numerals, informational callout chips (NOTE/STANDARDS/GOVERN), tags, hover/focus states, quiz/widget chrome. Explicitly excluded: body text (silver), heading `em` highlights (REMOVED site-wide — h1/gate/cert emphasis now inherits; the shine animation deleted), module-banner SVG line-art (stays silver ink), cert plate (stays monochrome paper), background drawing layers (grid/rules/watermarks/sheen stay silver; Spectra light unchanged). Cache busters style v9 / companions v3. | Subtle colour returns as *structure*, harmonising with the indigo of the Spectra light. Coloured words inside headings made no semantic sense (founder: "it makes no sense that these are coloured") — emphasis in a dossier is typographic, not chromatic. |
 
 | 2026-06-11 | **Light mode ("Paper") + pill theme toggle shipped site-wide.** Dark stays the brand default. `html[data-theme="light"]` token set: paper #eef0f4, ink #141b26, periwinkle-ink #4759c7 (5.7:1), darkened signals (#0e7d49 / #b92d2d), light plates + soft shadows. Drafting field becomes paper: ink grid/rules, dark watermark strokes, pointer sheen flips to multiply (a shadow chasing the cursor), paper vignette; banner SVGs inverted via filter (hue-rotate preserves signal colours). Pill toggle (border-radius 999px — deliberate pill exception to the sharp-corner system) injected into topbar/gate-header by cinema.js: role=switch, aria-checked/-label, sun/moon SVGs, knob 180ms ease-out, updates theme-color meta, persists to localStorage `aisw-theme`; 3-line no-FOUC script in every page head. 24 pages' inline dark-surface literals converted to var(--plate) so they theme. Companion CSS (quiz/widgets/completion) got light blocks. Cache busters style v10 / cinema v7. | Light mode is an accessibility feature (astigmatism/bright-environment readers) and a procurement nicety (print-adjacent reading). Dark remains default: the dossier brand. |
+
+| 2026-06-15 | **Legal-accuracy content pass (M6–M12) + M2 video transitions + award-track perf foundation.** Founder review for legal defensibility. M6: EU AI Act Art 50 reframed (transparency applies in specific circumstances, does not prevent criminal misuse). M8: copyright softened ("may not qualify" / "high risk" / varies by jurisdiction), ownership≠authorship≠copyright, search-engine claim → quality/originality, trademark + trade-dress note, provenance gov-box. M9: GDPR Art 22 "right to explanation" softened to protections for certain automated decisions + Arts 13–15 transparency (heading/objective/meta all updated), ISO 27001 reworded, Outcome/Status log field (8→9), regulatory/audit significance test, RoPA (Art 30) introduced earlier, accountability stays with org/decision-maker, logging-not-surveillance gov-box. M10: "potential 72-hour breach notification requirement" precision, unapproved-tool wording, window runs continuously, downstream-impact, use existing cyber-IR process, DPA/contract/supplier review, "Current impact" incident-note field, response-not-blame gov-box. M12 (= founder's "Module 11"; on-screen M11 is the print checklist): overlap-not-contradict, regulatory penalties not criminal liability, Art 22 scope, Art 50 + limited-risk softened, Annex A "areas such as", one-framework gov-box, Cyber Essentials / NCSC ref. Quizzes realigned. **M2 video**: new spoken `02b-versions-intro` scene (ElevenLabs voice lUTamkMw7gOzZbFIwmq4) + per-scene tail map (~1.1s holds before versions / "Trained on" / takeaway); re-rendered 4:14, embed ?v=2. **Perf (award-track, in-doctrine)**: self-hosted Atkinson (4 woff2 ~81KB under assets/fonts/ + atkinson.css, font-display swap, preload) replacing render-blocking Google Fonts on all 52 pages; `color-scheme: dark light` meta site-wide. Spec at `specs/module-refinements-and-m2-video.md`. | Overstated legal claims are a credibility/liability risk with the DPO/procurement audience the wedge targets. Self-hosting fonts removes two external origins + a render-blocking request (LCP/CLS/CWV win) — first move of a craft+technical+editorial "award-winning" pass, strictly within doctrine. |
 
 Append below as decisions land. Use `/aos-log` for global cross-project decisions.
 
