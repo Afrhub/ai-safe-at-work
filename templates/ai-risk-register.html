@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#060608" />
+<script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
+<title>AI Risk Register template — AI Safe@Work</title>
+<meta name="description" content="Identify and track AI-specific risks: data leakage, bias, hallucination, vendor lock-in, compliance gaps. Assign ownership, mitigation actions, and review cadence. Aligns with ISO/IEC 42001 Clause 8.2, EU AI Act Article 27, GDPR Article 32." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="AI Safe@Work" />
+<meta property="og:title" content="AI Risk Register template — AI Safe@Work" />
+<meta property="og:description" content="Identify and track AI-specific risks: data leakage, bias, hallucination, vendor lock-in, compliance gaps. Assign ownership, mitigation actions, and review cadence. Aligns with ISO/IEC 42001 Clause 8.2, EU AI Act Article 27, GDPR Article 32." />
+<meta property="og:url" content="https://aisafeatwork.org/templates/ai-risk-register.html" />
+<meta property="og:image" content="https://aisafeatwork.org/og-card.png" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Risk Register template — AI Safe@Work" />
+<meta name="twitter:description" content="Identify and track AI-specific risks: data leakage, bias, hallucination, vendor lock-in, compliance gaps. Assign ownership, mitigation actions, and review cadence. Aligns with ISO/IEC 42001 Clause 8.2, EU AI Act Article 27, GDPR Article 32." />
+<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png" />
+<link rel="preload" href="../assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=10" />
+<script defer src="../assets/cinema.js?v=8"></script>
+<style>
+.template-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 2px;
+  background: rgba(145,162,255, 0.08);
+  border: 1px solid rgba(145,162,255, 0.32);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.template-tag::before {
+  content: '§';
+  color: var(--accent);
+  font-weight: 800;
+}
+.print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0 2rem; align-items: center; flex-wrap: wrap; }
+.print-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--accent); color: #0b0e14;
+  font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.7rem 1.25rem; border-radius: 2px;
+  border: none; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 0 1px rgba(145,162,255,0.4), 0 8px 24px rgba(145,162,255,0.2);
+}
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(145,162,255,0.55), 0 12px 32px rgba(145,162,255,0.3); }
+.print-btn:active { transform: translateY(-1px) scale(0.97); }
+.print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
+.fill {
+  display: inline-block;
+  padding: 0.1rem 0.55rem;
+  border-radius: 2px;
+  background: rgba(145,162,255, 0.10);
+  color: var(--accent);
+  border: 1px dashed rgba(145,162,255, 0.42);
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+}
+.risk-matrix {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  margin: 1.5rem 0;
+  border: 1px solid var(--border);
+  font-size: 0.8rem;
+}
+.risk-cell {
+  padding: 0.8rem;
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.risk-cell.header {
+  background: rgba(145,162,255, 0.08);
+  font-weight: 700;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+.risk-cell.high { background: rgba(214, 40, 40, 0.12); color: #d62828; }
+.risk-cell.medium { background: rgba(247, 166, 0, 0.12); color: #f7a600; }
+.risk-cell.low { background: rgba(45, 164, 95, 0.12); color: #2da45f; }
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+.policy-doc {
+  margin: 1.5rem 0;
+  padding: 2rem 2.2rem;
+  background: var(--plate);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  box-shadow: var(--shadow-card);
+}
+.policy-doc h2 { margin-top: 2.2rem; }
+.policy-doc h2:first-child { margin-top: 0; }
+.policy-doc h3 { margin-top: 1.6rem; }
+.policy-doc ol, .policy-doc ul { padding-left: 1.4rem; }
+.policy-doc li { margin-bottom: 0.55rem; }
+@media (max-width: 640px) {
+  .risk-matrix { grid-template-columns: repeat(3, 1fr); font-size: 0.7rem; }
+  .risk-cell { padding: 0.5rem; }
+}
+@media print {
+  .policy-doc { background: white !important; border: 1px solid #ccc !important; box-shadow: none !important; padding: 1rem 0 !important; }
+  .risk-matrix { border: 1px solid #ccc; }
+  .risk-cell.header { background: #f5f5f5 !important; color: #46505e !important; }
+  .fill { background: white !important; color: #0b0e14 !important; border-color: #46505e !important; }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HowTo",
+      "name": "AI Risk Register template",
+      "description": "Track AI-specific risks: data leakage, hallucination, bias, vendor lock-in, compliance. Assign owners and mitigation actions.",
+      "url": "https://aisafeatwork.org/templates/ai-risk-register.html",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://aisafeatwork.org/#organization"
+      },
+      "totalTime": "PT45M",
+      "dateModified": "2026-06-13"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://aisafeatwork.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Templates",
+          "item": "https://aisafeatwork.org/templates/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AI Risk Register template — AI Safe@Work",
+          "item": "https://aisafeatwork.org/templates/ai-risk-register.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="topbar no-print">
+  <a href="../index.html" class="brand">AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="../course.html" class="always-show">Modules</a>
+    <a href="../standards-map.html">Standards Map</a>
+    <a href="../module-11.html">Checklist</a>
+    <a href="../module-12.html">Standards</a>
+  </nav>
+</header>
+
+<main id="main">
+  <span class="template-tag no-print">Template · AI Risk Register v1.0</span>
+  <p class="eyebrow no-print">Risk assessment and tracking</p>
+  <h1 class="page-title">AI Risk Register for <span class="fill">[Company Name]</span></h1>
+  <p class="lede no-print">Identify, assess, and track AI-specific risks: data leakage, hallucination, bias, vendor lock-in, and compliance gaps. Record severity, mitigation actions, and responsible owners. Aligns with ISO/IEC 42001 Clause 8.2, EU AI Act Article 27, GDPR Articles 32, 35.</p>
+
+  <div class="print-row no-print">
+    <button type="button" class="print-btn" onclick="window.print()">Print / Export →</button>
+    <span class="print-hint">Maintain in a shared spreadsheet. Review quarterly or when a new AI use case is introduced. Escalate High risks immediately.</span>
+  </div>
+
+  <article class="policy-doc">
+
+    <span class="section-tag">Purpose and scope</span>
+    <h2>Why we keep a risk register</h2>
+    <p>An AI Risk Register records the risks we've identified in our AI use — what could go wrong, how likely it is, how severe it would be, and what we're doing about it. It:</p>
+    <ul>
+      <li><strong>Makes risk visible</strong> — forces a structured conversation about what we're actually exposed to.</li>
+      <li><strong>Assigns ownership</strong> — ensures someone is responsible for each risk (not just a general concern).</li>
+      <li><strong>Drives mitigation</strong> — converts risk awareness into concrete actions (training, controls, process changes).</li>
+      <li><strong>Provides audit evidence</strong> — shows regulators and insurers that we've thought about AI risks and taken deliberate steps (ISO 42001 Clause 8.2, GDPR Article 32).</li>
+    </ul>
+
+    <h2>Scope</h2>
+    <p>This register covers risks arising from:</p>
+    <ol>
+      <li><strong>Data risks:</strong> Personal data leakage, confidential-data exposure, unintended data retention by vendors.</li>
+      <li><strong>Output risks:</strong> Hallucinations, inaccuracy, bias, misinformation being relied upon for decisions.</li>
+      <li><strong>Vendor risks:</strong> Vendor closure, term-of-service changes, data-handling practices, sub-processor changes, model updates.</li>
+      <li><strong>Operational risks:</strong> Shadow AI, unapproved tools, overreliance without human review, skill erosion.</li>
+      <li><strong>Compliance risks:</strong> GDPR breaches, EU AI Act violations, regulatory gaps, audit failures.</li>
+      <li><strong>Reputational risks:</strong> AI-generated content errors, bias allegations, misuse of AI tools.</li>
+    </ol>
+
+    <h2>Risk assessment framework</h2>
+
+    <h3>Likelihood</h3>
+    <p><strong>High:</strong> This risk has already occurred or is very likely to occur within 12 months (e.g. staff are already pasting personal data into free ChatGPT).</p>
+    <p><strong>Medium:</strong> This risk could plausibly occur within 12–24 months under normal circumstances (e.g. a vendor changes its DPA terms without notice).</p>
+    <p><strong>Low:</strong> This risk is unlikely within 2 years or would require several preconditions to occur (e.g. a vendor is bought out and acquires worse data practices).</p>
+
+    <h3>Impact</h3>
+    <p><strong>High:</strong> If this risk occurs, it causes serious harm: GDPR fine or breach notification required, regulatory investigation, significant reputational damage, customer contracts at risk, or business continuity disrupted.</p>
+    <p><strong>Medium:</strong> Significant but manageable impact: operational disruption, internal policy breach, customer complaint, remediation cost &gt;£10,000, or single-customer relationship damage.</p>
+    <p><strong>Low:</strong> Minor impact: localised inconvenience, internal process fix, minor cost (&lt;£10,000), or no external visibility.</p>
+
+    <h3>Overall risk rating</h3>
+    <p>Use the matrix below. <strong>High risk</strong> items require immediate mitigation action; <strong>Medium</strong items require a mitigation plan within 30 days; <strong>Low</strong> items are monitored.</p>
+
+    <div class="risk-matrix">
+      <div class="risk-cell header"></div>
+      <div class="risk-cell header">Low impact</div>
+      <div class="risk-cell header">Medium impact</div>
+      <div class="risk-cell header">High impact</div>
+      <div class="risk-cell header">Critical impact</div>
+
+      <div class="risk-cell header">High likelihood</div>
+      <div class="risk-cell medium">Medium</div>
+      <div class="risk-cell high">High</div>
+      <div class="risk-cell high">High</div>
+      <div class="risk-cell high">Critical</div>
+
+      <div class="risk-cell header">Medium likelihood</div>
+      <div class="risk-cell low">Low</div>
+      <div class="risk-cell medium">Medium</div>
+      <div class="risk-cell high">High</div>
+      <div class="risk-cell high">Critical</div>
+
+      <div class="risk-cell header">Low likelihood</div>
+      <div class="risk-cell low">Low</div>
+      <div class="risk-cell low">Low</div>
+      <div class="risk-cell medium">Medium</div>
+      <div class="risk-cell high">High</div>
+
+      <div class="risk-cell header">Very low likelihood</div>
+      <div class="risk-cell low">Low</div>
+      <div class="risk-cell low">Low</div>
+      <div class="risk-cell low">Low</div>
+      <div class="risk-cell medium">Medium</div>
+    </div>
+
+    <h2>Register columns explained</h2>
+
+    <h3>Risk category</h3>
+    <p>Choose from: Data leakage · Hallucination · Bias · Vendor risk · Compliance gap · Shadow AI · Operational.</p>
+
+    <h3>Description</h3>
+    <p>Specific risk statement. Example: "Customer personal data (names, emails) pasted into free ChatGPT by support team." Not: "Data risk." Be concrete.</p>
+
+    <h3>Current controls</h3>
+    <p>What are we already doing to reduce this risk? Example: "AUP training, approval list excludes free tools, monthly AI-use survey." If no controls, write "None."</p>
+
+    <h3>Likelihood & impact</h3>
+    <p>Use the framework above. Likelihood × Impact = Overall rating.</p>
+
+    <h3>Owner</h3>
+    <p>A named person responsible for managing this risk. Not a title — a name. They lead mitigation, monitor trends, report status monthly.</p>
+
+    <h3>Mitigation action</h3>
+    <p>Specific action to reduce the risk. Examples:</p>
+    <ul>
+      <li>"Deploy ChatGPT Enterprise as approved tool; retire free-tier usage by [date]."</li>
+      <li>"Implement vendor questionnaire review process; assess [Tool X] by [date]."</li>
+      <li>"Quarterly bias audit of AI-assisted hiring decisions."</li>
+      <li>"Monthly survey: staff to report shadow-AI tools and blockers; escalate to IT."</li>
+    </ul>
+
+    <h3>Mitigation due date</h3>
+    <p>When should this mitigation action be complete? For High risks, within 30 days. For Medium, within 90 days. For Low, within 6 months.</p>
+
+    <h3>Status</h3>
+    <p><strong>Open:</strong> Action not yet started or in progress.</p>
+    <p><strong>In progress:</strong> Work underway, on track to meet due date.</p>
+    <p><strong>Complete:</strong> Mitigation action finished; residual risk re-assessed.</p>
+    <p><strong>Deferred:</strong> Deferral approved by [role]; new target date recorded.</p>
+
+    <h2>Sample risk entries</h2>
+
+    <table style="width: 100%; margin: 1.5rem 0; border-collapse: collapse; font-size: 0.85rem;">
+      <tr style="background: rgba(145,162,255, 0.08); border: 1px solid var(--border);">
+        <th style="padding: 0.9rem; text-align: left; font-weight: 700; color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem;">Risk ID</th>
+        <th style="padding: 0.9rem; text-align: left; font-weight: 700; color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem;">Category</th>
+        <th style="padding: 0.9rem; text-align: left; font-weight: 700; color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem;">Description</th>
+        <th style="padding: 0.9rem; text-align: left; font-weight: 700; color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem;">Current rating</th>
+        <th style="padding: 0.9rem; text-align: left; font-weight: 700; color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem;">Mitigation</th>
+      </tr>
+      <tr style="border: 1px solid var(--border);">
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">R-001</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Data leakage</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Staff pasting customer emails into free ChatGPT</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border); color: #d62828; font-weight: 700;">High</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Approved list (enterprise tools only for personal data); AUP training; monthly compliance spot-check</td>
+      </tr>
+      <tr style="border: 1px solid var(--border);">
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">R-002</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Hallucination</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Support team relies on AI output without fact-checking; wrong advice given to customer</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border); color: #f7a600; font-weight: 700;">Medium</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Module 3 training (output verification); peer review of AI-assisted responses; incident tracking</td>
+      </tr>
+      <tr style="border: 1px solid var(--border);">
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">R-003</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Vendor risk</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Copilot vendor changes DPA or sub-processors without notice; we're out of compliance</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border); color: #f7a600; font-weight: 700;">Medium</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Subscribe to vendor change notifications; quarterly DPA review; escalation process documented</td>
+      </tr>
+      <tr style="border: 1px solid var(--border);">
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">R-004</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Shadow AI</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Staff find and use unapproved free tools without IT visibility</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border); color: #d62828; font-weight: 700;">High</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Quarterly anonymous survey; shadow-AI discovery process; approver can approve new tools within 5 days</td>
+      </tr>
+    </table>
+
+    <h2>How to establish and maintain the register</h2>
+    <ol>
+      <li><strong>Initial workshop:</strong> Convene IT, DPO, security, operations, and a line manager. Brainstorm: "What are our AI risks?" Use the risk categories above and Module 4–6 incident examples. Record 8–15 risks.</li>
+      <li><strong>Assess each:</strong> For each risk, estimate likelihood and impact. Plot on the matrix. Assign an owner (named person, not role).</li>
+      <li><strong>Prioritise:</strong> High and Critical risks get mitigation plans within 30 days. Medium risks get plans within 90 days. Low risks are monitored.</li>
+      <li><strong>Own and execute:</strong> Each risk owner leads their mitigation action, reports monthly. Escalate blockers to <span class="fill">[DPO / CISO / leadership]</span>.</li>
+      <li><strong>Review quarterly:</strong> Have existing risks improved? Are new risks emerging (new tools, vendor changes)? Update the register same week. If a High risk is resolved, move it to archive (keep for audit history).</li>
+    </ol>
+
+    <h2>Standards referenced</h2>
+    <ul>
+      <li><strong>ISO/IEC 42001:2023</strong> — Clause 8.2 (risk and opportunity identification), Clause 8.3 (compliance obligations), Clause 9.1 (monitoring and measurement).</li>
+      <li><strong>EU AI Act 2024/1689</strong> — Article 27 (deployer obligations to assess and mitigate risks).</li>
+      <li><strong>GDPR 2016/679</strong> — Article 32 (security of processing, including risk assessment), Article 35 (Data Protection Impact Assessment).</li>
+    </ul>
+
+  </article>
+
+  <div class="callout note no-print">
+    <span class="callout-icon">i</span>
+    <div>
+      <div class="callout-title">Getting started</div>
+      <ol>
+        <li>Set up a shared spreadsheet (Google Sheets, Notion, etc.) with columns: Risk ID, Category, Description, Likelihood, Impact, Rating, Owner, Mitigation action, Due date, Status, Last updated.</li>
+        <li>Run a 90-minute workshop with IT, DPO, and operations. Use Modules 3–6 and the eight risk categories above to prompt discussion.</li>
+        <li>Assess each risk using the likelihood/impact framework. Plot on the matrix to get overall rating.</li>
+        <li>For every High/Critical risk, define a specific mitigation action with a due date and owner name.</li>
+        <li>Communicate to leadership. Escalate High-risk mitigations for approval before executing.</li>
+        <li>Review and update monthly. Assign a single owner to shepherd the register and chase progress.</li>
+      </ol>
+    </div>
+  </div>
+
+</main>
+
+<nav class="module-bottom-nav no-print">
+  <a class="nav-btn" href="../module-procurement.html">
+    <span class="nav-dir">Back to</span>
+    <span class="nav-title">← Procurement track</span>
+  </a>
+  <a class="nav-btn next" href="ai-governance-charter.html">
+    <span class="nav-dir">Next template</span>
+    <span class="nav-title">AI Governance Charter →</span>
+  </a>
+</nav>
+
+<footer class="site-foot no-print">
+  <span>AI Safe@Work · AI Risk Register v1.0 · v2026.06</span>
+  <span class="foot-right">
+    <a href="../course.html">All modules</a>
+    <a href="../privacy.html">Privacy</a>
+    <a href="../terms.html">Terms</a>
+  </span>
+</footer>
+
+</body>
+</html>

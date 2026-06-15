@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#060608" />
+<script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
+<title>AI Executive Brief template — AI Safe@Work</title>
+<meta name="description" content="Board/leadership-level brief on AI governance: current state, strategic risks, compliance posture, and decisions needed. One page, plain language, standards-cited. Aligns with EU AI Act Article 4, ISO/IEC 38507 (board AI governance)." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="AI Safe@Work" />
+<meta property="og:title" content="AI Executive Brief template — AI Safe@Work" />
+<meta property="og:description" content="Board/leadership-level brief on AI governance: current state, strategic risks, compliance posture, and decisions needed. One page, plain language, standards-cited. Aligns with EU AI Act Article 4, ISO/IEC 38507 (board AI governance)." />
+<meta property="og:url" content="https://aisafeatwork.org/templates/ai-executive-brief.html" />
+<meta property="og:image" content="https://aisafeatwork.org/og-card.png" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Executive Brief template — AI Safe@Work" />
+<meta name="twitter:description" content="Board/leadership-level brief on AI governance: current state, strategic risks, compliance posture, and decisions needed. One page, plain language, standards-cited. Aligns with EU AI Act Article 4, ISO/IEC 38507 (board AI governance)." />
+<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png" />
+<link rel="preload" href="../assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=10" />
+<script defer src="../assets/cinema.js?v=8"></script>
+<style>
+.template-tag { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.95rem; border-radius: 2px; background: rgba(145,162,255, 0.08); border: 1px solid rgba(145,162,255, 0.32); color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.2rem; }
+.template-tag::before { content: '§'; color: var(--accent); font-weight: 800; }
+.print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0 2rem; align-items: center; flex-wrap: wrap; }
+.print-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #0b0e14; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.7rem 1.25rem; border-radius: 2px; border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 0 0 1px rgba(145,162,255,0.4), 0 8px 24px rgba(145,162,255,0.2); }
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(145,162,255,0.55), 0 12px 32px rgba(145,162,255,0.3); }
+.print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
+.brief-doc { margin: 1.5rem 0; padding: 2rem 2.2rem; background: var(--plate); border: 1px solid var(--border); border-radius: 3px; box-shadow: var(--shadow-card); page-break-inside: avoid; }
+.brief-doc h2 { margin-top: 1.6rem; font-size: 1.1rem; }
+.brief-doc h2:first-child { margin-top: 0; }
+.brief-doc h3 { margin-top: 1.2rem; font-size: 1rem; }
+.brief-doc ol, .brief-doc ul { padding-left: 1.4rem; margin: 0.8rem 0; }
+.brief-doc li { margin-bottom: 0.4rem; }
+.brief-doc p { margin: 0.8rem 0; }
+.status-amber { color: #f7a600; font-weight: 700; }
+.status-green { color: #2da45f; font-weight: 700; }
+.status-red { color: #d62828; font-weight: 700; }
+.section-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+.fill { display: inline-block; padding: 0.1rem 0.55rem; border-radius: 2px; background: rgba(145,162,255, 0.10); color: var(--accent); border: 1px dashed rgba(145,162,255, 0.42); font-family: var(--font-mono); font-size: 0.88em; }
+.decision-box { margin: 1.2rem 0; padding: 1.2rem; background: rgba(145,162,255, 0.05); border-left: 3px solid var(--accent); }
+.decision-box strong { display: block; color: var(--accent); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.4rem; }
+@media (max-width: 640px) { .brief-doc { padding: 1rem; } }
+@media print { .brief-doc { background: white !important; border: 1px solid #ccc !important; box-shadow: none !important; } .fill { background: white !important; color: #0b0e14 !important; border-color: #46505e !important; } .decision-box { border-left-color: #46505e !important; background: #f9f9f9 !important; } }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [{
+    "@type": "HowTo",
+    "name": "AI Executive Brief template",
+    "description": "One-page board brief on AI governance: risks, compliance, decisions needed. Plain language, standards-cited.",
+    "url": "https://aisafeatwork.org/templates/ai-executive-brief.html",
+    "inLanguage": "en",
+    "publisher": { "@id": "https://aisafeatwork.org/#organization" },
+    "totalTime": "PT20M",
+    "dateModified": "2026-06-13"
+  }, {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://aisafeatwork.org/" },
+      { "@type": "ListItem", "position": 2, "name": "Templates", "item": "https://aisafeatwork.org/templates/" },
+      { "@type": "ListItem", "position": 3, "name": "AI Executive Brief — AI Safe@Work", "item": "https://aisafeatwork.org/templates/ai-executive-brief.html" }
+    ]
+  }]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="topbar no-print">
+  <a href="../index.html" class="brand">AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="../course.html" class="always-show">Modules</a>
+    <a href="../standards-map.html">Standards Map</a>
+    <a href="../module-11.html">Checklist</a>
+    <a href="../module-12.html">Standards</a>
+  </nav>
+</header>
+<main id="main">
+  <span class="template-tag no-print">Template · AI Executive Brief v1.0</span>
+  <p class="eyebrow no-print">Board/leadership communication</p>
+  <h1 class="page-title">AI Governance: Executive Brief</h1>
+  <p class="lede no-print">A one-page, plain-language summary of AI governance status for the board or executive team. Covers current state, compliance posture, strategic risks, and decisions needed. Aligns with EU AI Act Article 4 (oversight), ISO/IEC 38507 (board oversight of AI), and GDPR Article 5 (accountability).</p>
+  <div class="print-row no-print">
+    <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF →</button>
+    <span class="print-hint">This is a one-page brief. Use it for board papers, quarterly reviews, or investor meetings.</span>
+  </div>
+
+  <article class="brief-doc">
+    <span class="section-tag">Executive summary</span>
+
+    <h1 style="margin: 0 0 0.5rem 0; font-size: 1.3rem;">AI Governance Status: <span class="fill">[Quarter / Month YYYY]</span></h1>
+    <p style="margin: 0; color: var(--text3); font-family: var(--font-mono); font-size: 0.85rem;">
+      Status: <span class="status-amber">AMBER</span> · Governance maturity: <span class="fill">Developing</span> · Compliance posture: <span class="fill">On track</span> · Key risk: Training completion lag
+    </p>
+
+    <h2>The situation</h2>
+    <p><span class="fill">[Company Name]</span> uses AI in <span class="fill">[10]</span> distinct ways: internal drafting, customer support summarisation, recruitment screening, and invoice categorisation. Staff use <span class="fill">[10]</span> approved AI tools (ChatGPT Enterprise, Claude, Copilot, etc.) and an estimated <span class="fill">[3]</span> unapproved tools (shadow AI).</p>
+
+    <p>Under EU AI Act Article 4 and GDPR Article 5, we have a legal duty to ensure staff are AI-literate, to monitor and manage risks, and to maintain accountability for AI-assisted decisions. This brief covers our current posture.</p>
+
+    <h2>Compliance status</h2>
+    <ul>
+      <li><strong>EU AI Act Article 4 (AI literacy):</strong> <span class="status-amber">75% of staff</span> completed AI literacy training; target is 100% by <span class="fill">[date]</span>. Managers are lagging: 60% completion.</li>
+      <li><strong>Data Protection Impact Assessments (GDPR Art. 35):</strong> <span class="status-amber">60% of High-risk AI use cases</span> have completed DPIA / FRIA. Four pending; due <span class="fill">[dates]</span>.</li>
+      <li><strong>Vendor oversight (GDPR Art. 28, EU AI Act Art. 26):</strong> <span class="status-green">All approved tools have Data Processing Agreements in place.</span> No vendor-related compliance breaches this quarter.</li>
+      <li><strong>Policy compliance:</strong> <span class="status-amber">One policy breach this month</span> (staff pasted personal data into non-approved tool). Incident investigated; no data loss confirmed. Team re-trained.</li>
+    </ul>
+
+    <h2>Operational risks (top three)</h2>
+    <table style="width: 100%; margin: 1rem 0; border-collapse: collapse; font-size: 0.9rem;">
+      <tr style="border: 1px solid var(--border);">
+        <th style="padding: 0.7rem; text-align: left; font-weight: 700; background: rgba(145,162,255, 0.08);">Risk</th>
+        <th style="padding: 0.7rem; text-align: left; font-weight: 700; background: rgba(145,162,255, 0.08);">Mitigation</th>
+        <th style="padding: 0.7rem; text-align: left; font-weight: 700; background: rgba(145,162,255, 0.08);">Due date</th>
+      </tr>
+      <tr style="border: 1px solid var(--border);">
+        <td style="padding: 0.7rem;"><span class="status-amber">Staff training lag</span> — 25% of staff incomplete</td>
+        <td style="padding: 0.7rem;">Manager accountability; deadline communication; incentive.</td>
+        <td style="padding: 0.7rem; font-family: var(--font-mono); font-size: 0.85rem;"><span class="fill">2026-06-30</span></td>
+      </tr>
+      <tr style="border: 1px solid var(--border);">
+        <td style="padding: 0.7rem;"><span class="status-amber">Vendor term changes</span> — ChatGPT model update requires re-assessment</td>
+        <td style="padding: 0.7rem;">DPO review of updated model; compliance memo to stakeholders.</td>
+        <td style="padding: 0.7rem; font-family: var(--font-mono); font-size: 0.85rem;"><span class="fill">2026-06-20</span></td>
+      </tr>
+      <tr style="border: 1px solid var(--border);">
+        <td style="padding: 0.7rem;"><span class="status-red">Incomplete DPIA/FRIA</span> — 4 use cases pending impact assessment</td>
+        <td style="padding: 0.7rem;">Accelerate FRIA completion; interim risk controls in place.</td>
+        <td style="padding: 0.7rem; font-family: var(--font-mono); font-size: 0.85rem;"><span class="fill">2026-07-31</span></td>
+      </tr>
+    </table>
+
+    <h2>What we've done</h2>
+    <ul>
+      <li><strong>Established governance:</strong> AI Governance Charter signed by CEO; steering committee formed; quarterly review cycle active.</li>
+      <li><strong>Built registers:</strong> AI Tool Register (10 approved + 3 shadow tools tracked); AI Risk Register (12 identified risks, 8 with mitigation plans); AI Use Case Register (7 live use cases).</li>
+      <li><strong>Set standards:</strong> AI Acceptable Use Policy (staff trained); vendor questionnaire process (DPA review requirement).</li>
+      <li><strong>Tracked performance:</strong> Monthly governance scorecard; zero data-leakage incidents this quarter (down from 1 last quarter).</li>
+    </ul>
+
+    <h2>Decisions needed from the board / leadership</h2>
+
+    <div class="decision-box">
+      <strong>Decision 1: Training deadline</strong>
+      <p>Staff training completion is at 75%. We need a hard deadline and leadership endorsement (e.g. "All staff must complete by June 30"). <strong>Recommend: Approve deadline and ask managers to sign off.</strong></p>
+    </div>
+
+    <div class="decision-box">
+      <strong>Decision 2: Budget for impact assessments</strong>
+      <p>Four High-risk AI use cases are pending GDPR DPIA / EU AI Act FRIA. Completing these internally takes ~2 weeks per use case (5 weeks total). Alternatively, we can hire a specialist (£8,000–£12,000). <strong>Recommend: Internal completion if capacity allows; external if time is critical.</strong></p>
+    </div>
+
+    <div class="decision-box">
+      <strong>Decision 3: Shadow AI governance approach</strong>
+      <p>Three unapproved tools are in use (staff found them independently). We can block them, approve them, or tolerate them with conditions. <strong>Recommend: Fast-track approval (5-day review) for tools that meet our criteria; communicate blocklist to staff.</strong></p>
+    </div>
+
+    <h2>Bottom line</h2>
+    <p><span class="fill">[Company Name]</span> is <strong>AMBER</strong> on AI governance maturity: we have the right structure (charter, steering committee, registers, policy), but we're lagging on execution (training, impact assessments). Two months of focused effort (training completion, DPIA/FRIA finish) moves us to <strong>GREEN</strong>.</p>
+
+    <p><strong>Regulatory exposure:</strong> Low to moderate. We have a documented governance system; no compliance breaches except the one policy incident (investigated and remediated). GDPR and EU AI Act supervisory authorities looking at staff training and impact assessments — both are underway.</p>
+
+    <p><strong>Insurance / audit readiness:</strong> Good. Our governance registers and incident log provide evidence that we've thought about AI risks and taken deliberate steps.</p>
+
+    <h2>Standards referenced</h2>
+    <p style="font-size: 0.9rem; color: var(--text3);">EU AI Act 2024/1689 (Article 4: AI literacy; Article 26: deployer obligations) · GDPR 2016/679 (Article 5: accountability; Article 35: impact assessment) · ISO/IEC 38507:2021 (board governance of information technology and AI).</p>
+
+  </article>
+
+  <div class="callout note no-print">
+    <span class="callout-icon">i</span>
+    <div>
+      <div class="callout-title">How to use this template</div>
+      <ol>
+        <li><strong>Quarterly update:</strong> Update this brief every quarter and present to the board or executive team alongside your governance scorecard.</li>
+        <li><strong>Use plain language:</strong> Replace jargon with plain English. Board members are not AI experts; help them understand the governance posture and risks in their own terms.</li>
+        <li><strong>Lead with decisions:</strong> Don't bury decisions needed in the middle. Make them explicit: "We need your approval to X by Y date."</li>
+        <li><strong>Cite standards:</strong> Brief the standards your organisation is governed by (EU AI Act, GDPR, ISO 42001, etc.). Board members understand "compliance" — frame governance as compliance.</li>
+        <li><strong>Track trends:</strong> Keep previous briefs to show progress: "Training completion up from 60% last quarter to 75% now."</li>
+      </ol>
+    </div>
+  </div>
+
+</main>
+
+<nav class="module-bottom-nav no-print">
+  <a class="nav-btn" href="../module-procurement.html">
+    <span class="nav-dir">Back to</span>
+    <span class="nav-title">← Procurement track</span>
+  </a>
+  <a class="nav-btn next" href="aup-template.html">
+    <span class="nav-dir">Return to</span>
+    <span class="nav-title">Templates overview →</span>
+  </a>
+</nav>
+
+<footer class="site-foot no-print">
+  <span>AI Safe@Work · AI Executive Brief v1.0 · v2026.06</span>
+  <span class="foot-right">
+    <a href="../course.html">All modules</a>
+    <a href="../privacy.html">Privacy</a>
+    <a href="../terms.html">Terms</a>
+  </span>
+</footer>
+
+</body>
+</html>

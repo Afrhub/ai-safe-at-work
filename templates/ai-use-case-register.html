@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#060608" />
+<script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
+<title>AI Use Case Register template — AI Safe@Work</title>
+<meta name="description" content="Inventory of how your organisation uses AI: what problems AI solves, who uses it, what data it processes, and what DPIA/FRIA coverage it has. Aligns with EU AI Act Articles 4, 27; GDPR Article 35; ISO/IEC 42001 Clause 6.2." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="AI Safe@Work" />
+<meta property="og:title" content="AI Use Case Register template — AI Safe@Work" />
+<meta property="og:description" content="Inventory of how your organisation uses AI: what problems AI solves, who uses it, what data it processes, and what DPIA/FRIA coverage it has. Aligns with EU AI Act Articles 4, 27; GDPR Article 35; ISO/IEC 42001 Clause 6.2." />
+<meta property="og:url" content="https://aisafeatwork.org/templates/ai-use-case-register.html" />
+<meta property="og:image" content="https://aisafeatwork.org/og-card.png" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Use Case Register template — AI Safe@Work" />
+<meta name="twitter:description" content="Inventory of how your organisation uses AI: what problems AI solves, who uses it, what data it processes, and what DPIA/FRIA coverage it has. Aligns with EU AI Act Articles 4, 27; GDPR Article 35; ISO/IEC 42001 Clause 6.2." />
+<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png" />
+<link rel="preload" href="../assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=10" />
+<script defer src="../assets/cinema.js?v=8"></script>
+<style>
+.template-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 2px;
+  background: rgba(145,162,255, 0.08);
+  border: 1px solid rgba(145,162,255, 0.32);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.template-tag::before { content: '§'; color: var(--accent); font-weight: 800; }
+.print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0 2rem; align-items: center; flex-wrap: wrap; }
+.print-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #0b0e14; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.7rem 1.25rem; border-radius: 2px; border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 0 0 1px rgba(145,162,255,0.4), 0 8px 24px rgba(145,162,255,0.2); }
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(145,162,255,0.55), 0 12px 32px rgba(145,162,255,0.3); }
+.print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
+.policy-doc { margin: 1.5rem 0; padding: 2rem 2.2rem; background: var(--plate); border: 1px solid var(--border); border-radius: 3px; box-shadow: var(--shadow-card); }
+.policy-doc h2 { margin-top: 2.2rem; }
+.policy-doc h2:first-child { margin-top: 0; }
+.policy-doc h3 { margin-top: 1.6rem; }
+.policy-doc ol, .policy-doc ul { padding-left: 1.4rem; }
+.policy-doc li { margin-bottom: 0.55rem; }
+.section-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+@media (max-width: 640px) { .policy-doc { padding: 1rem; } }
+@media print { .policy-doc { background: white !important; border: 1px solid #ccc !important; box-shadow: none !important; padding: 1rem 0 !important; } }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [{
+    "@type": "HowTo",
+    "name": "AI Use Case Register template",
+    "description": "Inventory of AI use cases in your organisation: what problems AI solves, data flows, and impact assessment coverage.",
+    "url": "https://aisafeatwork.org/templates/ai-use-case-register.html",
+    "inLanguage": "en",
+    "publisher": { "@id": "https://aisafeatwork.org/#organization" },
+    "totalTime": "PT45M",
+    "dateModified": "2026-06-13"
+  }, {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://aisafeatwork.org/" },
+      { "@type": "ListItem", "position": 2, "name": "Templates", "item": "https://aisafeatwork.org/templates/" },
+      { "@type": "ListItem", "position": 3, "name": "AI Use Case Register — AI Safe@Work", "item": "https://aisafeatwork.org/templates/ai-use-case-register.html" }
+    ]
+  }]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="topbar no-print">
+  <a href="../index.html" class="brand">AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="../course.html" class="always-show">Modules</a>
+    <a href="../standards-map.html">Standards Map</a>
+    <a href="../module-11.html">Checklist</a>
+    <a href="../module-12.html">Standards</a>
+  </nav>
+</header>
+<main id="main">
+  <span class="template-tag no-print">Template · AI Use Case Register v1.0</span>
+  <p class="eyebrow no-print">AI deployment inventory</p>
+  <h1 class="page-title">AI Use Case Register</h1>
+  <p class="lede no-print">Record every way your organisation uses AI: what problem it solves, who uses it, what data it touches, whether a DPIA or FRIA has been done. Aligns with EU AI Act Articles 4, 27; GDPR Article 35; ISO/IEC 42001 Clause 6.2.</p>
+  <div class="print-row no-print">
+    <button type="button" class="print-btn" onclick="window.print()">Print / Export →</button>
+    <span class="print-hint">Maintain in a shared spreadsheet. Update whenever a new AI use case is introduced or an existing one changes.</span>
+  </div>
+
+  <article class="policy-doc">
+    <span class="section-tag">Purpose and scope</span>
+    <h2>Why we keep a use case register</h2>
+    <p>A Use Case Register records what we actually do with AI — not the tools we have, but the jobs we use them for. It:</p>
+    <ul>
+      <li><strong>Traces data flows:</strong> What data does this AI use case ingest, process, and output?</li>
+      <li><strong>Triggers impact assessment:</strong> Does this use case trigger a GDPR DPIA or EU AI Act FRIA requirement?</li>
+      <li><strong>Ensures governance oversight:</strong> Every use case has an owner and a risk level.</li>
+      <li><strong>Provides audit evidence:</strong> Shows regulators that we've thought about each use of AI.</li>
+    </ul>
+
+    <h2>Scope</h2>
+    <p>Record every distinct way AI is used, including:</p>
+    <ul>
+      <li>Individual staff members using ChatGPT to draft documents.</li>
+      <li>Support team using AI to summarize customer emails.</li>
+      <li>Hiring team using AI to screen CVs.</li>
+      <li>Finance team using AI to categorize invoices.</li>
+      <li>Any other task where the outcome of AI processing affects decision-making, customer experience, or business decisions.</li>
+    </ul>
+
+    <h2>Register columns explained</h2>
+
+    <h3>Use case ID and name</h3>
+    <p>Give each use case a unique ID (UC-001, UC-002, etc.) and a descriptive name. Examples: "Customer email summarization", "Invoice categorization", "CV screening for data analyst role".</p>
+
+    <h3>Purpose</h3>
+    <p>What problem does this use case solve? One sentence. Example: "Reduce time support staff spend reading and summarizing customer emails."</p>
+
+    <h3>AI tool(s) used</h3>
+    <p>Which tool(s) power this use case? (Reference the approved AI Tool Register.) Example: "ChatGPT Enterprise".</p>
+
+    <h3>Input data categories</h3>
+    <p>What data does this use case ingest? Choose from: public data, internal non-sensitive, confidential business, personal data (general), special-category data. List all that apply.</p>
+
+    <h3>Data volume / retention</h3>
+    <p>How much data flows through? Example: "500 emails/month, retained by staff in summaries (not in ChatGPT)."</p>
+
+    <h3>Affected parties</h3>
+    <p>Whose data is processed? Example: "Customers (email authors)". This determines whether GDPR applies and what rights apply.</p>
+
+    <h3>Use case owner</h3>
+    <p>Named person responsible for this use case. They ensure the use case complies with policy, monitor for issues, and report status.</p>
+
+    <h3>GDPR impact assessment required?</h3>
+    <p><strong>Yes / No / Pending.</strong> A DPIA (Data Protection Impact Assessment per GDPR Article 35) is required if:</p>
+    <ul>
+      <li>You process special-category data (health, ethnicity, religion, etc.).</li>
+      <li>You make automated decisions about people (hiring, credit, eligibility).</li>
+      <li>The processing involves large-scale personal data.</li>
+    </ul>
+
+    <h3>EU AI Act impact assessment required?</h3>
+    <p><strong>Yes / No / Pending.</strong> An FRIA (Fundamental Rights Impact Assessment per EU AI Act Article 27) is required if the AI system could impact fundamental rights (privacy, fair trial, non-discrimination, etc.). Most customer-facing or decision-affecting use cases trigger FRIA.</p>
+
+    <h3>Assessment status and location</h3>
+    <p>If a DPIA or FRIA is required, where does it live? Link to the document location. Example: "DPIA-001 on shared drive / AI-Assessments/Customer-Email-Summary-DPIA.pdf".</p>
+
+    <h3>Risk rating</h3>
+    <p><strong>High / Medium / Low</strong> — based on data sensitivity and impact. A use case that processes special-category data and makes automated decisions is High. Use your AI Risk Register to inform this.</p>
+
+    <h3>Compliance status</h3>
+    <p><strong>Active / Paused / Discontinued.</strong> Is this use case running, on hold, or ended?</p>
+
+    <h3>Notes</h3>
+    <p>Any other relevant detail. Example: "Under review pending DPIA completion."</p>
+
+    <h2>Sample use case entries</h2>
+
+    <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.85rem;">
+      <tr style="background: rgba(145,162,255, 0.08); border: 1px solid var(--border);">
+        <th style="padding: 0.9rem; text-align: left; font-weight: 700; color: var(--accent);">Use Case</th>
+        <th style="padding: 0.9rem; text-align: left; font-weight: 700; color: var(--accent);">Data</th>
+        <th style="padding: 0.9rem; text-align: left; font-weight: 700; color: var(--accent);">Tool</th>
+        <th style="padding: 0.9rem; text-align: left; font-weight: 700; color: var(--accent);">DPIA</th>
+        <th style="padding: 0.9rem; text-align: left; font-weight: 700; color: var(--accent);">Risk</th>
+        <th style="padding: 0.9rem; text-align: left; font-weight: 700; color: var(--accent);">Status</th>
+      </tr>
+      <tr style="border: 1px solid var(--border);">
+        <td style="padding: 0.85rem; border: 1px solid var(--border);"><strong>UC-001: Customer email summarization</strong></td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Customer email (personal data: names, account info)</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">ChatGPT Enterprise</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Yes — DPIA-001 complete</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border); color: #f7a600; font-weight: 700;">Medium</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Active</td>
+      </tr>
+      <tr style="border: 1px solid var(--border);">
+        <td style="padding: 0.85rem; border: 1px solid var(--border);"><strong>UC-002: CV screening</strong></td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Applicant CV (personal data, special category if health disclosed)</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">AI screening tool (TBD)</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Yes — DPIA + FRIA pending</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border); color: #d62828; font-weight: 700;">High</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Paused (awaiting assessment)</td>
+      </tr>
+      <tr style="border: 1px solid var(--border);">
+        <td style="padding: 0.85rem; border: 1px solid var(--border);"><strong>UC-003: Internal document drafting</strong></td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Internal memos (confidential business, no personal data)</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Claude or ChatGPT</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">No — no personal data affected</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border); color: #2da45f; font-weight: 700;">Low</td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Active</td>
+      </tr>
+    </table>
+
+    <h2>How to establish and maintain the register</h2>
+    <ol>
+      <li><strong>Discovery:</strong> Interview managers, team leads, and department heads. Ask: "What are you using AI for?" Include shadow AI (unapproved uses).</li>
+      <li><strong>Record:</strong> For each use case, complete the columns above. Identify which ones require DPIA / FRIA.</li>
+      <li><strong>Assess:</strong> For High-risk use cases or those with personal data, trigger DPIA / FRIA immediately. Assign an owner to complete it within 30 days.</li>
+      <li><strong>Update monthly:</strong> Review the register with department heads. Any new use cases? Any discontinuations?</li>
+      <li><strong>Link to risk register:</strong> Each use case on this register should have a corresponding entry (or entries) in the AI Risk Register if risks are identified.</li>
+    </ol>
+
+    <h2>Standards referenced</h2>
+    <ul>
+      <li><strong>EU AI Act 2024/1689</strong> — Article 4 (literacy), Article 27 (deployer obligations to assess and monitor).</li>
+      <li><strong>GDPR 2016/679</strong> — Article 35 (Data Protection Impact Assessment requirement).</li>
+      <li><strong>ISO/IEC 42001:2023</strong> — Clause 6.2 (determining requirements for AI systems).</li>
+    </ul>
+
+  </article>
+
+  <div class="callout note no-print">
+    <span class="callout-icon">i</span>
+    <div>
+      <div class="callout-title">Getting started</div>
+      <ol>
+        <li>Set up a shared spreadsheet with columns: Use Case ID, Name, Purpose, Tool, Input Data, Owner, DPIA?, FRIA?, Risk, Status.</li>
+        <li>Run interviews with each department: "What are you using AI for?" List high-value and shadow-AI uses.</li>
+        <li>For each use case, record the columns. Highlight any that involve personal data or automated decisions — these need DPIA / FRIA.</li>
+        <li>Assign owners and trigger assessments for High-risk use cases.</li>
+        <li>Review monthly. Update immediately if a new use case begins or vendor terms change.</li>
+      </ol>
+    </div>
+  </div>
+
+</main>
+
+<nav class="module-bottom-nav no-print">
+  <a class="nav-btn" href="../module-procurement.html">
+    <span class="nav-dir">Back to</span>
+    <span class="nav-title">← Procurement track</span>
+  </a>
+  <a class="nav-btn next" href="ai-governance-scorecard.html">
+    <span class="nav-dir">Next template</span>
+    <span class="nav-title">AI Governance Scorecard →</span>
+  </a>
+</nav>
+
+<footer class="site-foot no-print">
+  <span>AI Safe@Work · AI Use Case Register v1.0 · v2026.06</span>
+  <span class="foot-right">
+    <a href="../course.html">All modules</a>
+    <a href="../privacy.html">Privacy</a>
+    <a href="../terms.html">Terms</a>
+  </span>
+</footer>
+
+</body>
+</html>

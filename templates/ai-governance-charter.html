@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#060608" />
+<script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
+<title>AI Governance Charter template — AI Safe@Work</title>
+<meta name="description" content="Founding charter for your AI governance function. Define scope, decision-making authority, roles, escalation paths, and review cadence. Aligns with EU AI Act Article 4, GDPR Article 24, ISO/IEC 42001 Clause 5.3." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="AI Safe@Work" />
+<meta property="og:title" content="AI Governance Charter template — AI Safe@Work" />
+<meta property="og:description" content="Founding charter for your AI governance function. Define scope, decision-making authority, roles, escalation paths, and review cadence. Aligns with EU AI Act Article 4, GDPR Article 24, ISO/IEC 42001 Clause 5.3." />
+<meta property="og:url" content="https://aisafeatwork.org/templates/ai-governance-charter.html" />
+<meta property="og:image" content="https://aisafeatwork.org/og-card.png" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Governance Charter template — AI Safe@Work" />
+<meta name="twitter:description" content="Founding charter for your AI governance function. Define scope, decision-making authority, roles, escalation paths, and review cadence. Aligns with EU AI Act Article 4, GDPR Article 24, ISO/IEC 42001 Clause 5.3." />
+<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png" />
+<link rel="preload" href="../assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=10" />
+<script defer src="../assets/cinema.js?v=8"></script>
+<style>
+.template-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 2px;
+  background: rgba(145,162,255, 0.08);
+  border: 1px solid rgba(145,162,255, 0.32);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.template-tag::before {
+  content: '§';
+  color: var(--accent);
+  font-weight: 800;
+}
+.print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0 2rem; align-items: center; flex-wrap: wrap; }
+.print-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--accent); color: #0b0e14;
+  font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.7rem 1.25rem; border-radius: 2px;
+  border: none; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 0 1px rgba(145,162,255,0.4), 0 8px 24px rgba(145,162,255,0.2);
+}
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(145,162,255,0.55), 0 12px 32px rgba(145,162,255,0.3); }
+.print-btn:active { transform: translateY(-1px) scale(0.97); }
+.print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
+.fill {
+  display: inline-block;
+  padding: 0.1rem 0.55rem;
+  border-radius: 2px;
+  background: rgba(145,162,255, 0.10);
+  color: var(--accent);
+  border: 1px dashed rgba(145,162,255, 0.42);
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+}
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+.policy-doc {
+  margin: 1.5rem 0;
+  padding: 2rem 2.2rem;
+  background: var(--plate);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  box-shadow: var(--shadow-card);
+}
+.policy-doc h2 { margin-top: 2.2rem; }
+.policy-doc h2:first-child { margin-top: 0; }
+.policy-doc h3 { margin-top: 1.6rem; }
+.policy-doc ol, .policy-doc ul { padding-left: 1.4rem; }
+.policy-doc li { margin-bottom: 0.55rem; }
+.signoff {
+  margin-top: 2.4rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+.signoff .field { color: var(--text2); }
+.signoff .field strong { display: block; color: var(--accent); font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 0.4rem; }
+.signoff .field .line { display: block; min-height: 1.6rem; border-bottom: 1px solid var(--border-bold); margin-top: 0.4rem; }
+@media (max-width: 640px) { .signoff { grid-template-columns: 1fr; } }
+@media print {
+  .policy-doc { background: white !important; border: 1px solid #ccc !important; box-shadow: none !important; padding: 1rem 0 !important; }
+  .signoff .field strong { color: #46505e !important; }
+  .fill { background: white !important; color: #0b0e14 !important; border-color: #46505e !important; }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HowTo",
+      "name": "AI Governance Charter template",
+      "description": "Founding charter for AI governance function. Define authority, scope, decision-making, escalation paths.",
+      "url": "https://aisafeatwork.org/templates/ai-governance-charter.html",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://aisafeatwork.org/#organization"
+      },
+      "totalTime": "PT60M",
+      "dateModified": "2026-06-13"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://aisafeatwork.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Templates",
+          "item": "https://aisafeatwork.org/templates/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AI Governance Charter template — AI Safe@Work",
+          "item": "https://aisafeatwork.org/templates/ai-governance-charter.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="topbar no-print">
+  <a href="../index.html" class="brand">AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="../course.html" class="always-show">Modules</a>
+    <a href="../standards-map.html">Standards Map</a>
+    <a href="../module-11.html">Checklist</a>
+    <a href="../module-12.html">Standards</a>
+  </nav>
+</header>
+
+<main id="main">
+  <span class="template-tag no-print">Template · AI Governance Charter v1.0</span>
+  <p class="eyebrow no-print">Governance foundational document</p>
+  <h1 class="page-title">AI Governance Charter</h1>
+  <p class="lede no-print">A founding document that defines why you govern AI, what authority the governance function has, who reports to whom, and how decisions are made. Signed by leadership. Aligns with EU AI Act Article 4, GDPR Article 24, ISO/IEC 42001 Clause 5.3.</p>
+
+  <div class="print-row no-print">
+    <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF →</button>
+    <span class="print-hint">This charter is signed by the CEO or board equivalent and filed as a policy document. It establishes the formal authority for AI governance.</span>
+  </div>
+
+  <article class="policy-doc">
+
+    <span class="section-tag">Governance foundation</span>
+    <h1 style="margin-top: 0; font-size: 1.35rem;">AI Governance Charter</h1>
+    <p><strong><span class="fill">[Company Name]</span></strong></p>
+    <p><strong>Version:</strong> 1.0 · <strong>Effective date:</strong> <span class="fill">[YYYY-MM-DD]</span> · <strong>Review cycle:</strong> Annual</p>
+
+    <h2>1. Purpose of this charter</h2>
+    <p>This charter formally establishes the AI Governance function at <span class="fill">[Company Name]</span>. It sets out:</p>
+    <ul>
+      <li>Why we govern AI (our obligation under law and our values).</li>
+      <li>What authority the governance function has (what decisions it makes, what it advises on, what it escalates).</li>
+      <li>Who governs (the roles, the steering committee, the escalation path).</li>
+      <li>How decisions are made (approval thresholds, consensus expectations, timeline for decisions).</li>
+      <li>How we measure success (governance maturity, compliance posture, incident trends).</li>
+    </ul>
+
+    <h2>2. Why we govern AI</h2>
+    <h3>Legal obligation</h3>
+    <p>We operate in the European Union and must comply with:</p>
+    <ul>
+      <li><strong>EU AI Act 2024/1689:</strong> Article 4 requires our staff to be "AI literate"; Article 26 requires us to evaluate and monitor risks from the AI tools we deploy.</li>
+      <li><strong>GDPR 2016/679:</strong> Article 5 requires that personal data be processed lawfully, fairly, and transparently, including when an AI tool processes it. Article 22 requires human oversight of decisions that affect people.</li>
+      <li><strong>ISO/IEC 42001:2023:</strong> If we pursue compliance certification, Clause 5 (leadership commitment) requires a documented management system for AI risks.</li>
+    </ul>
+
+    <h3>Business responsibility</h3>
+    <p>Beyond law, we have a responsibility to:</p>
+    <ul>
+      <li><strong>Protect our customers:</strong> Ensure AI-assisted decisions affecting them are fair, accurate, and subject to human review.</li>
+      <li><strong>Protect our data:</strong> Prevent confidential information and personal data from leaking into AI vendor systems.</li>
+      <li><strong>Manage vendor risk:</strong> Ensure the AI tools we depend on have adequate security and won't disappear or change terms on us.</li>
+      <li><strong>Maintain trust:</strong> Be transparent with our customers, regulators, and employees about how we use AI.</li>
+    </ul>
+
+    <h2>3. Authority and scope of the AI Governance function</h2>
+    <h3>Established authority</h3>
+    <p>The AI Governance Steering Committee has authority to:</p>
+    <ol>
+      <li><strong>Approve or reject new AI tool adoption</strong> — before procurement, a tool must be reviewed by DPO / IT security and approved by the committee.</li>
+      <li><strong>Maintain policy:</strong> Define and update the AI Acceptable Use Policy, AI Tool Register, and Risk Register (with executive sign-off for material changes).</li>
+      <li><strong>Oversee compliance:</strong> Ensure staff complete AI governance training; audit adherence to policies; escalate breaches to leadership.</li>
+      <li><strong>Manage incidents:</strong> Oversee investigation and remediation of AI-related incidents (data leakage, bias, hallucination harm, vendor issues).</li>
+      <li><strong>Report to leadership:</strong> Monthly status on governance maturity, compliance gaps, open risks, incident trends.</li>
+    </ol>
+
+    <h3>Advisory authority (not final decision)</h3>
+    <p>The committee advises but does not decide:</p>
+    <ul>
+      <li>What business problems AI should be applied to (that's leadership / business ownership).</li>
+      <li>Budget allocation for AI tools (that's finance and procurement).</li>
+      <li>Whether to take on legal risk for a tool we judge as inadequate (that's board / executive choice, after the committee warns them).</li>
+    </ul>
+
+    <h3>Escalation path</h3>
+    <p><strong>Committee → Chief [DPO / Risk Officer / Operations] → CEO.</strong></p>
+    <p>Any issue the committee cannot resolve (budget, vendor selection, board-level risk) escalates to <span class="fill">[Chief X]</span>. If that role cannot resolve it, it goes to the CEO. Committee decisions are not overruled without documented rationale and risk acceptance by the CEO.</p>
+
+    <h2>4. Governance steering committee composition</h2>
+    <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem;">
+      <tr style="background: rgba(145,162,255, 0.08); border: 1px solid var(--border);">
+        <th style="padding: 0.9rem; text-align: left; font-weight: 700; color: var(--accent);">Role</th>
+        <th style="padding: 0.9rem; text-align: left; font-weight: 700; color: var(--accent);">Name (current)</th>
+        <th style="padding: 0.9rem; text-align: left; font-weight: 700; color: var(--accent);">Responsibility</th>
+      </tr>
+      <tr style="border: 1px solid var(--border);">
+        <td style="padding: 0.85rem; border: 1px solid var(--border);"><strong>Chair</strong></td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);"><span class="fill">[Name, e.g. DPO]</span></td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Run meetings, escalate decisions, report to CEO.</td>
+      </tr>
+      <tr style="border: 1px solid var(--border);">
+        <td style="padding: 0.85rem; border: 1px solid var(--border);"><strong>Data Protection Officer (or equivalent)</strong></td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);"><span class="fill">[Name]</span></td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">GDPR compliance, DPIA on new tools, policy advice.</td>
+      </tr>
+      <tr style="border: 1px solid var(--border);">
+        <td style="padding: 0.85rem; border: 1px solid var(--border);"><strong>IT / Security lead</strong></td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);"><span class="fill">[Name]</span></td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Vendor security assessment, incident response.</td>
+      </tr>
+      <tr style="border: 1px solid var(--border);">
+        <td style="padding: 0.85rem; border: 1px solid var(--border);"><strong>Procurement / Finance</strong></td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);"><span class="fill">[Name]</span></td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Cost assessment, contract terms, vendor management.</td>
+      </tr>
+      <tr style="border: 1px solid var(--border);">
+        <td style="padding: 0.85rem; border: 1px solid var(--border);"><strong>Operations / Line manager</strong></td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);"><span class="fill">[Name]</span></td>
+        <td style="padding: 0.85rem; border: 1px solid var(--border);">Staff concerns, operational impact, feasibility of controls.</td>
+      </tr>
+    </table>
+
+    <h2>5. Governance processes</h2>
+
+    <h3>New tool approval</h3>
+    <p>Any tool new to the organisation must go through approval before staff use it for work:</p>
+    <ol>
+      <li>Business case submitted to <span class="fill">[chair]</span> with tool name, vendor, proposed use cases, and who will use it.</li>
+      <li>DPO reviews: can we legally process the data we intend to? Is the vendor's DPA acceptable? 5-day turnaround.</li>
+      <li>IT / Security reviews: vendor security posture, data residency, sub-processors, SLA compliance. 5-day turnaround.</li>
+      <li>Steering committee meets. Approval threshold: unanimous or majority + documented dissent. Max 10 days from business case.</li>
+      <li>If approved: tool is added to the approved list and staff are trained before rollout.</li>
+      <li>If rejected: business case goes to <span class="fill">[Chief X / CEO]</span> for final decision. Committee documents the risk they assessed.</li>
+    </ol>
+
+    <h3>Policy updates</h3>
+    <p>Changes to AI Acceptable Use Policy, AI Tool Register, or AI Risk Register are drafted by <span class="fill">[DPO / chair]</span>, reviewed by the full committee (1 meeting), and approved by the CEO. Effective within 5 working days of approval. Staff trained on material changes.</p>
+
+    <h3>Vendor changes</h3>
+    <p>When a tool vendor changes their terms of service, data-handling, sub-processors, or model in a material way:</p>
+    <ol>
+      <li>IT / Security notifies <span class="fill">[chair]</span> within 24 hours.</li>
+      <li>DPO assesses compliance impact. If material, escalates to committee within 48 hours.</li>
+      <li>Committee decides: accept the change, renegotiate with vendor, or discontinue the tool. 5-day max.</li>
+      <li>Staff are notified of the outcome same day decision is made.</li>
+    </ol>
+
+    <h3>Incidents</h3>
+    <p>Any AI-related incident (data leakage, hallucination causing harm, vendor breach, compliance violation) is reported to <span class="fill">[chair]</span> within 1 hour. The committee holds an emergency meeting within 4 hours. See the AI Incident Response Procedure for full process.</p>
+
+    <h3>Quarterly review</h3>
+    <p>The committee meets formally every quarter to review:</p>
+    <ul>
+      <li>Compliance maturity (training completion, policy adherence, risk-register progress).</li>
+      <li>New AI tools introduced (approved and unapproved / shadow).</li>
+      <li>Incidents and trends (near-misses, policy breaches).</li>
+      <li>Vendor landscape changes (new tools, discontinued tools, term changes).</li>
+      <li>Regulatory landscape (new guidance from regulators, case law, standards updates).</li>
+    </ul>
+    <p>Chair prepares a quarterly report for <span class="fill">[CEO / board]</span>.</p>
+
+    <h2>6. Success metrics</h2>
+    <p>We measure AI governance maturity by:</p>
+    <ul>
+      <li><strong>Training completion:</strong> 100% of staff complete AI literacy training within 30 days; managers complete role-track training within 60 days.</li>
+      <li><strong>Policy compliance:</strong> Zero breaches of forbidden-data categories (monthly audit). Shadow-AI detection and approval rate &gt;90% within 12 months.</li>
+      <li><strong>Vendor due diligence:</strong> Every approved tool has a signed DPA and completed vendor questionnaire before rollout.</li>
+      <li><strong>Risk register:</strong> 100% of High-risk items have mitigation actions; Medium-risk items have plans within 90 days of identification.</li>
+      <li><strong>Incident trend:</strong> Aim for zero data-leakage incidents; any incident responded to within 1 hour and resolved within 48 hours.</li>
+    </ul>
+
+    <h2>7. Governance principles</h2>
+    <ul>
+      <li><strong>Transparent:</strong> Policies and approved tools are communicated to all staff. Decisions and reasoning are recorded.</li>
+      <li><strong>Fair:</strong> Decisions apply equally. Shadow-AI is not tolerated if unapproved, but approval is not gatekept (5-day max).</li>
+      <li><strong>Pragmatic:</strong> Governance should enable innovation, not block it. Risk acceptance is explicit, not hidden.</li>
+      <li><strong>Audit-ready:</strong> Every decision, incident, and mitigation is documented. An external auditor should find evidence of governance maturity within the register files.</li>
+    </ul>
+
+    <h2>8. Standards referenced</h2>
+    <ul>
+      <li><strong>EU AI Act 2024/1689</strong> — Article 4 (AI literacy), Article 26 (deployer obligations).</li>
+      <li><strong>GDPR 2016/679</strong> — Article 24 (responsibility of the controller), Article 32 (security), Article 35 (impact assessment).</li>
+      <li><strong>ISO/IEC 42001:2023</strong> — Clause 5.3 (leadership and commitment), Clause 6.1 (actions to address risks and opportunities).</li>
+    </ul>
+
+    <div class="signoff">
+      <div class="field">
+        <strong>Approved by (CEO / Board Chair)</strong>
+        <span class="fill">[Name and title]</span>
+        <span class="line"></span>
+      </div>
+      <div class="field">
+        <strong>Date</strong>
+        <span class="fill">[YYYY-MM-DD]</span>
+        <span class="line"></span>
+      </div>
+      <div class="field">
+        <strong>AI Governance Chair</strong>
+        <span class="fill">[Name and title]</span>
+        <span class="line"></span>
+      </div>
+      <div class="field">
+        <strong>Next review</strong>
+        <span class="fill">[YYYY-MM-DD, 12 months later]</span>
+        <span class="line"></span>
+      </div>
+    </div>
+
+  </article>
+
+  <div class="callout note no-print">
+    <span class="callout-icon">i</span>
+    <div>
+      <div class="callout-title">Rolling this out</div>
+      <ol>
+        <li>Populate the roles and names table above with your current team.</li>
+        <li>Customise the authority, scope, and escalation path to match your organisation size and structure.</li>
+        <li>Walk the draft through your DPO and CEO / board. Three readers catch clarity issues.</li>
+        <li>Get formal sign-off from the CEO or board equivalent. This is a foundational governance document.</li>
+        <li>Communicate to the steering committee members that they now have formal authority and responsibility.</li>
+        <li>Schedule the first steering committee meeting and the first quarterly review.</li>
+      </ol>
+    </div>
+  </div>
+
+</main>
+
+<nav class="module-bottom-nav no-print">
+  <a class="nav-btn" href="../module-procurement.html">
+    <span class="nav-dir">Back to</span>
+    <span class="nav-title">← Procurement track</span>
+  </a>
+  <a class="nav-btn next" href="ai-raci-matrix.html">
+    <span class="nav-dir">Next template</span>
+    <span class="nav-title">AI RACI Matrix →</span>
+  </a>
+</nav>
+
+<footer class="site-foot no-print">
+  <span>AI Safe@Work · AI Governance Charter v1.0 · v2026.06</span>
+  <span class="foot-right">
+    <a href="../course.html">All modules</a>
+    <a href="../privacy.html">Privacy</a>
+    <a href="../terms.html">Terms</a>
+  </span>
+</footer>
+
+</body>
+</html>

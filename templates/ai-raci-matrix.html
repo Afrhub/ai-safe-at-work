@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#060608" />
+<script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
+<title>AI RACI Matrix template — AI Safe@Work</title>
+<meta name="description" content="Define AI governance roles: Responsible, Accountable, Consulted, Informed. Who makes decisions, who advises, who needs to know. Aligns with ISO/IEC 42001 Clause 5.3." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="AI Safe@Work" />
+<meta property="og:title" content="AI RACI Matrix template — AI Safe@Work" />
+<meta property="og:description" content="Define AI governance roles: Responsible, Accountable, Consulted, Informed. Who makes decisions, who advises, who needs to know. Aligns with ISO/IEC 42001 Clause 5.3." />
+<meta property="og:url" content="https://aisafeatwork.org/templates/ai-raci-matrix.html" />
+<meta property="og:image" content="https://aisafeatwork.org/og-card.png" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI RACI Matrix template — AI Safe@Work" />
+<meta name="twitter:description" content="Define AI governance roles: Responsible, Accountable, Consulted, Informed. Who makes decisions, who advises, who needs to know. Aligns with ISO/IEC 42001 Clause 5.3." />
+<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png" />
+<link rel="preload" href="../assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=10" />
+<script defer src="../assets/cinema.js?v=8"></script>
+<style>
+.template-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 2px;
+  background: rgba(145,162,255, 0.08);
+  border: 1px solid rgba(145,162,255, 0.32);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.template-tag::before { content: '§'; color: var(--accent); font-weight: 800; }
+.print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0 2rem; align-items: center; flex-wrap: wrap; }
+.print-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #0b0e14; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.7rem 1.25rem; border-radius: 2px; border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 0 0 1px rgba(145,162,255,0.4), 0 8px 24px rgba(145,162,255,0.2); }
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(145,162,255,0.55), 0 12px 32px rgba(145,162,255,0.3); }
+.print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
+.policy-doc { margin: 1.5rem 0; padding: 2rem 2.2rem; background: var(--plate); border: 1px solid var(--border); border-radius: 3px; box-shadow: var(--shadow-card); }
+.policy-doc h2 { margin-top: 2.2rem; }
+.policy-doc h2:first-child { margin-top: 0; }
+.policy-doc h3 { margin-top: 1.6rem; }
+.policy-doc ol, .policy-doc ul { padding-left: 1.4rem; }
+.policy-doc li { margin-bottom: 0.55rem; }
+.raci-table { width: 100%; margin: 1.5rem 0; border-collapse: collapse; font-size: 0.85rem; }
+.raci-table thead { background: rgba(145,162,255, 0.08); }
+.raci-table th { padding: 0.9rem; text-align: left; font-weight: 700; color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--border); }
+.raci-table td { padding: 0.85rem; border: 1px solid var(--border); }
+.raci-table tbody tr:nth-child(even) { background: rgba(145,162,255, 0.02); }
+.raci-cell { text-align: center; font-weight: 700; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.12em; }
+.raci-r { color: #2da45f; }
+.raci-a { color: var(--accent); }
+.raci-c { color: #f7a600; }
+.raci-i { color: #8595a7; }
+.section-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+@media (max-width: 640px) { .raci-table { font-size: 0.7rem; } .raci-table th, .raci-table td { padding: 0.6rem; } }
+@media print { .policy-doc { background: white !important; border: 1px solid #ccc !important; box-shadow: none !important; padding: 1rem 0 !important; } .raci-table { border: 1px solid #ccc; } .raci-table thead { background: #f5f5f5 !important; } .raci-table th { color: #46505e !important; } }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [{
+    "@type": "HowTo",
+    "name": "AI RACI Matrix template",
+    "description": "Define governance roles: Responsible, Accountable, Consulted, Informed for AI decisions.",
+    "url": "https://aisafeatwork.org/templates/ai-raci-matrix.html",
+    "inLanguage": "en",
+    "publisher": { "@id": "https://aisafeatwork.org/#organization" },
+    "totalTime": "PT30M",
+    "dateModified": "2026-06-13"
+  }, {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://aisafeatwork.org/" },
+      { "@type": "ListItem", "position": 2, "name": "Templates", "item": "https://aisafeatwork.org/templates/" },
+      { "@type": "ListItem", "position": 3, "name": "AI RACI Matrix — AI Safe@Work", "item": "https://aisafeatwork.org/templates/ai-raci-matrix.html" }
+    ]
+  }]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="topbar no-print">
+  <a href="../index.html" class="brand">AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="../course.html" class="always-show">Modules</a>
+    <a href="../standards-map.html">Standards Map</a>
+    <a href="../module-11.html">Checklist</a>
+    <a href="../module-12.html">Standards</a>
+  </nav>
+</header>
+<main id="main">
+  <span class="template-tag no-print">Template · AI RACI Matrix v1.0</span>
+  <p class="eyebrow no-print">Role clarity for governance decisions</p>
+  <h1 class="page-title">AI Governance RACI Matrix</h1>
+  <p class="lede no-print">Define who is Responsible, Accountable, Consulted, and Informed for key AI governance decisions. Clarity prevents confusion and ensures accountability. Aligns with ISO/IEC 42001 Clause 5.3.</p>
+  <div class="print-row no-print">
+    <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF →</button>
+    <span class="print-hint">Post this matrix where the governance steering committee can see it. Review annually or when roles change.</span>
+  </div>
+
+  <article class="policy-doc">
+    <span class="section-tag">RACI framework</span>
+    <h2>RACI definitions</h2>
+    <ul>
+      <li><strong>R — Responsible:</strong> Does the work; researches the option, prepares the recommendation, implements the decision.</li>
+      <li><strong>A — Accountable:</strong> Has final say; approves or rejects the recommendation; owns the outcome if it goes wrong.</li>
+      <li><strong>C — Consulted:</strong> Provides input before the decision; asked for advice or perspective; their feedback shapes the recommendation.</li>
+      <li><strong>I — Informed:</strong> Told the outcome after the decision is made; needs to know for their own work.</li>
+    </ul>
+
+    <h2>AI governance decision matrix</h2>
+    <p><em>Customise the role names and identities (person names) to match your structure.</em></p>
+
+    <table class="raci-table">
+      <thead>
+        <tr>
+          <th>Decision / Activity</th>
+          <th>DPO / Compliance</th>
+          <th>IT / Security</th>
+          <th>Procurement</th>
+          <th>Operations / Manager</th>
+          <th>CEO / Board</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Approve new AI tool for use</strong></td>
+          <td class="raci-cell raci-r">R / A</td>
+          <td class="raci-cell raci-c">C</td>
+          <td class="raci-cell raci-c">C</td>
+          <td class="raci-cell raci-c">C</td>
+          <td class="raci-cell raci-i">I</td>
+        </tr>
+        <tr>
+          <td><strong>Review vendor DPA and contract terms</strong></td>
+          <td class="raci-cell raci-r">R</td>
+          <td class="raci-cell raci-c">C</td>
+          <td class="raci-cell raci-a">A</td>
+          <td class="raci-cell raci-i">I</td>
+          <td class="raci-cell raci-i">I</td>
+        </tr>
+        <tr>
+          <td><strong>Conduct vendor security assessment</strong></td>
+          <td class="raci-cell raci-c">C</td>
+          <td class="raci-cell raci-r">R</td>
+          <td class="raci-cell raci-i">I</td>
+          <td class="raci-cell raci-i">I</td>
+          <td class="raci-cell raci-i">I</td>
+        </tr>
+        <tr>
+          <td><strong>Assess GDPR / EU AI Act compliance fit</strong></td>
+          <td class="raci-cell raci-r">R</td>
+          <td class="raci-cell raci-c">C</td>
+          <td class="raci-cell raci-i">I</td>
+          <td class="raci-cell raci-i">I</td>
+          <td class="raci-cell raci-i">I</td>
+        </tr>
+        <tr>
+          <td><strong>Run DPIA on new tool use case</strong></td>
+          <td class="raci-cell raci-r">R</td>
+          <td class="raci-cell raci-c">C</td>
+          <td class="raci-cell raci-i">I</td>
+          <td class="raci-cell raci-c">C</td>
+          <td class="raci-cell raci-i">I</td>
+        </tr>
+        <tr>
+          <td><strong>Update AI Acceptable Use Policy</strong></td>
+          <td class="raci-cell raci-r">R</td>
+          <td class="raci-cell raci-c">C</td>
+          <td class="raci-cell raci-i">I</td>
+          <td class="raci-cell raci-c">C</td>
+          <td class="raci-cell raci-a">A</td>
+        </tr>
+        <tr>
+          <td><strong>Maintain AI Tool Register</strong></td>
+          <td class="raci-cell raci-r">R</td>
+          <td class="raci-cell raci-c">C</td>
+          <td class="raci-cell raci-i">I</td>
+          <td class="raci-cell raci-i">I</td>
+          <td class="raci-cell raci-i">I</td>
+        </tr>
+        <tr>
+          <td><strong>Maintain AI Risk Register</strong></td>
+          <td class="raci-cell raci-r">R</td>
+          <td class="raci-cell raci-c">C</td>
+          <td class="raci-cell raci-i">I</td>
+          <td class="raci-cell raci-c">C</td>
+          <td class="raci-cell raci-i">I</td>
+        </tr>
+        <tr>
+          <td><strong>Track AI training completion</strong></td>
+          <td class="raci-cell raci-c">C</td>
+          <td class="raci-cell raci-i">I</td>
+          <td class="raci-cell raci-i">I</td>
+          <td class="raci-cell raci-r">R</td>
+          <td class="raci-cell raci-i">I</td>
+        </tr>
+        <tr>
+          <td><strong>Respond to AI incident (investigation)</strong></td>
+          <td class="raci-cell raci-r">R</td>
+          <td class="raci-cell raci-r">R</td>
+          <td class="raci-cell raci-i">I</td>
+          <td class="raci-cell raci-c">C</td>
+          <td class="raci-cell raci-a">A</td>
+        </tr>
+        <tr>
+          <td><strong>Notify regulator of AI-related breach</strong></td>
+          <td class="raci-cell raci-r">R</td>
+          <td class="raci-cell raci-c">C</td>
+          <td class="raci-cell raci-i">I</td>
+          <td class="raci-cell raci-i">I</td>
+          <td class="raci-cell raci-a">A</td>
+        </tr>
+        <tr>
+          <td><strong>Quarterly governance review (steering committee)</strong></td>
+          <td class="raci-cell raci-a">A</td>
+          <td class="raci-cell raci-r">R</td>
+          <td class="raci-cell raci-c">C</td>
+          <td class="raci-cell raci-c">C</td>
+          <td class="raci-cell raci-i">I</td>
+        </tr>
+        <tr>
+          <td><strong>Report to CEO on governance maturity</strong></td>
+          <td class="raci-cell raci-r">R</td>
+          <td class="raci-cell raci-c">C</td>
+          <td class="raci-cell raci-i">I</td>
+          <td class="raci-cell raci-i">I</td>
+          <td class="raci-cell raci-a">A</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Notes on this matrix</h2>
+    <ul>
+      <li><strong>Some roles are dual R/A:</strong> For example, DPO is both Responsible and Accountable for GDPR compliance decisions. They do the work and own the outcome.</li>
+      <li><strong>Some decisions have multiple Rs:</strong> "Respond to incident" has IT and DPO both responsible — they work together.</li>
+      <li><strong>CEO is usually A, not R:</strong> The CEO approves final decisions but doesn't do the day-to-day work; others are R/C.</li>
+      <li><strong>Customise to your structure:</strong> If you have a separate Risk Officer, move some of the DPO tasks. If IT and Security are the same person, merge those columns.</li>
+    </ul>
+
+    <h2>How to use this matrix</h2>
+    <ol>
+      <li><strong>Communicate it:</strong> Share with the entire steering committee and all people listed in the columns. They now know their role for each decision type.</li>
+      <li><strong>Refer to it:</strong> When a new AI decision comes up (e.g. "Should we adopt tool X?"), point to the matrix: "Tool approval — DPO is R/A, IT and Procurement are C."</li>
+      <li><strong>Use it to resolve confusion:</strong> If someone asks "Why didn't I get to decide?" you can point to the matrix and explain their role.</li>
+      <li><strong>Review annually:</strong> After a year of governance, review this matrix with your steering committee. Is the R/A/C/I split working or do role changes needed?</li>
+    </ol>
+
+    <h2>Standards referenced</h2>
+    <ul>
+      <li><strong>ISO/IEC 42001:2023</strong> — Clause 5.3 (roles, responsibilities and authorities).</li>
+    </ul>
+
+  </article>
+
+  <div class="callout note no-print">
+    <span class="callout-icon">i</span>
+    <div>
+      <div class="callout-title">Rolling this out</div>
+      <ol>
+        <li>Replace the role names in the table with the actual person names in your steering committee.</li>
+        <li>Walk the matrix through your steering committee. Ask each person: "Does this match how you expect to be involved?"</li>
+        <li>Print it and post it where the committee meets. Link it in your governance policy documents.</li>
+        <li>Reference it every time a decision is made: "X is responsible, Y is accountable, Z is consulted."</li>
+      </ol>
+    </div>
+  </div>
+
+</main>
+
+<nav class="module-bottom-nav no-print">
+  <a class="nav-btn" href="../module-procurement.html">
+    <span class="nav-dir">Back to</span>
+    <span class="nav-title">← Procurement track</span>
+  </a>
+  <a class="nav-btn next" href="ai-use-case-register.html">
+    <span class="nav-dir">Next template</span>
+    <span class="nav-title">AI Use Case Register →</span>
+  </a>
+</nav>
+
+<footer class="site-foot no-print">
+  <span>AI Safe@Work · AI RACI Matrix v1.0 · v2026.06</span>
+  <span class="foot-right">
+    <a href="../course.html">All modules</a>
+    <a href="../privacy.html">Privacy</a>
+    <a href="../terms.html">Terms</a>
+  </span>
+</footer>
+
+</body>
+</html>
