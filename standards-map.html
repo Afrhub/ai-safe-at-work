@@ -140,6 +140,115 @@
   color: var(--text3);
   letter-spacing: 0;
 }
+
+/* ──────────────── Coverage matrix (clause × module) ──────────────── */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.cov { margin: 2.4rem 0 1rem; }
+.cov-controls {
+  display: flex; flex-wrap: wrap; gap: 0.45rem; align-items: center;
+  margin-bottom: 1rem;
+}
+.cov-controls .cov-lab {
+  font-family: var(--font-mono); font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--text3);
+  margin-right: 0.3rem;
+}
+.cov-filter {
+  font-family: var(--font-mono); font-size: 0.64rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.4rem 0.7rem; border-radius: 2px;
+  border: 1px solid var(--border-bold); background: var(--glass);
+  color: var(--text2); cursor: pointer;
+  transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+.cov-filter:hover { border-color: var(--accent); color: var(--text); }
+.cov-filter[aria-pressed="true"] {
+  background: var(--accent-soft); border-color: var(--accent); color: var(--accent);
+}
+.cov-scroll {
+  overflow-x: auto; border: 1px solid var(--border); border-radius: 3px;
+  background: var(--plate); box-shadow: var(--shadow-card);
+  -webkit-overflow-scrolling: touch;
+}
+table.cov-grid { border-collapse: collapse; width: 100%; font-family: var(--font-mono); }
+.cov-grid th, .cov-grid td { border: 1px solid var(--border); }
+.cov-grid thead th { background: var(--bg2); padding: 0; vertical-align: bottom; }
+.cov-grid thead .corner {
+  text-align: left; padding: 0.55rem 0.8rem;
+  font-size: 0.6rem; font-weight: 800; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text3); white-space: nowrap;
+}
+.cov-colbtn {
+  width: 100%; padding: 0.6rem 0.2rem; background: none; border: 0; cursor: pointer;
+  font-family: var(--font-mono); font-size: 0.62rem; font-weight: 800;
+  letter-spacing: 0.02em; color: var(--text2);
+  transition: color 160ms ease, background 160ms ease;
+}
+.cov-colbtn:hover { color: var(--accent); background: var(--accent-soft); }
+.cov-grid th.cov-std {
+  text-align: left; padding: 0.5rem 0.8rem;
+  font-size: 0.6rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent); background: rgba(145,162,255,0.06);
+}
+.cov-grid th.cov-clause {
+  text-align: left; white-space: nowrap; padding: 0.42rem 0.8rem;
+  font-size: 0.72rem; font-weight: 700; color: var(--accent-2);
+  background: rgba(145,162,255,0.02);
+}
+.cov-grid td.cov-cell { width: 2.5rem; height: 2rem; text-align: center; position: relative; }
+.cov-grid td.cov-cell.on::after {
+  content: "✓"; color: var(--green); font-weight: 800; font-size: 0.82rem;
+}
+.cov-grid td.cov-cell.rt.on::after { content: "▣"; color: var(--accent); font-size: 0.74rem; }
+/* column highlight (set data-col on the table via the column buttons) */
+.cov-grid[data-col] td.cov-cell:not([data-c]) { opacity: 0.28; }
+.cov-grid[data-col="1"]  td.cov-cell[data-c="1"],
+.cov-grid[data-col="2"]  td.cov-cell[data-c="2"],
+.cov-grid[data-col="3"]  td.cov-cell[data-c="3"],
+.cov-grid[data-col="4"]  td.cov-cell[data-c="4"],
+.cov-grid[data-col="5"]  td.cov-cell[data-c="5"],
+.cov-grid[data-col="6"]  td.cov-cell[data-c="6"],
+.cov-grid[data-col="7"]  td.cov-cell[data-c="7"],
+.cov-grid[data-col="8"]  td.cov-cell[data-c="8"],
+.cov-grid[data-col="9"]  td.cov-cell[data-c="9"],
+.cov-grid[data-col="10"] td.cov-cell[data-c="10"],
+.cov-grid[data-col="11"] td.cov-cell[data-c="11"],
+.cov-grid[data-col="12"] td.cov-cell[data-c="12"],
+.cov-grid[data-col="rt"] td.cov-cell[data-c="rt"] { background: rgba(145,162,255,0.14); }
+.cov-grid[data-col] td.cov-cell[data-c] { opacity: 1; }
+/* when a column is active, dim cells not in that column */
+.cov-grid[data-col] tbody td.cov-cell { opacity: 0.18; }
+.cov-grid[data-col="1"]  td[data-c="1"], .cov-grid[data-col="2"]  td[data-c="2"],
+.cov-grid[data-col="3"]  td[data-c="3"], .cov-grid[data-col="4"]  td[data-c="4"],
+.cov-grid[data-col="5"]  td[data-c="5"], .cov-grid[data-col="6"]  td[data-c="6"],
+.cov-grid[data-col="7"]  td[data-c="7"], .cov-grid[data-col="8"]  td[data-c="8"],
+.cov-grid[data-col="9"]  td[data-c="9"], .cov-grid[data-col="10"] td[data-c="10"],
+.cov-grid[data-col="11"] td[data-c="11"], .cov-grid[data-col="12"] td[data-c="12"],
+.cov-grid[data-col="rt"] td[data-c="rt"] { opacity: 1; }
+/* standard filter: dim non-matching rows */
+.cov-grid tr.cov-dim { opacity: 0.16; }
+.cov-row:hover td.cov-cell { background: rgba(145,162,255,0.05); }
+.cov-legend {
+  display: flex; flex-wrap: wrap; gap: 1.2rem; margin: 0.9rem 0 0;
+  font-family: var(--font-mono); font-size: 0.66rem; color: var(--text3);
+  letter-spacing: 0.04em;
+}
+.cov-legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+.cov-legend b { font-weight: 800; }
+.cov-legend .lg-cov { color: var(--green); }
+.cov-legend .lg-rt { color: var(--accent); }
+@media (max-width: 640px) {
+  .cov-grid th.cov-clause { font-size: 0.66rem; padding: 0.4rem 0.5rem; }
+  .cov-grid td.cov-cell { width: 1.9rem; }
+}
+@media print {
+  .cov-controls { display: none; }
+  .cov-scroll { overflow: visible; box-shadow: none; }
+  .cov-grid td.cov-cell.on::after { content: "✓"; color: #000; }
+}
 </style>
 <script type="application/ld+json">
 {
@@ -212,6 +321,26 @@
       <p>This is an evidence map, not a certification statement. The auditor still does the audit. The map saves them hours in your training records.</p>
     </div>
   </div>
+
+  <section class="cov" id="coverage" aria-labelledby="cov-h">
+    <div class="standard-header">
+      <h2 id="cov-h">Coverage matrix</h2>
+      <span class="meta">Clause × module · at a glance</span>
+    </div>
+    <p>Every clause below, against every module. A green check means that module satisfies the clause; the final column marks coverage by a Relevant Role track or template. Filter by standard, or tap a module to isolate its column. Full clause text and links are in the detailed tables underneath.</p>
+    <div class="cov-controls" id="cov-filters" role="group" aria-label="Filter coverage matrix by standard"></div>
+    <div class="cov-scroll">
+      <table class="cov-grid" id="cov-grid"><caption class="sr-only">Coverage of standards clauses by course module</caption></table>
+    </div>
+    <div class="cov-legend">
+      <span><b class="lg-cov">✓</b> covered by a core module</span>
+      <span><b class="lg-rt">▣</b> covered by a Relevant Role or template</span>
+      <span>tap a column header to isolate a module · tap a standard to filter</span>
+    </div>
+    <noscript><p style="color:var(--text3)">The interactive matrix needs JavaScript. The detailed clause-by-clause tables below carry the same mapping and need no script.</p></noscript>
+  </section>
+
+  <hr class="section-divider" />
 
   <div class="toc">
     <a href="#eu-ai-act"><strong>EU AI Act</strong><small>Regulation 2024/1689</small></a>
@@ -608,5 +737,160 @@
   </span>
 </footer>
 
+<script>
+/* Coverage matrix — clause × module. Data mirrors the detailed tables below.
+   cols: '1'..'12' = core modules; 'rt' = covered by a Relevant Role or template. */
+(function () {
+  'use strict';
+  var grid = document.getElementById('cov-grid');
+  if (!grid) return;
+  var MODS = ['1','2','3','4','5','6','7','8','9','10','11','12'];
+  var ALL = MODS.concat(['rt']);
+  var STD = [
+    { id: 'eu',  name: 'EU AI Act' },
+    { id: '42',  name: 'ISO 42001' },
+    { id: '27',  name: 'ISO 27001' },
+    { id: 'gd',  name: 'GDPR' },
+    { id: 'ni',  name: 'NIST AI RMF' }
+  ];
+  var ROWS = [
+    ['eu','Art 4','AI literacy of staff', MODS.concat(['rt'])],
+    ['eu','Art 5','Prohibited AI practices', ['7','12']],
+    ['eu','Art 14','Human oversight of high-risk AI', ['5','rt']],
+    ['eu','Art 26','Deployer obligations', ['4','9','rt']],
+    ['eu','Art 27','FRIA for high-risk AI', ['rt']],
+    ['eu','Art 50','Transparency / synthetic content', ['6','8']],
+    ['eu','Art 73','Serious incident reporting', ['10','rt']],
+    ['eu','Annex III','High-risk use cases', ['7','12']],
+    ['42','Cl 5.2','AI policy', ['rt']],
+    ['42','Cl 6.1','Risks & AI risk assessment', ['3','4','rt']],
+    ['42','Cl 7.2','Competence', MODS.concat(['rt'])],
+    ['42','Cl 7.3','Awareness', ['1','11']],
+    ['42','Cl 7.5','Documented information', ['9']],
+    ['42','A.2','Policies for AI use', ['rt']],
+    ['42','A.4.5','Resources — staff capability', MODS.concat(['rt'])],
+    ['42','A.5.2','AI system impact assessment', ['rt']],
+    ['42','A.6.2','AI design — fairness, transparency', ['7']],
+    ['42','A.7','Data for AI systems', ['3','7']],
+    ['42','A.9','Use of AI — operation, monitoring', ['5','10']],
+    ['42','A.10','Third-party AI relationships', ['4','rt']],
+    ['27','A.5.10','Acceptable use of assets', ['3','rt']],
+    ['27','A.5.13','Labelling of information', ['3']],
+    ['27','A.5.23','Security for cloud services', ['2','4','rt']],
+    ['27','A.5.24–26','Incident planning & response', ['10']],
+    ['27','A.5.34','Privacy & protection of PII', ['3','rt']],
+    ['27','A.6.3','Awareness, education & training', MODS.slice()],
+    ['27','A.8.5','Secure authentication / MFA', ['6']],
+    ['27','A.8.12','Data leakage prevention', ['3']],
+    ['27','A.8.15','Logging', ['9']],
+    ['gd','Art 5','Processing principles', ['3','12']],
+    ['gd','Art 6','Lawful basis', ['3','rt']],
+    ['gd','Art 9','Special-category data', ['3','7']],
+    ['gd','Art 13–14','Information to data subjects', ['9','rt']],
+    ['gd','Art 22','Solely automated decisions', ['9','rt']],
+    ['gd','Art 28','Processor contracts (DPAs)', ['2','4','rt']],
+    ['gd','Art 30','Records of processing (RoPA)', ['9','rt']],
+    ['gd','Art 32','Security of processing', ['2','6']],
+    ['gd','Art 33–34','Breach notification', ['10','rt']],
+    ['gd','Art 35','DPIA', ['rt']],
+    ['gd','Art 39','DPO tasks & competence', ['rt']],
+    ['gd','Art 44–50','International transfers', ['2']],
+    ['ni','Govern','Workforce capability, policy, accountability', MODS.concat(['rt'])],
+    ['ni','Map','Categorise AI use cases & risks', ['4','rt']],
+    ['ni','Measure','Assess & benchmark AI risks', ['5','7']],
+    ['ni','Manage','Act on risks; incident response', ['9','10']],
+    ['ni','GAI Profile','Generative-AI-specific risks', ['5','7','8']]
+  ];
+  var stdName = {}; STD.forEach(function (s) { stdName[s.id] = s.name; });
+
+  // ---- header ----
+  var thead = document.createElement('thead');
+  var hr = document.createElement('tr');
+  var corner = document.createElement('th');
+  corner.className = 'corner'; corner.scope = 'col'; corner.textContent = 'Clause';
+  hr.appendChild(corner);
+  ALL.forEach(function (c) {
+    var th = document.createElement('th'); th.scope = 'col';
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'cov-colbtn';
+    b.textContent = c === 'rt' ? 'R/T' : 'M' + c;
+    b.setAttribute('aria-label', c === 'rt' ? 'Isolate roles and templates column' : 'Isolate Module ' + c + ' column');
+    b.addEventListener('click', function () { toggleCol(c); });
+    th.appendChild(b); hr.appendChild(th);
+  });
+  thead.appendChild(hr); grid.appendChild(thead);
+
+  // ---- body ----
+  var tbody = document.createElement('tbody');
+  var lastStd = null;
+  ROWS.forEach(function (r) {
+    var sid = r[0], clause = r[1], desc = r[2], on = r[3];
+    if (sid !== lastStd) {
+      var gr = document.createElement('tr'); gr.setAttribute('data-grp', sid);
+      var gth = document.createElement('th');
+      gth.className = 'cov-std'; gth.colSpan = ALL.length + 1; gth.scope = 'colgroup';
+      gth.textContent = stdName[sid];
+      gr.appendChild(gth); tbody.appendChild(gr); lastStd = sid;
+    }
+    var tr = document.createElement('tr');
+    tr.className = 'cov-row'; tr.setAttribute('data-std', sid);
+    var rh = document.createElement('th');
+    rh.className = 'cov-clause'; rh.scope = 'row';
+    rh.textContent = clause; rh.title = desc;
+    tr.appendChild(rh);
+    ALL.forEach(function (c) {
+      var td = document.createElement('td');
+      td.className = 'cov-cell' + (c === 'rt' ? ' rt' : '');
+      var hit = on.indexOf(c) > -1;
+      if (hit) {
+        td.classList.add('on'); td.setAttribute('data-c', c);
+        var who = c === 'rt' ? 'a Relevant Role or template' : 'Module ' + c;
+        td.setAttribute('aria-label', stdName[sid] + ' ' + clause + ' — covered by ' + who);
+        td.setAttribute('role', 'img');
+        td.title = clause + ' — ' + (c === 'rt' ? 'role/template' : 'Module ' + c);
+      } else {
+        td.setAttribute('aria-hidden', 'true');
+      }
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+  grid.appendChild(tbody);
+
+  // ---- standard filters ----
+  var fwrap = document.getElementById('cov-filters');
+  var lab = document.createElement('span'); lab.className = 'cov-lab'; lab.textContent = 'Filter';
+  fwrap.appendChild(lab);
+  var activeStd = 'all';
+  function makeFilter(id, name) {
+    var btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'cov-filter';
+    btn.textContent = name; btn.setAttribute('aria-pressed', id === 'all' ? 'true' : 'false');
+    btn.addEventListener('click', function () {
+      activeStd = id;
+      [].forEach.call(fwrap.querySelectorAll('.cov-filter'), function (b) {
+        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+      });
+      [].forEach.call(tbody.querySelectorAll('tr[data-std]'), function (tr) {
+        tr.classList.toggle('cov-dim', id !== 'all' && tr.getAttribute('data-std') !== id);
+      });
+      [].forEach.call(tbody.querySelectorAll('tr[data-grp]'), function (tr) {
+        tr.classList.toggle('cov-dim', id !== 'all' && tr.getAttribute('data-grp') !== id);
+      });
+    });
+    return btn;
+  }
+  fwrap.appendChild(makeFilter('all', 'All'));
+  STD.forEach(function (s) { fwrap.appendChild(makeFilter(s.id, s.name)); });
+
+  // ---- column isolate ----
+  var activeCol = null;
+  function toggleCol(c) {
+    activeCol = (activeCol === c) ? null : c;
+    if (activeCol) grid.setAttribute('data-col', activeCol);
+    else grid.removeAttribute('data-col');
+  }
+})();
+</script>
 </body>
 </html>
