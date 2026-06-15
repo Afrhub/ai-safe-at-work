@@ -165,6 +165,8 @@
   transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
 }
 .cov-filter:hover { border-color: var(--accent); color: var(--text); }
+.cov-filter:active { transform: scale(0.96); transition: transform 100ms var(--ease-out); }
+.cov-colbtn:active { transform: scale(0.92); transition: transform 100ms var(--ease-out); }
 .cov-filter[aria-pressed="true"] {
   background: var(--accent-soft); border-color: var(--accent); color: var(--accent);
 }
