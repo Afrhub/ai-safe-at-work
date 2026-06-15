@@ -2,6 +2,7 @@ import "./index.css";
 import React from "react";
 import { Composition, staticFile } from "remotion";
 import { Module2 } from "./Module2";
+import { OgCard } from "./OgCard";
 import { SCENES, FPS } from "./script";
 import { getAudioDuration } from "./get-audio-duration";
 import { AUDIO_EXT } from "./theme";
@@ -19,6 +20,7 @@ const EXTRA_TAIL: Record<string, number> = {
 
 export const RemotionRoot: React.FC = () => {
   return (
+    <>
     <Composition
       id="Module2"
       component={Module2}
@@ -40,5 +42,14 @@ export const RemotionRoot: React.FC = () => {
         };
       }}
     />
+      <Composition
+        id="OgCard"
+        component={OgCard}
+        fps={1}
+        width={1200}
+        height={630}
+        durationInFrames={1}
+      />
+    </>
   );
 };
