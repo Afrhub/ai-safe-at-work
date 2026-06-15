@@ -3,6 +3,8 @@ import React from "react";
 import { Composition, staticFile } from "remotion";
 import { Module2 } from "./Module2";
 import { OgCard } from "./OgCard";
+import { ModuleVideo } from "./ModuleVideo";
+import { MODULES } from "./modules";
 import { SCENES, FPS } from "./script";
 import { getAudioDuration } from "./get-audio-duration";
 import { AUDIO_EXT } from "./theme";
@@ -50,6 +52,30 @@ export const RemotionRoot: React.FC = () => {
         height={630}
         durationInFrames={1}
       />
+      {MODULES.map((spec) => (
+        <Composition
+          key={spec.id}
+          id={spec.id}
+          component={ModuleVideo}
+          fps={FPS}
+          width={1920}
+          height={1080}
+          durationInFrames={300}
+          defaultProps={{ spec, sceneDurations: spec.scenes.map(() => 90) }}
+          calculateMetadata={async () => {
+            const durations = await Promise.all(
+              spec.scenes.map((s) =>
+                getAudioDuration(staticFile(`voiceover/${spec.dir}/${s.id}.${AUDIO_EXT}`)),
+              ),
+            );
+            const sceneDurations = durations.map((d) => Math.ceil(d * FPS) + TAIL);
+            return {
+              durationInFrames: sceneDurations.reduce((a, b) => a + b, 0),
+              props: { spec, sceneDurations },
+            };
+          }}
+        />
+      ))}
     </>
   );
 };

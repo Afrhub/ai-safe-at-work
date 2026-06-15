@@ -13,19 +13,19 @@ import { body, PERI, INK } from "./theme";
 
 const SWITCH_MS = 1500;
 
-export const Subtitles: React.FC<{ sceneId: string }> = ({ sceneId }) => {
+export const Subtitles: React.FC<{ sceneId: string; dir?: string }> = ({ sceneId, dir = "m2" }) => {
   const [captions, setCaptions] = useState<Caption[] | null>(null);
-  const [handle] = useState(() => delayRender(`captions-${sceneId}`));
+  const [handle] = useState(() => delayRender(`captions-${dir}-${sceneId}`));
 
   useEffect(() => {
-    fetch(staticFile(`voiceover/m2/${sceneId}.json`))
+    fetch(staticFile(`voiceover/${dir}/${sceneId}.json`))
       .then((r) => r.json())
       .then((d: Caption[]) => {
         setCaptions(d);
         continueRender(handle);
       })
       .catch((e) => cancelRender(e));
-  }, [handle, sceneId]);
+  }, [handle, sceneId, dir]);
 
   const pages = useMemo(() => {
     if (!captions) return [];
