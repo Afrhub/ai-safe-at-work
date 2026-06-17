@@ -215,7 +215,7 @@ export const MODULES: ModuleSpec[] = [
   {
     id: "Module12", dir: "m12", ref: "REF AISW·M12", watermark: "§12",
     scenes: [
-      { id: "01-intro", kicker: "Module 12", title: "The standards behind this course",
+      { id: "01-intro", kicker: "Standards reference", title: "The standards behind this course",
         text: "Four sources of rules sit behind everything you have learned. They overlap and approach the same risks from different angles. Here is what each one means on a normal Tuesday." },
       { id: "02-four", kicker: "The four", title: "Two laws, two standards", type: "manifest",
         bullets: ["GDPR — personal data", "EU AI Act — AI systems, by risk", "ISO 27001 — information security", "ISO 42001 — AI governance"],
