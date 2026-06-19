@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#060608" />
+<meta name="color-scheme" content="dark light" />
+<meta name="robots" content="noindex, nofollow" />
+<script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
+<title>My learning — AI Safe@Work</title>
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=11" />
+<link rel="stylesheet" href="assets/portal.css?v=1" />
+<script src="config.js"></script>
+</head>
+<body>
+<header class="portal-top">
+  <span class="brand">AI&nbsp;Safe@Work</span>
+  <span style="display:flex;align-items:center;gap:1rem"><span class="who" id="who"></span><button id="out">Sign out</button></span>
+</header>
+<main class="portal-main">
+  <p class="eyebrow">Your learning</p>
+  <h1 class="page-title">The <em>course</em>.</h1>
+  <p class="lede">Eleven modules, about 90 minutes. Your progress is saved to your account.</p>
+  <div id="grid" class="tiles"></div>
+</main>
+<script type="module">
+import { guard, sb, signOut } from "./assets/portal.js";
+import { MODULES } from "./assets/modules.js";
+const profile = await guard(["end_user"]);
+if (profile) {
+  document.getElementById("who").textContent = (profile.full_name || "") + " · Team";
+  document.getElementById("out").addEventListener("click", signOut);
+  const { data: { user } } = await sb.auth.getUser();
+  const { data: prog } = await sb.from("module_progress").select("module,status").eq("user_id", user.id);
+  const done = new Set((prog || []).filter(p => p.status === "done").map(p => p.module));
+  document.getElementById("grid").innerHTML = MODULES.map(m => `
+    <a class="tile" href="/module-${m.n}.html">
+      <span class="k">Module ${String(m.n).padStart(2,"0")} ${done.has(m.n) ? "· ✓ done" : ""}</span>
+      <h2>${m.t}</h2>
+      <span class="arrow">${done.has(m.n) ? "Review →" : "Start →"}</span>
+    </a>`).join("");
+}
+</script>
+</body>
+</html>

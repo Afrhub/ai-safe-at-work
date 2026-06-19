@@ -103,3 +103,7 @@
 # Explicit content-types for non-html surfaces
 /llms.txt
   Content-Type: text/plain; charset=utf-8
+
+# Portal — paid auth-walled surface: never index, no AI ingest
+/portal/*
+  X-Robots-Tag: noindex, nofollow, noai, noimageai

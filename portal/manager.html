@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#060608" />
+<meta name="color-scheme" content="dark light" />
+<meta name="robots" content="noindex, nofollow" />
+<script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
+<title>Manager portal — AI Safe@Work</title>
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=11" />
+<link rel="stylesheet" href="assets/portal.css?v=1" />
+<script src="config.js"></script>
+</head>
+<body>
+<header class="portal-top">
+  <span class="brand">AI&nbsp;Safe@Work</span>
+  <span style="display:flex;align-items:center;gap:1rem"><span class="who" id="who"></span><button id="out">Sign out</button></span>
+</header>
+<main class="portal-main">
+  <p class="eyebrow">Manager portal</p>
+  <h1 class="page-title">Your <em>team</em>.</h1>
+
+  <div class="statline">
+    <div class="stat"><div class="n" id="credits">–</div><div class="l">Credits remaining</div></div>
+    <div class="stat"><div class="n" id="seated">–</div><div class="l">Seats assigned</div></div>
+  </div>
+
+  <h2>Assign a seat</h2>
+  <p class="lede">Spend one credit to give a team member access. They must already have an account.</p>
+  <form id="assign" style="display:flex;gap:0.6rem;flex-wrap:wrap;align-items:flex-end;margin:0.8rem 0 0.4rem">
+    <div class="field" style="margin:0;flex:1;min-width:240px"><label for="eu">Team member email</label><input id="eu" type="email" required /></div>
+    <button class="btn-primary" style="width:auto;padding:0.7rem 1.4rem" type="submit">Assign seat</button>
+  </form>
+  <p id="amsg" class="auth-msg"></p>
+  <table class="ptable" id="seats"><thead><tr><th>Team member</th><th>Modules done</th><th>Assigned</th></tr></thead><tbody></tbody></table>
+
+  <h2 style="margin-top:2.4rem">Templates</h2>
+  <p class="lede">Audit-ready documents for your AI governance pack.</p>
+  <div id="templates" class="tiles"></div>
+
+  <h2 style="margin-top:2.4rem">Course</h2>
+  <div id="grid" class="tiles"></div>
+</main>
+<script type="module">
+import { guard, sb, signOut } from "./assets/portal.js";
+import { MODULES, TEMPLATES } from "./assets/modules.js";
+const profile = await guard(["manager"]);
+if (profile) {
+  document.getElementById("who").textContent = (profile.full_name || "") + " · Manager";
+  document.getElementById("out").addEventListener("click", signOut);
+  document.getElementById("credits").textContent = profile.credits_balance ?? 0;
+
+  document.getElementById("templates").innerHTML = TEMPLATES.map(t =>
+    `<a class="tile" href="/templates/${t.f}"><span class="k">Template</span><h2>${t.t}</h2><span class="arrow">Open →</span></a>`).join("");
+  document.getElementById("grid").innerHTML = MODULES.map(m =>
+    `<a class="tile" href="/module-${m.n}.html"><span class="k">Module ${String(m.n).padStart(2,"0")}</span><h2>${m.t}</h2><span class="arrow">Open →</span></a>`).join("");
+
+  async function loadSeats() {
+    const { data: seats } = await sb.from("seats").select("end_user_id, created_at, profiles!seats_end_user_id_fkey(email)");
+    const { data: prog } = await sb.from("module_progress").select("user_id, status");
+    const counts = {};
+    (prog || []).forEach(p => { if (p.status === "done") counts[p.user_id] = (counts[p.user_id]||0)+1; });
+    document.getElementById("seated").textContent = (seats || []).length;
+    document.querySelector("#seats tbody").innerHTML = (seats || []).map(s =>
+      `<tr><td>${s.profiles?.email || s.end_user_id}</td><td>${counts[s.end_user_id]||0} / 11</td><td>${new Date(s.created_at).toLocaleDateString()}</td></tr>`
+    ).join("") || `<tr><td colspan="3" style="color:var(--text3)">No seats yet.</td></tr>`;
+  }
+  await loadSeats();
+
+  document.getElementById("assign").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const amsg = document.getElementById("amsg");
+    amsg.textContent = "Assigning…"; amsg.className = "auth-msg";
+    const email = document.getElementById("eu").value.trim();
+    const { data: eu } = await sb.from("profiles").select("id").eq("email", email).maybeSingle();
+    if (!eu) { amsg.textContent = "No account found for that email — they must sign up first."; amsg.className = "auth-msg err"; return; }
+    const { error } = await sb.rpc("assign_seat", { p_end_user: eu.id });
+    if (error) { amsg.textContent = error.message; amsg.className = "auth-msg err"; return; }
+    amsg.textContent = "Seat assigned."; amsg.className = "auth-msg ok";
+    document.getElementById("eu").value = "";
+    const p = await (await import("./assets/portal.js")).getRole();
+    document.getElementById("credits").textContent = p.credits_balance ?? 0;
+    loadSeats();
+  });
+}
+</script>
+</body>
+</html>

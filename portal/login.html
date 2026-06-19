@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#060608" />
+<meta name="color-scheme" content="dark light" />
+<meta name="robots" content="noindex, nofollow" />
+<script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
+<title>Portal sign-in — AI Safe@Work</title>
+<link rel="preload" href="../assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=11" />
+<link rel="stylesheet" href="assets/portal.css?v=1" />
+<script src="config.js"></script>
+</head>
+<body>
+<div class="auth-wrap">
+  <div class="auth-card">
+    <div class="ey" style="font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent)">AI Safe@Work · Partner Portal</div>
+
+    <!-- Step 1: credentials -->
+    <form id="step-login">
+      <h1>Sign in</h1>
+      <p class="sub">Reseller, manager and team access.</p>
+      <div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="username" required /></div>
+      <div class="field"><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password" required /></div>
+      <button class="btn-primary" type="submit">Continue</button>
+    </form>
+
+    <!-- Step 2: MFA enrol (first time) -->
+    <form id="step-enrol" hidden>
+      <h1>Set up 2-factor</h1>
+      <p class="sub">Scan with an authenticator app (Google Authenticator, 1Password, Authy), then enter the 6-digit code.</p>
+      <img id="qr" class="qr" alt="TOTP QR code" />
+      <div class="field"><label for="enrol-code">6-digit code</label><input id="enrol-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" /></div>
+      <button class="btn-primary" type="submit">Verify &amp; finish</button>
+    </form>
+
+    <!-- Step 3: MFA challenge (returning) -->
+    <form id="step-mfa" hidden>
+      <h1>Enter your code</h1>
+      <p class="sub">Open your authenticator app and enter the current 6-digit code.</p>
+      <div class="field"><label for="mfa-code">6-digit code</label><input id="mfa-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" /></div>
+      <button class="btn-primary" type="submit">Verify</button>
+    </form>
+
+    <p id="msg" class="auth-msg" role="status"></p>
+  </div>
+</div>
+
+<script type="module">
+import { sb, DASH, getRole } from "./assets/portal.js";
+
+const $ = (id) => document.getElementById(id);
+const msg = $("msg");
+const show = (id) => ["step-login","step-enrol","step-mfa"].forEach(s => $(s).hidden = (s !== id));
+const say = (t, cls="") => { msg.textContent = t; msg.className = "auth-msg " + cls; };
+
+async function route() {
+  const p = await getRole();
+  location.replace((p && DASH[p.role]) || "end-user.html");
+}
+
+// If already fully authed, skip straight in.
+(async () => {
+  const { data:{ session } } = await sb.auth.getSession();
+  if (session) {
+    const { data: aal } = await sb.auth.mfa.getAuthenticatorAssuranceLevel();
+    if (aal.currentLevel === "aal2" || aal.nextLevel === "aal1") return route();
+    return startMfa();
+  }
+})();
+
+$("step-login").addEventListener("submit", async (e) => {
+  e.preventDefault(); say("Signing in…");
+  const { error } = await sb.auth.signInWithPassword({ email: $("email").value.trim(), password: $("pw").value });
+  if (error) return say(error.message, "err");
+  startMfa();
+});
+
+async function startMfa() {
+  const { data: aal } = await sb.auth.mfa.getAuthenticatorAssuranceLevel();
+  if (aal.currentLevel === "aal2") return route();
+  if (aal.nextLevel === "aal2") { say(""); return show("step-mfa"); }   // factor exists → challenge
+  // no factor → enrol
+  const { data, error } = await sb.auth.mfa.enroll({ factorType: "totp" });
+  if (error) return say(error.message, "err");
+  $("qr").src = data.totp.qr_code;          // SVG data URI
+  $("step-enrol").dataset.factor = data.id;
+  say(""); show("step-enrol");
+}
+
+$("step-enrol").addEventListener("submit", async (e) => {
+  e.preventDefault(); say("Verifying…");
+  const factorId = $("step-enrol").dataset.factor;
+  const ch = await sb.auth.mfa.challenge({ factorId });
+  if (ch.error) return say(ch.error.message, "err");
+  const v = await sb.auth.mfa.verify({ factorId, challengeId: ch.data.id, code: $("enrol-code").value.trim() });
+  if (v.error) return say(v.error.message, "err");
+  route();
+});
+
+$("step-mfa").addEventListener("submit", async (e) => {
+  e.preventDefault(); say("Verifying…");
+  const { data: factors } = await sb.auth.mfa.listFactors();
+  const factor = (factors.totp || [])[0];
+  if (!factor) return say("No authenticator enrolled.", "err");
+  const ch = await sb.auth.mfa.challenge({ factorId: factor.id });
+  if (ch.error) return say(ch.error.message, "err");
+  const v = await sb.auth.mfa.verify({ factorId: factor.id, challengeId: ch.data.id, code: $("mfa-code").value.trim() });
+  if (v.error) return say(v.error.message, "err");
+  route();
+});
+</script>
+</body>
+</html>

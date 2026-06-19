@@ -69,3 +69,6 @@ build/
 
 # ── Build artefacts ──
 dist/
+
+# portal secrets (Supabase keys)
+portal/config.js

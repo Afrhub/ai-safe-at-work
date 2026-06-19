@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#060608" />
+<meta name="color-scheme" content="dark light" />
+<meta name="robots" content="noindex, nofollow" />
+<script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
+<title>Portal — AI Safe@Work</title>
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=11" />
+<link rel="stylesheet" href="assets/portal.css?v=1" />
+<script src="config.js"></script>
+</head>
+<body>
+<div class="auth-wrap"><p class="auth-msg">Loading…</p></div>
+<script type="module">
+import { isAuthed, getRole, DASH } from "./assets/portal.js";
+(async () => {
+  if (!(await isAuthed())) return location.replace("login.html");
+  const p = await getRole();
+  location.replace((p && DASH[p.role]) || "login.html");
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#060608" />
+<meta name="color-scheme" content="dark light" />
+<meta name="robots" content="noindex, nofollow" />
+<script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
+<title>Reseller portal — AI Safe@Work</title>
+<link rel="preload" href="../assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=11" />
+<link rel="stylesheet" href="assets/portal.css?v=1" />
+<script src="config.js"></script>
+</head>
+<body>
+<header class="portal-top">
+  <span class="brand">AI&nbsp;Safe@Work</span>
+  <span style="display:flex;align-items:center;gap:1rem"><span class="who" id="who"></span><button id="out">Sign out</button></span>
+</header>
+<main class="portal-main">
+  <p class="eyebrow">Reseller portal</p>
+  <h1 class="page-title">Sell AI <em>governance</em>, recurring.</h1>
+  <p class="lede">Everything you need to register, pitch and close. Pick where you're headed.</p>
+
+  <div class="tiles">
+    <a class="tile" href="#deals"><span class="k">Pipeline</span><h2>Register a deal</h2><p>Protect your deals with first-registered priority. Track every opportunity to close.</p><span class="arrow">Open →</span></a>
+    <a class="tile" href="#marketing"><span class="k">Assets</span><h2>Marketing material</h2><p>Logos, one-pagers and battlecards — ready to co-brand and send.</p><span class="arrow">Open →</span></a>
+    <a class="tile" href="/.audit/sales-deck.html" target="_blank" rel="noopener"><span class="k">Sell</span><h2>Pitch deck</h2><p>The full investor-grade sales deck. Present it live or send the link.</p><span class="arrow">Open →</span></a>
+  </div>
+
+  <section id="deals" style="margin-top:3rem">
+    <h2>Deal registration</h2>
+    <p class="lede">Register early — priority goes to the first reseller to register a customer.</p>
+    <form id="dealform" style="display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin:1rem 0 0;max-width:720px">
+      <div class="field" style="margin:0"><label for="cn">Customer name</label><input id="cn" required /></div>
+      <div class="field" style="margin:0"><label for="cc">Contact (name / email)</label><input id="cc" /></div>
+      <div class="field" style="margin:0"><label for="ev">Estimated value (£)</label><input id="ev" type="number" min="0" /></div>
+      <div class="field" style="margin:0"><label for="nt">Notes</label><input id="nt" /></div>
+      <button class="btn-primary" style="width:auto;padding:0.7rem 1.4rem;grid-column:1/2" type="submit">Register deal</button>
+    </form>
+    <p id="dmsg" class="auth-msg"></p>
+    <table class="ptable" id="deals-t"><thead><tr><th>Customer</th><th>Value</th><th>Stage</th><th>Registered</th></tr></thead><tbody></tbody></table>
+  </section>
+
+  <section id="marketing" style="margin-top:3rem">
+    <h2>Marketing material</h2>
+    <p class="lede">Co-brandable assets. (Drop files in <code>portal/assets/marketing/</code> — links appear here.)</p>
+    <div class="tiles">
+      <a class="tile" href="/og-card.png" target="_blank" rel="noopener"><span class="k">Brand</span><h2>Share card</h2><span class="arrow">Download →</span></a>
+      <a class="tile" href="/.audit/sales-deck.html" target="_blank" rel="noopener"><span class="k">Deck</span><h2>Pitch deck</h2><span class="arrow">Open →</span></a>
+      <a class="tile" href="/standards-map.html" target="_blank" rel="noopener"><span class="k">Proof</span><h2>Standards map</h2><span class="arrow">Open →</span></a>
+    </div>
+  </section>
+</main>
+<script type="module">
+import { guard, sb, signOut } from "./assets/portal.js";
+const profile = await guard(["reseller"]);
+if (profile) {
+  document.getElementById("who").textContent = (profile.full_name || "") + " · Reseller";
+  document.getElementById("out").addEventListener("click", signOut);
+
+  async function loadDeals() {
+    const { data: deals } = await sb.from("deal_registrations").select("*").order("created_at", { ascending: false });
+    document.querySelector("#deals-t tbody").innerHTML = (deals || []).map(d =>
+      `<tr><td>${d.customer_name}</td><td>${d.est_value ? "£"+Number(d.est_value).toLocaleString() : "—"}</td>
+       <td><span class="chip ${d.stage}">${d.stage}</span></td><td>${new Date(d.created_at).toLocaleDateString()}</td></tr>`
+    ).join("") || `<tr><td colspan="4" style="color:var(--text3)">No deals registered yet.</td></tr>`;
+  }
+  await loadDeals();
+
+  document.getElementById("dealform").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const dmsg = document.getElementById("dmsg");
+    dmsg.textContent = "Registering…"; dmsg.className = "auth-msg";
+    const { data: { user } } = await sb.auth.getUser();
+    const { error } = await sb.from("deal_registrations").insert({
+      reseller_id: user.id,
+      customer_name: document.getElementById("cn").value.trim(),
+      customer_contact: document.getElementById("cc").value.trim() || null,
+      est_value: document.getElementById("ev").value || null,
+      notes: document.getElementById("nt").value.trim() || null,
+    });
+    if (error) { dmsg.textContent = error.message; dmsg.className = "auth-msg err"; return; }
+    dmsg.textContent = "Deal registered."; dmsg.className = "auth-msg ok";
+    document.getElementById("dealform").reset();
+    loadDeals();
+  });
+}
+</script>
+</body>
+</html>
