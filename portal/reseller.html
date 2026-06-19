@@ -19,15 +19,22 @@
   <span class="brand">AI&nbsp;Safe@Work</span>
   <span style="display:flex;align-items:center;gap:1rem"><span class="who" id="who"></span><button id="out">Sign out</button></span>
 </header>
-<main class="portal-main">
-  <p class="eyebrow">Reseller portal</p>
+<main class="portal-main portal-hero">
+  <span class="portal-wm" aria-hidden="true">§</span>
+  <span class="ref"><b>REF · PARTNER</b><span class="rule"></span>Reseller portal</span>
   <h1 class="page-title">Sell AI <em>governance</em>, recurring.</h1>
   <p class="lede">Everything you need to register, pitch and close. Pick where you're headed.</p>
 
-  <div class="tiles">
-    <a class="tile" href="#deals"><span class="k">Pipeline</span><h2>Register a deal</h2><p>Protect your deals with first-registered priority. Track every opportunity to close.</p><span class="arrow">Open →</span></a>
-    <a class="tile" href="#marketing"><span class="k">Assets</span><h2>Marketing material</h2><p>Logos, one-pagers and battlecards — ready to co-brand and send.</p><span class="arrow">Open →</span></a>
-    <a class="tile" href="/.audit/sales-deck.html" target="_blank" rel="noopener"><span class="k">Sell</span><h2>Pitch deck</h2><p>The full investor-grade sales deck. Present it live or send the link.</p><span class="arrow">Open →</span></a>
+  <div class="statline">
+    <div class="stat"><div class="n" id="s-open">–</div><div class="l">Live deals</div></div>
+    <div class="stat"><div class="n" id="s-value">–</div><div class="l">Pipeline value</div></div>
+    <div class="stat"><div class="n" id="s-won">–</div><div class="l">Won</div></div>
+  </div>
+
+  <div class="tiles big">
+    <a class="tile" href="#deals"><span class="k">Pipeline</span><h2>Register a deal</h2><p>Protect your deals with first-registered priority. Track every opportunity to close.</p><span class="arrow">Register →</span><span class="tile-no">01</span></a>
+    <a class="tile" href="#marketing"><span class="k">Assets</span><h2>Marketing material</h2><p>Logos, one-pagers and battlecards — ready to co-brand and send.</p><span class="arrow">Browse →</span><span class="tile-no">02</span></a>
+    <a class="tile" href="/.audit/sales-deck.html" target="_blank" rel="noopener"><span class="k">Sell</span><h2>Pitch deck</h2><p>The full investor-grade sales deck. Present it live or send the link.</p><span class="arrow">Open →</span><span class="tile-no">03</span></a>
   </div>
 
   <section id="deals" style="margin-top:3rem">
@@ -63,7 +70,13 @@ if (profile) {
 
   async function loadDeals() {
     const { data: deals } = await sb.from("deal_registrations").select("*").order("created_at", { ascending: false });
-    document.querySelector("#deals-t tbody").innerHTML = (deals || []).map(d =>
+    const list = deals || [];
+    const open = list.filter(d => d.stage === "registered" || d.stage === "qualified");
+    const pipe = open.reduce((s, d) => s + (Number(d.est_value) || 0), 0);
+    document.getElementById("s-open").textContent = open.length;
+    document.getElementById("s-value").textContent = pipe ? "£" + pipe.toLocaleString() : "£0";
+    document.getElementById("s-won").textContent = list.filter(d => d.stage === "won").length;
+    document.querySelector("#deals-t tbody").innerHTML = list.map(d =>
       `<tr><td>${d.customer_name}</td><td>${d.est_value ? "£"+Number(d.est_value).toLocaleString() : "—"}</td>
        <td><span class="chip ${d.stage}">${d.stage}</span></td><td>${new Date(d.created_at).toLocaleDateString()}</td></tr>`
     ).join("") || `<tr><td colspan="4" style="color:var(--text3)">No deals registered yet.</td></tr>`;
