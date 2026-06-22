@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#060608" />
+<meta name="color-scheme" content="dark light" />
+<script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
+<title>AI Monitoring &amp; KPI Dashboard — AI Safe@Work</title>
+<meta name="description" content="Track the measures that show your AI governance is working: KPI, target, actual, trend and owner. Aligns with ISO/IEC 42001 Clause 9.1." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="AI Safe@Work" />
+<meta property="og:title" content="AI Monitoring &amp; KPI Dashboard — AI Safe@Work" />
+<meta property="og:description" content="Track the measures that show your AI governance is working: KPI, target, actual, trend and owner." />
+<meta property="og:url" content="https://aisafeatwork.org/templates/ai-monitoring-kpi.html" />
+<meta property="og:image" content="https://aisafeatwork.org/og-card.png?v=2" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Monitoring &amp; KPI Dashboard — AI Safe@Work" />
+<meta name="twitter:description" content="Track the measures that show your AI governance is working: KPI, target, actual, trend and owner." />
+<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png?v=2" />
+<link rel="preload" href="../assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=11" />
+<script defer src="../assets/cinema.js?v=8"></script>
+<style>
+.template-tag { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.95rem; border-radius: 2px; background: rgba(145,162,255, 0.08); border: 1px solid rgba(145,162,255, 0.32); color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.2rem; }
+.template-tag::before { content: '§'; color: var(--accent); font-weight: 800; }
+.print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0 2rem; align-items: center; flex-wrap: wrap; }
+.print-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #0b0e14; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.7rem 1.25rem; border-radius: 2px; border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 0 0 1px rgba(145,162,255,0.4), 0 8px 24px rgba(145,162,255,0.2); }
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(145,162,255,0.55), 0 12px 32px rgba(145,162,255,0.3); }
+.print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
+.policy-doc { margin: 1.5rem 0; padding: 2rem 2.2rem; background: var(--plate); border: 1px solid var(--border); border-radius: 3px; box-shadow: var(--shadow-card); }
+.policy-doc h2 { margin-top: 2.2rem; }
+.policy-doc h2:first-child { margin-top: 0; }
+.policy-doc ol, .policy-doc ul { padding-left: 1.4rem; }
+.policy-doc li { margin-bottom: 0.55rem; }
+.kpi-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+.kpi-card { border: 1px solid var(--border); border-radius: 3px; padding: 1.1rem 1.2rem; background: rgba(145,162,255,0.03); }
+.kpi-card .v { font-size: 1.9rem; font-weight: 800; color: var(--accent); line-height: 1; }
+.kpi-card .l { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); margin-top: 0.5rem; }
+.doc-table { width: 100%; margin: 1.5rem 0; border-collapse: collapse; font-size: 0.82rem; }
+.doc-table thead { background: rgba(145,162,255, 0.08); }
+.doc-table th { padding: 0.85rem; text-align: left; font-weight: 700; color: var(--accent); font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--border); }
+.doc-table td { padding: 0.8rem; border: 1px solid var(--border); vertical-align: top; }
+.doc-table tbody tr:nth-child(even) { background: rgba(145,162,255, 0.02); }
+.fill { color: var(--text3); font-style: italic; }
+.section-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+@media (max-width: 700px) { .doc-table { font-size: 0.7rem; } .doc-table th, .doc-table td { padding: 0.55rem; } }
+@media print { .policy-doc { background: white !important; border: 1px solid #ccc !important; box-shadow: none !important; padding: 1rem 0 !important; } .doc-table { border: 1px solid #ccc; } .doc-table thead { background: #f5f5f5 !important; } .doc-table th { color: #46505e !important; } .kpi-card { background: #f7f8fa !important; } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="topbar no-print">
+  <a href="../index.html" class="brand">AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="../course.html" class="always-show">Modules</a>
+    <a href="index.html">Templates</a>
+    <a href="../standards-map.html">Standards Map</a>
+    <a href="../module-11.html">Checklist</a>
+    <a href="../module-12.html">Standards</a>
+  </nav>
+</header>
+<main id="main">
+  <span class="template-tag no-print">Template · AI Monitoring &amp; KPI Dashboard v1.0</span>
+  <p class="eyebrow no-print">The numbers you report each quarter</p>
+  <h1 class="page-title">AI Monitoring &amp; KPI Dashboard</h1>
+  <p class="lede no-print">Pick a small set of measures that show whether AI governance is working, then track them every quarter. This is what the Steering Group reviews and the board sees. Aligns with ISO/IEC 42001 Clause 9.1.</p>
+  <div class="print-row no-print">
+    <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF →</button>
+    <span class="print-hint">Fill the figures each quarter. Replace the example numbers with your own.</span>
+  </div>
+
+  <article class="policy-doc">
+    <span class="section-tag">At a glance</span>
+    <h2>This quarter</h2>
+    <div class="kpi-cards">
+      <div class="kpi-card"><div class="v fill">__%</div><div class="l">Staff trained</div></div>
+      <div class="kpi-card"><div class="v fill">__</div><div class="l">Tools registered</div></div>
+      <div class="kpi-card"><div class="v fill">__</div><div class="l">Open high risks</div></div>
+      <div class="kpi-card"><div class="v fill">__</div><div class="l">Incidents</div></div>
+    </div>
+
+    <span class="section-tag">Detail</span>
+    <h2>KPI table</h2>
+    <table class="doc-table">
+      <thead><tr><th>KPI</th><th>Target</th><th>This quarter</th><th>Trend</th><th>Owner</th></tr></thead>
+      <tbody>
+        <tr><td>Staff who completed AI training</td><td>100%</td><td class="fill">…</td><td class="fill">↑ / → / ↓</td><td class="fill">…</td></tr>
+        <tr><td>Approved tools on the register</td><td>All in use</td><td class="fill">…</td><td class="fill">…</td><td class="fill">…</td></tr>
+        <tr><td>Unapproved (shadow) tools found</td><td>0</td><td class="fill">…</td><td class="fill">…</td><td class="fill">…</td></tr>
+        <tr><td>High-risk use cases with current assessment</td><td>100%</td><td class="fill">…</td><td class="fill">…</td><td class="fill">…</td></tr>
+        <tr><td>Open high risks past due date</td><td>0</td><td class="fill">…</td><td class="fill">…</td><td class="fill">…</td></tr>
+        <tr><td>AI incidents this quarter</td><td>Track</td><td class="fill">…</td><td class="fill">…</td><td class="fill">…</td></tr>
+        <tr><td>Mean time to close an incident</td><td class="fill">[target]</td><td class="fill">…</td><td class="fill">…</td><td class="fill">…</td></tr>
+        <tr><td>Audit findings still open</td><td>0</td><td class="fill">…</td><td class="fill">…</td><td class="fill">…</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Notes for the board</h2>
+    <ul>
+      <li><strong>What moved:</strong> <span class="fill">the one or two figures worth a sentence</span></li>
+      <li><strong>What needs a decision:</strong> <span class="fill">anything off-target the board should act on</span></li>
+    </ul>
+
+    <h2>Standards referenced</h2>
+    <ul>
+      <li><strong>ISO/IEC 42001:2023</strong> — Clause 9.1 (monitoring, measurement, analysis and evaluation).</li>
+    </ul>
+  </article>
+
+  <div class="callout note no-print">
+    <span class="callout-icon">i</span>
+    <div>
+      <div class="callout-title">Keeping it useful</div>
+      <ol>
+        <li>Track six to eight KPIs — enough to see the picture, not so many it becomes noise.</li>
+        <li>Pull the figures from your registers, not from memory.</li>
+        <li>Show the trend, not just the number — direction is what prompts action.</li>
+      </ol>
+    </div>
+  </div>
+
+</main>
+
+<nav class="module-bottom-nav no-print">
+  <a class="nav-btn" href="ai-internal-audit.html">
+    <span class="nav-dir">Back to</span>
+    <span class="nav-title">← AI Internal Audit</span>
+  </a>
+  <a class="nav-btn next" href="index.html">
+    <span class="nav-dir">Done</span>
+    <span class="nav-title">All templates →</span>
+  </a>
+</nav>
+
+<footer class="site-foot no-print">
+  <span>AI Safe@Work · AI Monitoring &amp; KPI Dashboard v1.0 · v2026.06</span>
+  <span class="foot-right">
+    <a href="../course.html">All modules</a>
+    <a href="../privacy.html">Privacy</a>
+    <a href="../terms.html">Terms</a>
+  </span>
+</footer>
+
+</body>
+</html>

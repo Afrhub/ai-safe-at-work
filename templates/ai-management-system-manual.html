@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#060608" />
+<meta name="color-scheme" content="dark light" />
+<script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
+<title>AI Management System Manual — AI Safe@Work</title>
+<meta name="description" content="The top-level manual for an AI Management System (AIMS): scope, policy, roles, planning, operation, evaluation and improvement. Structured to ISO/IEC 42001 clauses 4–10." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="AI Safe@Work" />
+<meta property="og:title" content="AI Management System Manual — AI Safe@Work" />
+<meta property="og:description" content="The top-level manual for an AI Management System, structured to ISO/IEC 42001 clauses 4–10." />
+<meta property="og:url" content="https://aisafeatwork.org/templates/ai-management-system-manual.html" />
+<meta property="og:image" content="https://aisafeatwork.org/og-card.png?v=2" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Management System Manual — AI Safe@Work" />
+<meta name="twitter:description" content="The top-level manual for an AI Management System, structured to ISO/IEC 42001 clauses 4–10." />
+<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png?v=2" />
+<link rel="preload" href="../assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=11" />
+<script defer src="../assets/cinema.js?v=8"></script>
+<style>
+.template-tag { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.95rem; border-radius: 2px; background: rgba(145,162,255, 0.08); border: 1px solid rgba(145,162,255, 0.32); color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.2rem; }
+.template-tag::before { content: '§'; color: var(--accent); font-weight: 800; }
+.print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0 2rem; align-items: center; flex-wrap: wrap; }
+.print-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #0b0e14; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.7rem 1.25rem; border-radius: 2px; border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 0 0 1px rgba(145,162,255,0.4), 0 8px 24px rgba(145,162,255,0.2); }
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(145,162,255,0.55), 0 12px 32px rgba(145,162,255,0.3); }
+.print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
+.policy-doc { margin: 1.5rem 0; padding: 2rem 2.2rem; background: var(--plate); border: 1px solid var(--border); border-radius: 3px; box-shadow: var(--shadow-card); }
+.policy-doc h2 { margin-top: 2.2rem; }
+.policy-doc h2:first-child { margin-top: 0; }
+.policy-doc h3 { margin-top: 1.6rem; }
+.policy-doc ol, .policy-doc ul { padding-left: 1.4rem; }
+.policy-doc li { margin-bottom: 0.55rem; }
+.doc-table { width: 100%; margin: 1.5rem 0; border-collapse: collapse; font-size: 0.85rem; }
+.doc-table thead { background: rgba(145,162,255, 0.08); }
+.doc-table th { padding: 0.9rem; text-align: left; font-weight: 700; color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--border); }
+.doc-table td { padding: 0.85rem; border: 1px solid var(--border); vertical-align: top; }
+.doc-table tbody tr:nth-child(even) { background: rgba(145,162,255, 0.02); }
+.fill { color: var(--text3); font-style: italic; }
+.section-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+@media (max-width: 640px) { .doc-table { font-size: 0.72rem; } .doc-table th, .doc-table td { padding: 0.6rem; } }
+@media print { .policy-doc { background: white !important; border: 1px solid #ccc !important; box-shadow: none !important; padding: 1rem 0 !important; } .doc-table { border: 1px solid #ccc; } .doc-table thead { background: #f5f5f5 !important; } .doc-table th { color: #46505e !important; } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="topbar no-print">
+  <a href="../index.html" class="brand">AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="../course.html" class="always-show">Modules</a>
+    <a href="index.html">Templates</a>
+    <a href="../standards-map.html">Standards Map</a>
+    <a href="../module-11.html">Checklist</a>
+    <a href="../module-12.html">Standards</a>
+  </nav>
+</header>
+<main id="main">
+  <span class="template-tag no-print">Template · AI Management System Manual v1.0</span>
+  <p class="eyebrow no-print">The top document in your AI governance pack</p>
+  <h1 class="page-title">AI Management System Manual</h1>
+  <p class="lede no-print">This is the cover document for your whole AI governance system. It says what the system covers, who runs it, and which records prove it works — then points to every other template. Adopt this first, fill the bracketed fields, and keep it under version control. Structured to ISO/IEC 42001 clauses 4 to 10.</p>
+  <div class="print-row no-print">
+    <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF →</button>
+    <span class="print-hint">Owned by the AI Steering Group. Review annually or on a major change.</span>
+  </div>
+
+  <article class="policy-doc">
+    <table class="doc-table">
+      <tbody>
+        <tr><td style="width:34%"><strong>Organisation</strong></td><td><span class="fill">[organisation]</span></td></tr>
+        <tr><td><strong>Document owner</strong></td><td><span class="fill">AI Steering Group chair</span></td></tr>
+        <tr><td><strong>Version / date</strong></td><td><span class="fill">1.0 · DD / MM / YYYY</span></td></tr>
+        <tr><td><strong>Approved by</strong></td><td><span class="fill">Name / role</span></td></tr>
+      </tbody>
+    </table>
+
+    <span class="section-tag">Clause 4</span>
+    <h2>Context and scope</h2>
+    <p>This AI Management System (AIMS) covers <span class="fill">[the AI tools, use cases and teams in scope]</span>. It exists to make sure AI is used safely, lawfully and effectively across <span class="fill">[organisation]</span>.</p>
+    <ul>
+      <li><strong>Internal context:</strong> the teams using AI, the systems it touches, the data involved.</li>
+      <li><strong>External context:</strong> the EU AI Act, GDPR, sector regulators, customer expectations.</li>
+      <li><strong>Interested parties:</strong> staff, customers, regulators, vendors, the board.</li>
+      <li><strong>Out of scope:</strong> <span class="fill">[anything explicitly excluded]</span>.</li>
+    </ul>
+
+    <span class="section-tag">Clause 5</span>
+    <h2>Leadership and policy</h2>
+    <p>Top management owns the AIMS through the AI Steering Group. The AI Policy and Acceptable Use Policy set the rules. Roles and decision rights are defined in the AI Governance Roles Matrix.</p>
+    <ul>
+      <li>Governing body: <strong>AI Steering Group</strong> (see its Terms of Reference).</li>
+      <li>Policies: <strong>AI Acceptable Use Policy</strong> and supporting standards.</li>
+      <li>Roles and authorities: <strong>AI Governance Roles Matrix</strong>.</li>
+    </ul>
+
+    <span class="section-tag">Clause 6</span>
+    <h2>Planning</h2>
+    <ul>
+      <li><strong>Risks and opportunities:</strong> assessed per use case in the AI Risk Assessment and tracked in the AI Risk Register.</li>
+      <li><strong>Objectives:</strong> set and tracked in the AI Objectives Register.</li>
+      <li><strong>Impact:</strong> data and rights impacts assessed via the DPIA and, where relevant, the FRIA.</li>
+    </ul>
+
+    <span class="section-tag">Clause 7</span>
+    <h2>Support</h2>
+    <ul>
+      <li><strong>Competence and awareness:</strong> the AI Safe@Work course; completion held in the Training Register; reinforced by the AI Awareness Poster.</li>
+      <li><strong>Resources:</strong> <span class="fill">[budget, tooling, people assigned to the AIMS]</span>.</li>
+      <li><strong>Documented information:</strong> this manual and every template, kept under version control.</li>
+    </ul>
+
+    <span class="section-tag">Clause 8</span>
+    <h2>Operation</h2>
+    <ul>
+      <li>New AI tools and use cases pass through the AI Risk Assessment before approval.</li>
+      <li>Approved tools and use cases are recorded in the AI Tool Register and AI Use Case Register.</li>
+      <li>Vendors are checked with the AI Vendor Due Diligence Assessment.</li>
+      <li>Problems are handled through the Incident Form and the incident process.</li>
+    </ul>
+
+    <span class="section-tag">Clause 9</span>
+    <h2>Performance evaluation</h2>
+    <ul>
+      <li><strong>Monitoring:</strong> the AI Monitoring &amp; KPI Dashboard tracks the measures that matter.</li>
+      <li><strong>Internal audit:</strong> run on a schedule using the AI Internal Audit Template.</li>
+      <li><strong>Management review:</strong> the Steering Group reviews the AIMS each quarter and reports to the board.</li>
+    </ul>
+
+    <span class="section-tag">Clause 10</span>
+    <h2>Improvement</h2>
+    <p>Findings from audits, incidents and reviews feed corrective actions. Actions are tracked to closure and the relevant templates are updated. The aim is a system that gets stronger each cycle.</p>
+
+    <h2>Document register</h2>
+    <table class="doc-table">
+      <thead><tr><th>Document</th><th>Owner</th><th>Review</th></tr></thead>
+      <tbody>
+        <tr><td>AI Acceptable Use Policy</td><td class="fill">…</td><td class="fill">Annual</td></tr>
+        <tr><td>AI Steering Group Terms of Reference</td><td class="fill">…</td><td class="fill">Annual</td></tr>
+        <tr><td>AI Governance Roles Matrix</td><td class="fill">…</td><td class="fill">Annual</td></tr>
+        <tr><td>AI Objectives Register</td><td class="fill">…</td><td class="fill">Quarterly</td></tr>
+        <tr><td>AI Use Case &amp; Tool Registers</td><td class="fill">…</td><td class="fill">Ongoing</td></tr>
+        <tr><td>AI Risk Assessment &amp; Risk Register</td><td class="fill">…</td><td class="fill">Per use case</td></tr>
+        <tr><td>DPIA / FRIA</td><td class="fill">…</td><td class="fill">Per use case</td></tr>
+        <tr><td>AI Internal Audit &amp; KPI Dashboard</td><td class="fill">…</td><td class="fill">Per cycle</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Standards referenced</h2>
+    <ul>
+      <li><strong>ISO/IEC 42001:2023</strong> — clauses 4 to 10 (the full management-system structure).</li>
+      <li><strong>EU AI Act</strong> — organisational accountability and risk management.</li>
+    </ul>
+  </article>
+
+  <div class="callout note no-print">
+    <span class="callout-icon">i</span>
+    <div>
+      <div class="callout-title">Using this manual</div>
+      <ol>
+        <li>Fill the bracketed fields and confirm the scope with your Steering Group.</li>
+        <li>Link each row of the document register to your real, filled-in templates.</li>
+        <li>Put it under version control and re-approve it at each annual review.</li>
+      </ol>
+    </div>
+  </div>
+
+</main>
+
+<nav class="module-bottom-nav no-print">
+  <a class="nav-btn" href="index.html">
+    <span class="nav-dir">Back to</span>
+    <span class="nav-title">← All templates</span>
+  </a>
+  <a class="nav-btn next" href="ai-objectives-register.html">
+    <span class="nav-dir">Next template</span>
+    <span class="nav-title">AI Objectives Register →</span>
+  </a>
+</nav>
+
+<footer class="site-foot no-print">
+  <span>AI Safe@Work · AI Management System Manual v1.0 · v2026.06</span>
+  <span class="foot-right">
+    <a href="../course.html">All modules</a>
+    <a href="../privacy.html">Privacy</a>
+    <a href="../terms.html">Terms</a>
+  </span>
+</footer>
+
+</body>
+</html>
