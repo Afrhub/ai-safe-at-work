@@ -29,6 +29,8 @@
     <div class="stat"><div class="n" id="s-open">–</div><div class="l">Live deals</div></div>
     <div class="stat"><div class="n" id="s-value">–</div><div class="l">Pipeline value</div></div>
     <div class="stat"><div class="n" id="s-won">–</div><div class="l">Won</div></div>
+    <div class="stat"><div class="n" id="s-paid" style="color:var(--green)">–</div><div class="l">Commission paid</div></div>
+    <div class="stat"><div class="n" id="s-pending">–</div><div class="l">Pending payout</div></div>
   </div>
 
   <div class="tiles big">
@@ -60,6 +62,25 @@
       <a class="tile" href="/standards-map.html" target="_blank" rel="noopener"><span class="k">Proof</span><h2>Standards map</h2><span class="arrow">Open →</span></a>
     </div>
   </section>
+
+  <section id="customers" style="margin-top:3rem">
+    <h2>Customers &amp; renewals</h2>
+    <p class="lede">Your active accounts and when they renew. Recurring revenue lives here.</p>
+    <form id="custform" style="display:flex;gap:0.6rem;flex-wrap:wrap;align-items:flex-end;margin:1rem 0 0.4rem">
+      <div class="field" style="margin:0;flex:1;min-width:200px"><label for="cust-name">Customer</label><input id="cust-name" required /></div>
+      <div class="field" style="margin:0"><label for="cust-seats">Seats</label><input id="cust-seats" type="number" min="0" value="0" style="width:90px" /></div>
+      <div class="field" style="margin:0"><label for="cust-renew">Renews</label><input id="cust-renew" type="date" /></div>
+      <button class="btn-primary" style="width:auto;padding:0.7rem 1.4rem" type="submit">Add customer</button>
+    </form>
+    <p id="cmsg" class="auth-msg"></p>
+    <table class="ptable" id="cust-t"><thead><tr><th>Customer</th><th>Seats</th><th>Renews</th><th>Status</th></tr></thead><tbody></tbody></table>
+  </section>
+
+  <section id="commission" style="margin-top:3rem">
+    <h2>Commission</h2>
+    <p class="lede">Your revenue-share statements. Issued by AI Safe@Work — read-only.</p>
+    <table class="ptable" id="comm-t"><thead><tr><th>Period</th><th>Amount</th><th>Status</th><th>Note</th></tr></thead><tbody></tbody></table>
+  </section>
 </main>
 <script type="module">
 import { guard, sb, signOut } from "./assets/portal.js";
@@ -82,6 +103,46 @@ if (profile) {
     ).join("") || `<tr><td colspan="4" style="color:var(--text3)">No deals registered yet.</td></tr>`;
   }
   await loadDeals();
+
+  async function loadCustomers() {
+    const { data: cust } = await sb.from("customers").select("*").order("renewal_date", { ascending: true });
+    document.querySelector("#cust-t tbody").innerHTML = (cust || []).map(c =>
+      `<tr><td>${c.name}</td><td>${c.seats}</td><td>${c.renewal_date || "—"}</td>
+       <td><span class="chip ${c.status === "active" ? "won" : "lost"}">${c.status}</span></td></tr>`
+    ).join("") || `<tr><td colspan="4" style="color:var(--text3)">No customers yet.</td></tr>`;
+  }
+  await loadCustomers();
+
+  async function loadCommissions() {
+    const { data: comm } = await sb.from("commissions").select("*").order("created_at", { ascending: false });
+    const list = comm || [];
+    const paid = list.filter(c => c.status === "paid").reduce((s, c) => s + Number(c.amount || 0), 0);
+    const pending = list.filter(c => c.status === "pending").reduce((s, c) => s + Number(c.amount || 0), 0);
+    document.getElementById("s-paid").textContent = "£" + paid.toLocaleString();
+    document.getElementById("s-pending").textContent = "£" + pending.toLocaleString();
+    document.querySelector("#comm-t tbody").innerHTML = list.map(c =>
+      `<tr><td>${c.period || "—"}</td><td>£${Number(c.amount||0).toLocaleString()}</td>
+       <td><span class="chip ${c.status === "paid" ? "won" : "registered"}">${c.status}</span></td><td>${c.note || ""}</td></tr>`
+    ).join("") || `<tr><td colspan="4" style="color:var(--text3)">No statements yet.</td></tr>`;
+  }
+  await loadCommissions();
+
+  document.getElementById("custform").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const cmsg = document.getElementById("cmsg");
+    cmsg.textContent = "Saving…"; cmsg.className = "auth-msg";
+    const { data: { user } } = await sb.auth.getUser();
+    const { error } = await sb.from("customers").insert({
+      reseller_id: user.id,
+      name: document.getElementById("cust-name").value.trim(),
+      seats: Number(document.getElementById("cust-seats").value) || 0,
+      renewal_date: document.getElementById("cust-renew").value || null,
+    });
+    if (error) { cmsg.textContent = error.message; cmsg.className = "auth-msg err"; return; }
+    cmsg.textContent = "Customer added."; cmsg.className = "auth-msg ok";
+    document.getElementById("custform").reset();
+    loadCustomers();
+  });
 
   document.getElementById("dealform").addEventListener("submit", async (e) => {
     e.preventDefault();
