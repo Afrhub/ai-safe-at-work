@@ -21,11 +21,13 @@
 
     <!-- Step 1: credentials -->
     <form id="step-login">
-      <h1>Sign in</h1>
+      <h1 id="login-title">Sign in</h1>
       <p class="sub">Reseller, manager and team access.</p>
       <div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="username" required /></div>
-      <div class="field"><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password" required /></div>
-      <button class="btn-primary" type="submit">Continue</button>
+      <div class="field"><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password" required minlength="8" /></div>
+      <button class="btn-primary" type="submit" id="login-btn">Continue</button>
+      <p style="margin-top:1rem;font-size:0.85rem;color:var(--text2)"><span id="toggle-q">No account?</span>
+        <a href="#" id="toggle" style="color:var(--accent);font-weight:700">Create one</a></p>
     </form>
 
     <!-- Step 2: MFA enrol (first time) -->
@@ -72,9 +74,29 @@ async function route() {
   }
 })();
 
+let mode = "in";
+$("toggle").addEventListener("click", (e) => {
+  e.preventDefault();
+  mode = mode === "in" ? "up" : "in";
+  $("login-title").textContent = mode === "in" ? "Sign in" : "Create account";
+  $("login-btn").textContent = mode === "in" ? "Continue" : "Sign up";
+  $("toggle-q").textContent = mode === "in" ? "No account?" : "Already have one?";
+  $("toggle").textContent = mode === "in" ? "Create one" : "Sign in";
+  say("");
+});
+
 $("step-login").addEventListener("submit", async (e) => {
-  e.preventDefault(); say("Signing in…");
-  const { error } = await sb.auth.signInWithPassword({ email: $("email").value.trim(), password: $("pw").value });
+  e.preventDefault();
+  const email = $("email").value.trim(), password = $("pw").value;
+  if (mode === "up") {
+    say("Creating account…");
+    const { data, error } = await sb.auth.signUp({ email, password });
+    if (error) return say(error.message, "err");
+    if (!data.session) return say("Account created — check your email to confirm, then sign in.", "ok");
+    return startMfa(); // confirmation disabled → straight to MFA setup
+  }
+  say("Signing in…");
+  const { error } = await sb.auth.signInWithPassword({ email, password });
   if (error) return say(error.message, "err");
   startMfa();
 });
