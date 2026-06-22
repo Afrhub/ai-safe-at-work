@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Safe AI, handled — [MSP Name] × AI Safe@Work</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060608; --plate:rgba(14,15,21,0.9); --ink:#eef2f7; --ink2:#9fb0c5; --ink3:#6b7a8d;
+  --peri:#91a2ff; --peri-dim:rgba(145,162,255,0.5); --green:#34d399; --red:#ff6b6b; --amber:#f7a600;
+  --border:rgba(255,255,255,0.10); --border-bold:rgba(255,255,255,0.18);
+  --mono:ui-monospace,'SF Mono',Menlo,monospace; --body:'Atkinson Hyperlegible',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);overflow:hidden}
+
+.slide-deck{position:relative;width:100vw;height:100vh;overflow:hidden}
+@media(min-width:769px){.slide-deck{max-width:calc(100vh*16/9);max-height:calc(100vw*9/16);margin:auto;position:absolute;inset:0}}
+
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  padding:6.2vmin 8vmin;opacity:0;visibility:hidden;transition:opacity .45s ease;overflow:hidden}
+.slide.active{opacity:1;visibility:visible}
+
+/* dossier background */
+.slide::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+   radial-gradient(ellipse 60% 50% at 18% 12%,rgba(79,216,196,0.06)0%,transparent 60%),
+   radial-gradient(ellipse 55% 50% at 88% 86%,rgba(145,162,255,0.10)0%,transparent 64%);}
+.slide::after{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(to right,rgba(145,162,255,.045)1px,transparent 1px),
+                   linear-gradient(to bottom,rgba(145,162,255,.045)1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(ellipse 90% 80% at 50% 40%,#000 0%,transparent 82%);
+          mask-image:radial-gradient(ellipse 90% 80% at 50% 40%,#000 0%,transparent 82%);}
+.slide > *{position:relative;z-index:1}
+
+/* crop marks */
+.slide-content{position:relative;width:100%}
+.slide-content::before,.slide-content::after{content:'';position:absolute;width:14px;height:14px;opacity:.5}
+.slide-content::before{top:-3.4vmin;left:0;border-top:1.5px solid var(--border-bold);border-left:1.5px solid var(--border-bold)}
+.slide-content::after{bottom:-3.4vmin;right:0;border-bottom:1.5px solid var(--border-bold);border-right:1.5px solid var(--border-bold)}
+
+.eyebrow{font-family:var(--mono);font-size:clamp(.62rem,1.25vmin,.8rem);letter-spacing:.22em;
+  text-transform:uppercase;color:var(--peri);margin-bottom:2.4vmin;display:flex;align-items:center;gap:.8rem}
+.eyebrow .rule{flex:0 0 48px;height:1px;background:repeating-linear-gradient(90deg,var(--peri-dim)0 6px,transparent 6px 12px)}
+h1.head{font-size:clamp(2.2rem,8vmin,6rem);font-weight:700;line-height:1.02;letter-spacing:-.01em}
+h2.head{font-size:clamp(1.8rem,6.4vmin,4.4rem);font-weight:700;line-height:1.05;letter-spacing:-.01em}
+.head em{font-style:normal;color:var(--peri)}
+.sub{font-size:clamp(1rem,2.5vmin,1.7rem);color:var(--ink2);margin-top:2.6vmin;max-width:46ch;line-height:1.45}
+.kicker{font-size:clamp(1.1rem,2.8vmin,2rem);color:var(--ink);margin-top:2vmin;font-weight:700}
+
+.watermark{position:absolute;right:-2vmin;bottom:-6vmin;font-size:38vmin;line-height:1;font-weight:700;
+  color:transparent;-webkit-text-stroke:1px rgba(145,162,255,.07);z-index:0;user-select:none}
+
+/* cards */
+.row{display:flex;gap:2.2vmin;margin-top:4vmin;flex-wrap:wrap}
+.card{flex:1;min-width:0;background:var(--plate);border:1px solid var(--border);border-radius:4px;
+  padding:3vmin 2.6vmin;position:relative;overflow:hidden}
+.card .n{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--peri)}
+.card h3{font-size:clamp(1rem,2.4vmin,1.5rem);margin:.6vmin 0 .8vmin;font-weight:700}
+.card p{font-size:clamp(.85rem,1.7vmin,1.1rem);color:var(--ink2);line-height:1.4}
+.card .big{font-size:clamp(2rem,6vmin,4rem);font-weight:700;color:var(--peri);line-height:1}
+.card.tier .step{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
+.card.soon{opacity:.62}
+.card .bgnum{position:absolute;right:1.2vmin;bottom:-1vmin;font-size:9vmin;font-weight:700;color:rgba(145,162,255,.06);font-family:var(--mono)}
+
+.badges{display:flex;gap:1.4vmin;flex-wrap:wrap;margin-top:4vmin}
+.badge{font-family:var(--mono);font-size:clamp(.7rem,1.5vmin,1rem);letter-spacing:.08em;color:var(--ink);
+  border:1px solid var(--peri-dim);border-radius:3px;padding:1vmin 1.8vmin;background:rgba(145,162,255,.06)}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:2.4vmin;margin-top:4vmin}
+.col{background:var(--plate);border:1px solid var(--border);border-radius:4px;padding:3vmin 2.8vmin}
+.col h3{font-size:clamp(1rem,2.4vmin,1.5rem);margin-bottom:1.4vmin;display:flex;align-items:center;gap:.7rem}
+.col h3 .dot{width:.8rem;height:.8rem;border-radius:50%;background:var(--peri)}
+.col ul{list-style:none}
+.col li{font-size:clamp(.85rem,1.8vmin,1.15rem);color:var(--ink2);padding:.7vmin 0 .7vmin 1.8rem;position:relative;line-height:1.35}
+.col li::before{content:'→';position:absolute;left:0;color:var(--peri)}
+
+.lockup{display:flex;align-items:center;gap:1.4rem;margin-top:5vmin;font-family:var(--mono);
+  font-size:clamp(.72rem,1.5vmin,1rem);letter-spacing:.1em;color:var(--ink3);text-transform:uppercase}
+.lockup .ms{color:var(--ink);font-weight:700}
+.lockup .x{color:var(--peri)}
+
+.cta-box{margin-top:4vmin;border:1px solid var(--peri-dim);border-radius:4px;background:rgba(145,162,255,.06);
+  padding:2.6vmin 3vmin;display:inline-flex;gap:2.6vmin;flex-wrap:wrap;font-family:var(--mono);
+  font-size:clamp(.8rem,1.7vmin,1.1rem);color:var(--ink)}
+.cta-box b{color:var(--peri)}
+
+.foot{position:absolute;bottom:3.4vmin;left:8vmin;font-family:var(--mono);font-size:clamp(.6rem,1.2vmin,.78rem);
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);z-index:1}
+.foot b{color:var(--peri)}
+
+/* nav */
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--peri);transition:width .3s;z-index:1000;width:0}
+.nav-controls{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:18px;z-index:1000}
+.nav-btn{background:rgba(145,162,255,.12);border:1px solid var(--border);color:var(--ink);width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:18px}
+.nav-btn:hover{background:rgba(145,162,255,.24)}
+.slide-counter{font-family:var(--mono);color:var(--ink3);font-size:13px;letter-spacing:.1em}
+
+@media(max-width:768px){.slide{padding:7vmin 7vmin}.cols{grid-template-columns:1fr}.row{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<div class="slide-deck">
+
+  <!-- 1 · Title -->
+  <div class="slide active">
+    <span class="watermark" aria-hidden="true">§</span>
+    <div class="slide-content">
+      <div class="eyebrow"><span class="rule"></span>[MSP Name] × AI Safe@Work</div>
+      <h1 class="head">Your team is<br>already using <em>AI</em>.</h1>
+      <p class="sub">The only question left is whether they're doing it safely.</p>
+      <div class="lockup"><span class="ms">[MSP&nbsp;Name]</span><span class="x">×</span><span>Powered by AI&nbsp;Safe@Work</span></div>
+    </div>
+  </div>
+
+  <!-- 2 · The reality -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="eyebrow"><span class="rule"></span>The reality</div>
+      <h2 class="head">ChatGPT. Copilot. <em>Gemini.</em></h2>
+      <p class="sub">Your people use them every day to write, summarise and decide. Most were never shown how to do it without putting the business at risk.</p>
+      <div class="row">
+        <div class="card"><div class="big">Daily</div><p>AI is already in your workflows, sanctioned or not.</p></div>
+        <div class="card"><div class="big">Zero</div><p>Most staff have had no AI safety training at all.</p></div>
+        <div class="card"><div class="big">You</div><p>carry the risk for what they paste in.</p></div>
+      </div>
+    </div>
+    <div class="foot"><b>[MSP&nbsp;Name]</b> · Powered by AI&nbsp;Safe@Work</div>
+  </div>
+
+  <!-- 3 · The risk -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="eyebrow"><span class="rule"></span>The risk</div>
+      <h2 class="head">One paste can <em>cost you</em>.</h2>
+      <div class="row">
+        <div class="card"><div class="n">Exposure</div><h3>Data leak</h3><p>A customer record or contract pasted into a public tool, gone, and possibly used to train it.</p><span class="bgnum">01</span></div>
+        <div class="card"><div class="n">Regulatory</div><h3>GDPR breach</h3><p>Personal data mishandled. Fines, notifications, and a very awkward conversation.</p><span class="bgnum">02</span></div>
+        <div class="card"><div class="n">Fraud</div><h3>A scam that lands</h3><p>AI makes phishing and deepfakes convincing. Untrained staff are the easiest way in.</p><span class="bgnum">03</span></div>
+      </div>
+    </div>
+    <div class="foot"><b>[MSP&nbsp;Name]</b> · Powered by AI&nbsp;Safe@Work</div>
+  </div>
+
+  <!-- 4 · The law -->
+  <div class="slide">
+    <span class="watermark" aria-hidden="true">§4</span>
+    <div class="slide-content">
+      <div class="eyebrow"><span class="rule"></span>Now it's the law</div>
+      <h2 class="head">AI literacy is a <em>legal duty</em>.</h2>
+      <p class="sub">The rules already expect your people to know how to use AI responsibly. This is not a future problem.</p>
+      <div class="badges">
+        <span class="badge">EU AI Act · Article 4</span>
+        <span class="badge">GDPR</span>
+        <span class="badge">ISO/IEC 42001</span>
+        <span class="badge">ISO/IEC 27001</span>
+      </div>
+      <p class="kicker">Not optional. Not later.</p>
+    </div>
+    <div class="foot"><b>[MSP&nbsp;Name]</b> · Powered by AI&nbsp;Safe@Work</div>
+  </div>
+
+  <!-- 5 · The gap -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="eyebrow"><span class="rule"></span>The gap</div>
+      <h2 class="head">You protect the machines.<br>Not the <em>habits</em>.</h2>
+      <p class="sub">Antivirus guards your network. Backups guard your files. Nothing guards how your people actually use AI, the place the real risk now sits.</p>
+    </div>
+    <div class="foot"><b>[MSP&nbsp;Name]</b> · Powered by AI&nbsp;Safe@Work</div>
+  </div>
+
+  <!-- 6 · The fix -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="eyebrow"><span class="rule"></span>The fix</div>
+      <h2 class="head"><em>Train.</em> Govern. Embed.</h2>
+      <div class="row">
+        <div class="card tier"><div class="step">Tier 1</div><h3>Train</h3><p>A 90-minute, plain-English course. Assessment, certificate, annual refresher.</p><span class="bgnum">01</span></div>
+        <div class="card tier"><div class="step">Tier 2</div><h3>Govern</h3><p>The Plus Pack: ready-to-use policies, registers and risk templates.</p><span class="bgnum">02</span></div>
+        <div class="card tier soon"><div class="step">Tier 3 · soon</div><h3>Embed</h3><p>Hands-on consultancy and ISO 42001 readiness when you're ready.</p><span class="bgnum">03</span></div>
+      </div>
+    </div>
+    <div class="foot"><b>[MSP&nbsp;Name]</b> · Powered by AI&nbsp;Safe@Work</div>
+  </div>
+
+  <!-- 7 · What you get -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="eyebrow"><span class="rule"></span>What you get</div>
+      <h2 class="head">Trained people.<br><em>Audit-ready</em> paperwork.</h2>
+      <div class="cols">
+        <div class="col"><h3><span class="dot"></span>Your people</h3><ul>
+          <li>11-module practical course</li>
+          <li>Knowledge assessment</li>
+          <li>Certificate with a verifiable ID</li>
+          <li>Annual refresher to stay current</li>
+        </ul></div>
+        <div class="col"><h3><span class="dot"></span>Your paperwork</h3><ul>
+          <li>AI Acceptable Use Policy</li>
+          <li>Use case, tool &amp; risk registers</li>
+          <li>Risk &amp; supplier assessments</li>
+          <li>Roles matrix &amp; steering-group ToR</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="foot"><b>[MSP&nbsp;Name]</b> · Powered by AI&nbsp;Safe@Work</div>
+  </div>
+
+  <!-- 8 · Why us -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="eyebrow"><span class="rule"></span>Why [MSP Name]</div>
+      <h2 class="head">We <em>handle it</em> for you.</h2>
+      <p class="sub">You already trust us with your IT. We roll this out the same way, so safe AI becomes one less thing you have to think about.</p>
+      <div class="row">
+        <div class="card"><div class="n">Deploy</div><h3>We set it up</h3><p>Accounts, access and content, ready for your team.</p></div>
+        <div class="card"><div class="n">Track</div><h3>We watch completion</h3><p>You see who's trained and who still needs to be.</p></div>
+        <div class="card"><div class="n">Maintain</div><h3>We keep you compliant</h3><p>Refreshers and updates as the rules move.</p></div>
+      </div>
+    </div>
+    <div class="foot"><b>[MSP&nbsp;Name]</b> · Powered by AI&nbsp;Safe@Work</div>
+  </div>
+
+  <!-- 9 · CTA -->
+  <div class="slide">
+    <span class="watermark" aria-hidden="true">§</span>
+    <div class="slide-content">
+      <div class="eyebrow"><span class="rule"></span>Next step</div>
+      <h1 class="head">Book a 20-minute<br><em>AI safety review</em>.</h1>
+      <p class="sub">Free, no jargon. In 20 minutes you'll know exactly where your business stands, and the three things to fix first.</p>
+      <div class="cta-box"><span><b>[MSP&nbsp;Name]</b></span><span>[email@msp.com]</span><span>[+44 0000 000 000]</span></div>
+      <div class="lockup"><span class="ms">[MSP&nbsp;Name]</span><span class="x">×</span><span>Powered by AI&nbsp;Safe@Work</span></div>
+    </div>
+  </div>
+
+</div><!-- /.slide-deck -->
+
+<div class="nav-controls">
+  <button class="nav-btn" onclick="prevSlide()" aria-label="Previous">←</button>
+  <span class="slide-counter"><span id="current">1</span> / <span id="total">9</span></span>
+  <button class="nav-btn" onclick="nextSlide()" aria-label="Next">→</button>
+</div>
+
+<script>
+let current=1;
+const slides=document.querySelectorAll('.slide');
+const total=slides.length;
+document.getElementById('total').textContent=total;
+function showSlide(n){
+  current=Math.max(1,Math.min(n,total));
+  slides.forEach((s,i)=>s.classList.toggle('active',i===current-1));
+  document.getElementById('current').textContent=current;
+  document.getElementById('progressBar').style.width=(current/total*100)+'%';
+}
+function nextSlide(){showSlide(current+1)}
+function prevSlide(){showSlide(current-1)}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();nextSlide()}
+  if(e.key==='ArrowLeft'){e.preventDefault();prevSlide()}
+});
+document.addEventListener('click',e=>{if(!e.target.closest('.nav-controls'))nextSlide()});
+showSlide(1);
+</script>
+</body>
+</html>
