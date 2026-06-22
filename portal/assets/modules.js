@@ -21,4 +21,9 @@ export const TEMPLATES = [
   { f: "training-register.html", t: "Training register" },
   { f: "incident-form.html", t: "Incident form" },
   { f: "atrs-template.html", t: "ATRS template" },
+  { f: "ai-risk-assessment.html", t: "AI Risk Assessment" },
+  { f: "ai-use-case-register.html", t: "AI Use Case Register" },
+  { f: "ai-raci-matrix.html", t: "AI Governance Roles Matrix" },
+  { f: "ai-awareness-poster.html", t: "AI Awareness Poster" },
+  { f: "ai-steering-group-tor.html", t: "AI Steering Group ToR" },
 ];

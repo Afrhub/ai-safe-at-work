@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#060608" />
+<meta name="color-scheme" content="dark light" />
+<script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
+<title>AI Awareness Poster — AI Safe@Work</title>
+<meta name="description" content="A print-ready wall poster for staff: the four-question test before using AI, what never to paste, and what to do when unsure. Print A4 or A3 and put it where people work." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="AI Safe@Work" />
+<meta property="og:title" content="AI Awareness Poster — AI Safe@Work" />
+<meta property="og:description" content="A print-ready wall poster for staff: the four-question test before using AI, what never to paste, and what to do when unsure." />
+<meta property="og:url" content="https://aisafeatwork.org/templates/ai-awareness-poster.html" />
+<meta property="og:image" content="https://aisafeatwork.org/og-card.png?v=2" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Awareness Poster — AI Safe@Work" />
+<meta name="twitter:description" content="A print-ready wall poster for staff: the four-question test before using AI, what never to paste, and what to do when unsure." />
+<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png?v=2" />
+<link rel="preload" href="../assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=11" />
+<script defer src="../assets/cinema.js?v=8"></script>
+<style>
+.template-tag { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.95rem; border-radius: 2px; background: rgba(145,162,255, 0.08); border: 1px solid rgba(145,162,255, 0.32); color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.2rem; }
+.template-tag::before { content: '§'; color: var(--accent); font-weight: 800; }
+.print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0 2rem; align-items: center; flex-wrap: wrap; }
+.print-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #0b0e14; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.7rem 1.25rem; border-radius: 2px; border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 0 0 1px rgba(145,162,255,0.4), 0 8px 24px rgba(145,162,255,0.2); }
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(145,162,255,0.55), 0 12px 32px rgba(145,162,255,0.3); }
+.print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
+
+/* Poster sheet — A4 portrait proportion on screen, full page on print */
+.poster { max-width: 760px; margin: 1.5rem auto; aspect-ratio: 1 / 1.414; background: var(--plate); border: 1px solid var(--border); border-radius: 4px; box-shadow: var(--shadow-card); padding: 3rem 3rem 2.4rem; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+.poster::before { content: '§'; position: absolute; right: -1.5rem; bottom: -3rem; font-size: 16rem; line-height: 1; color: rgba(145,162,255,0.06); font-weight: 800; pointer-events: none; }
+.poster-kicker { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+.poster-title { font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1.02; margin: 0.6rem 0 0.2rem; font-weight: 800; }
+.poster-title em { font-style: normal; color: var(--accent); }
+.poster-sub { color: var(--text2); font-size: 1.02rem; margin: 0.4rem 0 1.4rem; }
+.poster-rule { height: 1px; background: var(--border); margin: 0.2rem 0 1.4rem; }
+.qtest { list-style: none; padding: 0; margin: 0 0 1.4rem; counter-reset: q; display: grid; gap: 0.7rem; }
+.qtest li { position: relative; padding-left: 2.8rem; font-size: 1.05rem; font-weight: 600; }
+.qtest li::before { counter-increment: q; content: counter(q); position: absolute; left: 0; top: -0.1rem; width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: 50%; background: rgba(145,162,255,0.12); border: 1px solid rgba(145,162,255,0.4); color: var(--accent); font-family: var(--font-mono); font-weight: 800; font-size: 0.95rem; }
+.poster-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: auto; }
+.pcol { border: 1px solid var(--border); border-radius: 3px; padding: 1rem 1.1rem; }
+.pcol h3 { margin: 0 0 0.5rem; font-size: 0.78rem; font-family: var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; }
+.pcol.no h3 { color: #ff6b6b; }
+.pcol.yes h3 { color: #2da45f; }
+.pcol ul { margin: 0; padding-left: 1.1rem; }
+.pcol li { margin-bottom: 0.35rem; font-size: 0.92rem; }
+.poster-foot { display: flex; justify-content: space-between; align-items: baseline; margin-top: 1.4rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
+.poster-foot strong { color: var(--accent); }
+@media (max-width: 640px) { .poster { padding: 1.8rem 1.5rem; aspect-ratio: auto; } .poster-cols { grid-template-columns: 1fr; } }
+@media print {
+  .poster { max-width: none; width: 100%; aspect-ratio: auto; min-height: 96vh; background: white !important; border: 2px solid #111 !important; box-shadow: none !important; color: #111 !important; }
+  .poster-sub, .pcol li { color: #333 !important; }
+  .poster::before { color: rgba(0,0,0,0.05) !important; }
+  @page { size: A4 portrait; margin: 10mm; }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [{
+    "@type": "CreativeWork",
+    "name": "AI Awareness Poster",
+    "description": "A print-ready staff poster: the four-question test before using AI, what never to paste, and what to do when unsure.",
+    "url": "https://aisafeatwork.org/templates/ai-awareness-poster.html",
+    "inLanguage": "en",
+    "publisher": { "@id": "https://aisafeatwork.org/#organization" },
+    "dateModified": "2026-06-22"
+  }, {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://aisafeatwork.org/" },
+      { "@type": "ListItem", "position": 2, "name": "Templates", "item": "https://aisafeatwork.org/templates/" },
+      { "@type": "ListItem", "position": 3, "name": "AI Awareness Poster — AI Safe@Work", "item": "https://aisafeatwork.org/templates/ai-awareness-poster.html" }
+    ]
+  }]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="topbar no-print">
+  <a href="../index.html" class="brand">AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="../course.html" class="always-show">Modules</a>
+    <a href="../standards-map.html">Standards Map</a>
+    <a href="../module-11.html">Checklist</a>
+    <a href="../module-12.html">Standards</a>
+  </nav>
+</header>
+<main id="main">
+  <span class="template-tag no-print">Template · AI Awareness Poster v1.0</span>
+  <p class="eyebrow no-print">Put it where people work</p>
+  <h1 class="page-title">AI Awareness Poster</h1>
+  <p class="lede no-print">A one-page poster for the wall, the kitchen, the back of the toilet door — wherever staff will read it. Print A4 or A3, or save as PDF and pin it in your chat tool. The poster prints clean on white with no background.</p>
+  <div class="print-row no-print">
+    <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF →</button>
+    <span class="print-hint">Prints to a single A4 page (portrait). Scale to A3 at the printer for a wall version.</span>
+  </div>
+
+  <section class="poster">
+    <span class="poster-kicker">AI Safe@Work</span>
+    <h1 class="poster-title">Using AI? <em>Pause first.</em></h1>
+    <p class="poster-sub">AI tools are useful — and they remember, get things wrong, and leak. Run these four questions every time.</p>
+    <div class="poster-rule"></div>
+
+    <ol class="qtest">
+      <li>Would I be happy for this to appear on the front page?</li>
+      <li>Is there personal, customer or confidential data in what I'm pasting?</li>
+      <li>Am I treating the output as a draft I will check — not as fact?</li>
+      <li>Is this an approved tool for this kind of work?</li>
+    </ol>
+
+    <div class="poster-cols">
+      <div class="pcol no">
+        <h3>✕ Never paste</h3>
+        <ul>
+          <li>Customer or patient records</li>
+          <li>Passwords, keys or contracts</li>
+          <li>Anything marked confidential</li>
+          <li>Special-category personal data</li>
+        </ul>
+      </div>
+      <div class="pcol yes">
+        <h3>✓ When unsure</h3>
+        <ul>
+          <li>Stop before you paste</li>
+          <li>Ask your manager or the DPO</li>
+          <li>Use an approved tool only</li>
+          <li>Report a slip — fast beats hidden</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="poster-foot">
+      <span>The output is a <strong>draft</strong>, not the truth. You own what you send.</span>
+      <span>aisafeatwork.org</span>
+    </div>
+  </section>
+
+  <div class="callout note no-print">
+    <span class="callout-icon">i</span>
+    <div>
+      <div class="callout-title">Make it yours</div>
+      <ol>
+        <li>Add your own contact line (who to ask) before printing — edit the footer text.</li>
+        <li>Print one for each shared space; A3 reads well from across a room.</li>
+        <li>Refresh it when your approved-tools list or policy changes.</li>
+      </ol>
+    </div>
+  </div>
+
+</main>
+
+<nav class="module-bottom-nav no-print">
+  <a class="nav-btn" href="ai-steering-group-tor.html">
+    <span class="nav-dir">Back to</span>
+    <span class="nav-title">← AI Steering Group ToR</span>
+  </a>
+  <a class="nav-btn next" href="ai-risk-assessment.html">
+    <span class="nav-dir">First template</span>
+    <span class="nav-title">AI Risk Assessment →</span>
+  </a>
+</nav>
+
+<footer class="site-foot no-print">
+  <span>AI Safe@Work · AI Awareness Poster v1.0 · v2026.06</span>
+  <span class="foot-right">
+    <a href="../course.html">All modules</a>
+    <a href="../privacy.html">Privacy</a>
+    <a href="../terms.html">Terms</a>
+  </span>
+</footer>
+
+</body>
+</html>

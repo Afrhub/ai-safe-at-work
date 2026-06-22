@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#060608" />
+<meta name="color-scheme" content="dark light" />
+<script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
+<title>AI Steering Group Terms of Reference — AI Safe@Work</title>
+<meta name="description" content="Terms of Reference for an AI governance steering group: purpose, scope, membership, responsibilities, meetings, quorum, decision rights and reporting. Aligns with ISO/IEC 42001 Clause 5." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="AI Safe@Work" />
+<meta property="og:title" content="AI Steering Group Terms of Reference — AI Safe@Work" />
+<meta property="og:description" content="Purpose, scope, membership, responsibilities, meetings, quorum, decision rights and reporting for an AI governance steering group." />
+<meta property="og:url" content="https://aisafeatwork.org/templates/ai-steering-group-tor.html" />
+<meta property="og:image" content="https://aisafeatwork.org/og-card.png?v=2" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Steering Group Terms of Reference — AI Safe@Work" />
+<meta name="twitter:description" content="Purpose, scope, membership, responsibilities, meetings, quorum, decision rights and reporting for an AI governance steering group." />
+<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png?v=2" />
+<link rel="preload" href="../assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=11" />
+<script defer src="../assets/cinema.js?v=8"></script>
+<style>
+.template-tag { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.95rem; border-radius: 2px; background: rgba(145,162,255, 0.08); border: 1px solid rgba(145,162,255, 0.32); color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.2rem; }
+.template-tag::before { content: '§'; color: var(--accent); font-weight: 800; }
+.print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0 2rem; align-items: center; flex-wrap: wrap; }
+.print-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #0b0e14; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.7rem 1.25rem; border-radius: 2px; border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 0 0 1px rgba(145,162,255,0.4), 0 8px 24px rgba(145,162,255,0.2); }
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(145,162,255,0.55), 0 12px 32px rgba(145,162,255,0.3); }
+.print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
+.policy-doc { margin: 1.5rem 0; padding: 2rem 2.2rem; background: var(--plate); border: 1px solid var(--border); border-radius: 3px; box-shadow: var(--shadow-card); }
+.policy-doc h2 { margin-top: 2.2rem; }
+.policy-doc h2:first-child { margin-top: 0; }
+.policy-doc h3 { margin-top: 1.6rem; }
+.policy-doc ol, .policy-doc ul { padding-left: 1.4rem; }
+.policy-doc li { margin-bottom: 0.55rem; }
+.tor-table { width: 100%; margin: 1.5rem 0; border-collapse: collapse; font-size: 0.85rem; }
+.tor-table thead { background: rgba(145,162,255, 0.08); }
+.tor-table th { padding: 0.9rem; text-align: left; font-weight: 700; color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--border); }
+.tor-table td { padding: 0.85rem; border: 1px solid var(--border); vertical-align: top; }
+.tor-table tbody tr:nth-child(even) { background: rgba(145,162,255, 0.02); }
+.fill { color: var(--text3); font-style: italic; }
+.section-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+@media (max-width: 640px) { .tor-table { font-size: 0.72rem; } .tor-table th, .tor-table td { padding: 0.6rem; } }
+@media print { .policy-doc { background: white !important; border: 1px solid #ccc !important; box-shadow: none !important; padding: 1rem 0 !important; } .tor-table { border: 1px solid #ccc; } .tor-table thead { background: #f5f5f5 !important; } .tor-table th { color: #46505e !important; } }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [{
+    "@type": "HowTo",
+    "name": "AI Steering Group Terms of Reference",
+    "description": "Terms of Reference for an AI governance steering group: purpose, membership, responsibilities, meetings, decisions and reporting.",
+    "url": "https://aisafeatwork.org/templates/ai-steering-group-tor.html",
+    "inLanguage": "en",
+    "publisher": { "@id": "https://aisafeatwork.org/#organization" },
+    "totalTime": "PT40M",
+    "dateModified": "2026-06-22"
+  }, {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://aisafeatwork.org/" },
+      { "@type": "ListItem", "position": 2, "name": "Templates", "item": "https://aisafeatwork.org/templates/" },
+      { "@type": "ListItem", "position": 3, "name": "AI Steering Group ToR — AI Safe@Work", "item": "https://aisafeatwork.org/templates/ai-steering-group-tor.html" }
+    ]
+  }]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="topbar no-print">
+  <a href="../index.html" class="brand">AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+    <a href="../course.html" class="always-show">Modules</a>
+    <a href="../standards-map.html">Standards Map</a>
+    <a href="../module-11.html">Checklist</a>
+    <a href="../module-12.html">Standards</a>
+  </nav>
+</header>
+<main id="main">
+  <span class="template-tag no-print">Template · AI Steering Group ToR v1.0</span>
+  <p class="eyebrow no-print">The group that owns AI governance</p>
+  <h1 class="page-title">AI Steering Group<br>Terms of Reference</h1>
+  <p class="lede no-print">Adopt this to stand up the group that owns AI in your organisation. It sets out why the group exists, who sits on it, what it decides, and how it reports. Fill the bracketed fields, take it to the group's first meeting, and approve it. Aligns with ISO/IEC 42001 Clause 5 (leadership and roles).</p>
+  <div class="print-row no-print">
+    <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF →</button>
+    <span class="print-hint">Approve at the first meeting. Review annually.</span>
+  </div>
+
+  <article class="policy-doc">
+    <span class="section-tag">1</span>
+    <h2>Purpose</h2>
+    <p>The AI Steering Group is the body accountable for the safe, lawful and effective use of artificial intelligence across <span class="fill">[organisation]</span>. It owns the AI governance framework, approves AI use cases, oversees risk, and reports to <span class="fill">[the board / executive]</span>.</p>
+
+    <span class="section-tag">2</span>
+    <h2>Scope</h2>
+    <ul>
+      <li>All AI and generative-AI tools used by staff, whether bought, built or embedded in other software.</li>
+      <li>All AI use cases that touch personal data, customers, employment decisions, or regulated activity.</li>
+      <li>The AI policies, registers and assessments listed in section 5.</li>
+      <li><strong>Out of scope:</strong> day-to-day tool support (IT helpdesk) and individual HR matters.</li>
+    </ul>
+
+    <span class="section-tag">3</span>
+    <h2>Membership</h2>
+    <table class="tor-table">
+      <thead><tr><th>Role on the group</th><th>Held by</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Chair</strong></td><td><span class="fill">Senior owner — e.g. COO / CISO</span></td></tr>
+        <tr><td>Data protection / compliance</td><td><span class="fill">DPO or equivalent</span></td></tr>
+        <tr><td>IT / security</td><td><span class="fill">Name / role</span></td></tr>
+        <tr><td>Procurement / legal</td><td><span class="fill">Name / role</span></td></tr>
+        <tr><td>Business / operations</td><td><span class="fill">Name / role</span></td></tr>
+        <tr><td>Executive sponsor</td><td><span class="fill">Board or C-suite link</span></td></tr>
+      </tbody>
+    </table>
+    <p>Members may send a named deputy. The group may co-opt others (e.g. HR, a product lead) for specific items.</p>
+
+    <span class="section-tag">4</span>
+    <h2>Responsibilities</h2>
+    <ol>
+      <li>Own and maintain the AI governance framework and Acceptable Use Policy.</li>
+      <li>Approve, reject or set conditions on AI use cases, using the AI Risk Assessment.</li>
+      <li>Oversee the AI Use Case Register, Tool Register and Risk Register.</li>
+      <li>Set and monitor AI awareness training; confirm staff completion.</li>
+      <li>Review AI incidents and decide on regulator notification.</li>
+      <li>Track EU AI Act and ISO/IEC 42001 obligations and confirm the organisation meets them.</li>
+      <li>Report governance maturity and open risks to the board each quarter.</li>
+    </ol>
+
+    <span class="section-tag">5</span>
+    <h2>Documents the group owns</h2>
+    <ul>
+      <li>AI Acceptable Use Policy · AI Use Case Register · AI Tool Register</li>
+      <li>AI Risk Assessment (per use case) · AI Risk Register</li>
+      <li>AI Governance Roles Matrix · Training Register · Incident Form</li>
+    </ul>
+
+    <span class="section-tag">6</span>
+    <h2>Meetings, quorum and decisions</h2>
+    <table class="tor-table">
+      <tbody>
+        <tr><td style="width:34%"><strong>Frequency</strong></td><td><span class="fill">Quarterly, plus on demand for urgent approvals</span></td></tr>
+        <tr><td><strong>Quorum</strong></td><td>The Chair (or deputy) plus at least <span class="fill">[three]</span> members, including data protection.</td></tr>
+        <tr><td><strong>Decisions</strong></td><td>By consensus where possible; otherwise by majority, with the Chair holding the casting vote.</td></tr>
+        <tr><td><strong>Urgent approvals</strong></td><td>The Chair and data protection lead may approve low-risk use cases between meetings and report them at the next.</td></tr>
+        <tr><td><strong>Minutes</strong></td><td>Decisions and actions recorded and circulated within <span class="fill">[five working days]</span>.</td></tr>
+      </tbody>
+    </table>
+
+    <span class="section-tag">7</span>
+    <h2>Reporting</h2>
+    <p>The Chair reports to <span class="fill">[the board / executive]</span> each quarter on: use cases approved and rejected, open high risks, training completion, incidents, and progress against EU AI Act and ISO/IEC 42001 obligations.</p>
+
+    <span class="section-tag">8</span>
+    <h2>Review and approval</h2>
+    <table class="tor-table">
+      <tbody>
+        <tr><td style="width:34%"><strong>These Terms approved by</strong></td><td><span class="fill">Name / role</span></td></tr>
+        <tr><td><strong>Date approved</strong></td><td><span class="fill">DD / MM / YYYY</span></td></tr>
+        <tr><td><strong>Next review</strong></td><td><span class="fill">Annually, or on a major regulatory change</span></td></tr>
+      </tbody>
+    </table>
+
+    <h2>Standards referenced</h2>
+    <ul>
+      <li><strong>ISO/IEC 42001:2023</strong> — Clause 5 (leadership, roles, responsibilities and authorities).</li>
+      <li><strong>EU AI Act</strong> — organisational accountability for AI risk and oversight.</li>
+    </ul>
+  </article>
+
+  <div class="callout note no-print">
+    <span class="callout-icon">i</span>
+    <div>
+      <div class="callout-title">Standing it up</div>
+      <ol>
+        <li>Fill the bracketed fields and the membership table with real names.</li>
+        <li>Circulate before the first meeting so members read it in advance.</li>
+        <li>Approve it as the first agenda item, then record the approval in section 8.</li>
+        <li>Pair it with the AI Governance Roles Matrix so every decision has a clear owner.</li>
+      </ol>
+    </div>
+  </div>
+
+</main>
+
+<nav class="module-bottom-nav no-print">
+  <a class="nav-btn" href="ai-raci-matrix.html">
+    <span class="nav-dir">Back to</span>
+    <span class="nav-title">← AI Governance Roles Matrix</span>
+  </a>
+  <a class="nav-btn next" href="ai-awareness-poster.html">
+    <span class="nav-dir">Next template</span>
+    <span class="nav-title">AI Awareness Poster →</span>
+  </a>
+</nav>
+
+<footer class="site-foot no-print">
+  <span>AI Safe@Work · AI Steering Group ToR v1.0 · v2026.06</span>
+  <span class="foot-right">
+    <a href="../course.html">All modules</a>
+    <a href="../privacy.html">Privacy</a>
+    <a href="../terms.html">Terms</a>
+  </span>
+</footer>
+
+</body>
+</html>
