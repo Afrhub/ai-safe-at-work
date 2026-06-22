@@ -29,6 +29,7 @@ export const TEMPLATES = [
   { f: "fria-template.html", t: "FRIA Template" },
   { f: "atrs-template.html", t: "ATRS Template" },
   { f: "vendor-questionnaire.html", t: "AI Vendor Due Diligence Assessment" },
+  { f: "ai-supplier-risk-assessment.html", t: "AI Supplier Risk Assessment" },
   { f: "ai-internal-audit.html", t: "AI Internal Audit" },
   { f: "ai-monitoring-kpi.html", t: "AI Monitoring & KPI Dashboard" },
   { f: "ai-governance-scorecard.html", t: "AI Governance Scorecard" },
