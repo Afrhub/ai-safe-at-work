@@ -241,7 +241,7 @@
 
   // ─── 5b. Theme toggle — pill switch in the topbar / gate header ──────
   function setupThemeToggle() {
-    var host = document.querySelector('.topbar') || document.querySelector('.gate-header');
+    var host = document.querySelector('.topbar') || document.querySelector('.gate-header') || document.querySelector('.portal-top');
     if (!host || host.querySelector('.theme-toggle')) return;
 
     var btn = document.createElement('button');

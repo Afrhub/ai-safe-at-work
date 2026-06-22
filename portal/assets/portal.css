@@ -1,22 +1,6 @@
-/* Portal layout — extends assets/style.css tokens (Periwinkle/Carbon). */
-body { min-height: 100svh; position: relative; }
-/* Premium drafting-field background (CSS-only, no parallax) */
-body::before {
-  content: ''; position: fixed; inset: 0; z-index: -2; pointer-events: none;
-  background:
-    radial-gradient(ellipse 55% 45% at 22% 12%, rgba(79,216,196,0.07) 0%, transparent 58%),
-    radial-gradient(ellipse 50% 45% at 85% 80%, rgba(124,140,255,0.09) 0%, transparent 62%),
-    var(--bg);
-}
-body::after {
-  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background-image:
-    linear-gradient(to right, rgba(145,162,255,0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(145,162,255,0.045) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 90% 75% at 50% 30%, #000 0%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse 90% 75% at 50% 30%, #000 0%, transparent 80%);
-}
+/* Portal layout — extends assets/style.css tokens (Periwinkle/Carbon).
+   Background + theme toggle come from cinema.js (same as the course). */
+body { min-height: 100svh; }
 
 /* Hero with REF reference line + giant clause watermark */
 .portal-hero { position: relative; }
@@ -35,11 +19,12 @@ body::after {
 html[data-theme="light"] .portal-wm { -webkit-text-stroke-color: rgba(71,89,199,0.09); }
 .portal-top {
   position: sticky; top: 0; z-index: 50;
-  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  display: flex; align-items: center; gap: 1rem;
   padding: 0.85rem 2rem; background: rgba(6,6,8,0.92);
   backdrop-filter: blur(10px); border-bottom: var(--rule);
 }
-.portal-top .brand { color: var(--accent); font-weight: 800; }
+.portal-top .brand { color: var(--accent); font-weight: 800; margin-right: auto; }
+html[data-theme="light"] .portal-top { background: rgba(238,240,244,0.92); }
 .portal-top .who { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--text3); text-transform: uppercase; }
 .portal-top button { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text2); background: var(--glass); border: 1px solid var(--border-bold); border-radius: 999px; padding: 0.4rem 0.9rem; cursor: pointer; }
 .portal-top button:hover { border-color: var(--accent); color: var(--text); }

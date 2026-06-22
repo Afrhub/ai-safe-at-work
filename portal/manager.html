@@ -10,7 +10,8 @@
 <title>Manager portal — AI Safe@Work</title>
 <link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
 <link rel="stylesheet" href="../assets/style.css?v=11" />
-<link rel="stylesheet" href="assets/portal.css?v=1" />
+<link rel="stylesheet" href="assets/portal.css?v=2" />
+<script defer src="../assets/cinema.js?v=9"></script>
 <script src="config.js"></script>
 </head>
 <body>
@@ -75,7 +76,7 @@ if (profile) {
     amsg.textContent = "Assigning…"; amsg.className = "auth-msg";
     const email = document.getElementById("eu").value.trim();
     const { data: eu } = await sb.from("profiles").select("id").eq("email", email).maybeSingle();
-    if (!eu) { amsg.textContent = "No account found for that email — they must sign up first."; amsg.className = "auth-msg err"; return; }
+    if (!eu) { amsg.textContent = "No account found for that email. They need to sign up first."; amsg.className = "auth-msg err"; return; }
     const { error } = await sb.rpc("assign_seat", { p_end_user: eu.id });
     if (error) { amsg.textContent = error.message; amsg.className = "auth-msg err"; return; }
     amsg.textContent = "Seat assigned."; amsg.className = "auth-msg ok";
