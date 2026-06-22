@@ -104,6 +104,10 @@
 /llms.txt
   Content-Type: text/plain; charset=utf-8
 
-# Portal — paid auth-walled surface: never index, no AI ingest
+# Portal — paid auth-walled surface: never index, no AI ingest.
+# Needs a looser CSP than the static site: inline module scripts run the
+# portal, supabase-js loads from jsDelivr, and auth/db calls hit Supabase.
 /portal/*
   X-Robots-Tag: noindex, nofollow, noai, noimageai
+  Cache-Control: private, no-store
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://hanjrsslhnuauaysbhun.supabase.co https://*.supabase.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests
