@@ -61,6 +61,8 @@ const show = (id) => ["step-login","step-enrol","step-mfa"].forEach(s => $(s).hi
 const say = (t, cls="") => { msg.textContent = t; msg.className = "auth-msg " + cls; };
 
 async function route() {
+  const next = new URLSearchParams(location.search).get("next");
+  if (next && next.startsWith("/") && !next.startsWith("//")) return location.replace(next); // same-origin only
   const p = await getRole();
   location.replace((p && DASH[p.role]) || "end-user.html");
 }
