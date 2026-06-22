@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#060608" />
 <meta name="color-scheme" content="dark light" />
 <script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
-<script>/* ponytail: client-side course gate — content is free not secret; this is the login funnel, not security. Expired-but-present token still passes (fine for a free course). */try{if(!localStorage.getItem("sb-hanjrsslhnuauaysbhun-auth-token"))location.replace("/portal/login.html?next="+encodeURIComponent(location.pathname));}catch(e){}</script>
+<script>/* ponytail: client-side course gate, content is free not secret; this is the login funnel, not security. Expired-but-present token still passes (fine for a free course). */try{if(!localStorage.getItem("sb-hanjrsslhnuauaysbhun-auth-token"))location.replace("/portal/login.html?next="+encodeURIComponent(location.pathname));}catch(e){}</script>
 <title>DPO Track · AI through the compliance lens — AI Safe@Work</title>
 <meta name="description" content="For Data Protection Officers, compliance leads, and the people who own DPIAs, RoPAs, breach response, and vendor diligence in their organisation. Covers DPIA + FRIA scoping for AI, RoPA entries, the 72-hour clock, and the conversations to have before a tool is procured." />
 <meta property="og:type" content="article" />
@@ -163,9 +163,9 @@
   <div class="objectives">
     <div class="objectives-title">By the end of this module, you'll</div>
     <ul>
-      <li>Know when AI use triggers a DPIA, a FRIA, or both — and how to scope each in under a day</li>
+   <li>Know when AI use triggers a DPIA, a FRIA, or both, and how to scope each in under a day</li>
       <li>Know what an AI entry in the Records of Processing Activities should actually contain</li>
-      <li>Run the 72-hour breach-notification clock with confidence — including the awkward "are we even sure it's a breach?" hours</li>
+   <li>Run the 72-hour breach-notification clock with confidence, including the awkward "are we even sure it's a breach?" hours</li>
       <li>Know which conversations to have with procurement, IT, and the board before a tool is bought</li>
       <li>Have a defensible answer when a data subject asks "how was this decision about me made?"</li>
     </ul>
@@ -176,9 +176,9 @@
 
   <p>Three buckets of work, each cross-cutting:</p>
   <ul>
-    <li><strong>Before</strong> — assessments (DPIA, FRIA, vendor diligence), policies (AUP, RoPA entries).</li>
-    <li><strong>During</strong> — oversight of staff use (Module 9 logging), training (this course is one such measure under Art 4), incident readiness.</li>
-    <li><strong>After</strong> — incident response, breach notification, regulator engagement, lessons captured into the next cycle.</li>
+  <li><strong>Before</strong>, assessments (DPIA, FRIA, vendor diligence), policies (AUP, RoPA entries).</li>
+  <li><strong>During</strong>, oversight of staff use (Module 9 logging), training (this course is one such measure under Art 4), incident readiness.</li>
+  <li><strong>After</strong>, incident response, breach notification, regulator engagement, lessons captured into the next cycle.</li>
   </ul>
 
   <hr class="section-divider" />
@@ -205,7 +205,7 @@
   <p>Before either assessment starts, six questions extracted from a fifteen-minute conversation with the proposing business unit will determine the shape of the work:</p>
 
   <ol>
-    <li><strong>What problem is this AI solving?</strong> Not the feature — the underlying decision being made.</li>
+  <li><strong>What problem is this AI solving?</strong> Not the feature, the underlying decision being made.</li>
     <li><strong>Whose data, whose decisions?</strong> Categories of data subjects, categories of decisions affecting them.</li>
     <li><strong>What's the volume?</strong> Pilot, departmental rollout, organisation-wide.</li>
     <li><strong>What does refusal look like?</strong> Can a person opt out? Can they ask for human review?</li>
@@ -217,22 +217,22 @@
 
   <hr class="section-divider" />
 
-  <h2>Records of Processing Activities — the AI entry</h2>
+ <h2>Records of Processing Activities, the AI entry</h2>
   <p>For each AI use case, your RoPA (Art 30) entry needs five things many entries skip:</p>
 
   <div class="flow">
-    <div class="flow-step"><h4>The model behind the product</h4><p>Not "ChatGPT" — "OpenAI GPT-4o via ChatGPT Enterprise tenant ABC-123, configured EU region, training opt-out on." Sub-processors disclosed.</p></div>
+  <div class="flow-step"><h4>The model behind the product</h4><p>Not "ChatGPT", "OpenAI GPT-4o via ChatGPT Enterprise tenant ABC-123, configured EU region, training opt-out on." Sub-processors disclosed.</p></div>
     <div class="flow-step"><h4>The data flow</h4><p>What categories go in, what comes out, what is retained where, for how long. Include any vector store, prompt cache, conversation history.</p></div>
-    <div class="flow-step"><h4>Legal basis</h4><p>Specific Art 6 basis, plus Art 9 ground if special-category. "Legitimate interests" requires a documented balancing test — link to it.</p></div>
+  <div class="flow-step"><h4>Legal basis</h4><p>Specific Art 6 basis, plus Art 9 ground if special-category. "Legitimate interests" requires a documented balancing test, link to it.</p></div>
     <div class="flow-step"><h4>Decision boundary</h4><p>Where the AI's output ends and the human decision begins. Names of the humans, their authority to override.</p></div>
     <div class="flow-step"><h4>Incident contact</h4><p>Who at the vendor you call within thirty minutes if something goes wrong. SLA on notification. Vendor's own incident page URL.</p></div>
-    <div class="flow-step"><h4>Review cadence</h4><p>Quarterly check — has the vendor changed terms, changed sub-processors, changed model behaviour, changed retention? Default cadence quarterly; finance / health monthly.</p></div>
+  <div class="flow-step"><h4>Review cadence</h4><p>Quarterly check, has the vendor changed terms, changed sub-processors, changed model behaviour, changed retention? Default cadence quarterly; finance / health monthly.</p></div>
   </div>
 
   <hr class="section-divider" />
 
   <h2>The 72-hour breach clock</h2>
-  <p>Article 33 starts the clock when the controller has reasonable awareness — not certainty — that a personal-data breach has occurred. For AI-related incidents (the most common: data pasted into a free-tier tool, vendor security incident, model output disclosing data it shouldn't), the clock is the hardest part of the job.</p>
+ <p>Article 33 starts the clock when the controller has reasonable awareness, not certainty, that a personal-data breach has occurred. For AI-related incidents (the most common: data pasted into a free-tier tool, vendor security incident, model output disclosing data it shouldn't), the clock is the hardest part of the job.</p>
 
   <p>Three principles get most teams through:</p>
 
@@ -287,12 +287,12 @@
   <h2>The DPO's first 90 days on AI governance</h2>
 
   <div class="flow">
-    <div class="flow-step"><h4>Week 1 — inventory</h4><p>Across the org: which teams are using which AI tools, at which tiers, on which data. Walk floor. Five-minute conversations. Spreadsheet.</p></div>
-    <div class="flow-step"><h4>Week 2 — gap</h4><p>Match the inventory against existing DPAs, RoPA entries, AUP. Identify the shadow tools, the missing assessments, the unclear data flows.</p></div>
-    <div class="flow-step"><h4>Week 3 — triage</h4><p>Highest-risk uses first. Decide which to formalise (negotiate DPA, run DPIA), which to migrate to a procured alternative, which to stop.</p></div>
-    <div class="flow-step"><h4>Week 4 — policy</h4><p>Draft or update AUP for AI. Use the <a href="templates/aup-template.html" class="accent">AUP template</a>. Circulate, get sign-off, communicate.</p></div>
-    <div class="flow-step"><h4>Weeks 5–8 — DPIAs</h4><p>Run DPIA + FRIA on top three use cases. Document, mitigate, where needed escalate to prior consultation.</p></div>
-    <div class="flow-step"><h4>Weeks 9–12 — train + log</h4><p>Roll out AI literacy training (this course). Establish AI-use logging cadence (Module 9). Calendar the quarterly review.</p></div>
+  <div class="flow-step"><h4>Week 1, inventory</h4><p>Across the org: which teams are using which AI tools, at which tiers, on which data. Walk floor. Five-minute conversations. Spreadsheet.</p></div>
+  <div class="flow-step"><h4>Week 2, gap</h4><p>Match the inventory against existing DPAs, RoPA entries, AUP. Identify the shadow tools, the missing assessments, the unclear data flows.</p></div>
+  <div class="flow-step"><h4>Week 3, triage</h4><p>Highest-risk uses first. Decide which to formalise (negotiate DPA, run DPIA), which to migrate to a procured alternative, which to stop.</p></div>
+  <div class="flow-step"><h4>Week 4, policy</h4><p>Draft or update AUP for AI. Use the <a href="templates/aup-template.html" class="accent">AUP template</a>. Circulate, get sign-off, communicate.</p></div>
+  <div class="flow-step"><h4>Weeks 5–8, DPIAs</h4><p>Run DPIA + FRIA on top three use cases. Document, mitigate, where needed escalate to prior consultation.</p></div>
+  <div class="flow-step"><h4>Weeks 9–12, train + log</h4><p>Roll out AI literacy training (this course). Establish AI-use logging cadence (Module 9). Calendar the quarterly review.</p></div>
   </div>
 
   <div class="callout standard">
@@ -308,9 +308,9 @@
     <div>
       <div class="callout-title">Three artefacts to have ready by Friday</div>
       <ol>
-        <li><strong>AI inventory spreadsheet</strong> — every AI tool your org uses, at what tier, on what data, owned by whom.</li>
-        <li><strong>The AUP draft</strong> — at minimum the never-paste list (Module 3), the tier rules (Module 4), the logging expectations (Module 9). <a href="templates/aup-template.html" class="accent">Template</a>.</li>
-        <li><strong>The breach playbook</strong> — who to call in the first hour, where to log, what to preserve, when the clock starts. Print it. Tape it inside the cupboard, next to the fire-evacuation plan.</li>
+    <li><strong>AI inventory spreadsheet</strong>, every AI tool your org uses, at what tier, on what data, owned by whom.</li>
+    <li><strong>The AUP draft</strong>, at minimum the never-paste list (Module 3), the tier rules (Module 4), the logging expectations (Module 9). <a href="templates/aup-template.html" class="accent">Template</a>.</li>
+    <li><strong>The breach playbook</strong>, who to call in the first hour, where to log, what to preserve, when the clock starts. Print it. Tape it inside the cupboard, next to the fire-evacuation plan.</li>
       </ol>
     </div>
   </div>
@@ -330,6 +330,7 @@
 <footer class="site-foot">
   <span>AI Safe@Work · Relevant Role: DPO / compliance · v2026.05</span>
   <span class="foot-right">
+    <a href="templates/">Templates</a>
     <a href="course.html">All modules</a>
     <a href="portal/login.html">Partner login</a>
       <a href="privacy.html">Privacy</a>

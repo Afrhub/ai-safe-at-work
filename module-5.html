@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#060608" />
 <meta name="color-scheme" content="dark light" />
 <script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
-<script>/* ponytail: client-side course gate — content is free not secret; this is the login funnel, not security. Expired-but-present token still passes (fine for a free course). */try{if(!localStorage.getItem("sb-hanjrsslhnuauaysbhun-auth-token"))location.replace("/portal/login.html?next="+encodeURIComponent(location.pathname));}catch(e){}</script>
+<script>/* ponytail: client-side course gate, content is free not secret; this is the login funnel, not security. Expired-but-present token still passes (fine for a free course). */try{if(!localStorage.getItem("sb-hanjrsslhnuauaysbhun-auth-token"))location.replace("/portal/login.html?next="+encodeURIComponent(location.pathname));}catch(e){}</script>
 <title>Module 5 · Verifying what the AI tells you — AI Safe@Work</title>
 <meta name="description" content="Hallucinations. Fake citations. Made-up legal references. The two-source rule. The EU AI Act's human-oversight obligation in plain words." />
 <meta property="og:type" content="article" />
@@ -146,8 +146,8 @@
 
   <h2>Why hallucinations happen</h2>
   <p>A large language model does not automatically look things up unless it is connected to external tools or search services. Left to itself, it generates text one piece at a time, choosing each next piece from patterns it learned in training. Patterns of facts produce factual output most of the time. Patterns of "what a legal citation looks like" produce something shaped like a legal citation, with no guarantee the citation exists.</p>
-  <p>Throughout this course we call this a <strong>hallucination</strong> — the term you'll see most often. A more precise word is "confabulation": the model fills gaps with plausible-shaped material, the way a person can confabulate a memory without realising they're doing it. Either way, the behaviour is the same.</p>
-  <p>Connecting a model to live data — web search, your documents, a database — generally <em>reduces</em> the risk, because the model has something real to draw on. It does not remove it: a connected model can still misread a source, blend two of them, or hallucinate around the parts the data didn't cover. "It has access to the document" is not the same as "it read it correctly".</p>
+ <p>Throughout this course we call this a <strong>hallucination</strong>, the term you'll see most often. A more precise word is "confabulation": the model fills gaps with plausible-shaped material, the way a person can confabulate a memory without realising they're doing it. Either way, the behaviour is the same.</p>
+ <p>Connecting a model to live data, web search, your documents, a database, generally <em>reduces</em> the risk, because the model has something real to draw on. It does not remove it: a connected model can still misread a source, blend two of them, or hallucinate around the parts the data didn't cover. "It has access to the document" is not the same as "it read it correctly".</p>
 
   <div class="callout note">
     <span class="callout-icon">i</span>
@@ -160,7 +160,7 @@
   <h2>What hallucinations look like</h2>
 
   <h3>Fake citations</h3>
-  <p>The famous case. A model is asked to find legal precedents or academic references; it produces six that look perfect — names, years, journal, page numbers, holding — and none of them exist. This has led to sanctions, court criticism and professional embarrassment in multiple jurisdictions, as well as retractions for academics. The fix is simple: every citation goes to a primary source before you use it.</p>
+ <p>The famous case. A model is asked to find legal precedents or academic references; it produces six that look perfect, names, years, journal, page numbers, holding, and none of them exist. This has led to sanctions, court criticism and professional embarrassment in multiple jurisdictions, as well as retractions for academics. The fix is simple: every citation goes to a primary source before you use it.</p>
 
   <h3>Fabricated quotes</h3>
   <p>Ask a model "what did [famous person] say about [topic]" and you may get a perfectly believable quote, attributed precisely, that the person never said. The phrasing matches their style. The sentiment matches their public positions. The quote is invented.</p>
@@ -169,15 +169,15 @@
   <p>Statistics, dates, prices, percentages, conversions. Asking a model "how big is the European cybersecurity market" can produce a confident "€42 billion in 2023" that turns out to be off by a factor of ten, or to be a market that doesn't exist, or to be a number the model has interpolated from two reports that measured different things.</p>
 
   <h3>Plausible but invented procedure</h3>
-  <p>"How do I file a [specific kind of] form with HMRC?" or "What's the procedure for declaring [specific situation] under the French URSSAF rules?" — the model may produce confident step-by-step instructions that mix correct general principles with invented specifics. The form number is wrong, the threshold is wrong, the deadline is wrong, but the structure is right.</p>
+ <p>"How do I file a [specific kind of] form with HMRC?" or "What's the procedure for declaring [specific situation] under the French URSSAF rules?", the model may produce confident step-by-step instructions that mix correct general principles with invented specifics. The form number is wrong, the threshold is wrong, the deadline is wrong, but the structure is right.</p>
 
   <h3>Hallucinated APIs and functions</h3>
-  <p>For technical staff: a model writes code that calls <code>library.doTheThing(x, y)</code> — a perfectly plausible function name that doesn't exist in that library. The code looks right. The compiler says no.</p>
+ <p>For technical staff: a model writes code that calls <code>library.doTheThing(x, y)</code>, a perfectly plausible function name that doesn't exist in that library. The code looks right. The compiler says no.</p>
 
   <hr class="section-divider" />
 
   <h2>The two-source rule</h2>
-  <p>Anything an AI tells you that you'd <strong>put your name to</strong>, send to a client, file with a regulator, publish, or use to make a decision — verify against at least one independent source. For high-stakes claims, two.</p>
+ <p>Anything an AI tells you that you'd <strong>put your name to</strong>, send to a client, file with a regulator, publish, or use to make a decision, verify against at least one independent source. For high-stakes claims, two.</p>
   <p>"Independent" matters. Asking a second AI tool the same question often gives you a similar answer because the two models were trained on overlapping data. The second source needs to be of a different kind: a primary document, an official register, the actual library documentation, a person who would know.</p>
 
   <div class="compare">
@@ -188,19 +188,19 @@
     </div>
     <div class="compare-cell bad">
       <h4>Doesn't count</h4>
-      <p>Another chatbot. A blog post that may itself have been AI-written. A summary article that doesn't cite primary sources. The model "double-checking" its own answer — it can't.</p>
+   <p>Another chatbot. A blog post that may itself have been AI-written. A summary article that doesn't cite primary sources. The model "double-checking" its own answer, it can't.</p>
     </div>
   </div>
 
   <h2>Where verification is mandatory</h2>
   <p>Some categories of output should always be verified before use, even when the model sounds completely confident:</p>
   <ul>
-    <li><strong>Legal claims</strong> — case law, statute references, regulatory deadlines, contractual implications.</li>
-    <li><strong>Medical or health information</strong> — diagnoses, drug interactions, dosages, anything that could affect someone's wellbeing.</li>
-    <li><strong>Financial figures</strong> — tax rules, accounting treatments, market data, calculations.</li>
-    <li><strong>Citations of any kind</strong> — academic, journalistic, legal. Always check the source exists and says what the model says it says.</li>
-    <li><strong>Statements about real people</strong> — biographies, positions held, things said. Reputation damage is a fast lawsuit.</li>
-    <li><strong>Technical instructions for operating systems, networks, security</strong> — a wrong command in a terminal can lose data.</li>
+  <li><strong>Legal claims</strong>, case law, statute references, regulatory deadlines, contractual implications.</li>
+  <li><strong>Medical or health information</strong>, diagnoses, drug interactions, dosages, anything that could affect someone's wellbeing.</li>
+  <li><strong>Financial figures</strong>, tax rules, accounting treatments, market data, calculations.</li>
+  <li><strong>Citations of any kind</strong>, academic, journalistic, legal. Always check the source exists and says what the model says it says.</li>
+  <li><strong>Statements about real people</strong>, biographies, positions held, things said. Reputation damage is a fast lawsuit.</li>
+  <li><strong>Technical instructions for operating systems, networks, security</strong>, a wrong command in a terminal can lose data.</li>
   </ul>
 
   <div class="callout warn">
@@ -211,11 +211,11 @@
     </div>
   </div>
 
-  <h2>Human oversight — the EU AI Act in plain English</h2>
+ <h2>Human oversight, the EU AI Act in plain English</h2>
   <p>Article 14 of the EU AI Act requires that "high-risk" AI systems be designed and used in a way that allows a human to oversee them effectively. In practice, for the kind of work covered in this course, that means:</p>
   <ul>
     <li><strong>Appropriate human oversight should be applied before AI-generated outputs are relied upon in decisions affecting individuals.</strong> In plain terms: a person reads it before it's acted upon.</li>
-    <li>That human is in a position to <strong>not act</strong> on the AI's output — to override it, correct it, or set it aside.</li>
+  <li>That human is in a position to <strong>not act</strong> on the AI's output, to override it, correct it, or set it aside.</li>
     <li>The human understands the AI well enough to know <em>when</em> to be suspicious of its output. That's what this module is teaching.</li>
   </ul>
 
@@ -223,14 +223,14 @@
     <span class="callout-icon">G</span>
     <div>
       <div class="callout-title">Governance Insight</div>
-      <p>Human oversight is one of the core principles found across <strong>ISO/IEC 42001</strong>, the <strong>EU AI Act</strong> and many emerging AI governance frameworks. It is not a single rule from a single regulator — it is a shared expectation, which is why "a person stays accountable for the decision" is a safe default wherever you operate.</p>
+   <p>Human oversight is one of the core principles found across <strong>ISO/IEC 42001</strong>, the <strong>EU AI Act</strong> and many emerging AI governance frameworks. It is not a single rule from a single regulator, it is a shared expectation, which is why "a person stays accountable for the decision" is a safe default wherever you operate.</p>
     </div>
   </div>
   <p>"Human in the loop" is the slogan version. The substance is: <strong>the human signing off has to actually do the work of signing off</strong>, not click "approve" on autopilot.</p>
 
   <h3>What rubber-stamping looks like</h3>
   <p>The failure mode the law is trying to prevent isn't "no human reviewed it". It's "a human reviewed it and approved it without really reading it". You see this with auto-generated emails that include sentences nobody at the company would actually write, with marketing copy nobody proofread, with AI-summarised meeting notes circulated as the official record without anyone checking they're accurate.</p>
-  <p>The defence against rubber-stamping is friction. If an AI-generated output is about to leave your team — go to a customer, a regulator, a court, a public website — someone needs to read it line by line, with the question "do I actually believe this?" in mind.</p>
+ <p>The defence against rubber-stamping is friction. If an AI-generated output is about to leave your team, go to a customer, a regulator, a court, a public website, someone needs to read it line by line, with the question "do I actually believe this?" in mind.</p>
 
   <div class="callout do">
     <span class="callout-icon">✓</span>
@@ -239,7 +239,7 @@
       <ol>
         <li><strong>Read every AI output before you send it.</strong> Out loud, slowly, when the stakes are high. The number of errors you catch this way is shockingly high.</li>
         <li><strong>Click every citation.</strong> If it doesn't open, the source isn't real. If it opens but says something different, the model misrepresented it.</li>
-        <li><strong>If the model is unusually confident about something obscure, treat that as a warning, not as reassurance.</strong> Models hallucinate most fluently in domains that have lots of text in their training data but few external fact-checks — niche regulations, mid-list academic literature, smaller-jurisdiction case law.</li>
+    <li><strong>If the model is unusually confident about something obscure, treat that as a warning, not as reassurance.</strong> Models hallucinate most fluently in domains that have lots of text in their training data but few external fact-checks, niche regulations, mid-list academic literature, smaller-jurisdiction case law.</li>
       </ol>
     </div>
   </div>
@@ -248,7 +248,7 @@
     <span class="callout-icon">§</span>
     <div>
       <div class="callout-title">Where the standards land</div>
-      <p><strong>EU AI Act Article 14</strong>: human oversight obligations for high-risk AI. <strong>Article 50</strong>: transparency obligations — AI-generated content sometimes has to be marked as such. <strong>ISO/IEC 42001:2023 Annex A.9</strong>: performance evaluation of AI systems — including their accuracy and reliability over time. <strong>ISO/IEC 27001:2022 Annex A.5.36</strong>: compliance with policies, rules and standards for information security — the verification habits in this module are part of compliance with your own AI policy, if you have one.</p>
+   <p><strong>EU AI Act Article 14</strong>: human oversight obligations for high-risk AI. <strong>Article 50</strong>: transparency obligations, AI-generated content sometimes has to be marked as such. <strong>ISO/IEC 42001:2023 Annex A.9</strong>: performance evaluation of AI systems, including their accuracy and reliability over time. <strong>ISO/IEC 27001:2022 Annex A.5.36</strong>: compliance with policies, rules and standards for information security, the verification habits in this module are part of compliance with your own AI policy, if you have one.</p>
     </div>
   </div>
 
@@ -263,7 +263,7 @@
     </ol>
     <details class="quiz-reveal">
       <summary class="quiz-btn ghost">Show answer</summary>
-      <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>C — Humans remain accountable for AI-assisted decisions.</p>
+   <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>C, Humans remain accountable for AI-assisted decisions.</p>
     </details>
   </section>
 
@@ -290,6 +290,7 @@
 <footer class="site-foot">
   <span>AI Safe@Work · Module 05</span>
   <span class="foot-right">
+    <a href="templates/">Templates</a>
     <a href="course.html">All modules</a>
     <a href="portal/login.html">Partner login</a>
       <a href="privacy.html">Privacy</a>

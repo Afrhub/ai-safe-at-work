@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#060608" />
 <meta name="color-scheme" content="dark light" />
 <script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
-<script>/* ponytail: client-side course gate — content is free not secret; this is the login funnel, not security. Expired-but-present token still passes (fine for a free course). */try{if(!localStorage.getItem("sb-hanjrsslhnuauaysbhun-auth-token"))location.replace("/portal/login.html?next="+encodeURIComponent(location.pathname));}catch(e){}</script>
+<script>/* ponytail: client-side course gate, content is free not secret; this is the login funnel, not security. Expired-but-present token still passes (fine for a free course). */try{if(!localStorage.getItem("sb-hanjrsslhnuauaysbhun-auth-token"))location.replace("/portal/login.html?next="+encodeURIComponent(location.pathname));}catch(e){}</script>
 <title>MSP / IT Admin Track · Deploying AI governance at scale — AI Safe@Work</title>
 <meta name="description" content="For MSP technicians, IT admins, and vCIOs deploying AI governance across multiple SMB customers. Covers Article 4 (your own staff), Article 26 (your customers' AI), approved-tool inventory, patch + change management, customer onboarding, audit-pack handover, incident response, and white-label posture." />
 <meta property="og:type" content="article" />
@@ -70,7 +70,7 @@
   <div class="objectives">
     <div class="objectives-title">By the end of this track, you'll</div>
     <ul>
-      <li>Understand your dual Article 4 / Article 26 position — as employer of your own staff and operator on behalf of customers</li>
+   <li>Understand your dual Article 4 / Article 26 position, as employer of your own staff and operator on behalf of customers</li>
       <li>Run a single AI governance baseline across your customer base without losing per-customer specificity</li>
       <li>Maintain an approved-tool inventory that survives Copilot version bumps, ChatGPT model swaps, and vendor terms changes</li>
       <li>Onboard a new customer's AI posture in 30 days without inventing it from scratch</li>
@@ -89,7 +89,7 @@
     <a href="#sub-5">5. Customer onboarding</a>
     <a href="#sub-6">6. Patch + change mgmt</a>
     <a href="#sub-7">7. Audit-pack handover</a>
-    <a href="#sub-8">8. Incident — first 10 min</a>
+  <a href="#sub-8">8. Incident, first 10 min</a>
     <a href="#sub-9">9. White-label posture</a>
     <a href="#sub-10">10. Final assessment</a>
   </nav>
@@ -97,10 +97,10 @@
   <hr class="section-divider" />
 
   <span class="sub-tag" id="sub-1">Sub-module 1 of 10</span>
-  <h2>MSP as deployer — your Article 4 obligation to your own staff</h2>
-  <p>Before you sell AI governance to anyone, you owe it to your own team. The MSP is itself a deployer of AI — your technicians use Copilot to write scripts, your account managers use ChatGPT to draft proposals, your service desk pipes ticket summaries through whatever is closest to hand. Article 4 of the EU AI Act applies to you as your own employer first.</p>
+ <h2>MSP as deployer, your Article 4 obligation to your own staff</h2>
+ <p>Before you sell AI governance to anyone, you owe it to your own team. The MSP is itself a deployer of AI, your technicians use Copilot to write scripts, your account managers use ChatGPT to draft proposals, your service desk pipes ticket summaries through whatever is closest to hand. Article 4 of the EU AI Act applies to you as your own employer first.</p>
 
-  <p>The obligation is not "send everyone on a course". It is "ensure, to your best extent, a sufficient level of AI literacy" — meaning evidence that your staff understand what they're using, on what data, with what risk. The evidence is the <a href="templates/training-register.html" class="accent">training register</a>. If your auditor or your biggest customer asks how you discharge Article 4 internally, the training register is the answer.</p>
+ <p>The obligation is not "send everyone on a course". It is "ensure, to your best extent, a sufficient level of AI literacy", meaning evidence that your staff understand what they're using, on what data, with what risk. The evidence is the <a href="templates/training-register.html" class="accent">training register</a>. If your auditor or your biggest customer asks how you discharge Article 4 internally, the training register is the answer.</p>
 
   <div class="callout warn">
     <span class="callout-icon">!</span>
@@ -114,34 +114,34 @@
   <ol>
     <li>An <a href="templates/aup-template.html" class="accent">AUP</a> covering AI use, signed by every member of staff including contractors.</li>
     <li>A <a href="templates/training-register.html" class="accent">training register</a> covering every member of staff, evidencing course completion (this site is fine), with manager sign-off and annual restatement.</li>
-    <li>A named owner of the register and of the AI-tool inventory inside the MSP — usually the technical director, vCIO, or compliance lead.</li>
-    <li>A documented incident channel internally — see sub-module 8.</li>
+  <li>A named owner of the register and of the AI-tool inventory inside the MSP, usually the technical director, vCIO, or compliance lead.</li>
+  <li>A documented incident channel internally, see sub-module 8.</li>
   </ol>
 
   <div class="signature">
     <div class="label">Sub-module 1 takeaway</div>
-    <div class="quote">Discharge Article 4 internally before pitching it externally. The training register is the evidence — yours, on you, signed off, fileable in five minutes when asked.</div>
+  <div class="quote">Discharge Article 4 internally before pitching it externally. The training register is the evidence, yours, on you, signed off, fileable in five minutes when asked.</div>
   </div>
 
   <hr class="section-divider" />
 
   <span class="sub-tag" id="sub-2">Sub-module 2 of 10</span>
-  <h2>MSP as deployer — your Article 26 obligation to your customers' AI</h2>
+ <h2>MSP as deployer, your Article 26 obligation to your customers' AI</h2>
   <p>Article 26 of the EU AI Act lays out deployer obligations for high-risk AI systems. Most SMB customers won't deploy Annex-III high-risk systems directly. But Article 26 still bites in two places that matter to MSPs.</p>
 
-  <p>First — if you, the MSP, configure or operate an AI tool on a customer's behalf, you are participating in their deployment. Their Article 26 duties (instruction-following, human oversight, log retention, incident reporting) become your operational task. Their regulator will, in practice, look at your operations as much as their policy.</p>
+ <p>First, if you, the MSP, configure or operate an AI tool on a customer's behalf, you are participating in their deployment. Their Article 26 duties (instruction-following, human oversight, log retention, incident reporting) become your operational task. Their regulator will, in practice, look at your operations as much as their policy.</p>
 
-  <p>Second — when your customer is a public body, a bank scoring creditworthiness, or a life-and-health insurer (the Article 27 categories), Article 26 + 27 combine. Their <a href="templates/fria-template.html" class="accent">FRIA</a> needs your input. Their human-oversight arrangements run on infrastructure you provide.</p>
+ <p>Second, when your customer is a public body, a bank scoring creditworthiness, or a life-and-health insurer (the Article 27 categories), Article 26 + 27 combine. Their <a href="templates/fria-template.html" class="accent">FRIA</a> needs your input. Their human-oversight arrangements run on infrastructure you provide.</p>
 
-  <h3>Practical mapping — what Article 26 means at the keyboard</h3>
+ <h3>Practical mapping, what Article 26 means at the keyboard</h3>
   <ul>
-    <li><strong>Art 26(1)</strong> — Use AI systems "in accordance with the instructions for use" published by the provider. Translation: read the Copilot governance docs, the ChatGPT Enterprise admin guide, your AI vendor's intended-purpose statement. Don't deploy outside scope. Record what scope you're using.</li>
-    <li><strong>Art 26(2)</strong> — Assign human oversight to natural persons with the necessary competence. Translation: name an oversight role per customer; train them; record the name in the customer's training register.</li>
-    <li><strong>Art 26(3)</strong> — Where you control input data, ensure inputs are relevant and representative. Translation: don't pipe arbitrary customer data into a model without thinking about it. RAG indices are inputs. Sharepoint permissions are inputs.</li>
-    <li><strong>Art 26(5)</strong> — Monitor operation per provider instructions; suspend use and inform the provider if you find serious risks. Translation: have a monitoring routine and a kill-switch path. Document both.</li>
-    <li><strong>Art 26(6)</strong> — Retain auto-generated logs for at least six months (longer if other law requires). Translation: log retention is contractual + technical, not optional. Confirm what your AI vendor retains and what you retain. Don't assume.</li>
-    <li><strong>Art 26(7)</strong> — Inform workers and their representatives where high-risk AI is used in employment context. Translation: applies to anyone doing recruitment-tool, scheduling-optimiser, or performance-tracking AI for an SMB customer.</li>
-    <li><strong>Art 26(11)</strong> — Cooperate with competent authorities on action regarding the system. Translation: a regulator asking your customer questions may end up asking you. Build the answer-pack before the request.</li>
+  <li><strong>Art 26(1)</strong>, Use AI systems "in accordance with the instructions for use" published by the provider. Translation: read the Copilot governance docs, the ChatGPT Enterprise admin guide, your AI vendor's intended-purpose statement. Don't deploy outside scope. Record what scope you're using.</li>
+  <li><strong>Art 26(2)</strong>, Assign human oversight to natural persons with the necessary competence. Translation: name an oversight role per customer; train them; record the name in the customer's training register.</li>
+  <li><strong>Art 26(3)</strong>, Where you control input data, ensure inputs are relevant and representative. Translation: don't pipe arbitrary customer data into a model without thinking about it. RAG indices are inputs. Sharepoint permissions are inputs.</li>
+  <li><strong>Art 26(5)</strong>, Monitor operation per provider instructions; suspend use and inform the provider if you find serious risks. Translation: have a monitoring routine and a kill-switch path. Document both.</li>
+  <li><strong>Art 26(6)</strong>, Retain auto-generated logs for at least six months (longer if other law requires). Translation: log retention is contractual + technical, not optional. Confirm what your AI vendor retains and what you retain. Don't assume.</li>
+  <li><strong>Art 26(7)</strong>, Inform workers and their representatives where high-risk AI is used in employment context. Translation: applies to anyone doing recruitment-tool, scheduling-optimiser, or performance-tracking AI for an SMB customer.</li>
+  <li><strong>Art 26(11)</strong>, Cooperate with competent authorities on action regarding the system. Translation: a regulator asking your customer questions may end up asking you. Build the answer-pack before the request.</li>
   </ul>
 
   <div class="callout warn">
@@ -167,9 +167,9 @@
   <ul>
     <li>A standard AUP, brand-swapped per customer (the <a href="templates/aup-template.html" class="accent">template</a> + customer header).</li>
     <li>A standard approved-tool list, with the MSP's "AI services schedule" naming the tools you support. Customer adds their own approved tools via change request.</li>
-    <li>A standard training programme — this site, for all customer staff. Per-customer training register, never co-mingled.</li>
+  <li>A standard training programme, this site, for all customer staff. Per-customer training register, never co-mingled.</li>
     <li>A standard incident escalation path: customer reports to MSP service desk, MSP triages, MSP escalates to customer-side sponsor + your incident lead.</li>
-    <li>A standard quarterly refresh routine — see sub-module 6 (patch + change management).</li>
+  <li>A standard quarterly refresh routine, see sub-module 6 (patch + change management).</li>
   </ul>
 
   <h3>Per-customer variation that's worth keeping</h3>
@@ -196,7 +196,7 @@
   <hr class="section-divider" />
 
   <span class="sub-tag" id="sub-4">Sub-module 4 of 10</span>
-  <h2>Approved tool list — building, maintaining, communicating</h2>
+ <h2>Approved tool list, building, maintaining, communicating</h2>
   <p>The approved-tool list is the single most-asked-about artefact when you sit a customer down and say "we're going to govern AI together". Build it once for your MSP. Refresh it monthly. Communicate updates without prompting.</p>
 
   <h3>Schema for the approved-tool list</h3>
@@ -241,20 +241,20 @@
   <hr class="section-divider" />
 
   <span class="sub-tag" id="sub-5">Sub-module 5 of 10</span>
-  <h2>Customer onboarding — embedding AI governance from day 1</h2>
+ <h2>Customer onboarding, embedding AI governance from day 1</h2>
   <p>A new managed-services contract is the only time the customer is fully attentive. Use it. Embed the AI governance machinery in the first 30 days while everyone is still in onboarding-receptive mode. After that, retrofitting requires a project.</p>
 
   <h3>The 30-day onboarding sequence</h3>
   <p>Run this in parallel with your standard MSP onboarding (network, identity, endpoints, backup, monitoring, ticketing). The <a href="rollout-guide.html" class="accent">30-day rollout guide</a> is the linear plan you can hand the customer's sponsor.</p>
 
   <ul>
-    <li><strong>Day 0</strong> — Sign the AI services schedule alongside the master MSP agreement. Confirm sponsor + DPO + IT lead on the customer side.</li>
-    <li><strong>Days 1–3</strong> — Audit existing AI use at the customer. Browser extensions, SaaS plugins, personal-account usage, BYOAI patterns. Document what you find without judgment.</li>
-    <li><strong>Days 4–7</strong> — Customise the AUP, training register, approved-tool list for the customer. Brand-swap. Add customer-specific forbidden categories.</li>
-    <li><strong>Days 8–10</strong> — Sponsor kick-off message goes out. Course launches. Training register opened for sign-off as completions land.</li>
-    <li><strong>Days 11–21</strong> — Drive completion using your service desk as the chase channel. The customer's HR lead is not chasing this; you are.</li>
-    <li><strong>Days 22–28</strong> — Final assessment completion. AUP signature collection. Tabletop incident drill (sub-module 8).</li>
-    <li><strong>Day 30</strong> — Audit binder closed and handed to customer sponsor. Quarterly refresh booked in shared calendar.</li>
+  <li><strong>Day 0</strong>, Sign the AI services schedule alongside the master MSP agreement. Confirm sponsor + DPO + IT lead on the customer side.</li>
+  <li><strong>Days 1–3</strong>, Audit existing AI use at the customer. Browser extensions, SaaS plugins, personal-account usage, BYOAI patterns. Document what you find without judgment.</li>
+  <li><strong>Days 4–7</strong>, Customise the AUP, training register, approved-tool list for the customer. Brand-swap. Add customer-specific forbidden categories.</li>
+  <li><strong>Days 8–10</strong>, Sponsor kick-off message goes out. Course launches. Training register opened for sign-off as completions land.</li>
+  <li><strong>Days 11–21</strong>, Drive completion using your service desk as the chase channel. The customer's HR lead is not chasing this; you are.</li>
+  <li><strong>Days 22–28</strong>, Final assessment completion. AUP signature collection. Tabletop incident drill (sub-module 8).</li>
+  <li><strong>Day 30</strong>, Audit binder closed and handed to customer sponsor. Quarterly refresh booked in shared calendar.</li>
   </ul>
 
   <div class="callout standard">
@@ -278,12 +278,12 @@
 
   <h3>Six change vectors to monitor</h3>
   <ol>
-    <li><strong>Model swaps</strong> — Underlying model version changes (GPT-4 → GPT-4o → GPT-5; Claude 3.5 → Claude 4 → Claude 4.5). Output behaviour can shift; tested workflows may degrade.</li>
-    <li><strong>Feature additions</strong> — New features (browsing, image generation, agentic tool use) ship turned-on by default. Each feature expands the risk surface.</li>
-    <li><strong>Vendor terms changes</strong> — Training-data opt-out clauses, data residency commitments, indemnification clauses. Check monthly.</li>
-    <li><strong>Sub-processor list</strong> — New sub-processor appears in the vendor's published list. GDPR Article 28(2): notify customer; customer may object.</li>
-    <li><strong>Plugin / extension marketplace</strong> — A new browser extension claiming AI features lands in a customer's Chrome estate. May not be approved.</li>
-    <li><strong>Regulatory changes</strong> — A new EU AI Act delegated act lands. A new ICO guidance note drops. Your approved-tool list may need to flex.</li>
+  <li><strong>Model swaps</strong>, Underlying model version changes (GPT-4 → GPT-4o → GPT-5; Claude 3.5 → Claude 4 → Claude 4.5). Output behaviour can shift; tested workflows may degrade.</li>
+  <li><strong>Feature additions</strong>, New features (browsing, image generation, agentic tool use) ship turned-on by default. Each feature expands the risk surface.</li>
+  <li><strong>Vendor terms changes</strong>, Training-data opt-out clauses, data residency commitments, indemnification clauses. Check monthly.</li>
+  <li><strong>Sub-processor list</strong>, New sub-processor appears in the vendor's published list. GDPR Article 28(2): notify customer; customer may object.</li>
+  <li><strong>Plugin / extension marketplace</strong>, A new browser extension claiming AI features lands in a customer's Chrome estate. May not be approved.</li>
+  <li><strong>Regulatory changes</strong>, A new EU AI Act delegated act lands. A new ICO guidance note drops. Your approved-tool list may need to flex.</li>
   </ol>
 
   <h3>The monthly AI change-management ritual</h3>
@@ -311,8 +311,8 @@
   <hr class="section-divider" />
 
   <span class="sub-tag" id="sub-7">Sub-module 7 of 10</span>
-  <h2>Customer audit-pack handover — what the customer keeps, what the MSP keeps</h2>
-  <p>The customer's auditor will ask the customer for evidence. The customer turns to you. The handover question is not "do we have the evidence" — you do, you generated it during the rollout. It's "what stays with the customer permanently versus what you operate on their behalf".</p>
+ <h2>Customer audit-pack handover, what the customer keeps, what the MSP keeps</h2>
+ <p>The customer's auditor will ask the customer for evidence. The customer turns to you. The handover question is not "do we have the evidence", you do, you generated it during the rollout. It's "what stays with the customer permanently versus what you operate on their behalf".</p>
 
   <h3>Stays with the customer (they own the original)</h3>
   <ul>
@@ -321,7 +321,7 @@
     <li>Any <a href="templates/dpia-template.html" class="accent">DPIA</a> / <a href="templates/fria-template.html" class="accent">FRIA</a>. Customer's compliance team signs. You may co-author. The signed copy lives with them.</li>
     <li>Customer-specific approved-tool list (the branded variant).</li>
     <li>The 30-day rollout guide annotated with their actual dates and sign-offs.</li>
-    <li>Audit binder index — a one-page table of contents pointing to every artefact above with its location.</li>
+  <li>Audit binder index, a one-page table of contents pointing to every artefact above with its location.</li>
   </ul>
 
   <h3>Stays with the MSP (you operate; customer can request)</h3>
@@ -334,26 +334,26 @@
   </ul>
 
   <h3>The handover packet</h3>
-  <p>At the end of the 30-day onboarding (and at every annual restatement), generate the handover packet. A single PDF + a folder of source artefacts. Customer sponsor signs receipt. File in your customer record. Title the file <code>{Customer} — AI governance audit pack — {YYYY-MM-DD}</code>. Boring. Findable.</p>
+ <p>At the end of the 30-day onboarding (and at every annual restatement), generate the handover packet. A single PDF + a folder of source artefacts. Customer sponsor signs receipt. File in your customer record. Title the file <code>{Customer}, AI governance audit pack, {YYYY-MM-DD}</code>. Boring. Findable.</p>
 
   <div class="signature">
     <div class="label">Sub-module 7 takeaway</div>
-    <div class="quote">Customer owns their evidence. You operate on top of it. The handover packet is the moment that line gets drawn. Draw it explicitly and put it in writing — every time.</div>
+  <div class="quote">Customer owns their evidence. You operate on top of it. The handover packet is the moment that line gets drawn. Draw it explicitly and put it in writing, every time.</div>
   </div>
 
   <hr class="section-divider" />
 
   <span class="sub-tag" id="sub-8">Sub-module 8 of 10</span>
-  <h2>Customer incident response — who calls whom in the first ten minutes</h2>
+ <h2>Customer incident response, who calls whom in the first ten minutes</h2>
   <p>AI incidents at customers will reach you via the service desk first. Default routing for "I pasted something into ChatGPT I shouldn't have" lands in your ticket queue at 16:55 on a Friday. The first ten minutes shape the next ten weeks.</p>
 
   <h3>The first ten minutes</h3>
   <ol>
-    <li><strong>0–1 min</strong> — Service desk takes the call, opens an incident-tagged ticket, takes a one-line statement of what happened. Doesn't tell anyone yet. Doesn't say "don't worry".</li>
-    <li><strong>1–3 min</strong> — Service desk pages your incident lead. Incident lead reads the ticket; if it's potentially a personal-data incident or a confidentiality breach, escalates to your AI-incident routine immediately.</li>
-    <li><strong>3–5 min</strong> — Incident lead calls the customer's named sponsor (from sub-module 5). Does not call the customer's DPO directly. The sponsor decides who they bring in their side.</li>
-    <li><strong>5–7 min</strong> — Containment actions begin. Revoke tool access. Rotate exposed credentials. Pull the user out of the affected tenant. Document each action with a timestamp on the ticket.</li>
-    <li><strong>7–10 min</strong> — Incident lead opens the <a href="templates/incident-form.html" class="accent">incident report form</a> from your template library. Starts filling it. The clock under GDPR Art 33 starts when "awareness" is established — that's now.</li>
+  <li><strong>0–1 min</strong>, Service desk takes the call, opens an incident-tagged ticket, takes a one-line statement of what happened. Doesn't tell anyone yet. Doesn't say "don't worry".</li>
+  <li><strong>1–3 min</strong>, Service desk pages your incident lead. Incident lead reads the ticket; if it's potentially a personal-data incident or a confidentiality breach, escalates to your AI-incident routine immediately.</li>
+  <li><strong>3–5 min</strong>, Incident lead calls the customer's named sponsor (from sub-module 5). Does not call the customer's DPO directly. The sponsor decides who they bring in their side.</li>
+  <li><strong>5–7 min</strong>, Containment actions begin. Revoke tool access. Rotate exposed credentials. Pull the user out of the affected tenant. Document each action with a timestamp on the ticket.</li>
+  <li><strong>7–10 min</strong>, Incident lead opens the <a href="templates/incident-form.html" class="accent">incident report form</a> from your template library. Starts filling it. The clock under GDPR Art 33 starts when "awareness" is established, that's now.</li>
   </ol>
 
   <div class="callout warn">
@@ -384,15 +384,15 @@
   <h2>White-label deployment posture (Strategic-tier consideration)</h2>
   <p>The Strategic-tier MSP partnership permits white-label deployment: customer-facing surfaces show the MSP's brand, not "AI Safe@Work". White-label looks straightforward; it isn't. Get it wrong and you create contract, liability, and trust gaps.</p>
 
-  <h3>Contract — Schedule D</h3>
+ <h3>Contract, Schedule D</h3>
   <p>White-label is enabled by Schedule D of the MSP partner agreement. Don't operate white-label without Schedule D signed. Schedule D names: the white-label brand; the customer-facing surfaces it appears on; the indemnification carve-outs; what reverts if the partnership ends; the duration of customer-side support after termination.</p>
 
   <h3>What white-label changes operationally</h3>
   <ul>
-    <li><strong>Audit binder</strong> — Customer-facing artefacts show the MSP's brand. Internal artefacts (DPA, sub-processor list, vendor questionnaires you used to vet AI Safe@Work) still show AI Safe@Work.</li>
-    <li><strong>Incident reporting upstream</strong> — When AI Safe@Work needs to be notified (regulatory issue with content; security issue with delivery infra), the MSP routes through the Strategic-tier slack channel; customer is not exposed to the upstream relationship unless required.</li>
-    <li><strong>Content changes</strong> — Quarterly content refresh from AI Safe@Work is rebadged. Material changes notified via the partner channel; MSP decides timing of customer-facing rollout.</li>
-    <li><strong>Customer dispute on content</strong> — Customer disputes a claim or a citation. MSP is the first responder. AI Safe@Work supports L3. Customer never sees the AI Safe@Work brand unless MSP chooses to surface it.</li>
+  <li><strong>Audit binder</strong>, Customer-facing artefacts show the MSP's brand. Internal artefacts (DPA, sub-processor list, vendor questionnaires you used to vet AI Safe@Work) still show AI Safe@Work.</li>
+  <li><strong>Incident reporting upstream</strong>, When AI Safe@Work needs to be notified (regulatory issue with content; security issue with delivery infra), the MSP routes through the Strategic-tier slack channel; customer is not exposed to the upstream relationship unless required.</li>
+  <li><strong>Content changes</strong>, Quarterly content refresh from AI Safe@Work is rebadged. Material changes notified via the partner channel; MSP decides timing of customer-facing rollout.</li>
+  <li><strong>Customer dispute on content</strong>, Customer disputes a claim or a citation. MSP is the first responder. AI Safe@Work supports L3. Customer never sees the AI Safe@Work brand unless MSP chooses to surface it.</li>
   </ul>
 
   <h3>When white-label is the wrong choice</h3>
@@ -406,20 +406,20 @@
     <span class="callout-icon">§</span>
     <div>
       <div class="callout-title">Co-branded is the right default</div>
-      <p>For most Tier 2 (Growth) partners, co-branded — "Delivered by {MSP} · Powered by AI Safe@Work" — is the right posture. Customer benefits from both brands; MSP retains primary relationship; AI Safe@Work backs the content credibility. Only step to white-label when the partnership and customer base genuinely warrant it.</p>
+   <p>For most Tier 2 (Growth) partners, co-branded, "Delivered by {MSP} · Powered by AI Safe@Work", is the right posture. Customer benefits from both brands; MSP retains primary relationship; AI Safe@Work backs the content credibility. Only step to white-label when the partnership and customer base genuinely warrant it.</p>
     </div>
   </div>
 
   <div class="signature">
     <div class="label">Sub-module 9 takeaway</div>
-    <div class="quote">White-label is a contractual choice, not a marketing one. If Schedule D isn't signed, you're not white-label — you're a brand violation waiting to be discovered.</div>
+  <div class="quote">White-label is a contractual choice, not a marketing one. If Schedule D isn't signed, you're not white-label, you're a brand violation waiting to be discovered.</div>
   </div>
 
   <hr class="section-divider" />
 
   <span class="sub-tag" id="sub-10">Sub-module 10 of 10</span>
   <h2>Final assessment</h2>
-  <p>Ten questions covering all nine prior sub-modules. Self-mark. Suggested pass: 8/10. Use it to feel where you're confident and where the gap is — the gap is your action list for the next 30 days.</p>
+ <p>Ten questions covering all nine prior sub-modules. Self-mark. Suggested pass: 8/10. Use it to feel where you're confident and where the gap is, the gap is your action list for the next 30 days.</p>
 
   <div class="callout standard">
     <span class="callout-icon">§</span>
@@ -435,7 +435,7 @@
 
   <h3>Question 2</h3>
   <p>You operate Microsoft 365 Copilot on behalf of a customer. The Copilot model is updated by Microsoft without notice. Which Article 26 sub-clauses does this update touch, and what's your operational response?</p>
-  <details><summary>Answer</summary><p>Art 26(1) — instructions for use may have changed; verify. Art 26(3) — input handling may behave differently. Art 26(5) — monitoring of operation; re-run critical workflow tests. Art 26(6) — log retention may have shifted; verify. Operational response: log the change in your change-management register, re-test workflows, communicate to customer, update the approved-tool list.</p></details>
+ <details><summary>Answer</summary><p>Art 26(1), instructions for use may have changed; verify. Art 26(3), input handling may behave differently. Art 26(5), monitoring of operation; re-run critical workflow tests. Art 26(6), log retention may have shifted; verify. Operational response: log the change in your change-management register, re-test workflows, communicate to customer, update the approved-tool list.</p></details>
 
   <h3>Question 3</h3>
   <p>Customer A is a solicitors' firm. Customer B is a manufacturer. They both use ChatGPT Enterprise. Should they share a single training register, AUP, and approved-tool list?</p>
@@ -447,7 +447,7 @@
 
   <h3>Question 5</h3>
   <p>A customer's AUP says "AI tools may not process customer data". Their salesperson uses Copilot in M365 to summarise meeting notes that contain client names. Is the AUP violated?</p>
-  <details><summary>Answer</summary><p>Yes, on a literal reading. But the AUP is also likely poorly drafted — Copilot in a properly-tenanted M365 environment processing data the customer already controls is usually low risk and intended. The right fix is to refine the AUP to distinguish data categories and tool tiers (the <a href="templates/aup-template.html" class="accent">AUP template</a> Section 5 has the pattern). Then re-onboard staff to the updated policy.</p></details>
+ <details><summary>Answer</summary><p>Yes, on a literal reading. But the AUP is also likely poorly drafted, Copilot in a properly-tenanted M365 environment processing data the customer already controls is usually low risk and intended. The right fix is to refine the AUP to distinguish data categories and tool tiers (the <a href="templates/aup-template.html" class="accent">AUP template</a> Section 5 has the pattern). Then re-onboard staff to the updated policy.</p></details>
 
   <h3>Question 6</h3>
   <p>A customer's regulator asks for their AI logs covering the last six months. You hold them. The customer asks you to provide them directly to the regulator. Should you?</p>
@@ -463,7 +463,7 @@
 
   <h3>Question 9</h3>
   <p>A Tier 2 Growth-tier customer asks whether you can white-label the AI Safe@Work materials. What's your answer?</p>
-  <details><summary>Answer</summary><p>Tier 2 supports co-branded delivery, not white-label. White-label requires Tier 3 (Strategic Partner) status and Schedule D of the MSP partner agreement. Offer co-branded — "Delivered by {MSP} · Powered by AI Safe@Work" — which is usually a stronger commercial position than white-label anyway. If the customer relationship genuinely warrants full white-label, that's a Tier 3 conversation with AI Safe@Work head of partnerships.</p></details>
+ <details><summary>Answer</summary><p>Tier 2 supports co-branded delivery, not white-label. White-label requires Tier 3 (Strategic Partner) status and Schedule D of the MSP partner agreement. Offer co-branded, "Delivered by {MSP} · Powered by AI Safe@Work", which is usually a stronger commercial position than white-label anyway. If the customer relationship genuinely warrants full white-label, that's a Tier 3 conversation with AI Safe@Work head of partnerships.</p></details>
 
   <h3>Question 10</h3>
   <p>It's 16:55 on a Friday. A customer's service-desk ticket reads: "I think I just pasted our pricing model into ChatGPT". What are the first three actions you take, in order?</p>
@@ -479,6 +479,7 @@
 <footer class="site-foot">
   <span>AI Safe@Work · Relevant Role · MSP / IT Admin v1.0</span>
   <span class="foot-right">
+    <a href="templates/">Templates</a>
     <a href="course.html">All modules</a>
     <a href="module-manager.html">Manager Portal</a>
     <a href="module-dpo.html">DPO Track</a>

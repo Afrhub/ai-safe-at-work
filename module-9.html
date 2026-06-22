@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#060608" />
 <meta name="color-scheme" content="dark light" />
 <script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
-<script>/* ponytail: client-side course gate — content is free not secret; this is the login funnel, not security. Expired-but-present token still passes (fine for a free course). */try{if(!localStorage.getItem("sb-hanjrsslhnuauaysbhun-auth-token"))location.replace("/portal/login.html?next="+encodeURIComponent(location.pathname));}catch(e){}</script>
+<script>/* ponytail: client-side course gate, content is free not secret; this is the login funnel, not security. Expired-but-present token still passes (fine for a free course). */try{if(!localStorage.getItem("sb-hanjrsslhnuauaysbhun-auth-token"))location.replace("/portal/login.html?next="+encodeURIComponent(location.pathname));}catch(e){}</script>
 <title>Module 9 · Logging, accountability, and "who used what" — AI Safe@Work</title>
 <meta name="description" content="Keeping a paper trail without becoming bureaucratic. GDPR Article 22 protections for automated decisions. When an AI-assisted decision needs a human signature." />
 <meta property="og:type" content="article" />
@@ -112,9 +112,9 @@
         <line x1="150" y1="56" x2="610" y2="56" stroke="rgba(201,212,227,0.28)" stroke-width="1"/>
         <line x1="150" y1="78" x2="610" y2="78" stroke="rgba(201,212,227,0.28)" stroke-width="1"/>
         <line x1="150" y1="100" x2="610" y2="100" stroke="rgba(201,212,227,0.28)" stroke-width="1"/>
-        <text x="166" y="49" fill="rgba(201,212,227,0.40)">09:14</text><text x="240" y="49" fill="rgba(201,212,227,0.70)">DRAFT REVIEWED — APPROVED</text><text x="560" y="49" fill="#1ab86a">✓</text>
+    <text x="166" y="49" fill="rgba(201,212,227,0.40)">09:14</text><text x="240" y="49" fill="rgba(201,212,227,0.70)">DRAFT REVIEWED, APPROVED</text><text x="560" y="49" fill="#1ab86a">✓</text>
         <text x="166" y="71" fill="rgba(201,212,227,0.40)">11:02</text><text x="240" y="71" fill="rgba(201,212,227,0.70)">SUMMARY USED IN REPORT</text><text x="560" y="71" fill="#1ab86a">✓</text>
-        <text x="166" y="93" fill="rgba(201,212,227,0.40)">14:37</text><text x="240" y="93" fill="rgba(201,212,227,0.70)">OUTPUT SET ASIDE — WRONG</text><text x="560" y="93" fill="#1ab86a">✓</text>
+    <text x="166" y="93" fill="rgba(201,212,227,0.40)">14:37</text><text x="240" y="93" fill="rgba(201,212,227,0.70)">OUTPUT SET ASIDE, WRONG</text><text x="560" y="93" fill="#1ab86a">✓</text>
         <text x="166" y="113" fill="rgba(201,212,227,0.40)">16:08</text><text x="240" y="113" fill="rgba(201,212,227,0.28)">. . .</text>
       </g>
     </svg>
@@ -143,7 +143,7 @@
   <ol>
     <li><strong>The law is increasingly asking.</strong> GDPR Article 22 provides protections relating to certain automated decision-making, alongside transparency obligations under Articles 13–15, and the EU AI Act's logging obligations for high-risk systems (Article 12) both rest on the assumption that there's a record of how AI contributed to a decision. Where AI processes personal data, that activity may also belong in your Records of Processing Activities (RoPA) under GDPR Article 30.</li>
     <li><strong>The standards are increasingly asking.</strong> ISO/IEC 42001 requires documented evidence of how AI is used and overseen. ISO/IEC 27001 includes controls relating to logging, monitoring and accountability.</li>
-    <li><strong>The business cost of "we don't know" is high.</strong> When a customer complains that an AI-generated decision was wrong, or a regulator asks how you're using AI, or your insurer asks for evidence of AI controls — "we didn't keep track" is the worst answer.</li>
+  <li><strong>The business cost of "we don't know" is high.</strong> When a customer complains that an AI-generated decision was wrong, or a regulator asks how you're using AI, or your insurer asks for evidence of AI controls, "we didn't keep track" is the worst answer.</li>
   </ol>
 
   <h2>What counts as "significant"</h2>
@@ -158,7 +158,7 @@
   <p>Two or more of those true: log it. Zero true: skip it. Over-logging is its own dysfunction.</p>
 
   <h2>The minimum useful log</h2>
-  <p>Nine fields, no more. Designed to be copied into a spreadsheet, a Notion page, a shared doc — whatever your team already uses. The whole point is that this should take 30 seconds and remain useful in six months.</p>
+ <p>Nine fields, no more. Designed to be copied into a spreadsheet, a Notion page, a shared doc, whatever your team already uses. The whole point is that this should take 30 seconds and remain useful in six months.</p>
 
   <div class="callout note">
     <span class="callout-icon">i</span>
@@ -171,8 +171,8 @@
         <li><strong>Task.</strong> One sentence. ("Drafted reply to customer complaint about late delivery.")</li>
         <li><strong>Inputs.</strong> What kind of data was in the prompt, not the data itself. ("Customer's order history, summarised; no names or contact details.")</li>
         <li><strong>What the AI produced.</strong> One sentence. ("Three reply drafts, varying in tone.")</li>
-        <li><strong>What you did with it.</strong> ("Picked option 2, edited the apology, removed the offer of a refund — added 'we'll investigate' instead.")</li>
-        <li><strong>Who else reviewed it.</strong> If anyone. ("Sent. No further review — within normal authority for me.")</li>
+    <li><strong>What you did with it.</strong> ("Picked option 2, edited the apology, removed the offer of a refund, added 'we'll investigate' instead.")</li>
+    <li><strong>Who else reviewed it.</strong> If anyone. ("Sent. No further review, within normal authority for me.")</li>
         <li><strong>Outcome / status.</strong> What happened to the output. ("Used", "Rejected", "Escalated", "Further review required".) This becomes useful evidence during audits and annual reviews.</li>
       </ol>
     </div>
@@ -182,16 +182,16 @@
 
   <h2>What you don't need to do</h2>
   <p>Logging isn't a transcript. You don't need to keep every prompt, every response, every conversation. You don't need to capture screenshots. You don't need to record what other people in your team did with their AI tools (that's their log, not yours).</p>
-  <p>The goal is "if asked, could I describe what happened?" — not "if asked, could I replay it exactly?".</p>
+ <p>The goal is "if asked, could I describe what happened?", not "if asked, could I replay it exactly?".</p>
 
   <hr class="section-divider" />
 
   <h2>Automated decisions and transparency (GDPR Article 22)</h2>
   <p>GDPR gives individuals a right not to be subject to a decision "based solely on automated processing... which produces legal effects concerning him or her or similarly significantly affects him or her". And when such decisions <em>are</em> made, the person has the right to "meaningful information about the logic involved".</p>
-  <p>"Solely automated" is the key phrase. If a human meaningfully reviews the AI's output and is empowered to override it (Module 5 — real oversight, not rubber-stamping), the decision isn't "solely automated" and Article 22 doesn't bite in its strongest form. But transparency and accountability obligations may still apply depending on the circumstances.</p>
+ <p>"Solely automated" is the key phrase. If a human meaningfully reviews the AI's output and is empowered to override it (Module 5, real oversight, not rubber-stamping), the decision isn't "solely automated" and Article 22 doesn't bite in its strongest form. But transparency and accountability obligations may still apply depending on the circumstances.</p>
   <p>In practice, for an SMB, this means:</p>
   <ul>
-    <li>If a customer is told no, a candidate is rejected, an employee is disciplined, a price is set, or a service is denied — and AI helped shape that — be prepared to explain the AI's role if asked.</li>
+  <li>If a customer is told no, a candidate is rejected, an employee is disciplined, a price is set, or a service is denied, and AI helped shape that, be prepared to explain the AI's role if asked.</li>
     <li>"Our AI tool recommended this and we accepted it without thinking" is the answer that gets you in trouble. "We used AI to summarise the application; a human then read the summary, the application, and decided" is the answer that does not.</li>
   </ul>
 
@@ -199,20 +199,20 @@
     <span class="callout-icon">!</span>
     <div>
       <div class="callout-title">Beware "the AI decided"</div>
-      <p>It's tempting to deflect difficult decisions by blaming the AI. Legally, this is exactly backwards: deferring to AI on regulated decisions <em>increases</em> liability, because Article 22 specifically targets automated decisions. Saying "the AI flagged this candidate as low-fit, so we didn't interview them" is admitting to the kind of decision the law most carefully restricts. Saying "we read the application, considered the AI's summary, and chose not to progress" is doing the same work more defensibly. Accountability for the decision remains with the organisation and the decision-maker — never with the AI system.</p>
+   <p>It's tempting to deflect difficult decisions by blaming the AI. Legally, this is exactly backwards: deferring to AI on regulated decisions <em>increases</em> liability, because Article 22 specifically targets automated decisions. Saying "the AI flagged this candidate as low-fit, so we didn't interview them" is admitting to the kind of decision the law most carefully restricts. Saying "we read the application, considered the AI's summary, and chose not to progress" is doing the same work more defensibly. Accountability for the decision remains with the organisation and the decision-maker, never with the AI system.</p>
     </div>
   </div>
 
   <h2>Logging vs. surveillance</h2>
-  <p>Logging your <em>own</em> AI use, as in the nine-field row above, is good practice and protective of you. Your employer logging <em>your</em> AI use without your knowledge or a clear policy is a different thing — it's employee monitoring, and it has its own legal framework.</p>
-  <p>For employers reading this: monitoring of employees' AI use needs the same things any monitoring needs — a lawful basis, transparency to staff, proportionality, and (usually) consultation with employee representatives where they exist. "We installed it without telling people" doesn't fly under GDPR or under employment law in most EU jurisdictions.</p>
+ <p>Logging your <em>own</em> AI use, as in the nine-field row above, is good practice and protective of you. Your employer logging <em>your</em> AI use without your knowledge or a clear policy is a different thing, it's employee monitoring, and it has its own legal framework.</p>
+ <p>For employers reading this: monitoring of employees' AI use needs the same things any monitoring needs, a lawful basis, transparency to staff, proportionality, and (usually) consultation with employee representatives where they exist. "We installed it without telling people" doesn't fly under GDPR or under employment law in most EU jurisdictions.</p>
   <p>The healthy pattern: AI tool use is logged at the tool level (in the admin console) for security and compliance purposes; employees know this; the logs aren't used for performance scoring; and there's a clear policy.</p>
 
   <div class="callout note">
     <span class="callout-icon">i</span>
     <div>
       <div class="callout-title">Governance insight: logging is for accountability, not monitoring</div>
-      <p>The purpose of logging should be accountability, traceability and continuous improvement — not employee performance monitoring. Where AI use is recorded in a Records of Processing Activities (RoPA), that record exists to evidence lawful, overseen processing, not to score individuals. Keep the two purposes clearly separate in policy and in practice.</p>
+   <p>The purpose of logging should be accountability, traceability and continuous improvement, not employee performance monitoring. Where AI use is recorded in a Records of Processing Activities (RoPA), that record exists to evidence lawful, overseen processing, not to score individuals. Keep the two purposes clearly separate in policy and in practice.</p>
     </div>
   </div>
 
@@ -224,7 +224,7 @@
     <li>Are there categories of use we should formalise as policy?</li>
     <li>Are there categories we should stop doing?</li>
   </ul>
-  <p>This is exactly the kind of evidence ISO 42001 expects, but it's also genuinely useful as a management exercise. Most small businesses, when they do this, discover their AI use is concentrated in two or three task types — which makes choosing the right enterprise tool dramatically easier.</p>
+ <p>This is exactly the kind of evidence ISO 42001 expects, but it's also genuinely useful as a management exercise. Most small businesses, when they do this, discover their AI use is concentrated in two or three task types, which makes choosing the right enterprise tool dramatically easier.</p>
 
   <div class="callout do">
     <span class="callout-icon">✓</span>
@@ -238,7 +238,7 @@
     <span class="callout-icon">§</span>
     <div>
       <div class="callout-title">Where the standards land</div>
-      <p><strong>GDPR Article 22</strong>: rights related to automated decision-making. <strong>Article 13–14</strong>: information to be provided to data subjects, including "the existence of automated decision-making" and "meaningful information about the logic involved". <strong>Article 30</strong>: records of processing activities (RoPA) — for larger businesses, AI uses belong in this register. <strong>EU AI Act Article 12</strong>: high-risk AI systems must keep automated logs. <strong>Article 26(5–6)</strong>: deployers must retain logs and inform affected persons. <strong>ISO/IEC 42001:2023 Clause 7.5</strong>: documented information; <strong>Annex A.9.1</strong>: monitoring AI system performance. <strong>ISO/IEC 27001:2022 Annex A.8.15</strong>: logging.</p>
+   <p><strong>GDPR Article 22</strong>: rights related to automated decision-making. <strong>Article 13–14</strong>: information to be provided to data subjects, including "the existence of automated decision-making" and "meaningful information about the logic involved". <strong>Article 30</strong>: records of processing activities (RoPA), for larger businesses, AI uses belong in this register. <strong>EU AI Act Article 12</strong>: high-risk AI systems must keep automated logs. <strong>Article 26(5–6)</strong>: deployers must retain logs and inform affected persons. <strong>ISO/IEC 42001:2023 Clause 7.5</strong>: documented information; <strong>Annex A.9.1</strong>: monitoring AI system performance. <strong>ISO/IEC 27001:2022 Annex A.8.15</strong>: logging.</p>
     </div>
   </div>
 
@@ -253,7 +253,7 @@
     </ol>
     <details class="quiz-reveal">
       <summary class="quiz-btn ghost">Show answer</summary>
-      <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>C — Humans remain accountable for AI-assisted business activity.</p>
+   <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>C, Humans remain accountable for AI-assisted business activity.</p>
     </details>
   </section>
 
@@ -280,6 +280,7 @@
 <footer class="site-foot">
   <span>AI Safe@Work · Module 09</span>
   <span class="foot-right">
+    <a href="templates/">Templates</a>
     <a href="course.html">All modules</a>
     <a href="portal/login.html">Partner login</a>
       <a href="privacy.html">Privacy</a>

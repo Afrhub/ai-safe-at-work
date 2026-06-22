@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#060608" />
 <meta name="color-scheme" content="dark light" />
 <script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
-<script>/* ponytail: client-side course gate — content is free not secret; this is the login funnel, not security. Expired-but-present token still passes (fine for a free course). */try{if(!localStorage.getItem("sb-hanjrsslhnuauaysbhun-auth-token"))location.replace("/portal/login.html?next="+encodeURIComponent(location.pathname));}catch(e){}</script>
+<script>/* ponytail: client-side course gate, content is free not secret; this is the login funnel, not security. Expired-but-present token still passes (fine for a free course). */try{if(!localStorage.getItem("sb-hanjrsslhnuauaysbhun-auth-token"))location.replace("/portal/login.html?next="+encodeURIComponent(location.pathname));}catch(e){}</script>
 <title>Module 10 · When something goes wrong — AI Safe@Work</title>
 <meta name="description" content="Incident response in plain English. How to escalate. What to write to your manager or DPO. Preserving evidence. The potential 72-hour breach notification requirement." />
 <meta property="og:type" content="article" />
@@ -102,7 +102,7 @@
   <h1 class="page-title">When something goes <em>wrong</em>.</h1>
   <p class="lede">No matter how careful, sometimes it happens. What matters is the first hour after you notice. This module walks that hour, in order, by category.</p>
 
-  <figure class="module-banner" role="img" aria-label="Banner: incident flow — an alert, do not delete the evidence, tell your team, and a clock because 72-hour reporting windows may be running.">
+ <figure class="module-banner" role="img" aria-label="Banner: incident flow, an alert, do not delete the evidence, tell your team, and a clock because 72-hour reporting windows may be running.">
     <svg viewBox="0 0 760 132" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <text x="22" y="24" font-family='Atkinson Hyperlegible Mono, monospace' letter-spacing='1.5' font-size="9" fill="rgba(201,212,227,0.40)">FIG. 10</text>
       <text x="738" y="24" text-anchor="end" font-family='Atkinson Hyperlegible Mono, monospace' letter-spacing='1.5' font-size="9" fill="rgba(201,212,227,0.40)">THE FIRST HOUR</text>
@@ -172,29 +172,29 @@
   <ol>
     <li><strong>Stop the bleeding, if you can do it safely.</strong> Pause whatever process is currently sending more data, taking more actions, or sending more money. Don't yet "fix" anything, just stop adding to the problem.</li>
     <li><strong>Don't delete the evidence.</strong> The reflex to delete the chat, the email, the file is understandable. Don't. Investigators will need it.</li>
-    <li><strong>Tell someone.</strong> Your manager and/or whoever covers IT or security. The first sentence is enough: "I think we have an AI-related incident — can we talk in five minutes?" You're not asking for permission. You're not confessing. You're flagging.</li>
+  <li><strong>Tell someone.</strong> Your manager and/or whoever covers IT or security. The first sentence is enough: "I think we have an AI-related incident, can we talk in five minutes?" You're not asking for permission. You're not confessing. You're flagging.</li>
     <li><strong>Write down what happened, while it's fresh.</strong> Five lines, plain language, no spin. You'll thank yourself two days from now.</li>
   </ol>
 
-  <h2>Category 1 — data leak</h2>
+ <h2>Category 1, data leak</h2>
 
   <h3>If the data is personal data of EU residents</h3>
-  <p>This may be a personal data breach under GDPR. Article 33 requires the controller (usually the business, not you personally) to notify the supervisory authority — ICO in the UK, CNIL in France, etc. — within <strong>72 hours of becoming aware</strong>, where the breach is likely to result in a risk to the rights and freedoms of natural persons.</p>
-  <p>"Becoming aware" is from the moment the business — not the regulator — has a reasonable degree of certainty that a breach has occurred. The clock starts then. The 72-hour notification window runs continuously, including weekends and holidays.</p>
+ <p>This may be a personal data breach under GDPR. Article 33 requires the controller (usually the business, not you personally) to notify the supervisory authority, ICO in the UK, CNIL in France, etc., within <strong>72 hours of becoming aware</strong>, where the breach is likely to result in a risk to the rights and freedoms of natural persons.</p>
+ <p>"Becoming aware" is from the moment the business, not the regulator, has a reasonable degree of certainty that a breach has occurred. The clock starts then. The 72-hour notification window runs continuously, including weekends and holidays.</p>
   <p>You, the individual, are not the one notifying the regulator. Your DPO or your business's nominated person does that. But your speed of telling them is what makes that 72-hour clock survivable.</p>
 
   <div class="callout warn">
     <span class="callout-icon">!</span>
     <div>
       <div class="callout-title">"It might not be a breach" is not an excuse to wait</div>
-      <p>The breach-notification clock starts when the business has reasonable awareness, not when the business is certain. If you think there's a real possibility — escalate today. Your DPO has 72 hours to investigate and decide whether to notify; they can't use any of those hours if they don't know yet.</p>
+   <p>The breach-notification clock starts when the business has reasonable awareness, not when the business is certain. If you think there's a real possibility, escalate today. Your DPO has 72 hours to investigate and decide whether to notify; they can't use any of those hours if they don't know yet.</p>
     </div>
   </div>
 
   <h3>What to preserve</h3>
   <ul>
     <li>The original conversation with the AI tool, including timestamps. (Take a screenshot. Don't delete the chat history.)</li>
-    <li>What you pasted (the source document or query — keep it).</li>
+  <li>What you pasted (the source document or query, keep it).</li>
     <li>Any output the AI produced.</li>
     <li>Your own recollection of when and why.</li>
   </ul>
@@ -206,19 +206,19 @@
     <li>Turn off any "use my data for training" setting that may have been on, if you haven't already.</li>
     <li>Export and then delete the conversation from your account.</li>
   </ul>
-  <p>Don't do these unilaterally before your DPO/manager has agreed — for breach-investigation purposes they may want to preserve the originals first, even though preservation in a third-party system is itself imperfect.</p>
+ <p>Don't do these unilaterally before your DPO/manager has agreed, for breach-investigation purposes they may want to preserve the originals first, even though preservation in a third-party system is itself imperfect.</p>
 
-  <h2>Category 2 — bad output acted upon</h2>
+ <h2>Category 2, bad output acted upon</h2>
   <p>The fix here depends on how far the bad output has travelled.</p>
   <ul>
     <li><strong>If it's still in your draft</strong>: easy. Fix it, learn, log it, move on.</li>
-    <li><strong>If it's been sent to one person</strong>: write a clear correction. Don't blame the AI; own it. ("I sent you an inaccurate citation in my message yesterday — the case I referenced doesn't exist. The correct authority is...")</li>
-    <li><strong>If it's been published or filed somewhere formal</strong>: this is a bigger correction. Tell your manager. Most professional settings have a "correction-of-record" procedure — court filings, regulatory submissions, formal client deliverables. Use it.</li>
+  <li><strong>If it's been sent to one person</strong>: write a clear correction. Don't blame the AI; own it. ("I sent you an inaccurate citation in my message yesterday, the case I referenced doesn't exist. The correct authority is...")</li>
+  <li><strong>If it's been published or filed somewhere formal</strong>: this is a bigger correction. Tell your manager. Most professional settings have a "correction-of-record" procedure, court filings, regulatory submissions, formal client deliverables. Use it.</li>
     <li><strong>If a decision was made on the basis of bad output</strong>: depending on what kind of decision, the affected person may have a right to ask for it to be reconsidered (Module 9). Be prepared to reconsider it without the AI's input.</li>
-    <li><strong>Assess whether any downstream decisions, reports or communications were influenced by the inaccurate output.</strong> One wrong output often feeds others — a flawed figure copied into a report, a bad summary forwarded onward. Trace where it went.</li>
+  <li><strong>Assess whether any downstream decisions, reports or communications were influenced by the inaccurate output.</strong> One wrong output often feeds others, a flawed figure copied into a report, a bad summary forwarded onward. Trace where it went.</li>
   </ul>
 
-  <h2>Category 3 — successful attack</h2>
+ <h2>Category 3, successful attack</h2>
   <p>Module 6 covered the prevention side. The response side:</p>
   <ol>
     <li><strong>If money moved</strong>: call the bank within minutes, not hours. UK Faster Payments and SEPA Instant transfers can sometimes be recalled in the first hour. After that, recovery rates drop sharply.</li>
@@ -226,14 +226,14 @@
     <li><strong>If software was installed</strong>: assume the device is compromised. Disconnect it from the network. Call IT.</li>
     <li><strong>Tell your manager and IT/security immediately.</strong> Same minute, not same day. Same attack is probably still active in the inbox of someone else in the business.</li>
     <li><strong>For UK businesses</strong>: report to Action Fraud (0300 123 2040) and consider reporting to the NCSC. For EU businesses: report to your national police cybercrime unit and your supervisory data-protection authority if personal data was involved.</li>
-    <li><strong>Follow your existing cyber incident response process where one exists.</strong> An AI-related attack is still a cyber incident — use the runbook, contacts and escalation path you already have rather than inventing a separate AI-only process.</li>
+  <li><strong>Follow your existing cyber incident response process where one exists.</strong> An AI-related attack is still a cyber incident, use the runbook, contacts and escalation path you already have rather than inventing a separate AI-only process.</li>
   </ol>
 
-  <h2>Category 4 — vendor incident</h2>
+ <h2>Category 4, vendor incident</h2>
   <p>The vendor will (or should) publish a notification. Your job is:</p>
   <ul>
-    <li>Read what they actually say about the incident. Don't rely on the press summary — read the vendor's status page or incident report.</li>
-    <li>Identify what your business had with them — what kinds of data, in which workspace, at which time.</li>
+  <li>Read what they actually say about the incident. Don't rely on the press summary, read the vendor's status page or incident report.</li>
+  <li>Identify what your business had with them, what kinds of data, in which workspace, at which time.</li>
     <li>If personal data was involved, this is now a Category 1 problem in disguise: your business may itself have a notification obligation to its own customers.</li>
     <li>Treat the vendor's terms-change as a procurement event: if they've materially changed how they handle data, decide whether the relationship can continue.</li>
     <li>As part of the response, review the Data Processing Agreement (DPA) and other contractual obligations, and reassess supplier risk in light of what happened.</li>
@@ -248,16 +248,16 @@
     <span class="callout-icon">✉</span>
     <div>
       <div class="callout-title">A clean incident note</div>
-      <p><strong>Subject:</strong> Possible AI-related incident — needs review today</p>
+   <p><strong>Subject:</strong> Possible AI-related incident, needs review today</p>
       <p>Hi [name],</p>
       <p>I want to flag a possible incident from this morning. Brief facts:</p>
       <ul>
-        <li>What happened: [one sentence — "I pasted a customer spreadsheet into ChatGPT to deduplicate it"]</li>
+    <li>What happened: [one sentence, "I pasted a customer spreadsheet into ChatGPT to deduplicate it"]</li>
         <li>When: [date and approximate time]</li>
-        <li>What data was involved: [type and rough volume — "approx 400 rows including names, emails, order dates"]</li>
-        <li>Which AI tool / tier: [be specific — "ChatGPT, free tier, my personal account"]</li>
+    <li>What data was involved: [type and rough volume, "approx 400 rows including names, emails, order dates"]</li>
+    <li>Which AI tool / tier: [be specific, "ChatGPT, free tier, my personal account"]</li>
         <li>What I've done so far: [stopped, screenshotted the chat, didn't delete, haven't told anyone else yet]</li>
-        <li>Current impact / known consequences: [what's affected right now — "data may have left our control; no customer contact yet; unsure if training was on"]</li>
+    <li>Current impact / known consequences: [what's affected right now, "data may have left our control; no customer contact yet; unsure if training was on"]</li>
       </ul>
       <p>I think this may need to be treated as a personal data breach. I'm available any time today to talk through what's next.</p>
       <p>Thanks,<br/>[Your name]</p>
@@ -267,7 +267,7 @@
   <h2>After the dust settles</h2>
   <p>Three things, none of them optional:</p>
   <ol>
-    <li><strong>A short written record</strong> — what happened, what was done, what was decided. Goes into your AI-use log (Module 9) and, if material, into the business's incident register.</li>
+  <li><strong>A short written record</strong>, what happened, what was done, what was decided. Goes into your AI-use log (Module 9) and, if material, into the business's incident register.</li>
     <li><strong>One thing that changes</strong>. Process, policy, tool tier, training, settings. The lesson has to land somewhere outside your own head.</li>
     <li><strong>No blame, no scapegoat</strong>. The point of incident response is to learn faster than the next incident happens. Cultures that punish the person who reports are cultures that don't get reports.</li>
   </ol>
@@ -276,7 +276,7 @@
     <span class="callout-icon">i</span>
     <div>
       <div class="callout-title">Governance insight: response, not blame</div>
-      <p>The goal of incident response is containment, evidence preservation, assessment and learning — not assigning blame. Organisations that treat incidents as failures to punish get fewer reports and slower responses; organisations that treat them as information get faster containment and real improvement.</p>
+   <p>The goal of incident response is containment, evidence preservation, assessment and learning, not assigning blame. Organisations that treat incidents as failures to punish get fewer reports and slower responses; organisations that treat them as information get faster containment and real improvement.</p>
     </div>
   </div>
 
@@ -299,7 +299,7 @@
     </ol>
     <details class="quiz-reveal">
       <summary class="quiz-btn ghost">Show answer</summary>
-      <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>B — It is usually safer to report concerns early.</p>
+   <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>B, It is usually safer to report concerns early.</p>
     </details>
   </section>
 
@@ -326,6 +326,7 @@
 <footer class="site-foot">
   <span>AI Safe@Work · Module 10</span>
   <span class="foot-right">
+    <a href="templates/">Templates</a>
     <a href="course.html">All modules</a>
     <a href="portal/login.html">Partner login</a>
       <a href="privacy.html">Privacy</a>

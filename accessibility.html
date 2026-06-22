@@ -56,17 +56,17 @@
   <p class="lede">We target WCAG 2.2 Level AA on every page. The site is built static and text-first, with full <code>prefers-reduced-motion</code> support and a clean print path. Something broken for you? The complaints route is on <a href="complaints.html">this page</a>.</p>
 
   <h2>Conformance status</h2>
-  <p>Self-assessed as <strong>partially conformant</strong> with WCAG 2.2 Level AA as of 2026-06-03. First-pass internal audit completed 2026-06-03 — three Level A / AA fails fixed (skip-to-content link, focus-visible styles, body-text contrast ratio). Eight items deferred to a manual + assistive-technology pass scheduled for 2026-09. A third-party audit will follow once the next-quarter manual pass is closed.</p>
+ <p>Self-assessed as <strong>partially conformant</strong> with WCAG 2.2 Level AA as of 2026-06-03. First-pass internal audit completed 2026-06-03, three Level A / AA fails fixed (skip-to-content link, focus-visible styles, body-text contrast ratio). Eight items deferred to a manual + assistive-technology pass scheduled for 2026-09. A third-party audit will follow once the next-quarter manual pass is closed.</p>
   <p>Audit record: <a href="https://github.com/Afrhub/ai-safe-at-work/blob/main/.audit/accessibility/wcag-audit-2026-06-03.md" class="accent">wcag-audit-2026-06-03.md</a> on GitHub.</p>
 
   <h2>What works well</h2>
   <ul>
-    <li>Semantic HTML throughout — proper heading hierarchy, landmark elements, lists where lists are needed.</li>
+  <li>Semantic HTML throughout, proper heading hierarchy, landmark elements, lists where lists are needed.</li>
     <li>Sufficient colour contrast on body text, headings, and links against the dark background.</li>
     <li>Keyboard-operable: every interactive element can be reached and activated without a mouse.</li>
     <li>No autoplay video, no auto-advancing carousels, no time limits.</li>
-    <li>Full <code>prefers-reduced-motion: reduce</code> respect — the cinematic background and scroll reveals are switched off automatically for users with that preference.</li>
-    <li>Print stylesheet — modules can be printed cleanly; the 60-second checklist is designed for print.</li>
+  <li>Full <code>prefers-reduced-motion: reduce</code> respect, the cinematic background and scroll reveals are switched off automatically for users with that preference.</li>
+  <li>Print stylesheet, modules can be printed cleanly; the 60-second checklist is designed for print.</li>
     <li>No login, no forms, no captcha to navigate.</li>
     <li>Mobile-first responsive layout; supports orientation changes and pinch zoom.</li>
     <li>No tracking cookies, no third-party scripts beyond Google Fonts.</li>
@@ -74,18 +74,18 @@
 
   <h2>Resolved 2026-06-03 (first-pass audit)</h2>
   <ul>
-    <li><strong>Skip-to-content link</strong> — added on every page. Press <kbd>Tab</kbd> from the page top to focus it; <kbd>Enter</kbd> jumps to the main content landmark.</li>
-    <li><strong>Focus styles</strong> — custom high-contrast amber outline on every interactive element via <code>:focus-visible</code>. Mouse-clicks don't trigger it; keyboard users always see it.</li>
-    <li><strong>Body-text contrast</strong> — the <code>--text3</code> caption / hint colour was bumped to deliver ≥ 6.7:1 contrast against the dark background (WCAG AA needs 4.5:1 for normal text).</li>
+  <li><strong>Skip-to-content link</strong>, added on every page. Press <kbd>Tab</kbd> from the page top to focus it; <kbd>Enter</kbd> jumps to the main content landmark.</li>
+  <li><strong>Focus styles</strong>, custom high-contrast amber outline on every interactive element via <code>:focus-visible</code>. Mouse-clicks don't trigger it; keyboard users always see it.</li>
+  <li><strong>Body-text contrast</strong>, the <code>--text3</code> caption / hint colour was bumped to deliver ≥ 6.7:1 contrast against the dark background (WCAG AA needs 4.5:1 for normal text).</li>
   </ul>
 
   <h2>Known issues (deferred to next-quarter manual + AT pass)</h2>
   <ul>
-    <li><strong>Manual screen-reader pass</strong> — internal NVDA + VoiceOver pass scheduled for 2026-09. A third-party AT audit follows once internal findings are closed.</li>
-    <li><strong>Cinematic background</strong> — the aurora gradient layer adds subtle visual motion. Users on <code>prefers-reduced-motion: reduce</code> get a static version; we may add a manual toggle for users who don't set the OS preference but find it distracting.</li>
-    <li><strong>Touch target sizing</strong> — WCAG 2.2 SC 2.5.5 (Target Size Minimum) needs per-viewport measurement, not static review. Re-evaluated next quarter.</li>
-    <li><strong>Focus-not-obscured</strong> — WCAG 2.2 SC 2.4.11 against the sticky topbar. Needs interactive scroll testing; deferred to next pass.</li>
-    <li><strong>Some module text uses long sentences</strong> in places where the meaning depends on nuance. We accept this trade-off — readability for an adult professional audience over Hemingway-short sentences — but acknowledge it raises cognitive load for some readers.</li>
+  <li><strong>Manual screen-reader pass</strong>, internal NVDA + VoiceOver pass scheduled for 2026-09. A third-party AT audit follows once internal findings are closed.</li>
+  <li><strong>Cinematic background</strong>, the aurora gradient layer adds subtle visual motion. Users on <code>prefers-reduced-motion: reduce</code> get a static version; we may add a manual toggle for users who don't set the OS preference but find it distracting.</li>
+  <li><strong>Touch target sizing</strong>, WCAG 2.2 SC 2.5.5 (Target Size Minimum) needs per-viewport measurement, not static review. Re-evaluated next quarter.</li>
+  <li><strong>Focus-not-obscured</strong>, WCAG 2.2 SC 2.4.11 against the sticky topbar. Needs interactive scroll testing; deferred to next pass.</li>
+  <li><strong>Some module text uses long sentences</strong> in places where the meaning depends on nuance. We accept this trade-off, readability for an adult professional audience over Hemingway-short sentences, but acknowledge it raises cognitive load for some readers.</li>
     <li><strong>No alternative formats</strong> currently offered (audio, summarised plain-English version). On the roadmap.</li>
   </ul>
 
@@ -93,7 +93,7 @@
   <p>Designed and tested-by-developer with screen readers in mind. A third-party screen-reader audit is part of the planned external audit. If you use NVDA, JAWS, VoiceOver, or TalkBack and encounter a barrier, please report it via the complaints route.</p>
 
   <h2>How to report a barrier</h2>
-  <p>If something on this site doesn't work for your assistive technology, your device, or your situation — please tell us. See the <a href="complaints.html" class="accent">complaints procedure</a>. We respond within five working days.</p>
+ <p>If something on this site doesn't work for your assistive technology, your device, or your situation, please tell us. See the <a href="complaints.html" class="accent">complaints procedure</a>. We respond within five working days.</p>
 
   <h2>Enforcement</h2>
   <p>EU residents have the right to raise an accessibility complaint with the relevant national enforcement body. We will provide contact details on request, and we aim to resolve issues directly first.</p>
@@ -105,6 +105,7 @@
 <footer class="site-foot">
   <span>AI Safe@Work · Accessibility statement · v2026.06</span>
   <span class="foot-right">
+    <a href="templates/">Templates</a>
     <a href="course.html">All modules</a>
     <a href="standards-map.html">Standards Map</a>
     <a href="complaints.html">Complaints</a>

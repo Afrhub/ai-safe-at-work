@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#060608" />
 <meta name="color-scheme" content="dark light" />
 <script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
-<script>/* ponytail: client-side course gate — content is free not secret; this is the login funnel, not security. Expired-but-present token still passes (fine for a free course). */try{if(!localStorage.getItem("sb-hanjrsslhnuauaysbhun-auth-token"))location.replace("/portal/login.html?next="+encodeURIComponent(location.pathname));}catch(e){}</script>
+<script>/* ponytail: client-side course gate, content is free not secret; this is the login funnel, not security. Expired-but-present token still passes (fine for a free course). */try{if(!localStorage.getItem("sb-hanjrsslhnuauaysbhun-auth-token"))location.replace("/portal/login.html?next="+encodeURIComponent(location.pathname));}catch(e){}</script>
 <title>Module 7 · Bias, fairness, and not embarrassing the business — AI Safe@Work</title>
 <meta name="description" content="AI in hiring decisions. Customer-facing chatbots. Marketing copy that excludes people. Where the EU AI Act starts to bite." />
 <meta property="og:type" content="article" />
@@ -154,23 +154,23 @@
 
   <h3>1. Decisions about people</h3>
   <p>Hiring, firing, promotion, pay, performance reviews, references. Anything where an AI's output influences whether a specific person gets something they applied for or asked for.</p>
-  <p>The European pattern is consistent: certain AI systems used in these categories may be classified as <strong>high-risk</strong> under the EU AI Act (Annex III, point 4), depending on how they are used. That triggers a long list of obligations on the deployer — your business — including risk assessment, logging, human oversight, instructions to staff, and registration where required.</p>
+ <p>The European pattern is consistent: certain AI systems used in these categories may be classified as <strong>high-risk</strong> under the EU AI Act (Annex III, point 4), depending on how they are used. That triggers a long list of obligations on the deployer, your business, including risk assessment, logging, human oversight, instructions to staff, and registration where required.</p>
   <p>In plain English: if you're a manager, recruiter, or HR person and you've been using ChatGPT to screen CVs or draft performance feedback, additional governance, oversight and compliance obligations may apply, even if you didn't realise they did.</p>
 
   <div class="callout warn">
     <span class="callout-icon">!</span>
     <div>
       <div class="callout-title">"It's just a draft" isn't a defence</div>
-      <p>The risk is not the use of AI itself to draft content, but allowing AI-generated recommendations to influence decisions without appropriate review and challenge. "I only use AI to draft the feedback — a human writes the final version" sounds like a mitigation, but in practice the final version is usually 80% the draft with minor edits. If the draft was biased in tone or substance, the final version is biased in tone or substance. The mitigation has to be more concrete than "I'll edit it".</p>
+   <p>The risk is not the use of AI itself to draft content, but allowing AI-generated recommendations to influence decisions without appropriate review and challenge. "I only use AI to draft the feedback, a human writes the final version" sounds like a mitigation, but in practice the final version is usually 80% the draft with minor edits. If the draft was biased in tone or substance, the final version is biased in tone or substance. The mitigation has to be more concrete than "I'll edit it".</p>
     </div>
   </div>
 
   <h3>2. Public-facing or customer-facing content</h3>
   <p>Marketing copy, social media posts, customer-service chatbots, blog articles, product descriptions, autoresponders, anything with the company name on it.</p>
-  <p>The risk here is reputational rather than regulatory, but it lands faster: a screenshot of a customer-service chatbot saying something offensive can be on social media before you've finished your coffee. AI-generated marketing copy that excludes a major customer group — say, by defaulting to assumptions about gender, family structure, age, ability, or country — is a complaint, a refund, and sometimes a viral pile-on.</p>
+ <p>The risk here is reputational rather than regulatory, but it lands faster: a screenshot of a customer-service chatbot saying something offensive can be on social media before you've finished your coffee. AI-generated marketing copy that excludes a major customer group, say, by defaulting to assumptions about gender, family structure, age, ability, or country, is a complaint, a refund, and sometimes a viral pile-on.</p>
 
   <h3>3. Decisions that affect access to services</h3>
-  <p>Loans, insurance, education places, healthcare triage, fraud scoring, immigration applications, social benefits. These are the EU AI Act's other big high-risk categories. Most small businesses don't touch them directly — but you may be the procurement person evaluating AI vendors, the operations person who configures one, or the finance person approving the investment. The decisions to use these systems carefully are made by people just like you.</p>
+ <p>Loans, insurance, education places, healthcare triage, fraud scoring, immigration applications, social benefits. These are the EU AI Act's other big high-risk categories. Most small businesses don't touch them directly, but you may be the procurement person evaluating AI vendors, the operations person who configures one, or the finance person approving the investment. The decisions to use these systems carefully are made by people just like you.</p>
 
   <hr class="section-divider" />
 
@@ -180,7 +180,7 @@
   <p>AI-generated job descriptions sometimes default to masculine-coded language ("dominant", "competitive", "rockstar", "ninja") which is well-evidenced to reduce female application rates. AI-generated examples and case studies tend to default to male protagonists. AI-generated translations into gendered languages (French, German, Spanish) sometimes default to masculine forms even when the source was neutral.</p>
 
   <h3>Cultural defaults</h3>
-  <p>Models trained on English-language internet text default to American cultural references, American legal context, American holidays, American spellings. A model writing customer copy for a French SMB will, unless told otherwise, produce something that sounds slightly off — pricing in dollars, references to Thanksgiving, "fall" instead of "autumn".</p>
+ <p>Models trained on English-language internet text default to American cultural references, American legal context, American holidays, American spellings. A model writing customer copy for a French SMB will, unless told otherwise, produce something that sounds slightly off, pricing in dollars, references to Thanksgiving, "fall" instead of "autumn".</p>
 
   <h3>Stereotyped imagery</h3>
   <p>AI image generators, asked for "a CEO", over-produce one demographic. Asked for "a nurse", they over-produce another. Asked for "a person from [country]", they often produce caricatures. Image generation models are improving, but still require human review for representation, diversity and appropriateness. If you use AI-generated imagery in any public-facing material, you have to actively curate the output, not just take the first plausible image.</p>
@@ -189,7 +189,7 @@
   <p>AI-generated copy sometimes assumes a default user with no accessibility needs, no caring responsibilities, no minority identity. Forms drafted with AI sometimes lack the categories ("prefer not to say", "other", "non-binary") that real users need. AI-generated user research scripts sometimes ask questions that exclude or pathologise certain experiences.</p>
 
   <h3>Confident wrongness about underrepresented topics</h3>
-  <p>Models trained on the public web know less about communities, languages, regions, and identities that have less representation in that data. The output for "a wedding ceremony" defaults heavily to one tradition; for "a successful entrepreneur", to one demographic. The error doesn't always show up as overt offence — it shows up as a quiet exclusion in the framing.</p>
+ <p>Models trained on the public web know less about communities, languages, regions, and identities that have less representation in that data. The output for "a wedding ceremony" defaults heavily to one tradition; for "a successful entrepreneur", to one demographic. The error doesn't always show up as overt offence, it shows up as a quiet exclusion in the framing.</p>
 
   <h2>Practical checks</h2>
 
@@ -214,7 +214,7 @@
     <span class="callout-icon">§</span>
     <div>
       <div class="callout-title">Where the standards land</div>
-      <p><strong>EU AI Act Annex III</strong>: lists the categories of "high-risk" AI use. Most relevant for SMBs: employment-related decisions (point 4), education access (point 3), creditworthiness (point 5b), and access to essential services. <strong>Article 26</strong>: deployer obligations include monitoring for bias and instructing staff appropriately. <strong>Article 27</strong>: fundamental rights impact assessment, required for certain deployers of high-risk AI. <strong>ISO/IEC 42001:2023 Annex A.6.2</strong>: requirements for AI system design include fairness considerations. <strong>Annex A.7</strong>: data quality, including representativeness. <strong>GDPR Article 22</strong>: the data subject's right not to be subject to automated decision-making applies to certain automated decisions that produce legal or similarly significant effects on them — not all AI-assisted decisions — which means these specific AI-driven decisions require human involvement, transparency, and the right to contest.</p>
+   <p><strong>EU AI Act Annex III</strong>: lists the categories of "high-risk" AI use. Most relevant for SMBs: employment-related decisions (point 4), education access (point 3), creditworthiness (point 5b), and access to essential services. <strong>Article 26</strong>: deployer obligations include monitoring for bias and instructing staff appropriately. <strong>Article 27</strong>: fundamental rights impact assessment, required for certain deployers of high-risk AI. <strong>ISO/IEC 42001:2023 Annex A.6.2</strong>: requirements for AI system design include fairness considerations. <strong>Annex A.7</strong>: data quality, including representativeness. <strong>GDPR Article 22</strong>: the data subject's right not to be subject to automated decision-making applies to certain automated decisions that produce legal or similarly significant effects on them, not all AI-assisted decisions, which means these specific AI-driven decisions require human involvement, transparency, and the right to contest.</p>
     </div>
   </div>
 
@@ -222,7 +222,7 @@
     <span class="callout-icon">i</span>
     <div>
       <div class="callout-title">Governance insight: Bias management is not about perfection</div>
-      <p>Bias management is not about removing all bias from AI. It is about identifying potential sources of unfairness, applying appropriate controls and ensuring accountability for decisions. The goal is defensible, documented decision-making — not bias-free AI (which doesn't exist).</p>
+   <p>Bias management is not about removing all bias from AI. It is about identifying potential sources of unfairness, applying appropriate controls and ensuring accountability for decisions. The goal is defensible, documented decision-making, not bias-free AI (which doesn't exist).</p>
     </div>
   </div>
 
@@ -240,7 +240,7 @@
     </ol>
     <details class="quiz-reveal">
       <summary class="quiz-btn ghost">Show answer</summary>
-      <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>C — AI-generated content may still contain bias or inappropriate assumptions.</p>
+   <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>C, AI-generated content may still contain bias or inappropriate assumptions.</p>
     </details>
   </section>
 
@@ -266,6 +266,7 @@
 <footer class="site-foot">
   <span>AI Safe@Work · Module 07</span>
   <span class="foot-right">
+    <a href="templates/">Templates</a>
     <a href="course.html">All modules</a>
     <a href="portal/login.html">Partner login</a>
       <a href="privacy.html">Privacy</a>

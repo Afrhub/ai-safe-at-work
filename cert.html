@@ -8,7 +8,7 @@
 <script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
 <meta name="robots" content="noindex, nofollow" />
 <title>Module certificate — AI Safe@Work</title>
-<meta name="description" content="Personal printable certificate evidencing AI Safe@Work module completion — generated locally, stored locally, your record only." />
+<meta name="description" content="Personal printable certificate evidencing AI Safe@Work module completion, generated locally, stored locally, your record only." />
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
@@ -291,6 +291,7 @@
 <footer class="site-foot">
   <span>AI Safe@Work · personal training record</span>
   <span class="foot-right">
+    <a href="templates/">Templates</a>
     <a href="course.html">All modules</a>
     <a href="portal/login.html">Partner login</a>
       <a href="privacy.html">Privacy</a>
@@ -358,7 +359,7 @@
       <div class="cert-intro">
         <h1>Certificate <em>register</em>.</h1>
         <p>Each module issues a printable certificate when you pass its knowledge check.
-           Results live in this browser only — nothing is sent anywhere. ${passedCount} of 11 earned on this device.</p>
+      Results live in this browser only, nothing is sent anywhere. ${passedCount} of 11 earned on this device.</p>
       </div>
       <div style="max-width:860px;margin:2rem auto 0;background:var(--plate);border:1px solid var(--border);
                   border-radius:3px;padding:1.2rem 1.4rem;box-shadow:var(--shadow-card);">
@@ -366,7 +367,7 @@
                     text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem;">The 11 modules</div>
         ${rows}
         <p style="margin:1.1rem 0 0.2rem;font-size:0.9rem;color:var(--text3);">
-          Pass mark is 8 of 10 on each knowledge check. Retake any quiz at any time — the certificate reissues with the new score.
+     Pass mark is 8 of 10 on each knowledge check. Retake any quiz at any time, the certificate reissues with the new score.
           <a href="course.html" style="color:var(--accent);">Browse all modules →</a>
         </p>
       </div>`;
@@ -396,7 +397,7 @@
   root.innerHTML = `
     <div class="cert-intro">
       <h1>Your <em>certificate</em>.</h1>
-      <p>Personal training record. Saved on this device only — printable for your file. Type your name below, then print or save as PDF.</p>
+   <p>Personal training record. Saved on this device only, printable for your file. Type your name below, then print or save as PDF.</p>
       <div class="cert-name-row">
         <label for="who">Your full name</label>
         <input id="who" type="text" placeholder="Your full name" autocomplete="name" value="${escapeHtml(name)}">
@@ -416,7 +417,7 @@
       <div class="cert-recipient" id="who-display">${escapeHtml(name) || 'Your name here'}</div>
 
       <p class="cert-module">
-        Has completed <strong>Module ${pad2(moduleNum)} — ${escapeHtml(MODULE_TITLES[moduleNum] || '')}</strong>
+    Has completed <strong>Module ${pad2(moduleNum)}, ${escapeHtml(MODULE_TITLES[moduleNum] || '')}</strong>
         with a score of <strong>${stored.score} of ${total}</strong>
         (pass mark ${stored.threshold || 8}).
       </p>

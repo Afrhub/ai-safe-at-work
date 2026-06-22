@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#060608" />
 <meta name="color-scheme" content="dark light" />
 <script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
-<script>/* ponytail: client-side course gate — content is free not secret; this is the login funnel, not security. Expired-but-present token still passes (fine for a free course). */try{if(!localStorage.getItem("sb-hanjrsslhnuauaysbhun-auth-token"))location.replace("/portal/login.html?next="+encodeURIComponent(location.pathname));}catch(e){}</script>
+<script>/* ponytail: client-side course gate, content is free not secret; this is the login funnel, not security. Expired-but-present token still passes (fine for a free course). */try{if(!localStorage.getItem("sb-hanjrsslhnuauaysbhun-auth-token"))location.replace("/portal/login.html?next="+encodeURIComponent(location.pathname));}catch(e){}</script>
 <title>Module 6 · AI-powered scams aimed at you — AI Safe@Work</title>
 <meta name="description" content="Phishing that no longer has typos. Deepfake voice and video. Business email compromise on steroids. How to verify identity when the message looks perfect." />
 <meta property="og:type" content="article" />
@@ -143,25 +143,25 @@
 
   <h2>The old playbook is dead</h2>
   <p>Until recently, phishing emails were detectable because they were written by people whose first language wasn't the target's, working at scale, with little context. Telltales were everywhere: "Dear Sir/Madam", odd punctuation, an urgent tone, a sender domain almost-but-not-quite-right.</p>
-  <p>Today, an attacker can feed a public LinkedIn profile, a few of the target's company emails (perhaps from a previous breach), and a goal into a language model, and produce a perfectly written, contextually appropriate message — referencing the target's recent project, in their boss's voice, with no grammar mistakes whatsoever.</p>
+ <p>Today, an attacker can feed a public LinkedIn profile, a few of the target's company emails (perhaps from a previous breach), and a goal into a language model, and produce a perfectly written, contextually appropriate message, referencing the target's recent project, in their boss's voice, with no grammar mistakes whatsoever.</p>
   <p>This is the current baseline, not a future risk. A significant and growing proportion of phishing attacks are now written, edited or enhanced using AI.</p>
 
   <h2>The four new attack patterns</h2>
 
   <h3>1. Spear-phishing 2.0</h3>
-  <p>A targeted email that references things only an insider would know — a recent client win, a leadership change, an open job role, a personal detail from your social media. The model used the public web as research material. The email reads as though your CFO actually wrote it.</p>
+ <p>A targeted email that references things only an insider would know, a recent client win, a leadership change, an open job role, a personal detail from your social media. The model used the public web as research material. The email reads as though your CFO actually wrote it.</p>
   <p><strong>What to look for:</strong> not typos, but <em>requests that don't match normal channels</em>. Your CFO doesn't usually email you about a wire transfer. Your IT lead doesn't usually email you to install a new piece of software. Your CEO doesn't usually email asking you to buy gift cards. The substance of the request is the red flag, not the writing.</p>
 
   <h3>2. Voice cloning</h3>
-  <p>A 30-second sample of someone's voice — from a podcast, a webinar, a LinkedIn video, a voicemail — is enough for current tools to produce a convincing clone. The clone can read any text in the target's voice. Combine this with caller ID spoofing and you have a phone call from "your boss" asking you to do something urgent.</p>
-  <p><strong>What to look for:</strong> any phone-based request that involves money, credentials, or unusual access, and that pushes urgency. Hang up. Call back on a known number — not a number from the caller's call log.</p>
+ <p>A 30-second sample of someone's voice, from a podcast, a webinar, a LinkedIn video, a voicemail, is enough for current tools to produce a convincing clone. The clone can read any text in the target's voice. Combine this with caller ID spoofing and you have a phone call from "your boss" asking you to do something urgent.</p>
+ <p><strong>What to look for:</strong> any phone-based request that involves money, credentials, or unusual access, and that pushes urgency. Hang up. Call back on a known number, not a number from the caller's call log.</p>
 
   <h3>3. Video deepfakes</h3>
   <p>Live video deepfakes have moved from "uncanny valley" to "increasingly difficult to distinguish from real" within two years. The Arup case (Module 1) is the headline example: a clerk joined a video call with four senior leaders, all generated. The same technology is increasingly used for "video voicemails" from impersonated CEOs and for impostor candidates in remote job interviews.</p>
   <p><strong>What to look for:</strong> requests over video that bypass normal authorisation flows. A meeting that ends with "approve this now, I'll explain later" should never be acted on without a second channel of verification.</p>
 
   <h3>4. AI-driven social engineering</h3>
-  <p>An attacker chats with you over LinkedIn, WhatsApp, or email — possibly for weeks — building rapport, before steering toward a request. The attacker doesn't have to be a skilled social engineer because the AI is doing the cognitive work: maintaining the persona, remembering the previous conversations, sounding right.</p>
+ <p>An attacker chats with you over LinkedIn, WhatsApp, or email, possibly for weeks, building rapport, before steering toward a request. The attacker doesn't have to be a skilled social engineer because the AI is doing the cognitive work: maintaining the persona, remembering the previous conversations, sounding right.</p>
   <p><strong>What to look for:</strong> any new contact that progresses toward a financial, credential, or access ask. The relationship being more than a few weeks old doesn't make it real. Long-form rapport is now cheap.</p>
 
   <div class="callout warn">
@@ -176,7 +176,7 @@
     <span class="callout-icon">!</span>
     <div>
       <div class="callout-title">Romance scams have gone industrial</div>
-      <p>The same patterns are used in romance scams — "pig butchering" — that target individuals via dating apps. Multiple personas, AI-generated photos, AI-driven messages over weeks, before steering to "investment opportunities". This is a personal-life risk that bleeds into work the moment the target uses a work device or work email to manage the relationship. Don't dismiss it as "not a business problem".</p>
+   <p>The same patterns are used in romance scams, "pig butchering", that target individuals via dating apps. Multiple personas, AI-generated photos, AI-driven messages over weeks, before steering to "investment opportunities". This is a personal-life risk that bleeds into work the moment the target uses a work device or work email to manage the relationship. Don't dismiss it as "not a business problem".</p>
     </div>
   </div>
 
@@ -186,7 +186,7 @@
   <p>The single most effective defence against the patterns above is also the simplest. For any unusual request involving money, credentials, contracts, or access:</p>
   <ol>
     <li>Don't act on it inside the channel that received it.</li>
-    <li>Look up the supposed sender in a <em>different</em> system (your internal directory, your phone's saved contact, the company website) — never the contact details in the message itself.</li>
+  <li>Look up the supposed sender in a <em>different</em> system (your internal directory, your phone's saved contact, the company website), never the contact details in the message itself.</li>
     <li>Call them. On video, if you can. Ask them about something only they would know.</li>
     <li>If they confirm, you're fine. If you can't reach them and the request is urgent, escalate to your manager, not to the requester.</li>
   </ol>
@@ -199,21 +199,21 @@
     </div>
     <div class="compare-cell bad">
       <h4>A request that should not</h4>
-      <p>"Don't tell anyone — this is confidential." "I'm in a meeting, just process it." A new bank account that wasn't in the original instruction. A counterparty you've never paid before. Pressure to bypass the usual checks "this once".</p>
+   <p>"Don't tell anyone, this is confidential." "I'm in a meeting, just process it." A new bank account that wasn't in the original instruction. A counterparty you've never paid before. Pressure to bypass the usual checks "this once".</p>
     </div>
   </div>
 
   <h2>Family code-words</h2>
-  <p>The same scams are used against individuals, especially older relatives — a phone call in a grandchild's cloned voice, in trouble, needing money fast. Some families now have a private code-word or phrase that anyone calling to ask for money must use first. It's worth a five-minute conversation with your family. It also works in a professional setting: a leadership team can quietly agree on a verification phrase for unusual instructions.</p>
+ <p>The same scams are used against individuals, especially older relatives, a phone call in a grandchild's cloned voice, in trouble, needing money fast. Some families now have a private code-word or phrase that anyone calling to ask for money must use first. It's worth a five-minute conversation with your family. It also works in a professional setting: a leadership team can quietly agree on a verification phrase for unusual instructions.</p>
 
   <h2>If you think you've been targeted</h2>
   <p>The first ten minutes matter, but panic doesn't help. The order:</p>
   <ol>
     <li><strong>Stop.</strong> Don't click anything else. Don't reply. Don't try to "test" the attacker.</li>
-    <li><strong>If you've moved money</strong>: call your bank immediately and report the transaction. Speed matters — some transfers can be reversed in the first hour, fewer in the first day.</li>
+  <li><strong>If you've moved money</strong>: call your bank immediately and report the transaction. Speed matters, some transfers can be reversed in the first hour, fewer in the first day.</li>
     <li><strong>If you've shared credentials</strong>: change them in the affected system. Then change anything else where you reused that password.</li>
     <li><strong>If you've installed something</strong>: disconnect the device from the network if you can do it safely (turn off Wi-Fi, unplug cable). Call IT.</li>
-    <li><strong>Tell someone.</strong> Your manager, IT, or security team. Not because you're in trouble — you're not, attackers fool experts every day — but because the same attack is probably trying to reach other people in the business right now, and your speed of reporting is what stops them.</li>
+  <li><strong>Tell someone.</strong> Your manager, IT, or security team. Not because you're in trouble, you're not, attackers fool experts every day, but because the same attack is probably trying to reach other people in the business right now, and your speed of reporting is what stops them.</li>
   </ol>
 
   <div class="callout note">
@@ -227,7 +227,7 @@
   <h2>Things that help, ahead of time</h2>
   <ul>
     <li><strong>Phishing-resistant multi-factor authentication.</strong> Hardware security keys (YubiKey, Titan), passkeys, or device-bound app-based MFA. SMS codes are now considered the weakest form of MFA and are increasingly bypassed.</li>
-    <li><strong>A password manager.</strong> Even just one. It enforces unique passwords per site automatically, and most refuse to autofill on lookalike domains — a built-in defence against phishing.</li>
+  <li><strong>A password manager.</strong> Even just one. It enforces unique passwords per site automatically, and most refuse to autofill on lookalike domains, a built-in defence against phishing.</li>
     <li><strong>The habit of pausing on urgency.</strong> "Why is this urgent?" is a question that costs nothing to ask, and attackers can't engineer a satisfying answer to it.</li>
     <li><strong>A reporting channel you actually know how to find.</strong> Your business's phishing report button, IT's email address, security's Slack channel. Find it now, before you need it.</li>
   </ul>
@@ -236,7 +236,7 @@
     <span class="callout-icon">§</span>
     <div>
       <div class="callout-title">Where the standards land</div>
-      <p><strong>GDPR Articles 32–34</strong>: security of processing, breach notification — a successful phishing attack often is a personal data breach, and organisations may have reporting obligations once they become aware of a personal data breach. <strong>ISO 27001:2022 Annex A.6.3</strong>: information security awareness, education and training — this module is the kind of awareness that control envisages. <strong>Annex A.8.5</strong>: secure authentication, including MFA. <strong>EU AI Act Article 50</strong>: transparency obligations apply in specific circumstances — for example, certain AI-generated audio, video and images may need to be marked. These obligations are about transparency and do not automatically prevent criminal misuse; an attacker will simply ignore them. Their value is that, over time, unmarked deepfakes become themselves evidence of bad faith.</p>
+   <p><strong>GDPR Articles 32–34</strong>: security of processing, breach notification, a successful phishing attack often is a personal data breach, and organisations may have reporting obligations once they become aware of a personal data breach. <strong>ISO 27001:2022 Annex A.6.3</strong>: information security awareness, education and training, this module is the kind of awareness that control envisages. <strong>Annex A.8.5</strong>: secure authentication, including MFA. <strong>EU AI Act Article 50</strong>: transparency obligations apply in specific circumstances, for example, certain AI-generated audio, video and images may need to be marked. These obligations are about transparency and do not automatically prevent criminal misuse; an attacker will simply ignore them. Their value is that, over time, unmarked deepfakes become themselves evidence of bad faith.</p>
     </div>
   </div>
 
@@ -244,7 +244,7 @@
     <span class="callout-icon">i</span>
     <div>
       <div class="callout-title">Governance insight: Social engineering remains primarily a human problem</div>
-      <p>AI increases the scale, quality and speed of attacks, but governance, awareness, verification processes and strong authentication remain the most effective controls. Technical defences alone — email filtering, MFA, security keys — are necessary but not sufficient. The human layer still decides whether to click, call back, or escalate.</p>
+   <p>AI increases the scale, quality and speed of attacks, but governance, awareness, verification processes and strong authentication remain the most effective controls. Technical defences alone, email filtering, MFA, security keys, are necessary but not sufficient. The human layer still decides whether to click, call back, or escalate.</p>
     </div>
   </div>
 
@@ -259,7 +259,7 @@
     </ol>
     <details class="quiz-reveal">
       <summary class="quiz-btn ghost">Show answer</summary>
-      <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>D — Verification and process are increasingly important in the AI era.</p>
+   <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>D, Verification and process are increasingly important in the AI era.</p>
     </details>
   </section>
 
@@ -286,6 +286,7 @@
 <footer class="site-foot">
   <span>AI Safe@Work · Module 06</span>
   <span class="foot-right">
+    <a href="templates/">Templates</a>
     <a href="course.html">All modules</a>
     <a href="portal/login.html">Partner login</a>
       <a href="privacy.html">Privacy</a>

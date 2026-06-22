@@ -69,7 +69,7 @@
 
 <main id="main">
   <p class="eyebrow">Security &amp; AI-crawler posture · v2026.05</p>
-  <h1 class="page-title">What we do to keep <em>your</em> data — and ours — safe.</h1>
+ <h1 class="page-title">What we do to keep <em>your</em> data, and ours, safe.</h1>
   <p class="lede">A short statement of what AI Safe@Work does at the edge, in the browser and in the audit pack to (a) protect customer data, (b) signal opt-out from AI model training and (c) keep the free course citable by the AI tools that link back to source. Hand it to a procurement team in five minutes.</p>
 
   <div class="callout standard">
@@ -81,9 +81,9 @@
   </div>
 
   <h2>Why we split AI crawlers into two classes</h2>
-  <p>Most vendor "AI bots" are actually two separate things under different user-agents. One ingests content for model training and gives nothing back. The other fetches at query time, cites the source, and drives a click. We treat them differently — same vendor or not.</p>
+ <p>Most vendor "AI bots" are actually two separate things under different user-agents. One ingests content for model training and gives nothing back. The other fetches at query time, cites the source, and drives a click. We treat them differently, same vendor or not.</p>
 
-  <h2>The classes — what we block, what we allow</h2>
+ <h2>The classes, what we block, what we allow</h2>
 
   <table class="bots-table">
     <thead>
@@ -102,17 +102,17 @@
       <tr><td>Microsoft</td><td>(none)</td><td><span class="ua">Bingbot</span></td><td><span class="pill allow">Allowed (search + Copilot citations)</span></td></tr>
       <tr><td>Apple</td><td><span class="ua">Applebot-Extended</span></td><td><span class="ua">Applebot</span></td><td><span class="pill block">AI training opt-out signalled</span> · <span class="pill allow">Search allowed</span></td></tr>
       <tr><td>Meta</td><td><span class="ua">Meta-ExternalAgent</span></td><td><span class="ua">Meta-ExternalFetcher</span> · <span class="ua">FacebookBot</span></td><td><span class="pill block">Training blocked</span> · <span class="pill allow">On-demand fetch + link-preview allowed</span></td></tr>
-      <tr><td>Common Crawl</td><td><span class="ua">CCBot</span></td><td>—</td><td><span class="pill block">Blocked</span> (feedstock for many downstream model trainers)</td></tr>
-      <tr><td>ByteDance / TikTok</td><td><span class="ua">Bytespider</span></td><td>—</td><td><span class="pill block">Blocked</span></td></tr>
-      <tr><td>Amazon</td><td><span class="ua">Amazonbot</span></td><td>—</td><td><span class="pill block">Blocked</span> (mixed; conservative)</td></tr>
+   <tr><td>Common Crawl</td><td><span class="ua">CCBot</span></td><td>, </td><td><span class="pill block">Blocked</span> (feedstock for many downstream model trainers)</td></tr>
+   <tr><td>ByteDance / TikTok</td><td><span class="ua">Bytespider</span></td><td>, </td><td><span class="pill block">Blocked</span></td></tr>
+   <tr><td>Amazon</td><td><span class="ua">Amazonbot</span></td><td>, </td><td><span class="pill block">Blocked</span> (mixed; conservative)</td></tr>
       <tr><td>Others (training)</td><td colspan="2"><span class="ua">cohere-ai</span> · <span class="ua">omgili</span> · <span class="ua">omgilibot</span> · <span class="ua">ImagesiftBot</span> · <span class="ua">YouBot</span> · <span class="ua">Diffbot</span> · <span class="ua">magpie-crawler</span> · <span class="ua">AI2Bot</span> · <span class="ua">Timpibot</span> · <span class="ua">PetalBot</span> · <span class="ua">Webzio-Extended</span></td><td><span class="pill block">Blocked</span></td></tr>
-      <tr><td>Social link-preview</td><td>—</td><td><span class="ua">Slackbot</span> · <span class="ua">Twitterbot</span> · <span class="ua">LinkedInBot</span> · <span class="ua">WhatsApp</span> · <span class="ua">TelegramBot</span> · <span class="ua">DiscordBot</span> · <span class="ua">FacebookExternalHit</span></td><td><span class="pill allow">Always allowed</span> (drive traffic, no training)</td></tr>
+   <tr><td>Social link-preview</td><td>, </td><td><span class="ua">Slackbot</span> · <span class="ua">Twitterbot</span> · <span class="ua">LinkedInBot</span> · <span class="ua">WhatsApp</span> · <span class="ua">TelegramBot</span> · <span class="ua">DiscordBot</span> · <span class="ua">FacebookExternalHit</span></td><td><span class="pill allow">Always allowed</span> (drive traffic, no training)</td></tr>
     </tbody>
   </table>
 
-  <p>For paid surfaces (when published), <strong>all</strong> classes are blocked — citation or training. Auth-wall is primary defence; everything else is layered.</p>
+ <p>For paid surfaces (when published), <strong>all</strong> classes are blocked, citation or training. Auth-wall is primary defence; everything else is layered.</p>
 
-  <h2>Verify it yourself — three URLs</h2>
+ <h2>Verify it yourself, three URLs</h2>
 
   <div class="proof-grid">
     <div class="proof-card">
@@ -132,37 +132,38 @@
     </div>
   </div>
 
-  <h2>Layered defence — six controls</h2>
+ <h2>Layered defence, six controls</h2>
 
   <ol>
-    <li><strong>robots.txt</strong> — honour-system but catches every well-behaved crawler. Training UAs blocked site-wide; citation UAs blocked on paid paths only.</li>
-    <li><strong>tdm-policy.json (TDMRep)</strong> — machine-readable EU CDSM Art 4 opt-out. Required for legal weight in EU.</li>
-    <li><strong>HTTP headers</strong> — <code>X-Robots-Tag: noai, noimageai, nosnippet</code> on every paid response (Bing + Adobe + others honour). Strict-Transport-Security, Content-Security-Policy, X-Content-Type-Options, Referrer-Policy, Permissions-Policy site-wide.</li>
-    <li><strong>Edge bot management</strong> — TLS / headless / behavioural fingerprinting on paid paths (catches UA spoofing that robots.txt cannot). Activates once paid surfaces ship.</li>
-    <li><strong>Auth-wall</strong> — per-account rate limits, session-behaviour anomaly detection, on every commercially-valuable surface.</li>
-    <li><strong>Honeypots + canary content</strong> — embedded tokens in paid exports and certificates; monthly web-search for canary strings to detect leaks.</li>
+  <li><strong>robots.txt</strong>, honour-system but catches every well-behaved crawler. Training UAs blocked site-wide; citation UAs blocked on paid paths only.</li>
+  <li><strong>tdm-policy.json (TDMRep)</strong>, machine-readable EU CDSM Art 4 opt-out. Required for legal weight in EU.</li>
+  <li><strong>HTTP headers</strong>, <code>X-Robots-Tag: noai, noimageai, nosnippet</code> on every paid response (Bing + Adobe + others honour). Strict-Transport-Security, Content-Security-Policy, X-Content-Type-Options, Referrer-Policy, Permissions-Policy site-wide.</li>
+  <li><strong>Edge bot management</strong>, TLS / headless / behavioural fingerprinting on paid paths (catches UA spoofing that robots.txt cannot). Activates once paid surfaces ship.</li>
+  <li><strong>Auth-wall</strong>, per-account rate limits, session-behaviour anomaly detection, on every commercially-valuable surface.</li>
+  <li><strong>Honeypots + canary content</strong>, embedded tokens in paid exports and certificates; monthly web-search for canary strings to detect leaks.</li>
   </ol>
 
   <h2>What we don't do</h2>
   <ul>
     <li>We don't track free-course readers. There's no analytics, no advertising pixels, no behavioural-tracking cookie.</li>
-    <li>We don't ingest learner content into AI training pipelines — ours or anyone else's.</li>
+  <li>We don't ingest learner content into AI training pipelines, ours or anyone else's.</li>
     <li>We don't block citation engines on the free course. The wedge depends on AI tools being able to cite our content back to readers with a link.</li>
-    <li>We don't promise crawler blocking against state-actor-grade scrapers — that's beyond any commercial-tier control.</li>
+  <li>We don't promise crawler blocking against state-actor-grade scrapers, that's beyond any commercial-tier control.</li>
   </ul>
 
   <h2>Procurement teams</h2>
-  <p>Hand this page (or the <a href="standards-map.html" class="accent">Standards Map</a>) to your DPO / compliance lead. If you need a vendor-questionnaire response file, the structure mirrors the <a href="templates/vendor-questionnaire.html" class="accent">AI vendor diligence questionnaire</a> we publish for use against other vendors — we hold ourselves to the same questions.</p>
+ <p>Hand this page (or the <a href="standards-map.html" class="accent">Standards Map</a>) to your DPO / compliance lead. If you need a vendor-questionnaire response file, the structure mirrors the <a href="templates/vendor-questionnaire.html" class="accent">AI vendor diligence questionnaire</a> we publish for use against other vendors, we hold ourselves to the same questions.</p>
 
   <h2>Review cadence</h2>
   <p>Posture re-walked quarterly per <a href="changelog.html" class="accent">changelog</a>. Vendor UA policies change; the classification table above is verified each quarter and updated if the line moves (e.g. if PerplexityBot starts training, it moves to the block-everywhere class). Verification record: <code>.audit/security/anti-scraping-verification-YYYY-QN.md</code>.</p>
 
-  <p class="muted" style="font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em;">If you have a security concern — a leak, an exploit, an open canary hit — please report via the <a href="complaints.html">complaints route</a>. We aim to respond within five working days; sooner for active leaks.</p>
+ <p class="muted" style="font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em;">If you have a security concern, a leak, an exploit, an open canary hit, please report via the <a href="complaints.html">complaints route</a>. We aim to respond within five working days; sooner for active leaks.</p>
 </main>
 
 <footer class="site-foot">
   <span>AI Safe@Work · Security &amp; AI-crawler posture · v2026.05</span>
   <span class="foot-right">
+    <a href="templates/">Templates</a>
     <a href="course.html">All modules</a>
     <a href="standards-map.html">Standards Map</a>
     <a href="accessibility.html">Accessibility</a>

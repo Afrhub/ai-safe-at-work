@@ -6,9 +6,9 @@
 <meta name="theme-color" content="#060608" />
 <meta name="color-scheme" content="dark light" />
 <script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
-<script>/* ponytail: client-side course gate — content is free not secret; this is the login funnel, not security. Expired-but-present token still passes (fine for a free course). */try{if(!localStorage.getItem("sb-hanjrsslhnuauaysbhun-auth-token"))location.replace("/portal/login.html?next="+encodeURIComponent(location.pathname));}catch(e){}</script>
+<script>/* ponytail: client-side course gate, content is free not secret; this is the login funnel, not security. Expired-but-present token still passes (fine for a free course). */try{if(!localStorage.getItem("sb-hanjrsslhnuauaysbhun-auth-token"))location.replace("/portal/login.html?next="+encodeURIComponent(location.pathname));}catch(e){}</script>
 <title>Module 8 · Copyright, IP, and other people's content — AI Safe@Work</title>
-<meta name="description" content="Who owns AI output. Is that generated image safe to publish? Using AI on a paywalled article. Training data lawsuits — what they mean for you." />
+<meta name="description" content="Who owns AI output. Is that generated image safe to publish? Using AI on a paywalled article. Training data lawsuits, what they mean for you." />
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="AI Safe@Work" />
 <meta property="og:title" content="Module 8 · Copyright, IP, and other people's content — AI Safe@Work" />
@@ -135,7 +135,7 @@
   <div class="objectives">
     <div class="objectives-title">By the end of this module, you'll</div>
     <ul>
-      <li>Understand who owns AI-generated output in the EU, UK, and US — to the extent anyone owns it</li>
+   <li>Understand who owns AI-generated output in the EU, UK, and US, to the extent anyone owns it</li>
       <li>Know what "input copyright" means and why pasting other people's content into AI is not always neutral</li>
       <li>Apply a practical test before publishing AI-generated images, copy, code, or music</li>
       <li>Recognise the ongoing major lawsuits and what they could mean for businesses that rely on AI output</li>
@@ -145,17 +145,17 @@
   <h2>Two copyright questions, not one</h2>
   <p>AI and copyright is two separate problems people often confuse:</p>
   <ol>
-    <li><strong>Input copyright.</strong> When you (or the AI vendor) feed copyrighted material into an AI — does that need permission?</li>
-    <li><strong>Output copyright.</strong> When the AI produces something — who owns it, and is it allowed to be published?</li>
+  <li><strong>Input copyright.</strong> When you (or the AI vendor) feed copyrighted material into an AI, does that need permission?</li>
+  <li><strong>Output copyright.</strong> When the AI produces something, who owns it, and is it allowed to be published?</li>
   </ol>
   <p>The legal position differs for each and differs by jurisdiction. Below is the practical headline for each.</p>
 
-  <h2>Input — feeding copyrighted material to AI</h2>
+ <h2>Input, feeding copyrighted material to AI</h2>
   <p>When you paste a copyrighted article, book chapter, image, song lyric, or company document into an AI tool to ask it to summarise or transform, you're making a copy of that material and sending it to a third party. Depending on what you do next, that may be:</p>
   <ul>
-    <li><strong>Probably fine</strong> — if it's your own content, public-domain material, or content you have a licence to use that includes "machine reading".</li>
-    <li><strong>Probably a problem</strong> — if it's behind a paywall, marked as "no AI training", under a Creative Commons licence that excludes commercial reuse, or you're using the AI to produce something competitive with the original.</li>
-    <li><strong>Definitely a problem</strong> — if it's a client's confidential information, a competitor's internal document, or material from a contract whose confidentiality clauses don't permit third-party processing (see Module 3).</li>
+  <li><strong>Probably fine</strong>, if it's your own content, public-domain material, or content you have a licence to use that includes "machine reading".</li>
+  <li><strong>Probably a problem</strong>, if it's behind a paywall, marked as "no AI training", under a Creative Commons licence that excludes commercial reuse, or you're using the AI to produce something competitive with the original.</li>
+  <li><strong>Definitely a problem</strong>, if it's a client's confidential information, a competitor's internal document, or material from a contract whose confidentiality clauses don't permit third-party processing (see Module 3).</li>
   </ul>
 
   <div class="callout warn">
@@ -166,10 +166,10 @@
     </div>
   </div>
 
-  <h2>Output — who owns what the AI makes</h2>
+ <h2>Output, who owns what the AI makes</h2>
   <p>The headline position in most jurisdictions in 2026 is that <strong>fully AI-generated material with no significant human creative input may not qualify for copyright protection in many jurisdictions</strong>. The legal position continues to evolve and varies by country. This reflects guidance from the US Copyright Office in 2023, several US court decisions since, and broadly similar reasoning emerging in the EU, UK, Canada, and Australia.</p>
   <p>The practical consequence: if you generate an image, a piece of music, or a piece of copy entirely from an AI prompt, your business may have little or no copyright in it, and others may be able to use the same output. How far this extends to edited or derivative versions depends on the level of human contribution. Note too that ownership, authorship and copyright are separate legal concepts, and may be treated differently depending on the jurisdiction.</p>
-  <p>"Significant human creative input" is the moving line. Selecting between options, editing the output, combining multiple AI outputs into something new, using AI as one tool inside a longer creative process — these tend to attract some copyright protection, in the human-contributed parts. Pure prompt-and-paste does not.</p>
+ <p>"Significant human creative input" is the moving line. Selecting between options, editing the output, combining multiple AI outputs into something new, using AI as one tool inside a longer creative process, these tend to attract some copyright protection, in the human-contributed parts. Pure prompt-and-paste does not.</p>
 
   <div class="compare">
     <div class="compare-cell good">
@@ -186,25 +186,25 @@
   <p>Two risks even when you "own" the output:</p>
 
   <h3>1. Substantial similarity to training data</h3>
-  <p>Some AI image generators have been shown to reproduce specific copyrighted images almost verbatim under certain prompts — Disney characters, well-known photographs, particular illustrators' styles. Publishing such an output, even unintentionally, is copyright infringement, and the AI vendor's terms typically pass the risk to you.</p>
+ <p>Some AI image generators have been shown to reproduce specific copyrighted images almost verbatim under certain prompts, Disney characters, well-known photographs, particular illustrators' styles. Publishing such an output, even unintentionally, is copyright infringement, and the AI vendor's terms typically pass the risk to you.</p>
   <p>The same applies in code: an AI coding assistant sometimes produces a function that is a near-verbatim copy of a specific piece of training-set code. If that code was under a copyleft licence (GPL, AGPL) that requires your code to also be open-source, using it in a proprietary codebase is a problem.</p>
 
   <h3>2. The right of publicity and the right of personality</h3>
-  <p>AI can produce content that looks like a real, identifiable person — a celebrity, a politician, a former employee — without their consent. Using such content commercially may breach the right of publicity (US) or the right of personality (EU). Some jurisdictions have explicit rules against unauthorised AI imitation of real people; more are coming.</p>
+ <p>AI can produce content that looks like a real, identifiable person, a celebrity, a politician, a former employee, without their consent. Using such content commercially may breach the right of publicity (US) or the right of personality (EU). Some jurisdictions have explicit rules against unauthorised AI imitation of real people; more are coming.</p>
 
   <h3>3. The vendor's terms</h3>
-  <p>Most major AI vendors' terms say "you keep ownership of your output" but also say "you indemnify the vendor against any third-party claim arising from your use". Read: if the output infringes someone's copyright and they sue, that's your problem, not the vendor's. A few vendors now offer indemnification on certain enterprise tiers — Microsoft, Adobe, Google have all rolled out limited versions. Worth knowing whether your business has one of those.</p>
+ <p>Most major AI vendors' terms say "you keep ownership of your output" but also say "you indemnify the vendor against any third-party claim arising from your use". Read: if the output infringes someone's copyright and they sue, that's your problem, not the vendor's. A few vendors now offer indemnification on certain enterprise tiers, Microsoft, Adobe, Google have all rolled out limited versions. Worth knowing whether your business has one of those.</p>
 
   <h3>4. Trademarks and brands</h3>
-  <p>Copyright is not the only risk. AI-generated content can unintentionally reproduce protected logos, brands, product names or trade dress — creating separate legal risks from copyright. An image model may render a recognisable brand mark; a copy tool may echo a competitor's registered product name. Treat brand and trademark review as a distinct check on anything customer-facing.</p>
+ <p>Copyright is not the only risk. AI-generated content can unintentionally reproduce protected logos, brands, product names or trade dress, creating separate legal risks from copyright. An image model may render a recognisable brand mark; a copy tool may echo a competitor's registered product name. Treat brand and trademark review as a distinct check on anything customer-facing.</p>
 
   <h2>The ongoing lawsuits</h2>
   <p>The detail does not matter to a non-lawyer. The existence of these cases does. Their outcomes will reshape what you can rely on:</p>
   <ul>
-    <li><strong>The New York Times v. OpenAI and Microsoft</strong> — the NYT claims its articles were used to train models without permission.</li>
-    <li><strong>Getty Images v. Stability AI</strong> — Getty claims Stability's image model was trained on Getty's watermarked stock photos.</li>
-    <li><strong>The Authors Guild v. OpenAI</strong> — a class action by authors over use of copyrighted books in training data.</li>
-    <li><strong>Multiple coding-assistant cases</strong> — Doe v. GitHub, claims that GitHub Copilot's training and output infringe open-source licences.</li>
+  <li><strong>The New York Times v. OpenAI and Microsoft</strong>, the NYT claims its articles were used to train models without permission.</li>
+  <li><strong>Getty Images v. Stability AI</strong>, Getty claims Stability's image model was trained on Getty's watermarked stock photos.</li>
+  <li><strong>The Authors Guild v. OpenAI</strong>, a class action by authors over use of copyrighted books in training data.</li>
+  <li><strong>Multiple coding-assistant cases</strong>, Doe v. GitHub, claims that GitHub Copilot's training and output infringe open-source licences.</li>
   </ul>
   <p>No one knows yet. The cases will probably settle or split by jurisdiction. The trend points one way: the era of "the model was trained on the open web, deal with it" is closing. Licensing deals between AI vendors and publishers land in volume now. Expect more obligations on businesses that use AI output, not fewer.</p>
 
@@ -221,7 +221,7 @@
         <li><strong>For images you're going to publish, generate three, edit them, and document the process.</strong> A short note (date, prompts used, what was edited) lives in the asset folder. If you ever need to defend the work, you have a record.</li>
         <li><strong>For text that will be customer-facing or formal, AI is your editor, not your author.</strong> Write the substance yourself, use AI to tighten, smooth, translate, fact-check.</li>
         <li><strong>For code, check your project's licensing rules.</strong> If you're working on something that must stay free of GPL-licensed code, treat unknown AI-generated snippets with caution. Run a tool that scans output against known training-set matches if your codebase is sensitive.</li>
-        <li><strong>For known third-party material — paywalled articles, leaked documents, competitor materials — assume it shouldn't be in the prompt at all.</strong> Module 3 covers the "describe the shape" reformulation that gets you the same value.</li>
+    <li><strong>For known third-party material, paywalled articles, leaked documents, competitor materials, assume it shouldn't be in the prompt at all.</strong> Module 3 covers the "describe the shape" reformulation that gets you the same value.</li>
       </ol>
     </div>
   </div>
@@ -238,7 +238,7 @@
     <span class="callout-icon">i</span>
     <div>
       <div class="callout-title">Governance insight: the question is provenance, not permission</div>
-      <p>The key question is often not "Can we use AI-generated content?" but "Can we demonstrate ownership, licensing rights, provenance and appropriate review?" A short record of how each asset was made — prompts, edits, human contribution, brand check — is what lets the business stand behind what it publishes.</p>
+   <p>The key question is often not "Can we use AI-generated content?" but "Can we demonstrate ownership, licensing rights, provenance and appropriate review?" A short record of how each asset was made, prompts, edits, human contribution, brand check, is what lets the business stand behind what it publishes.</p>
     </div>
   </div>
 
@@ -246,7 +246,7 @@
     <span class="callout-icon">§</span>
     <div>
       <div class="callout-title">Where the standards land</div>
-      <p><strong>EU AI Act Article 50</strong>: transparency for generative AI — providers must mark outputs as AI-generated where reasonably possible, and deployers using AI to produce "deepfakes" or text on matters of public interest must disclose. <strong>Article 53</strong>: providers of general-purpose AI models must publish a summary of training data used. <strong>Copyright Directive (EU) 2019/790, Articles 3 and 4</strong>: text-and-data-mining exception, including the right of rightholders to opt out — the legal basis many EU publishers are now using to forbid AI training on their content. <strong>ISO/IEC 42001:2023 Annex A.5</strong>: AI policies should cover intellectual property and licensing.</p>
+   <p><strong>EU AI Act Article 50</strong>: transparency for generative AI, providers must mark outputs as AI-generated where reasonably possible, and deployers using AI to produce "deepfakes" or text on matters of public interest must disclose. <strong>Article 53</strong>: providers of general-purpose AI models must publish a summary of training data used. <strong>Copyright Directive (EU) 2019/790, Articles 3 and 4</strong>: text-and-data-mining exception, including the right of rightholders to opt out, the legal basis many EU publishers are now using to forbid AI training on their content. <strong>ISO/IEC 42001:2023 Annex A.5</strong>: AI policies should cover intellectual property and licensing.</p>
     </div>
   </div>
 
@@ -281,7 +281,7 @@
         ],
         "correct": 1,
         "why": "Body: <em>fully AI-generated material with no significant human creative input may not qualify for copyright protection in many jurisdictions. The legal position continues to evolve and varies by country.</em>",
-        "cite": "Output — who owns what the AI makes"
+    "cite": "Output, who owns what the AI makes"
       },
       {
         "q": "Which authority confirmed the rule on AI-generated material and copyright in 2023?",
@@ -294,7 +294,7 @@
         ],
         "correct": 2,
         "why": "Body: <em>This was confirmed by the US Copyright Office in 2023.</em>",
-        "cite": "Output — who owns what the AI makes"
+    "cite": "Output, who owns what the AI makes"
       },
       {
         "q": "Which is listed as one of the ongoing copyright lawsuits the module flags?",
@@ -306,7 +306,7 @@
           "Apple v. The Beatles"
         ],
         "correct": 3,
-        "why": "Body: lists <em>The New York Times v. OpenAI and Microsoft — the NYT claims its articles were used to train models without permission.</em>",
+    "why": "Body: lists <em>The New York Times v. OpenAI and Microsoft, the NYT claims its articles were used to train models without permission.</em>",
         "cite": "The ongoing lawsuits"
       },
       {
@@ -336,7 +336,7 @@
         "cite": "Is the output safe to publish?"
       },
       {
-        "q": "Which EU directive contains the text-and-data-mining exception with a rightholder opt-out — the legal basis many EU publishers use to forbid AI training on their content?",
+    "q": "Which EU directive contains the text-and-data-mining exception with a rightholder opt-out, the legal basis many EU publishers use to forbid AI training on their content?",
         "options": [
           "GDPR Article 4",
           "Copyright Directive (EU) 2019/790, Articles 3 and 4",
@@ -353,12 +353,12 @@
         "options": [
           "Maximum fines for AI vendors",
           "Mandatory disclosure of training data sets",
-          "Transparency — providers must mark outputs as AI-generated where reasonably possible; deployers using AI to produce deepfakes or text on matters of public interest must disclose",
+     "Transparency, providers must mark outputs as AI-generated where reasonably possible; deployers using AI to produce deepfakes or text on matters of public interest must disclose",
           "Mandatory open-sourcing",
           "An obligation to send the user a thank-you note"
         ],
         "correct": 2,
-        "why": "Body: <em>EU AI Act Article 50: transparency for generative AI — providers must mark outputs as AI-generated where reasonably possible.</em>",
+    "why": "Body: <em>EU AI Act Article 50: transparency for generative AI, providers must mark outputs as AI-generated where reasonably possible.</em>",
         "cite": "Where the standards land"
       },
       {
@@ -367,8 +367,8 @@
           "Your own original work",
           "Protected by trade-secret law",
           "Owned by the AI vendor",
-          "Public domain — don't put a copyright notice on something you didn't actually author",
-          "Cursed — touch with gloves only"
+     "Public domain, don't put a copyright notice on something you didn't actually author",
+     "Cursed, touch with gloves only"
         ],
         "correct": 3,
         "why": "Body: <em>Treat purely AI-generated content as public domain. Don't put a copyright notice on something you didn't actually author.</em>",
@@ -414,6 +414,7 @@
 <footer class="site-foot">
   <span>AI Safe@Work · Module 08</span>
   <span class="foot-right">
+    <a href="templates/">Templates</a>
     <a href="course.html">All modules</a>
     <a href="portal/login.html">Partner login</a>
       <a href="privacy.html">Privacy</a>

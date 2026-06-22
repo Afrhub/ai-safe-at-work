@@ -7,7 +7,7 @@
 <meta name="color-scheme" content="dark light" />
 <script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
 <title>Changelog — AI Safe@Work</title>
-<meta name="description" content="Public release notes for AI Safe@Work. Quarterly cadence — each release walks every citation against its primary source, refreshes against regulator updates, and is dated in every page footer." />
+<meta name="description" content="Public release notes for AI Safe@Work. Quarterly cadence, each release walks every citation against its primary source, refreshes against regulator updates, and is dated in every page footer." />
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="AI Safe@Work" />
 <meta property="og:title" content="Changelog — AI Safe@Work" />
@@ -19,8 +19,8 @@
 <meta name="twitter:title" content="Changelog — AI Safe@Work" />
 <meta name="twitter:description" content="Public release notes for AI Safe@Work. Quarterly cadence — each release walks every citation against its primary source, refreshes against regulator updates, and is dated in every page footer." />
 <meta name="twitter:image" content="https://aisafeatwork.org/og-card.png?v=2" />
-<link rel="alternate" type="application/rss+xml" title="AI Safe@Work — Changelog (RSS)" href="https://aisafeatwork.org/changelog.xml" />
-<link rel="alternate" type="application/feed+json" title="AI Safe@Work — Changelog (JSON Feed)" href="https://aisafeatwork.org/changelog.json" />
+<link rel="alternate" type="application/rss+xml" title="AI Safe@Work, Changelog (RSS)" href="https://aisafeatwork.org/changelog.xml" />
+<link rel="alternate" type="application/feed+json" title="AI Safe@Work, Changelog (JSON Feed)" href="https://aisafeatwork.org/changelog.json" />
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
@@ -116,7 +116,7 @@
     <span class="callout-icon">§</span>
     <div>
       <div class="callout-title">Cadence</div>
-      <p>Releases follow the calendar — quarterly minor versions in February, May, August, and November. Patch versions can land any time for broken-link fixes, accessibility tweaks, or new citations. Major versions happen once a year on the back of a full content audit.</p>
+   <p>Releases follow the calendar, quarterly minor versions in February, May, August, and November. Patch versions can land any time for broken-link fixes, accessibility tweaks, or new citations. Major versions happen once a year on the back of a full content audit.</p>
       <p>Version scheme: <code>vYYYY.MM</code>. The version of the page you're currently looking at is in every footer.</p>
     </div>
   </div>
@@ -128,24 +128,24 @@
 
     <h3>What's new</h3>
     <ul>
-      <li><strong>SCORM 1.2 package</strong> — IMS Content Aggregation Model v1.2 manifest, single-SCO, 80% mastery score, 2-hour session cap. API discovery walks parent <code>opener</code> chains; <code>cmi.suspend_data</code> persists per-module completion across sessions. Builder script under <code>scripts/build-scorm.py</code> (stdlib zip, zip-slip safe, <code>--locale en|fr|de|all</code>). Deployable on Moodle, Cornerstone, Workday Learning, SCORM Cloud.</li>
-      <li><strong>xAPI (Tin Can) adapter</strong> — HTTPS-gated POST to any conformant LRS. Anonymous-actor default, no auth-in-URL, <code>credentials: 'omit'</code>. IRI namespace lives at <code>https://aisafeatwork.org/xapi/v2/</code>. Spec + LRS config template under <code>.audit/integrations/</code>.</li>
-      <li><strong>FR and DE language shells</strong> — full v2 site rendered in French and German (<code>/v2/fr/</code> and <code>/v2/de/</code>). Banner on every page declares machine-translation status and links to canonical EN. <code>modules.json</code> extended with locale dictionaries; <code>v2.js</code> auto-detects locale from path.</li>
-      <li><strong>SEO + AEO metadata pass</strong> — JSON-LD <code>WebSite</code> / <code>Course</code> / <code>LearningResource</code> / <code>BreadcrumbList</code> + canonical + <code>hreflang</code> (en/fr/de/x-default) + OpenGraph + Twitter card across all 39 v2 pages. Repeatable splicer: <code>scripts/inject-v2-seo.py</code> (idempotent, marker-based).</li>
+   <li><strong>SCORM 1.2 package</strong>, IMS Content Aggregation Model v1.2 manifest, single-SCO, 80% mastery score, 2-hour session cap. API discovery walks parent <code>opener</code> chains; <code>cmi.suspend_data</code> persists per-module completion across sessions. Builder script under <code>scripts/build-scorm.py</code> (stdlib zip, zip-slip safe, <code>--locale en|fr|de|all</code>). Deployable on Moodle, Cornerstone, Workday Learning, SCORM Cloud.</li>
+   <li><strong>xAPI (Tin Can) adapter</strong>, HTTPS-gated POST to any conformant LRS. Anonymous-actor default, no auth-in-URL, <code>credentials: 'omit'</code>. IRI namespace lives at <code>https://aisafeatwork.org/xapi/v2/</code>. Spec + LRS config template under <code>.audit/integrations/</code>.</li>
+   <li><strong>FR and DE language shells</strong>, full v2 site rendered in French and German (<code>/v2/fr/</code> and <code>/v2/de/</code>). Banner on every page declares machine-translation status and links to canonical EN. <code>modules.json</code> extended with locale dictionaries; <code>v2.js</code> auto-detects locale from path.</li>
+   <li><strong>SEO + AEO metadata pass</strong>, JSON-LD <code>WebSite</code> / <code>Course</code> / <code>LearningResource</code> / <code>BreadcrumbList</code> + canonical + <code>hreflang</code> (en/fr/de/x-default) + OpenGraph + Twitter card across all 39 v2 pages. Repeatable splicer: <code>scripts/inject-v2-seo.py</code> (idempotent, marker-based).</li>
     </ul>
 
     <h3>Procurement gates closed this release</h3>
     <ul>
-      <li>Gate 4 — SCORM 1.2 + xAPI export wrapper.</li>
-      <li>Gate 5 — FR + DE translations (shells; native-speaker review pending).</li>
-      <li>Gate 13 — JSON-LD + hreflang + sitemap (v2 deferred until <code>noindex</code> lifted).</li>
-      <li>Gate 14 — OpenGraph + Twitter card meta (v2).</li>
+   <li>Gate 4, SCORM 1.2 + xAPI export wrapper.</li>
+   <li>Gate 5, FR + DE translations (shells; native-speaker review pending).</li>
+   <li>Gate 13, JSON-LD + hreflang + sitemap (v2 deferred until <code>noindex</code> lifted).</li>
+   <li>Gate 14, OpenGraph + Twitter card meta (v2).</li>
     </ul>
 
     <h3>Open flags <span class="flag-pill">to resolve before next release</span></h3>
     <ul>
       <li>Native-speaker review of FR + DE shells before procurement deployment.</li>
-      <li>Custom domain (<code>aisafeatwork.org</code>) purchase + DNS — recipe filed at <code>.audit/legal/domain-procurement-2026-06-03.md</code>.</li>
+   <li>Custom domain (<code>aisafeatwork.org</code>) purchase + DNS, recipe filed at <code>.audit/legal/domain-procurement-2026-06-03.md</code>.</li>
       <li>OMB M-25-21 URL canonical form (carried over from v2026.05).</li>
     </ul>
   </article>
@@ -162,30 +162,30 @@
       <li>11 universal modules (M1–M12) covering: why this course exists, what AI tools do with data, the never-paste list, picking the right tool, verifying outputs, AI-powered scams, bias and fairness, copyright and IP, logging, incident response, the 60-second checklist, the standards.</li>
       <li>2 Relevant Roles: <a href="module-manager.html">Manager</a> and <a href="module-dpo.html">DPO / compliance lead</a>.</li>
       <li>2 ship-ready templates: <a href="templates/aup-template.html">Acceptable Use Policy</a>, <a href="templates/vendor-questionnaire.html">AI vendor diligence questionnaire</a>.</li>
-      <li><a href="standards-map.html">Standards Map</a> — 6 standards, 57 clause-to-module rows, 88 cross-link pills.</li>
-      <li><a href="citations.html">Citations bibliography</a> — every claim mapped to its primary source with a confidence flag.</li>
+   <li><a href="standards-map.html">Standards Map</a>, 6 standards, 57 clause-to-module rows, 88 cross-link pills.</li>
+   <li><a href="citations.html">Citations bibliography</a>, every claim mapped to its primary source with a confidence flag.</li>
       <li>Cinematic design system: aurora + drifting orbs + parallax + scroll reveals + reading progress + press feedback. Full <code>prefers-reduced-motion</code> fallback. Clean print path.</li>
     </ul>
 
     <h3>Standards baseline</h3>
     <ul>
-      <li>EU AI Act — Regulation (EU) 2024/1689 (Art 4 in force 2 Feb 2025; phased through 2026–2027).</li>
-      <li>GDPR — Regulation (EU) 2016/679.</li>
-      <li>ISO/IEC 42001:2023 — AI management system.</li>
-      <li>ISO/IEC 27001:2022 — Information security management (93 Annex A controls).</li>
+   <li>EU AI Act, Regulation (EU) 2024/1689 (Art 4 in force 2 Feb 2025; phased through 2026–2027).</li>
+   <li>GDPR, Regulation (EU) 2016/679.</li>
+   <li>ISO/IEC 42001:2023, AI management system.</li>
+   <li>ISO/IEC 27001:2022, Information security management (93 Annex A controls).</li>
       <li>NIST AI RMF 1.0 + GAI Profile (NIST AI 600-1).</li>
       <li>OWASP Top 10 for LLM Applications (2025 edition).</li>
     </ul>
 
     <h3>Resolved flags (mid-release)</h3>
     <ul>
-      <li><s>EU AI Act Art 22 cross-reference numbering on the standards-map page.</s> <strong>Resolved 2026-05-19</strong> — Art 22 is "Authorised Representatives", not auto-decisions. Row removed from standards-map.</li>
-      <li><s>ISO/IEC 42001 Annex A sub-clause numbering for A.3.2 and A.6.2.5.</s> <strong>Resolved 2026-05-19</strong> — A.3.2 = "AI Roles and Responsibilities" (not "AI policy"); A.6.2.5 = "AI-System Deployment" (not incidents); M10 reference now points to A.6.2.6 + A.9 for incident handling.</li>
+   <li><s>EU AI Act Art 22 cross-reference numbering on the standards-map page.</s> <strong>Resolved 2026-05-19</strong>, Art 22 is "Authorised Representatives", not auto-decisions. Row removed from standards-map.</li>
+   <li><s>ISO/IEC 42001 Annex A sub-clause numbering for A.3.2 and A.6.2.5.</s> <strong>Resolved 2026-05-19</strong>, A.3.2 = "AI Roles and Responsibilities" (not "AI policy"); A.6.2.5 = "AI-System Deployment" (not incidents); M10 reference now points to A.6.2.6 + A.9 for incident handling.</li>
     </ul>
 
     <h3>Open flags <span class="flag-pill">to resolve before next release</span></h3>
     <ul>
-      <li>OMB M-25-21 URL canonical form (still open — verify in next quarterly).</li>
+   <li>OMB M-25-21 URL canonical form (still open, verify in next quarterly).</li>
     </ul>
   </article>
 
@@ -199,6 +199,7 @@
 <footer class="site-foot">
   <span>AI Safe@Work · Changelog · v2026.05</span>
   <span class="foot-right">
+    <a href="templates/">Templates</a>
     <a href="course.html">All modules</a>
     <a href="standards-map.html">Standards Map</a>
     <a href="citations.html">Citations</a>

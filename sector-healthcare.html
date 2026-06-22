@@ -66,7 +66,7 @@
   <span class="role-banner">Sector overlay · Healthcare</span>
   <p class="eyebrow">9 sub-modules · 45 min read · special-category-data era</p>
   <h1 class="page-title">AI in <em>healthcare</em>.</h1>
-  <p class="lede">A sector overlay on top of the universal course. Healthcare data is special-category under GDPR Article 9 by default; AI that touches clinical decisions becomes a medical device under EU MDR; UK practices answer to NHS DSPT + DCB0129 + DCB0160. The clocks are tighter than other sectors — and the patient is always closer than the regulator.</p>
+ <p class="lede">A sector overlay on top of the universal course. Healthcare data is special-category under GDPR Article 9 by default; AI that touches clinical decisions becomes a medical device under EU MDR; UK practices answer to NHS DSPT + DCB0129 + DCB0160. The clocks are tighter than other sectors, and the patient is always closer than the regulator.</p>
 
   <div class="objectives">
     <div class="objectives-title">By the end of this overlay, you'll</div>
@@ -75,7 +75,7 @@
       <li>Know when an AI tool crosses the EU MDR / MHRA / FDA SaMD threshold and becomes a medical device</li>
       <li>Map AI procurement to NHS DSP Toolkit, DCB0129 (manufacturer) + DCB0160 (deployer) clinical-safety obligations</li>
       <li>Identify the extended healthcare "never-paste" list (NHS number, clinical-record extracts, prescription data, diagnostic images, genetics)</li>
-      <li>Apply patient-safety reporting clocks: Yellow Card · MHRA · MDR Article 87 · AI Act Article 73 — and which fires first</li>
+   <li>Apply patient-safety reporting clocks: Yellow Card · MHRA · MDR Article 87 · AI Act Article 73, and which fires first</li>
       <li>Manage AI receptionist / triage chatbot risk under MHRA + Consumer-facing AI rules</li>
       <li>Handle cross-border patient data flows (UK / EU / US / HIPAA)</li>
       <li>Know which regulator you tell, in what order, in an AI incident affecting patients</li>
@@ -84,20 +84,20 @@
   </div>
 
   <div class="standards-stack">
-    <h3>The regulatory stack — read top to bottom</h3>
-    <p><strong>GDPR</strong> — applies sitewide. Article 9 special-category data (Article 9(1) prohibition + Article 9(2) lawful-basis conditions, of which 9(2)(h) "preventive or occupational medicine" is the workhorse for clinical use). Article 22 (automated decisions) bites in clinical triage. Recital 35 defines "data concerning health" widely. National derogations under Article 9(4) — UK DPA 2018 Schedule 1, French Code de la santé publique, German BDSG §22 — add local conditions.</p>
-    <p><strong>EU AI Act</strong> — applies. Article 4 literacy obligation now. Article 26 deployer obligations August 2026. Annex III §5(a) high-risk where AI is used to dispatch / triage emergency services. Annex I lists AI integrated into medical devices: high-risk by default. Article 50 transparency for AI users interacting with patients (chatbots).</p>
-    <p><strong>EU MDR (Regulation 2017/745)</strong> — applies if AI is a medical device. Articles 2(1) definition + Annex VIII classification rules + Rule 11 (software) — most AI clinical software is at least Class IIa. CE marking required. Notified body involvement scales with class. Vigilance reporting per Article 87 (serious incident → competent authority within 15 days; immediate or 2-day windows for serious public-health threats).</p>
+  <h3>The regulatory stack, read top to bottom</h3>
+  <p><strong>GDPR</strong>, applies sitewide. Article 9 special-category data (Article 9(1) prohibition + Article 9(2) lawful-basis conditions, of which 9(2)(h) "preventive or occupational medicine" is the workhorse for clinical use). Article 22 (automated decisions) bites in clinical triage. Recital 35 defines "data concerning health" widely. National derogations under Article 9(4), UK DPA 2018 Schedule 1, French Code de la santé publique, German BDSG §22, add local conditions.</p>
+  <p><strong>EU AI Act</strong>, applies. Article 4 literacy obligation now. Article 26 deployer obligations August 2026. Annex III §5(a) high-risk where AI is used to dispatch / triage emergency services. Annex I lists AI integrated into medical devices: high-risk by default. Article 50 transparency for AI users interacting with patients (chatbots).</p>
+  <p><strong>EU MDR (Regulation 2017/745)</strong>, applies if AI is a medical device. Articles 2(1) definition + Annex VIII classification rules + Rule 11 (software), most AI clinical software is at least Class IIa. CE marking required. Notified body involvement scales with class. Vigilance reporting per Article 87 (serious incident → competent authority within 15 days; immediate or 2-day windows for serious public-health threats).</p>
     <p><strong>UK regulators</strong>:</p>
     <ul>
-      <li><strong>MHRA</strong> — UK medical device authority; AI as a Medical Device programme; UKCA / UKCA(NI) marking; Yellow Card incident reporting</li>
-      <li><strong>NHS England + NHS Digital</strong> — DSP Toolkit annual self-assessment (mandatory for organisations connected to NHS systems); Network and Information Systems (NIS) Regulations 2018 for NHS organisations</li>
-      <li><strong>NICE</strong> — Evidence Standards Framework for Digital Health Technologies (ESF) — informs procurement; not strictly statutory but de facto required for NHS purchase</li>
-      <li><strong>CQC</strong> — registers + inspects health and social care providers; AI-related concerns surface in well-led + safe-domain assessments</li>
+   <li><strong>MHRA</strong>, UK medical device authority; AI as a Medical Device programme; UKCA / UKCA(NI) marking; Yellow Card incident reporting</li>
+   <li><strong>NHS England + NHS Digital</strong>, DSP Toolkit annual self-assessment (mandatory for organisations connected to NHS systems); Network and Information Systems (NIS) Regulations 2018 for NHS organisations</li>
+   <li><strong>NICE</strong>, Evidence Standards Framework for Digital Health Technologies (ESF), informs procurement; not strictly statutory but de facto required for NHS purchase</li>
+   <li><strong>CQC</strong>, registers + inspects health and social care providers; AI-related concerns surface in well-led + safe-domain assessments</li>
     </ul>
-    <p><strong>UK clinical-safety standards</strong> — DCB0129 (manufacturer of health IT — clinical safety case + clinical-safety officer named); DCB0160 (deployer — same disciplines applied locally). Both are mandatory under the Health and Social Care Act 2012 for NHS organisations.</p>
-    <p><strong>US cross-reference</strong> — HIPAA Privacy + Security + Breach Notification Rules (45 CFR Parts 160 + 164); FDA SaMD framework; HHS OCR breach reporting clocks (60 days). Cross-border telehealth + US-served patients trigger these.</p>
-    <p><strong>NIS2</strong> — covers healthcare providers as "essential" entities for those above relevant thresholds. Article 21 risk-management measures apply.</p>
+  <p><strong>UK clinical-safety standards</strong>, DCB0129 (manufacturer of health IT, clinical safety case + clinical-safety officer named); DCB0160 (deployer, same disciplines applied locally). Both are mandatory under the Health and Social Care Act 2012 for NHS organisations.</p>
+  <p><strong>US cross-reference</strong>, HIPAA Privacy + Security + Breach Notification Rules (45 CFR Parts 160 + 164); FDA SaMD framework; HHS OCR breach reporting clocks (60 days). Cross-border telehealth + US-served patients trigger these.</p>
+  <p><strong>NIS2</strong>, covers healthcare providers as "essential" entities for those above relevant thresholds. Article 21 risk-management measures apply.</p>
     <p>This overlay sits on top of the universal course. Universal course = baseline. Healthcare overlay = the additional clinical-safety + special-category layer.</p>
   </div>
 
@@ -116,7 +116,7 @@
   <hr class="section-divider" />
 
   <span class="sub-tag" id="sub-1">Sub-module 1 of 9</span>
-  <h2>The healthcare governance layer — how GDPR Art 9 + EU MDR + EU AI Act + DCB0129 combine</h2>
+ <h2>The healthcare governance layer, how GDPR Art 9 + EU MDR + EU AI Act + DCB0129 combine</h2>
   <p>Healthcare AI sits at the intersection of three regulatory frameworks that were written by three different communities, in three different decades, with three different definitions of "device" and "data". They don't always align. They all apply.</p>
 
   <table class="std-table">
@@ -136,7 +136,7 @@
     </tbody>
   </table>
 
-  <p>For most SMB healthcare providers the priority sequence is: (1) GDPR Article 9 lawful basis — must exist before any AI processes a patient record; (2) DCB0160 deployer clinical-safety case for any AI affecting clinical decisions; (3) NHS DSPT compliance if connected; (4) check whether the AI is a medical device under MDR/MHRA — if yes, only buy CE / UKCA-marked; (5) EU AI Act Article 26 if a deployer of a high-risk AI system.</p>
+ <p>For most SMB healthcare providers the priority sequence is: (1) GDPR Article 9 lawful basis, must exist before any AI processes a patient record; (2) DCB0160 deployer clinical-safety case for any AI affecting clinical decisions; (3) NHS DSPT compliance if connected; (4) check whether the AI is a medical device under MDR/MHRA, if yes, only buy CE / UKCA-marked; (5) EU AI Act Article 26 if a deployer of a high-risk AI system.</p>
 
   <div class="signature">
     <div class="label">Sub-module 1 takeaway</div>
@@ -151,25 +151,25 @@
 
   <h3>Categories to add to the universal never-paste list</h3>
   <ul>
-    <li><strong>NHS number / health-system identifier</strong> — strong identifier; combination with a postcode often re-identifies. Avoid even partial in any non-approved AI tool.</li>
-    <li><strong>Clinical record extracts</strong> — even single SOAP notes are special-category. Pasting one note into a consumer LLM to "tidy the wording" is an Article 9 event.</li>
-    <li><strong>Prescription data</strong> — drug + dose + patient + date often identifies the patient + the condition.</li>
-    <li><strong>Diagnostic images</strong> — radiology, dermatology, fundus images. EXIF + DICOM tags often contain identifiers. Don't drop into image-handling AI tools without scrubbing AND lawful basis.</li>
-    <li><strong>Genetic + genomic data</strong> — special-category and highly identifying. Even partial genotype string is sensitive.</li>
-    <li><strong>Mental-health record content</strong> — same category, with social-consequence asymmetry that elevates risk.</li>
-    <li><strong>Safeguarding-investigation records</strong> — child / vulnerable-adult protection notes. Disclosure outside the controlled environment may be a criminal offence under safeguarding law.</li>
-    <li><strong>Sexual-health / HIV / GUM records</strong> — additional national restrictions in many jurisdictions (UK NHS Act 1977, etc.).</li>
-    <li><strong>Reproductive-health records in restrictive jurisdictions</strong> — varies; relevant for cross-border practices.</li>
-    <li><strong>Death-by-suicide records + coroner-related notes</strong> — restricted handling under multiple national regimes.</li>
-    <li><strong>Donor / transplant records</strong> — highly identifying.</li>
-    <li><strong>Insurance + claims notes</strong> — may identify diagnosis indirectly via covered-procedure codes.</li>
+  <li><strong>NHS number / health-system identifier</strong>, strong identifier; combination with a postcode often re-identifies. Avoid even partial in any non-approved AI tool.</li>
+  <li><strong>Clinical record extracts</strong>, even single SOAP notes are special-category. Pasting one note into a consumer LLM to "tidy the wording" is an Article 9 event.</li>
+  <li><strong>Prescription data</strong>, drug + dose + patient + date often identifies the patient + the condition.</li>
+  <li><strong>Diagnostic images</strong>, radiology, dermatology, fundus images. EXIF + DICOM tags often contain identifiers. Don't drop into image-handling AI tools without scrubbing AND lawful basis.</li>
+  <li><strong>Genetic + genomic data</strong>, special-category and highly identifying. Even partial genotype string is sensitive.</li>
+  <li><strong>Mental-health record content</strong>, same category, with social-consequence asymmetry that elevates risk.</li>
+  <li><strong>Safeguarding-investigation records</strong>, child / vulnerable-adult protection notes. Disclosure outside the controlled environment may be a criminal offence under safeguarding law.</li>
+  <li><strong>Sexual-health / HIV / GUM records</strong>, additional national restrictions in many jurisdictions (UK NHS Act 1977, etc.).</li>
+  <li><strong>Reproductive-health records in restrictive jurisdictions</strong>, varies; relevant for cross-border practices.</li>
+  <li><strong>Death-by-suicide records + coroner-related notes</strong>, restricted handling under multiple national regimes.</li>
+  <li><strong>Donor / transplant records</strong>, highly identifying.</li>
+  <li><strong>Insurance + claims notes</strong>, may identify diagnosis indirectly via covered-procedure codes.</li>
   </ul>
 
   <div class="callout warn">
     <span class="callout-icon">!</span>
     <div>
       <div class="callout-title">Pseudonymised ≠ anonymised</div>
-      <p>Removing a name doesn't make a record safe to paste. Pseudonymised data is still personal data under GDPR. Re-identification via combination of free-text features + AI is straightforward. Only properly-anonymised data falls outside GDPR — and "properly" is a high bar (ICO Anonymisation Code).</p>
+   <p>Removing a name doesn't make a record safe to paste. Pseudonymised data is still personal data under GDPR. Re-identification via combination of free-text features + AI is straightforward. Only properly-anonymised data falls outside GDPR, and "properly" is a high bar (ICO Anonymisation Code).</p>
     </div>
   </div>
 
@@ -181,23 +181,23 @@
   <hr class="section-divider" />
 
   <span class="sub-tag" id="sub-3">Sub-module 3 of 9</span>
-  <h2>AI as a Medical Device — when an AI tool crosses the SaMD threshold</h2>
+ <h2>AI as a Medical Device, when an AI tool crosses the SaMD threshold</h2>
   <p>Some AI tools are medical devices in the eyes of EU MDR + MHRA + FDA. Many SMB healthcare providers don't realise this; they procure a "decision-support" tool that is, regulatorily, an unauthorised Class IIa medical device. The fine + clinical-safety consequence is significant.</p>
 
   <h3>The MDR definition (Article 2(1))</h3>
-  <p>"Medical device" — any instrument, apparatus, software, etc. intended by the manufacturer to be used for human beings for: diagnosis, prevention, monitoring, prediction, prognosis, treatment, or alleviation of disease — among other purposes. <strong>"Intended by the manufacturer"</strong> is the key phrase: intended-purpose statements drive classification.</p>
+ <p>"Medical device", any instrument, apparatus, software, etc. intended by the manufacturer to be used for human beings for: diagnosis, prevention, monitoring, prediction, prognosis, treatment, or alleviation of disease, among other purposes. <strong>"Intended by the manufacturer"</strong> is the key phrase: intended-purpose statements drive classification.</p>
 
-  <h3>Rule 11 (Annex VIII) — software classification</h3>
-  <p>Software intended to provide information for decisions for diagnosis or therapeutic purposes is at least <strong>Class IIa</strong>. Where the decisions could cause serious deterioration / surgical intervention / death — Class IIb or III.</p>
+ <h3>Rule 11 (Annex VIII), software classification</h3>
+ <p>Software intended to provide information for decisions for diagnosis or therapeutic purposes is at least <strong>Class IIa</strong>. Where the decisions could cause serious deterioration / surgical intervention / death, Class IIb or III.</p>
 
   <h3>Worked examples</h3>
   <ul>
-    <li>AI that summarises a consultation transcript for the clinician's review — usually <strong>NOT a medical device</strong> (administrative use). Document the intended purpose.</li>
-    <li>AI that flags an X-ray for radiologist review — <strong>YES, medical device, Class IIa</strong>. CE/UKCA required.</li>
-    <li>AI receptionist that triages "is this an emergency?" — likely <strong>YES, medical device + EU AI Act Annex III §5(a) high-risk</strong>. Both apply.</li>
-    <li>AI that drafts a referral letter from notes — <strong>borderline</strong>; depends on whether the AI selects clinical content or just rewords human-authored content. Document intended purpose carefully.</li>
-    <li>AI mental-health chatbot for self-help — <strong>YES, medical device</strong> in most regulators' interpretation; some recent enforcement.</li>
-    <li>AI tool that predicts patient no-show risk — <strong>NOT a medical device</strong> (administrative); still GDPR + ICO scrutiny.</li>
+  <li>AI that summarises a consultation transcript for the clinician's review, usually <strong>NOT a medical device</strong> (administrative use). Document the intended purpose.</li>
+  <li>AI that flags an X-ray for radiologist review, <strong>YES, medical device, Class IIa</strong>. CE/UKCA required.</li>
+  <li>AI receptionist that triages "is this an emergency?", likely <strong>YES, medical device + EU AI Act Annex III §5(a) high-risk</strong>. Both apply.</li>
+  <li>AI that drafts a referral letter from notes, <strong>borderline</strong>; depends on whether the AI selects clinical content or just rewords human-authored content. Document intended purpose carefully.</li>
+  <li>AI mental-health chatbot for self-help, <strong>YES, medical device</strong> in most regulators' interpretation; some recent enforcement.</li>
+  <li>AI tool that predicts patient no-show risk, <strong>NOT a medical device</strong> (administrative); still GDPR + ICO scrutiny.</li>
   </ul>
 
   <h3>What to do as an SMB deployer</h3>
@@ -219,16 +219,16 @@
 
   <div class="signature">
     <div class="label">Sub-module 3 takeaway</div>
-    <div class="quote">If the AI helps with diagnosis, prognosis, monitoring, or treatment, it's a medical device. CE/UKCA-marked or it doesn't get deployed. Intended-purpose document is the artefact that decides — get it.</div>
+  <div class="quote">If the AI helps with diagnosis, prognosis, monitoring, or treatment, it's a medical device. CE/UKCA-marked or it doesn't get deployed. Intended-purpose document is the artefact that decides, get it.</div>
   </div>
 
   <hr class="section-divider" />
 
   <span class="sub-tag" id="sub-4">Sub-module 4 of 9</span>
-  <h2>Clinical-safety case files — DCB0129 + DCB0160 in practice</h2>
+ <h2>Clinical-safety case files, DCB0129 + DCB0160 in practice</h2>
   <p>Two UK clinical-safety standards govern any digital health system that could affect patient safety. DCB0129 applies to the manufacturer of the system; DCB0160 applies to the deployer (your practice / trust). Both require a named clinical-safety officer + a documented clinical-safety case + ongoing surveillance.</p>
 
-  <h3>DCB0129 — manufacturer (your AI vendor)</h3>
+ <h3>DCB0129, manufacturer (your AI vendor)</h3>
   <ul>
     <li>Named clinical-safety officer (clinically qualified + appropriately trained).</li>
     <li>Hazard analysis covering reasonably foreseeable misuse.</li>
@@ -238,7 +238,7 @@
   </ul>
   <p>Ask the vendor for: their DCB0129 case file; the name of their clinical-safety officer; their hazard log summary; their last review date.</p>
 
-  <h3>DCB0160 — deployer (you)</h3>
+ <h3>DCB0160, deployer (you)</h3>
   <ul>
     <li>Named clinical-safety officer at your practice / trust.</li>
     <li>Local hazard analysis covering how the system will be used by your staff in your workflows.</li>
@@ -266,16 +266,16 @@
   <hr class="section-divider" />
 
   <span class="sub-tag" id="sub-5">Sub-module 5 of 9</span>
-  <h2>Triage chatbots, AI receptionists — consumer-facing healthcare AI</h2>
+ <h2>Triage chatbots, AI receptionists, consumer-facing healthcare AI</h2>
   <p>"AI receptionist" tools that screen incoming calls + classify urgency are increasingly marketed to SMB practices. Most are partially or fully medical devices. Most are also EU AI Act Annex III §5(a) high-risk where they perform triage / emergency dispatch. The combination is heavy regulatory load that vendors often understate.</p>
 
   <h3>The combined regulatory load</h3>
   <ul>
-    <li><strong>EU MDR</strong> — Class IIa or higher under Rule 11 if the system informs clinical urgency decisions.</li>
-    <li><strong>EU AI Act</strong> — Annex III §5(a) high-risk where used for triage / dispatch of emergency services; Article 26 deployer duties bite.</li>
-    <li><strong>GDPR</strong> — Article 9 special-category (health data); Article 22 if the patient experience is materially shaped by the AI decision; Article 50 transparency to interacting natural persons (the patient must know they're talking to an AI).</li>
-    <li><strong>CQC + clinical-safety</strong> — patient-safety case under DCB0160; CQC inspection considers AI handling under "safe" and "well-led" domains.</li>
-    <li><strong>Equality + accessibility</strong> — Equality Act 2010 obligations: AI receptionist must be accessible to disabled patients (deaf, speech-difference, English-as-additional-language); reasonable adjustments required.</li>
+  <li><strong>EU MDR</strong>, Class IIa or higher under Rule 11 if the system informs clinical urgency decisions.</li>
+  <li><strong>EU AI Act</strong>, Annex III §5(a) high-risk where used for triage / dispatch of emergency services; Article 26 deployer duties bite.</li>
+  <li><strong>GDPR</strong>, Article 9 special-category (health data); Article 22 if the patient experience is materially shaped by the AI decision; Article 50 transparency to interacting natural persons (the patient must know they're talking to an AI).</li>
+  <li><strong>CQC + clinical-safety</strong>, patient-safety case under DCB0160; CQC inspection considers AI handling under "safe" and "well-led" domains.</li>
+  <li><strong>Equality + accessibility</strong>, Equality Act 2010 obligations: AI receptionist must be accessible to disabled patients (deaf, speech-difference, English-as-additional-language); reasonable adjustments required.</li>
   </ul>
 
   <h3>Procurement red flags</h3>
@@ -306,7 +306,7 @@
   <hr class="section-divider" />
 
   <span class="sub-tag" id="sub-6">Sub-module 6 of 9</span>
-  <h2>Cross-border patient data — UK / EU / US flows</h2>
+ <h2>Cross-border patient data, UK / EU / US flows</h2>
   <p>Healthcare data crosses borders the moment a UK practice uses a US-hosted EHR, an EU radiology service uses a US-hosted AI, or telehealth platform serves patients in another jurisdiction. The legal stack changes depending on direction.</p>
 
   <table class="reg-table">
@@ -328,7 +328,7 @@
   <ul>
     <li>UK practice → AI tool whose backend is Azure OpenAI in West Europe (Netherlands). UK→EU flow; covered by adequacy.</li>
     <li>UK practice → AI tool whose backend is US-hosted. UK→US; Data Bridge or SCC required + TIA + HIPAA BAA likely.</li>
-    <li>EU practice → AI tool whose backend uses Bing grounding (public web). Public-web exposure of patient data — usually unacceptable for Article 9 data.</li>
+  <li>EU practice → AI tool whose backend uses Bing grounding (public web). Public-web exposure of patient data, usually unacceptable for Article 9 data.</li>
     <li>NHS-connected practice → any AI: NHS DSPT statement of compliance must reflect any cross-border processing.</li>
   </ul>
 
@@ -348,7 +348,7 @@
   <hr class="section-divider" />
 
   <span class="sub-tag" id="sub-7">Sub-module 7 of 9</span>
-  <h2>Patient-safety reporting — Yellow Card · MHRA · MDR Art 87 · AI Act Art 73</h2>
+ <h2>Patient-safety reporting, Yellow Card · MHRA · MDR Art 87 · AI Act Art 73</h2>
   <p>A patient-safety incident involving an AI tool fires multiple reporting clocks. Each has a different recipient, a different definition, and a different window. The fastest clock starts first; the slowest finishes last; all must be filed.</p>
 
   <h3>The reporting clock matrix</h3>
@@ -358,10 +358,10 @@
     </thead>
     <tbody>
       <tr><td>Yellow Card (UK)</td><td>Manufacturer, deployer, clinician, or patient</td><td>MHRA</td><td>"As soon as possible"; serious incidents within days, immediate for life-threatening</td></tr>
-      <tr><td>MDR Article 87 — vigilance</td><td>Manufacturer primarily; deployer cooperates</td><td>Competent authority of the MS where the incident occurred</td><td>Serious incident: 15 days; serious public-health threat: 2 days; death / unanticipated serious deterioration: immediate</td></tr>
-      <tr><td>EU AI Act Article 73 — serious incident</td><td>Provider of high-risk AI system</td><td>Market surveillance authority of the MS where incident occurred</td><td>15 days from awareness; 2 days if widespread infringement or fatal outcome</td></tr>
-      <tr><td>GDPR Article 33 — controller breach</td><td>Controller</td><td>Supervisory authority</td><td>72 hours from awareness</td></tr>
-      <tr><td>GDPR Article 34 — data subjects</td><td>Controller</td><td>Affected data subjects</td><td>Without undue delay where high risk</td></tr>
+   <tr><td>MDR Article 87, vigilance</td><td>Manufacturer primarily; deployer cooperates</td><td>Competent authority of the MS where the incident occurred</td><td>Serious incident: 15 days; serious public-health threat: 2 days; death / unanticipated serious deterioration: immediate</td></tr>
+   <tr><td>EU AI Act Article 73, serious incident</td><td>Provider of high-risk AI system</td><td>Market surveillance authority of the MS where incident occurred</td><td>15 days from awareness; 2 days if widespread infringement or fatal outcome</td></tr>
+   <tr><td>GDPR Article 33, controller breach</td><td>Controller</td><td>Supervisory authority</td><td>72 hours from awareness</td></tr>
+   <tr><td>GDPR Article 34, data subjects</td><td>Controller</td><td>Affected data subjects</td><td>Without undue delay where high risk</td></tr>
       <tr><td>HIPAA Breach Notification</td><td>Covered entity / business associate</td><td>HHS OCR + affected individuals + (sometimes) media</td><td>60 days max for individuals; 60 days for HHS OCR if &lt; 500 affected, immediately if 500+</td></tr>
       <tr><td>NHS DSPT (UK)</td><td>NHS-connected organisation</td><td>NHS England + ICO</td><td>Initial report immediately; full report per DSPT timeline</td></tr>
       <tr><td>CQC notification</td><td>Registered provider</td><td>CQC</td><td>"Without delay" for notifiable events under Regulation 18</td></tr>
@@ -396,7 +396,7 @@
   <hr class="section-divider" />
 
   <span class="sub-tag" id="sub-8">Sub-module 8 of 9</span>
-  <h2>Incident escalation — which regulator hears, in what order</h2>
+ <h2>Incident escalation, which regulator hears, in what order</h2>
   <p>The <a href="templates/incident-form.html" class="accent">incident form</a> covers the universal flow. This sub-module adds the healthcare-specific sequencing. The first hour is patient-care-first; the first 24 hours is reporting-first.</p>
 
   <h3>First 15 minutes</h3>
@@ -417,21 +417,21 @@
 
   <h3>First 24 hours</h3>
   <ul>
-    <li><strong>MHRA vigilance / Yellow Card</strong> — serious incident filed.</li>
-    <li><strong>CQC notification</strong> — Regulation 18 "without delay" filing where applicable.</li>
-    <li><strong>NHS England + DSPT</strong> — initial notification.</li>
-    <li><strong>ICO / supervisory authority</strong> — GDPR Article 33 72-hour clock running.</li>
-    <li><strong>NIS2 CSIRT</strong> — early warning if in scope.</li>
-    <li><strong>Insurer</strong> — E&amp;O / cyber / clinical-negligence policy notification.</li>
-    <li><strong>Defence Union / Medical Protection</strong> — for clinicians involved.</li>
+  <li><strong>MHRA vigilance / Yellow Card</strong>, serious incident filed.</li>
+  <li><strong>CQC notification</strong>, Regulation 18 "without delay" filing where applicable.</li>
+  <li><strong>NHS England + DSPT</strong>, initial notification.</li>
+  <li><strong>ICO / supervisory authority</strong>, GDPR Article 33 72-hour clock running.</li>
+  <li><strong>NIS2 CSIRT</strong>, early warning if in scope.</li>
+  <li><strong>Insurer</strong>, E&amp;O / cyber / clinical-negligence policy notification.</li>
+  <li><strong>Defence Union / Medical Protection</strong>, for clinicians involved.</li>
   </ul>
 
   <h3>First 7 days</h3>
   <ul>
-    <li>EU AI Act Article 73 — if you are also provider of high-risk AI system, 15-day filing.</li>
-    <li>MDR Article 87 — 15-day filing if device manufacturer.</li>
-    <li>HIPAA Breach Notification — if US patient data involved.</li>
-    <li>Affected patient notification — GDPR Article 34 where high risk; clinical duty of candour parallel obligation.</li>
+  <li>EU AI Act Article 73, if you are also provider of high-risk AI system, 15-day filing.</li>
+  <li>MDR Article 87, 15-day filing if device manufacturer.</li>
+  <li>HIPAA Breach Notification, if US patient data involved.</li>
+  <li>Affected patient notification, GDPR Article 34 where high risk; clinical duty of candour parallel obligation.</li>
     <li>Updated clinical-safety case + hazard log entry.</li>
     <li>External counsel engagement on patient / regulator comms.</li>
     <li>Board / Practice partners briefed.</li>
@@ -477,7 +477,7 @@
 
   <h3>Question 6</h3>
   <p>An AI mental-health support chatbot is being procured for a primary-care practice. Patient self-help. What's the regulatory analysis?</p>
-  <details><summary>Answer</summary><p>(a) Almost certainly a medical device under MDR (Rule 11) — mental-health intervention software has been treated as Class IIa or higher in recent regulator decisions; (b) Annex I integration if it is part of a regulated patient pathway; (c) Article 9 GDPR (health + mental-health); (d) Article 22 if any decision is materially made by the AI; (e) Article 50 transparency to interacting patients; (f) DCB0160 clinical-safety case; (g) Equality Act accessibility obligations; (h) safeguarding considerations especially for under-18 use. Only procure CE/UKCA-marked; require vendor's DCB0129 + clinical-safety officer details.</p></details>
+ <details><summary>Answer</summary><p>(a) Almost certainly a medical device under MDR (Rule 11), mental-health intervention software has been treated as Class IIa or higher in recent regulator decisions; (b) Annex I integration if it is part of a regulated patient pathway; (c) Article 9 GDPR (health + mental-health); (d) Article 22 if any decision is materially made by the AI; (e) Article 50 transparency to interacting patients; (f) DCB0160 clinical-safety case; (g) Equality Act accessibility obligations; (h) safeguarding considerations especially for under-18 use. Only procure CE/UKCA-marked; require vendor's DCB0129 + clinical-safety officer details.</p></details>
 
   <h3>Question 7</h3>
   <p>Your vendor refuses to provide the DCB0129 clinical-safety case file. They say it's "commercial-confidential". Do you proceed?</p>
@@ -485,7 +485,7 @@
 
   <h3>Question 8</h3>
   <p>A clinician uses a non-approved consumer AI to draft a referral letter from notes; they realise mid-draft the AI has fabricated a clinical finding. What do you do?</p>
-  <details><summary>Answer</summary><p>(1) Discard the AI output; do not include any AI-generated clinical statement in the referral. (2) Re-draft manually. (3) Report the use as an AUP violation but as a learning event, not disciplinary. (4) If the referral was sent: notify the receiving clinician immediately and amend. (5) If patient was affected: clinical duty of candour applies; report. (6) Open the incident-form workflow; the fabricated finding is a near-miss patient-safety event even if not actualised. (7) Tighten the AUP + training; this user found the failure mode safely — protect that.</p></details>
+ <details><summary>Answer</summary><p>(1) Discard the AI output; do not include any AI-generated clinical statement in the referral. (2) Re-draft manually. (3) Report the use as an AUP violation but as a learning event, not disciplinary. (4) If the referral was sent: notify the receiving clinician immediately and amend. (5) If patient was affected: clinical duty of candour applies; report. (6) Open the incident-form workflow; the fabricated finding is a near-miss patient-safety event even if not actualised. (7) Tighten the AUP + training; this user found the failure mode safely, protect that.</p></details>
 
   <h3>Question 9</h3>
   <p>NHS DSPT renewal is in 8 weeks. Your practice has deployed Copilot for M365 in the last month. What's the DSPT impact?</p>
@@ -505,6 +505,7 @@
 <footer class="site-foot">
   <span>AI Safe@Work · Sector overlay · Healthcare v1.0</span>
   <span class="foot-right">
+    <a href="templates/">Templates</a>
     <a href="course.html">All modules</a>
     <a href="sector-financial-services.html">FS overlay</a>
     <a href="module-dpo.html">DPO Track</a>
