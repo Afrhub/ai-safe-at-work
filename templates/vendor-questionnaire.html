@@ -232,9 +232,9 @@
   </div>
 
   <div class="legend no-print">
-    <span class="legend-pill must">Must — blocker if not satisfactory</span>
-    <span class="legend-pill should">Should — flag for discussion</span>
-    <span class="legend-pill nice">Nice — adds confidence</span>
+  <span class="legend-pill must">Must, blocker if not satisfactory</span>
+  <span class="legend-pill should">Should, flag for discussion</span>
+  <span class="legend-pill nice">Nice, adds confidence</span>
   </div>
 
   <!-- 1. IDENTITY ───────────────────────────────────── -->
@@ -257,7 +257,7 @@
     <li class="q-item"><div><div class="q-text">In which countries is customer data processed and stored? List all regions. <span class="legend-pill must">Must</span><div class="response"></div></div></div></li>
     <li class="q-item"><div><div class="q-text">Are EU-region-only processing options available for our tenant? <span class="legend-pill must">Must</span><div class="response"></div></div></div></li>
     <li class="q-item"><div><div class="q-text">What customer data is retained, in what form, and for how long? Include prompts, responses, system metadata, embeddings, vector stores, fine-tuning data. <span class="legend-pill must">Must</span><div class="response"></div></div></div></li>
-    <li class="q-item"><div><div class="q-text">Is customer data used to train, fine-tune, or evaluate any model — first-party or sub-processor — for any customer? Confirm contractually. <span class="legend-pill must">Must</span><span class="q-hint">"No" with a contract clause is what we want. "No by default with opt-out" is much weaker.</span><div class="response"></div></div></div></li>
+  <li class="q-item"><div><div class="q-text">Is customer data used to train, fine-tune, or evaluate any model, first-party or sub-processor, for any customer? Confirm contractually. <span class="legend-pill must">Must</span><span class="q-hint">"No" with a contract clause is what we want. "No by default with opt-out" is much weaker.</span><div class="response"></div></div></div></li>
     <li class="q-item"><div><div class="q-text">Can customer data be deleted on request, and within what timeframe? Does deletion propagate to backups, logs, and any sub-processor systems? <span class="legend-pill must">Must</span><div class="response"></div></div></div></li>
     <li class="q-item"><div><div class="q-text">Describe encryption: at rest, in transit, and key-management options. Are customer-managed keys available? <span class="legend-pill should">Should</span><div class="response"></div></div></div></li>
     <li class="q-item"><div><div class="q-text">List every sub-processor and the role each plays. Confirm notification mechanism when sub-processors change. <span class="legend-pill must">Must</span><div class="response"></div></div></div></li>
@@ -269,7 +269,7 @@
     <span class="standard-ref">GDPR Art 28 · EU AI Act Art 26</span>
   </div>
   <ol class="q-list">
-    <li class="q-item"><div><div class="q-text">Provide a copy of your Data Processing Agreement (DPA) — including standard contractual clauses for international transfers. <span class="legend-pill must">Must</span><div class="response"></div></div></div></li>
+  <li class="q-item"><div><div class="q-text">Provide a copy of your Data Processing Agreement (DPA), including standard contractual clauses for international transfers. <span class="legend-pill must">Must</span><div class="response"></div></div></div></li>
     <li class="q-item"><div><div class="q-text">Do you offer contractual indemnification against intellectual-property infringement arising from model output? <span class="legend-pill should">Should</span><span class="q-hint">A handful of vendors do (Microsoft, Adobe, Google, IBM, Anthropic enterprise). Lack of indemnification means we carry the risk.</span><div class="response"></div></div></div></li>
     <li class="q-item"><div><div class="q-text">Under EU AI Act Article 26, will you provide the deployer-facing instructions and information required for our use of the system? <span class="legend-pill must">Must</span><div class="response"></div></div></div></li>
     <li class="q-item"><div><div class="q-text">Describe your exit and data-portability provisions. <span class="legend-pill should">Should</span><div class="response"></div></div></div></li>
@@ -283,7 +283,7 @@
   <ol class="q-list">
     <li class="q-item"><div><div class="q-text">Provide your current ISO/IEC 27001:2022 certificate and Statement of Applicability. <span class="legend-pill must">Must</span><div class="response"></div></div></div></li>
     <li class="q-item"><div><div class="q-text">Provide your most recent SOC 2 Type II report (under NDA acceptable). <span class="legend-pill should">Should</span><div class="response"></div></div></div></li>
-    <li class="q-item"><div><div class="q-text">List other relevant attestations — ISO/IEC 27018 (cloud PII), ISO/IEC 42001 (AIMS), ISO/IEC 27701 (PIMS), HIPAA, FedRAMP, IRAP, C5, etc. <span class="legend-pill nice">Nice</span><div class="response"></div></div></div></li>
+  <li class="q-item"><div><div class="q-text">List other relevant attestations, ISO/IEC 27018 (cloud PII), ISO/IEC 42001 (AIMS), ISO/IEC 27701 (PIMS), HIPAA, FedRAMP, IRAP, C5, etc. <span class="legend-pill nice">Nice</span><div class="response"></div></div></div></li>
     <li class="q-item"><div><div class="q-text">Confirm penetration testing cadence and provide a recent summary or attestation. <span class="legend-pill should">Should</span><div class="response"></div></div></div></li>
     <li class="q-item"><div><div class="q-text">Describe authentication options: SAML/OIDC SSO, SCIM provisioning, MFA enforcement, role-based access controls. <span class="legend-pill must">Must</span><div class="response"></div></div></div></li>
     <li class="q-item"><div><div class="q-text">Describe logging and audit-trail capabilities exposed to customers. <span class="legend-pill should">Should</span><div class="response"></div></div></div></li>
@@ -310,7 +310,7 @@
     <span class="standard-ref">GDPR Art 33–34 · ISO/IEC 27001 A.5.24–26 · EU AI Act Art 73</span>
   </div>
   <ol class="q-list">
-    <li class="q-item"><div><div class="q-text">What is your contractual SLA for notifying us of a personal-data breach affecting our tenant? <span class="legend-pill must">Must</span><span class="q-hint">Anything more than 24 hours is problematic — we have 72 from the moment we have reasonable awareness, and we need time to investigate.</span><div class="response"></div></div></div></li>
+  <li class="q-item"><div><div class="q-text">What is your contractual SLA for notifying us of a personal-data breach affecting our tenant? <span class="legend-pill must">Must</span><span class="q-hint">Anything more than 24 hours is problematic, we have 72 from the moment we have reasonable awareness, and we need time to investigate.</span><div class="response"></div></div></div></li>
     <li class="q-item"><div><div class="q-text">What is your process for notifying us of a serious AI incident under EU AI Act Article 73? <span class="legend-pill must">Must</span><div class="response"></div></div></div></li>
     <li class="q-item"><div><div class="q-text">Provide a sample incident-notification template you would send to a customer. <span class="legend-pill should">Should</span><div class="response"></div></div></div></li>
     <li class="q-item"><div><div class="q-text">Where can customers see real-time service status and incident history? <span class="legend-pill should">Should</span><div class="response"></div></div></div></li>
@@ -334,7 +334,7 @@
   </div>
   <ol class="q-list">
     <li class="q-item"><div><div class="q-text">Confirm advance-notice period before material changes to the model, the data-handling, the terms of service, or sub-processors. <span class="legend-pill must">Must</span><div class="response"></div></div></div></li>
-    <li class="q-item"><div><div class="q-text">Describe customer-pinning options — can we lock to a specific model version, on a specific date, for a specific period? <span class="legend-pill should">Should</span><div class="response"></div></div></div></li>
+  <li class="q-item"><div><div class="q-text">Describe customer-pinning options, can we lock to a specific model version, on a specific date, for a specific period? <span class="legend-pill should">Should</span><div class="response"></div></div></div></li>
     <li class="q-item"><div><div class="q-text">What is the published end-of-life / deprecation policy for models offered? <span class="legend-pill should">Should</span><div class="response"></div></div></div></li>
   </ol>
 
@@ -348,7 +348,7 @@
         <li>Every <span class="legend-pill must">Must</span> needs a satisfactory written answer. Any "no" or "we'll get back to you" is a procurement blocker.</li>
         <li>Every <span class="legend-pill should">Should</span> deserves a follow-up conversation if not answered or unclear.</li>
         <li><span class="legend-pill nice">Nice</span> items are confidence-builders, not blockers.</li>
-        <li>Read the contract / DPA <em>before</em> signing — vendor questionnaires are a representation, but the contract is the obligation.</li>
+    <li>Read the contract / DPA <em>before</em> signing, vendor questionnaires are a representation, but the contract is the obligation.</li>
         <li>Re-run this annually with the same vendor. Things change.</li>
       </ol>
     </div>
@@ -358,7 +358,7 @@
     <span class="callout-icon">§</span>
     <div>
       <div class="callout-title">Where the standards land</div>
-      <p><strong>GDPR Art 28</strong> — processor contracts; <strong>Art 5, 32, 44–50</strong> — security and transfers; <strong>Art 33–34</strong> — breach response. <strong>EU AI Act Art 13</strong> — deployer information; <strong>Art 26</strong> — deployer obligations; <strong>Art 27</strong> — FRIA; <strong>Art 50</strong> — transparency; <strong>Art 73</strong> — serious incidents. <strong>ISO/IEC 27001 A.5.19</strong> (supplier relationships), <strong>A.5.23</strong> (cloud), <strong>A.5.24–26</strong> (incidents), <strong>A.5.34</strong> (PII), <strong>A.8.12</strong> (data leakage). <strong>ISO/IEC 42001 A.10</strong> (third-party AI relationships). <strong>CSA AI Controls Matrix</strong> (whole document). <strong>OWASP LLM Top 10</strong> (sections 5–7).</p>
+   <p><strong>GDPR Art 28</strong>, processor contracts; <strong>Art 5, 32, 44–50</strong>, security and transfers; <strong>Art 33–34</strong>, breach response. <strong>EU AI Act Art 13</strong>, deployer information; <strong>Art 26</strong>, deployer obligations; <strong>Art 27</strong>, FRIA; <strong>Art 50</strong>, transparency; <strong>Art 73</strong>, serious incidents. <strong>ISO/IEC 27001 A.5.19</strong> (supplier relationships), <strong>A.5.23</strong> (cloud), <strong>A.5.24–26</strong> (incidents), <strong>A.5.34</strong> (PII), <strong>A.8.12</strong> (data leakage). <strong>ISO/IEC 42001 A.10</strong> (third-party AI relationships). <strong>CSA AI Controls Matrix</strong> (whole document). <strong>OWASP LLM Top 10</strong> (sections 5–7).</p>
     </div>
   </div>
 </main>

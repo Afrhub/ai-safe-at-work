@@ -104,7 +104,7 @@
   <article class="policy-doc">
     <span class="section-tag">Purpose and scope</span>
     <h2>Why we keep a use case register</h2>
-    <p>A Use Case Register records what we actually do with AI — not the tools we have, but the jobs we use them for. It:</p>
+  <p>A Use Case Register records what we actually do with AI, not the tools we have, but the jobs we use them for. It:</p>
     <ul>
       <li><strong>Traces data flows:</strong> What data does this AI use case ingest, process, and output?</li>
       <li><strong>Triggers impact assessment:</strong> Does this use case trigger a GDPR DPIA or EU AI Act FRIA requirement?</li>
@@ -160,7 +160,7 @@
     <p>If a DPIA or FRIA is required, where does it live? Link to the document location. Example: "DPIA-001 on shared drive / AI-Assessments/Customer-Email-Summary-DPIA.pdf".</p>
 
     <h3>Risk rating</h3>
-    <p><strong>High / Medium / Low</strong> — based on data sensitivity and impact. A use case that processes special-category data and makes automated decisions is High. Use your AI Risk Register to inform this.</p>
+  <p><strong>High / Medium / Low</strong>, based on data sensitivity and impact. A use case that processes special-category data and makes automated decisions is High. Use your AI Risk Register to inform this.</p>
 
     <h3>Compliance status</h3>
     <p><strong>Active / Paused / Discontinued.</strong> Is this use case running, on hold, or ended?</p>
@@ -183,7 +183,7 @@
         <td style="padding: 0.85rem; border: 1px solid var(--border);"><strong>UC-001: Customer email summarization</strong></td>
         <td style="padding: 0.85rem; border: 1px solid var(--border);">Customer email (personal data: names, account info)</td>
         <td style="padding: 0.85rem; border: 1px solid var(--border);">ChatGPT Enterprise</td>
-        <td style="padding: 0.85rem; border: 1px solid var(--border);">Yes — DPIA-001 complete</td>
+    <td style="padding: 0.85rem; border: 1px solid var(--border);">Yes, DPIA-001 complete</td>
         <td style="padding: 0.85rem; border: 1px solid var(--border); color: #f7a600; font-weight: 700;">Medium</td>
         <td style="padding: 0.85rem; border: 1px solid var(--border);">Active</td>
       </tr>
@@ -191,7 +191,7 @@
         <td style="padding: 0.85rem; border: 1px solid var(--border);"><strong>UC-002: CV screening</strong></td>
         <td style="padding: 0.85rem; border: 1px solid var(--border);">Applicant CV (personal data, special category if health disclosed)</td>
         <td style="padding: 0.85rem; border: 1px solid var(--border);">AI screening tool (TBD)</td>
-        <td style="padding: 0.85rem; border: 1px solid var(--border);">Yes — DPIA + FRIA pending</td>
+    <td style="padding: 0.85rem; border: 1px solid var(--border);">Yes, DPIA + FRIA pending</td>
         <td style="padding: 0.85rem; border: 1px solid var(--border); color: #d62828; font-weight: 700;">High</td>
         <td style="padding: 0.85rem; border: 1px solid var(--border);">Paused (awaiting assessment)</td>
       </tr>
@@ -199,7 +199,7 @@
         <td style="padding: 0.85rem; border: 1px solid var(--border);"><strong>UC-003: Internal document drafting</strong></td>
         <td style="padding: 0.85rem; border: 1px solid var(--border);">Internal memos (confidential business, no personal data)</td>
         <td style="padding: 0.85rem; border: 1px solid var(--border);">Claude or ChatGPT</td>
-        <td style="padding: 0.85rem; border: 1px solid var(--border);">No — no personal data affected</td>
+    <td style="padding: 0.85rem; border: 1px solid var(--border);">No, no personal data affected</td>
         <td style="padding: 0.85rem; border: 1px solid var(--border); color: #2da45f; font-weight: 700;">Low</td>
         <td style="padding: 0.85rem; border: 1px solid var(--border);">Active</td>
       </tr>
@@ -216,9 +216,9 @@
 
     <h2>Standards referenced</h2>
     <ul>
-      <li><strong>EU AI Act 2024/1689</strong> — Article 4 (literacy), Article 27 (deployer obligations to assess and monitor).</li>
-      <li><strong>GDPR 2016/679</strong> — Article 35 (Data Protection Impact Assessment requirement).</li>
-      <li><strong>ISO/IEC 42001:2023</strong> — Clause 6.2 (determining requirements for AI systems).</li>
+   <li><strong>EU AI Act 2024/1689</strong>, Article 4 (literacy), Article 27 (deployer obligations to assess and monitor).</li>
+   <li><strong>GDPR 2016/679</strong>, Article 35 (Data Protection Impact Assessment requirement).</li>
+   <li><strong>ISO/IEC 42001:2023</strong>, Clause 6.2 (determining requirements for AI systems).</li>
     </ul>
 
   </article>
@@ -230,7 +230,7 @@
       <ol>
         <li>Set up a shared spreadsheet with columns: Use Case ID, Name, Purpose, Tool, Input Data, Owner, DPIA?, FRIA?, Risk, Status.</li>
         <li>Run interviews with each department: "What are you using AI for?" List high-value and shadow-AI uses.</li>
-        <li>For each use case, record the columns. Highlight any that involve personal data or automated decisions — these need DPIA / FRIA.</li>
+    <li>For each use case, record the columns. Highlight any that involve personal data or automated decisions, these need DPIA / FRIA.</li>
         <li>Assign owners and trigger assessments for High-risk use cases.</li>
         <li>Review monthly. Update immediately if a new use case begins or vendor terms change.</li>
       </ol>
