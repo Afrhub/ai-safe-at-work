@@ -523,6 +523,39 @@ hr.section-divider {
 .tag.warn   { background: rgba(224,62,62,0.08);  color: #ff8b8b; border-color: rgba(224,62,62,0.4); }
 .tag.ok     { background: rgba(26,184,106,0.08); color: var(--green); border-color: rgba(26,184,106,0.4); }
 
+/* In-page section sub-nav — anchor pills under a page hero (site IA 2026-06-23) */
+.section-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0 2.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+  list-style: none;
+}
+.section-nav a {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--r-sm);
+  color: var(--text2);
+  border: 1px solid var(--border-bold);
+  background: rgba(255,255,255,0.02);
+  text-decoration: none;
+}
+.section-nav a:hover, .section-nav a:focus-visible { color: var(--accent); border-color: rgba(145,162,255,0.4); background: rgba(145,162,255,0.06); }
+
+/* Hero CTA buttons (site IA round 2, 2026-06-23) */
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 1.8rem 0 0.5rem; }
+.hero-cta { display: inline-block; font-family: var(--font-display); font-weight: 800; font-size: 0.98rem; letter-spacing: 0.01em; padding: 0.8rem 1.5rem; border-radius: var(--r-sm); text-decoration: none; border: 1px solid var(--accent); transition: transform 140ms var(--ease-out), background 160ms ease, color 160ms ease; }
+.hero-cta.primary { background: var(--accent); color: #0b0e14; }
+.hero-cta.primary:hover { background: var(--accent-2); color: #0b0e14; }
+.hero-cta.secondary { background: transparent; color: var(--accent); }
+.hero-cta.secondary:hover { background: rgba(145,162,255,0.08); color: var(--accent-2); }
+.hero-cta:active { transform: scale(0.97); }
+
 /* ════════════════════════════════════════════════════════════
    TWO-COLUMN COMPARISON — ruled ledger cells
    ════════════════════════════════════════════════════════════ */

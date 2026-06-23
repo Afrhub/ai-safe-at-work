@@ -9,7 +9,7 @@
 <script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
 <title>My learning — AI Safe@Work</title>
 <link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
-<link rel="stylesheet" href="../assets/style.css?v=11" />
+<link rel="stylesheet" href="../assets/style.css?v=12" />
 <link rel="stylesheet" href="assets/portal.css?v=2" />
 <script defer src="../assets/cinema.js?v=10"></script>
 <script src="config.js"></script>
@@ -20,10 +20,25 @@
   <span style="display:flex;align-items:center;gap:1rem"><span class="who" id="who"></span><button id="out">Sign out</button></span>
 </header>
 <main class="portal-main">
-  <p class="eyebrow">Your learning</p>
-  <h1 class="page-title">The <em>course</em>.</h1>
-  <p class="lede">Eleven modules, about 90 minutes. Your progress is saved to your account.</p>
-  <div id="grid" class="tiles"></div>
+  <nav class="section-nav" aria-label="Portal sections"><a href="#my-courses">My Courses</a><a href="#module-progress">Module Progress</a><a href="#certificate">Certificate Download</a></nav>
+
+  <section id="my-courses">
+    <p class="eyebrow">Your learning</p>
+    <h1 class="page-title">My <em>courses</em>.</h1>
+    <p class="lede">Eleven modules, about 90 minutes. Your progress is saved to your account.</p>
+    <div id="grid" class="tiles"></div>
+  </section>
+
+  <section id="module-progress">
+    <h2>Module Progress</h2>
+    <p class="lede">Your per-module completion is shown on each course tile above. A detailed progress summary is coming soon.</p>
+  </section>
+
+  <section id="certificate">
+    <h2>Certificate Download</h2>
+    <p class="lede">When you finish the course, your certificate is available to view and download.</p>
+    <p><a class="tile" href="../cert.html"><span class="k">Certificate</span><h2>View your certificate</h2><span class="arrow">Open →</span></a></p>
+  </section>
 </main>
 <script type="module">
 import { guard, sb, signOut } from "./assets/portal.js";

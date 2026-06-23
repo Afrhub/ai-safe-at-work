@@ -18,7 +18,7 @@
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
 
-<link rel="stylesheet" href="assets/style.css?v=11" />
+<link rel="stylesheet" href="assets/style.css?v=12" />
 <link rel="stylesheet" href="assets/completion.css?v=3" /><!-- completion v1 -->
 <script defer src="assets/completion.js?v=1"></script><!-- completion v1 -->
 <script defer src="assets/cinema.js?v=8"></script>
@@ -28,13 +28,18 @@
 body { background: var(--bg); }
 main.gate {
   max-width: none;
-  min-height: 100svh; min-height: 100dvh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  padding: 1rem 2rem 0.85rem;
+  padding: 0;
+}
+.gate-hero {
+  min-height: calc(100svh - 5rem); min-height: calc(100dvh - 5rem);
+  padding: 2rem 2rem 1rem;
   position: relative;
   isolation: isolate;
   overflow: visible;
+  /* break out of the 980px main shell to a full-bleed landing hero */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 }
 .gate::before {
   content: '';
@@ -246,7 +251,7 @@ main.gate {
 .gate-foot .right { display: flex; gap: 1.4rem; flex-wrap: wrap; }
 
 @media (max-width: 640px) {
-  main.gate { height: auto; min-height: 100dvh; overflow: visible; padding: 1.25rem 1.25rem 1.5rem; }
+  .gate-hero { height: auto; min-height: 100dvh; overflow: visible; padding: 1.25rem 1.25rem 1.5rem; }
   .choices { grid-template-columns: 1fr; gap: 0.7rem; }
   .choice  { padding: 1.25rem 1.25rem 1.1rem; }
 }
@@ -454,17 +459,29 @@ html[data-theme="light"] .aud-card { border-top-color: rgba(71,89,199,0.5); }
 })();
 </script>
 
-<main id="main" class="gate">
-  <header class="gate-header">
-    <a href="index.html" class="brand"><img src="/assets/logo.png" alt="" class="brand-logo" style="height:3em;width:auto;vertical-align:-0.64em;margin-right:.45em" />AI&nbsp;Safe@Work</a>
-  </header>
+<header class="topbar">
+  <a href="index.html" class="brand"><img src="/assets/logo.png" alt="" class="brand-logo" style="height:3em;width:auto;vertical-align:-0.64em;margin-right:.45em" />AI&nbsp;Safe@Work</a>
+  <nav class="topbar-nav">
+      <a href="course.html" class="always-show">Course</a>
+      <a href="plus-pack.html">Plus Pack</a>
+      <a href="msp.html">MSP Partners</a>
+      <a href="about.html">About Us</a>
+      <a href="portal/login.html">Sign in</a>
+    </nav>
+</header>
 
-  <section class="gate-stage">
+<main id="main">
+  <section id="hero" class="gate-hero gate-stage gate">
     <span class="gate-watermark" aria-hidden="true">§4</span>
     <span class="gate-refline"><span class="rule" aria-hidden="true"></span><span class="ref">REF · EU AI Act 2024/1689</span><span class="rule" aria-hidden="true"></span></span>
-    <p class="gate-eyebrow">AI Governance Awareness + Enablement</p>
-    <h1>Safe AI <em>adoption</em>.<br/>Operational governance.</h1>
-  <p class="lede">A plain-English course that teaches people how to use AI tools at work without leaking data, breaking the law, or getting fooled. Built for small and medium businesses and the MSPs who support them, and mapped to the EU AI Act, GDPR and the ISO standards behind the scenes.</p>
+    <p class="gate-eyebrow">AI Safe@Work</p>
+    <h1>AI Governance, Risk &amp; Compliance <em>Training</em> for Modern Businesses</h1>
+  <p class="lede">Help your employees use AI safely, responsibly and compliantly while protecting your business from emerging risks.</p>
+
+    <div class="hero-ctas">
+      <a class="hero-cta primary" href="about.html#contact">Request a Demo</a>
+      <a class="hero-cta secondary" href="msp.html#become-a-partner">Become a Partner</a>
+    </div>
 
     <div class="audience" aria-label="Who this is for, what it is, why it matters">
       <div class="aud-card">
@@ -512,20 +529,135 @@ html[data-theme="light"] .aud-card { border-top-color: rgba(71,89,199,0.5); }
     </p>
   </section>
 
-  <footer class="gate-foot">
-    <span>Non-technical · Update 2026</span>
-    <span class="right">
-      <a href="course.html">Course</a>
-      <a href="plus-pack.html">Plus Pack</a>
-      <a href="msp.html">MSP Partners</a>
-      <a href="about.html">About</a>
-      <a href="standards-map.html">Standards Map</a>
-      <a href="portal/login.html">Sign in</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-    </span>
-  </footer>
+  <nav class="section-nav" aria-label="On this page"><a href="#why">Why AI Safe@Work?</a><a href="#course">The Course</a><a href="#plus-pack">Plus Pack</a><a href="#consultancy">Consultancy</a><a href="#who-we-help">Who We Help</a><a href="#msp">MSP Partner Programme</a><a href="#about">About Us</a><a href="#cta">Get started</a></nav>
+
+  <section id="why">
+    <h2>Why AI Safe@Work?</h2>
+    <p>People are already pasting customer details, contracts and source data into AI tools that nobody approved. One careless paste can leak private information, break a privacy law, or hand a scammer everything they need. Most of this "shadow AI" use is invisible to the business until something goes wrong.</p>
+    <p>The EU AI Act now expects organisations to give staff genuine AI literacy (Article 4, in force 2 February 2025). This is the wedge: a short, plain-English course that turns risky habits into safe ones and gives you the evidence that your people were trained.</p>
+  </section>
+
+  <section id="course">
+    <p class="eyebrow">Tier 1 · Train your people</p>
+    <h2>The Course</h2>
+    <div class="callout standard">
+      <span class="callout-icon">§</span>
+      <div>
+        <div class="callout-title">Eleven modules, about 90 minutes</div>
+        <p>The free core: eleven plain-English modules for people who use AI at work. A knowledge check at the end of each module, a completion certificate when you finish, and annual refresher training to stay current. No login to read.</p>
+        <p><a href="course.html" class="accent">See the full course →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="plus-pack">
+    <p class="eyebrow">Tier 2 · Get the governance toolkit</p>
+    <h2>Plus Pack</h2>
+    <div class="callout standard">
+      <span class="callout-icon">§</span>
+      <div>
+        <div class="callout-title">Ten governance documents you can hand to an auditor</div>
+        <p>Acceptable Use Policy, Use Case Register, Risk Assessment Template, Risk Register, Incident Form, Governance Roles Matrix, Steering Group Terms of Reference, Vendor Due Diligence Assessment, Supplier Risk Assessment and an Implementation Guide — built on the same standards the free course teaches.</p>
+        <p><a href="plus-pack.html" class="accent">Explore the Plus Pack →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="consultancy">
+    <p class="eyebrow">Tier 3 · Let us implement and manage AI governance for you</p>
+    <h2>AI Governance Consultancy</h2>
+    <div class="callout note">
+      <span class="callout-icon">i</span>
+      <div>
+        <div class="callout-title">Coming soon</div>
+        <p>Hands-on help to implement and run AI governance: health check, gap analysis, policy customisation, risk workshops, framework implementation, ISO 42001 readiness and a fractional AI Governance Officer. <a href="consultancy.html" class="accent">Preview the scope →</a></p>
+      </div>
+    </div>
+    <p style="margin-top:1.4rem;color:var(--text2)"><strong>For MSPs it stays simple:</strong> Course · Course + Plus Pack · Course + Plus Pack + Consultancy.</p>
+  </section>
+
+  <section id="who-we-help">
+    <h2>Who We Help</h2>
+    <div class="module-grid">
+      <div class="module-card">
+        <div class="module-num">SMB staff</div>
+        <h3>People who use AI at work</h3>
+        <p>Anyone in sales, support, HR, finance, marketing or ops who uses ChatGPT, Copilot, Claude or Gemini. No technical background needed.</p>
+        <span class="bg-num">1</span>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Managers</div>
+        <h3>People who approve AI-assisted work</h3>
+        <p>Anyone whose sign-off unlocks AI-assisted work, and who needs meaningful human oversight and an audit trail that survives twelve months later.</p>
+        <span class="bg-num">2</span>
+      </div>
+      <div class="module-card">
+        <div class="module-num">MSPs</div>
+        <h3>The partners who support them</h3>
+        <p>Managed service providers and IT admins rolling AI governance out across multiple SMB customers, with a white-label posture.</p>
+        <span class="bg-num">3</span>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Regulated sectors</div>
+        <h3>Financial services, healthcare, public sector</h3>
+        <p>Firms that need the regulator-specific lever, the sector "never-paste" list and the right incident escalation order layered on top.</p>
+        <span class="bg-num">4</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="msp">
+    <h2>MSP Partner Programme</h2>
+    <div class="callout standard">
+      <span class="callout-icon">§</span>
+      <div>
+        <div class="callout-title">Deploy AI governance across your customer base</div>
+        <p>For managed service providers: a white-label way to take AI Safe@Work to every SMB you support, with partner pricing and a rebate structure. Five founding slots.</p>
+        <p><a href="msp.html" class="accent">See the MSP programme →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>AI Safe@Work is an AI governance awareness and enablement platform built for small and medium businesses and the MSPs who support them. We turn the EU AI Act, GDPR and the ISO standards into plain-English habits people can actually use, and into evidence a business can show.</p>
+    <p><a href="about.html" class="accent">More about us →</a></p>
+  </section>
+
+  <section id="cta">
+    <h2>Get started</h2>
+    <p>Start the free course today, or talk to us about rolling it out across your team.</p>
+    <div class="module-grid">
+      <a class="module-card" href="course.html">
+        <div class="module-num">Free</div>
+        <h3>Start the course</h3>
+        <p>Eleven modules in around 90 minutes. Create a free account and your progress saves as you go.</p>
+        <span class="bg-num">→</span>
+      </a>
+      <a class="module-card" href="about.html#contact">
+        <div class="module-num">For teams</div>
+        <h3>Book a demo</h3>
+        <p>See how AI Safe@Work works for your business, your managers, or your MSP customer base.</p>
+        <span class="bg-num">→</span>
+      </a>
+    </div>
+  </section>
 </main>
+
+<footer class="site-foot">
+  <span>AI Safe@Work · Non-technical · Update 2026</span>
+  <span class="foot-right">
+        <a href="course.html">Course</a>
+        <a href="plus-pack.html">Plus Pack</a>
+        <a href="msp.html">MSP Partners</a>
+        <a href="about.html">About Us</a>
+        <a href="phase-2.html">Phase 2</a>
+        <a href="standards-map.html">Standards Map</a>
+        <a href="portal/login.html">Sign in</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </span>
+</footer>
 
 </body>
 </html>

@@ -21,7 +21,7 @@
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
-<link rel="stylesheet" href="assets/style.css?v=11" />
+<link rel="stylesheet" href="assets/style.css?v=12" />
 <script defer src="assets/cinema.js?v=8"></script>
 <style>
 .pack-q { margin: 1.4rem 0 0; padding: 1.1rem 1.3rem; border-left: 3px solid var(--accent); background: rgba(145,162,255,0.05); border-radius: 0 3px 3px 0; }
@@ -43,23 +43,33 @@
       <a href="course.html" class="always-show">Course</a>
       <a href="plus-pack.html" class="is-current">Plus Pack</a>
       <a href="msp.html">MSP Partners</a>
-      <a href="about.html">About</a>
+      <a href="about.html">About Us</a>
       <a href="portal/login.html">Sign in</a>
     </nav>
 </header>
 
 <main id="main">
-  <p class="eyebrow">Tier 2 · Governance documentation</p>
-  <h1 class="page-title">The <em>Plus Pack</em>.</h1>
-  <p class="lede">Training teaches your people. The Plus Pack gives you the paperwork to govern AI as an organisation: the policy, the registers, the assessments and the structure an auditor or a regulator expects to see. Every document is ready to fill in, prints to PDF, and is mapped to ISO/IEC 42001 and the EU AI Act.</p>
+  <section id="overview" aria-label="Overview">
+    <p class="eyebrow">Tier 2 · Governance documentation</p>
+    <h1 class="page-title">The <em>Plus Pack</em>.</h1>
+    <p class="lede">Training teaches your people. The Plus Pack gives you the paperwork to govern AI as an organisation: the policy, the registers, the assessments and the structure an auditor or a regulator expects to see. Every document is ready to fill in, prints to PDF, and is mapped to ISO/IEC 42001 and the EU AI Act.</p>
 
-  <div class="pack-q">
-    <p style="margin:0">The question it answers: <strong>"Do we have the documentation needed to start governing AI?"</strong></p>
-  </div>
+    <div class="pack-q">
+      <p style="margin:0">The question it answers: <strong>"Do we have the documentation needed to start governing AI?"</strong></p>
+    </div>
+  </section>
 
-  <h2 style="margin-top:2.4rem">What's included</h2>
-  <p class="lede">Ten documents, the full starter set for an AI management system.</p>
-  <div class="module-grid">
+  <nav class="section-nav" aria-label="On this page"><a href="#overview">Overview</a><a href="#whats-included">What's Included</a><a href="#templates">Governance Templates</a><a href="#benefits">Benefits to Businesses</a><a href="#coming-soon">Coming Soon</a></nav>
+
+  <section id="whats-included">
+    <h2 style="margin-top:2.4rem">What's included</h2>
+    <p class="lede">Ten documents, the full starter set for an AI management system.</p>
+  </section>
+
+  <section id="templates">
+    <h2 style="margin-top:2.6rem">Governance Templates</h2>
+    <p class="lede">The ten Tier 2 documents, in the order you put them to work.</p>
+    <div class="module-grid">
 
     <a class="module-card" href="templates/aup-template.html">
       <div class="module-num">01</div>
@@ -68,11 +78,11 @@
       <span class="bg-num">AUP</span>
     </a>
 
-    <a class="module-card" href="templates/incident-form.html">
+    <a class="module-card" href="templates/ai-use-case-register.html">
       <div class="module-num">02</div>
-      <h3>AI Incident Report Form</h3>
-      <p>Capture what happened when AI goes wrong, fast, so it can be handled.</p>
-      <span class="bg-num">INC</span>
+      <h3>AI Use Case Register</h3>
+      <p>Every approved AI use case in one list, with owner, data and risk tier.</p>
+      <span class="bg-num">UC</span>
     </a>
 
     <a class="module-card" href="templates/ai-risk-assessment.html">
@@ -82,46 +92,46 @@
       <span class="bg-num">RA</span>
     </a>
 
-    <a class="module-card" href="templates/ai-use-case-register.html">
+    <a class="module-card" href="templates/ai-risk-register.html">
       <div class="module-num">04</div>
-      <h3>AI Use Case Register</h3>
-      <p>Every approved AI use case in one list, with owner, data and risk tier.</p>
-      <span class="bg-num">UC</span>
+      <h3>AI Risk Register</h3>
+      <p>The live log of AI risks, their scores, owners and mitigations.</p>
+      <span class="bg-num">RISK</span>
     </a>
 
-    <a class="module-card" href="templates/vendor-questionnaire.html">
+    <a class="module-card" href="templates/incident-form.html">
       <div class="module-num">05</div>
-      <h3>AI Supplier Due Diligence Questionnaire</h3>
-      <p>The questions to ask any AI vendor before you trust them with your data.</p>
-      <span class="bg-num">DDQ</span>
-    </a>
-
-    <a class="module-card" href="templates/ai-supplier-risk-assessment.html">
-      <div class="module-num">06</div>
-      <h3>AI Supplier Risk Assessment</h3>
-      <p>Turn the due-diligence answers into a score and a go / no-go decision.</p>
-      <span class="bg-num">SRA</span>
+      <h3>AI Incident Form</h3>
+      <p>Capture what happened when AI goes wrong, fast, so it can be handled.</p>
+      <span class="bg-num">INC</span>
     </a>
 
     <a class="module-card" href="templates/ai-raci-matrix.html">
-      <div class="module-num">07</div>
+      <div class="module-num">06</div>
       <h3>AI Governance Roles Matrix</h3>
       <p>Who is Responsible, Accountable, Consulted and Informed for each AI decision.</p>
       <span class="bg-num">RACI</span>
     </a>
 
     <a class="module-card" href="templates/ai-steering-group-tor.html">
-      <div class="module-num">08</div>
+      <div class="module-num">07</div>
       <h3>AI Steering Group Terms of Reference</h3>
       <p>Stand up the group that owns AI: purpose, members, decisions, reporting.</p>
       <span class="bg-num">ToR</span>
     </a>
 
-    <a class="module-card" href="templates/ai-risk-register.html">
+    <a class="module-card" href="templates/vendor-questionnaire.html">
+      <div class="module-num">08</div>
+      <h3>AI Vendor Due Diligence Assessment</h3>
+      <p>The questions to ask any AI vendor before you trust them with your data.</p>
+      <span class="bg-num">DDQ</span>
+    </a>
+
+    <a class="module-card" href="templates/ai-supplier-risk-assessment.html">
       <div class="module-num">09</div>
-      <h3>AI Risk Register</h3>
-      <p>The live log of AI risks, their scores, owners and mitigations.</p>
-      <span class="bg-num">RISK</span>
+      <h3>AI Supplier Risk Assessment</h3>
+      <p>Turn the due-diligence answers into a score and a go / no-go decision.</p>
+      <span class="bg-num">SRA</span>
     </a>
 
     <a class="module-card" href="rollout-guide.html">
@@ -134,24 +144,29 @@
   </div>
 
   <p class="lede" style="margin-top:0.5rem">Want the wider library too? The <a href="templates/" class="accent">full templates index</a> adds the Management System Manual, Objectives Register, Internal Audit, KPI dashboard, DPIA, FRIA and more.</p>
+  </section>
 
-  <h2 style="margin-top:2.6rem">Benefits to your business</h2>
-  <div class="benefit-grid">
-    <div class="benefit"><h3>Start in days, not months</h3><p>Skip the blank page. Adapt proven documents instead of drafting from scratch.</p></div>
-    <div class="benefit"><h3>Audit-ready</h3><p>Each document maps to a clause an auditor, DPO or procurement team asks for.</p></div>
-    <div class="benefit"><h3>One coherent system</h3><p>The documents reference each other, so you get a system, not a folder of files.</p></div>
-    <div class="benefit"><h3>Yours to keep</h3><p>Edit, brand and reuse them. No lock-in, no per-document fees.</p></div>
-  </div>
+  <section id="benefits">
+    <h2 style="margin-top:2.6rem">Benefits to your business</h2>
+    <div class="benefit-grid">
+      <div class="benefit"><h3>Start in days, not months</h3><p>Skip the blank page. Adapt proven documents instead of drafting from scratch.</p></div>
+      <div class="benefit"><h3>Audit-ready</h3><p>Each document maps to a clause an auditor, DPO or procurement team asks for.</p></div>
+      <div class="benefit"><h3>One coherent system</h3><p>The documents reference each other, so you get a system, not a folder of files.</p></div>
+      <div class="benefit"><h3>Yours to keep</h3><p>Edit, brand and reuse them. No lock-in, no per-document fees.</p></div>
+    </div>
 
-  <h2 style="margin-top:2.6rem">Who it's for</h2>
-  <p class="lede">IT Managers, Compliance Leads and Operations Directors who need to show the organisation is governing AI, not just talking about it. Pair it with <a href="course.html" class="accent">Tier 1 Training</a> so your people and your paperwork move together.</p>
+    <h3 style="margin-top:2.6rem">Who it's for</h3>
+    <p class="lede">IT Managers, Compliance Leads and Operations Directors who need to show the organisation is governing AI, not just talking about it. Pair it with <a href="course.html" class="accent">Tier 1 Training</a> so your people and your paperwork move together.</p>
+  </section>
 
-  <h2 style="margin-top:2.6rem">Coming soon</h2>
-  <div class="module-grid">
-    <div class="module-card soon"><div class="module-num">Soon</div><h3>Editable .docx versions</h3><p>Word versions of every document for teams that live in Office.</p><span class="bg-num">DOC</span></div>
-    <div class="module-card soon"><div class="module-num">Soon</div><h3>Sector overlays</h3><p>Finance, healthcare and public-sector variants of the core pack.</p><span class="bg-num">SEC</span></div>
-    <div class="module-card soon"><div class="module-num">Soon</div><h3>Guided setup</h3><p>A walkthrough that assembles your pack as you answer a few questions.</p><span class="bg-num">SET</span></div>
-  </div>
+  <section id="coming-soon">
+    <h2 style="margin-top:2.6rem">Coming soon</h2>
+    <div class="module-grid">
+      <div class="module-card soon"><div class="module-num">Soon</div><h3>Editable .docx versions</h3><p>Word versions of every document for teams that live in Office.</p><span class="bg-num">DOC</span></div>
+      <div class="module-card soon"><div class="module-num">Soon</div><h3>Sector overlays</h3><p>Finance, healthcare and public-sector variants of the core pack.</p><span class="bg-num">SEC</span></div>
+      <div class="module-card soon"><div class="module-num">Soon</div><h3>Guided setup</h3><p>A walkthrough that assembles your pack as you answer a few questions.</p><span class="bg-num">SET</span></div>
+    </div>
+  </section>
 
   <div class="callout note" style="margin-top:2rem">
     <span class="callout-icon">i</span>
@@ -179,7 +194,8 @@
         <a href="course.html">Course</a>
         <a href="plus-pack.html">Plus Pack</a>
         <a href="msp.html">MSP Partners</a>
-        <a href="about.html">About</a>
+        <a href="about.html">About Us</a>
+        <a href="phase-2.html">Phase 2</a>
         <a href="standards-map.html">Standards Map</a>
         <a href="module-11.html">Checklist</a>
         <a href="portal/login.html">Sign in</a>

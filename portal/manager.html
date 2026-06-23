@@ -9,7 +9,7 @@
 <script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
 <title>Manager portal — AI Safe@Work</title>
 <link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
-<link rel="stylesheet" href="../assets/style.css?v=11" />
+<link rel="stylesheet" href="../assets/style.css?v=12" />
 <link rel="stylesheet" href="assets/portal.css?v=2" />
 <script defer src="../assets/cinema.js?v=10"></script>
 <script src="config.js"></script>
@@ -20,26 +20,45 @@
   <span style="display:flex;align-items:center;gap:1rem"><span class="who" id="who"></span><button id="out">Sign out</button></span>
 </header>
 <main class="portal-main">
+  <nav class="section-nav" aria-label="Portal sections"><a href="#add-users">Add Users</a><a href="#remove-users">Remove Users</a><a href="#completion">View Completion %</a><a href="#certificates">Download Certificates</a></nav>
+
   <p class="eyebrow">Manager portal</p>
   <h1 class="page-title">Your <em>team</em>.</h1>
 
-  <div class="statline">
-    <div class="stat"><div class="n" id="credits">–</div><div class="l">Credits remaining</div></div>
-    <div class="stat"><div class="n" id="seated">–</div><div class="l">Seats assigned</div></div>
-  </div>
+  <section id="add-users">
+    <h2>Add Users</h2>
+    <p class="lede">Spend one credit to give a team member access. They must already have an account.</p>
+    <div class="statline">
+      <div class="stat"><div class="n" id="credits">–</div><div class="l">Credits remaining</div></div>
+      <div class="stat"><div class="n" id="seated">–</div><div class="l">Seats assigned</div></div>
+    </div>
+    <form id="assign" style="display:flex;gap:0.6rem;flex-wrap:wrap;align-items:flex-end;margin:0.8rem 0 0.4rem">
+      <div class="field" style="margin:0;flex:1;min-width:240px"><label for="eu">Team member email</label><input id="eu" type="email" required /></div>
+      <button class="btn-primary" style="width:auto;padding:0.7rem 1.4rem" type="submit">Assign seat</button>
+    </form>
+    <p id="amsg" class="auth-msg"></p>
+  </section>
 
-  <h2>Assign a seat</h2>
-  <p class="lede">Spend one credit to give a team member access. They must already have an account.</p>
-  <form id="assign" style="display:flex;gap:0.6rem;flex-wrap:wrap;align-items:flex-end;margin:0.8rem 0 0.4rem">
-    <div class="field" style="margin:0;flex:1;min-width:240px"><label for="eu">Team member email</label><input id="eu" type="email" required /></div>
-    <button class="btn-primary" style="width:auto;padding:0.7rem 1.4rem" type="submit">Assign seat</button>
-  </form>
-  <p id="amsg" class="auth-msg"></p>
-  <table class="ptable" id="seats"><thead><tr><th>Team member</th><th>Modules done</th><th>Assigned</th></tr></thead><tbody></tbody></table>
+  <section id="remove-users" style="margin-top:2.4rem">
+    <h2>Remove Users</h2>
+    <p class="lede">Revoke a team member's access and free up their seat.</p>
+    <p class="auth-msg">Coming soon: removing a user and reclaiming their credit.</p>
+  </section>
 
-  <h2 style="margin-top:2.4rem">Templates</h2>
-  <p class="lede">Audit-ready documents for your AI governance pack.</p>
-  <div id="templates" class="tiles"></div>
+  <section id="completion" style="margin-top:2.4rem">
+    <h2>View Completion %</h2>
+    <p class="lede">Each seated team member's completed modules, out of 11.</p>
+    <table class="ptable" id="seats"><thead><tr><th>Team member</th><th>Modules done</th><th>Assigned</th></tr></thead><tbody></tbody></table>
+  </section>
+
+  <section id="certificates" style="margin-top:2.4rem">
+    <h2>Download Certificates</h2>
+    <p class="lede">Verify and download completion certificates for your team.</p>
+    <p><a href="../cert.html">Open the certificate verification page →</a></p>
+    <h3 style="margin-top:1.6rem">Governance templates</h3>
+    <p class="lede">Audit-ready documents for your AI governance pack.</p>
+    <div id="templates" class="tiles"></div>
+  </section>
 
   <h2 style="margin-top:2.4rem">Course</h2>
   <div id="grid" class="tiles"></div>
