@@ -7,7 +7,7 @@
 <meta name="color-scheme" content="dark light" />
 <script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
 <title>Resources — AI Safe@Work</title>
-<meta name="description" content="Everything in one place: the Glossary of AI terms in plain English, the Standards Map, the DPO guide, and the Acceptable-Use Policy template." />
+<meta name="description" content="Everything in one place: the Glossary of AI terms in plain English, the Standards Map, the Acceptable-Use Policy template, plus the Relevant Role tracks (manager, DPO, MSP, Copilot, Shadow AI, procurement) and sector overlays (financial services, healthcare, public sector)." />
 <meta name="robots" content="noindex,nofollow" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI Safe@Work" />
@@ -39,7 +39,7 @@
 <main id="main">
   <p class="eyebrow">Reference</p>
   <h1 class="page-title">Resources.</h1>
-  <p class="lede">The handy stuff, all in one place. A plain-English glossary so no word trips you up, the map that shows auditors where each rule is covered, a guide for your data-protection person, and a ready-to-use policy you can adapt for your own team.</p>
+  <p class="lede">The handy stuff, all in one place. A plain-English glossary so no word trips you up, the map that shows auditors where each rule is covered, a ready-to-use policy you can adapt, plus free deep-dive Relevant Role tracks and sector overlays you can share as marketing.</p>
 
   <div class="module-grid">
     <a class="module-card" href="glossary.html">
@@ -56,18 +56,75 @@
       <span class="bg-num">§</span>
     </a>
 
-    <a class="module-card" href="module-dpo.html">
-      <div class="module-num">Relevant Role</div>
-      <h3>DPO guide</h3>
-   <p>The course seen through a data-protection lens, what a Data Protection Officer needs to know, check, and sign off.</p>
-      <span class="bg-num">DPO</span>
-    </a>
-
     <a class="module-card" href="templates/aup-template.html">
       <div class="module-num">Template</div>
       <h3>Acceptable-Use Policy</h3>
       <p>A ready-made AI Acceptable-Use Policy you can copy, fill in, and give to your team. The short rulebook for using AI at work.</p>
       <span class="bg-num">AUP</span>
+    </a>
+  </div>
+
+  <h2 style="margin-top:2.8rem">Relevant Roles</h2>
+  <p>Free deep-dive tracks for the people who carry the weight of AI use. Share them as marketing with managers, compliance leads and the MSPs deploying AI across multiple customers.</p>
+  <div class="module-grid">
+    <a class="module-card" href="module-manager.html">
+      <div class="module-num">Role · Manager</div>
+      <h3>Approving AI-assisted work</h3>
+      <p>Meaningful human oversight under Article 14. The four-question review. Documenting approvals that survive an audit twelve months later.</p>
+      <span class="bg-num">M</span>
+    </a>
+    <a class="module-card" href="module-dpo.html">
+      <div class="module-num">Role · DPO / compliance</div>
+      <h3>AI through the compliance lens</h3>
+      <p>DPIA + FRIA scoping. RoPA entries for AI. The 72-hour breach clock. The conversations to have with procurement before a tool is bought.</p>
+      <span class="bg-num">D</span>
+    </a>
+    <a class="module-card" href="module-msp-admin.html">
+      <div class="module-num">Role · MSP / IT Admin</div>
+      <h3>Deploying AI governance at scale</h3>
+      <p>For MSP technicians and IT admins running AI governance across multiple SMB customers. Approved-tool inventory, onboarding, incident response, white-label posture.</p>
+      <span class="bg-num">P</span>
+    </a>
+    <a class="module-card" href="module-copilot.html">
+      <div class="module-num">Role · Microsoft Copilot</div>
+      <h3>Governing Microsoft Copilot</h3>
+      <p>For M365 admins, governance leads and end users. Permissions inheritance, data residency, Purview sensitivity labels, Copilot Studio agent governance, audit logging.</p>
+      <span class="bg-num">C</span>
+    </a>
+    <a class="module-card" href="module-shadow-ai.html">
+      <div class="module-num">Role · Shadow AI</div>
+      <h3>Discovering, containing, replacing Shadow AI</h3>
+      <p>For CISOs, IT leads and security managers. Four shapes of Shadow AI. Discovery without panic. Why bans don't work. A 90-day containment plan.</p>
+      <span class="bg-num">S</span>
+    </a>
+    <a class="module-card" href="module-procurement.html">
+      <div class="module-num">Role · Procurement</div>
+      <h3>Buying AI without inheriting the risk</h3>
+      <p>For procurement leads and vendor managers. The vendor questionnaire as a buying tool, the DPA clauses that matter, and a buy / build / compose / defer decision tree.</p>
+      <span class="bg-num">G</span>
+    </a>
+  </div>
+
+  <h2 style="margin-top:2.8rem">Sector overlays</h2>
+  <p>Layered on top of the universal course for firms in a regulated sector — the regulator-specific lever, the sector "never-paste" list and the right incident escalation order. Useful as sector-specific marketing.</p>
+  <div class="module-grid">
+    <a class="module-card" href="sector-financial-services.html">
+      <div class="module-num">Sector · Financial Services</div>
+      <h3>AI in financial services</h3>
+      <p>DORA Article 13 ICT third-party risk · SR 11-7 / SS1/23 model risk · FCA Consumer Duty · MiFID II algo trading · NYDFS Part 500 · regulator escalation matrix.</p>
+      <span class="bg-num">F</span>
+    </a>
+    <a class="module-card" href="sector-healthcare.html">
+      <div class="module-num">Sector · Healthcare</div>
+      <h3>AI in healthcare</h3>
+      <p>GDPR Article 9 special-category data · EU MDR + AI Act SaMD overlap · NHS DSPT · DCB0129 / DCB0160 clinical-safety case files · MHRA AI-as-a-Medical-Device.</p>
+      <span class="bg-num">H</span>
+    </a>
+    <a class="module-card" href="sector-public-sector.html">
+      <div class="module-num">Sector · Public Sector</div>
+      <h3>AI in the public sector</h3>
+      <p>EU AI Act Annex III high-risk public services · Article 27 FRIA · UK AI Playbook · Algorithmic Transparency Recording Standard (ATRS) · Crown Commercial procurement.</p>
+      <span class="bg-num">G</span>
     </a>
   </div>
 </main>
