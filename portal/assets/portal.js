@@ -1,6 +1,6 @@
 // Shared portal engine: Supabase client, MFA-aware session guard, role router.
 // Static ES module, no build step. supabase-js from CDN.
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/+esm";
 
 const cfg = window.AISW_CONFIG;
 if (!cfg || !cfg.url || cfg.url.includes("YOUR-PROJECT")) {

@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#060608" />
 <meta name="color-scheme" content="dark light" />
 <meta name="robots" content="noindex, nofollow" />
-<script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
+<script src="/assets/theme.js"></script>
 <title>My learning — AI Safe@Work</title>
 <link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
 <link rel="stylesheet" href="../assets/style.css?v=12" />
@@ -40,23 +40,6 @@
     <p><a class="tile" href="../cert.html"><span class="k">Certificate</span><h2>View your certificate</h2><span class="arrow">Open →</span></a></p>
   </section>
 </main>
-<script type="module">
-import { guard, sb, signOut } from "./assets/portal.js";
-import { MODULES } from "./assets/modules.js";
-const profile = await guard(["end_user"]);
-if (profile) {
-  document.getElementById("who").textContent = (profile.full_name || "") + " · Team";
-  document.getElementById("out").addEventListener("click", signOut);
-  const { data: { user } } = await sb.auth.getUser();
-  const { data: prog } = await sb.from("module_progress").select("module,status").eq("user_id", user.id);
-  const done = new Set((prog || []).filter(p => p.status === "done").map(p => p.module));
-  document.getElementById("grid").innerHTML = MODULES.map(m => `
-    <a class="tile" href="/module-${m.n}.html">
-      <span class="k">Module ${String(m.n).padStart(2,"0")} ${done.has(m.n) ? "· ✓ done" : ""}</span>
-      <h2>${m.t}</h2>
-      <span class="arrow">${done.has(m.n) ? "Review →" : "Start →"}</span>
-    </a>`).join("");
-}
-</script>
+<script type="module" src="assets/end-user.js"></script>
 </body>
 </html>
