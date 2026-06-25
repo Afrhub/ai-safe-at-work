@@ -92,9 +92,41 @@ rows). Postgres handles this easily. The work is indexes and backups.
   scaling item after indexes.
 - **Email confirmation** — keep ON for prod. Decide the redirect URLs.
 - **MFA** — TOTP enrolment to AAL2 is already enforced in `login.html`. Keep it.
-- **Auth rate limits** — set sensible per-IP sign-in / sign-up limits in
-  Supabase to blunt credential stuffing.
+- **Leaked-password protection + min length** — Auth → Providers (Email): turn ON
+  "Prevent use of leaked passwords" (HaveIBeenPwned; Pro-plan feature, and the org
+  is on Pro) and set minimum length ≥ 10. Cheapest real anti-credential-stuffing win.
+- **CAPTCHA on auth endpoints** — add Cloudflare Turnstile or hCaptcha on
+  sign-up/sign-in (both tracker-free, WCAG-friendly). This is the genuine bot /
+  credential-stuffing control; rate limits alone do not stop IP-rotating botnets.
 - **Redirect allowlist** — set the prod site URL as the only allowed redirect.
+
+### Auth rate limits — target values for 50k scale
+
+At 50k users the risk is setting these **too low**, not too high. Two traps:
+(1) several limits are **global per-project** (email/SMS sending), so they must
+scale with the user base; (2) corporate users share one IP (NAT) — a 200-person
+customer office logging in at 9am looks like 200 requests from one address, so a
+tight per-IP sign-in limit locks out a whole customer on onboarding day.
+
+Read the **unit + scope** shown next to each field (Supabase has shifted these
+between per-5-min / per-hour and per-IP / global across versions); treat the
+below as magnitudes, not exact strings.
+
+| Setting | Scope | Target | Rationale |
+|---|---|---|---|
+| Sign-ups & sign-ins | per IP | ~150–300 / hour | Must clear a big NAT'd office onboarding at once. Default (~360/hr) is fine — don't lower it. |
+| Token verification (OTP/MFA) | per IP | ≥ sign-in value | Fires on every login; same office-behind-one-IP burst. |
+| Token refresh | per IP | leave default / high | Every active session refreshes ~hourly; never the throttle you want. |
+| Email sending | **global** | as high as your SMTP allows (100s–1000s/hr) | The real 50k bottleneck — gated on custom SMTP below. |
+| Anonymous sign-ins | per IP | low / off | Anonymous auth is unused. |
+
+**Dependencies / order of operations:**
+1. **Custom SMTP first** (see top of this section) — built-in email (~3–4/hr,
+   global) throttles onboarding immediately; raise the email rate limit only
+   after wiring Resend / SES / SendGrid.
+2. The genuine credential-stuffing defences are **MFA (done) + leaked-password
+   protection + CAPTCHA**, not the rate numbers. Tune rate limits as abuse
+   guardrails, not as the primary control.
 
 ---
 
