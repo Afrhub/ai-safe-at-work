@@ -15,7 +15,7 @@ if (profile) {
     document.getElementById("s-won").textContent = list.filter(d => d.stage === "won").length;
     document.querySelector("#deals-t tbody").innerHTML = list.map(d =>
    `<tr><td>${esc(d.customer_name)}</td><td>${d.est_value ? "Â£"+Number(d.est_value).toLocaleString() : "—"}</td>
-       <td><span class="chip ${d.stage}">${d.stage}</span></td><td>${new Date(d.created_at).toLocaleDateString()}</td></tr>`
+       <td><span class="chip ${esc(d.stage)}">${esc(d.stage)}</span></td><td>${new Date(d.created_at).toLocaleDateString()}</td></tr>`
     ).join("") || `<tr><td colspan="4" style="color:var(--text3)">No deals registered yet.</td></tr>`;
   }
   await loadDeals();
@@ -24,7 +24,7 @@ if (profile) {
     const { data: cust } = await sb.from("customers").select("*").order("renewal_date", { ascending: true });
     document.querySelector("#cust-t tbody").innerHTML = (cust || []).map(c =>
    `<tr><td>${esc(c.name)}</td><td>${esc(c.seats)}</td><td>${esc(c.renewal_date || "—")}</td>
-       <td><span class="chip ${c.status === "active" ? "won" : "lost"}">${c.status}</span></td></tr>`
+       <td><span class="chip ${c.status === "active" ? "won" : "lost"}">${esc(c.status)}</span></td></tr>`
     ).join("") || `<tr><td colspan="4" style="color:var(--text3)">No customers yet.</td></tr>`;
   }
   await loadCustomers();
