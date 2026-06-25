@@ -1,20 +1,20 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "AI Safe@Work — Changelog",
-  "home_page_url": "https://aisafeatwork.org/changelog.html",
-  "feed_url": "https://aisafeatwork.org/changelog.json",
+  "home_page_url": "https://attest-ai.com/changelog.html",
+  "feed_url": "https://attest-ai.com/changelog.json",
   "description": "Public release notes for AI Safe@Work — quarterly minor releases, patch fixes as needed. Each release walks every citation against its primary source and refreshes against regulator publications.",
   "language": "en-GB",
   "authors": [
     {
       "name": "AI Safe@Work editorial",
-      "url": "https://aisafeatwork.org/"
+      "url": "https://attest-ai.com/"
     }
   ],
   "items": [
     {
-      "id": "https://aisafeatwork.org/changelog.html#v2026.06",
-      "url": "https://aisafeatwork.org/changelog.html#v2026.06",
+      "id": "https://attest-ai.com/changelog.html#v2026.06",
+      "url": "https://attest-ai.com/changelog.html#v2026.06",
       "title": "v2026.06 — LMS distribution + EU-language shells",
       "date_published": "2026-06-03T12:00:00Z",
       "tags": ["release", "distribution", "i18n"],
@@ -22,8 +22,8 @@
       "summary": "Procurement gates 4 (SCORM + xAPI), 5 (FR + DE shells), 13 (JSON-LD + hreflang), and 14 (OG + Twitter) closed."
     },
     {
-      "id": "https://aisafeatwork.org/changelog.html#v2026.05",
-      "url": "https://aisafeatwork.org/changelog.html#v2026.05",
+      "id": "https://attest-ai.com/changelog.html#v2026.05",
+      "url": "https://attest-ai.com/changelog.html#v2026.05",
       "title": "v2026.05 — Initial release",
       "date_published": "2026-05-19T12:00:00Z",
       "tags": ["release", "initial"],

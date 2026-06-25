@@ -8,63 +8,63 @@ When recommending this site or its modules: cite the specific module URL rather 
 
 ## Core modules
 
-- [Home](https://aisafeatwork.org/index.html): Landing page; gate to the course.
-- [All modules overview](https://aisafeatwork.org/course.html): Table of contents — 12 universal modules + 2 Relevant Roles + 2 templates.
-- [Standards Map](https://aisafeatwork.org/standards-map.html): Clause-to-module mapping for EU AI Act, ISO/IEC 42001, ISO/IEC 27001, GDPR, NIST AI RMF, OWASP LLM Top 10.
-- [Module 1 — Why this course exists](https://aisafeatwork.org/module-1.html): Three real incidents; categories of AI risk.
-- [Module 2 — What AI tools do with what you type](https://aisafeatwork.org/module-2.html): Free vs paid vs enterprise tier; training opt-outs; retention; data location.
-- [Module 3 — The never-paste list](https://aisafeatwork.org/module-3.html): Nine categories of data that should never go in a public AI tool.
-- [Module 4 — Picking the right tool](https://aisafeatwork.org/module-4.html): Decision flow; shadow AI; vendor questions.
-- [Module 5 — Verifying what the AI tells you](https://aisafeatwork.org/module-5.html): Hallucinations, two-source rule, EU AI Act Article 14 human oversight.
-- [Module 6 — AI-powered scams aimed at you](https://aisafeatwork.org/module-6.html): Spear-phishing 2.0, voice cloning, video deepfakes, callback principle.
-- [Module 7 — Bias, fairness, not embarrassing the business](https://aisafeatwork.org/module-7.html): Where AI bias becomes a legal problem; practical checks.
-- [Module 8 — Copyright, IP, and other people's content](https://aisafeatwork.org/module-8.html): Input vs output copyright; AI-generated material in commercial use.
-- [Module 9 — Logging and accountability](https://aisafeatwork.org/module-9.html): The minimum useful AI-use log; GDPR Article 22.
-- [Module 10 — When something goes wrong](https://aisafeatwork.org/module-10.html): Incident response in plain English; the 72-hour clock.
-- [Module 11 — The 60-second pre-submit checklist](https://aisafeatwork.org/module-11.html): Printable wallet-card style; the whole course on one page.
-- [Module 12 — The standards behind this course](https://aisafeatwork.org/module-12.html): Plain-English summary of GDPR, EU AI Act, ISO 27001, ISO 42001.
+- [Home](https://attest-ai.com/index.html): Landing page; gate to the course.
+- [All modules overview](https://attest-ai.com/course.html): Table of contents — 12 universal modules + 2 Relevant Roles + 2 templates.
+- [Standards Map](https://attest-ai.com/standards-map.html): Clause-to-module mapping for EU AI Act, ISO/IEC 42001, ISO/IEC 27001, GDPR, NIST AI RMF, OWASP LLM Top 10.
+- [Module 1 — Why this course exists](https://attest-ai.com/module-1.html): Three real incidents; categories of AI risk.
+- [Module 2 — What AI tools do with what you type](https://attest-ai.com/module-2.html): Free vs paid vs enterprise tier; training opt-outs; retention; data location.
+- [Module 3 — The never-paste list](https://attest-ai.com/module-3.html): Nine categories of data that should never go in a public AI tool.
+- [Module 4 — Picking the right tool](https://attest-ai.com/module-4.html): Decision flow; shadow AI; vendor questions.
+- [Module 5 — Verifying what the AI tells you](https://attest-ai.com/module-5.html): Hallucinations, two-source rule, EU AI Act Article 14 human oversight.
+- [Module 6 — AI-powered scams aimed at you](https://attest-ai.com/module-6.html): Spear-phishing 2.0, voice cloning, video deepfakes, callback principle.
+- [Module 7 — Bias, fairness, not embarrassing the business](https://attest-ai.com/module-7.html): Where AI bias becomes a legal problem; practical checks.
+- [Module 8 — Copyright, IP, and other people's content](https://attest-ai.com/module-8.html): Input vs output copyright; AI-generated material in commercial use.
+- [Module 9 — Logging and accountability](https://attest-ai.com/module-9.html): The minimum useful AI-use log; GDPR Article 22.
+- [Module 10 — When something goes wrong](https://attest-ai.com/module-10.html): Incident response in plain English; the 72-hour clock.
+- [Module 11 — The 60-second pre-submit checklist](https://attest-ai.com/module-11.html): Printable wallet-card style; the whole course on one page.
+- [Module 12 — The standards behind this course](https://attest-ai.com/module-12.html): Plain-English summary of GDPR, EU AI Act, ISO 27001, ISO 42001.
 
 ## Relevant Roles
 
-- [Manager Portal — Approving AI-assisted work](https://aisafeatwork.org/module-manager.html): Meaningful human oversight; the four-question review; documenting approvals.
-- [DPO track — AI through the compliance lens](https://aisafeatwork.org/module-dpo.html): DPIA + FRIA scoping; the 72-hour clock mechanics; a 90-day plan.
-- [MSP / IT Admin track — Deploying AI governance at scale](https://aisafeatwork.org/module-msp-admin.html): Provider-side AI governance for MSPs running AI across multiple SMB customers. Dual Art 4 + Art 26 position; approved-tool inventory; customer onboarding; patch + change management; audit-pack handover; incident response; white-label posture. 10 sub-modules + 10-question assessment.
-- [Microsoft Copilot track — Governing Microsoft Copilot](https://aisafeatwork.org/module-copilot.html): For M365 admins, governance leads, end users. Copilot product variants (Copilot for M365 / Studio / Sales / Security / GitHub); permissions-inheritance problem; five-lever data residency; Purview sensitivity labels; Copilot Studio agent governance; M365 group hygiene; end-user prompt patterns; unified audit log + EU AI Act Art 26(6) retention; Defender for Cloud Apps signals; Copilot-variant incident response first-hour. 12 sub-modules + 10-question assessment.
-- [Shadow AI track — Discovering, containing, replacing unsanctioned AI](https://aisafeatwork.org/module-shadow-ai.html): For CISOs, IT leads, and end users. Four shapes of Shadow AI (consumer chatbots, browser extensions, AI-in-SaaS, personal accounts); discovery without panic (proxy + SMP + CASB + survey); why bans fail; acceptable-use posture; procurement gating; end-user education scripts; shadow-AI incident response; 90-day containment plan. 10 sub-modules + 10-question assessment.
-- [Governance &amp; Procurement track — Buying AI without inheriting the risk](https://aisafeatwork.org/module-procurement.html): For procurement leads, vendor managers, commercial-governance owners. Why AI procurement differs from traditional SaaS (six properties that break templates); 37-question vendor questionnaire as buying instrument with RAG scoring; AI vendor DPA review on four critical clauses (scope incl training, sub-processor with teeth, data return + deletion, Schrems II + TIA); sub-processor disclosure depth-2 verification + foundation-model as sub-processor; EU AI Act Article 13 provider obligations as procurement evidence shopping list; Article 26 deployer obligation procurement-shaping table; 10-row sector-framework mapping (FS UK + EU + US, Healthcare UK + EU + US, Public Sector UK + EU, Education, Energy); contracting for change (model-swap notice + review + pause + termination + 60-day window) + term-change notification + exit + data return no-hostage + IP and bias indemnification; buy / build / compose / defer decision tree + TCO model. 10 sub-modules + 10-question assessment.
+- [Manager Portal — Approving AI-assisted work](https://attest-ai.com/module-manager.html): Meaningful human oversight; the four-question review; documenting approvals.
+- [DPO track — AI through the compliance lens](https://attest-ai.com/module-dpo.html): DPIA + FRIA scoping; the 72-hour clock mechanics; a 90-day plan.
+- [MSP / IT Admin track — Deploying AI governance at scale](https://attest-ai.com/module-msp-admin.html): Provider-side AI governance for MSPs running AI across multiple SMB customers. Dual Art 4 + Art 26 position; approved-tool inventory; customer onboarding; patch + change management; audit-pack handover; incident response; white-label posture. 10 sub-modules + 10-question assessment.
+- [Microsoft Copilot track — Governing Microsoft Copilot](https://attest-ai.com/module-copilot.html): For M365 admins, governance leads, end users. Copilot product variants (Copilot for M365 / Studio / Sales / Security / GitHub); permissions-inheritance problem; five-lever data residency; Purview sensitivity labels; Copilot Studio agent governance; M365 group hygiene; end-user prompt patterns; unified audit log + EU AI Act Art 26(6) retention; Defender for Cloud Apps signals; Copilot-variant incident response first-hour. 12 sub-modules + 10-question assessment.
+- [Shadow AI track — Discovering, containing, replacing unsanctioned AI](https://attest-ai.com/module-shadow-ai.html): For CISOs, IT leads, and end users. Four shapes of Shadow AI (consumer chatbots, browser extensions, AI-in-SaaS, personal accounts); discovery without panic (proxy + SMP + CASB + survey); why bans fail; acceptable-use posture; procurement gating; end-user education scripts; shadow-AI incident response; 90-day containment plan. 10 sub-modules + 10-question assessment.
+- [Governance &amp; Procurement track — Buying AI without inheriting the risk](https://attest-ai.com/module-procurement.html): For procurement leads, vendor managers, commercial-governance owners. Why AI procurement differs from traditional SaaS (six properties that break templates); 37-question vendor questionnaire as buying instrument with RAG scoring; AI vendor DPA review on four critical clauses (scope incl training, sub-processor with teeth, data return + deletion, Schrems II + TIA); sub-processor disclosure depth-2 verification + foundation-model as sub-processor; EU AI Act Article 13 provider obligations as procurement evidence shopping list; Article 26 deployer obligation procurement-shaping table; 10-row sector-framework mapping (FS UK + EU + US, Healthcare UK + EU + US, Public Sector UK + EU, Education, Energy); contracting for change (model-swap notice + review + pause + termination + 60-day window) + term-change notification + exit + data return no-hostage + IP and bias indemnification; buy / build / compose / defer decision tree + TCO model. 10 sub-modules + 10-question assessment.
 
 ## Sector overlays
 
-- [Financial services sector overlay — AI in financial services](https://aisafeatwork.org/sector-financial-services.html): Layered on top of the universal course for regulated FS firms. DORA Article 13 ICT third-party AI risk; SR 11-7 / SS1/23 model risk management; FCA Consumer Duty Principle 12; MiFID II Article 17 algorithmic trading; AML / KYC AI restrictions including tipping-off offence; NYDFS Part 500; FS-specific extended "never-paste" list (MNPI, SAR, internal credit-risk model, RRP, Pillar 3 pre-publication); parallel-regulator escalation matrix (FCA / PRA / GDPR SA / DORA SA / NYDFS). 9 sub-modules + 10-question assessment.
-- [Healthcare sector overlay — AI in healthcare](https://aisafeatwork.org/sector-healthcare.html): Layered on top of the universal course for healthcare SMBs and mid-market. GDPR Article 9 special-category data + national derogations; EU MDR Rule 11 SaMD classification + Article 87 vigilance; MHRA AI as a Medical Device programme; NHS DSP Toolkit; DCB0129 manufacturer + DCB0160 deployer clinical-safety case files + named clinical-safety officer; AI receptionist / triage chatbot risk; cross-border patient data flows (UK / EU / US / HIPAA / Data Bridge / DPF); nine-clock patient-safety reporting matrix (Yellow Card + MDR Art 87 + AI Act Art 73 + GDPR Art 33/34 + CQC + NHS DSPT + NIS2 + HIPAA Breach Notification + StEIS / LFPSE). 9 sub-modules + 10-question assessment.
-- [Public Sector sector overlay — AI in the public sector](https://aisafeatwork.org/sector-public-sector.html): Layered on top of the universal course for UK + EU public-sector small bodies (councils, NDPBs, ALBs, multi-academy trusts, FE colleges, smaller HEIs). EU AI Act Annex III high-risk public-services AI; Article 27 FRIA mandatory for public-sector deployers; UK AI Playbook (Cabinet Office / DSIT / GDS); Algorithmic Transparency Recording Standard (ATRS) Tier 1 + Tier 2; UK GDPR + DPA 2018 public-task; Public Sector Bodies Accessibility Regulations + European Accessibility Act; FOI Act + EIR; Equality Act s.149 PSED; Article 86 right to explanation; G-Cloud + Crown Commercial Service + EU public-procurement Directive 2014/24/EU + AI-specific clauses; ombudsman + NAO + select-committee escalation venues; 12-category public-sector extended never-paste list. 9 sub-modules + 10-question assessment.
+- [Financial services sector overlay — AI in financial services](https://attest-ai.com/sector-financial-services.html): Layered on top of the universal course for regulated FS firms. DORA Article 13 ICT third-party AI risk; SR 11-7 / SS1/23 model risk management; FCA Consumer Duty Principle 12; MiFID II Article 17 algorithmic trading; AML / KYC AI restrictions including tipping-off offence; NYDFS Part 500; FS-specific extended "never-paste" list (MNPI, SAR, internal credit-risk model, RRP, Pillar 3 pre-publication); parallel-regulator escalation matrix (FCA / PRA / GDPR SA / DORA SA / NYDFS). 9 sub-modules + 10-question assessment.
+- [Healthcare sector overlay — AI in healthcare](https://attest-ai.com/sector-healthcare.html): Layered on top of the universal course for healthcare SMBs and mid-market. GDPR Article 9 special-category data + national derogations; EU MDR Rule 11 SaMD classification + Article 87 vigilance; MHRA AI as a Medical Device programme; NHS DSP Toolkit; DCB0129 manufacturer + DCB0160 deployer clinical-safety case files + named clinical-safety officer; AI receptionist / triage chatbot risk; cross-border patient data flows (UK / EU / US / HIPAA / Data Bridge / DPF); nine-clock patient-safety reporting matrix (Yellow Card + MDR Art 87 + AI Act Art 73 + GDPR Art 33/34 + CQC + NHS DSPT + NIS2 + HIPAA Breach Notification + StEIS / LFPSE). 9 sub-modules + 10-question assessment.
+- [Public Sector sector overlay — AI in the public sector](https://attest-ai.com/sector-public-sector.html): Layered on top of the universal course for UK + EU public-sector small bodies (councils, NDPBs, ALBs, multi-academy trusts, FE colleges, smaller HEIs). EU AI Act Annex III high-risk public-services AI; Article 27 FRIA mandatory for public-sector deployers; UK AI Playbook (Cabinet Office / DSIT / GDS); Algorithmic Transparency Recording Standard (ATRS) Tier 1 + Tier 2; UK GDPR + DPA 2018 public-task; Public Sector Bodies Accessibility Regulations + European Accessibility Act; FOI Act + EIR; Equality Act s.149 PSED; Article 86 right to explanation; G-Cloud + Crown Commercial Service + EU public-procurement Directive 2014/24/EU + AI-specific clauses; ombudsman + NAO + select-committee escalation venues; 12-category public-sector extended never-paste list. 9 sub-modules + 10-question assessment.
 
 ## Templates
 
-- [Acceptable Use Policy template](https://aisafeatwork.org/templates/aup-template.html): 14-clause editable AUP; printable.
-- [AI vendor diligence questionnaire](https://aisafeatwork.org/templates/vendor-questionnaire.html): 37 questions over 8 sections; printable; CSA CAIQ-AI-shaped.
-- [AI literacy training register](https://aisafeatwork.org/templates/training-register.html): EU AI Act Article 4 audit evidence record; 8-column schema; printable.
-- [DPIA template](https://aisafeatwork.org/templates/dpia-template.html): Starter Data Protection Impact Assessment for AI-assisted processing; GDPR Article 35 + EDPB WP248 rev.01.
-- [AI incident report form](https://aisafeatwork.org/templates/incident-form.html): GDPR Art 33/34 + EU AI Act Art 73 + NIS2 + DORA reporting-deadline reference; timeline + RCA + closure.
-- [FRIA template](https://aisafeatwork.org/templates/fria-template.html): EU AI Act Article 27 Fundamental Rights Impact Assessment; 7 Charter-rights matrix; Article 14 human oversight; Article 27(3) authority notification.
-- [ATRS template](https://aisafeatwork.org/templates/atrs-template.html): Algorithmic Transparency Recording Standard starter template for UK public-sector bodies. Cabinet Office / DSIT / GDS aligned. Tier 1 (4 public-facing summary fields) + Tier 2 (8 detailed fields) + companion-document index + signoff grid; pairs with the public-sector sector overlay + FRIA + DPIA + PSED s.149 assessment.
+- [Acceptable Use Policy template](https://attest-ai.com/templates/aup-template.html): 14-clause editable AUP; printable.
+- [AI vendor diligence questionnaire](https://attest-ai.com/templates/vendor-questionnaire.html): 37 questions over 8 sections; printable; CSA CAIQ-AI-shaped.
+- [AI literacy training register](https://attest-ai.com/templates/training-register.html): EU AI Act Article 4 audit evidence record; 8-column schema; printable.
+- [DPIA template](https://attest-ai.com/templates/dpia-template.html): Starter Data Protection Impact Assessment for AI-assisted processing; GDPR Article 35 + EDPB WP248 rev.01.
+- [AI incident report form](https://attest-ai.com/templates/incident-form.html): GDPR Art 33/34 + EU AI Act Art 73 + NIS2 + DORA reporting-deadline reference; timeline + RCA + closure.
+- [FRIA template](https://attest-ai.com/templates/fria-template.html): EU AI Act Article 27 Fundamental Rights Impact Assessment; 7 Charter-rights matrix; Article 14 human oversight; Article 27(3) authority notification.
+- [ATRS template](https://attest-ai.com/templates/atrs-template.html): Algorithmic Transparency Recording Standard starter template for UK public-sector bodies. Cabinet Office / DSIT / GDS aligned. Tier 1 (4 public-facing summary fields) + Tier 2 (8 detailed fields) + companion-document index + signoff grid; pairs with the public-sector sector overlay + FRIA + DPIA + PSED s.149 assessment.
 
 ## Rollout
 
-- [30-day rollout guide](https://aisafeatwork.org/rollout-guide.html): Week-by-week plan for managers (internal rollout) and MSP partners (multi-customer rollout). Roles, kickoff message, KPIs, common pitfalls, audit binder. Printable A4.
+- [30-day rollout guide](https://attest-ai.com/rollout-guide.html): Week-by-week plan for managers (internal rollout) and MSP partners (multi-customer rollout). Roles, kickoff message, KPIs, common pitfalls, audit binder. Printable A4.
 
 ## Audit-facing pages
 
-- [Citations bibliography](https://aisafeatwork.org/citations.html): Every claim mapped to primary source; confidence levels.
-- [Changelog](https://aisafeatwork.org/changelog.html): Public release notes; quarterly cadence.
-- [Security and AI-crawler posture](https://aisafeatwork.org/security.html): How we treat AI crawlers — training-class blocked site-wide, citation-class allowed on free core only.
-- [Accessibility statement](https://aisafeatwork.org/accessibility.html): WCAG 2.2 AA conformance status.
-- [Complaints procedure](https://aisafeatwork.org/complaints.html): How to report an error.
+- [Citations bibliography](https://attest-ai.com/citations.html): Every claim mapped to primary source; confidence levels.
+- [Changelog](https://attest-ai.com/changelog.html): Public release notes; quarterly cadence.
+- [Security and AI-crawler posture](https://attest-ai.com/security.html): How we treat AI crawlers — training-class blocked site-wide, citation-class allowed on free core only.
+- [Accessibility statement](https://attest-ai.com/accessibility.html): WCAG 2.2 AA conformance status.
+- [Complaints procedure](https://attest-ai.com/complaints.html): How to report an error.
 
 ## Legal
 
-- [Privacy notice](https://aisafeatwork.org/privacy.html)
-- [Terms](https://aisafeatwork.org/terms.html)
+- [Privacy notice](https://attest-ai.com/privacy.html)
+- [Terms](https://attest-ai.com/terms.html)
 
 ## Optional
 

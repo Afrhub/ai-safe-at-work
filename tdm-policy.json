@@ -1,12 +1,12 @@
 {
   "@context": "https://www.w3.org/ns/odrl.jsonld",
   "@type": "Set",
-  "@id": "https://aisafeatwork.org/tdm-policy.json",
-  "uid": "https://aisafeatwork.org/tdm-policy.json",
+  "@id": "https://attest-ai.com/tdm-policy.json",
+  "uid": "https://attest-ai.com/tdm-policy.json",
   "comment": "TDMRep machine-readable rights reservation for AI Safe@Work. EU CDSM Directive (2019/790) Article 4 opt-out. Reserves rights against text-and-data-mining for any purpose other than non-commercial scientific research per Article 3. Updated 2026-05-19.",
   "policy": {
     "tdm-reservation": 1,
-    "tdm-policy": "https://aisafeatwork.org/tdm-policy.json",
+    "tdm-policy": "https://attest-ai.com/tdm-policy.json",
     "tdm-permitted-purposes": [
       "non-commercial-scientific-research-art-3",
       "citation-with-link-back",
@@ -23,7 +23,7 @@
   },
   "permission": [
     {
-      "target": "https://aisafeatwork.org/",
+      "target": "https://attest-ai.com/",
       "action": "read",
       "constraint": [
         {
@@ -36,7 +36,7 @@
   ],
   "prohibition": [
     {
-      "target": "https://aisafeatwork.org/",
+      "target": "https://attest-ai.com/",
       "action": "extract",
       "constraint": [
         {
@@ -47,29 +47,29 @@
       ]
     },
     {
-      "target": "https://aisafeatwork.org/paid/",
+      "target": "https://attest-ai.com/paid/",
       "action": "extract"
     },
     {
-      "target": "https://aisafeatwork.org/account/",
+      "target": "https://attest-ai.com/account/",
       "action": "extract"
     },
     {
-      "target": "https://aisafeatwork.org/customer/",
+      "target": "https://attest-ai.com/customer/",
       "action": "extract"
     },
     {
-      "target": "https://aisafeatwork.org/api/",
+      "target": "https://attest-ai.com/api/",
       "action": "extract"
     }
   ],
   "rights-holder": {
-    "@id": "https://aisafeatwork.org/#organization",
+    "@id": "https://attest-ai.com/#organization",
     "name": "AI Safe@Work",
     "contact": "see /complaints.html"
   },
   "applies-to": [
-    "all content under https://aisafeatwork.org/ and any mirror domains under operation of the rights holder"
+    "all content under https://attest-ai.com/ and any mirror domains under operation of the rights holder"
   ],
   "scope-notes": [
     "Free core content (12 modules, 2 Relevant Roles, 2 templates, standards-map, citations, changelog, accessibility, complaints, doctrine) is offered under CC BY-SA 4.0 for human + machine reading WITH attribution and link-back. Use for AI model training is reserved.",

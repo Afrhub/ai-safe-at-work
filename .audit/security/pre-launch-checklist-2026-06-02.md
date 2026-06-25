@@ -144,9 +144,9 @@ Per `DOCTRINE.md § Pre-launch security checklist`: any commit introducing a new
 
 | Item | Status | Evidence |
 |---|---|---|
-| 1.1 Privacy policy still covers new surfaces | PASS | SCORM + xAPI fire only when buyer-side LMS / LRS is detected. Default state on aisafeatwork.org: both silent. No data collection added to the public site. `privacy.html` unchanged; new surfaces do not collect on the public origin. |
+| 1.1 Privacy policy still covers new surfaces | PASS | SCORM + xAPI fire only when buyer-side LMS / LRS is detected. Default state on attest-ai.com: both silent. No data collection added to the public site. `privacy.html` unchanged; new surfaces do not collect on the public origin. |
 | 1.2 Data storage location | PASS | SCORM `cmi.*` data resides on the buyer's LMS. xAPI statements go to the buyer-configured LRS endpoint, never to our origin. `localStorage` progress unchanged. Documented in `.audit/integrations/xapi-statements-spec.md`. |
-| 1.4 Minimal data collection | PASS | xAPI actor defaults to anonymous (`mbox: mailto:anonymous@aisafeatwork.org`) unless buyer supplies their own. No identifier captured by us. |
+| 1.4 Minimal data collection | PASS | xAPI actor defaults to anonymous (`mbox: mailto:anonymous@attest-ai.com`) unless buyer supplies their own. No identifier captured by us. |
 | 2.2 Security headers — new surfaces | PASS | xAPI POSTs use `credentials: 'omit'`. CSP `connect-src 'self'` continues to block xAPI by default; buyer-side requirement to add LRS origin is documented in `.audit/integrations/xapi-statements-spec.md` § CSP. |
 | 2.4 XSS — new surfaces | PASS | `v2/assets/scorm-api.js` + `v2/assets/xapi-adapter.js` use no `innerHTML`, no `document.write`, no `eval`. Grep verified: `grep -nE "innerHTML\s*=\|document\.write\(\|eval\(" v2/assets/scorm-api.js v2/assets/xapi-adapter.js` returns zero hits. v2.js i18n extension uses `textContent` exclusively. |
 | 3.2 No keys in frontend | PASS | xAPI auth header read from URL params (`?lrs=&auth=`) or `window.AISW_XAPI_CONFIG` global. Stripped from URL history after read via `history.replaceState`. No defaults committed. |

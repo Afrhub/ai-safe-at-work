@@ -12,7 +12,7 @@
 |---|---|---|---|---|---|---|
 | AISW-CT-001 | HTML comment honeypot | `pricing.html` (deferred — page is currently `noindex`; token is staged in this log, drops into HTML the day pricing lifts to commerce) | — | — | At pricing.html lift from `noindex` | Founder |
 | AISW-CT-002 | HTML comment honeypot | `msp.html` (same deferral logic) | — | — | At msp.html lift from `noindex` | Founder |
-| AISW-CT-003 | DNS canary subdomain (`*.canary.aisafeatwork.org`) | Cloudflare DNS, resolves to a 403 page logged separately | — | — | At canonical-domain ship + Cloudflare cutover | Founder |
+| AISW-CT-003 | DNS canary subdomain (`*.canary.attest-ai.com`) | Cloudflare DNS, resolves to a 403 page logged separately | — | — | At canonical-domain ship + Cloudflare cutover | Founder |
 | AISW-CT-004 | `.audit/security/canary-tokens.md` self-reference (this file) | This file is `disallow:/.audit/*` in `robots.txt` AND 404-redirected on Netlify. Any 200 response in access logs against this path indicates that the bot-block layer has regressed. | 2026-06-02 | 2026-06-02 | 2026-09-02 | Founder |
 
 ---

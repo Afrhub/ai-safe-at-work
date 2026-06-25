@@ -22,7 +22,7 @@
 | S-03 | Cursor (paid) | Founder | monthly | IDE |
 | S-04 | GitHub | Founder | monthly | repo + actions |
 | S-05 | Cloudflare / Netlify (TBD) | Founder | monthly | hosting |
-| S-06 | Domain registrar (TBD) | Founder | annual | aisafeatwork.org |
+| S-06 | Domain registrar (TBD) | Founder | annual | attest-ai.com |
 | S-07 | Password manager (1Password / Bitwarden — TBD) | Founder | annual | secrets |
 | S-08 | Email provider (TBD) | Founder | annual | contact / business email |
 | S-09 | Stripe (planned) | Founder | n/a | payments when live |

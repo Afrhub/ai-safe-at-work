@@ -41,7 +41,7 @@ Supabase project.
 | | Dev (today) | Prod (to create) |
 |---|---|---|
 | Supabase project | `aisafework-portals` (`hanjrsslhnuauaysbhun`) | new project, EU/London |
-| Frontend | `aisafework.netlify.app` | real domain (e.g. `app.aisafeatwork.org`) |
+| Frontend | `aisafework.netlify.app` | real domain (e.g. `app.attest-ai.com`) |
 | Plan | small / current | Pro + sized compute |
 | Config | `portal/config.js` (dev keys) | prod `config.js` (prod publishable key) |
 

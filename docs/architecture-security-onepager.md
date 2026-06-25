@@ -44,4 +44,4 @@ The browser only ever holds a **publishable (anon) key**; all data access is med
 Modern SaaS frontends are static apps on a CDN; the seriousness is in the **data, identity and control plane** — which here is **managed PostgreSQL on AWS London with enforced RLS, MFA and audit**. This is a deliberately boring, defensible, compliance-aligned architecture, not a bespoke server estate to operate.
 
 ---
-*Production environment served from `app.aisafeatwork.org` (HTTPS). Hosting can be delivered via enterprise edge (Cloudflare/CloudFront) on request; data plane remains AWS London.*
+*Production environment served from `app.attest-ai.com` (HTTPS). Hosting can be delivered via enterprise edge (Cloudflare/CloudFront) on request; data plane remains AWS London.*

@@ -143,4 +143,4 @@ Disallow: /admin/
 Disallow: /.audit/
 Allow: /
 
-Sitemap: https://aisafeatwork.org/sitemap.xml
+Sitemap: https://attest-ai.com/sitemap.xml

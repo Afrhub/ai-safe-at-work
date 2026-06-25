@@ -328,10 +328,10 @@ Goal: confirm citation / answer-engine crawlers can still fetch + cite our free 
 
 | Step | Action | Pass criterion |
 |---|---|---|
-| 1 | Open ChatGPT. Paste: `Read https://aisafeatwork.org/module-3.html and list the 9 categories of data that should never go into a public AI tool.` | ChatGPT returns the 9 categories AND shows the URL as a source link. |
+| 1 | Open ChatGPT. Paste: `Read https://attest-ai.com/module-3.html and list the 9 categories of data that should never go into a public AI tool.` | ChatGPT returns the 9 categories AND shows the URL as a source link. |
 | 2 | Open Claude. Same prompt. | Same. |
 | 3 | Open Perplexity. Same prompt (or browse to perplexity.ai and ask). | Returns the 9 categories with our URL listed in the source pills. |
-| 4 | Open Google. Search `site:aisafeatwork.org "never-paste"` | Module 3 appears in results. |
+| 4 | Open Google. Search `site:attest-ai.com "never-paste"` | Module 3 appears in results. |
 | 5 | Open Bing. Same search. | Module 3 appears in results. |
 
 **Fail = wedge broken.** Investigate immediately: check robots.txt for accidental blanket `Disallow: /`, check `tdm-policy.json` for syntax errors, check no edge bot-mgmt rule went too broad, check Google Search Console for "blocked by robots.txt" warnings.
@@ -342,12 +342,12 @@ Goal: confirm the published `robots.txt` and `tdm-policy.json` actually contain 
 
 | Step | URL | What to verify present |
 |---|---|---|
-| 1 | <https://aisafeatwork.org/robots.txt> | `User-agent: GPTBot` followed by `Disallow: /` — confirms training-bot block site-wide |
+| 1 | <https://attest-ai.com/robots.txt> | `User-agent: GPTBot` followed by `Disallow: /` — confirms training-bot block site-wide |
 | 2 | same | `User-agent: ChatGPT-User` followed by `Disallow: /paid/` and `Allow: /` — confirms citation-bot allowed on free, blocked on paid |
 | 3 | same | `User-agent: CCBot` → `Disallow: /` — confirms Common Crawl block (indirect training-data protection) |
-| 4 | same | `Sitemap: https://aisafeatwork.org/sitemap.xml` line still present |
-| 5 | <https://aisafeatwork.org/tdm-policy.json> | Returns valid JSON; `"tdm-reservation": 1`; `"prohibited-purposes"` array includes `training-of-machine-learning-models`; `"last-reviewed"` date within last 90 days |
-| 6 | <https://aisafeatwork.org/llms.txt> | Still present (citation engines depend on it); covers free-core paths only |
+| 4 | same | `Sitemap: https://attest-ai.com/sitemap.xml` line still present |
+| 5 | <https://attest-ai.com/tdm-policy.json> | Returns valid JSON; `"tdm-reservation": 1`; `"prohibited-purposes"` array includes `training-of-machine-learning-models`; `"last-reviewed"` date within last 90 days |
+| 6 | <https://attest-ai.com/llms.txt> | Still present (citation engines depend on it); covers free-core paths only |
 
 **Fail = deploy regression.** Roll back to last good commit, re-validate, redeploy.
 
@@ -426,7 +426,7 @@ If `ChatGPT-User` shows 403s on free paths → wedge broken, fix immediately.
 
 - [ ] Confirm hosting choice (Cloudflare Pages strongly preferred for free-tier Bot Management features).
 - [ ] Write path-scoped robots.txt rules; ship pre-launch.
-- [ ] Enable Cloudflare Bot Management on `*.aisafeatwork.org/{paid,account,customer,api,admin}/*` (or equivalent paths).
+- [ ] Enable Cloudflare Bot Management on `*.attest-ai.com/{paid,account,customer,api,admin}/*` (or equivalent paths).
 - [ ] Build `.audit/security/canary-tokens.md` with the rotation log.
 - [ ] Add honeypot URL to paid HTML (hidden from humans + free-tier crawlers).
 - [ ] Document the policy on a public-facing page (`/security.html` or extend `accessibility.html` model — short statement of posture).

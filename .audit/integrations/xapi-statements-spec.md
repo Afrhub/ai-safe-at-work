@@ -40,8 +40,8 @@ The buyer configures the endpoint + auth via one of three mechanisms — see `xa
 
 | Activity | URI |
 |---|---|
-| Course | `https://aisafeatwork.org/xapi/v2/course` |
-| Module N (N = 1..11) | `https://aisafeatwork.org/xapi/v2/module/N` |
+| Course | `https://attest-ai.com/xapi/v2/course` |
+| Module N (N = 1..11) | `https://attest-ai.com/xapi/v2/module/N` |
 
 The course activity is the parent of every module activity in `context.contextActivities.parent`.
 
@@ -63,7 +63,7 @@ The course activity is the parent of every module activity in `context.contextAc
     "objectType": "Agent",
     "name": "AI Safe@Work learner",
     "account": {
-      "homePage": "https://aisafeatwork.org/v2/",
+      "homePage": "https://attest-ai.com/v2/",
       "name": "anonymous-or-buyer-supplied-id"
     }
   },
@@ -73,7 +73,7 @@ The course activity is the parent of every module activity in `context.contextAc
   },
   "object": {
     "objectType": "Activity",
-    "id": "https://aisafeatwork.org/xapi/v2/module/3",
+    "id": "https://attest-ai.com/xapi/v2/module/3",
     "definition": {
       "name": { "en-US": "AI Safe@Work — v2 module 3" },
       "type": "http://adlnet.gov/expapi/activities/lesson"
@@ -86,7 +86,7 @@ The course activity is the parent of every module activity in `context.contextAc
     "contextActivities": {
       "parent": [
         {
-          "id": "https://aisafeatwork.org/xapi/v2/course",
+          "id": "https://attest-ai.com/xapi/v2/course",
           "objectType": "Activity"
         }
       ]
@@ -106,7 +106,7 @@ The course activity is the parent of every module activity in `context.contextAc
   },
   "object": {
     "objectType": "Activity",
-    "id": "https://aisafeatwork.org/xapi/v2/course",
+    "id": "https://attest-ai.com/xapi/v2/course",
     "definition": {
       "name": { "en-US": "AI Safe@Work — v2 course" },
       "type": "http://adlnet.gov/expapi/activities/course"
@@ -129,7 +129,7 @@ The course activity is the parent of every module activity in `context.contextAc
     "contextActivities": {
       "parent": [
         {
-          "id": "https://aisafeatwork.org/xapi/v2/course",
+          "id": "https://attest-ai.com/xapi/v2/course",
           "objectType": "Activity"
         }
       ]
@@ -176,9 +176,9 @@ A buyer who does not update CSP will see the adapter log a `console.warn` per st
 2. Update CSP `connect-src` to include the LRS origin.
 3. Open `v2/index.html` in a private browsing window from the SCORM container or hosted location.
 4. Click "Mark this module complete" on module 1.
-5. Check the LRS dashboard for a `completed` statement against `https://aisafeatwork.org/xapi/v2/module/1` within 5 seconds.
+5. Check the LRS dashboard for a `completed` statement against `https://attest-ai.com/xapi/v2/module/1` within 5 seconds.
 6. Repeat for modules 2–11.
-7. After module 11, check for a `passed` statement against `https://aisafeatwork.org/xapi/v2/course` with `result.score.scaled = 1.0`.
+7. After module 11, check for a `passed` statement against `https://attest-ai.com/xapi/v2/course` with `result.score.scaled = 1.0`.
 
 If any step fails, the cause is in one of:
 - CSP `connect-src` (most common — log will say "blocked by CSP")

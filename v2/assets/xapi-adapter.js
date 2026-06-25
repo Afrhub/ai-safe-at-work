@@ -51,7 +51,7 @@
 (function () {
   'use strict';
 
-  var ACTIVITY_BASE = 'https://aisafeatwork.org/xapi/v2/';
+  var ACTIVITY_BASE = 'https://attest-ai.com/xapi/v2/';
   var VERBS = {
     experienced: 'http://adlnet.gov/expapi/verbs/experienced',
     completed:   'http://adlnet.gov/expapi/verbs/completed',
@@ -137,7 +137,7 @@
       objectType: 'Agent',
       name: 'AI Safe@Work learner',
       account: {
-        homePage: 'https://aisafeatwork.org/v2/',
+        homePage: 'https://attest-ai.com/v2/',
         name: opts.actorName || 'anonymous'
       }
     };

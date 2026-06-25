@@ -12,15 +12,15 @@
 <meta property="og:site_name" content="AI Safe@Work" />
 <meta property="og:title" content="Changelog — AI Safe@Work" />
 <meta property="og:description" content="Public release notes for AI Safe@Work. Quarterly cadence — each release walks every citation against its primary source, refreshes against regulator updates, and is dated in every page footer." />
-<meta property="og:url" content="https://aisafeatwork.org/changelog.html" />
-<meta property="og:image" content="https://aisafeatwork.org/og-card.png?v=2" />
+<meta property="og:url" content="https://attest-ai.com/changelog.html" />
+<meta property="og:image" content="https://attest-ai.com/og-card.png?v=2" />
 <meta property="og:locale" content="en_GB" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Changelog — AI Safe@Work" />
 <meta name="twitter:description" content="Public release notes for AI Safe@Work. Quarterly cadence — each release walks every citation against its primary source, refreshes against regulator updates, and is dated in every page footer." />
-<meta name="twitter:image" content="https://aisafeatwork.org/og-card.png?v=2" />
-<link rel="alternate" type="application/rss+xml" title="AI Safe@Work, Changelog (RSS)" href="https://aisafeatwork.org/changelog.xml" />
-<link rel="alternate" type="application/feed+json" title="AI Safe@Work, Changelog (JSON Feed)" href="https://aisafeatwork.org/changelog.json" />
+<meta name="twitter:image" content="https://attest-ai.com/og-card.png?v=2" />
+<link rel="alternate" type="application/rss+xml" title="AI Safe@Work, Changelog (RSS)" href="https://attest-ai.com/changelog.xml" />
+<link rel="alternate" type="application/feed+json" title="AI Safe@Work, Changelog (JSON Feed)" href="https://attest-ai.com/changelog.json" />
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
@@ -58,9 +58,9 @@
       "@type": "Article",
       "headline": "Changelog - AI Safe@Work",
       "description": "Public release notes; quarterly cadence.",
-      "url": "https://aisafeatwork.org/changelog.html",
+      "url": "https://attest-ai.com/changelog.html",
       "publisher": {
-        "@id": "https://aisafeatwork.org/#organization"
+        "@id": "https://attest-ai.com/#organization"
       },
       "dateModified": "2026-05-19",
       "datePublished": "2026-05-19",
@@ -73,13 +73,13 @@
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://aisafeatwork.org/"
+          "item": "https://attest-ai.com/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Changelog \u2014 AI Safe@Work",
-          "item": "https://aisafeatwork.org/changelog.html"
+          "item": "https://attest-ai.com/changelog.html"
         }
       ]
     }
@@ -129,7 +129,7 @@
     <h3>What's new</h3>
     <ul>
    <li><strong>SCORM 1.2 package</strong>, IMS Content Aggregation Model v1.2 manifest, single-SCO, 80% mastery score, 2-hour session cap. API discovery walks parent <code>opener</code> chains; <code>cmi.suspend_data</code> persists per-module completion across sessions. Builder script under <code>scripts/build-scorm.py</code> (stdlib zip, zip-slip safe, <code>--locale en|fr|de|all</code>). Deployable on Moodle, Cornerstone, Workday Learning, SCORM Cloud.</li>
-   <li><strong>xAPI (Tin Can) adapter</strong>, HTTPS-gated POST to any conformant LRS. Anonymous-actor default, no auth-in-URL, <code>credentials: 'omit'</code>. IRI namespace lives at <code>https://aisafeatwork.org/xapi/v2/</code>. Spec + LRS config template under <code>.audit/integrations/</code>.</li>
+   <li><strong>xAPI (Tin Can) adapter</strong>, HTTPS-gated POST to any conformant LRS. Anonymous-actor default, no auth-in-URL, <code>credentials: 'omit'</code>. IRI namespace lives at <code>https://attest-ai.com/xapi/v2/</code>. Spec + LRS config template under <code>.audit/integrations/</code>.</li>
    <li><strong>FR and DE language shells</strong>, full v2 site rendered in French and German (<code>/v2/fr/</code> and <code>/v2/de/</code>). Banner on every page declares machine-translation status and links to canonical EN. <code>modules.json</code> extended with locale dictionaries; <code>v2.js</code> auto-detects locale from path.</li>
    <li><strong>SEO + AEO metadata pass</strong>, JSON-LD <code>WebSite</code> / <code>Course</code> / <code>LearningResource</code> / <code>BreadcrumbList</code> + canonical + <code>hreflang</code> (en/fr/de/x-default) + OpenGraph + Twitter card across all 39 v2 pages. Repeatable splicer: <code>scripts/inject-v2-seo.py</code> (idempotent, marker-based).</li>
     </ul>
@@ -145,7 +145,7 @@
     <h3>Open flags <span class="flag-pill">to resolve before next release</span></h3>
     <ul>
       <li>Native-speaker review of FR + DE shells before procurement deployment.</li>
-   <li>Custom domain (<code>aisafeatwork.org</code>) purchase + DNS, recipe filed at <code>.audit/legal/domain-procurement-2026-06-03.md</code>.</li>
+   <li>Custom domain (<code>attest-ai.com</code>) purchase + DNS, recipe filed at <code>.audit/legal/domain-procurement-2026-06-03.md</code>.</li>
       <li>OMB M-25-21 URL canonical form (carried over from v2026.05).</li>
     </ul>
   </article>

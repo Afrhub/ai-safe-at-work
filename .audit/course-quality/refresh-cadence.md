@@ -76,5 +76,5 @@ If the founder cannot complete the quarterly review on time, the next review is 
 The Q3 2026 review (target first week of August 2026) cannot start until:
 
 - All TODO mailing-list subscriptions are active. Currently zero subscriptions; this is the **first hard prerequisite**.
-- Canonical domain (`aisafeatwork.org`) is live OR a documented decision is made to stay on the Netlify subdomain through Q3.
+- Canonical domain (`attest-ai.com`) is live OR a documented decision is made to stay on the Netlify subdomain through Q3.
 - Any commit shipped since 2026-06-02 that introduced a new surface has a pre-launch-checklist evidence row recorded.

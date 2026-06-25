@@ -5,13 +5,13 @@
      xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>AI Safe@Work — Changelog</title>
-    <link>https://aisafeatwork.org/changelog.html</link>
-    <atom:link href="https://aisafeatwork.org/changelog.xml" rel="self" type="application/rss+xml" />
+    <link>https://attest-ai.com/changelog.html</link>
+    <atom:link href="https://attest-ai.com/changelog.xml" rel="self" type="application/rss+xml" />
     <description>Public release notes for AI Safe@Work — quarterly minor releases, patch fixes as needed. Each release walks every citation against its primary source and refreshes against regulator publications.</description>
     <language>en-GB</language>
     <copyright>Content CC BY-SA 4.0 · Code MIT</copyright>
-    <managingEditor>noreply@aisafeatwork.org (AI Safe@Work editorial)</managingEditor>
-    <webMaster>noreply@aisafeatwork.org (AI Safe@Work editorial)</webMaster>
+    <managingEditor>noreply@attest-ai.com (AI Safe@Work editorial)</managingEditor>
+    <webMaster>noreply@attest-ai.com (AI Safe@Work editorial)</webMaster>
     <lastBuildDate>Wed, 03 Jun 2026 12:00:00 +0000</lastBuildDate>
     <pubDate>Wed, 03 Jun 2026 12:00:00 +0000</pubDate>
     <ttl>1440</ttl>
@@ -19,8 +19,8 @@
 
     <item>
       <title>v2026.06 — LMS distribution + EU-language shells</title>
-      <link>https://aisafeatwork.org/changelog.html#v2026.06</link>
-      <guid isPermaLink="true">https://aisafeatwork.org/changelog.html#v2026.06</guid>
+      <link>https://attest-ai.com/changelog.html#v2026.06</link>
+      <guid isPermaLink="true">https://attest-ai.com/changelog.html#v2026.06</guid>
       <pubDate>Wed, 03 Jun 2026 12:00:00 +0000</pubDate>
       <dc:creator>AI Safe@Work editorial</dc:creator>
       <category>release</category>
@@ -40,8 +40,8 @@
 
     <item>
       <title>v2026.05 — Initial release</title>
-      <link>https://aisafeatwork.org/changelog.html#v2026.05</link>
-      <guid isPermaLink="true">https://aisafeatwork.org/changelog.html#v2026.05</guid>
+      <link>https://attest-ai.com/changelog.html#v2026.05</link>
+      <guid isPermaLink="true">https://attest-ai.com/changelog.html#v2026.05</guid>
       <pubDate>Tue, 19 May 2026 12:00:00 +0000</pubDate>
       <dc:creator>AI Safe@Work editorial</dc:creator>
       <category>release</category>

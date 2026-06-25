@@ -10,7 +10,7 @@
 | OpenAI | ChatGPT for content drafting | Same as Anthropic | OpenAI, US — EU region on Enterprise | API Data Processing Addendum on paid tiers | 2026-05-19 | Training opt-out confirmed at workspace level |
 | Anysphere | Cursor IDE for development | Code + any text we type into the editor | Anysphere, US | Privacy mode setting reviewed | 2026-05-19 | Privacy mode enabled — no codebase indexing |
 | GitHub | Repo hosting + CI | Source code (no PII); commit-author metadata | GitHub, Microsoft, US | Microsoft / GitHub DPA | 2026-05-19 | Public repo planned; private fork for `.audit/` |
-| Domain registrar | Domain registration for aisafeatwork.org | Registrant contact (using founder details) | TBD | Standard registrar terms | TBD | Provider TBD; pick one with WHOIS privacy |
+| Domain registrar | Domain registration for attest-ai.com | Registrant contact (using founder details) | TBD | Standard registrar terms | TBD | Provider TBD; pick one with WHOIS privacy |
 | Email provider | Inbound + outbound email | Email contents + addresses | TBD (likely Fastmail / Proton / ProtonMail Business) | EU-based providers preferred | TBD | Decision before going commercial |
 | Stripe (planned) | Payment processing | Customer email, billing address, payment card (tokenised) | Stripe, Ireland (EU) / US | Stripe DPA + SCCs | n/a yet | When commercial offering live |
 

@@ -6,7 +6,7 @@
 
 ## Scope
 
-DOCTRINE.md hard-codes `aisafeatwork.org` as the canonical production domain.
+DOCTRINE.md hard-codes `attest-ai.com` as the canonical production domain.
 `xAPI` IRI namespaces (`.audit/integrations/xapi-statements-spec.md`) and the
 v1 JSON-LD inject script (`.audit/inject-jsonld.py`) already reference it.
 
@@ -18,7 +18,7 @@ Current production canonical (per § 903) is the Netlify free subdomain
 
 | Domain | RDAP code | Inference | Note |
 |---|---|---|---|
-| `aisafeatwork.org` | 302 → empty body | likely available | RDAP indirection at PIR did not return a record on follow |
+| `attest-ai.com` | 302 → empty body | likely available | RDAP indirection at PIR did not return a record on follow |
 | `aisafeatwork.com` | 302 → empty | ambiguous — re-check via WHOIS | |
 | `aisafeatwork.net` | 302 → empty | ambiguous — re-check via WHOIS | |
 | `aisafeatwork.io` | 404 | **AVAILABLE** | premium TLD |
@@ -34,7 +34,7 @@ in cease-and-desist or trademark territory later.
 
 ## Recommendation
 
-Buy `aisafeatwork.org` as primary + `aisafeatwork.eu` as defensive secondary.
+Buy `attest-ai.com` as primary + `aisafeatwork.eu` as defensive secondary.
 
 Skip `.com` variants — squatter on `aisafework.com` reduces value of the
 `-at-` variant; doctrine is `.org` first regardless.
@@ -56,8 +56,8 @@ on push. Pick ONE as canonical to avoid duplicate-content + SEO split.
 
 ### Option A — point at Vercel (recommended for v2 procurement)
 
-1. Buy `aisafeatwork.org` at Cloudflare Registrar.
-2. In Vercel project settings → Domains → add `aisafeatwork.org` + `www.aisafeatwork.org`.
+1. Buy `attest-ai.com` at Cloudflare Registrar.
+2. In Vercel project settings → Domains → add `attest-ai.com` + `www.attest-ai.com`.
 3. Vercel will display the exact DNS records to create. Typically:
 
 ```
@@ -69,9 +69,9 @@ CNAME www               cname.vercel-dns.com        3600
 4. Set them in Cloudflare DNS panel. Disable Cloudflare proxy (orange-cloud OFF)
    on these records — Vercel handles TLS + edge already; double-CDN causes loops.
 5. Wait for Vercel "Valid Configuration". TLS provisions automatically (Let's Encrypt).
-6. In Vercel project settings → Domains → set `aisafeatwork.org` as
+6. In Vercel project settings → Domains → set `attest-ai.com` as
    **primary** (`www` redirects to root).
-7. Test: `curl -sI https://aisafeatwork.org/v2/` → expect 200.
+7. Test: `curl -sI https://attest-ai.com/v2/` → expect 200.
 
 ### Option B — point at Netlify (if you prefer Netlify, e.g. for build hooks)
 
@@ -93,7 +93,7 @@ In this repo, after the domain resolves:
 1. **Sed-swap base URLs** in injected SEO blocks:
 
 ```bash
-git grep -l "aisafework.netlify.app" v2/ | xargs sed -i 's|https://aisafework.netlify.app|https://aisafeatwork.org|g'
+git grep -l "aisafework.netlify.app" v2/ | xargs sed -i 's|https://aisafework.netlify.app|https://attest-ai.com|g'
 ```
 
 2. **Re-run SEO splicer** if `BASE` constant in `scripts/inject-v2-seo.py`
@@ -101,7 +101,7 @@ git grep -l "aisafework.netlify.app" v2/ | xargs sed -i 's|https://aisafework.ne
    re-running replaces the injected blocks cleanly:
 
 ```bash
-# edit scripts/inject-v2-seo.py: BASE = "https://aisafeatwork.org"
+# edit scripts/inject-v2-seo.py: BASE = "https://attest-ai.com"
 python scripts/inject-v2-seo.py
 ```
 
@@ -118,7 +118,7 @@ python scripts/inject-v2-seo.py
 
 | Item | Annual | Notes |
 |---|---|---|
-| `aisafeatwork.org` at Cloudflare Registrar | ~£10 | wholesale |
+| `attest-ai.com` at Cloudflare Registrar | ~£10 | wholesale |
 | `aisafeatwork.eu` defensive | ~£8 | EU-presence may add small fee |
 | Cloudflare DNS | £0 | free tier sufficient |
 | Vercel hosting (current Hobby) | £0 | until paid surface ships |
@@ -138,4 +138,4 @@ python scripts/inject-v2-seo.py
 - DOCTRINE.md § 903 (current canonical = Netlify subdomain)
 - `.audit/integrations/xapi-statements-spec.md` (IRI namespace already on `.org`)
 - `scripts/inject-v2-seo.py` constant `BASE` (sed target)
-- `sitemap.xml` (locked to `aisafeatwork.org` — does not actually resolve until purchase + DNS live)
+- `sitemap.xml` (locked to `attest-ai.com` — does not actually resolve until purchase + DNS live)

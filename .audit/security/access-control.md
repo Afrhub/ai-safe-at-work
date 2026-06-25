@@ -23,7 +23,7 @@ All accounts currently controlled by the founder. MFA on every account. Password
 | Cursor — Founder | Paid | OAuth + MFA | 2026-05-19 | Tied to GitHub |
 | GitHub — Founder | Free | passkey + TOTP | 2026-05-19 | Repo + actions |
 | Cloudflare / Netlify — Founder | Free → paid TBD | TOTP | 2026-05-19 | Hosting (provider TBD) |
-| Domain registrar — Founder | n/a | TBD | TBD | aisafeatwork.org pending registration |
+| Domain registrar — Founder | n/a | TBD | TBD | attest-ai.com pending registration |
 | Email provider — Founder | TBD | TBD | TBD | Pre-launch decision |
 | Stripe — Founder | n/a | TBD | n/a | Pre-commercial |
 | Bookkeeping — Founder | n/a | TBD | n/a | Pre-commercial |
