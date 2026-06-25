@@ -69,3 +69,7 @@ build/
 
 # ── Build artefacts ──
 dist/
+
+# ── Private security artefacts (repo is public; do NOT publish vuln detail) ──
+.audit/security/owasp-security-review-*.md
+.audit/security/owasp-test-coverage-*.xlsx

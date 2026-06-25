@@ -66,6 +66,7 @@
 <script type="module">
 import { guard, sb, signOut } from "./assets/portal.js";
 import { MODULES, TEMPLATES } from "./assets/modules.js";
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const profile = await guard(["manager"]);
 if (profile) {
   document.getElementById("who").textContent = (profile.full_name || "") + " · Manager";
@@ -84,7 +85,7 @@ if (profile) {
     (prog || []).forEach(p => { if (p.status === "done") counts[p.user_id] = (counts[p.user_id]||0)+1; });
     document.getElementById("seated").textContent = (seats || []).length;
     document.querySelector("#seats tbody").innerHTML = (seats || []).map(s =>
-      `<tr><td>${s.profiles?.email || s.end_user_id}</td><td>${counts[s.end_user_id]||0} / 11</td><td>${new Date(s.created_at).toLocaleDateString()}</td></tr>`
+      `<tr><td>${esc(s.profiles?.email || s.end_user_id)}</td><td>${counts[s.end_user_id]||0} / 11</td><td>${new Date(s.created_at).toLocaleDateString()}</td></tr>`
     ).join("") || `<tr><td colspan="3" style="color:var(--text3)">No seats yet.</td></tr>`;
   }
   await loadSeats();
