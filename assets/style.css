@@ -456,6 +456,7 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
 }
 .module-card {
   display: block; padding: 1.6rem 1.7rem 1.5rem; cursor: pointer; overflow: hidden;
+  isolation: isolate;   /* keep the .bg-num watermark layered inside the card */
   transition: transform 0.28s var(--ease-quart), border-color 0.28s ease, box-shadow 0.28s ease;
 }
 .module-card::before {
@@ -477,7 +478,7 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
 }
 .module-card p { color: var(--text2); font-size: 0.96rem; line-height: 1.6; margin: 0 0 0.95rem; }
 .module-card .bg-num {
-  position: absolute; right: 0.9rem; bottom: -0.6rem;
+  position: absolute; right: 0.9rem; bottom: -0.6rem; z-index: -1;
   font-size: 5rem; font-weight: 800; line-height: 1; pointer-events: none;
   font-family: var(--font-display); color: var(--bg-soft2);
   transition: transform 0.4s var(--ease-out);
