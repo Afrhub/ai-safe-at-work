@@ -92,6 +92,15 @@ html[data-theme="dark"] .gate-hero .hero-cta.secondary:hover { background: rgba(
 }
 .gate-stats .n .accent { color: var(--accent); }
 .gate-stats .l { color: var(--text3); font-size: 0.9rem; margin-top: 0.3rem; line-height: 1.4; }
+.stat-clocked { display: flex; align-items: center; gap: 0.7rem; }
+.stat-clock {
+  width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%;
+  background: url('assets/hero-clock.jpg?v=1') center / cover no-repeat;
+  border: 1px solid var(--border-bold);
+  box-shadow: 0 1px 4px rgba(16,24,40,0.18);
+}
+html[data-theme="dark"] .stat-clock { border-color: rgba(255,255,255,0.22); box-shadow: 0 1px 6px rgba(0,0,0,0.5); }
+@media (max-width: 780px) { .stat-clock { width: 40px; height: 40px; } }
 @media (max-width: 780px) { .gate-stats { grid-template-columns: 1fr 1fr; gap: 1.6rem 1.4rem; } }
 
 /* light content wrapper below hero */
@@ -302,7 +311,7 @@ main.gate > section:not(.gate-hero), main.gate > .section-nav { max-width: 1000p
 
       <div class="gate-stats" aria-label="At a glance">
         <div><div class="n">11</div><div class="l">plain-English modules</div></div>
-        <div><div class="n">~90<span class="accent"> min</span></div><div class="l">to complete, free</div></div>
+        <div class="stat-clocked"><span class="stat-clock" aria-hidden="true"></span><div><div class="n">~90<span class="accent"> min</span></div><div class="l">to complete, free</div></div></div>
         <div><div class="n">Art.&nbsp;4</div><div class="l">EU AI Act literacy, in force</div></div>
         <div><div class="n">ISO <span class="accent">42001</span></div><div class="l">&amp; 27001 mapped inline</div></div>
       </div>
