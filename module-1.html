@@ -173,24 +173,79 @@
   <p>Each time, good staff used normal tools in normal ways. No hackers. No viruses. Nothing most people would call an attack. The safety rules around those tools were years out of date.</p>
   <p>AI risk comes in three main shapes. This course covers all three:</p>
 
-  <div class="compare">
-    <div class="compare-cell bad">
-      <h4>What you put in</h4>
-      <p>You paste something private and it leaks. Customer lists, contracts, code, money records, staff files. See Modules 2 and 3.</p>
-    </div>
-    <div class="compare-cell bad">
-      <h4>What it gives back</h4>
-      <p>The AI makes something up and you use it. Fake cases, made-up facts, unfair choices. See Modules 5, 7 and 8.</p>
-    </div>
-    <div class="compare-cell bad">
-      <h4>AI aimed at you</h4>
-      <p>Someone uses AI to copy or trick you. Deepfakes, scam emails, fake bosses. See Module 6.</p>
-    </div>
-    <div class="compare-cell good">
-      <h4>And what to do</h4>
-      <p>How to act when something goes wrong, and how to keep a record of the AI you use. See Modules 9, 10 and 12.</p>
-    </div>
-  </div>
+  <style>
+  /* interactive diagram — scoped */
+  .risk-fig { margin: 1.6rem 0 2.4rem; }
+  .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
+  .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
+  .risk-svg .rnode { cursor: pointer; }
+  .risk-svg .rnode:hover .rcard { stroke: var(--border-bold); }
+  .risk-svg .rnode.is-active .rcard { stroke: var(--accent); fill: var(--accent-soft); }
+  .risk-svg .rnode.rgood.is-active .rcard { stroke: var(--green); fill: rgba(14,125,73,.08); }
+  .risk-svg .rnode:focus { outline: none; }
+  .risk-svg .rnode:focus-visible .rcard { stroke: var(--accent); stroke-width: 2.5; }
+  .risk-svg .rtt { fill: var(--text); font-weight: 800; font-size: 19px; }
+  .risk-svg .rss { fill: var(--text3); font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .risk-svg .ric { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .risk-svg .rgood .ric { stroke: var(--green); }
+  .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
+  .rd-cap strong { color: var(--text); }
+  .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
+  </style>
+  <figure id="risk-fig-1" class="risk-fig" aria-labelledby="risk-fig-cap">
+    <svg viewBox="0 0 760 250" class="risk-svg" role="group" aria-label="The three shapes of AI risk. Select a shape to learn more.">
+      <g class="rnode" data-k="in" tabindex="0" role="button" aria-label="What you put in — data leaks">
+        <rect class="rcard" x="14" y="14" width="232" height="118" rx="14"/>
+        <g transform="translate(34,34)"><path class="ric" d="M12 3v11m-5-5 5 5 5-5M4 18h16v2H4z"/></g>
+        <text class="rtt" x="34" y="96">What you put in</text>
+        <text class="rss" x="34" y="116">data leaks</text>
+      </g>
+      <g class="rnode" data-k="out" tabindex="0" role="button" aria-label="What it gives back — made-up output">
+        <rect class="rcard" x="262" y="14" width="232" height="118" rx="14"/>
+        <g transform="translate(282,34)"><path class="ric" d="M12 21V10m-5 5 5-5 5 5M4 4h16"/></g>
+        <text class="rtt" x="282" y="96">What it gives back</text>
+        <text class="rss" x="282" y="116">made-up output</text>
+      </g>
+      <g class="rnode" data-k="at" tabindex="0" role="button" aria-label="AI aimed at you — deepfakes and scams">
+        <rect class="rcard" x="510" y="14" width="236" height="118" rx="14"/>
+        <g transform="translate(530,34)"><circle class="ric" cx="12" cy="12" r="9"/><circle class="ric" cx="12" cy="12" r="3"/></g>
+        <text class="rtt" x="530" y="96">AI aimed at you</text>
+        <text class="rss" x="530" y="116">deepfakes &amp; scams</text>
+      </g>
+      <g class="rnode rgood" data-k="do" tabindex="0" role="button" aria-label="And what to do — respond and record">
+        <rect class="rcard" x="14" y="150" width="732" height="84" rx="14"/>
+        <g transform="translate(34,176)"><path class="ric" d="M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6zM9 12l2 2 4-4"/></g>
+        <text class="rtt" x="72" y="188">And what to do</text>
+        <text class="rss" x="72" y="210">respond &amp; keep a record</text>
+      </g>
+    </svg>
+    <p class="rd-cap" id="risk-fig-cap" aria-live="polite"><strong>The three shapes of AI risk.</strong> Select a shape above — each one maps to later modules in the course.</p>
+  </figure>
+  <script>
+  (function(){
+    var data = {
+      in:  {t:'What you put in', d:'You paste something private and it leaks — customer lists, contracts, code, money records, staff files.', m:'Covered in Modules 2 &amp; 3.'},
+      out: {t:'What it gives back', d:'The AI makes something up and you use it — fake cases, made-up facts, unfair choices.', m:'Covered in Modules 5, 7 &amp; 8.'},
+      at:  {t:'AI aimed at you', d:'Someone uses AI to copy or trick you — deepfakes, scam emails, fake bosses.', m:'Covered in Module 6.'},
+      do:  {t:'And what to do', d:'How to act when something goes wrong, and how to keep a record of the AI you use.', m:'Covered in Modules 9, 10 &amp; 12.'}
+    };
+    var fig = document.getElementById('risk-fig-1'); if(!fig) return;
+    var cap = fig.querySelector('.rd-cap');
+    var nodes = fig.querySelectorAll('.rnode');
+    function sel(k){
+      nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k') === k); });
+      var x = data[k]; if(!x) return;
+      cap.innerHTML = '<strong>' + x.t + '.</strong> ' + x.d + ' <span class="rd-m">' + x.m + '</span>';
+    }
+    nodes.forEach(function(n){
+      var k = n.getAttribute('data-k');
+      n.addEventListener('click', function(){ sel(k); });
+      n.addEventListener('mouseenter', function(){ sel(k); });
+      n.addEventListener('focus', function(){ sel(k); });
+      n.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sel(k); } });
+    });
+  })();
+  </script>
 
   <h2>"But I only use AI to write emails"</h2>
   <p>Most people on this course use AI. They do not build it. They write emails, draft proposals, sum up meetings, fix wording, translate, code, plan, and think out loud.</p>
@@ -219,20 +274,147 @@
     </div>
   </div>
 
-    <section class="quiz-block" aria-labelledby="kc-q-1">
-    <div class="quiz-eyebrow">Quick knowledge check</div>
-    <h2 class="quiz-q-text" id="kc-q-1">Which of the following are examples of “shadow AI”?</h2>
-    <ol class="quiz-options">
-      <li class="quiz-option" aria-hidden="false"><span class="key">A</span><span class="body">Using an unapproved AI chatbot for work</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">B</span><span class="body">Installing an AI browser extension without approval</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">C</span><span class="body">Uploading company information into a personal AI account</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">D</span><span class="body">Using AI-enabled SaaS tools without governance review</span></li>
-    </ol>
-    <details class="quiz-reveal">
-      <summary class="quiz-btn ghost">Show answer</summary>
-      <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>All of the above.</p>
-    </details>
-  </section>
+  <div id="quiz-mount"></div>
+  <script type="application/json" id="quiz-data">
+  {
+    "module": 1,
+    "passThreshold": 8,
+    "quizTitle": "Test your <em>understanding</em>.",
+    "quizLede": "Ten questions drawn only from the three incidents and the rules in this module. Pass mark 8 out of 10. Retake as many times as you like.",
+    "questions": [
+      {
+        "q": "Module 1 says AI risk comes in three main shapes. What are they?",
+        "options": [
+          "What you put in (leaks), what it gives back (made-up output), and AI aimed at you (deepfakes and scams)",
+          "Hardware, software and networks",
+          "Cheap AI, mid AI and expensive AI",
+          "Email, chat and video",
+          "Past, present and future risk"
+        ],
+        "correct": 0,
+        "why": "Body: <em>AI risk comes in three main shapes … What you put in … What it gives back … AI aimed at you.</em>",
+        "cite": "What these stories share"
+      },
+      {
+        "q": "In story one, the intern pasted a 40,000-row customer list into ChatGPT. What did the module say the REAL mistake was?",
+        "options": [
+          "The intern was lazy and careless",
+          "Nobody higher up had decided which information was safe to put into which tool",
+          "ChatGPT was hacked",
+          "The list was too large for the tool",
+          "The customer data was already public"
+        ],
+        "correct": 1,
+        "why": "Body: <em>The real mistake happened higher up: nobody had decided which information was safe to put into which tool.</em>",
+        "cite": "Story one — What really went wrong"
+      },
+      {
+        "q": "In the law-firm story, what was wrong with the six cases ChatGPT supplied?",
+        "options": [
+          "They were from the wrong country",
+          "They were too old to use",
+          "Not one was real — the AI invented six cases that only sounded true",
+          "They were copyrighted",
+          "They were real but unrelated"
+        ],
+        "correct": 2,
+        "why": "Body: <em>Not one is real. The AI made up six cases that only sounded true.</em>",
+        "cite": "Story two — the lawyer who didn't check"
+      },
+      {
+        "q": "What was the first famous court case of AI-invented legal citations?",
+        "options": [
+          "Roe v. Wade",
+          "Mata v. Avianca",
+          "Carpenter v. United States",
+          "Donoghue v. Stevenson",
+          "Brown v. Board of Education"
+        ],
+        "correct": 1,
+        "why": "Body: <em>The first famous one was a case called Mata v. Avianca. Many have followed.</em>",
+        "cite": "Story two"
+      },
+      {
+        "q": "In the Arup deepfake video-call incident (early 2024), how much money was sent?",
+        "options": [
+          "25 thousand dollars",
+          "2.5 million dollars",
+          "25 million dollars",
+          "250 million dollars",
+          "1 billion dollars"
+        ],
+        "correct": 2,
+        "why": "Body: <em>They add up to 25 million dollars … This really happened, in early 2024, to a real engineering firm called Arup.</em>",
+        "cite": "Story three — the fake boss on the video call"
+      },
+      {
+        "q": "Why did the Arup worker's old training fail to protect them?",
+        "options": [
+          "They ignored the training",
+          "Every person on the video call was an AI-generated fake — voice and face — so checking for a familiar face no longer worked",
+          "The training was in the wrong language",
+          "They never received any training",
+          "The payment system was broken"
+        ],
+        "correct": 1,
+        "why": "Body: <em>Every face on that call was fake … The training was built for a world that has changed.</em>",
+        "cite": "Story three"
+      },
+      {
+        "q": "Which GDPR article requires personal data to be handled in a way that is lawful, fair and transparent?",
+        "options": [
+          "GDPR Article 4",
+          "GDPR Article 5",
+          "GDPR Article 17",
+          "GDPR Article 30",
+          "GDPR Article 99"
+        ],
+        "correct": 1,
+        "why": "Body: <em>GDPR Article 5 says you must handle people's personal data in a way that is lawful, fair and open.</em>",
+        "cite": "Where the rules land"
+      },
+      {
+        "q": "What does the EU AI Act (Article 4) require of organisations?",
+        "options": [
+          "That they stop using AI entirely",
+          "That only the IT team may use AI",
+          "That staff who use AI have enough know-how to use it safely (AI literacy)",
+          "That all AI tools are built in the EU",
+          "That every AI output is printed and filed"
+        ],
+        "correct": 2,
+        "why": "Body: <em>The EU AI Act (Article 4) says staff who use AI need enough know-how to use it safely. This course is part of that know-how.</em>",
+        "cite": "Where the rules land"
+      },
+      {
+        "q": "Who do the big rules (EU AI Act, GDPR, ISO 42001 and 27001) actually apply to?",
+        "options": [
+          "Only companies that build AI models",
+          "Only the IT department",
+          "Any company that uses AI to do its work — and the duty lands on the people doing the work",
+          "Only companies with more than 250 staff",
+          "Only government bodies"
+        ],
+        "correct": 2,
+        "why": "Body: <em>cover any company that uses AI to do its work. The duty lands on the people doing the work, not only the IT team.</em>",
+        "cite": "But I only use AI to write emails"
+      },
+      {
+        "q": "Which of these counts as “shadow AI”?",
+        "options": [
+          "Only using an unapproved chatbot",
+          "Only installing an unapproved browser extension",
+          "Only uploading company information to a personal AI account",
+          "All of these, plus using AI-enabled SaaS tools without a governance review",
+          "None of these — shadow AI means AI used at night"
+        ],
+        "correct": 3,
+        "why": "Shadow AI is any AI use that has slipped past governance: unapproved chatbots and extensions, company data in personal AI accounts, and ungoverned AI-enabled SaaS.",
+        "cite": "Quick knowledge check — shadow AI"
+      }
+    ]
+  }
+  </script>
 </main>
 
 <!-- completion-bar v1 -->
