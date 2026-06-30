@@ -233,6 +233,24 @@ export const MODULES: ModuleSpec[] = [
         takeaway: "Follow the habits; the standards follow." },
     ],
   },
+
+  /* ───────────────────────── PLUS PACK ───────────────────────── */
+  {
+    id: "PlusPack", dir: "pp", ref: "REF AISW·PLUS", watermark: "PP",
+    scenes: [
+      { id: "01-intro", kicker: "Plus Pack", title: "Your AI governance starter kit",
+        text: "Download each of the ten documents and have them ready for the A.I. Starter Management System. The Plus Pack is the paperwork that turns training into governance — the policy, the registers and the assessments an auditor expects to see." },
+      { id: "02-included", kicker: "What's inside", title: "Ten documents, audit-ready", type: "manifest",
+        bullets: ["Acceptable Use Policy", "Use Case & Risk Registers", "Risk Assessment Template", "Incident Form", "Roles Matrix & Steering Group", "Vendor & Supplier due diligence"],
+        text: "Inside are ten documents. An Acceptable Use Policy. A Use Case Register and a Risk Register. A Risk Assessment Template and an Incident Form. A Governance Roles Matrix and Steering Group Terms of Reference. Vendor and Supplier due diligence. And an Implementation Guide to put them all to work." },
+      { id: "03-system", kicker: "How it fits", title: "Assemble your AI management system", type: "flow",
+        steps: ["Policy sets the rules", "Registers track the use", "Assessments score the risk", "Reviews keep it live"],
+        text: "Together they form a starter A.I. management system. The policy sets the rules. The registers track where A.I. is used. The assessments score the risk. And regular reviews keep it all current." },
+      { id: "04-standards", kicker: "Where the rules land", title: "Mapped to ISO 42001 and the EU AI Act",
+        text: "Every document is ready to fill in, prints to P.D.F., and is mapped to ISO forty-two thousand and one and the E.U. A.I. Act. It is the documentation a regulator or an auditor expects to see.",
+        takeaway: "Have the ten ready — that's your starter management system." },
+    ],
+  },
 ];
 
 export const MODULE_BY_ID: Record<string, ModuleSpec> = Object.fromEntries(MODULES.map((m) => [m.id, m]));
