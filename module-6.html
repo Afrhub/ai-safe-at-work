@@ -167,6 +167,80 @@
  <p>An attacker chats with you over LinkedIn, WhatsApp, or email, possibly for weeks, building rapport, before steering toward a request. The attacker doesn't have to be a skilled social engineer because the AI is doing the cognitive work: maintaining the persona, remembering the previous conversations, sounding right.</p>
   <p><strong>What to look for:</strong> any new contact that progresses toward a financial, credential, or access ask. The relationship being more than a few weeks old doesn't make it real. Long-form rapport is now cheap.</p>
 
+  <style>
+  /* interactive diagram — scoped */
+  .risk-fig { margin: 1.6rem 0 2.4rem; }
+  .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
+  .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
+  .risk-svg .rnode { cursor: pointer; }
+  .risk-svg .rnode:hover .rcard { stroke: var(--border-bold); }
+  .risk-svg .rnode.is-active .rcard { stroke: var(--accent); fill: var(--accent-soft); }
+  .risk-svg .rnode.rgood.is-active .rcard { stroke: var(--green); fill: rgba(14,125,73,.08); }
+  .risk-svg .rnode:focus { outline: none; }
+  .risk-svg .rnode:focus-visible .rcard { stroke: var(--accent); stroke-width: 2.5; }
+  .risk-svg .rtt { fill: var(--text); font-weight: 800; font-size: 19px; }
+  .risk-svg .rss { fill: var(--text3); font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .risk-svg .ric { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .risk-svg .rgood .ric { stroke: var(--green); }
+  .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
+  .rd-cap strong { color: var(--text); }
+  .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
+  </style>
+  <figure id="risk-fig-6" class="risk-fig" aria-labelledby="risk-fig-cap">
+    <svg viewBox="0 0 760 250" class="risk-svg" role="group" aria-label="The four AI-powered attack patterns, and the callback that beats them all. Select a pattern to learn more.">
+      <g class="rnode" data-k="spear" tabindex="0" role="button" aria-label="Spear-phishing 2.0 — a flawless email">
+        <rect class="rcard" x="14" y="14" width="232" height="118" rx="14"/>
+        <g transform="translate(34,34)"><path class="ric" d="M3 5h18v14H3zM3 5l9 7 9-7"/></g>
+        <text class="rtt" x="34" y="96">Spear-phishing 2.0</text>
+        <text class="rss" x="34" y="116">a flawless email</text>
+      </g>
+      <g class="rnode" data-k="voice" tabindex="0" role="button" aria-label="Voice cloning — a boss who sounds right">
+        <rect class="rcard" x="262" y="14" width="232" height="118" rx="14"/>
+        <g transform="translate(282,34)"><path class="ric" d="M4 12v0m4-4v8m4-12v16m4-12v8m4-4v0"/></g>
+        <text class="rtt" x="282" y="96">Voice cloning</text>
+        <text class="rss" x="282" y="116">a voice that sounds right</text>
+      </g>
+      <g class="rnode" data-k="video" tabindex="0" role="button" aria-label="Video deepfakes — a face you know">
+        <rect class="rcard" x="510" y="14" width="236" height="118" rx="14"/>
+        <g transform="translate(530,34)"><path class="ric" d="M3 6h13v12H3zM16 10l5-3v10l-5-3z"/></g>
+        <text class="rtt" x="530" y="96">Video deepfakes</text>
+        <text class="rss" x="530" y="116">a face you know</text>
+      </g>
+      <g class="rnode rgood" data-k="callback" tabindex="0" role="button" aria-label="The callback — verify on a channel you start">
+        <rect class="rcard" x="14" y="150" width="732" height="84" rx="14"/>
+        <g transform="translate(34,176)"><path class="ric" d="M4 5c0 9 7 16 16 16l-3-5-4 1m-9-12 5-1 1-4"/></g>
+        <text class="rtt" x="72" y="188">The callback</text>
+        <text class="rss" x="72" y="210">verify on a channel you start</text>
+      </g>
+    </svg>
+    <p class="rd-cap" id="risk-fig-cap" aria-live="polite"><strong>Four attacks, one defence.</strong> Select an attack above — each one is beaten by the same simple move: the callback.</p>
+  </figure>
+  <script>
+  (function(){
+    var data = {
+      spear:    {t:'Spear-phishing 2.0', d:'A targeted email that references things only an insider would know — the substance of the request is the red flag, not the writing.', m:'Look at the request, not the typos.'},
+      voice:    {t:'Voice cloning', d:'A 30-second sample is enough to produce a convincing clone, paired with caller ID spoofing for a call from "your boss".', m:'Hang up. Call back on a known number.'},
+      video:    {t:'Video deepfakes', d:'Live deepfakes have moved from uncanny valley to hard to distinguish from real — as in the Arup case from Module 1.', m:'Never approve on the call alone.'},
+      callback: {t:'The callback', d:'For any unusual request, look up the sender in a different system, call them, and ask something only they would know.', m:'Slow on purpose — it breaks the attack.'}
+    };
+    var fig = document.getElementById('risk-fig-6'); if(!fig) return;
+    var cap = fig.querySelector('.rd-cap');
+    var nodes = fig.querySelectorAll('.rnode');
+    function sel(k){
+      nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k') === k); });
+      var x = data[k]; if(!x) return;
+      cap.innerHTML = '<strong>' + x.t + '.</strong> ' + x.d + ' <span class="rd-m">' + x.m + '</span>';
+    }
+    nodes.forEach(function(n){
+      var k = n.getAttribute('data-k');
+      n.addEventListener('click', function(){ sel(k); });
+      n.addEventListener('mouseenter', function(){ sel(k); });
+      n.addEventListener('focus', function(){ sel(k); });
+      n.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sel(k); } });
+    });
+  })();
+  </script>
+
   <div class="callout warn">
     <span class="callout-icon">!</span>
     <div>
@@ -251,20 +325,147 @@
     </div>
   </div>
 
-  <section class="quiz-block" aria-labelledby="kc-q-6">
-    <div class="quiz-eyebrow">Quick knowledge check</div>
-    <h2 class="quiz-q-text" id="kc-q-6">Which statement is TRUE?</h2>
-    <ol class="quiz-options">
-      <li class="quiz-option" aria-hidden="false"><span class="key">A</span><span class="body">AI-generated scams are usually easy to spot.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">B</span><span class="body">Voice messages should always be trusted.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">C</span><span class="body">Professional wording guarantees legitimacy.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">D</span><span class="body">Verification and process are increasingly important in the AI era.</span></li>
-    </ol>
-    <details class="quiz-reveal">
-      <summary class="quiz-btn ghost">Show answer</summary>
-   <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>D, Verification and process are increasingly important in the AI era.</p>
-    </details>
-  </section>
+  <div id="quiz-mount"></div>
+  <script type="application/json" id="quiz-data">
+  {
+    "module": 6,
+    "passThreshold": 8,
+    "quizTitle": "Test your <em>understanding</em>.",
+    "quizLede": "Ten questions drawn only from this module. Pass mark 8 out of 10. Retake as many times as you like.",
+    "questions": [
+      {
+        "q": "Why is the old security-training playbook (look for typos, broken grammar, weird tone) no longer reliable?",
+        "options": [
+          "Attackers have stopped using email entirely",
+          "Generative AI has invalidated most of that — it produces perfectly written, contextually appropriate messages with no grammar mistakes",
+          "Email providers now filter every scam automatically",
+          "Phishing is now illegal everywhere",
+          "Workers no longer read their emails"
+        ],
+        "correct": 1,
+        "why": "Body: <em>Generative AI has invalidated most of that.</em>",
+        "cite": "The old playbook is dead"
+      },
+      {
+        "q": "For Spear-phishing 2.0, what does the module say is the actual red flag?",
+        "options": [
+          "Spelling mistakes in the email",
+          "An unfamiliar sender domain",
+          "The substance of the request — requests that don't match normal channels",
+          "The time of day the email was sent",
+          "The length of the email"
+        ],
+        "correct": 2,
+        "why": "Body: <em>The substance of the request is the red flag, not the writing.</em>",
+        "cite": "1. Spear-phishing 2.0"
+      },
+      {
+        "q": "How short a voice sample do current tools need to produce a convincing clone?",
+        "options": [
+          "Around five minutes",
+          "A 30-second sample",
+          "At least an hour of audio",
+          "A single spoken word",
+          "Around ten minutes"
+        ],
+        "correct": 1,
+        "why": "Body: <em>A 30-second sample of someone's voice … is enough for current tools to produce a convincing clone.</em>",
+        "cite": "2. Voice cloning"
+      },
+      {
+        "q": "What does the module advise when you get a suspicious phone-based request that pushes urgency?",
+        "options": [
+          "Comply quickly to avoid trouble",
+          "Forward the call to a colleague",
+          "Hang up, and call back on a known number, not a number from the caller's call log",
+          "Ask the caller to prove their identity over the same call",
+          "Record the call and continue"
+        ],
+        "correct": 2,
+        "why": "Body: <em>Hang up. Call back on a known number, not a number from the caller's call log.</em>",
+        "cite": "2. Voice cloning"
+      },
+      {
+        "q": "What should never be acted on without a second channel of verification?",
+        "options": [
+          "Any email from outside the company",
+          "A meeting that ends with \"approve this now, I'll explain later\"",
+          "A request to schedule a follow-up call",
+          "A message that contains an attachment",
+          "Any request sent after working hours"
+        ],
+        "correct": 1,
+        "why": "Body: <em>A meeting that ends with \"approve this now, I'll explain later\" should never be acted on without a second channel of verification.</em>",
+        "cite": "3. Video deepfakes"
+      },
+      {
+        "q": "In AI-driven social engineering, why doesn't the attacker need to be a skilled social engineer?",
+        "options": [
+          "Because the victim is always careless",
+          "Because the AI is doing the cognitive work — maintaining the persona, remembering previous conversations, sounding right",
+          "Because the messages are sent at random",
+          "Because rapport is never actually built",
+          "Because the attacker hires a professional"
+        ],
+        "correct": 1,
+        "why": "Body: <em>The attacker doesn't have to be a skilled social engineer because the AI is doing the cognitive work: maintaining the persona, remembering the previous conversations, sounding right.</em>",
+        "cite": "4. AI-driven social engineering"
+      },
+      {
+        "q": "When applying the callback principle, where should you look up the supposed sender's contact details?",
+        "options": [
+          "In the message itself, since it's quickest",
+          "By replying and asking for their number",
+          "In a different system — your internal directory, saved contact, or the company website — never the contact details in the message",
+          "Through a web search for their name",
+          "On the caller ID display"
+        ],
+        "correct": 2,
+        "why": "Body: <em>Look up the supposed sender in a different system … never the contact details in the message itself.</em>",
+        "cite": "The callback principle"
+      },
+      {
+        "q": "Why is the callback principle deliberately slow?",
+        "options": [
+          "Because verification systems are outdated",
+          "Because attackers depend on urgency to bypass thinking — slowing down breaks the attack",
+          "Because banks require a waiting period",
+          "Because it needs manager sign-off every time",
+          "Because the phone networks are unreliable"
+        ],
+        "correct": 1,
+        "why": "Body: <em>Attackers depend on urgency to bypass thinking. Slowing down breaks the attack.</em>",
+        "cite": "The callback principle"
+      },
+      {
+        "q": "According to the module, what is the single biggest determinant of how bad a successful phishing attack ends up being?",
+        "options": [
+          "The amount of money initially requested",
+          "The seniority of the person targeted",
+          "The time between the moment the victim realises and the moment IT or security finds out",
+          "Whether the attacker used voice or video",
+          "The size of the company"
+        ],
+        "correct": 2,
+        "why": "Body: <em>The single biggest determinant of how bad a successful phishing attack ends up being is the time between the moment the victim realises and the moment IT or security finds out.</em>",
+        "cite": "Why fast reporting is the whole game"
+      },
+      {
+        "q": "What does the module say about SMS codes as a form of multi-factor authentication?",
+        "options": [
+          "They are the strongest form of MFA available",
+          "They are now considered the weakest form of MFA and are increasingly bypassed",
+          "They are required by the EU AI Act",
+          "They cannot be used with a password manager",
+          "They are only a risk on older phones"
+        ],
+        "correct": 1,
+        "why": "Body: <em>SMS codes are now considered the weakest form of MFA and are increasingly bypassed.</em>",
+        "cite": "Things that help, ahead of time"
+      }
+    ]
+  }
+  </script>
 
   <div id="widget-mount"></div>
 </main>

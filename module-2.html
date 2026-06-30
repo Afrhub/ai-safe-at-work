@@ -161,6 +161,87 @@
 
   <h2>The four versions, weakest to safest</h2>
 
+  <style>
+  /* interactive diagram — scoped */
+  .risk-fig { margin: 1.6rem 0 2.4rem; }
+  .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
+  .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
+  .risk-svg .rnode { cursor: pointer; }
+  .risk-svg .rnode:hover .rcard { stroke: var(--border-bold); }
+  .risk-svg .rnode.is-active .rcard { stroke: var(--accent); fill: var(--accent-soft); }
+  .risk-svg .rnode.rgood.is-active .rcard { stroke: var(--green); fill: rgba(14,125,73,.08); }
+  .risk-svg .rnode:focus { outline: none; }
+  .risk-svg .rnode:focus-visible .rcard { stroke: var(--accent); stroke-width: 2.5; }
+  .risk-svg .rtt { fill: var(--text); font-weight: 800; font-size: 19px; }
+  .risk-svg .rss { fill: var(--text3); font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .risk-svg .ric { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .risk-svg .rgood .ric { stroke: var(--green); }
+  .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
+  .rd-cap strong { color: var(--text); }
+  .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
+  </style>
+  <figure id="risk-fig-2" class="risk-fig" aria-labelledby="risk-fig-2-cap">
+    <svg viewBox="0 0 760 250" class="risk-svg" role="group" aria-label="The four versions of an AI tool, weakest to safest. Select a version to learn what it does with your data.">
+      <g class="rnode" data-k="free" tabindex="0" role="button" aria-label="Free version — no deal, weakest">
+        <rect class="rcard" x="14" y="14" width="174" height="118" rx="14"/>
+        <g transform="translate(34,34)"><path class="ric" d="M3 7h18v12H3zM3 11h18M8 19v3m8-3v3"/></g>
+        <text class="rtt" x="34" y="96">1 · Free</text>
+        <text class="rss" x="34" y="116">no deal</text>
+      </g>
+      <g class="rnode" data-k="paid" tabindex="0" role="button" aria-label="Paid version — still public">
+        <rect class="rcard" x="200" y="14" width="174" height="118" rx="14"/>
+        <g transform="translate(220,34)"><circle class="ric" cx="12" cy="12" r="9"/><path class="ric" d="M12 7v10m-2.5-7.5h4a2 2 0 0 1 0 4h-3a2 2 0 0 0 0 4h4"/></g>
+        <text class="rtt" x="220" y="96">2 · Paid</text>
+        <text class="rss" x="220" y="116">still public</text>
+      </g>
+      <g class="rnode" data-k="team" tabindex="0" role="button" aria-label="Team or business version — a proper deal">
+        <rect class="rcard" x="386" y="14" width="174" height="118" rx="14"/>
+        <g transform="translate(406,34)"><circle class="ric" cx="8" cy="8" r="4"/><circle class="ric" cx="17" cy="9" r="3"/><path class="ric" d="M2 21v-2a6 6 0 0 1 12 0v2M15 21v-2a5 5 0 0 1 6-4.5"/></g>
+        <text class="rtt" x="406" y="96">3 · Team</text>
+        <text class="rss" x="406" y="116">a proper deal</text>
+      </g>
+      <g class="rnode rgood" data-k="ent" tabindex="0" role="button" aria-label="Work or enterprise version — full control, safest">
+        <rect class="rcard" x="572" y="14" width="174" height="118" rx="14"/>
+        <g transform="translate(592,34)"><path class="ric" d="M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6zM9 12l2 2 4-4"/></g>
+        <text class="rtt" x="592" y="96">4 · Work</text>
+        <text class="rss" x="592" y="116">full control</text>
+      </g>
+      <g class="rnode rgood" data-k="rule" tabindex="0" role="button" aria-label="The rule of thumb">
+        <rect class="rcard" x="14" y="150" width="732" height="84" rx="14"/>
+        <g transform="translate(34,176)"><path class="ric" d="M5 4h11l4 4v12H5zM16 4v4h4M9 13h7M9 17h5"/></g>
+        <text class="rtt" x="72" y="188">The rule of thumb</text>
+        <text class="rss" x="72" y="210">version matters as much as what you type</text>
+      </g>
+    </svg>
+    <p class="rd-cap" id="risk-fig-2-cap" aria-live="polite"><strong>The four versions, weakest to safest.</strong> Select a version above — each one treats your data differently.</p>
+  </figure>
+  <script>
+  (function(){
+    var data = {
+      free: {t:'Free version', d:'A public tool with no deal between your company and the AI company. Conversations may be used to improve future models unless you turn that off, and your company has no say over the data.', m:'Weakest. Pasting work here is the most common leak.'},
+      paid: {t:'Paid version (just you)', d:'Better answers and longer chats, but still a public tool with no company deal. Most paid versions do have a clear "do not train on my chats" switch — find it and turn it on.', m:'Still public. Paying does not change the rules.'},
+      team: {t:'Team or business version', d:'Your company has a proper deal (a Data Processing Agreement). Training on your data is usually off by default, you can set retention, and there is an admin panel.', m:'The rules change here. If your company has it, use it.'},
+      ent:  {t:'Work (enterprise) version', d:'Everything the team version has, plus a choice of where data is kept (often EU-only), full audit logs, single sign-on, and security certificates the buying team can check.', m:'Safest. What the standards expect for anything private.'},
+      rule: {t:'The rule of thumb', d:'"Is it OK to use AI for this?" depends on which version of which tool, with which settings, on which data.', m:'Remember: the version you use matters as much as what you type.'}
+    };
+    var fig = document.getElementById('risk-fig-2'); if(!fig) return;
+    var cap = fig.querySelector('.rd-cap');
+    var nodes = fig.querySelectorAll('.rnode');
+    function sel(k){
+      nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k') === k); });
+      var x = data[k]; if(!x) return;
+      cap.innerHTML = '<strong>' + x.t + '.</strong> ' + x.d + ' <span class="rd-m">' + x.m + '</span>';
+    }
+    nodes.forEach(function(n){
+      var k = n.getAttribute('data-k');
+      n.addEventListener('click', function(){ sel(k); });
+      n.addEventListener('mouseenter', function(){ sel(k); });
+      n.addEventListener('focus', function(){ sel(k); });
+      n.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sel(k); } });
+    });
+  })();
+  </script>
+
   <h3>1. Free version</h3>
   <p>Like ChatGPT, Claude, Gemini or Copilot when you have not paid.</p>
   <p>Things that surprise most people the first time:</p>
@@ -261,20 +342,147 @@
   <h2>The takeaway</h2>
   <p>"Is it OK to use AI for this?" almost always has the same answer: it depends on which version of which tool, with which settings, on which data. Modules 3 and 4 turn that into a simple rule. For now, remember one line: <strong>the version you use matters as much as what you type.</strong></p>
 
-  <section class="quiz-block" aria-labelledby="kc-q-2">
-    <div class="quiz-eyebrow">Quick knowledge check</div>
-    <h2 class="quiz-q-text" id="kc-q-2">Which statement is TRUE?</h2>
-    <ol class="quiz-options">
-      <li class="quiz-option" aria-hidden="false"><span class="key">A</span><span class="body">All AI tools process data in the same way.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">B</span><span class="body">Enterprise AI removes the need for governance.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">C</span><span class="body">Some AI systems may retain or process submitted data depending on platform settings and account type.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">D</span><span class="body">AI browser extensions are always safe.</span></li>
-    </ol>
-    <details class="quiz-reveal">
-      <summary class="quiz-btn ghost">Show answer</summary>
-   <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>C, Some AI systems may retain or process submitted data depending on platform settings and account type.</p>
-    </details>
-  </section>
+  <div id="quiz-mount"></div>
+  <script type="application/json" id="quiz-data">
+  {
+    "module": 2,
+    "passThreshold": 8,
+    "quizTitle": "Test your <em>understanding</em>.",
+    "quizLede": "Ten questions drawn only from this module. Pass mark 8 out of 10. Retake as many times as you like.",
+    "questions": [
+      {
+        "q": "In the five-question test, which question does the module call the real decision point in most organisations?",
+        "options": [
+          "What type of data am I about to paste?",
+          "Where is my data kept?",
+          "How long is it kept?",
+          "Is it used to train the next AI?",
+          "Who at the company can read it?"
+        ],
+        "correct": 0,
+        "why": "Body: <em>The first one is the real decision point in most organisations … What type of data am I about to paste?</em>",
+        "cite": "The five-question test"
+      },
+      {
+        "q": "If you are not sure how sensitive a piece of data is, what does the module say to do?",
+        "options": [
+          "Paste it and check later",
+          "Treat it as public until proven otherwise",
+          "Treat it as the most sensitive class until you know",
+          "Ask the AI tool to classify it for you",
+          "Only paste it into a free tool"
+        ],
+        "correct": 2,
+        "why": "Body: <em>If you are not sure, treat it as the most sensitive class until you know.</em>",
+        "cite": "The five-question test"
+      },
+      {
+        "q": "How often does the module say you should check the answers a big AI company publishes about its tools?",
+        "options": [
+          "Once, when you first sign up",
+          "Every day",
+          "Twice a year, not once and never again",
+          "Only after a data breach",
+          "Never — they never change"
+        ],
+        "correct": 2,
+        "why": "Body: <em>Check them twice a year, not once and never again.</em>",
+        "cite": "The five-question test"
+      },
+      {
+        "q": "What is the big catch with a paid version for just yourself (like ChatGPT Plus or Claude Pro)?",
+        "options": [
+          "It gives worse answers than the free version",
+          "It is still a public tool with no deal between your company and the AI company",
+          "It trains on your data more than the free version",
+          "It cannot be used at work at all",
+          "It deletes your chats automatically"
+        ],
+        "correct": 1,
+        "why": "Body: <em>it is still a public tool. Still no deal between your company and the AI company. Paying for it yourself does not change the rules.</em>",
+        "cite": "Paid version (just you)"
+      },
+      {
+        "q": "On a team or business version (like ChatGPT Team or Claude for Work), what does the company have with the AI company?",
+        "options": [
+          "Nothing different from the free tier",
+          "A proper deal — a Data Processing Agreement",
+          "A verbal agreement only",
+          "A refund guarantee",
+          "A licence to resell the AI"
+        ],
+        "correct": 1,
+        "why": "Body: <em>Your company has a proper deal (a Data Processing Agreement) with the AI company.</em>",
+        "cite": "Team or business version"
+      },
+      {
+        "q": "On the team or business version, what is the usual default for training on your data?",
+        "options": [
+          "On by default, and you cannot change it",
+          "On by default, but you can switch it off",
+          "Off by default",
+          "It depends entirely on the weather of the day",
+          "There is no training setting"
+        ],
+        "correct": 2,
+        "why": "Body: <em>Training on your data is usually off by default.</em>",
+        "cite": "Team or business version"
+      },
+      {
+        "q": "What does the module say is the real risk of your chats being used to train future AI?",
+        "options": [
+          "The next AI will repeat your client list word for word",
+          "Your client list becomes one of millions of tiny pieces inside it, and a clever person with the right question can pull small bits back out",
+          "The AI will refuse to answer you in future",
+          "Your account will be suspended",
+          "Nothing — trained data is always safe"
+        ],
+        "correct": 1,
+        "why": "Body: <em>your client list becomes one of millions of tiny pieces inside it, and a clever person with the right question can pull small bits back out.</em>",
+        "cite": "\"Trained on\", what it really means"
+      },
+      {
+        "q": "According to the module, how do you actually fix the training risk?",
+        "options": [
+          "By deleting the chat afterwards",
+          "By turning off training before you paste",
+          "By using a longer password",
+          "By pasting smaller amounts at a time",
+          "By emailing the AI company to forget it"
+        ],
+        "correct": 1,
+        "why": "Body: <em>You cannot fix this by deleting the chat later. You fix it by turning off training before you paste.</em>",
+        "cite": "\"Trained on\", what it really means"
+      },
+      {
+        "q": "Which court case made GDPR rules on sending personal data outside Europe stricter, after 2020?",
+        "options": [
+          "Mata v. Avianca",
+          "Schrems II",
+          "Carpenter v. United States",
+          "Donoghue v. Stevenson",
+          "Roe v. Wade"
+        ],
+        "correct": 1,
+        "why": "Body: <em>the rules got stricter after a big court case in 2020 (Schrems II).</em>",
+        "cite": "Where the data actually sits"
+      },
+      {
+        "q": "When employees use AI tools outside approved company processes, what is this often called?",
+        "options": [
+          "Open AI",
+          "Grey-market AI",
+          "Shadow AI",
+          "Rogue AI",
+          "Free-tier AI"
+        ],
+        "correct": 2,
+        "why": "Body: <em>When employees use AI tools outside approved company processes like this, it is often called Shadow AI.</em>",
+        "cite": "The \"free for work\" mistake"
+      }
+    ]
+  }
+  </script>
 
   <div id="widget-mount"></div>
 </main>

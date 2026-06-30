@@ -174,6 +174,94 @@
     <span class="print-hint">Designed to print on one or two A4 pages. Pin it next to your screen.</span>
   </div>
 
+  <style>
+  /* interactive diagram — scoped */
+  .risk-fig { margin: 1.6rem 0 2.4rem; }
+  .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
+  .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
+  .risk-svg .rnode { cursor: pointer; }
+  .risk-svg .rnode:hover .rcard { stroke: var(--border-bold); }
+  .risk-svg .rnode.is-active .rcard { stroke: var(--accent); fill: var(--accent-soft); }
+  .risk-svg .rnode.rgood.is-active .rcard { stroke: var(--green); fill: rgba(14,125,73,.08); }
+  .risk-svg .rnode:focus { outline: none; }
+  .risk-svg .rnode:focus-visible .rcard { stroke: var(--accent); stroke-width: 2.5; }
+  .risk-svg .rtt { fill: var(--text); font-weight: 800; font-size: 19px; }
+  .risk-svg .rss { fill: var(--text3); font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .risk-svg .ric { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .risk-svg .rgood .ric { stroke: var(--green); }
+  .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
+  .rd-cap strong { color: var(--text); }
+  .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
+  </style>
+  <figure id="risk-fig-11" class="risk-fig no-print" aria-labelledby="risk-fig-cap">
+    <svg viewBox="0 0 760 250" class="risk-svg" role="group" aria-label="The 60-second check, section by section. Select a step to see what it asks.">
+      <g class="rnode" data-k="data" tabindex="0" role="button" aria-label="The data — before you paste">
+        <rect class="rcard" x="14" y="14" width="232" height="118" rx="14"/>
+        <g transform="translate(34,34)"><path class="ric" d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3zM4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/></g>
+        <text class="rtt" x="34" y="96">1 · The data</text>
+        <text class="rss" x="34" y="116">before you paste</text>
+      </g>
+      <g class="rnode" data-k="tool" tabindex="0" role="button" aria-label="The tool — before you choose the AI">
+        <rect class="rcard" x="262" y="14" width="232" height="118" rx="14"/>
+        <g transform="translate(282,34)"><path class="ric" d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-2.4 2.6-2.8z"/></g>
+        <text class="rtt" x="282" y="96">2 · The tool</text>
+        <text class="rss" x="282" y="116">right tier &amp; settings</text>
+      </g>
+      <g class="rnode" data-k="output" tabindex="0" role="button" aria-label="The output — before you act on it">
+        <rect class="rcard" x="510" y="14" width="236" height="118" rx="14"/>
+        <g transform="translate(530,34)"><path class="ric" d="M3 5h14v12H3zM6 9h8M6 13h6"/><path class="ric" d="m15 17 3 3 4-5"/></g>
+        <text class="rtt" x="530" y="96">3 · The output</text>
+        <text class="rss" x="530" y="116">read &amp; verify</text>
+      </g>
+      <g class="rnode" data-k="trail" tabindex="0" role="button" aria-label="The trail — before you close the tab">
+        <rect class="rcard" x="14" y="150" width="232" height="84" rx="14"/>
+        <g transform="translate(34,168)"><path class="ric" d="M5 3h11l4 4v14H5zM15 3v5h5"/><path class="ric" d="M8 13h8M8 17h6"/></g>
+        <text class="rtt" x="72" y="184">4 · Trail</text>
+        <text class="rss" x="72" y="204">log it</text>
+      </g>
+      <g class="rnode" data-k="at" tabindex="0" role="button" aria-label="Aimed at you — before you act on an unusual request">
+        <rect class="rcard" x="262" y="150" width="232" height="84" rx="14"/>
+        <g transform="translate(282,168)"><path class="ric" d="M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6z"/><path class="ric" d="M12 9v4M12 16h.01"/></g>
+        <text class="rtt" x="320" y="184">5 · Aimed at you</text>
+        <text class="rss" x="320" y="204">verify the request</text>
+      </g>
+      <g class="rnode rgood" data-k="wrong" tabindex="0" role="button" aria-label="If something goes wrong — the first ten minutes">
+        <rect class="rcard" x="510" y="150" width="236" height="84" rx="14"/>
+        <g transform="translate(530,168)"><path class="ric" d="M12 8v5m0 3h.01M3.3 18 12 3l8.7 15z"/></g>
+        <text class="rtt" x="568" y="184">6 · Goes wrong</text>
+        <text class="rss" x="568" y="204">first ten minutes</text>
+      </g>
+    </svg>
+    <p class="rd-cap" id="risk-fig-cap" aria-live="polite"><strong>The 60-second check, section by section.</strong> Select a step above — each one maps to a part of the printable list below.</p>
+  </figure>
+  <script>
+  (function(){
+    var data = {
+      data:   {t:'The data', d:'Before you paste, ask: is it on the never-paste list, could you describe the shape of the problem instead, and who would you be apologising to if it leaked?', m:'Section 1.'},
+      tool:   {t:'The tool', d:'Before you choose the AI: are you on the right tier, is training-on-your-conversations turned off, and do you know where the data physically goes?', m:'Section 2.'},
+      output: {t:'The output', d:'Before you act on it: read the whole thing line by line, verify every fact and citation, and make sure a human actually thought about decisions that affect a person.', m:'Section 3.'},
+      trail:  {t:'The trail', d:'Before you close the tab: if it is a significant use, log it across eight fields, and make sure you could honestly explain how you used the AI in six months.', m:'Section 4.'},
+      at:     {t:'Aimed at you', d:'Before you act on an unusual request: perfectly-written phishing is the baseline, so verify the sender on a different channel you initiated, and slow down on urgency.', m:'Section 5.'},
+      wrong:  {t:'If it goes wrong', d:'The first ten minutes: stop and keep the evidence, tell your manager / IT / DPO within the hour, and act immediately if money was sent or credentials shared.', m:'Section 6.'}
+    };
+    var fig = document.getElementById('risk-fig-11'); if(!fig) return;
+    var cap = fig.querySelector('.rd-cap');
+    var nodes = fig.querySelectorAll('.rnode');
+    function sel(k){
+      nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k') === k); });
+      var x = data[k]; if(!x) return;
+      cap.innerHTML = '<strong>' + x.t + '.</strong> ' + x.d + ' <span class="rd-m">' + x.m + '</span>';
+    }
+    nodes.forEach(function(n){
+      var k = n.getAttribute('data-k');
+      n.addEventListener('click', function(){ sel(k); });
+      n.addEventListener('mouseenter', function(){ sel(k); });
+      n.addEventListener('focus', function(){ sel(k); });
+      n.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sel(k); } });
+    });
+  })();
+  </script>
+
   <div class="section-num">Section 1 · The data</div>
   <h2 style="margin-top:0">Before you paste, ask</h2>
 
@@ -348,20 +436,147 @@
     </div>
   </div>
 
-  <section class="quiz-block" aria-labelledby="kc-q-10">
-    <div class="quiz-eyebrow">Quick knowledge check</div>
-    <h2 class="quiz-q-text" id="kc-q-10">Which statement is TRUE?</h2>
-    <ol class="quiz-options">
-      <li class="quiz-option" aria-hidden="false"><span class="key">A</span><span class="body">AI governance is designed to block productivity.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">B</span><span class="body">If AI saves time, governance is less important.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">C</span><span class="body">Simple checks before using AI may significantly reduce operational risk.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">D</span><span class="body">Verification is unnecessary if the output looks professional.</span></li>
-    </ol>
-    <details class="quiz-reveal">
-      <summary class="quiz-btn ghost">Show answer</summary>
-   <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>C, Simple checks before using AI may significantly reduce operational risk.</p>
-    </details>
-  </section>
+  <div id="quiz-mount" class="no-print"></div>
+  <script type="application/json" id="quiz-data">
+  {
+    "module": 11,
+    "passThreshold": 8,
+    "quizTitle": "Test your <em>understanding</em>.",
+    "quizLede": "Questions drawn only from this module. Retake as many times as you like.",
+    "questions": [
+      {
+        "q": "On the never-paste list, which of these is named as special-category data?",
+        "options": [
+          "Marketing copy you wrote yourself",
+          "Health, ethnicity, religion and biometrics",
+          "A public blog post",
+          "Your own meeting notes with no names in them",
+          "A press release scheduled for tomorrow"
+        ],
+        "correct": 1,
+        "why": "Body: <em>special-category data (health, ethnicity, religion, biometrics)</em>",
+        "cite": "Section 1 · The data"
+      },
+      {
+        "q": "Instead of pasting the data, what does the checklist suggest you do, and how often does it work?",
+        "options": [
+          "Encrypt the rows first; works for 100% of tasks",
+          "Email it to IT first; works for half of tasks",
+          "Describe the shape of the problem instead of pasting the data; works for 80% of real tasks",
+          "Split the file into two halves; works for 60% of tasks",
+          "Wait until the data is older; works for 20% of tasks"
+        ],
+        "correct": 2,
+        "why": "Body: <em>\"I have a CSV with three columns: X, Y, Z, give me the Excel formula\" rather than pasting the rows. Works for 80% of real tasks.</em>",
+        "cite": "Section 1 · The data"
+      },
+      {
+        "q": "The checklist asks you to picture a leak tomorrow. What is the decision rule it gives?",
+        "options": [
+          "If you could blame someone else, paste it",
+          "If the answer makes you wince, don't paste",
+          "If it's after 5pm, paste it",
+          "If your boss approves, always paste",
+          "If it's only one row, paste it"
+        ],
+        "correct": 1,
+        "why": "Body: <em>If the answer makes you wince, don't paste.</em>",
+        "cite": "Section 1 · The data"
+      },
+      {
+        "q": "How does the module describe the free / paid-individual tier of an AI tool?",
+        "options": [
+          "Enterprise territory with a full contract",
+          "Consumer territory, with no DPA with your employer",
+          "Banned by GDPR for all use",
+          "Safe for any data because it is paid",
+          "Identical to the Business tier in every way"
+        ],
+        "correct": 1,
+        "why": "Body: <em>Free / paid-individual is consumer territory, no DPA with your employer.</em>",
+        "cite": "Section 2 · The tool"
+      },
+      {
+        "q": "When checking facts or citations in an AI output, what does the checklist tell you to do?",
+        "options": [
+          "Trust them if the formatting looks professional",
+          "Click every reference; if it doesn't open, the source isn't real, and use two independent sources for anything high-stakes",
+          "Ask the AI whether it is sure",
+          "Only check the first and last citation",
+          "Assume citations are correct unless a colleague objects"
+        ],
+        "correct": 1,
+        "why": "Body: <em>Click every reference. If it doesn't open, the source isn't real. Two independent sources for anything high-stakes.</em>",
+        "cite": "Section 3 · The output"
+      },
+      {
+        "q": "For decisions that affect a person (hiring, firing, pricing), what standard does the module set for sign-off?",
+        "options": [
+          "The human must do the work of signing off, not click \"approve\"",
+          "The AI's decision is final once generated",
+          "Two AIs must agree before acting",
+          "Any team member may approve without reading",
+          "Sign-off can be skipped if the AI sounds confident"
+        ],
+        "correct": 0,
+        "why": "Body: <em>the human signing off has to do the work of signing off, not click \"approve\". The AI's suggestion is the start of the thinking, not the end.</em>",
+        "cite": "Section 3 · The output"
+      },
+      {
+        "q": "The log for a significant AI use has eight fields. Which set matches the module?",
+        "options": [
+          "Name · email · password · IP · device · browser · time zone · country",
+          "Date · who · tool/tier · task · inputs · output · what I did with it · who else reviewed",
+          "Title · author · summary · keywords · cost · vendor · licence · expiry",
+          "Project · client · invoice · deadline · status · owner · notes · tags",
+          "Risk · likelihood · impact · owner · mitigation · review date · status · cost"
+        ],
+        "correct": 1,
+        "why": "Body: <em>Eight fields: date · who · tool/tier · task · inputs · output · what I did with it · who else reviewed.</em>",
+        "cite": "Section 4 · The trail"
+      },
+      {
+        "q": "With a perfectly written message asking you to do something unusual, where is the red flag?",
+        "options": [
+          "In the spelling mistakes",
+          "In the request, not the writing",
+          "In the time it was sent",
+          "In the length of the message",
+          "In the font used"
+        ],
+        "correct": 1,
+        "why": "Body: <em>Perfectly-written phishing is the current baseline. The red flag is the request, not the writing.</em>",
+        "cite": "Section 5 · When you're suspicious"
+      },
+      {
+        "q": "If something goes wrong, what is the module's first instruction?",
+        "options": [
+          "Delete the chat history quickly",
+          "Quietly fix it yourself before anyone notices",
+          "Stop; don't delete the evidence; don't try to \"fix\" it alone",
+          "Wait a day to see if it resolves",
+          "Forward the chat to a customer"
+        ],
+        "correct": 2,
+        "why": "Body: <em>Stop. Don't delete the evidence. Don't try to \"fix\" it alone … The reflex to delete is the wrong instinct.</em>",
+        "cite": "Section 6 · If something goes wrong"
+      },
+      {
+        "q": "If personal data leaked, when does the 72-hour GDPR breach clock start?",
+        "options": [
+          "When the regulator sends a letter",
+          "When the data is first pasted",
+          "When the business becomes aware",
+          "Exactly 72 hours after the incident, regardless",
+          "When a customer complains"
+        ],
+        "correct": 2,
+        "why": "Body: <em>the 72-hour GDPR breach clock starts when the business becomes aware. Speed of escalation is what saves it.</em>",
+        "cite": "Section 6 · If something goes wrong"
+      }
+    ]
+  }
+  </script>
 
   <div id="widget-mount" class="no-print"></div>
   </div><!-- /data-checklist-gate -->

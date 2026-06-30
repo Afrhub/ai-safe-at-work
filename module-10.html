@@ -150,6 +150,80 @@
   <h2>The four categories</h2>
   <p>Different incidents need different responses. Categorising it correctly in the first ten minutes will save days of confusion later.</p>
 
+  <style>
+  /* interactive diagram — scoped */
+  .risk-fig { margin: 1.6rem 0 2.4rem; }
+  .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
+  .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
+  .risk-svg .rnode { cursor: pointer; }
+  .risk-svg .rnode:hover .rcard { stroke: var(--border-bold); }
+  .risk-svg .rnode.is-active .rcard { stroke: var(--accent); fill: var(--accent-soft); }
+  .risk-svg .rnode.rgood.is-active .rcard { stroke: var(--green); fill: rgba(14,125,73,.08); }
+  .risk-svg .rnode:focus { outline: none; }
+  .risk-svg .rnode:focus-visible .rcard { stroke: var(--accent); stroke-width: 2.5; }
+  .risk-svg .rtt { fill: var(--text); font-weight: 800; font-size: 19px; }
+  .risk-svg .rss { fill: var(--text3); font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .risk-svg .ric { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .risk-svg .rgood .ric { stroke: var(--green); }
+  .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
+  .rd-cap strong { color: var(--text); }
+  .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
+  </style>
+  <figure id="risk-fig-10" class="risk-fig" aria-labelledby="risk-fig-cap">
+    <svg viewBox="0 0 760 250" class="risk-svg" role="group" aria-label="The four categories of AI incident. Select a category to learn how to respond.">
+      <g class="rnode" data-k="leak" tabindex="0" role="button" aria-label="Category 1 — data leak">
+        <rect class="rcard" x="14" y="14" width="232" height="118" rx="14"/>
+        <g transform="translate(34,34)"><path class="ric" d="M12 3v11m-5-5 5 5 5-5M4 18h16v2H4z"/></g>
+        <text class="rtt" x="34" y="96">1 · Data leak</text>
+        <text class="rss" x="34" y="116">data sent out</text>
+      </g>
+      <g class="rnode" data-k="output" tabindex="0" role="button" aria-label="Category 2 — bad output acted upon">
+        <rect class="rcard" x="262" y="14" width="232" height="118" rx="14"/>
+        <g transform="translate(282,34)"><path class="ric" d="M12 21V10m-5 5 5-5 5 5M4 4h16"/></g>
+        <text class="rtt" x="282" y="96">2 · Bad output</text>
+        <text class="rss" x="282" y="116">acted upon</text>
+      </g>
+      <g class="rnode" data-k="attack" tabindex="0" role="button" aria-label="Category 3 — successful attack">
+        <rect class="rcard" x="510" y="14" width="236" height="118" rx="14"/>
+        <g transform="translate(530,34)"><circle class="ric" cx="12" cy="12" r="9"/><circle class="ric" cx="12" cy="12" r="3"/></g>
+        <text class="rtt" x="530" y="96">3 · Attack</text>
+        <text class="rss" x="530" y="116">scam landed</text>
+      </g>
+      <g class="rnode rgood" data-k="vendor" tabindex="0" role="button" aria-label="Category 4 — vendor incident">
+        <rect class="rcard" x="14" y="150" width="732" height="84" rx="14"/>
+        <g transform="translate(34,176)"><path class="ric" d="M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6zM9 12l2 2 4-4"/></g>
+        <text class="rtt" x="72" y="188">4 · Vendor incident</text>
+        <text class="rss" x="72" y="210">their breach, your data</text>
+      </g>
+    </svg>
+    <p class="rd-cap" id="risk-fig-cap" aria-live="polite"><strong>The four categories of AI incident.</strong> Select a category above — each one needs a different first response.</p>
+  </figure>
+  <script>
+  (function(){
+    var data = {
+      leak:   {t:'Data leak', d:'You or your team put sensitive data into an AI tool that shouldn’t have received it — customer records, source code, a confidential document.', m:'May be a GDPR breach; the 72-hour clock can start.'},
+      output: {t:'Bad output acted upon', d:'The AI’s output was wrong and got used in a decision — a hallucinated citation filed, a biased screening, made-up facts published.', m:'Correct it; trace where it travelled.'},
+      attack: {t:'Successful attack', d:'An AI-powered scam landed — money transferred, credentials given up, software installed, a deepfake call acted on.', m:'Call the bank in minutes; tell IT the same minute.'},
+      vendor: {t:'Vendor incident', d:'Your AI vendor was breached, changed terms, or had an outage — the data you sent them is now at unexpected risk.', m:'If personal data was involved, it’s a Category 1 problem in disguise.'}
+    };
+    var fig = document.getElementById('risk-fig-10'); if(!fig) return;
+    var cap = fig.querySelector('.rd-cap');
+    var nodes = fig.querySelectorAll('.rnode');
+    function sel(k){
+      nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k') === k); });
+      var x = data[k]; if(!x) return;
+      cap.innerHTML = '<strong>' + x.t + '.</strong> ' + x.d + ' <span class="rd-m">' + x.m + '</span>';
+    }
+    nodes.forEach(function(n){
+      var k = n.getAttribute('data-k');
+      n.addEventListener('click', function(){ sel(k); });
+      n.addEventListener('mouseenter', function(){ sel(k); });
+      n.addEventListener('focus', function(){ sel(k); });
+      n.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sel(k); } });
+    });
+  })();
+  </script>
+
   <div class="compare">
     <div class="compare-cell bad">
       <h4>1. Data leak</h4>
@@ -291,20 +365,147 @@
     </div>
   </div>
 
-  <section class="quiz-block" aria-labelledby="kc-q-9">
-    <div class="quiz-eyebrow">Quick knowledge check</div>
-    <h2 class="quiz-q-text" id="kc-q-9">Which statement is TRUE?</h2>
-    <ol class="quiz-options">
-      <li class="quiz-option" aria-hidden="false"><span class="key">A</span><span class="body">AI incidents only matter if hackers are involved.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">B</span><span class="body">It is usually safer to report concerns early.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">C</span><span class="body">Accidental AI misuse should be hidden if no one noticed.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">D</span><span class="body">Governance incidents are not operational incidents.</span></li>
-    </ol>
-    <details class="quiz-reveal">
-      <summary class="quiz-btn ghost">Show answer</summary>
-   <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>B, It is usually safer to report concerns early.</p>
-    </details>
-  </section>
+  <div id="quiz-mount"></div>
+  <script type="application/json" id="quiz-data">
+  {
+    "module": 10,
+    "passThreshold": 8,
+    "quizTitle": "Test your <em>understanding</em>.",
+    "quizLede": "Ten questions drawn only from this module. Pass mark 8 out of 10. Retake as many times as you like.",
+    "questions": [
+      {
+        "q": "How many categories of \"something went wrong\" does this module split AI incidents into?",
+        "options": [
+          "Four",
+          "Two",
+          "Three",
+          "Five",
+          "Six"
+        ],
+        "correct": 0,
+        "why": "Body: <em>Different incidents need different responses. Categorising it correctly in the first ten minutes will save days of confusion later.</em> The module names four: data leak, bad output acted upon, successful attack, and vendor incident.",
+        "cite": "The four categories"
+      },
+      {
+        "q": "Which scenario does the module classify as Category 3, a successful attack?",
+        "options": [
+          "Customer records pasted into an unapproved AI tool",
+          "A hallucinated legal citation filed with a court",
+          "An AI-powered scam landed: money transferred, credentials given up, software installed, or a deepfake call acted on",
+          "Your AI vendor changed their terms without notice",
+          "A biased screening tool rejected a candidate"
+        ],
+        "correct": 2,
+        "why": "Body: <em>An AI-powered scam landed. Money was transferred. Credentials were given up. Software was installed. A deepfake call was acted on.</em>",
+        "cite": "The four categories"
+      },
+      {
+        "q": "In the first ten minutes of any incident, what does the module say to do about the chat, email or file involved?",
+        "options": [
+          "Delete it immediately to limit exposure",
+          "Don't delete the evidence — investigators will need it",
+          "Forward it to the whole team",
+          "Edit it to remove the sensitive parts",
+          "Archive it and forget about it"
+        ],
+        "correct": 1,
+        "why": "Body: <em>Don't delete the evidence. The reflex to delete the chat, the email, the file is understandable. Don't. Investigators will need it.</em>",
+        "cite": "The first ten minutes (any category)"
+      },
+      {
+        "q": "When you tell someone about an incident in the first ten minutes, how does the module frame what you are doing?",
+        "options": [
+          "Asking for permission to proceed",
+          "Confessing to a mistake",
+          "Flagging — you're not asking for permission and not confessing",
+          "Requesting a formal investigation",
+          "Filing a complaint against the vendor"
+        ],
+        "correct": 2,
+        "why": "Body: <em>You're not asking for permission. You're not confessing. You're flagging.</em>",
+        "cite": "The first ten minutes (any category)"
+      },
+      {
+        "q": "Under GDPR Article 33, within how long must the controller notify the supervisory authority of a personal data breach likely to risk people's rights?",
+        "options": [
+          "24 hours of becoming aware",
+          "48 hours of becoming aware",
+          "72 hours of becoming aware",
+          "7 days of becoming aware",
+          "30 days of becoming aware"
+        ],
+        "correct": 2,
+        "why": "Body: <em>Article 33 requires the controller … to notify the supervisory authority … within 72 hours of becoming aware, where the breach is likely to result in a risk to the rights and freedoms of natural persons.</em>",
+        "cite": "Category 1, data leak"
+      },
+      {
+        "q": "When does the 72-hour breach-notification clock start, according to the module?",
+        "options": [
+          "When the regulator contacts the business",
+          "When the business is fully certain a breach occurred",
+          "On the next working day after the incident",
+          "From the moment the business has a reasonable degree of certainty that a breach has occurred",
+          "Only once customers have been told"
+        ],
+        "correct": 3,
+        "why": "Body: <em>\"Becoming aware\" is from the moment the business, not the regulator, has a reasonable degree of certainty that a breach has occurred. The clock starts then.</em>",
+        "cite": "Category 1, data leak"
+      },
+      {
+        "q": "In a Category 2 incident, if bad AI output has only been sent to one person, what does the module advise?",
+        "options": [
+          "Blame the AI tool clearly so the recipient understands",
+          "Wait to see if they notice before acting",
+          "Write a clear correction and own it, rather than blaming the AI",
+          "Delete the original message and say nothing",
+          "Escalate straight to the regulator"
+        ],
+        "correct": 2,
+        "why": "Body: <em>If it's been sent to one person: write a clear correction. Don't blame the AI; own it.</em>",
+        "cite": "Category 2, bad output acted upon"
+      },
+      {
+        "q": "If money moved in a Category 3 attack, what does the module say to do?",
+        "options": [
+          "Email the bank's general inbox the next morning",
+          "Call the bank within minutes, not hours — Faster Payments and SEPA Instant can sometimes be recalled in the first hour",
+          "Wait 24 hours to confirm the loss before contacting anyone",
+          "Report only to the police and let them handle the bank",
+          "Change your account password first, then deal with the money"
+        ],
+        "correct": 1,
+        "why": "Body: <em>If money moved: call the bank within minutes, not hours. UK Faster Payments and SEPA Instant transfers can sometimes be recalled in the first hour. After that, recovery rates drop sharply.</em>",
+        "cite": "Category 3, successful attack"
+      },
+      {
+        "q": "When an AI vendor suffers an incident and personal data was involved, how does the module describe it?",
+        "options": [
+          "A purely technical problem for the vendor to fix",
+          "A Category 1 problem in disguise — your business may itself have a notification obligation to its own customers",
+          "Something only the vendor must report",
+          "A reason to immediately switch vendors with no further action",
+          "Not your concern unless the vendor admits fault"
+        ],
+        "correct": 1,
+        "why": "Body: <em>If personal data was involved, this is now a Category 1 problem in disguise: your business may itself have a notification obligation to its own customers.</em>",
+        "cite": "Category 4, vendor incident"
+      },
+      {
+        "q": "What does the module say is the goal of incident response, in the 'response, not blame' insight?",
+        "options": [
+          "Identifying and punishing the person responsible",
+          "Recovering the maximum amount of lost money",
+          "Producing a report for the regulator as fast as possible",
+          "Proving the incident was the vendor's fault",
+          "Containment, evidence preservation, assessment and learning — not assigning blame"
+        ],
+        "correct": 4,
+        "why": "Body: <em>The goal of incident response is containment, evidence preservation, assessment and learning, not assigning blame.</em>",
+        "cite": "Governance insight: response, not blame"
+      }
+    ]
+  }
+  </script>
 
   <div id="widget-mount"></div>
 </main>

@@ -154,6 +154,80 @@
     </div>
   </div>
 
+  <style>
+  /* interactive diagram — scoped */
+  .risk-fig { margin: 1.6rem 0 2.4rem; }
+  .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
+  .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
+  .risk-svg .rnode { cursor: pointer; }
+  .risk-svg .rnode:hover .rcard { stroke: var(--border-bold); }
+  .risk-svg .rnode.is-active .rcard { stroke: var(--accent); fill: var(--accent-soft); }
+  .risk-svg .rnode.rgood.is-active .rcard { stroke: var(--green); fill: rgba(14,125,73,.08); }
+  .risk-svg .rnode:focus { outline: none; }
+  .risk-svg .rnode:focus-visible .rcard { stroke: var(--accent); stroke-width: 2.5; }
+  .risk-svg .rtt { fill: var(--text); font-weight: 800; font-size: 19px; }
+  .risk-svg .rss { fill: var(--text3); font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .risk-svg .ric { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .risk-svg .rgood .ric { stroke: var(--green); }
+  .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
+  .rd-cap strong { color: var(--text); }
+  .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
+  </style>
+  <figure id="risk-fig-4" class="risk-fig" aria-labelledby="risk-fig-cap">
+    <svg viewBox="0 0 760 250" class="risk-svg" role="group" aria-label="The four-question decision flow for picking an AI tool. Select a question to learn more.">
+      <g class="rnode" data-k="q1" tabindex="0" role="button" aria-label="Question 1 — is the data on the never-paste list?">
+        <rect class="rcard" x="14" y="14" width="232" height="118" rx="14"/>
+        <g transform="translate(34,34)"><path class="ric" d="M5 5l14 14M19 5 5 19M4 12h16"/></g>
+        <text class="rtt" x="34" y="96">1 · Never-paste?</text>
+        <text class="rss" x="34" y="116">stop or escalate</text>
+      </g>
+      <g class="rnode" data-k="q2" tabindex="0" role="button" aria-label="Question 2 — does my business have a procured AI tool for this?">
+        <rect class="rcard" x="262" y="14" width="232" height="118" rx="14"/>
+        <g transform="translate(282,34)"><path class="ric" d="M3 21V8l9-5 9 5v13M9 21v-6h6v6"/></g>
+        <text class="rtt" x="282" y="96">2 · Procured tool?</text>
+        <text class="rss" x="282" y="116">use the licence</text>
+      </g>
+      <g class="rnode" data-k="q3" tabindex="0" role="button" aria-label="Question 3 — is the data internal but low-sensitivity?">
+        <rect class="rcard" x="510" y="14" width="236" height="118" rx="14"/>
+        <g transform="translate(530,34)"><path class="ric" d="M3 12h6m6 0h6M12 3v6m0 6v6"/><circle class="ric" cx="12" cy="12" r="3"/></g>
+        <text class="rtt" x="530" y="96">3 · Low-sensitivity?</text>
+        <text class="rss" x="530" y="116">consumer tier may do</text>
+      </g>
+      <g class="rnode rgood" data-k="q4" tabindex="0" role="button" aria-label="Question 4 — is there a regulated decision involved?">
+        <rect class="rcard" x="14" y="150" width="732" height="84" rx="14"/>
+        <g transform="translate(34,176)"><path class="ric" d="M3 21h18M5 21V8l7-5 7 5v13M9 12h6m-6 4h6"/></g>
+        <text class="rtt" x="72" y="188">4 · Regulated decision?</text>
+        <text class="rss" x="72" y="210">enterprise controls or humans only</text>
+      </g>
+    </svg>
+    <p class="rd-cap" id="risk-fig-cap" aria-live="polite"><strong>The four-question decision flow.</strong> Select a question above — run any task through them in order before opening an AI tool.</p>
+  </figure>
+  <script>
+  (function(){
+    var data = {
+      q1: {t:'Is the data on the never-paste list?', d:'If yes, stop. Reformulate the task to use the shape of the data rather than the data itself, or escalate to the enterprise tool. Never-paste means never into a free or personal AI tool.', m:'Question 1.'},
+      q2: {t:'Does my business have a procured AI tool?', d:'Most businesses now have at least one — Copilot, ChatGPT Team, Claude for Work, Gemini. If your business has paid for one, use it: the contract, DPA and controls are already in place.', m:'Question 2.'},
+      q3: {t:'Is the data internal but low-sensitivity?', d:'Marketing copy, a presentation outline, a generic how-to question. A consumer-tier tool may be acceptable — subject to policy, with training opted off, and nothing from the never-paste list.', m:'Question 3.'},
+      q4: {t:'Is there a regulated decision involved?', d:'Hiring, firing, pay, credit, insurance, health, criminal justice. That is EU AI Act territory: an enterprise tool with oversight and logging, or a human-only process.', m:'Question 4.'}
+    };
+    var fig = document.getElementById('risk-fig-4'); if(!fig) return;
+    var cap = fig.querySelector('.rd-cap');
+    var nodes = fig.querySelectorAll('.rnode');
+    function sel(k){
+      nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k') === k); });
+      var x = data[k]; if(!x) return;
+      cap.innerHTML = '<strong>' + x.t + '</strong> ' + x.d + ' <span class="rd-m">' + x.m + '</span>';
+    }
+    nodes.forEach(function(n){
+      var k = n.getAttribute('data-k');
+      n.addEventListener('click', function(){ sel(k); });
+      n.addEventListener('mouseenter', function(){ sel(k); });
+      n.addEventListener('focus', function(){ sel(k); });
+      n.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sel(k); } });
+    });
+  })();
+  </script>
+
  <h3>Question 1, Is the data on the never-paste list?</h3>
   <p>(Module 3.) If yes, you're already in the right place: either reformulate the task to use the "shape" of the data rather than the data itself, or escalate to the enterprise tool. Don't continue down the flow with sensitive data in hand.</p>
  <p>Remember the footnote from Module 3: "never-paste" means never into a <strong>free or personal</strong> AI tool. It does not necessarily rule out an approved enterprise AI platform your company has set up with a contract and the right controls, that is often exactly where this work should go.</p>
@@ -258,22 +332,147 @@
  <p>Caveats: the models are smaller, often less capable; you still need to make sure backup and disk encryption are sorted; and "local" doesn't help if the laptop itself isn't well managed. But for some kinds of work, summarising sensitive notes, drafting things you'd rather not send anywhere, a local model is a genuine fit.</p>
   <p>One thing local AI does <strong>not</strong> remove: governance. A model running on your laptop still needs an acceptable-use policy, a record of what it's used for, logging where the work matters, and human oversight of its output (Module 5). "The data stayed on the device" answers the privacy question, not the accountability one.</p>
 
-  <section class="quiz-block" aria-labelledby="kc-q-4">
-    <div class="quiz-eyebrow">Quick knowledge check</div>
-    <h2 class="quiz-q-text" id="kc-q-4">Which statement is TRUE?</h2>
-    <ol class="quiz-options">
-      <li class="quiz-option" aria-hidden="false"><span class="key">A</span><span class="body">All popular AI tools are suitable for business usage.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">B</span><span class="body">Enterprise AI removes the need for governance.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">C</span><span class="body">Browser extensions and plugins may still create AI governance risks.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">D</span><span class="body">Personal AI accounts are safer because only the employee can access them.</span></li>
-    </ol>
-    <details class="quiz-reveal">
-      <summary class="quiz-btn ghost">Show answer</summary>
-   <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>C, Browser extensions and plugins may still create AI governance risks.</p>
-    </details>
-  </section>
-
-  <div id="widget-mount"></div>
+  <div id="quiz-mount"></div>
+  <script type="application/json" id="quiz-data">
+  {
+    "module": 4,
+    "passThreshold": 8,
+    "quizTitle": "Test your <em>understanding</em>.",
+    "quizLede": "Ten questions drawn only from this module. Pass mark 8 out of 10. Retake as many times as you like.",
+    "questions": [
+      {
+        "q": "Module 4 says \"Which AI should I use?\" has how many possible answers?",
+        "options": [
+          "One answer: always use the enterprise tool",
+          "Two answers: free or paid",
+          "Three answers: this one is fine, this needs a different tier, or this task does not belong in AI at all",
+          "Four answers, one per data class",
+          "It depends entirely on the vendor"
+        ],
+        "correct": 2,
+        "why": "Body: <em>\"Which AI should I use?\" has three possible answers: this one is fine, this needs a different tier, or this task does not belong in AI at all.</em>",
+        "cite": "Picking the right tool for the job (lede)"
+      },
+      {
+        "q": "What is the step most people skip before running the four questions?",
+        "options": [
+          "Reading the vendor's pricing page",
+          "Classifying the data first — Public, Internal, Confidential or Restricted",
+          "Asking a colleague which tool they use",
+          "Checking the AI's training cut-off date",
+          "Logging in to the enterprise tool"
+        ],
+        "correct": 1,
+        "why": "Body: <em>classify the data first. Public, Internal, Confidential or Restricted (Module 3). The class sets the bar.</em>",
+        "cite": "Start from the data class"
+      },
+      {
+        "q": "According to the module, does \"never-paste\" rule out an approved enterprise AI platform?",
+        "options": [
+          "Yes — never-paste data can never go into any AI tool",
+          "Only if the data is Public",
+          "Only if the laptop has disk encryption",
+          "No — never-paste means never into a free or personal tool; an approved enterprise platform with a contract and controls is often exactly where the work should go",
+          "Yes, unless your manager approves it verbally"
+        ],
+        "correct": 3,
+        "why": "Body: <em>\"never-paste\" means never into a free or personal AI tool. It does not necessarily rule out an approved enterprise AI platform your company has set up with a contract and the right controls.</em>",
+        "cite": "Question 1 — Is the data on the never-paste list?"
+      },
+      {
+        "q": "Question 2 asks whether your business already has a procured AI tool. Why does the module say to use it if so?",
+        "options": [
+          "It is always the cheapest option",
+          "Free tools are blocked on the company network",
+          "It runs entirely on your own laptop",
+          "The contract, the DPA, the retention controls and the training opt-out are all already in place for you",
+          "It guarantees the AI never makes mistakes"
+        ],
+        "correct": 3,
+        "why": "Body: <em>If your business has paid for one, use it. The contract, the DPA, the retention controls, the training opt-out, they're all already in place for you.</em>",
+        "cite": "Question 2 — Does my business have a procured AI tool for this?"
+      },
+      {
+        "q": "For internal, low-sensitivity work, what condition does the module attach to using a consumer-tier tool?",
+        "options": [
+          "Nothing — low-sensitivity data is always fine",
+          "You must first email the vendor",
+          "It may be acceptable, subject to company policy and data classification, with training opted off and nothing from the never-paste list",
+          "Only if you are working from the office",
+          "Only if the tool is made in the EU"
+        ],
+        "correct": 2,
+        "why": "Body: <em>a consumer-tier AI tool may be acceptable, subject to company policy and data classification, provided training is opted off (Module 2), and you're not pasting anything that falls into the never-paste list.</em>",
+        "cite": "Question 3 — Is the data internal but low-sensitivity?"
+      },
+      {
+        "q": "Which of these counts as a \"regulated decision\" in Question 4?",
+        "options": [
+          "Drafting a blog post outline",
+          "Anything affecting someone's hiring, firing, pay, promotion, benefits, credit, insurance, education, immigration, health, criminal justice, or access to essential services",
+          "Summarising a public news article",
+          "Translating marketing copy",
+          "Asking how to use a spreadsheet formula"
+        ],
+        "correct": 1,
+        "why": "Body: <em>anything affecting someone's hiring, firing, pay, promotion, benefits, credit, insurance, education, immigration, health, criminal justice, or access to essential services.</em>",
+        "cite": "Question 4 — Is there a regulated decision involved?"
+      },
+      {
+        "q": "What does the module call the biggest AI risk in most small businesses?",
+        "options": [
+          "Malicious insiders",
+          "Viruses in AI software",
+          "Spending too much on enterprise licences",
+          "Shadow adoption — useful tools spreading through a team outside IT's view, with no contract, DPA or audit trail",
+          "Employees refusing to use AI at all"
+        ],
+        "correct": 3,
+        "why": "Body: <em>The biggest AI risk in most small businesses is not malicious use. It is shadow adoption.</em>",
+        "cite": "\"Shadow AI\", when teams adopt tools outside IT's view"
+      },
+      {
+        "q": "Under the \"clean-introduction rule\", what is the right move when you find a useful free AI tool?",
+        "options": [
+          "Start using it quietly and tell colleagues",
+          "A five-minute conversation with your manager or IT lead",
+          "Buy the enterprise tier yourself",
+          "Wait three months to see if anyone notices",
+          "Email the vendor for a discount"
+        ],
+        "correct": 1,
+        "why": "Body: <em>the right move isn't \"start using it quietly\". It's a five-minute conversation with your manager or IT lead.</em>",
+        "cite": "The clean-introduction rule"
+      },
+      {
+        "q": "The module warns about the \"AI wrapper\" risk. What does it mean?",
+        "options": [
+          "AI tools wrapped in too much marketing",
+          "Many \"AI tools\" are thin wrappers around a major model provider's API, so your data flows through two companies — the wrapper and the underlying model provider",
+          "AI that wraps your text in formatting you didn't ask for",
+          "Tools that only work inside a web browser",
+          "AI that cannot be cancelled once subscribed"
+        ],
+        "correct": 1,
+        "why": "Body: <em>Many \"AI tools\" advertised to SMBs are thin wrappers around a major model provider's API … your data flows through two companies: the wrapper, and the underlying model provider.</em>",
+        "cite": "The \"AI wrapper\" risk"
+      },
+      {
+        "q": "What does the module say local / offline AI does NOT remove?",
+        "options": [
+          "The need for an internet connection",
+          "The cost of the hardware",
+          "The never-paste list entirely",
+          "The need to opt out of training",
+          "Governance — it still needs an acceptable-use policy, a record of use, logging where the work matters, and human oversight of its output"
+        ],
+        "correct": 4,
+        "why": "Body: <em>One thing local AI does not remove: governance. A model running on your laptop still needs an acceptable-use policy, a record of what it's used for, logging where the work matters, and human oversight of its output.</em>",
+        "cite": "A note on local / offline AI"
+      }
+    ]
+  }
+  </script>
 </main>
 
 <!-- completion-bar v1 -->

@@ -160,6 +160,87 @@
   </ul>
   <p>Two or more of those true: log it. Zero true: skip it. Over-logging is its own dysfunction.</p>
 
+  <style>
+  /* interactive diagram — scoped */
+  .risk-fig { margin: 1.6rem 0 2.4rem; }
+  .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
+  .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
+  .risk-svg .rnode { cursor: pointer; }
+  .risk-svg .rnode:hover .rcard { stroke: var(--border-bold); }
+  .risk-svg .rnode.is-active .rcard { stroke: var(--accent); fill: var(--accent-soft); }
+  .risk-svg .rnode.rgood.is-active .rcard { stroke: var(--green); fill: rgba(14,125,73,.08); }
+  .risk-svg .rnode:focus { outline: none; }
+  .risk-svg .rnode:focus-visible .rcard { stroke: var(--accent); stroke-width: 2.5; }
+  .risk-svg .rtt { fill: var(--text); font-weight: 800; font-size: 18px; }
+  .risk-svg .rss { fill: var(--text3); font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .risk-svg .ric { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .risk-svg .rgood .ric { stroke: var(--green); }
+  .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
+  .rd-cap strong { color: var(--text); }
+  .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
+  </style>
+  <figure id="risk-fig-9" class="risk-fig" aria-labelledby="risk-fig-cap">
+    <svg viewBox="0 0 760 332" class="risk-svg" role="group" aria-label="The five-property test for whether an AI-assisted decision is significant enough to log. Select a property to learn more.">
+      <g class="rnode" data-k="person" tabindex="0" role="button" aria-label="Affects another person">
+        <rect class="rcard" x="14" y="14" width="362" height="84" rx="14"/>
+        <g transform="translate(34,40)"><circle class="ric" cx="12" cy="7" r="4"/><path class="ric" d="M4 21c0-5 4-8 8-8s8 3 8 8"/></g>
+        <text class="rtt" x="72" y="50">Affects a person</text>
+        <text class="rss" x="72" y="72">customer · staff · public</text>
+      </g>
+      <g class="rnode" data-k="represents" tabindex="0" role="button" aria-label="Represents the business">
+        <rect class="rcard" x="384" y="14" width="362" height="84" rx="14"/>
+        <g transform="translate(404,40)"><path class="ric" d="M4 20V8l8-5 8 5v12M4 20h16M10 20v-6h4v6"/></g>
+        <text class="rtt" x="442" y="50">Represents the business</text>
+        <text class="rss" x="442" y="72">customer-facing · contract</text>
+      </g>
+      <g class="rnode" data-k="sensitive" tabindex="0" role="button" aria-label="Sensitive data involved">
+        <rect class="rcard" x="14" y="116" width="362" height="84" rx="14"/>
+        <g transform="translate(34,142)"><path class="ric" d="M12 2l8 3v6c0 5-8 9-8 9s-8-4-8-9V5z"/><path class="ric" d="M8 11h8M12 8v6"/></g>
+        <text class="rtt" x="72" y="152">Sensitive data</text>
+        <text class="rss" x="72" y="174">near the never-paste list</text>
+      </g>
+      <g class="rnode" data-k="costly" tabindex="0" role="button" aria-label="Irreversible or expensive">
+        <rect class="rcard" x="384" y="116" width="362" height="84" rx="14"/>
+        <g transform="translate(404,142)"><path class="ric" d="M12 3v18M7 7h7a3 3 0 0 1 0 6H8a3 3 0 0 0 0 6h8"/></g>
+        <text class="rtt" x="442" y="152">Irreversible or costly</text>
+        <text class="rss" x="442" y="174">hiring · pricing · production</text>
+      </g>
+      <g class="rnode" data-k="regulatory" tabindex="0" role="button" aria-label="Touches regulatory, compliance or audit activity">
+        <rect class="rcard" x="14" y="218" width="732" height="84" rx="14"/>
+        <g transform="translate(34,244)"><path class="ric" d="M5 3h10l4 4v14H5zM14 3v5h5"/><path class="ric" d="M8 12h8M8 16h6"/></g>
+        <text class="rtt" x="72" y="254">Touches regulation or audit</text>
+        <text class="rss" x="72" y="276">may be examined by a regulator, auditor, or insurer</text>
+      </g>
+    </svg>
+    <p class="rd-cap" id="risk-fig-cap" aria-live="polite"><strong>The five-property "significant" test.</strong> Select a property above — two or more true, and the interaction is worth a log row.</p>
+  </figure>
+  <script>
+  (function(){
+    var data = {
+      person:     {t:'Does the output affect another person?', d:'Customer, employee, candidate, supplier, the public.', m:'Property 1 of 5.'},
+      represents: {t:'Does the output represent the business?', d:'Going to a customer, on the website, in a contract, in a marketing campaign.', m:'Property 2 of 5.'},
+      sensitive:  {t:'Was the data sensitive?', d:'Anything close to the never-paste list (Module 3), even if handled correctly.', m:'Property 3 of 5.'},
+      costly:     {t:'Was the decision irreversible or expensive?', d:'Hiring, firing, pricing, contract terms, technical changes to production systems.', m:'Property 4 of 5.'},
+      regulatory: {t:'Does it influence a regulatory, compliance or audit activity?', d:'Anything that may later be examined by a regulator, auditor, or insurer.', m:'Property 5 of 5.'}
+    };
+    var fig = document.getElementById('risk-fig-9'); if(!fig) return;
+    var cap = fig.querySelector('.rd-cap');
+    var nodes = fig.querySelectorAll('.rnode');
+    function sel(k){
+      nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k') === k); });
+      var x = data[k]; if(!x) return;
+      cap.innerHTML = '<strong>' + x.t + '</strong> ' + x.d + ' <span class="rd-m">' + x.m + '</span>';
+    }
+    nodes.forEach(function(n){
+      var k = n.getAttribute('data-k');
+      n.addEventListener('click', function(){ sel(k); });
+      n.addEventListener('mouseenter', function(){ sel(k); });
+      n.addEventListener('focus', function(){ sel(k); });
+      n.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sel(k); } });
+    });
+  })();
+  </script>
+
   <h2>The minimum useful log</h2>
  <p>Nine fields, no more. Designed to be copied into a spreadsheet, a Notion page, a shared doc, whatever your team already uses. The whole point is that this should take 30 seconds and remain useful in six months.</p>
 
@@ -245,20 +326,147 @@
     </div>
   </div>
 
-  <section class="quiz-block" aria-labelledby="kc-q-8">
-    <div class="quiz-eyebrow">Quick knowledge check</div>
-    <h2 class="quiz-q-text" id="kc-q-8">Which statement is TRUE?</h2>
-    <ol class="quiz-options">
-      <li class="quiz-option" aria-hidden="false"><span class="key">A</span><span class="body">AI removes the need for accountability.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">B</span><span class="body">Organisations do not need visibility into AI usage.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">C</span><span class="body">Humans remain accountable for AI-assisted business activity.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">D</span><span class="body">AI-assisted decisions never require review.</span></li>
-    </ol>
-    <details class="quiz-reveal">
-      <summary class="quiz-btn ghost">Show answer</summary>
-   <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>C, Humans remain accountable for AI-assisted business activity.</p>
-    </details>
-  </section>
+  <div id="quiz-mount"></div>
+  <script type="application/json" id="quiz-data">
+  {
+    "module": 9,
+    "passThreshold": 8,
+    "quizTitle": "Test your <em>understanding</em>.",
+    "quizLede": "Ten questions drawn only from this module. Pass mark 8 out of 10. Retake as many times as you like.",
+    "questions": [
+      {
+        "q": "How many of the \"significant\" properties must be true before the module says you should log an AI interaction?",
+        "options": [
+          "Any one of them",
+          "Two or more of them",
+          "All five of them",
+          "At least three of them",
+          "Only if all of them are false"
+        ],
+        "correct": 1,
+        "why": "Body: <em>Two or more of those true: log it. Zero true: skip it. Over-logging is its own dysfunction.</em>",
+        "cite": "What counts as \"significant\""
+      },
+      {
+        "q": "According to the module, how many fields make up the minimum useful log?",
+        "options": [
+          "Five fields",
+          "Seven fields",
+          "Nine fields",
+          "Twelve fields",
+          "As many as you can capture"
+        ],
+        "correct": 2,
+        "why": "Body: <em>Nine fields, no more. Designed to be copied into a spreadsheet, a Notion page, a shared doc, whatever your team already uses.</em>",
+        "cite": "The minimum useful log"
+      },
+      {
+        "q": "For the \"Inputs\" field of a log row, what does the module say you should record?",
+        "options": [
+          "The full prompt text, word for word",
+          "A screenshot of the conversation",
+          "What kind of data was in the prompt, not the data itself",
+          "Only the AI tool's name",
+          "Nothing — inputs are not logged"
+        ],
+        "correct": 2,
+        "why": "Body: <em>Inputs. What kind of data was in the prompt, not the data itself.</em>",
+        "cite": "A minimum log row"
+      },
+      {
+        "q": "What does the module say logging is NOT?",
+        "options": [
+          "It isn't a transcript — you don't need every prompt, response or screenshot",
+          "It isn't allowed under GDPR",
+          "It isn't useful after six months",
+          "It isn't something an individual can do",
+          "It isn't relevant to ISO standards"
+        ],
+        "correct": 0,
+        "why": "Body: <em>Logging isn't a transcript. You don't need to keep every prompt, every response, every conversation. You don't need to capture screenshots.</em>",
+        "cite": "What you don't need to do"
+      },
+      {
+        "q": "The module says the goal of logging is best captured by which question?",
+        "options": [
+          "\"If asked, could I replay it exactly?\"",
+          "\"If asked, could I describe what happened?\"",
+          "\"If asked, could I name everyone on my team who used AI?\"",
+          "\"If asked, could I produce a full transcript?\"",
+          "\"If asked, could I prove the AI was never wrong?\""
+        ],
+        "correct": 1,
+        "why": "Body: <em>The goal is \"if asked, could I describe what happened?\", not \"if asked, could I replay it exactly?\".</em>",
+        "cite": "What you don't need to do"
+      },
+      {
+        "q": "Which phrase does the module call \"the key phrase\" in GDPR Article 22?",
+        "options": [
+          "\"Meaningful information\"",
+          "\"Legal effects\"",
+          "\"Solely automated\"",
+          "\"Personal data\"",
+          "\"Significantly affects\""
+        ],
+        "correct": 2,
+        "why": "Body: <em>\"Solely automated\" is the key phrase. If a human meaningfully reviews the AI's output and is empowered to override it … the decision isn't \"solely automated\".</em>",
+        "cite": "Automated decisions and transparency (GDPR Article 22)"
+      },
+      {
+        "q": "Why does the module warn against deferring difficult decisions to the AI?",
+        "options": [
+          "Because the AI charges extra for regulated decisions",
+          "Because deferring to AI on regulated decisions increases liability — Article 22 specifically targets automated decisions",
+          "Because the AI keeps its own separate log",
+          "Because it slows the decision down",
+          "Because regulators cannot read AI output"
+        ],
+        "correct": 1,
+        "why": "Body: <em>deferring to AI on regulated decisions increases liability, because Article 22 specifically targets automated decisions.</em>",
+        "cite": "Beware \"the AI decided\""
+      },
+      {
+        "q": "Where does accountability for an AI-assisted decision remain?",
+        "options": [
+          "With the AI system that produced the output",
+          "With the AI vendor",
+          "With the organisation and the decision-maker, never with the AI system",
+          "With the regulator who reviews it",
+          "With whoever wrote the prompt only"
+        ],
+        "correct": 2,
+        "why": "Body: <em>Accountability for the decision remains with the organisation and the decision-maker, never with the AI system.</em>",
+        "cite": "Beware \"the AI decided\""
+      },
+      {
+        "q": "What distinguishes healthy logging from surveillance, according to the module?",
+        "options": [
+          "Surveillance is faster than logging",
+          "Logging your own AI use is protective of you; an employer logging your use without your knowledge or a clear policy is employee monitoring with its own legal framework",
+          "Surveillance only applies to managers",
+          "Logging requires consent but surveillance does not",
+          "There is no real difference between the two"
+        ],
+        "correct": 1,
+        "why": "Body: <em>Logging your own AI use … is good practice and protective of you. Your employer logging your AI use without your knowledge or a clear policy is a different thing, it's employee monitoring.</em>",
+        "cite": "Logging vs. surveillance"
+      },
+      {
+        "q": "What does the module say most small businesses discover when they do an annual review of their AI use log?",
+        "options": [
+          "That their AI use is impossible to categorise",
+          "That they should stop using AI entirely",
+          "That their AI use is concentrated in two or three task types, making the right enterprise tool easier to choose",
+          "That logging was a waste of time",
+          "That only the IT team uses AI"
+        ],
+        "correct": 2,
+        "why": "Body: <em>Most small businesses, when they do this, discover their AI use is concentrated in two or three task types, which makes choosing the right enterprise tool dramatically easier.</em>",
+        "cite": "Annual review"
+      }
+    ]
+  }
+  </script>
 
   <div id="widget-mount"></div>
 </main>

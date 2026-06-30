@@ -153,6 +153,80 @@
   </ol>
   <p>You can't eliminate bias by switching to a different model. They all share the same internet. You can manage it by knowing where it shows up and putting checks in the right places.</p>
 
+  <style>
+  /* interactive diagram — scoped */
+  .risk-fig { margin: 1.6rem 0 2.4rem; }
+  .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
+  .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
+  .risk-svg .rnode { cursor: pointer; }
+  .risk-svg .rnode:hover .rcard { stroke: var(--border-bold); }
+  .risk-svg .rnode.is-active .rcard { stroke: var(--accent); fill: var(--accent-soft); }
+  .risk-svg .rnode.rgood.is-active .rcard { stroke: var(--green); fill: rgba(14,125,73,.08); }
+  .risk-svg .rnode:focus { outline: none; }
+  .risk-svg .rnode:focus-visible .rcard { stroke: var(--accent); stroke-width: 2.5; }
+  .risk-svg .rtt { fill: var(--text); font-weight: 800; font-size: 19px; }
+  .risk-svg .rss { fill: var(--text3); font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .risk-svg .ric { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .risk-svg .rgood .ric { stroke: var(--green); }
+  .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
+  .rd-cap strong { color: var(--text); }
+  .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
+  </style>
+  <figure id="risk-fig-7" class="risk-fig" aria-labelledby="risk-fig-cap">
+    <svg viewBox="0 0 760 250" class="risk-svg" role="group" aria-label="Where bias enters an AI output. Select a layer to learn more.">
+      <g class="rnode" data-k="data" tabindex="0" role="button" aria-label="The training data — over-represents some voices">
+        <rect class="rcard" x="14" y="14" width="232" height="118" rx="14"/>
+        <g transform="translate(34,34)"><path class="ric" d="M3 5c0-1.1 4-2 9-2s9 .9 9 2-4 2-9 2-9-.9-9-2zm0 0v14c0 1.1 4 2 9 2s9-.9 9-2V5M3 12c0 1.1 4 2 9 2s9-.9 9-2"/></g>
+        <text class="rtt" x="34" y="96">The training data</text>
+        <text class="rss" x="34" y="116">over-represented voices</text>
+      </g>
+      <g class="rnode" data-k="tune" tabindex="0" role="button" aria-label="The fine-tuning — human raters' blind spots">
+        <rect class="rcard" x="262" y="14" width="232" height="118" rx="14"/>
+        <g transform="translate(282,34)"><circle class="ric" cx="9" cy="7" r="4"/><path class="ric" d="M2 21c0-4 3.5-7 7-7s7 3 7 7M17 9l2 2 4-4"/></g>
+        <text class="rtt" x="282" y="96">The fine-tuning</text>
+        <text class="rss" x="282" y="116">raters' blind spots</text>
+      </g>
+      <g class="rnode" data-k="prompt" tabindex="0" role="button" aria-label="Your prompt — wording shapes the output">
+        <rect class="rcard" x="510" y="14" width="236" height="118" rx="14"/>
+        <g transform="translate(530,34)"><path class="ric" d="M4 4h16v12H8l-4 4z"/><path class="ric" d="M8 9h8M8 12h5"/></g>
+        <text class="rtt" x="530" y="96">Your prompt</text>
+        <text class="rss" x="530" y="116">wording shapes output</text>
+      </g>
+      <g class="rnode rgood" data-k="manage" tabindex="0" role="button" aria-label="What you can do — put checks in the right places">
+        <rect class="rcard" x="14" y="150" width="732" height="84" rx="14"/>
+        <g transform="translate(34,176)"><path class="ric" d="M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6zM9 12l2 2 4-4"/></g>
+        <text class="rtt" x="72" y="188">What you can do</text>
+        <text class="rss" x="72" y="210">put checks in the right places</text>
+      </g>
+    </svg>
+    <p class="rd-cap" id="risk-fig-cap" aria-live="polite"><strong>Where bias enters an AI output.</strong> Select a layer above — three sources stack on top of each other, and you manage the result.</p>
+  </figure>
+  <script>
+  (function(){
+    var data = {
+      data:   {t:'The training data', d:'Mostly the public web, books, and code. The internet over-represents some voices and under-represents others, and the model learns the over-representation as "normal".', m:'You can’t fix this by switching model.'},
+      tune:   {t:'The fine-tuning', d:'Humans rate model outputs and the model learns to produce what gets good ratings. Those raters bring their own preferences, blind spots, and demographics.', m:'Bias layered on bias.'},
+      prompt: {t:'Your prompt', d:'Change one word and watch the answer change. "A software engineer" produces a different person, statistically, than "a software engineering manager".', m:'The one layer you control directly.'},
+      manage: {t:'What you can do', d:'You can’t eliminate bias by switching to a different model — they all share the same internet. You manage it by knowing where it shows up.', m:'Put checks in the right places.'}
+    };
+    var fig = document.getElementById('risk-fig-7'); if(!fig) return;
+    var cap = fig.querySelector('.rd-cap');
+    var nodes = fig.querySelectorAll('.rnode');
+    function sel(k){
+      nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k') === k); });
+      var x = data[k]; if(!x) return;
+      cap.innerHTML = '<strong>' + x.t + '.</strong> ' + x.d + ' <span class="rd-m">' + x.m + '</span>';
+    }
+    nodes.forEach(function(n){
+      var k = n.getAttribute('data-k');
+      n.addEventListener('click', function(){ sel(k); });
+      n.addEventListener('mouseenter', function(){ sel(k); });
+      n.addEventListener('focus', function(){ sel(k); });
+      n.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sel(k); } });
+    });
+  })();
+  </script>
+
   <h2>The three categories that matter</h2>
 
   <h3>1. Decisions about people</h3>
@@ -232,20 +306,147 @@
   <h2>One sentence to take with you</h2>
   <p>"The AI's first draft is its laziest draft." Treat it that way. Edit harder than you would your own writing, especially in the places where it would be easiest to just nod and ship.</p>
 
-  <section class="quiz-block" aria-labelledby="kc-q-7">
-    <div class="quiz-eyebrow">Quick knowledge check</div>
-    <h2 class="quiz-q-text" id="kc-q-7">Which statement is TRUE?</h2>
-    <ol class="quiz-options">
-      <li class="quiz-option" aria-hidden="false"><span class="key">A</span><span class="body">AI outputs are always neutral and unbiased.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">B</span><span class="body">Human oversight is unnecessary if AI improves efficiency.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">C</span><span class="body">AI-generated content may still contain bias or inappropriate assumptions.</span></li>
-      <li class="quiz-option" aria-hidden="false"><span class="key">D</span><span class="body">AI should independently make sensitive employment decisions.</span></li>
-    </ol>
-    <details class="quiz-reveal">
-      <summary class="quiz-btn ghost">Show answer</summary>
-   <p class="quiz-feedback right show"><span class="verdict">Correct answer</span>C, AI-generated content may still contain bias or inappropriate assumptions.</p>
-    </details>
-  </section>
+  <div id="quiz-mount"></div>
+  <script type="application/json" id="quiz-data">
+  {
+    "module": 7,
+    "passThreshold": 8,
+    "quizTitle": "Test your <em>understanding</em>.",
+    "quizLede": "Ten questions drawn only from this module. Pass mark 8 out of 10. Retake as many times as you like.",
+    "questions": [
+      {
+        "q": "According to the module, an AI model's outputs reflect three things layered on top of each other. What are they?",
+        "options": [
+          "The hardware, the software, and the network",
+          "The training data, the fine-tuning, and your prompt",
+          "The vendor, the price, and the country",
+          "The user, the manager, and the regulator",
+          "The model size, the temperature, and the speed"
+        ],
+        "correct": 1,
+        "why": "Body: <em>An AI model's outputs reflect three things layered on top of each other: The training data … The fine-tuning … Your prompt.</em>",
+        "cite": "Where bias comes from"
+      },
+      {
+        "q": "What does the module say about switching to a different model to remove bias?",
+        "options": [
+          "It removes most bias if the model is newer",
+          "It works only for image models",
+          "You can't eliminate bias by switching — they all share the same internet",
+          "It removes bias but adds cost",
+          "It works only for translation tasks"
+        ],
+        "correct": 2,
+        "why": "Body: <em>You can't eliminate bias by switching to a different model. They all share the same internet.</em>",
+        "cite": "Where bias comes from"
+      },
+      {
+        "q": "Under the EU AI Act, which Annex III point covers AI used in decisions about people such as hiring and promotion?",
+        "options": [
+          "Annex III, point 4 (employment-related)",
+          "Annex III, point 1 (biometrics)",
+          "Annex III, point 9 (elections)",
+          "Annex III, point 2 (infrastructure)",
+          "Annex III, point 7 (law enforcement)"
+        ],
+        "correct": 0,
+        "why": "Body: <em>certain AI systems used in these categories may be classified as high-risk under the EU AI Act (Annex III, point 4), depending on how they are used.</em>",
+        "cite": "The three categories that matter — Decisions about people"
+      },
+      {
+        "q": "Why does the module say \"I only use AI to draft the feedback, a human writes the final version\" is a weak mitigation?",
+        "options": [
+          "Because drafting with AI is never allowed",
+          "Because the human is too busy to edit",
+          "Because in practice the final version is usually 80% the draft with minor edits, so a biased draft stays biased",
+          "Because AI cannot write feedback at all",
+          "Because the regulator bans all drafts"
+        ],
+        "correct": 2,
+        "why": "Body: <em>in practice the final version is usually 80% the draft with minor edits. If the draft was biased in tone or substance, the final version is biased in tone or substance.</em>",
+        "cite": "\"It's just a draft\" isn't a defence"
+      },
+      {
+        "q": "How does the module describe the main risk from public-facing or customer-facing AI content?",
+        "options": [
+          "It is mainly a regulatory fine",
+          "It is reputational rather than regulatory, but it lands faster",
+          "It is purely an internal quality issue",
+          "It is only a translation problem",
+          "It carries no real risk"
+        ],
+        "correct": 1,
+        "why": "Body: <em>The risk here is reputational rather than regulatory, but it lands faster.</em>",
+        "cite": "Public-facing or customer-facing content"
+      },
+      {
+        "q": "What does the module say about masculine-coded language in AI-generated job descriptions?",
+        "options": [
+          "It has no measurable effect",
+          "It improves application rates overall",
+          "It is well-evidenced to reduce female application rates",
+          "It only affects senior roles",
+          "It is required by the EU AI Act"
+        ],
+        "correct": 2,
+        "why": "Body: <em>AI-generated job descriptions sometimes default to masculine-coded language (\"dominant\", \"competitive\", \"rockstar\", \"ninja\") which is well-evidenced to reduce female application rates.</em>",
+        "cite": "Gendered language and assumptions"
+      },
+      {
+        "q": "When using AI-generated imagery in public-facing material, what does the module say you must do?",
+        "options": [
+          "Take the first plausible image to save time",
+          "Actively curate the output, not just take the first plausible image",
+          "Avoid all AI imagery entirely",
+          "Use only stock photography instead",
+          "Let the vendor pick the image"
+        ],
+        "correct": 1,
+        "why": "Body: <em>If you use AI-generated imagery in any public-facing material, you have to actively curate the output, not just take the first plausible image.</em>",
+        "cite": "Stereotyped imagery"
+      },
+      {
+        "q": "In the practical checks, which four words does the module tell you to search the text for?",
+        "options": [
+          "\"the\", \"and\", \"of\", \"to\"",
+          "\"he\", \"she\", \"guys\", and \"young\"",
+          "\"man\", \"woman\", \"boy\", \"girl\"",
+          "\"fair\", \"unbiased\", \"neutral\", \"safe\"",
+          "\"please\", \"thanks\", \"sorry\", \"sure\""
+        ],
+        "correct": 1,
+        "why": "Body: <em>Search the text for the four words \"he\", \"she\", \"guys\", and \"young\".</em>",
+        "cite": "Practical checks"
+      },
+      {
+        "q": "The module says some vendors market their models as \"fair\" or \"unbiased\". How does it describe such claims?",
+        "options": [
+          "Verified by the regulator",
+          "Generally accurate for newer models",
+          "That is marketing — every model carries biases",
+          "True only for paid models",
+          "A legal requirement under GDPR"
+        ],
+        "correct": 2,
+        "why": "Body: <em>Some vendors market their models as \"fair\" or \"unbiased\". That is marketing. Every model carries biases.</em>",
+        "cite": "\"Bias-free AI\" doesn't exist"
+      },
+      {
+        "q": "What is the single sentence the module tells you to take with you?",
+        "options": [
+          "\"The AI's first draft is its laziest draft.\"",
+          "\"Bias-free AI is just around the corner.\"",
+          "\"If it sounds fluent, it's fine.\"",
+          "\"Always trust the model's first answer.\"",
+          "\"Compliance is someone else's job.\""
+        ],
+        "correct": 0,
+        "why": "Body: <em>\"The AI's first draft is its laziest draft.\" Treat it that way. Edit harder than you would your own writing.</em>",
+        "cite": "One sentence to take with you"
+      }
+    ]
+  }
+  </script>
 
 </main>
 
