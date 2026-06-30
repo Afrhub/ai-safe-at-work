@@ -340,11 +340,76 @@
     for (var j = start; j <= end; j++) { inner.appendChild(kids[j]); }
   }
 
+  // ─── 5d. Stat count-up — Palo-Alto-style number counters ────────────
+  // Animates the number inside stat elements from 0 to its value when it
+  // scrolls into view. Animates only the text node that holds the number,
+  // so surrounding text and coloured spans survive. Skips JS-driven portal
+  // values (those carry an id), respects reduced-motion, preserves the
+  // exact authored formatting (commas, +, %, decimals) at the end.
+  function setupCounters() {
+    if (reduceMotion || !('IntersectionObserver' in window) || !window.requestAnimationFrame) return;
+    var els = Array.prototype.slice.call(document.querySelectorAll('.gate-stats .n, .stat > .n, [data-count]'))
+      .filter(function (el) { return !el.id && !el.closest('.no-count') && /\d/.test(el.textContent); });
+    if (!els.length) return;
+
+    function pickNode(el) {                      // text node holding the largest number
+      var w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null), best = null, bv = -Infinity, n;
+      while ((n = w.nextNode())) {
+        var m = n.nodeValue.match(/-?\d[\d,]*\.?\d*/);
+        if (!m) continue;
+        var v = parseFloat(m[0].replace(/,/g, ''));
+        if (v > bv) { bv = v; best = n; }
+      }
+      return best;
+    }
+    function fmt(v, dec, comma) {
+      var s = v.toFixed(dec);
+      if (comma) { var p = s.split('.'); p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, ','); s = p.join('.'); }
+      return s;
+    }
+    function prep(el) {
+      var node = pickNode(el); if (!node) return null;
+      var m = node.nodeValue.match(/(-?\d[\d,]*\.?\d*)/), raw = m[0], i = m.index;
+      return {
+        node: node, prefix: node.nodeValue.slice(0, i), suffix: node.nodeValue.slice(i + raw.length),
+        dec: (raw.split('.')[1] || '').length, comma: raw.indexOf(',') !== -1,
+        target: parseFloat(raw.replace(/,/g, '')), raw: raw
+      };
+    }
+    function animate(info) {
+      var dur = 1100, t0 = null;
+      function step(ts) {
+        if (t0 === null) t0 = ts;
+        var p = Math.min((ts - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+        info.node.nodeValue = p < 1
+          ? info.prefix + fmt(info.target * e, info.dec, info.comma) + info.suffix
+          : info.prefix + info.raw + info.suffix;        // restore exact authored text
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        io.unobserve(entry.target);
+        var info = entry.target.__count;
+        if (!info) return;
+        if (document.hidden) { info.node.nodeValue = info.prefix + info.raw + info.suffix; return; }
+        info.node.nodeValue = info.prefix + fmt(0, info.dec, info.comma) + info.suffix;
+        animate(info);
+      });
+    }, { threshold: 0.4 });
+
+    els.forEach(function (el) { var info = prep(el); if (info) { el.__count = info; io.observe(el); } });
+  }
+
   // ─── 6. Bootstrap ────────────────────────────────────────────────────
   function start() {
     injectCinema();
     bandPageHero();
     tagReveals();
+    setupCounters();
     setupRevealObserver();
     setupScroll();
     setupGatePointer();
