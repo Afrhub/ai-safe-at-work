@@ -153,6 +153,73 @@
   </ol>
   <p>The legal position differs for each and differs by jurisdiction. Below is the practical headline for each.</p>
 
+  <style>
+  /* interactive diagram — scoped */
+  .risk-fig { margin: 1.6rem 0 2.4rem; }
+  .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
+  .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
+  .risk-svg .rnode { cursor: pointer; }
+  .risk-svg .rnode:hover .rcard { stroke: var(--border-bold); }
+  .risk-svg .rnode.is-active .rcard { stroke: var(--accent); fill: var(--accent-soft); }
+  .risk-svg .rnode.rgood.is-active .rcard { stroke: var(--green); fill: rgba(14,125,73,.08); }
+  .risk-svg .rnode:focus { outline: none; }
+  .risk-svg .rnode:focus-visible .rcard { stroke: var(--accent); stroke-width: 2.5; }
+  .risk-svg .rtt { fill: var(--text); font-weight: 800; font-size: 19px; }
+  .risk-svg .rss { fill: var(--text3); font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .risk-svg .ric { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .risk-svg .rgood .ric { stroke: var(--green); }
+  .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
+  .rd-cap strong { color: var(--text); }
+  .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
+  </style>
+  <figure id="risk-fig-8" class="risk-fig" aria-labelledby="risk-fig-8-cap">
+    <svg viewBox="0 0 760 250" class="risk-svg" role="group" aria-label="The two copyright questions and what to do. Select one to learn more.">
+      <g class="rnode" data-k="in" tabindex="0" role="button" aria-label="Input copyright — feeding material in">
+        <rect class="rcard" x="14" y="14" width="360" height="118" rx="14"/>
+        <g transform="translate(34,34)"><path class="ric" d="M3 12h11m-5-5 5 5-5 5M18 4h2v16h-2"/></g>
+        <text class="rtt" x="34" y="96">Input copyright</text>
+        <text class="rss" x="34" y="116">feeding material in</text>
+      </g>
+      <g class="rnode" data-k="out" tabindex="0" role="button" aria-label="Output copyright — who owns what it makes">
+        <rect class="rcard" x="386" y="14" width="360" height="118" rx="14"/>
+        <g transform="translate(406,34)"><path class="ric" d="M6 4h-2v16h2m12-16h2v16h-2M9 12h7m-3-3 3 3-3 3"/></g>
+        <text class="rtt" x="406" y="96">Output copyright</text>
+        <text class="rss" x="406" y="116">who owns what it makes</text>
+      </g>
+      <g class="rnode rgood" data-k="do" tabindex="0" role="button" aria-label="The practical rule — provenance, not permission">
+        <rect class="rcard" x="14" y="150" width="732" height="84" rx="14"/>
+        <g transform="translate(34,176)"><path class="ric" d="M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6zM9 12l2 2 4-4"/></g>
+        <text class="rtt" x="72" y="188">The practical rule</text>
+        <text class="rss" x="72" y="210">provenance, not permission</text>
+      </g>
+    </svg>
+    <p class="rd-cap" id="risk-fig-8-cap" aria-live="polite"><strong>Two copyright questions, not one.</strong> Select a question above — input and output are separate problems with separate answers.</p>
+  </figure>
+  <script>
+  (function(){
+    var data = {
+      in:  {t:'Input copyright', d:'When you (or the AI vendor) feed copyrighted material into an AI, does that need permission? Pasting a paywalled article, a "no AI training" page, or a client’s confidential document to summarise can breach the publisher’s terms or a confidentiality clause.', m:'Probably fine for your own or public-domain content; a problem behind a paywall.'},
+      out: {t:'Output copyright', d:'When the AI produces something, who owns it? Fully AI-generated material with no significant human creative input may not qualify for copyright protection in many jurisdictions — so others may be able to use the same output.', m:'“Significant human creative input” is the moving line.'},
+      do:  {t:'The practical rule', d:'Treat purely AI-generated content as public domain, and keep a short record of how each asset was made — prompts, edits, human contribution, brand check.', m:'The question is provenance, not permission.'}
+    };
+    var fig = document.getElementById('risk-fig-8'); if(!fig) return;
+    var cap = fig.querySelector('.rd-cap');
+    var nodes = fig.querySelectorAll('.rnode');
+    function sel(k){
+      nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k') === k); });
+      var x = data[k]; if(!x) return;
+      cap.innerHTML = '<strong>' + x.t + '.</strong> ' + x.d + ' <span class="rd-m">' + x.m + '</span>';
+    }
+    nodes.forEach(function(n){
+      var k = n.getAttribute('data-k');
+      n.addEventListener('click', function(){ sel(k); });
+      n.addEventListener('mouseenter', function(){ sel(k); });
+      n.addEventListener('focus', function(){ sel(k); });
+      n.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sel(k); } });
+    });
+  })();
+  </script>
+
  <h2>Input, feeding copyrighted material to AI</h2>
   <p>When you paste a copyrighted article, book chapter, image, song lyric, or company document into an AI tool to ask it to summarise or transform, you're making a copy of that material and sending it to a third party. Depending on what you do next, that may be:</p>
   <ul>

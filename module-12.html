@@ -340,24 +340,79 @@
   <h2>How they fit together</h2>
   <p>The four standards aren't competing. They cover different surfaces of the same problem:</p>
 
-  <div class="compare">
-    <div class="compare-cell good">
-      <h4>GDPR</h4>
-      <p>What you can and can't do with <strong>personal data</strong>. The data layer.</p>
-    </div>
-    <div class="compare-cell good">
-      <h4>EU AI Act</h4>
-      <p>What you can and can't do with <strong>AI systems</strong>, by risk tier. The use-case layer.</p>
-    </div>
-    <div class="compare-cell good">
-      <h4>ISO 27001</h4>
-      <p>How to organise yourself to <strong>protect information</strong> generally. The security management layer.</p>
-    </div>
-    <div class="compare-cell good">
-      <h4>ISO 42001</h4>
-      <p>How to organise yourself to <strong>govern AI</strong> specifically. The AI management layer.</p>
-    </div>
-  </div>
+  <style>
+  /* interactive diagram — scoped */
+  .risk-fig { margin: 1.6rem 0 2.4rem; }
+  .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
+  .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
+  .risk-svg .rnode { cursor: pointer; }
+  .risk-svg .rnode:hover .rcard { stroke: var(--border-bold); }
+  .risk-svg .rnode.is-active .rcard { stroke: var(--accent); fill: var(--accent-soft); }
+  .risk-svg .rnode.rgood.is-active .rcard { stroke: var(--green); fill: rgba(14,125,73,.08); }
+  .risk-svg .rnode:focus { outline: none; }
+  .risk-svg .rnode:focus-visible .rcard { stroke: var(--accent); stroke-width: 2.5; }
+  .risk-svg .rtt { fill: var(--text); font-weight: 800; font-size: 19px; }
+  .risk-svg .rss { fill: var(--text3); font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .risk-svg .ric { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .risk-svg .rgood .ric { stroke: var(--green); }
+  .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
+  .rd-cap strong { color: var(--text); }
+  .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
+  </style>
+  <figure id="risk-fig-12" class="risk-fig" aria-labelledby="risk-fig-12-cap">
+    <svg viewBox="0 0 760 250" class="risk-svg" role="group" aria-label="Four standards, four surfaces of the same problem. Select a standard to learn which surface it covers.">
+      <g class="rnode" data-k="gdpr" tabindex="0" role="button" aria-label="GDPR — the data layer">
+        <rect class="rcard" x="14" y="14" width="232" height="118" rx="14"/>
+        <g transform="translate(34,34)"><rect class="ric" x="3" y="4" width="18" height="16" rx="2"/><path class="ric" d="M3 9h18M8 14h8"/></g>
+        <text class="rtt" x="34" y="96">GDPR</text>
+        <text class="rss" x="34" y="116">the data layer</text>
+      </g>
+      <g class="rnode" data-k="act" tabindex="0" role="button" aria-label="EU AI Act — the use-case layer">
+        <rect class="rcard" x="262" y="14" width="232" height="118" rx="14"/>
+        <g transform="translate(282,34)"><path class="ric" d="M12 3l9 5v8l-9 5-9-5V8z"/><path class="ric" d="M12 12v9M12 12l9-5M12 12L3 7"/></g>
+        <text class="rtt" x="282" y="96">EU AI Act</text>
+        <text class="rss" x="282" y="116">the use-case layer</text>
+      </g>
+      <g class="rnode" data-k="iso27" tabindex="0" role="button" aria-label="ISO 27001 — the security management layer">
+        <rect class="rcard" x="510" y="14" width="236" height="118" rx="14"/>
+        <g transform="translate(530,34)"><path class="ric" d="M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6z"/></g>
+        <text class="rtt" x="530" y="96">ISO 27001</text>
+        <text class="rss" x="530" y="116">security mgmt layer</text>
+      </g>
+      <g class="rnode rgood" data-k="iso42" tabindex="0" role="button" aria-label="ISO 42001 — the AI management layer">
+        <rect class="rcard" x="14" y="150" width="732" height="84" rx="14"/>
+        <g transform="translate(34,176)"><circle class="ric" cx="12" cy="12" r="9"/><path class="ric" d="M12 7v5l3 3"/></g>
+        <text class="rtt" x="72" y="188">ISO 42001</text>
+        <text class="rss" x="72" y="210">the AI management layer</text>
+      </g>
+    </svg>
+    <p class="rd-cap" id="risk-fig-12-cap" aria-live="polite"><strong>Four standards, four surfaces.</strong> Select a standard above — each one covers a different surface of the same problem, and they fit together rather than contradict.</p>
+  </figure>
+  <script>
+  (function(){
+    var data = {
+      gdpr:  {t:'GDPR', d:'What you can and can’t do with personal data.', m:'The data layer.'},
+      act:   {t:'EU AI Act', d:'What you can and can’t do with AI systems, by risk tier.', m:'The use-case layer.'},
+      iso27: {t:'ISO 27001', d:'How to organise yourself to protect information generally.', m:'The security management layer.'},
+      iso42: {t:'ISO 42001', d:'How to organise yourself to govern AI specifically.', m:'The AI management layer.'}
+    };
+    var fig = document.getElementById('risk-fig-12'); if(!fig) return;
+    var cap = fig.querySelector('.rd-cap');
+    var nodes = fig.querySelectorAll('.rnode');
+    function sel(k){
+      nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k') === k); });
+      var x = data[k]; if(!x) return;
+      cap.innerHTML = '<strong>' + x.t + '.</strong> ' + x.d + ' <span class="rd-m">' + x.m + '</span>';
+    }
+    nodes.forEach(function(n){
+      var k = n.getAttribute('data-k');
+      n.addEventListener('click', function(){ sel(k); });
+      n.addEventListener('mouseenter', function(){ sel(k); });
+      n.addEventListener('focus', function(){ sel(k); });
+      n.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sel(k); } });
+    });
+  })();
+  </script>
 
   <p>A small business using AI for customer-facing work might find itself touching all four: GDPR because customer data is involved, the EU AI Act because the use is in a regulated category, ISO 27001 because their enterprise customers ask, and ISO 42001 because their insurer or board has asked them to demonstrate AI governance.</p>
 
