@@ -55,6 +55,12 @@
   --r-sm:        8px;
   --r-btn:       6px;    /* buttons */
 
+  /* corner accent wash: tint from bottom-left + top-right, fades out by ~halfway.
+     Set --cl on the element for its colour; layer over a base: background: var(--wash), var(--plate); */
+  --wash:
+    radial-gradient(ellipse 52% 135% at left bottom, var(--cl, transparent) 0%, transparent 100%),
+    radial-gradient(ellipse 52% 135% at right top,    var(--cl, transparent) 0%, transparent 100%);
+
   /* ── Easing ── */
   --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
   --ease-expo:   cubic-bezier(0.16, 1, 0.3, 1);
@@ -292,11 +298,7 @@ html[data-theme="dark"] .gate-hero::before, html[data-theme="dark"] .page-hero::
   --cl: rgba(250,88,45,0.12);   /* per-type tint, set below */
   display: grid; grid-template-columns: 42px 1fr; gap: 1rem;
   align-items: start; padding: 1.3rem 1.4rem; margin: 1.5rem 0;
-  /* corner washes: bottom-left + top-right, fading out by halfway across */
-  background:
-    radial-gradient(ellipse 52% 135% at left bottom, var(--cl) 0%, transparent 100%),
-    radial-gradient(ellipse 52% 135% at right top,    var(--cl) 0%, transparent 100%),
-    var(--plate);
+  background: var(--wash), var(--plate);   /* corner washes, fading out by halfway across */
 }
 .callout .callout-icon {
   font-family: var(--font-mono); font-size: 0.95rem; font-weight: 800;
@@ -347,7 +349,10 @@ html[data-theme="dark"] .callout.dont     { --cl: rgba(255,122,118,0.15); }
 html[data-theme="dark"] .callout.do       { --cl: rgba(58,208,138,0.15); }
 html[data-theme="dark"] .callout.note,
 html[data-theme="dark"] .callout.standard,
-html[data-theme="dark"] .callout.govern   { --cl: rgba(250,88,45,0.17); }
+html[data-theme="dark"] .callout.govern,
+html[data-theme="dark"] .objectives        { --cl: rgba(250,88,45,0.17); }
+html[data-theme="dark"] .compare-cell.good  { --cl: rgba(58,208,138,0.16); }
+html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
 
 @media (max-width: 640px) {
   .callout-title::after { display: inline-block; margin-left: 0; margin-top: 0.2rem; vertical-align: baseline; }
@@ -410,8 +415,9 @@ html[data-theme="dark"] .callout.govern   { --cl: rgba(250,88,45,0.17); }
   letter-spacing: -0.01em; margin-bottom: 0.6rem; padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--border);
 }
-.compare-cell.good { border-top: 3px solid var(--green); }
-.compare-cell.bad  { border-top: 3px solid var(--red); }
+.compare-cell.good, .compare-cell.bad { background: var(--wash), var(--plate); }
+.compare-cell.good { --cl: rgba(14,125,73,0.12); }
+.compare-cell.bad  { --cl: rgba(196,50,47,0.12); }
 .compare-cell.good h4::before { content: '✓ '; color: var(--green); }
 .compare-cell.bad  h4::before { content: '✗ '; color: var(--red); }
 .compare-cell p { font-size: 0.98rem; margin: 0; }
@@ -420,7 +426,7 @@ html[data-theme="dark"] .callout.govern   { --cl: rgba(250,88,45,0.17); }
 /* ════════════════════════════════════════════════════════════
    OBJECTIVES BLOCK
    ════════════════════════════════════════════════════════════ */
-.objectives { border-top: 3px solid var(--accent); padding: 1.5rem 1.7rem; margin: 1.5rem 0 2.5rem; }
+.objectives { --cl: rgba(250,88,45,0.12); background: var(--wash), var(--plate); padding: 1.5rem 1.7rem; margin: 1.5rem 0 2.5rem; }
 .objectives-title {
   font-family: var(--font-body); font-size: 0.8rem; font-weight: 800;
   letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-d); margin-bottom: 0.8rem;

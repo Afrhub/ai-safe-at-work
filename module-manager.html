@@ -23,7 +23,7 @@
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
-<link rel="stylesheet" href="assets/style.css?v=16" />
+<link rel="stylesheet" href="assets/style.css?v=17" />
 <script defer src="assets/cinema.js?v=11"></script>
 <style>
 .role-banner {
@@ -49,12 +49,12 @@
   box-shadow: 0 0 10px rgba(250,88,45, 0.65);
 }
 .signature {
+  --cl: rgba(250,88,45,0.12);
   margin: 2rem 0;
   padding: 1.4rem 1.6rem;
   border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
-  border-radius: 3px;
-  background: var(--plate);
+  border-radius: var(--r);
+  background: var(--wash), var(--plate);
   box-shadow: var(--shadow-card);
 }
 .signature .label {

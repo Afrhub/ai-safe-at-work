@@ -25,7 +25,7 @@
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
 
-<link rel="stylesheet" href="assets/style.css?v=16" />
+<link rel="stylesheet" href="assets/style.css?v=17" />
 <link rel="stylesheet" href="assets/completion.css?v=3" /><!-- completion v1 -->
 <script defer src="assets/completion.js?v=1"></script><!-- completion v1 -->
 <script defer src="assets/cinema.js?v=11"></script>
@@ -113,9 +113,11 @@ html[data-theme="dark"] .stat-ic { border-color: rgba(255,255,255,0.22); box-sha
 /* audience cards (who / what / why) */
 .audience { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin: 0 0 1.2rem; }
 .aud-card {
-  background: var(--bg); border: 1px solid var(--border); border-top: 3px solid var(--accent);
+  --cl: rgba(250,88,45,0.12);
+  background: var(--wash), var(--bg); border: 1px solid var(--border);
   border-radius: var(--r); box-shadow: var(--shadow-card); padding: 1.4rem 1.5rem;
 }
+html[data-theme="dark"] .aud-card { --cl: rgba(250,88,45,0.17); }
 .aud-label {
   display: block; font-family: var(--font-body); font-size: 0.78rem; font-weight: 800;
   letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-d); margin-bottom: 0.55rem;
