@@ -289,8 +289,14 @@ html[data-theme="dark"] .gate-hero::before, html[data-theme="dark"] .page-hero::
    CALLOUTS — soft notice cards with a left accent rail
    ════════════════════════════════════════════════════════════ */
 .callout {
+  --cl: rgba(250,88,45,0.12);   /* per-type tint, set below */
   display: grid; grid-template-columns: 42px 1fr; gap: 1rem;
   align-items: start; padding: 1.3rem 1.4rem; margin: 1.5rem 0;
+  /* corner washes: bottom-left + top-right, fading out by halfway across */
+  background:
+    radial-gradient(ellipse 52% 135% at left bottom, var(--cl) 0%, transparent 100%),
+    radial-gradient(ellipse 52% 135% at right top,    var(--cl) 0%, transparent 100%),
+    var(--plate);
 }
 .callout .callout-icon {
   font-family: var(--font-mono); font-size: 0.95rem; font-weight: 800;
@@ -314,26 +320,34 @@ html[data-theme="dark"] .gate-hero::before, html[data-theme="dark"] .page-hero::
 .callout p:last-child { margin-bottom: 0; }
 .callout ul, .callout ol { margin-bottom: 0; }
 
-.callout.warn  { border-left: 3px solid var(--red); }
+.callout.warn  { --cl: rgba(196,50,47,0.11); }
 .callout.warn .callout-icon  { background: #fdecec; border-color: #f6c9c8; color: var(--red); }
 .callout.warn .callout-title::after  { content: 'CAUTION'; color: var(--red); }
 
-.callout.do    { border-left: 3px solid var(--green); }
+.callout.do    { --cl: rgba(14,125,73,0.11); }
 .callout.do .callout-icon    { background: #e7f6ee; border-color: #b9e2cb; color: var(--green); }
 .callout.do .callout-title::after    { content: 'PRACTICE'; color: var(--green); }
 
-.callout.dont  { border-left: 3px solid var(--red); }
+.callout.dont  { --cl: rgba(196,50,47,0.11); }
 .callout.dont .callout-icon  { background: #fdecec; border-color: #f6c9c8; color: var(--red); }
 .callout.dont .callout-title::after  { content: 'PROHIBITED'; color: var(--red); }
 
-.callout.note  { border-left: 3px solid var(--accent); }
+.callout.note  { --cl: rgba(250,88,45,0.12); }
 .callout.note .callout-title::after  { content: 'NOTE'; color: var(--accent-d); }
 
-.callout.standard { border-left: 3px solid var(--accent); }
+.callout.standard { --cl: rgba(250,88,45,0.12); }
 .callout.standard .callout-title::after { content: 'STANDARDS'; color: var(--accent-d); }
 
-.callout.govern   { border-left: 3px solid var(--accent); }
+.callout.govern   { --cl: rgba(250,88,45,0.12); }
 .callout.govern .callout-title::after { content: 'ISO/IEC 42001'; color: var(--accent-d); }
+
+/* dark mode: lift the wash a touch on the darker plate */
+html[data-theme="dark"] .callout.warn,
+html[data-theme="dark"] .callout.dont     { --cl: rgba(255,122,118,0.15); }
+html[data-theme="dark"] .callout.do       { --cl: rgba(58,208,138,0.15); }
+html[data-theme="dark"] .callout.note,
+html[data-theme="dark"] .callout.standard,
+html[data-theme="dark"] .callout.govern   { --cl: rgba(250,88,45,0.17); }
 
 @media (max-width: 640px) {
   .callout-title::after { display: inline-block; margin-left: 0; margin-top: 0.2rem; vertical-align: baseline; }
