@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#060608" />
-<meta name="color-scheme" content="dark light" />
-<script>try{if(localStorage.getItem("aisw-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
+<meta name="theme-color" content="#ffffff" />
+<meta name="color-scheme" content="light dark" />
+<script>try{if(localStorage.getItem("aisw-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <title>AI Safe@Work — AI Governance, Risk &amp; Compliance Training for Modern Businesses</title>
 <meta name="description" content="AI Governance, Risk &amp; Compliance training for modern businesses. Help your employees use AI safely, responsibly and compliantly while protecting your business from emerging risks. EU AI Act Article 4, GDPR, ISO/IEC 42001 and ISO/IEC 27001 in plain English — for SMBs and the MSPs who support them." />
 <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -18,276 +18,126 @@
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
 
-<link rel="stylesheet" href="assets/style.css?v=13" />
+<link rel="stylesheet" href="assets/style.css?v=14" />
 <link rel="stylesheet" href="assets/completion.css?v=3" /><!-- completion v1 -->
 <script defer src="assets/completion.js?v=1"></script><!-- completion v1 -->
-<script defer src="assets/cinema.js?v=8"></script>
+<script defer src="assets/cinema.js?v=9"></script>
 
 <style>
-/* Page-specific gate styling, overrides shared shell */
-body { background: var(--bg); }
-main.gate {
-  max-width: none;
-  padding: 0;
-}
+/* ── Homepage: Palo Alto charcoal hero + clean light bands ── */
+main.gate { max-width: none; padding: 0; }
+
+/* full-bleed dark hero band */
 .gate-hero {
-  min-height: calc(100svh - 5rem); min-height: calc(100dvh - 5rem);
-  padding: 2rem 2rem 1rem;
-  position: relative;
-  isolation: isolate;
-  overflow: visible;
-  /* break out of the 980px main shell to a full-bleed landing hero */
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  position: relative; isolation: isolate; overflow: hidden;
+  background: var(--dark); color: var(--on-dark);
+  width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
+  padding: 5rem 2rem 4.5rem;
 }
-.gate::before {
-  content: '';
-  position: absolute; inset: 0; z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse 70% 55% at 50% 22%, rgba(250,88,45,0.10) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(250,88,45,0.05) 0%, transparent 70%);
-  opacity: 0;
-  animation: bgFade 1.2s var(--ease-out) 0.1s forwards;
+.gate-hero::before {
+  content: ''; position: absolute; top: -220px; right: -120px;
+  width: 720px; height: 720px; border-radius: 50%; z-index: -1; pointer-events: none;
+  background: radial-gradient(circle, rgba(250,88,45,0.22), transparent 65%);
+  filter: blur(40px);
 }
-.gate::after {
-  content: '';
-  position: absolute; inset: 0; z-index: -1;
-  pointer-events: none;
-  background-image:
-    linear-gradient(to right, rgba(255,255,255,0.018) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.018) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, #000 0%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, #000 0%, transparent 75%);
-}
-.gate-header { display: flex; align-items: center; }
-.gate-header .brand { font-size: 1.05rem; }
-.gate-stage {
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center; min-height: 0;
-}
+.gate-stage { max-width: 1100px; margin: 0 auto; text-align: left; }
 .gate-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.66rem; font-weight: 700;
-  letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 0.55rem;
-  opacity: 0; animation: fadeUp 0.7s var(--ease-out) 0.25s forwards;
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: var(--font-body); font-size: 0.84rem; font-weight: 800;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.1rem;
 }
+.gate-eyebrow::before { content: ''; width: 24px; height: 2px; background: var(--accent); border-radius: 2px; }
 .gate h1 {
-  font-family: var(--font-display);
-  font-size: clamp(1.7rem, 4vw, 3rem);
-  font-weight: 800;
-  letter-spacing: -0.045em;
-  line-height: 1.02;
-  color: var(--text);
-  margin-bottom: 0.6rem;
-  max-width: 15ch;
-  opacity: 0; animation: fadeUp 0.8s var(--ease-out) 0.32s forwards;
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(2.3rem, 5.4vw, 4rem); letter-spacing: -0.025em; line-height: 1.05;
+  color: var(--on-dark); margin-bottom: 1.2rem; max-width: 18ch;
 }
-.gate h1 em { font-style: normal; color: inherit; }
+.gate h1 em { font-style: normal; color: var(--accent); }
 .gate .lede {
-  font-size: clamp(0.86rem, 1.2vw, 0.98rem);
-  color: var(--text2);
-  max-width: 56ch;
-  margin: 0 auto 1.15rem;
-  line-height: 1.45;
-  opacity: 0; animation: fadeUp 0.8s var(--ease-out) 0.42s forwards;
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem); color: var(--on-dark2);
+  max-width: 56ch; margin: 0 0 0; line-height: 1.55; border: none; padding: 0;
 }
-.audience {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.9rem;
-  width: 100%;
-  max-width: 1040px;
-  margin: 0 auto 1.3rem;
-  text-align: left;
-  opacity: 0; animation: fadeUp 0.8s var(--ease-out) 0.5s forwards;
+.gate-hero .hero-ctas { margin-top: 2rem; }
+.gate-hero .hero-cta.secondary { background: transparent; color: #fff; border-color: rgba(255,255,255,0.3); }
+.gate-hero .hero-cta.secondary:hover { border-color: #fff; }
+
+/* stat strip */
+.gate-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.6rem;
+  margin-top: 3.4rem; padding-top: 2.2rem; border-top: 1px solid var(--dline);
 }
+.gate-stats .n {
+  font-family: var(--font-display); font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 800;
+  letter-spacing: -0.02em; color: #fff;
+}
+.gate-stats .n .accent { color: var(--accent); }
+.gate-stats .l { color: var(--on-dark3); font-size: 0.9rem; margin-top: 0.3rem; line-height: 1.4; }
+@media (max-width: 780px) { .gate-stats { grid-template-columns: 1fr 1fr; gap: 1.6rem 1.4rem; } }
+
+/* light content wrapper below hero */
+.home-light { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem 0; }
+
+/* audience cards (who / what / why) */
+.audience { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin: 0 0 1.2rem; }
 .aud-card {
-  background: linear-gradient(160deg, rgba(255,255,255,0.02), rgba(255,255,255,0.004));
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  padding: 0.85rem 1rem 0.9rem;
+  background: var(--bg); border: 1px solid var(--border); border-top: 3px solid var(--accent);
+  border-radius: var(--r); box-shadow: var(--shadow-card); padding: 1.4rem 1.5rem;
 }
 .aud-label {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.6rem; font-weight: 700;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 0.4rem;
+  display: block; font-family: var(--font-body); font-size: 0.78rem; font-weight: 800;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-d); margin-bottom: 0.55rem;
 }
-.aud-card p { font-size: 0.78rem; line-height: 1.45; color: var(--text2); margin: 0; }
-.aud-card em { font-style: normal; color: var(--text); border-bottom: 1px solid rgba(250,88,45,0.4); }
+.aud-card p { font-size: 0.95rem; line-height: 1.6; color: var(--text2); margin: 0; }
+.aud-card em { font-style: normal; color: var(--text); font-weight: 700; }
 
-.choices {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.1rem;
-  width: 100%;
-  max-width: 1040px;
-}
-.choice:nth-child(3) { animation-delay: 0.69s; }
-.choice.locked {
-  cursor: default;
-  opacity: 0.5;
-  filter: grayscale(0.6);
-  animation-delay: 0.69s;
-}
-.choice.locked .choice-tag { color: var(--text3); }
-.choice.locked .choice-cta { color: var(--text3); }
-.choice.locked.is-unlocked { opacity: 1; filter: none; cursor: pointer; }
-.choice.locked.is-unlocked .choice-tag { color: var(--accent); }
-.choice.locked.is-unlocked .choice-cta { color: var(--text); }
-.choice-lock { display: inline-block; font-size: 0.8rem; }
-@media (max-width: 860px) {
-  .audience { grid-template-columns: 1fr; gap: 0.6rem; margin-bottom: 1rem; }
-}
+/* choice cards */
+.choices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 1.4rem; }
 .choice {
-  position: relative;
-  display: flex; flex-direction: column;
-  align-items: flex-start; text-align: left;
-  background: linear-gradient(160deg, rgba(255,255,255,0.025), rgba(255,255,255,0.005));
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  padding: 1.1rem 1.3rem 1.05rem;
-  cursor: pointer;
-  isolation: isolate;
-  opacity: 0; transform: translateY(16px);
-  animation: fadeUp 0.7s var(--ease-out) forwards;
-  transition: transform 220ms var(--ease-out), border-color 220ms ease, background 220ms ease, box-shadow 220ms ease;
+  position: relative; display: flex; flex-direction: column; align-items: flex-start; text-align: left;
+  background: var(--bg); border: 1px solid var(--border); border-radius: var(--r);
+  box-shadow: var(--shadow-card); padding: 1.6rem 1.6rem 1.4rem; cursor: pointer;
+  transition: transform 0.24s var(--ease-out), border-color 0.24s ease, box-shadow 0.24s ease;
 }
-.choice:nth-child(1) { animation-delay: 0.55s; }
-.choice:nth-child(2) { animation-delay: 0.62s; }
 @media (hover: hover) and (pointer: fine) {
-  .choice:hover {
-    border-color: rgba(250,88,45,0.45);
-    background: linear-gradient(160deg, rgba(250,88,45,0.06), rgba(250,88,45,0.015));
-    transform: translateY(-3px);
-    box-shadow:
-      0 0 0 1px rgba(250,88,45,0.18),
-      0 24px 60px rgba(0,0,0,0.6),
-      inset 0 1px 0 rgba(255,255,255,0.06);
-  }
-  .choice:hover .choice-cta { color: var(--accent); }
+  .choice:hover { border-color: var(--border-bold); transform: translateY(-4px); box-shadow: var(--shadow-card-hover); }
+  .choice:hover .choice-cta { color: var(--accent-d); }
   .choice:hover .choice-arrow { transform: translateX(4px); }
 }
+.choice.locked { cursor: default; opacity: 0.6; }
+.choice.locked .choice-tag, .choice.locked .choice-cta { color: var(--text3); }
+.choice.locked.is-unlocked { opacity: 1; cursor: pointer; }
+.choice.locked.is-unlocked .choice-tag { color: var(--accent-d); }
+.choice.locked.is-unlocked .choice-cta { color: var(--text); }
+.choice-lock { display: inline-block; }
 .choice-tag {
-  font-family: var(--font-mono);
-  font-size: 0.58rem; font-weight: 700;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--text3);
-  margin-bottom: 0.35rem;
+  font-family: var(--font-body); font-size: 0.74rem; font-weight: 800;
+  letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent-d); margin-bottom: 0.5rem;
 }
 .choice h2 {
-  font-family: var(--font-display);
-  font-size: clamp(1.25rem, 2vw, 1.55rem);
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 1.05;
-  margin: 0 0 0.3rem;
+  font-family: var(--font-display); font-size: 1.4rem; font-weight: 700;
+  letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 0.4rem; color: var(--text);
 }
-.choice p {
-  font-size: 0.8rem;
-  line-height: 1.42;
-  color: var(--text2);
-  margin-bottom: 0.65rem;
-  max-width: 34ch;
-}
+.choice p { font-size: 0.95rem; line-height: 1.55; color: var(--text2); margin-bottom: 0.9rem; max-width: 34ch; }
 .choice-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  margin-top: auto;
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--text);
+  display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto;
+  font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; color: var(--text);
   transition: color 200ms ease;
 }
 .choice-arrow { display: inline-block; transition: transform 220ms var(--ease-out); }
+
 .gate-tertiary {
-  margin-top: 1rem;
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  color: var(--text3);
-  text-align: center;
-  max-width: 880px;
-  line-height: 1.55;
-  opacity: 0;
-  animation: fadeIn 0.7s var(--ease-out) 0.8s forwards;
+  margin: 1.6rem 0 0; font-size: 0.92rem; color: var(--text3); text-align: center; line-height: 1.7;
 }
-.gate-tertiary a {
-  color: var(--text2);
-  border-bottom: 1px dashed rgba(250,88,45, 0.32);
-  padding-bottom: 1px;
-  transition: color 200ms ease, border-color 200ms ease;
-}
-.gate-tertiary a:hover {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
-}
-.gate-foot {
-  display: flex; justify-content: space-between;
-  align-items: center;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text3);
-  flex-wrap: wrap;
-  gap: 1rem;
-  opacity: 0; animation: fadeIn 0.6s var(--ease-out) 0.85s forwards;
-}
-.gate-foot a:hover { color: var(--accent); }
-.gate-foot .right { display: flex; gap: 1.4rem; flex-wrap: wrap; }
+.gate-tertiary a { color: var(--text2); border-bottom: 1px solid var(--border-bold); padding-bottom: 1px; transition: color 200ms ease, border-color 200ms ease; }
+.gate-tertiary a:hover { color: var(--accent-d); border-bottom-color: var(--accent); }
 
-@media (max-width: 640px) {
-  .gate-hero { height: auto; min-height: 100dvh; overflow: visible; padding: 1.25rem 1.25rem 1.5rem; }
-  .choices { grid-template-columns: 1fr; gap: 0.7rem; }
-  .choice  { padding: 1.25rem 1.25rem 1.1rem; }
-}
-@media (max-height: 740px) and (min-width: 641px) {
-  .gate h1 { font-size: clamp(1.9rem, 4.4vw, 3.2rem); margin-bottom: 0.7rem; }
-  .gate .lede { margin-bottom: 1.25rem; }
-  .choices { gap: 1rem; }
-  .choice { padding: 1.2rem 1.4rem 1rem; }
-  .choice h2 { font-size: 1.4rem; margin-bottom: 0.3rem; }
-  .choice p { margin-bottom: 0.85rem; font-size: 0.85rem; }
-}
+/* the homepage content sections live in the readable column */
+main.gate > section:not(.gate-hero), main.gate > .section-nav { max-width: 1000px; margin-left: auto; margin-right: auto; padding-left: 1.75rem; padding-right: 1.75rem; }
 
-@keyframes bgFade { to { opacity: 1; } }
-@keyframes fadeIn { to { opacity: 1; } }
-@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-
-/* light theme, paper gate */
-html[data-theme="light"] .gate::after {
-  background-image:
-    linear-gradient(to right, rgba(15,23,42,0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15,23,42,0.04) 1px, transparent 1px);
-}
-html[data-theme="light"] .gate::before {
-  background:
-    radial-gradient(ellipse 70% 55% at 50% 22%, rgba(216,67,26,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(216,67,26,0.04) 0%, transparent 70%);
-}
-html[data-theme="light"] .aud-card,
-html[data-theme="light"] .choice {
-  background: var(--plate);
-}
-html[data-theme="light"] .choice:hover {
-  box-shadow:
-    0 0 0 1px rgba(216,67,26,0.22),
-    0 18px 44px rgba(20,27,38,0.14),
-    inset 0 1px 0 rgba(255,255,255,0.7);
+@media (max-width: 860px) {
+  .audience, .choices { grid-template-columns: 1fr; }
+  .gate-hero { padding: 3.5rem 1.5rem 3rem; }
+  .home-light { padding: 3rem 1.5rem 0; }
 }
 </style>
 <script type="application/ld+json">
@@ -355,88 +205,35 @@ html[data-theme="light"] .choice:hover {
 <style>
 .v1-to-v2-banner {
   position: relative; z-index: 50;
-  background: linear-gradient(90deg, rgba(250,88,45,0.18), rgba(250,88,45,0.06));
-  border-bottom: 1px solid rgba(250,88,45,0.32);
+  background: var(--accent-soft);
+  border-bottom: 1px solid var(--accent-line);
   padding: 0.55rem 1rem;
   text-align: center;
-  font-family: 'Atkinson Hyperlegible Mono', ui-monospace, monospace;
-  font-size: 0.78rem;
-  letter-spacing: 0.02em;
-  color: #eef2f7;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  letter-spacing: 0;
+  color: var(--text);
 }
-.v1-to-v2-banner strong { color: var(--accent, #fa582d); font-weight: 700; }
+.v1-to-v2-banner strong { color: var(--accent-d); font-weight: 700; }
 .v1-to-v2-banner a {
-  color: var(--accent, #fa582d);
+  color: var(--accent-d);
   font-weight: 700;
   margin-left: 0.5rem;
   text-decoration: none;
-  border-bottom: 1px dashed rgba(250,88,45,0.5);
+  border-bottom: 1px solid var(--accent-line);
 }
-.v1-to-v2-banner a:hover { border-bottom-style: solid; }
+.v1-to-v2-banner a:hover { border-bottom-color: var(--accent); }
 .v1-to-v2-banner-close {
   background: none; border: 0;
-  color: #879eb7;
+  color: var(--text3);
   cursor: pointer;
   font-family: inherit;
   font-size: 1rem;
   padding: 0 0.4rem;
   margin-left: 0.6rem;
 }
-.v1-to-v2-banner-close:hover { color: #eef2f7; }
+.v1-to-v2-banner-close:hover { color: var(--text); }
 @media print { .v1-to-v2-banner { display: none; } }
-
-/* ════════ Gate enrichment, dossier richness (same language, more crafted) ════════ */
-.gate-stage { position: relative; }
-/* large clause watermark behind the hero, depth, like the module banners */
-.gate-watermark {
-  position: absolute; top: 0.5rem; left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--font-display); font-weight: 800;
-  font-size: clamp(9rem, 24vw, 22rem); line-height: 1; letter-spacing: -0.05em;
-  white-space: nowrap; color: transparent;
-  -webkit-text-stroke: 1px rgba(250,88,45,0.06);
-  pointer-events: none; z-index: -1; user-select: none;
-}
-html[data-theme="light"] .gate-watermark { -webkit-text-stroke-color: rgba(216,67,26,0.08); }
-/* REF line above the eyebrow, echoes the module file-reference header */
-.gate-refline {
-  display: inline-flex; align-items: center; gap: 0.7rem;
-  margin-bottom: 0.7rem;
-  opacity: 0; animation: fadeUp 0.7s var(--ease-out) 0.18s forwards;
-}
-.gate-refline .ref {
-  font-family: var(--font-mono); font-size: 0.58rem; font-weight: 700;
-  letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent);
-  border: 1px solid rgba(250,88,45,0.45); border-radius: 2px; padding: 0.24rem 0.6rem;
-}
-.gate-refline .rule {
-  width: 56px; height: 1px;
-  background: repeating-linear-gradient(90deg, rgba(250,88,45,0.5) 0 6px, transparent 6px 12px);
-}
-/* crop-mark corners on every gate card */
-.choice::before, .aud-card::before {
-  content: ''; position: absolute; inset: 5px; pointer-events: none; z-index: 1;
-  background:
-    linear-gradient(var(--border-bold), var(--border-bold)) top left / 8px 1.5px,
-    linear-gradient(var(--border-bold), var(--border-bold)) top left / 1.5px 8px,
-    linear-gradient(var(--border-bold), var(--border-bold)) bottom right / 8px 1.5px,
-    linear-gradient(var(--border-bold), var(--border-bold)) bottom right / 1.5px 8px;
-  background-repeat: no-repeat;
-  opacity: 0.45; transition: opacity 220ms var(--ease-out);
-}
-.choice:hover::before { opacity: 1; }
-/* clause index on the choice cards (§ 01 / 02 / 03) */
-.choices { counter-reset: choiceidx; }
-.choice { counter-increment: choiceidx; }
-.choice::after {
-  content: "§ 0" counter(choiceidx);
-  position: absolute; top: 0.9rem; right: 1.15rem; z-index: 2;
-  font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700;
-  letter-spacing: 0.1em; color: rgba(250,88,45,0.5);
-}
-/* audience cards become ruled index cards (file-tab accent) */
-.aud-card { border-top: 2px solid rgba(250,88,45,0.42); }
-html[data-theme="light"] .aud-card { border-top-color: rgba(216,67,26,0.5); }
 </style>
 <div id="v1-to-v2-banner" class="v1-to-v2-banner" hidden>
   <strong>New:</strong> a governance-led 11-module rebuild is being trialled in parallel.
@@ -470,23 +267,32 @@ html[data-theme="light"] .aud-card { border-top-color: rgba(216,67,26,0.5); }
     </nav>
 </header>
 
-<main id="main">
-  <section id="hero" class="gate-hero gate-stage gate">
-    <span class="gate-watermark" aria-hidden="true">§4</span>
-    <span class="gate-refline"><span class="rule" aria-hidden="true"></span><span class="ref">REF · EU AI Act 2024/1689</span><span class="rule" aria-hidden="true"></span></span>
-    <p class="gate-eyebrow">AI Safe@Work</p>
-    <h1>AI Governance, Risk &amp; Compliance <em>Training</em> for Modern Businesses</h1>
-  <p class="lede">Help your employees use AI safely, responsibly and compliantly while protecting your business from emerging risks.</p>
+<main id="main" class="gate">
+  <section id="hero" class="gate-hero">
+    <div class="gate-stage">
+      <p class="gate-eyebrow">AI Safe@Work</p>
+      <h1>AI Governance, Risk &amp; Compliance <em>Training</em> for Modern Businesses</h1>
+      <p class="lede">Help your employees use AI safely, responsibly and compliantly — while protecting your business from emerging risks.</p>
 
-    <div class="hero-ctas">
-      <a class="hero-cta primary" href="about.html#contact">Request a Demo</a>
-      <a class="hero-cta secondary" href="msp.html#become-a-partner">Become a Partner</a>
+      <div class="hero-ctas">
+        <a class="hero-cta primary" href="about.html#contact">Request a Demo →</a>
+        <a class="hero-cta secondary" href="msp.html#become-a-partner">Become a Partner</a>
+      </div>
+
+      <div class="gate-stats" aria-label="At a glance">
+        <div><div class="n">11</div><div class="l">plain-English modules</div></div>
+        <div><div class="n">~90<span class="accent"> min</span></div><div class="l">to complete, free</div></div>
+        <div><div class="n">Art.&nbsp;4</div><div class="l">EU AI Act literacy, in force</div></div>
+        <div><div class="n">ISO <span class="accent">42001</span></div><div class="l">&amp; 27001 mapped inline</div></div>
+      </div>
     </div>
+  </section>
 
+  <div class="home-light">
     <div class="audience" aria-label="Who this is for, what it is, why it matters">
       <div class="aud-card">
         <span class="aud-label">Who it's for</span>
-    <p>Anyone at work who uses AI tools like ChatGPT, Copilot, Claude or Gemini, in sales, support, HR, finance, marketing or ops. You do <em>not</em> need to be techy. If you've ever pasted something into an AI and thought "should I have done that?", this is for you.</p>
+        <p>Anyone at work who uses AI tools like ChatGPT, Copilot, Claude or Gemini, in sales, support, HR, finance, marketing or ops. You do <em>not</em> need to be techy. If you've ever pasted something into an AI and thought "should I have done that?", this is for you.</p>
       </div>
       <div class="aud-card">
         <span class="aud-label">What it is</span>
@@ -516,7 +322,7 @@ html[data-theme="light"] .aud-card { border-top-color: rgba(216,67,26,0.5); }
       <a class="choice locked" data-locked-until-complete data-unlock-href="module-11.html" aria-labelledby="choice-check-title">
         <span class="choice-tag lock-state"><span class="when-locked">Locked</span><span class="when-unlocked">Unlocked</span></span>
         <h2 id="choice-check-title">The 60-second check</h2>
-    <p class="lock-state"><span class="when-locked">This is available upon successful completion of all modules.</span><span class="when-unlocked">All modules complete, open your printable checklist.</span></p>
+        <p class="lock-state"><span class="when-locked">This is available upon successful completion of all modules.</span><span class="when-unlocked">All modules complete, open your printable checklist.</span></p>
         <span class="choice-cta lock-state"><span class="when-locked">Locked <svg class="choice-lock" aria-hidden="true" width="11" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="5.5" width="10" height="7" rx="1" stroke="currentColor"/><path d="M3 5.5V3.5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" fill="none"/></svg></span><span class="when-unlocked">Open <span class="choice-arrow" aria-hidden="true">→</span></span></span>
       </a>
     </div>
@@ -525,9 +331,9 @@ html[data-theme="light"] .aud-card { border-top-color: rgba(216,67,26,0.5); }
       <a href="module-manager.html">Manager Portal</a> ·
       <a href="templates/vendor-questionnaire.html">Vendor questionnaire</a> ·
       <a href="security.html">Security</a> ·
-      <a href="msp.html"><strong>MSP programme</strong></a> <span style="color:var(--accent);">· 5 Founding slots</span>
+      <a href="msp.html"><strong>MSP programme</strong></a> <span style="color:var(--accent-d);">· 5 Founding slots</span>
     </p>
-  </section>
+  </div>
 
   <nav class="section-nav" aria-label="On this page"><a href="#why">Why AI Safe@Work?</a><a href="#course">The Course</a><a href="#plus-pack">Plus Pack</a><a href="#consultancy">Consultancy</a><a href="#who-we-help">Who We Help</a><a href="#msp">MSP Partner Programme</a><a href="#about">About Us</a><a href="#cta">Get started</a></nav>
 
