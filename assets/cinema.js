@@ -70,7 +70,16 @@
     '.check-item',
     '.section-num',
     '.module-bottom-nav',
-    '.print-row'
+    '.print-row',
+    // homepage (gate) hero + cards
+    '.gate-eyebrow',
+    '.gate h1',
+    '.gate .lede',
+    '.gate-hero .hero-ctas',
+    '.gate-stats > div',
+    '.aud-card',
+    '.choice',
+    '.gate-tertiary'
   ];
 
   function tagReveals() {
@@ -81,7 +90,6 @@
       var lastParent = null;
       nodes.forEach(function (el) {
         if (el.hasAttribute('data-reveal')) return;
-        if (el.closest('.gate')) return;
         el.setAttribute('data-reveal', '');
         if (el.parentElement === lastParent) {
           seenInGroup++;
@@ -295,9 +303,47 @@
     });
   }
 
+  // ─── 5c. Interior page hero band ─────────────────────────────────────
+  // Wrap the leading page header (badge? + eyebrow? + page-title + lede?)
+  // of non-homepage pages in a full-bleed .page-hero band, so every page
+  // opens with the same hero format as the homepage. Pure DOM, no markup
+  // edits. Skips the homepage (.gate) and any page without a page-title.
+  function bandPageHero() {
+    var main = document.querySelector('main');
+    if (!main || main.classList.contains('gate')) return;
+    if (main.querySelector('.page-hero')) return;
+    var title = main.querySelector('h1.page-title');
+    if (!title) return;
+    var container = title.parentElement;            // main, or a leading <section>/<div>
+    var kids = Array.prototype.slice.call(container.children);
+    var i = kids.indexOf(title);
+    if (i < 0) return;
+    var start = i, end = i;
+    var cls = function (n) { return ((n && n.className) || '').toString(); };
+    // absorb preceding eyebrow / badges / banners
+    while (start - 1 >= 0 && /\b(eyebrow|soon-badge|role-banner|sector-badge|kicker|tagline)\b/i.test(cls(kids[start - 1]))) {
+      start--;
+    }
+    // absorb following sr-only headings, then the lede (stop after it)
+    while (kids[end + 1]) {
+      var nx = kids[end + 1];
+      if (/\blede\b/.test(cls(nx))) { end++; break; }
+      if (/\bsr-only\b/.test(cls(nx)) || nx.getAttribute('aria-hidden') === 'true') { end++; continue; }
+      break;
+    }
+    var hero = document.createElement('header');
+    hero.className = 'page-hero';
+    var inner = document.createElement('div');
+    inner.className = 'page-hero-inner';
+    hero.appendChild(inner);
+    container.insertBefore(hero, kids[start]);
+    for (var j = start; j <= end; j++) { inner.appendChild(kids[j]); }
+  }
+
   // ─── 6. Bootstrap ────────────────────────────────────────────────────
   function start() {
     injectCinema();
+    bandPageHero();
     tagReveals();
     setupRevealObserver();
     setupScroll();

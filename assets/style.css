@@ -226,6 +226,40 @@ hr.section-divider { border: none; height: 1px; margin: 3.5rem 0; background: va
 .muted  { color: var(--text3); }
 
 /* ════════════════════════════════════════════════════════════
+   PAGE HERO BAND — shared by homepage (.gate-hero) and interior
+   pages (.page-hero, wrapped around the page header by cinema.js).
+   Light by default; charcoal under html[data-theme="dark"].
+   ════════════════════════════════════════════════════════════ */
+.gate-hero, .page-hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  background: linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 100%);
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+.gate-hero::before, .page-hero::before {
+  content: ''; position: absolute; top: -220px; right: -120px;
+  width: 720px; height: 720px; border-radius: 50%; z-index: -1; pointer-events: none;
+  background: radial-gradient(circle, rgba(250,88,45,0.10), transparent 62%);
+  filter: blur(30px);
+}
+html[data-theme="dark"] .gate-hero, html[data-theme="dark"] .page-hero {
+  background: var(--dark); border-bottom-color: rgba(255,255,255,0.08); color: var(--on-dark);
+}
+html[data-theme="dark"] .gate-hero::before, html[data-theme="dark"] .page-hero::before {
+  background: radial-gradient(circle, rgba(250,88,45,0.22), transparent 65%); filter: blur(40px);
+}
+/* interior page hero: full-bleed band; pulls up to meet the topbar */
+.page-hero {
+  width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
+  margin-top: -3.5rem; margin-bottom: 3rem; padding: 4rem 2rem 3.5rem;
+}
+.page-hero-inner { max-width: 1000px; margin: 0 auto; }
+.page-hero .eyebrow, .page-hero .page-title { margin-bottom: 1rem; }
+.page-hero .lede { margin-bottom: 0; }
+.page-hero .soon-badge, .page-hero .role-banner { margin-bottom: 1rem; }
+@media (max-width: 640px) { .page-hero { padding: 3rem 1.5rem 2.5rem; } }
+
+/* ════════════════════════════════════════════════════════════
    CARD PRIMITIVE — soft rounded, gentle lift
    ════════════════════════════════════════════════════════════ */
 .callout, .compare-cell, .module-card, .nav-btn, .check-item, .objectives {
