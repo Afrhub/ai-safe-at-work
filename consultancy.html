@@ -31,6 +31,20 @@
 .svc { border: 1px solid var(--border); border-radius: 3px; padding: 1.2rem 1.3rem; background: var(--plate); }
 .svc h3 { margin: 0 0 0.35rem; font-size: 1rem; }
 .svc p { margin: 0; color: var(--text2); font-size: 0.9rem; }
+
+/* hero consultant photo — faded + graded into the page-hero band, right side
+   (same radial fadeout as the homepage safe image) */
+.page-hero-inner { position: relative; z-index: 1; }
+.page-hero::after {
+  content: ''; position: absolute; top: 0; right: 0; bottom: 0; z-index: 0; pointer-events: none;
+  width: min(42%, 520px);
+  background: url('assets/hero-consultant.jpg?v=1') right 22% / cover no-repeat;
+  -webkit-mask-image: radial-gradient(118% 96% at 82% 42%, #000 22%, transparent 72%);
+          mask-image: radial-gradient(118% 96% at 82% 42%, #000 22%, transparent 72%);
+  opacity: 0.95;
+}
+html[data-theme="dark"] .page-hero::after { opacity: 0.72; filter: grayscale(0.18) brightness(0.82) contrast(1.02); }
+@media (max-width: 900px) { .page-hero::after { display: none; } }
 </style>
 </head>
 <body>
