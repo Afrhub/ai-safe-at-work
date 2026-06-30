@@ -11,7 +11,7 @@
 <style>
 :root{
   --bg:#060608; --plate:rgba(14,15,21,0.9); --ink:#eef2f7; --ink2:#9fb0c5; --ink3:#6b7a8d;
-  --peri:#91a2ff; --peri-dim:rgba(145,162,255,0.5); --green:#34d399; --red:#ff6b6b; --amber:#f7a600;
+  --peri:#fa582d; --peri-dim:rgba(250,88,45,0.5); --green:#34d399; --red:#ff6b6b; --amber:#f7a600;
   --border:rgba(255,255,255,0.10); --border-bold:rgba(255,255,255,0.18);
   --mono:ui-monospace,'SF Mono',Menlo,monospace; --body:'Atkinson Hyperlegible',system-ui,sans-serif;
 }
@@ -30,10 +30,10 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);overflow:hidd
 .slide::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
   background:
    radial-gradient(ellipse 60% 50% at 18% 12%,rgba(79,216,196,0.06)0%,transparent 60%),
-   radial-gradient(ellipse 55% 50% at 88% 86%,rgba(145,162,255,0.10)0%,transparent 64%);}
+   radial-gradient(ellipse 55% 50% at 88% 86%,rgba(250,88,45,0.10)0%,transparent 64%);}
 .slide::after{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
-  background-image:linear-gradient(to right,rgba(145,162,255,.045)1px,transparent 1px),
-                   linear-gradient(to bottom,rgba(145,162,255,.045)1px,transparent 1px);
+  background-image:linear-gradient(to right,rgba(250,88,45,.045)1px,transparent 1px),
+                   linear-gradient(to bottom,rgba(250,88,45,.045)1px,transparent 1px);
   background-size:64px 64px;
   -webkit-mask-image:radial-gradient(ellipse 90% 80% at 50% 40%,#000 0%,transparent 82%);
           mask-image:radial-gradient(ellipse 90% 80% at 50% 40%,#000 0%,transparent 82%);}
@@ -55,7 +55,7 @@ h2.head{font-size:clamp(1.8rem,6.4vmin,4.4rem);font-weight:700;line-height:1.05;
 .kicker{font-size:clamp(1.1rem,2.8vmin,2rem);color:var(--ink);margin-top:2vmin;font-weight:700}
 
 .watermark{position:absolute;right:-2vmin;bottom:-6vmin;font-size:38vmin;line-height:1;font-weight:700;
-  color:transparent;-webkit-text-stroke:1px rgba(145,162,255,.07);z-index:0;user-select:none}
+  color:transparent;-webkit-text-stroke:1px rgba(250,88,45,.07);z-index:0;user-select:none}
 
 /* cards */
 .row{display:flex;gap:2.2vmin;margin-top:4vmin;flex-wrap:wrap}
@@ -67,11 +67,11 @@ h2.head{font-size:clamp(1.8rem,6.4vmin,4.4rem);font-weight:700;line-height:1.05;
 .card .big{font-size:clamp(2rem,6vmin,4rem);font-weight:700;color:var(--peri);line-height:1}
 .card.tier .step{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
 .card.soon{opacity:.62}
-.card .bgnum{position:absolute;right:1.2vmin;bottom:-1vmin;font-size:9vmin;font-weight:700;color:rgba(145,162,255,.06);font-family:var(--mono)}
+.card .bgnum{position:absolute;right:1.2vmin;bottom:-1vmin;font-size:9vmin;font-weight:700;color:rgba(250,88,45,.06);font-family:var(--mono)}
 
 .badges{display:flex;gap:1.4vmin;flex-wrap:wrap;margin-top:4vmin}
 .badge{font-family:var(--mono);font-size:clamp(.7rem,1.5vmin,1rem);letter-spacing:.08em;color:var(--ink);
-  border:1px solid var(--peri-dim);border-radius:3px;padding:1vmin 1.8vmin;background:rgba(145,162,255,.06)}
+  border:1px solid var(--peri-dim);border-radius:3px;padding:1vmin 1.8vmin;background:rgba(250,88,45,.06)}
 
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:2.4vmin;margin-top:4vmin}
 .col{background:var(--plate);border:1px solid var(--border);border-radius:4px;padding:3vmin 2.8vmin}
@@ -86,7 +86,7 @@ h2.head{font-size:clamp(1.8rem,6.4vmin,4.4rem);font-weight:700;line-height:1.05;
 .lockup .ms{color:var(--ink);font-weight:700}
 .lockup .x{color:var(--peri)}
 
-.cta-box{margin-top:4vmin;border:1px solid var(--peri-dim);border-radius:4px;background:rgba(145,162,255,.06);
+.cta-box{margin-top:4vmin;border:1px solid var(--peri-dim);border-radius:4px;background:rgba(250,88,45,.06);
   padding:2.6vmin 3vmin;display:inline-flex;gap:2.6vmin;flex-wrap:wrap;font-family:var(--mono);
   font-size:clamp(.8rem,1.7vmin,1.1rem);color:var(--ink)}
 .cta-box b{color:var(--peri)}
@@ -98,8 +98,8 @@ h2.head{font-size:clamp(1.8rem,6.4vmin,4.4rem);font-weight:700;line-height:1.05;
 /* nav */
 .progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--peri);transition:width .3s;z-index:1000;width:0}
 .nav-controls{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:18px;z-index:1000}
-.nav-btn{background:rgba(145,162,255,.12);border:1px solid var(--border);color:var(--ink);width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:18px}
-.nav-btn:hover{background:rgba(145,162,255,.24)}
+.nav-btn{background:rgba(250,88,45,.12);border:1px solid var(--border);color:var(--ink);width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:18px}
+.nav-btn:hover{background:rgba(250,88,45,.24)}
 .slide-counter{font-family:var(--mono);color:var(--ink3);font-size:13px;letter-spacing:.1em}
 
 @media(max-width:768px){.slide{padding:7vmin 7vmin}.cols{grid-template-columns:1fr}.row{flex-direction:column}}
@@ -107,7 +107,7 @@ h2.head{font-size:clamp(1.8rem,6.4vmin,4.4rem);font-weight:700;line-height:1.05;
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
-<a href="index.html" class="brand-logo" style="position:fixed;top:16px;left:20px;z-index:60"><img src="/assets/logo.png" alt="AI Safe@Work" style="height:120px;width:auto;display:block" /></a>
+<a href="index.html" class="brand-logo" style="position:fixed;top:16px;left:20px;z-index:60"><img src="/assets/logo.png?v=2" alt="AI Safe@Work" style="height:120px;width:auto;display:block" /></a>
 <div class="slide-deck">
 
   <!-- 1 · Title -->

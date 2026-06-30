@@ -22,14 +22,14 @@
 <link rel="preload" href="../assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="../assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
-<link rel="stylesheet" href="../assets/style.css?v=12" />
+<link rel="stylesheet" href="../assets/style.css?v=13" />
 <script defer src="../assets/cinema.js?v=8"></script>
 <style>
-.template-tag { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.95rem; border-radius: 2px; background: rgba(145,162,255, 0.08); border: 1px solid rgba(145,162,255, 0.32); color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.2rem; }
+.template-tag { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.95rem; border-radius: 2px; background: rgba(250,88,45, 0.08); border: 1px solid rgba(250,88,45, 0.32); color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.2rem; }
 .template-tag::before { content: '§'; color: var(--accent); font-weight: 800; }
 .print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0 2rem; align-items: center; flex-wrap: wrap; }
-.print-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #0b0e14; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.7rem 1.25rem; border-radius: 2px; border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 0 0 1px rgba(145,162,255,0.4), 0 8px 24px rgba(145,162,255,0.2); }
-.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(145,162,255,0.55), 0 12px 32px rgba(145,162,255,0.3); }
+.print-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #0b0e14; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.7rem 1.25rem; border-radius: 2px; border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 0 0 1px rgba(250,88,45,0.4), 0 8px 24px rgba(250,88,45,0.2); }
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(250,88,45,0.55), 0 12px 32px rgba(250,88,45,0.3); }
 .print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
 .brief-doc { margin: 1.5rem 0; padding: 2rem 2.2rem; background: var(--plate); border: 1px solid var(--border); border-radius: 3px; box-shadow: var(--shadow-card); page-break-inside: avoid; }
 .brief-doc h2 { margin-top: 1.6rem; font-size: 1.1rem; }
@@ -42,8 +42,8 @@
 .status-green { color: #2da45f; font-weight: 700; }
 .status-red { color: #d62828; font-weight: 700; }
 .section-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
-.fill { display: inline-block; padding: 0.1rem 0.55rem; border-radius: 2px; background: rgba(145,162,255, 0.10); color: var(--accent); border: 1px dashed rgba(145,162,255, 0.42); font-family: var(--font-mono); font-size: 0.88em; }
-.decision-box { margin: 1.2rem 0; padding: 1.2rem; background: rgba(145,162,255, 0.05); border-left: 3px solid var(--accent); }
+.fill { display: inline-block; padding: 0.1rem 0.55rem; border-radius: 2px; background: rgba(250,88,45, 0.10); color: var(--accent); border: 1px dashed rgba(250,88,45, 0.42); font-family: var(--font-mono); font-size: 0.88em; }
+.decision-box { margin: 1.2rem 0; padding: 1.2rem; background: rgba(250,88,45, 0.05); border-left: 3px solid var(--accent); }
 .decision-box strong { display: block; color: var(--accent); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.4rem; }
 @media (max-width: 640px) { .brief-doc { padding: 1rem; } }
 @media print { .brief-doc { background: white !important; border: 1px solid #ccc !important; box-shadow: none !important; } .fill { background: white !important; color: #0b0e14 !important; border-color: #46505e !important; } .decision-box { border-left-color: #46505e !important; background: #f9f9f9 !important; } }
@@ -74,7 +74,7 @@
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="topbar no-print">
-  <a href="../index.html" class="brand"><img src="/assets/logo.png" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />AI&nbsp;Safe@Work</a>
+  <a href="../index.html" class="brand"><img src="/assets/logo.png?v=2" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />AI&nbsp;Safe@Work</a>
   <nav class="topbar-nav">
       <a href="../course.html" class="always-show">Course</a>
       <a href="../plus-pack.html" class="is-current">Plus Pack</a>
@@ -117,9 +117,9 @@
     <h2>Operational risks (top three)</h2>
     <table style="width: 100%; margin: 1rem 0; border-collapse: collapse; font-size: 0.9rem;">
       <tr style="border: 1px solid var(--border);">
-        <th style="padding: 0.7rem; text-align: left; font-weight: 700; background: rgba(145,162,255, 0.08);">Risk</th>
-        <th style="padding: 0.7rem; text-align: left; font-weight: 700; background: rgba(145,162,255, 0.08);">Mitigation</th>
-        <th style="padding: 0.7rem; text-align: left; font-weight: 700; background: rgba(145,162,255, 0.08);">Due date</th>
+        <th style="padding: 0.7rem; text-align: left; font-weight: 700; background: rgba(250,88,45, 0.08);">Risk</th>
+        <th style="padding: 0.7rem; text-align: left; font-weight: 700; background: rgba(250,88,45, 0.08);">Mitigation</th>
+        <th style="padding: 0.7rem; text-align: left; font-weight: 700; background: rgba(250,88,45, 0.08);">Due date</th>
       </tr>
       <tr style="border: 1px solid var(--border);">
     <td style="padding: 0.7rem;"><span class="status-amber">Staff training lag</span>, 25% of staff incomplete</td>

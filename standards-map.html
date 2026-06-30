@@ -22,7 +22,7 @@
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
-<link rel="stylesheet" href="assets/style.css?v=12" />
+<link rel="stylesheet" href="assets/style.css?v=13" />
 <script defer src="assets/cinema.js?v=8"></script>
 <style>
 .map-table-wrap {
@@ -39,7 +39,7 @@
   font-size: 0.88rem;
 }
 .map-table thead th {
-  background: rgba(145,162,255, 0.05);
+  background: rgba(250,88,45, 0.05);
   color: var(--accent);
   text-align: left;
   padding: 0.85rem 1rem;
@@ -48,7 +48,7 @@
   font-weight: 800;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  border-bottom: 1px solid rgba(145,162,255,0.22);
+  border-bottom: 1px solid rgba(250,88,45,0.22);
 }
 .map-table tbody td {
   padding: 0.85rem 1rem;
@@ -58,7 +58,7 @@
   line-height: 1.55;
 }
 .map-table tbody tr:hover td {
-  background: rgba(145,162,255,0.03);
+  background: rgba(250,88,45,0.03);
   color: var(--text);
 }
 .map-table .clause {
@@ -76,13 +76,13 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   border-radius: 2px;
-  background: rgba(145,162,255,0.08);
+  background: rgba(250,88,45,0.08);
   color: var(--accent);
-  border: 1px solid rgba(145,162,255,0.25);
+  border: 1px solid rgba(250,88,45,0.25);
   transition: background 180ms ease, transform 120ms var(--ease-out-strong);
 }
 .map-table .modules a:hover {
-  background: rgba(145,162,255,0.16);
+  background: rgba(250,88,45,0.16);
 }
 .map-table .modules a:active {
   transform: scale(0.94);
@@ -125,8 +125,8 @@
   box-shadow: var(--shadow-card);
 }
 .toc a:hover {
-  border-color: rgba(145,162,255,0.42);
-  background: rgba(145,162,255,0.04);
+  border-color: rgba(250,88,45,0.42);
+  background: rgba(250,88,45,0.04);
   transform: translateY(-3px);
   box-shadow: var(--shadow-card-hover);
 }
@@ -193,12 +193,12 @@ table.cov-grid { border-collapse: collapse; width: 100%; font-family: var(--font
 .cov-grid th.cov-std {
   text-align: left; padding: 0.5rem 0.8rem;
   font-size: 0.6rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--accent); background: rgba(145,162,255,0.06);
+  color: var(--accent); background: rgba(250,88,45,0.06);
 }
 .cov-grid th.cov-clause {
   text-align: left; white-space: nowrap; padding: 0.42rem 0.8rem;
   font-size: 0.72rem; font-weight: 700; color: var(--accent-2);
-  background: rgba(145,162,255,0.02);
+  background: rgba(250,88,45,0.02);
 }
 .cov-grid td.cov-cell { width: 2.5rem; height: 2rem; text-align: center; position: relative; }
 .cov-grid td.cov-cell.on::after {
@@ -219,7 +219,7 @@ table.cov-grid { border-collapse: collapse; width: 100%; font-family: var(--font
 .cov-grid[data-col="10"] td.cov-cell[data-c="10"],
 .cov-grid[data-col="11"] td.cov-cell[data-c="11"],
 .cov-grid[data-col="12"] td.cov-cell[data-c="12"],
-.cov-grid[data-col="rt"] td.cov-cell[data-c="rt"] { background: rgba(145,162,255,0.14); }
+.cov-grid[data-col="rt"] td.cov-cell[data-c="rt"] { background: rgba(250,88,45,0.14); }
 .cov-grid[data-col] td.cov-cell[data-c] { opacity: 1; }
 /* when a column is active, dim cells not in that column */
 .cov-grid[data-col] tbody td.cov-cell { opacity: 0.18; }
@@ -232,7 +232,7 @@ table.cov-grid { border-collapse: collapse; width: 100%; font-family: var(--font
 .cov-grid[data-col="rt"] td[data-c="rt"] { opacity: 1; }
 /* standard filter: dim non-matching rows */
 .cov-grid tr.cov-dim { opacity: 0.16; }
-.cov-row:hover td.cov-cell { background: rgba(145,162,255,0.05); }
+.cov-row:hover td.cov-cell { background: rgba(250,88,45,0.05); }
 .cov-legend {
   display: flex; flex-wrap: wrap; gap: 1.2rem; margin: 0.9rem 0 0;
   font-family: var(--font-mono); font-size: 0.66rem; color: var(--text3);
@@ -301,7 +301,7 @@ table.cov-grid { border-collapse: collapse; width: 100%; font-family: var(--font
 
 
 <header class="topbar">
-  <a href="index.html" class="brand"><img src="/assets/logo.png" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />AI&nbsp;Safe@Work</a>
+  <a href="index.html" class="brand"><img src="/assets/logo.png?v=2" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />AI&nbsp;Safe@Work</a>
   <nav class="topbar-nav">
       <a href="course.html" class="always-show">Course</a>
       <a href="plus-pack.html">Plus Pack</a>

@@ -18,7 +18,7 @@
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
 
-<link rel="stylesheet" href="assets/style.css?v=12" />
+<link rel="stylesheet" href="assets/style.css?v=13" />
 <link rel="stylesheet" href="assets/completion.css?v=3" /><!-- completion v1 -->
 <script defer src="assets/completion.js?v=1"></script><!-- completion v1 -->
 <script defer src="assets/cinema.js?v=8"></script>
@@ -46,8 +46,8 @@ main.gate {
   position: absolute; inset: 0; z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 55% at 50% 22%, rgba(145,162,255,0.10) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(145,162,255,0.05) 0%, transparent 70%);
+    radial-gradient(ellipse 70% 55% at 50% 22%, rgba(250,88,45,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(250,88,45,0.05) 0%, transparent 70%);
   opacity: 0;
   animation: bgFade 1.2s var(--ease-out) 0.1s forwards;
 }
@@ -122,7 +122,7 @@ main.gate {
   margin-bottom: 0.4rem;
 }
 .aud-card p { font-size: 0.78rem; line-height: 1.45; color: var(--text2); margin: 0; }
-.aud-card em { font-style: normal; color: var(--text); border-bottom: 1px solid rgba(145,162,255,0.4); }
+.aud-card em { font-style: normal; color: var(--text); border-bottom: 1px solid rgba(250,88,45,0.4); }
 
 .choices {
   display: grid;
@@ -165,11 +165,11 @@ main.gate {
 .choice:nth-child(2) { animation-delay: 0.62s; }
 @media (hover: hover) and (pointer: fine) {
   .choice:hover {
-    border-color: rgba(145,162,255,0.45);
-    background: linear-gradient(160deg, rgba(145,162,255,0.06), rgba(145,162,255,0.015));
+    border-color: rgba(250,88,45,0.45);
+    background: linear-gradient(160deg, rgba(250,88,45,0.06), rgba(250,88,45,0.015));
     transform: translateY(-3px);
     box-shadow:
-      0 0 0 1px rgba(145,162,255,0.18),
+      0 0 0 1px rgba(250,88,45,0.18),
       0 24px 60px rgba(0,0,0,0.6),
       inset 0 1px 0 rgba(255,255,255,0.06);
   }
@@ -227,7 +227,7 @@ main.gate {
 }
 .gate-tertiary a {
   color: var(--text2);
-  border-bottom: 1px dashed rgba(145,162,255, 0.32);
+  border-bottom: 1px dashed rgba(250,88,45, 0.32);
   padding-bottom: 1px;
   transition: color 200ms ease, border-color 200ms ease;
 }
@@ -276,8 +276,8 @@ html[data-theme="light"] .gate::after {
 }
 html[data-theme="light"] .gate::before {
   background:
-    radial-gradient(ellipse 70% 55% at 50% 22%, rgba(71,89,199,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(71,89,199,0.04) 0%, transparent 70%);
+    radial-gradient(ellipse 70% 55% at 50% 22%, rgba(216,67,26,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(216,67,26,0.04) 0%, transparent 70%);
 }
 html[data-theme="light"] .aud-card,
 html[data-theme="light"] .choice {
@@ -285,7 +285,7 @@ html[data-theme="light"] .choice {
 }
 html[data-theme="light"] .choice:hover {
   box-shadow:
-    0 0 0 1px rgba(71,89,199,0.22),
+    0 0 0 1px rgba(216,67,26,0.22),
     0 18px 44px rgba(20,27,38,0.14),
     inset 0 1px 0 rgba(255,255,255,0.7);
 }
@@ -355,8 +355,8 @@ html[data-theme="light"] .choice:hover {
 <style>
 .v1-to-v2-banner {
   position: relative; z-index: 50;
-  background: linear-gradient(90deg, rgba(145,162,255,0.18), rgba(145,162,255,0.06));
-  border-bottom: 1px solid rgba(145,162,255,0.32);
+  background: linear-gradient(90deg, rgba(250,88,45,0.18), rgba(250,88,45,0.06));
+  border-bottom: 1px solid rgba(250,88,45,0.32);
   padding: 0.55rem 1rem;
   text-align: center;
   font-family: 'Atkinson Hyperlegible Mono', ui-monospace, monospace;
@@ -364,13 +364,13 @@ html[data-theme="light"] .choice:hover {
   letter-spacing: 0.02em;
   color: #eef2f7;
 }
-.v1-to-v2-banner strong { color: var(--accent, #91a2ff); font-weight: 700; }
+.v1-to-v2-banner strong { color: var(--accent, #fa582d); font-weight: 700; }
 .v1-to-v2-banner a {
-  color: var(--accent, #91a2ff);
+  color: var(--accent, #fa582d);
   font-weight: 700;
   margin-left: 0.5rem;
   text-decoration: none;
-  border-bottom: 1px dashed rgba(145,162,255,0.5);
+  border-bottom: 1px dashed rgba(250,88,45,0.5);
 }
 .v1-to-v2-banner a:hover { border-bottom-style: solid; }
 .v1-to-v2-banner-close {
@@ -394,10 +394,10 @@ html[data-theme="light"] .choice:hover {
   font-family: var(--font-display); font-weight: 800;
   font-size: clamp(9rem, 24vw, 22rem); line-height: 1; letter-spacing: -0.05em;
   white-space: nowrap; color: transparent;
-  -webkit-text-stroke: 1px rgba(145,162,255,0.06);
+  -webkit-text-stroke: 1px rgba(250,88,45,0.06);
   pointer-events: none; z-index: -1; user-select: none;
 }
-html[data-theme="light"] .gate-watermark { -webkit-text-stroke-color: rgba(71,89,199,0.08); }
+html[data-theme="light"] .gate-watermark { -webkit-text-stroke-color: rgba(216,67,26,0.08); }
 /* REF line above the eyebrow, echoes the module file-reference header */
 .gate-refline {
   display: inline-flex; align-items: center; gap: 0.7rem;
@@ -407,11 +407,11 @@ html[data-theme="light"] .gate-watermark { -webkit-text-stroke-color: rgba(71,89
 .gate-refline .ref {
   font-family: var(--font-mono); font-size: 0.58rem; font-weight: 700;
   letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent);
-  border: 1px solid rgba(145,162,255,0.45); border-radius: 2px; padding: 0.24rem 0.6rem;
+  border: 1px solid rgba(250,88,45,0.45); border-radius: 2px; padding: 0.24rem 0.6rem;
 }
 .gate-refline .rule {
   width: 56px; height: 1px;
-  background: repeating-linear-gradient(90deg, rgba(145,162,255,0.5) 0 6px, transparent 6px 12px);
+  background: repeating-linear-gradient(90deg, rgba(250,88,45,0.5) 0 6px, transparent 6px 12px);
 }
 /* crop-mark corners on every gate card */
 .choice::before, .aud-card::before {
@@ -432,11 +432,11 @@ html[data-theme="light"] .gate-watermark { -webkit-text-stroke-color: rgba(71,89
   content: "§ 0" counter(choiceidx);
   position: absolute; top: 0.9rem; right: 1.15rem; z-index: 2;
   font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700;
-  letter-spacing: 0.1em; color: rgba(145,162,255,0.5);
+  letter-spacing: 0.1em; color: rgba(250,88,45,0.5);
 }
 /* audience cards become ruled index cards (file-tab accent) */
-.aud-card { border-top: 2px solid rgba(145,162,255,0.42); }
-html[data-theme="light"] .aud-card { border-top-color: rgba(71,89,199,0.5); }
+.aud-card { border-top: 2px solid rgba(250,88,45,0.42); }
+html[data-theme="light"] .aud-card { border-top-color: rgba(216,67,26,0.5); }
 </style>
 <div id="v1-to-v2-banner" class="v1-to-v2-banner" hidden>
   <strong>New:</strong> a governance-led 11-module rebuild is being trialled in parallel.
@@ -460,7 +460,7 @@ html[data-theme="light"] .aud-card { border-top-color: rgba(71,89,199,0.5); }
 </script>
 
 <header class="topbar">
-  <a href="index.html" class="brand"><img src="/assets/logo.png" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />AI&nbsp;Safe@Work</a>
+  <a href="index.html" class="brand"><img src="/assets/logo.png?v=2" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />AI&nbsp;Safe@Work</a>
   <nav class="topbar-nav">
       <a href="course.html" class="always-show">Course</a>
       <a href="plus-pack.html">Plus Pack</a>

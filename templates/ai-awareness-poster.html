@@ -22,19 +22,19 @@
 <link rel="preload" href="../assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="../assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
-<link rel="stylesheet" href="../assets/style.css?v=12" />
+<link rel="stylesheet" href="../assets/style.css?v=13" />
 <script defer src="../assets/cinema.js?v=8"></script>
 <style>
-.template-tag { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.95rem; border-radius: 2px; background: rgba(145,162,255, 0.08); border: 1px solid rgba(145,162,255, 0.32); color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.2rem; }
+.template-tag { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.95rem; border-radius: 2px; background: rgba(250,88,45, 0.08); border: 1px solid rgba(250,88,45, 0.32); color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.2rem; }
 .template-tag::before { content: '§'; color: var(--accent); font-weight: 800; }
 .print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0 2rem; align-items: center; flex-wrap: wrap; }
-.print-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #0b0e14; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.7rem 1.25rem; border-radius: 2px; border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 0 0 1px rgba(145,162,255,0.4), 0 8px 24px rgba(145,162,255,0.2); }
-.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(145,162,255,0.55), 0 12px 32px rgba(145,162,255,0.3); }
+.print-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #0b0e14; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.7rem 1.25rem; border-radius: 2px; border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 0 0 1px rgba(250,88,45,0.4), 0 8px 24px rgba(250,88,45,0.2); }
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(250,88,45,0.55), 0 12px 32px rgba(250,88,45,0.3); }
 .print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
 
 /* Poster sheet, A4 portrait proportion on screen, full page on print */
 .poster { max-width: 760px; margin: 1.5rem auto; aspect-ratio: 1 / 1.414; background: var(--plate); border: 1px solid var(--border); border-radius: 4px; box-shadow: var(--shadow-card); padding: 3rem 3rem 2.4rem; display: flex; flex-direction: column; position: relative; overflow: hidden; }
-.poster::before { content: '§'; position: absolute; right: -1.5rem; bottom: -3rem; font-size: 16rem; line-height: 1; color: rgba(145,162,255,0.06); font-weight: 800; pointer-events: none; }
+.poster::before { content: '§'; position: absolute; right: -1.5rem; bottom: -3rem; font-size: 16rem; line-height: 1; color: rgba(250,88,45,0.06); font-weight: 800; pointer-events: none; }
 .poster-kicker { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
 .poster-title { font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1.02; margin: 0.6rem 0 0.2rem; font-weight: 800; }
 .poster-title em { font-style: normal; color: var(--accent); }
@@ -42,7 +42,7 @@
 .poster-rule { height: 1px; background: var(--border); margin: 0.2rem 0 1.4rem; }
 .qtest { list-style: none; padding: 0; margin: 0 0 1.4rem; counter-reset: q; display: grid; gap: 0.7rem; }
 .qtest li { position: relative; padding-left: 2.8rem; font-size: 1.05rem; font-weight: 600; }
-.qtest li::before { counter-increment: q; content: counter(q); position: absolute; left: 0; top: -0.1rem; width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: 50%; background: rgba(145,162,255,0.12); border: 1px solid rgba(145,162,255,0.4); color: var(--accent); font-family: var(--font-mono); font-weight: 800; font-size: 0.95rem; }
+.qtest li::before { counter-increment: q; content: counter(q); position: absolute; left: 0; top: -0.1rem; width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: 50%; background: rgba(250,88,45,0.12); border: 1px solid rgba(250,88,45,0.4); color: var(--accent); font-family: var(--font-mono); font-weight: 800; font-size: 0.95rem; }
 .poster-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: auto; }
 .pcol { border: 1px solid var(--border); border-radius: 3px; padding: 1rem 1.1rem; }
 .pcol h3 { margin: 0 0 0.5rem; font-size: 0.78rem; font-family: var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; }
@@ -85,7 +85,7 @@
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="topbar no-print">
-  <a href="../index.html" class="brand"><img src="/assets/logo.png" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />AI&nbsp;Safe@Work</a>
+  <a href="../index.html" class="brand"><img src="/assets/logo.png?v=2" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />AI&nbsp;Safe@Work</a>
   <nav class="topbar-nav">
       <a href="../course.html" class="always-show">Course</a>
       <a href="../plus-pack.html" class="is-current">Plus Pack</a>

@@ -25,7 +25,7 @@
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
-<link rel="stylesheet" href="assets/style.css?v=12" />
+<link rel="stylesheet" href="assets/style.css?v=13" />
 <script defer src="assets/cinema.js?v=8"></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
@@ -43,9 +43,9 @@
 .tier { position: relative; background: var(--plate); border: 1px solid var(--border); border-radius: 3px; padding: 1.6rem 1.6rem 1.4rem; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: transform 0.32s var(--ease-out-strong), border-color 0.32s, box-shadow 0.32s; }
 .tier::before { content: ''; position: absolute; inset: 6px; pointer-events: none; z-index: 1; background: linear-gradient(var(--border-bold), var(--border-bold)) top left / 9px 1.5px, linear-gradient(var(--border-bold), var(--border-bold)) top left / 1.5px 9px, linear-gradient(var(--border-bold), var(--border-bold)) bottom right / 9px 1.5px, linear-gradient(var(--border-bold), var(--border-bold)) bottom right / 1.5px 9px; background-repeat: no-repeat; opacity: 0.4; transition: opacity 0.32s var(--ease-out-strong); }
 .tier:hover::before { opacity: 0.9; }
-.tier.featured::before { background: linear-gradient(rgba(145,162,255,0.7), rgba(145,162,255,0.7)) top left / 11px 1.5px, linear-gradient(rgba(145,162,255,0.7), rgba(145,162,255,0.7)) top left / 1.5px 11px, linear-gradient(rgba(145,162,255,0.7), rgba(145,162,255,0.7)) bottom right / 11px 1.5px, linear-gradient(rgba(145,162,255,0.7), rgba(145,162,255,0.7)) bottom right / 1.5px 11px; background-repeat: no-repeat; opacity: 0.85; }
-.tier.featured { border-color: rgba(145,162,255, 0.5); box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 0 0 1px rgba(145,162,255,0.32), 0 32px 80px rgba(0,0,0,0.7), 0 0 60px rgba(145,162,255, 0.12); }
-@media (hover: hover) and (pointer: fine) { .tier:hover { transform: translateY(-4px); border-color: rgba(145,162,255, 0.42); box-shadow: var(--shadow-card-hover); } }
+.tier.featured::before { background: linear-gradient(rgba(250,88,45,0.7), rgba(250,88,45,0.7)) top left / 11px 1.5px, linear-gradient(rgba(250,88,45,0.7), rgba(250,88,45,0.7)) top left / 1.5px 11px, linear-gradient(rgba(250,88,45,0.7), rgba(250,88,45,0.7)) bottom right / 11px 1.5px, linear-gradient(rgba(250,88,45,0.7), rgba(250,88,45,0.7)) bottom right / 1.5px 11px; background-repeat: no-repeat; opacity: 0.85; }
+.tier.featured { border-color: rgba(250,88,45, 0.5); box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 0 0 1px rgba(250,88,45,0.32), 0 32px 80px rgba(0,0,0,0.7), 0 0 60px rgba(250,88,45, 0.12); }
+@media (hover: hover) and (pointer: fine) { .tier:hover { transform: translateY(-4px); border-color: rgba(250,88,45, 0.42); box-shadow: var(--shadow-card-hover); } }
 .tier-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text3); margin-bottom: 0.7rem; }
 .tier.featured .tier-tag { color: var(--accent); }
 .tier h3 { font-family: var(--font-display); font-size: 1.3rem; letter-spacing: -0.025em; margin: 0 0 0.45rem; color: var(--text); }
@@ -58,20 +58,20 @@
 .tier ul li:first-child { border-top: none; }
 .tier ul li::before { content: '✓'; position: absolute; left: 0; top: 0.4rem; color: var(--accent); font-weight: 800; }
 .tier .cta { display: inline-block; padding: 0.7rem 1.1rem; background: var(--accent); color: #0b0e14; font-family: var(--font-mono); font-size: 0.74rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; border-radius: 2px; text-align: center; transition: transform 0.16s var(--ease-out-strong), box-shadow 0.16s; }
-.tier .cta.outline { background: transparent; color: var(--accent); border: 1px solid rgba(145,162,255,0.42); }
+.tier .cta.outline { background: transparent; color: var(--accent); border: 1px solid rgba(250,88,45,0.42); }
 .tier .cta:hover { transform: translateY(-2px); }
 .tier .cta:active { transform: translateY(-1px) scale(0.97); }
 .split-table { width: 100%; border-collapse: collapse; margin: 1.4rem 0 2rem; font-size: 0.88rem; background: var(--plate); border: 1px solid var(--border); border-radius: 3px; overflow: hidden; box-shadow: var(--shadow-card); }
-.split-table thead th { background: rgba(145,162,255, 0.05); color: var(--accent); text-align: left; padding: 0.78rem 0.95rem; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; border-bottom: 1px solid rgba(145,162,255,0.22); }
+.split-table thead th { background: rgba(250,88,45, 0.05); color: var(--accent); text-align: left; padding: 0.78rem 0.95rem; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; border-bottom: 1px solid rgba(250,88,45,0.22); }
 .split-table tbody td { padding: 0.78rem 0.95rem; border-top: 1px solid var(--border); color: var(--text2); vertical-align: top; line-height: 1.5; }
 .split-table tbody td:first-child { color: var(--text); font-weight: 600; }
 .split-table .split { font-family: var(--font-mono); color: var(--accent-2); font-weight: 700; }
-.founding-card { background: linear-gradient(160deg, rgba(145,162,255,0.06), rgba(145,162,255,0.012)); border: 1px solid rgba(145,162,255,0.32); border-radius: 3px; padding: 1.8rem 2rem; margin: 2rem 0; box-shadow: var(--shadow-card); }
-.founding-card .tag { display: inline-block; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; padding: 0.18rem 0.55rem; border-radius: 2px; background: rgba(145,162,255,0.10); border: 1px solid rgba(145,162,255,0.34); }
+.founding-card { background: linear-gradient(160deg, rgba(250,88,45,0.06), rgba(250,88,45,0.012)); border: 1px solid rgba(250,88,45,0.32); border-radius: 3px; padding: 1.8rem 2rem; margin: 2rem 0; box-shadow: var(--shadow-card); }
+.founding-card .tag { display: inline-block; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; padding: 0.18rem 0.55rem; border-radius: 2px; background: rgba(250,88,45,0.10); border: 1px solid rgba(250,88,45,0.34); }
 .founding-card h2 { margin-top: 0.4rem; }
 .bundle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0.7rem; margin: 1.4rem 0 2rem; }
 .bundle-card { padding: 0.95rem 1.1rem; background: var(--plate); border: 1px solid var(--border); border-radius: 3px; box-shadow: var(--shadow-card); transition: all 0.28s var(--ease-out-strong); }
-.bundle-card:hover { border-color: rgba(145,162,255,0.32); transform: translateY(-2px); }
+.bundle-card:hover { border-color: rgba(250,88,45,0.32); transform: translateY(-2px); }
 .bundle-card .label { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
 .bundle-card .text { font-size: 0.86rem; color: var(--text); line-height: 1.4; }
 </style>
@@ -82,7 +82,7 @@
 
 
 <header class="topbar">
-  <a href="index.html" class="brand"><img src="/assets/logo.png" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />AI&nbsp;Safe@Work</a>
+  <a href="index.html" class="brand"><img src="/assets/logo.png?v=2" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />AI&nbsp;Safe@Work</a>
   <nav class="topbar-nav">
       <a href="course.html" class="always-show">Course</a>
       <a href="plus-pack.html">Plus Pack</a>
