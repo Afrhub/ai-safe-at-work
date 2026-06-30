@@ -33,6 +33,19 @@
 .benefit p { margin: 0; color: var(--text2); font-size: 0.9rem; }
 .soon { opacity: 0.7; }
 .soon .module-num { color: var(--text3); }
+
+/* hero "+" artwork — faded + graded into the page-hero band, right side
+   (same radial fadeout as the homepage safe image) */
+.page-hero-inner { position: relative; z-index: 1; }
+.page-hero::after {
+  content: ''; position: absolute; top: 0; right: 0; bottom: 0; z-index: 0; pointer-events: none;
+  width: min(46%, 560px);
+  background: url('assets/hero-plus.jpg?v=1') right center / cover no-repeat;
+  -webkit-mask-image: radial-gradient(118% 90% at 84% 46%, #000 22%, transparent 72%);
+          mask-image: radial-gradient(118% 90% at 84% 46%, #000 22%, transparent 72%);
+  opacity: 0.92;
+}
+@media (max-width: 900px) { .page-hero::after { display: none; } }
 </style>
 </head>
 <body>
