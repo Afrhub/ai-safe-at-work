@@ -38,7 +38,11 @@ $("step-login").addEventListener("submit", async (e) => {
   const email = $("email").value.trim(), password = $("pw").value;
   if (mode === "up") {
     say("Creating account…");
-    const { data, error } = await sb.auth.signUp({ email, password });
+    // emailRedirectTo pins the confirm link to THIS origin (live site), not the
+    // project's Site URL fallback (which was localhost). Landing back on login.html
+    // lets supabase-js process the token hash and auto-route into MFA enrolment.
+    const emailRedirectTo = new URL("login.html", location.href).href;
+    const { data, error } = await sb.auth.signUp({ email, password, options: { emailRedirectTo } });
     if (error) return say(error.message, "err");
     if (!data.session) return say("Account created. Check your email to confirm, then sign in.", "ok");
     return startMfa(); // confirmation disabled → straight to MFA setup
