@@ -1,6 +1,6 @@
 # Attest AI
 
-> Attest AI is the AI Governance Platform for small and medium businesses and the managed service providers (MSPs) who support them. It helps organisations adopt AI safely, securely and responsibly by combining a free, plain-English AI-safety course (AI Safe@Work), practical governance templates, continuous regulatory updates, audit-ready evidence and expert consultancy. EU-first, standards-cited inline (EU AI Act, GDPR, ISO/IEC 42001, ISO/IEC 27001).
+> Attest AI is the AI Governance Platform for small and medium businesses and the managed service providers (MSPs) who support them. It helps organisations adopt AI safely, securely and responsibly by combining a free, plain-English AI-safety course (AI Safe@Work), practical governance templates, continuous regulatory updates, audit-ready evidence and expert consultancy. UK-first (and EU), standards-cited inline (EU AI Act, GDPR, ISO/IEC 42001, ISO/IEC 27001).
 
 Tiers: Tier 1 (one-off) — the AI Safe@Work course plus the governance templates (Acceptable Use Policy, Use Case Register, Risk Assessment, Risk Register, Incident Form and more), yours to keep. Tier 2 (subscription) — the Attest AI Management Platform (AIMP): the same governance kept live, hosted, evidenced and always current, with reporting, audit evidence, regulatory updates and user management. Tier 3 — AI governance consultancy. The core training modules stay free with no login; templates and the platform are the paid layers.
 
