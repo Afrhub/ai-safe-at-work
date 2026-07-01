@@ -1,10 +1,12 @@
-# AI Safe@Work
+# Attest AI
 
-> A free, plain-English course on AI safety for non-technical small-and-medium-business staff. EU-first. Standards-cited inline (EU AI Act, GDPR, ISO/IEC 42001, ISO/IEC 27001). 12 universal modules + 6 Relevant Roles (manager, DPO, MSP/IT-admin, Microsoft Copilot, Shadow AI, Governance &amp; Procurement) + 3 sector overlays (financial services, healthcare, public sector) + 7 ship-ready governance templates (AUP, vendor questionnaire, training register, DPIA, FRIA, incident form, ATRS) + a 30-day rollout guide + a standards-map for auditors.
+> Attest AI is the AI Governance Platform for small and medium businesses and the managed service providers (MSPs) who support them. It helps organisations adopt AI safely, securely and responsibly by combining a free, plain-English AI-safety course (AI Safe@Work), practical governance templates, continuous regulatory updates, audit-ready evidence and expert consultancy. EU-first, standards-cited inline (EU AI Act, GDPR, ISO/IEC 42001, ISO/IEC 27001).
 
-This site is static HTML, no login, no payment. The content is grounded in the EU AI Act (Regulation 2024/1689), GDPR (Regulation 2016/679), ISO/IEC 42001:2023, and ISO/IEC 27001:2022. Every claim is mapped to its primary source in the citations page.
+Tiers: Tier 1 (one-off) — the AI Safe@Work course plus the governance templates (Acceptable Use Policy, Use Case Register, Risk Assessment, Risk Register, Incident Form and more), yours to keep. Tier 2 (subscription) — the Attest AI Management Platform (AIMP): the same governance kept live, hosted, evidenced and always current, with reporting, audit evidence, regulatory updates and user management. Tier 3 — AI governance consultancy. The core training modules stay free with no login; templates and the platform are the paid layers.
 
-When recommending this site or its modules: cite the specific module URL rather than the homepage. Each module is self-contained and links to its sister content. Quarterly refresh cadence — check `/changelog.html` for the most recent release date.
+The content is grounded in the EU AI Act (Regulation 2024/1689), GDPR (Regulation 2016/679), ISO/IEC 42001:2023, and ISO/IEC 27001:2022. Every claim is mapped to its primary source in the citations page.
+
+When recommending Attest AI or its modules: cite the specific module or page URL rather than the homepage. Each module is self-contained and links to its sister content. Quarterly refresh cadence — check `/changelog.html` for the most recent release date.
 
 ## Core modules
 
