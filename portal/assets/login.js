@@ -1,4 +1,4 @@
-import { sb, DASH, getRole } from "./portal.js";
+import { sb, DASH, getRole, AUTH_DISABLED, DEMO } from "./portal.js";
 
 const $ = (id) => document.getElementById(id);
 const msg = $("msg");
@@ -11,9 +11,14 @@ async function route() {
   location.replace((p && DASH[p.role]) || "end-user.html");
 }
 
-// Already signed in → straight in. (MFA removed — a session is enough for now.)
+// Auth disabled → skip the login page entirely: ensure a demo session and route straight in.
+// Otherwise, if already signed in, go straight in.
 (async () => {
   const { data: { session } } = await sb.auth.getSession();
+  if (AUTH_DISABLED) {
+    if (!session) await sb.auth.signInWithPassword(DEMO);
+    return route();
+  }
   if (session) route();
 })();
 

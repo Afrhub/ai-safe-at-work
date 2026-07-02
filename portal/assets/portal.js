@@ -15,8 +15,8 @@ export const DASH = { end_user: "end-user.html", manager: "manager.html", resell
 // ponytail: AUTH OFF for prod until further notice. Portal pages auto-sign-in as the
 // demo account so they render populated with no login. RLS still scopes every query to
 // this account, so no real user data is exposed. Restore real auth: set false + redeploy.
-const AUTH_DISABLED = true;
-const DEMO = { email: "demo@attest-ai.com", password: "attest-manager-demo-2026" };
+export const AUTH_DISABLED = true;
+export const DEMO = { email: "demo@attest-ai.com", password: "attest-manager-demo-2026" };
 
 // Signed in is enough (MFA removed for now).
 export async function isAuthed() {
