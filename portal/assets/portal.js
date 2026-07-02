@@ -12,14 +12,10 @@ export const sb = createClient(cfg.url, cfg.anon);
 
 export const DASH = { end_user: "end-user.html", manager: "manager.html", reseller: "reseller.html" };
 
-// True only when signed in AND MFA satisfied (AAL2 if a factor is enrolled).
+// Signed in is enough (MFA removed for now).
 export async function isAuthed() {
   const { data: { session } } = await sb.auth.getSession();
-  if (!session) return false;
-  const { data: aal } = await sb.auth.mfa.getAuthenticatorAssuranceLevel();
-  // nextLevel aal2 means a factor exists; currentLevel must reach it.
-  if (aal.nextLevel === "aal2" && aal.currentLevel !== "aal2") return false;
-  return true;
+  return !!session;
 }
 
 export async function getRole() {
