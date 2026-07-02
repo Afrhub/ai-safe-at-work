@@ -12,6 +12,12 @@ export const sb = createClient(cfg.url, cfg.anon);
 
 export const DASH = { end_user: "end-user.html", manager: "manager.html", reseller: "reseller.html" };
 
+// ponytail: AUTH OFF for prod until further notice. Portal pages auto-sign-in as the
+// demo account so they render populated with no login. RLS still scopes every query to
+// this account, so no real user data is exposed. Restore real auth: set false + redeploy.
+const AUTH_DISABLED = true;
+const DEMO = { email: "demo@attest-ai.com", password: "attest-manager-demo-2026" };
+
 // Signed in is enough (MFA removed for now).
 export async function isAuthed() {
   const { data: { session } } = await sb.auth.getSession();
@@ -27,6 +33,10 @@ export async function getRole() {
 
 // Page guard: bounce to login if not authed; bounce to own dashboard if role not allowed.
 export async function guard(allowedRoles) {
+  if (AUTH_DISABLED) {
+    if (!(await isAuthed())) await sb.auth.signInWithPassword(DEMO); // silent demo session; no login, no role gate
+    return await getRole();
+  }
   if (!(await isAuthed())) { location.replace("login.html"); return null; }
   const profile = await getRole();
   if (!profile) { location.replace("login.html"); return null; }
