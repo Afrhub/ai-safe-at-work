@@ -20,11 +20,12 @@ html[data-theme="light"] .portal-wm { -webkit-text-stroke-color: rgba(216,67,26,
 .portal-top {
   position: sticky; top: 0; z-index: 50;
   display: flex; align-items: center; gap: 1rem;
-  padding: 0.85rem 2rem; background: rgba(6,6,8,0.92);
-  backdrop-filter: blur(10px); border-bottom: var(--rule);
+  padding: 0.85rem 2rem; background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
 }
 .portal-top .brand { color: var(--accent); font-weight: 800; margin-right: auto; }
-html[data-theme="light"] .portal-top { background: rgba(238,240,244,0.92); }
+html[data-theme="dark"] .portal-top { background: rgba(6,6,8,0.92); }
 .portal-top .who { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--text3); text-transform: uppercase; }
 .portal-top button { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text2); background: var(--glass); border: 1px solid var(--border-bold); border-radius: 999px; padding: 0.4rem 0.9rem; cursor: pointer; }
 .portal-top button:hover { border-color: var(--accent); color: var(--text); }
@@ -61,19 +62,15 @@ html[data-theme="light"] .portal-top { background: rgba(238,240,244,0.92); }
 .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.4rem; margin-top: 1.8rem; }
 .tiles.big { grid-template-columns: repeat(3, 1fr); gap: 1.6rem; }
 @media (max-width: 820px){ .tiles.big { grid-template-columns: 1fr; } }
-.tile { position: relative; overflow: hidden; display: block; background: linear-gradient(160deg, rgba(250,88,45,0.045), rgba(12,12,17,0.86) 55%); border: 1px solid var(--border); border-radius: var(--r); padding: 2.2rem 2rem 2.6rem; min-height: 200px; box-shadow: var(--shadow-card); transition: transform 0.3s var(--ease-out), border-color 0.3s ease, box-shadow 0.3s ease; }
+.tile { position: relative; overflow: hidden; display: block; background: var(--plate); border: 1px solid var(--border); border-radius: var(--r); padding: 2.2rem 2rem 2.6rem; min-height: 200px; box-shadow: var(--shadow-card); isolation: isolate; transition: transform 0.28s var(--ease-quart), border-color 0.28s ease, box-shadow 0.28s ease; }
 .tiles.big .tile { min-height: 260px; }
-.tile-no { position: absolute; right: 1.1rem; bottom: -1rem; font-family: var(--font-display); font-weight: 800; font-size: 6rem; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(250,88,45,0.16); pointer-events: none; transition: -webkit-text-stroke-color 0.3s ease; }
-.tile:hover .tile-no { -webkit-text-stroke-color: rgba(250,88,45,0.3); }
-.tile::after { content:''; position:absolute; inset:6px; pointer-events:none;
-  background:
-    linear-gradient(var(--border-bold),var(--border-bold)) top left/10px 1.5px,
-    linear-gradient(var(--border-bold),var(--border-bold)) top left/1.5px 10px,
-    linear-gradient(var(--border-bold),var(--border-bold)) bottom right/10px 1.5px,
-    linear-gradient(var(--border-bold),var(--border-bold)) bottom right/1.5px 10px;
-  background-repeat:no-repeat; opacity:0.4; transition: opacity 0.28s var(--ease-out); }
-.tile:hover { transform: translateY(-5px); border-color: rgba(250,88,45,0.5); box-shadow: var(--shadow-card-hover), 0 0 0 1px rgba(250,88,45,0.2), 0 0 50px rgba(250,88,45,0.1); }
-.tile:hover::after { opacity: 1; }
+.tile-no { position: absolute; right: 1.1rem; bottom: -0.9rem; z-index: -1; font-family: var(--font-display); font-weight: 800; font-size: 6rem; line-height: 1; color: var(--bg-soft2); pointer-events: none; transition: transform 0.4s var(--ease-out); }
+.tile:hover .tile-no { transform: translateY(-4px); }
+/* module-card signature: orange top bar grows on hover */
+.tile::before { content:''; position:absolute; top:0; left:0; width:0; height:3px; z-index:1;
+  background: var(--accent); border-radius: 3px 3px 0 0; transition: width 0.4s var(--ease-out); }
+.tile:hover { transform: translateY(-3px); border-color: var(--border-bold); box-shadow: var(--shadow-card-hover); }
+.tile:hover::before { width: 100%; }
 .tile:active { transform: translateY(-2px) scale(0.99); }
 .tile .k { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
 .tile h2 { font-size: 1.65rem; letter-spacing: -0.02em; margin: 0.7rem 0 0.5rem; }
