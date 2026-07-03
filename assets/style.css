@@ -179,9 +179,7 @@ main {
   color: var(--accent);
   margin-bottom: 0.9rem;
 }
-.eyebrow::before {
-  content: ''; width: 22px; height: 2px; background: var(--accent); border-radius: 2px;
-}
+.eyebrow::before { content: none; }
 .eyebrow::after { content: none; }
 
 h1.page-title {
