@@ -7,7 +7,7 @@
 <meta name="color-scheme" content="dark light" />
 <script>try{if(localStorage.getItem("aisw-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <script>/* ponytail: client-side course gate, content is free not secret; this is the login funnel, not security. Expired-but-present token still passes (fine for a free course). */try{if(!localStorage.getItem("sb-hanjrsslhnuauaysbhun-auth-token"))location.replace("/portal/login.html?next="+encodeURIComponent(location.pathname));}catch(e){}</script>
-<title>Module 7 · Bias, fairness, and not embarrassing the business — Attest AI</title>
+<title>Module 7 · Bias, fairness, and not embarrassing the business · Attest AI</title>
 <link rel="canonical" href="https://attest-ai.com/module-7.html" />
 <meta name="geo.region" content="GB" />
 <meta name="geo.placename" content="United Kingdom" />
@@ -18,13 +18,13 @@
 <meta name="description" content="AI in hiring decisions. Customer-facing chatbots. Marketing copy that excludes people. Where the EU AI Act starts to bite." />
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="Attest AI" />
-<meta property="og:title" content="Module 7 · Bias, fairness, and not embarrassing the business — Attest AI" />
+<meta property="og:title" content="Module 7 · Bias, fairness, and not embarrassing the business · Attest AI" />
 <meta property="og:description" content="AI in hiring decisions. Customer-facing chatbots. Marketing copy that excludes people. Where the EU AI Act starts to bite." />
 <meta property="og:url" content="https://attest-ai.com/module-7.html" />
 <meta property="og:image" content="https://attest-ai.com/og-card.png?v=3" />
 <meta property="og:locale" content="en_GB" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Module 7 · Bias, fairness, and not embarrassing the business — Attest AI" />
+<meta name="twitter:title" content="Module 7 · Bias, fairness, and not embarrassing the business · Attest AI" />
 <meta name="twitter:description" content="AI in hiring decisions. Customer-facing chatbots. Marketing copy that excludes people. Where the EU AI Act starts to bite." />
 <meta name="twitter:image" content="https://attest-ai.com/og-card.png?v=3" />
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
@@ -92,75 +92,75 @@
 
 
 <header class="topbar">
-  <a href="index.html" class="brand"><img src="/assets/logo.png?v=2" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />Attest&nbsp;AI</a>
-  <nav class="topbar-nav">
-      <a href="index.html#platform">Platform</a>
-      <a href="index.html#included">Features</a>
-      <a href="consultancy.html">Consultancy</a>
-      <a href="msp.html">Partners</a>
-      <a href="resources.html">Resources</a>
-      <a href="about.html">About</a>
-      <a href="portal/manager.html">AIMP</a>
-      <a href="about.html#contact" class="nav-cta always-show">Book a Demo</a>
-    </nav>
+ <a href="index.html" class="brand"><img src="/assets/logo.png?v=2" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />Attest&nbsp;AI</a>
+ <nav class="topbar-nav">
+ <a href="index.html#platform">Platform</a>
+ <a href="index.html#included">Features</a>
+ <a href="consultancy.html">Consultancy</a>
+ <a href="msp.html">Partners</a>
+ <a href="resources.html">Resources</a>
+ <a href="about.html">About</a>
+ <a href="portal/manager.html">AIMP</a>
+ <a href="about.html#contact" class="nav-cta always-show">Book a Demo</a>
+ </nav>
 </header>
 
 <main id="main">
-  <p class="eyebrow">Module 07 · 7 min read</p>
-  <h1 class="page-title">Bias, fairness, and not <em>embarrassing</em> the business.</h1>
-  <p class="lede">AI does not hold opinions. It holds patterns, and the patterns it learned from were not neutral. The risks here are reputational, legal and human, sometimes all three at once.</p>
+ <p class="eyebrow">Module 07 · 7 min read</p>
+ <h1 class="page-title">Bias, fairness, and not <em>embarrassing</em> the business.</h1>
+ <p class="lede">AI does not hold opinions. It holds patterns, and the patterns it learned from were not neutral. The risks here are reputational, legal and human, sometimes all three at once.</p>
 
-  <figure class="module-banner" role="img" aria-label="Banner: a set of scales tipped by uneven weight on each pan, asking who is missing from the data.">
-    <svg viewBox="0 0 760 132" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <text x="22" y="24" font-family='Atkinson Hyperlegible Mono, monospace' letter-spacing='1.5' font-size="9" fill="rgba(201,212,227,0.40)">FIG. 07</text>
-      <text x="738" y="24" text-anchor="end" font-family='Atkinson Hyperlegible Mono, monospace' letter-spacing='1.5' font-size="9" fill="rgba(201,212,227,0.40)">BIAS SCALES SILENTLY</text>
-      
-      <g>
-        <line x1="380" y1="36" x2="380" y2="100" stroke="rgba(201,212,227,0.55)" stroke-width="1.8"/>
-        <line x1="240" y1="56" x2="520" y2="44" stroke="rgba(201,212,227,0.55)" stroke-width="1.8"/>
-        <circle cx="380" cy="50" r="4" fill="none" stroke="rgba(201,212,227,0.55)" stroke-width="1.5"/>
-        <line x1="250" y1="56" x2="234" y2="84" stroke="rgba(201,212,227,0.28)" stroke-width="1.2"/>
-        <line x1="250" y1="56" x2="266" y2="84" stroke="rgba(201,212,227,0.28)" stroke-width="1.2"/>
-        <path d="M 226 84 a 24 12 0 0 0 48 0 z" fill="none" stroke="rgba(201,212,227,0.55)" stroke-width="1.5"/>
-        <line x1="510" y1="44" x2="494" y2="64" stroke="rgba(201,212,227,0.28)" stroke-width="1.2"/>
-        <line x1="510" y1="44" x2="526" y2="64" stroke="rgba(201,212,227,0.28)" stroke-width="1.2"/>
-        <path d="M 486 64 a 24 12 0 0 0 48 0 z" fill="none" stroke="rgba(201,212,227,0.55)" stroke-width="1.5"/>
-        <circle cx="242" cy="80" r="2.4" fill="rgba(201,212,227,0.55)"/><circle cx="252" cy="80" r="2.4" fill="rgba(201,212,227,0.55)"/><circle cx="262" cy="80" r="2.4" fill="rgba(201,212,227,0.55)"/><circle cx="247" cy="74" r="2.4" fill="rgba(201,212,227,0.55)"/><circle cx="257" cy="74" r="2.4" fill="rgba(201,212,227,0.55)"/>
-        <circle cx="510" cy="60" r="2.4" fill="rgba(201,212,227,0.28)"/>
-        <line x1="380" y1="100" x2="340" y2="108" stroke="rgba(201,212,227,0.55)" stroke-width="1.5"/><line x1="380" y1="100" x2="420" y2="108" stroke="rgba(201,212,227,0.55)" stroke-width="1.5"/>
-        <text x="640" y="70" font-family='Atkinson Hyperlegible Mono, monospace' letter-spacing='1.5' font-size="9.5" fill="rgba(201,212,227,0.70)">WHO IS</text>
-        <text x="640" y="84" font-family='Atkinson Hyperlegible Mono, monospace' letter-spacing='1.5' font-size="9.5" fill="rgba(201,212,227,0.70)">MISSING?</text>
-      </g>
-    </svg>
-  </figure>
+ <figure class="module-banner" role="img" aria-label="Banner: a set of scales tipped by uneven weight on each pan, asking who is missing from the data.">
+ <svg viewBox="0 0 760 132" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+ <text x="22" y="24" font-family='Atkinson Hyperlegible Mono, monospace' letter-spacing='1.5' font-size="9" fill="rgba(201,212,227,0.40)">FIG. 07</text>
+ <text x="738" y="24" text-anchor="end" font-family='Atkinson Hyperlegible Mono, monospace' letter-spacing='1.5' font-size="9" fill="rgba(201,212,227,0.40)">BIAS SCALES SILENTLY</text>
+ 
+ <g>
+ <line x1="380" y1="36" x2="380" y2="100" stroke="rgba(201,212,227,0.55)" stroke-width="1.8"/>
+ <line x1="240" y1="56" x2="520" y2="44" stroke="rgba(201,212,227,0.55)" stroke-width="1.8"/>
+ <circle cx="380" cy="50" r="4" fill="none" stroke="rgba(201,212,227,0.55)" stroke-width="1.5"/>
+ <line x1="250" y1="56" x2="234" y2="84" stroke="rgba(201,212,227,0.28)" stroke-width="1.2"/>
+ <line x1="250" y1="56" x2="266" y2="84" stroke="rgba(201,212,227,0.28)" stroke-width="1.2"/>
+ <path d="M 226 84 a 24 12 0 0 0 48 0 z" fill="none" stroke="rgba(201,212,227,0.55)" stroke-width="1.5"/>
+ <line x1="510" y1="44" x2="494" y2="64" stroke="rgba(201,212,227,0.28)" stroke-width="1.2"/>
+ <line x1="510" y1="44" x2="526" y2="64" stroke="rgba(201,212,227,0.28)" stroke-width="1.2"/>
+ <path d="M 486 64 a 24 12 0 0 0 48 0 z" fill="none" stroke="rgba(201,212,227,0.55)" stroke-width="1.5"/>
+ <circle cx="242" cy="80" r="2.4" fill="rgba(201,212,227,0.55)"/><circle cx="252" cy="80" r="2.4" fill="rgba(201,212,227,0.55)"/><circle cx="262" cy="80" r="2.4" fill="rgba(201,212,227,0.55)"/><circle cx="247" cy="74" r="2.4" fill="rgba(201,212,227,0.55)"/><circle cx="257" cy="74" r="2.4" fill="rgba(201,212,227,0.55)"/>
+ <circle cx="510" cy="60" r="2.4" fill="rgba(201,212,227,0.28)"/>
+ <line x1="380" y1="100" x2="340" y2="108" stroke="rgba(201,212,227,0.55)" stroke-width="1.5"/><line x1="380" y1="100" x2="420" y2="108" stroke="rgba(201,212,227,0.55)" stroke-width="1.5"/>
+ <text x="640" y="70" font-family='Atkinson Hyperlegible Mono, monospace' letter-spacing='1.5' font-size="9.5" fill="rgba(201,212,227,0.70)">WHO IS</text>
+ <text x="640" y="84" font-family='Atkinson Hyperlegible Mono, monospace' letter-spacing='1.5' font-size="9.5" fill="rgba(201,212,227,0.70)">MISSING?</text>
+ </g>
+ </svg>
+ </figure>
 
-  <figure class="module-video">
-    <video class="module-video-el" controls preload="metadata" poster="assets/video/module-7-poster.jpg?v=1" playsinline>
-      <source src="assets/video/module-7.mp4?v=1" type="video/mp4" />
-      Your browser can't play this video. <a href="assets/video/module-7.mp4">Download it instead</a>.
-    </video>
-    <figcaption class="module-video-cap">Watch: the whole of Module 7 as a short narrated explainer.</figcaption>
-  </figure>
+ <figure class="module-video">
+ <video class="module-video-el" controls preload="metadata" poster="assets/video/module-7-poster.jpg?v=1" playsinline>
+ <source src="assets/video/module-7.mp4?v=1" type="video/mp4" />
+ Your browser can't play this video. <a href="assets/video/module-7.mp4">Download it instead</a>.
+ </video>
+ <figcaption class="module-video-cap">Watch: the whole of Module 7 as a short narrated explainer.</figcaption>
+ </figure>
 
-  <div class="objectives">
-    <div class="objectives-title">By the end of this module, you'll</div>
-    <ul>
-      <li>Understand the three sources of bias in AI outputs and why they're hard to remove</li>
-      <li>Recognise the three categories of work where AI bias becomes a legal problem, not just a quality one</li>
-      <li>Apply practical checks before AI-generated content goes near a customer, candidate, or public audience</li>
-    </ul>
-  </div>
+ <div class="objectives">
+ <div class="objectives-title">By the end of this module, you'll</div>
+ <ul>
+ <li>Understand the three sources of bias in AI outputs and why they're hard to remove</li>
+ <li>Recognise the three categories of work where AI bias becomes a legal problem, not just a quality one</li>
+ <li>Apply practical checks before AI-generated content goes near a customer, candidate, or public audience</li>
+ </ul>
+ </div>
 
-  <h2>Where bias comes from</h2>
-  <p>An AI model's outputs reflect three things layered on top of each other:</p>
-  <ol>
-    <li><strong>The training data.</strong> Mostly the public web, books, and code. The internet over-represents some voices and under-represents others. The model learns the over-representation as "normal".</li>
-    <li><strong>The fine-tuning.</strong> A second training stage where humans rate model outputs and the model learns to produce outputs that get good ratings. The humans doing the rating have their own preferences, blind spots, and demographics.</li>
-    <li><strong>Your prompt.</strong> You don't realise how much your wording shapes the output until you change one word and watch the answer change. "Write a CV for a software engineer" produces a different person, statistically, than "Write a CV for a software engineering manager".</li>
-  </ol>
-  <p>You can't eliminate bias by switching to a different model. They all share the same internet. You can manage it by knowing where it shows up and putting checks in the right places.</p>
+ <h2>Where bias comes from</h2>
+ <p>An AI model's outputs reflect three things layered on top of each other:</p>
+ <ol>
+ <li><strong>The training data.</strong> Mostly the public web, books, and code. The internet over-represents some voices and under-represents others. The model learns the over-representation as "normal".</li>
+ <li><strong>The fine-tuning.</strong> A second training stage where humans rate model outputs and the model learns to produce outputs that get good ratings. The humans doing the rating have their own preferences, blind spots, and demographics.</li>
+ <li><strong>Your prompt.</strong> You don't realise how much your wording shapes the output until you change one word and watch the answer change. "Write a CV for a software engineer" produces a different person, statistically, than "Write a CV for a software engineering manager".</li>
+ </ol>
+ <p>You can't eliminate bias by switching to a different model. They all share the same internet. You can manage it by knowing where it shows up and putting checks in the right places.</p>
 
-  <style>
+ <style>
   /* interactive diagram — scoped */
   .risk-fig { margin: 1.6rem 0 2.4rem; }
   .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
@@ -179,36 +179,36 @@
   .rd-cap strong { color: var(--text); }
   .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
   </style>
-  <figure id="risk-fig-7" class="risk-fig" aria-labelledby="risk-fig-cap">
-    <svg viewBox="0 0 760 250" class="risk-svg" role="group" aria-label="Where bias enters an AI output. Select a layer to learn more.">
-      <g class="rnode" data-k="data" tabindex="0" role="button" aria-label="The training data — over-represents some voices">
-        <rect class="rcard" x="14" y="14" width="232" height="118" rx="14"/>
-        <g transform="translate(34,34)"><path class="ric" d="M3 5c0-1.1 4-2 9-2s9 .9 9 2-4 2-9 2-9-.9-9-2zm0 0v14c0 1.1 4 2 9 2s9-.9 9-2V5M3 12c0 1.1 4 2 9 2s9-.9 9-2"/></g>
-        <text class="rtt" x="34" y="96">The training data</text>
-        <text class="rss" x="34" y="116">over-represented voices</text>
-      </g>
-      <g class="rnode" data-k="tune" tabindex="0" role="button" aria-label="The fine-tuning — human raters' blind spots">
-        <rect class="rcard" x="262" y="14" width="232" height="118" rx="14"/>
-        <g transform="translate(282,34)"><circle class="ric" cx="9" cy="7" r="4"/><path class="ric" d="M2 21c0-4 3.5-7 7-7s7 3 7 7M17 9l2 2 4-4"/></g>
-        <text class="rtt" x="282" y="96">The fine-tuning</text>
-        <text class="rss" x="282" y="116">raters' blind spots</text>
-      </g>
-      <g class="rnode" data-k="prompt" tabindex="0" role="button" aria-label="Your prompt — wording shapes the output">
-        <rect class="rcard" x="510" y="14" width="236" height="118" rx="14"/>
-        <g transform="translate(530,34)"><path class="ric" d="M4 4h16v12H8l-4 4z"/><path class="ric" d="M8 9h8M8 12h5"/></g>
-        <text class="rtt" x="530" y="96">Your prompt</text>
-        <text class="rss" x="530" y="116">wording shapes output</text>
-      </g>
-      <g class="rnode rgood" data-k="manage" tabindex="0" role="button" aria-label="What you can do — put checks in the right places">
-        <rect class="rcard" x="14" y="150" width="732" height="84" rx="14"/>
-        <g transform="translate(34,176)"><path class="ric" d="M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6zM9 12l2 2 4-4"/></g>
-        <text class="rtt" x="72" y="188">What you can do</text>
-        <text class="rss" x="72" y="210">put checks in the right places</text>
-      </g>
-    </svg>
-    <p class="rd-cap" id="risk-fig-cap" aria-live="polite"><strong>Where bias enters an AI output.</strong> Select a layer above — three sources stack on top of each other, and you manage the result.</p>
-  </figure>
-  <script>
+ <figure id="risk-fig-7" class="risk-fig" aria-labelledby="risk-fig-cap">
+ <svg viewBox="0 0 760 250" class="risk-svg" role="group" aria-label="Where bias enters an AI output. Select a layer to learn more.">
+ <g class="rnode" data-k="data" tabindex="0" role="button" aria-label="The training data, over-represents some voices">
+ <rect class="rcard" x="14" y="14" width="232" height="118" rx="14"/>
+ <g transform="translate(34,34)"><path class="ric" d="M3 5c0-1.1 4-2 9-2s9 .9 9 2-4 2-9 2-9-.9-9-2zm0 0v14c0 1.1 4 2 9 2s9-.9 9-2V5M3 12c0 1.1 4 2 9 2s9-.9 9-2"/></g>
+ <text class="rtt" x="34" y="96">The training data</text>
+ <text class="rss" x="34" y="116">over-represented voices</text>
+ </g>
+ <g class="rnode" data-k="tune" tabindex="0" role="button" aria-label="The fine-tuning, human raters' blind spots">
+ <rect class="rcard" x="262" y="14" width="232" height="118" rx="14"/>
+ <g transform="translate(282,34)"><circle class="ric" cx="9" cy="7" r="4"/><path class="ric" d="M2 21c0-4 3.5-7 7-7s7 3 7 7M17 9l2 2 4-4"/></g>
+ <text class="rtt" x="282" y="96">The fine-tuning</text>
+ <text class="rss" x="282" y="116">raters' blind spots</text>
+ </g>
+ <g class="rnode" data-k="prompt" tabindex="0" role="button" aria-label="Your prompt, wording shapes the output">
+ <rect class="rcard" x="510" y="14" width="236" height="118" rx="14"/>
+ <g transform="translate(530,34)"><path class="ric" d="M4 4h16v12H8l-4 4z"/><path class="ric" d="M8 9h8M8 12h5"/></g>
+ <text class="rtt" x="530" y="96">Your prompt</text>
+ <text class="rss" x="530" y="116">wording shapes output</text>
+ </g>
+ <g class="rnode rgood" data-k="manage" tabindex="0" role="button" aria-label="What you can do, put checks in the right places">
+ <rect class="rcard" x="14" y="150" width="732" height="84" rx="14"/>
+ <g transform="translate(34,176)"><path class="ric" d="M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6zM9 12l2 2 4-4"/></g>
+ <text class="rtt" x="72" y="188">What you can do</text>
+ <text class="rss" x="72" y="210">put checks in the right places</text>
+ </g>
+ </svg>
+ <p class="rd-cap" id="risk-fig-cap" aria-live="polite"><strong>Where bias enters an AI output.</strong> Select a layer above, three sources stack on top of each other, and you manage the result.</p>
+ </figure>
+ <script>
   (function(){
     var data = {
       data:   {t:'The training data', d:'Mostly the public web, books, and code. The internet over-represents some voices and under-represents others, and the model learns the over-representation as "normal".', m:'You can’t fix this by switching model.'},
@@ -234,256 +234,256 @@
   })();
   </script>
 
-  <h2>The three categories that matter</h2>
+ <h2>The three categories that matter</h2>
 
-  <h3>1. Decisions about people</h3>
-  <p>Hiring, firing, promotion, pay, performance reviews, references. Anything where an AI's output influences whether a specific person gets something they applied for or asked for.</p>
+ <h3>1. Decisions about people</h3>
+ <p>Hiring, firing, promotion, pay, performance reviews, references. Anything where an AI's output influences whether a specific person gets something they applied for or asked for.</p>
  <p>The European pattern is consistent: certain AI systems used in these categories may be classified as <strong>high-risk</strong> under the EU AI Act (Annex III, point 4), depending on how they are used. That triggers a long list of obligations on the deployer, your business, including risk assessment, logging, human oversight, instructions to staff, and registration where required.</p>
-  <p>In plain English: if you're a manager, recruiter, or HR person and you've been using ChatGPT to screen CVs or draft performance feedback, additional governance, oversight and compliance obligations may apply, even if you didn't realise they did.</p>
+ <p>In plain English: if you're a manager, recruiter, or HR person and you've been using ChatGPT to screen CVs or draft performance feedback, additional governance, oversight and compliance obligations may apply, even if you didn't realise they did.</p>
 
-  <div class="callout warn">
-    <span class="callout-icon">!</span>
-    <div>
-      <div class="callout-title">"It's just a draft" isn't a defence</div>
-   <p>The risk is not the use of AI itself to draft content, but allowing AI-generated recommendations to influence decisions without appropriate review and challenge. "I only use AI to draft the feedback, a human writes the final version" sounds like a mitigation, but in practice the final version is usually 80% the draft with minor edits. If the draft was biased in tone or substance, the final version is biased in tone or substance. The mitigation has to be more concrete than "I'll edit it".</p>
-    </div>
-  </div>
+ <div class="callout warn">
+ <span class="callout-icon">!</span>
+ <div>
+ <div class="callout-title">"It's just a draft" isn't a defence</div>
+ <p>The risk is not the use of AI itself to draft content, but allowing AI-generated recommendations to influence decisions without appropriate review and challenge. "I only use AI to draft the feedback, a human writes the final version" sounds like a mitigation, but in practice the final version is usually 80% the draft with minor edits. If the draft was biased in tone or substance, the final version is biased in tone or substance. The mitigation has to be more concrete than "I'll edit it".</p>
+ </div>
+ </div>
 
-  <h3>2. Public-facing or customer-facing content</h3>
-  <p>Marketing copy, social media posts, customer-service chatbots, blog articles, product descriptions, autoresponders, anything with the company name on it.</p>
+ <h3>2. Public-facing or customer-facing content</h3>
+ <p>Marketing copy, social media posts, customer-service chatbots, blog articles, product descriptions, autoresponders, anything with the company name on it.</p>
  <p>The risk here is reputational rather than regulatory, but it lands faster: a screenshot of a customer-service chatbot saying something offensive can be on social media before you've finished your coffee. AI-generated marketing copy that excludes a major customer group, say, by defaulting to assumptions about gender, family structure, age, ability, or country, is a complaint, a refund, and sometimes a viral pile-on.</p>
 
-  <h3>3. Decisions that affect access to services</h3>
+ <h3>3. Decisions that affect access to services</h3>
  <p>Loans, insurance, education places, healthcare triage, fraud scoring, immigration applications, social benefits. These are the EU AI Act's other big high-risk categories. Most small businesses don't touch them directly, but you may be the procurement person evaluating AI vendors, the operations person who configures one, or the finance person approving the investment. The decisions to use these systems carefully are made by people just like you.</p>
 
-  <hr class="section-divider" />
+ <hr class="section-divider" />
 
-  <h2>The specific failure modes</h2>
+ <h2>The specific failure modes</h2>
 
-  <h3>Gendered language and assumptions</h3>
-  <p>AI-generated job descriptions sometimes default to masculine-coded language ("dominant", "competitive", "rockstar", "ninja") which is well-evidenced to reduce female application rates. AI-generated examples and case studies tend to default to male protagonists. AI-generated translations into gendered languages (French, German, Spanish) sometimes default to masculine forms even when the source was neutral.</p>
+ <h3>Gendered language and assumptions</h3>
+ <p>AI-generated job descriptions sometimes default to masculine-coded language ("dominant", "competitive", "rockstar", "ninja") which is well-evidenced to reduce female application rates. AI-generated examples and case studies tend to default to male protagonists. AI-generated translations into gendered languages (French, German, Spanish) sometimes default to masculine forms even when the source was neutral.</p>
 
-  <h3>Cultural defaults</h3>
+ <h3>Cultural defaults</h3>
  <p>Models trained on English-language internet text default to American cultural references, American legal context, American holidays, American spellings. A model writing customer copy for a French SMB will, unless told otherwise, produce something that sounds slightly off, pricing in dollars, references to Thanksgiving, "fall" instead of "autumn".</p>
 
-  <h3>Stereotyped imagery</h3>
-  <p>AI image generators, asked for "a CEO", over-produce one demographic. Asked for "a nurse", they over-produce another. Asked for "a person from [country]", they often produce caricatures. Image generation models are improving, but still require human review for representation, diversity and appropriateness. If you use AI-generated imagery in any public-facing material, you have to actively curate the output, not just take the first plausible image.</p>
+ <h3>Stereotyped imagery</h3>
+ <p>AI image generators, asked for "a CEO", over-produce one demographic. Asked for "a nurse", they over-produce another. Asked for "a person from [country]", they often produce caricatures. Image generation models are improving, but still require human review for representation, diversity and appropriateness. If you use AI-generated imagery in any public-facing material, you have to actively curate the output, not just take the first plausible image.</p>
 
-  <h3>Excluding minorities and disabilities</h3>
-  <p>AI-generated copy sometimes assumes a default user with no accessibility needs, no caring responsibilities, no minority identity. Forms drafted with AI sometimes lack the categories ("prefer not to say", "other", "non-binary") that real users need. AI-generated user research scripts sometimes ask questions that exclude or pathologise certain experiences.</p>
+ <h3>Excluding minorities and disabilities</h3>
+ <p>AI-generated copy sometimes assumes a default user with no accessibility needs, no caring responsibilities, no minority identity. Forms drafted with AI sometimes lack the categories ("prefer not to say", "other", "non-binary") that real users need. AI-generated user research scripts sometimes ask questions that exclude or pathologise certain experiences.</p>
 
-  <h3>Confident wrongness about underrepresented topics</h3>
+ <h3>Confident wrongness about underrepresented topics</h3>
  <p>Models trained on the public web know less about communities, languages, regions, and identities that have less representation in that data. The output for "a wedding ceremony" defaults heavily to one tradition; for "a successful entrepreneur", to one demographic. The error doesn't always show up as overt offence, it shows up as a quiet exclusion in the framing.</p>
 
-  <h2>Practical checks</h2>
+ <h2>Practical checks</h2>
 
-  <div class="callout do">
-    <span class="callout-icon">✓</span>
-    <div>
-      <div class="callout-title">Before AI-generated content goes to a real audience</div>
-      <ol>
-        <li><strong>Read it as the person you'd most want to apologise to.</strong> Your toughest customer. Your least-represented colleague. The journalist who'd love a story.</li>
-        <li><strong>Search the text for the four words "he", "she", "guys", and "young".</strong> Each one is a signal to check whether a stereotype just slipped in.</li>
-        <li><strong>For imagery: generate at least three options.</strong> If they all look the same, the model is being lazy and so are you. Re-prompt with explicit specificity.</li>
-        <li><strong>For decisions about people: never let the AI's output be the final word.</strong> Document what you did differently from what the AI suggested, and why.</li>
-        <li><strong>For translations: have someone fluent in the target language read it.</strong> AI translations are excellent at fluency and ordinary at nuance. The nuance is what gets you in trouble.</li>
-      </ol>
-    </div>
-  </div>
+ <div class="callout do">
+ <span class="callout-icon">✓</span>
+ <div>
+ <div class="callout-title">Before AI-generated content goes to a real audience</div>
+ <ol>
+ <li><strong>Read it as the person you'd most want to apologise to.</strong> Your toughest customer. Your least-represented colleague. The journalist who'd love a story.</li>
+ <li><strong>Search the text for the four words "he", "she", "guys", and "young".</strong> Each one is a signal to check whether a stereotype just slipped in.</li>
+ <li><strong>For imagery: generate at least three options.</strong> If they all look the same, the model is being lazy and so are you. Re-prompt with explicit specificity.</li>
+ <li><strong>For decisions about people: never let the AI's output be the final word.</strong> Document what you did differently from what the AI suggested, and why.</li>
+ <li><strong>For translations: have someone fluent in the target language read it.</strong> AI translations are excellent at fluency and ordinary at nuance. The nuance is what gets you in trouble.</li>
+ </ol>
+ </div>
+ </div>
 
-  <h2>"Bias-free AI" doesn't exist</h2>
-  <p>Some vendors market their models as "fair" or "unbiased". That is marketing. Every model carries biases. Different models carry different biases. The useful question is "have we put checks in the right places to catch this model's specific weaknesses". That is good practice. That is what the standards require.</p>
+ <h2>"Bias-free AI" doesn't exist</h2>
+ <p>Some vendors market their models as "fair" or "unbiased". That is marketing. Every model carries biases. Different models carry different biases. The useful question is "have we put checks in the right places to catch this model's specific weaknesses". That is good practice. That is what the standards require.</p>
 
-  <div class="callout standard">
-    <span class="callout-icon">§</span>
-    <div>
-      <div class="callout-title">Where the standards land</div>
-   <p><strong>EU AI Act Annex III</strong>: lists the categories of "high-risk" AI use. Most relevant for SMBs: employment-related decisions (point 4), education access (point 3), creditworthiness (point 5b), and access to essential services. <strong>Article 26</strong>: deployer obligations include monitoring for bias and instructing staff appropriately. <strong>Article 27</strong>: fundamental rights impact assessment, required for certain deployers of high-risk AI. <strong>ISO/IEC 42001:2023 Annex A.6.2</strong>: requirements for AI system design include fairness considerations. <strong>Annex A.7</strong>: data quality, including representativeness. <strong>GDPR Article 22</strong>: the data subject's right not to be subject to automated decision-making applies to certain automated decisions that produce legal or similarly significant effects on them, not all AI-assisted decisions, which means these specific AI-driven decisions require human involvement, transparency, and the right to contest.</p>
-    </div>
-  </div>
+ <div class="callout standard">
+ <span class="callout-icon">§</span>
+ <div>
+ <div class="callout-title">Where the standards land</div>
+ <p><strong>EU AI Act Annex III</strong>: lists the categories of "high-risk" AI use. Most relevant for SMBs: employment-related decisions (point 4), education access (point 3), creditworthiness (point 5b), and access to essential services. <strong>Article 26</strong>: deployer obligations include monitoring for bias and instructing staff appropriately. <strong>Article 27</strong>: fundamental rights impact assessment, required for certain deployers of high-risk AI. <strong>ISO/IEC 42001:2023 Annex A.6.2</strong>: requirements for AI system design include fairness considerations. <strong>Annex A.7</strong>: data quality, including representativeness. <strong>GDPR Article 22</strong>: the data subject's right not to be subject to automated decision-making applies to certain automated decisions that produce legal or similarly significant effects on them, not all AI-assisted decisions, which means these specific AI-driven decisions require human involvement, transparency, and the right to contest.</p>
+ </div>
+ </div>
 
-  <div class="callout note">
-    <span class="callout-icon">i</span>
-    <div>
-      <div class="callout-title">Governance insight: Bias management is not about perfection</div>
-   <p>Bias management is not about removing all bias from AI. It is about identifying potential sources of unfairness, applying appropriate controls and ensuring accountability for decisions. The goal is defensible, documented decision-making, not bias-free AI (which doesn't exist).</p>
-    </div>
-  </div>
+ <div class="callout note">
+ <span class="callout-icon">i</span>
+ <div>
+ <div class="callout-title">Governance insight: Bias management is not about perfection</div>
+ <p>Bias management is not about removing all bias from AI. It is about identifying potential sources of unfairness, applying appropriate controls and ensuring accountability for decisions. The goal is defensible, documented decision-making, not bias-free AI (which doesn't exist).</p>
+ </div>
+ </div>
 
-  <h2>One sentence to take with you</h2>
-  <p>"The AI's first draft is its laziest draft." Treat it that way. Edit harder than you would your own writing, especially in the places where it would be easiest to just nod and ship.</p>
+ <h2>One sentence to take with you</h2>
+ <p>"The AI's first draft is its laziest draft." Treat it that way. Edit harder than you would your own writing, especially in the places where it would be easiest to just nod and ship.</p>
 
-  <div id="quiz-mount"></div>
-  <script type="application/json" id="quiz-data">
-  {
-    "module": 7,
-    "passThreshold": 8,
-    "quizTitle": "Test your <em>understanding</em>.",
-    "quizLede": "Ten questions drawn only from this module. Pass mark 8 out of 10. Retake as many times as you like.",
-    "questions": [
-      {
-        "q": "According to the module, an AI model's outputs reflect three things layered on top of each other. What are they?",
-        "options": [
-          "The hardware, the software, and the network",
-          "The training data, the fine-tuning, and your prompt",
-          "The vendor, the price, and the country",
-          "The user, the manager, and the regulator",
-          "The model size, the temperature, and the speed"
-        ],
-        "correct": 1,
-        "why": "Body: <em>An AI model's outputs reflect three things layered on top of each other: The training data … The fine-tuning … Your prompt.</em>",
-        "cite": "Where bias comes from"
-      },
-      {
-        "q": "What does the module say about switching to a different model to remove bias?",
-        "options": [
-          "It removes most bias if the model is newer",
-          "It works only for image models",
-          "You can't eliminate bias by switching — they all share the same internet",
-          "It removes bias but adds cost",
-          "It works only for translation tasks"
-        ],
-        "correct": 2,
-        "why": "Body: <em>You can't eliminate bias by switching to a different model. They all share the same internet.</em>",
-        "cite": "Where bias comes from"
-      },
-      {
-        "q": "Under the EU AI Act, which Annex III point covers AI used in decisions about people such as hiring and promotion?",
-        "options": [
-          "Annex III, point 4 (employment-related)",
-          "Annex III, point 1 (biometrics)",
-          "Annex III, point 9 (elections)",
-          "Annex III, point 2 (infrastructure)",
-          "Annex III, point 7 (law enforcement)"
-        ],
-        "correct": 0,
-        "why": "Body: <em>certain AI systems used in these categories may be classified as high-risk under the EU AI Act (Annex III, point 4), depending on how they are used.</em>",
-        "cite": "The three categories that matter — Decisions about people"
-      },
-      {
-        "q": "Why does the module say \"I only use AI to draft the feedback, a human writes the final version\" is a weak mitigation?",
-        "options": [
-          "Because drafting with AI is never allowed",
-          "Because the human is too busy to edit",
-          "Because in practice the final version is usually 80% the draft with minor edits, so a biased draft stays biased",
-          "Because AI cannot write feedback at all",
-          "Because the regulator bans all drafts"
-        ],
-        "correct": 2,
-        "why": "Body: <em>in practice the final version is usually 80% the draft with minor edits. If the draft was biased in tone or substance, the final version is biased in tone or substance.</em>",
-        "cite": "\"It's just a draft\" isn't a defence"
-      },
-      {
-        "q": "How does the module describe the main risk from public-facing or customer-facing AI content?",
-        "options": [
-          "It is mainly a regulatory fine",
-          "It is reputational rather than regulatory, but it lands faster",
-          "It is purely an internal quality issue",
-          "It is only a translation problem",
-          "It carries no real risk"
-        ],
-        "correct": 1,
-        "why": "Body: <em>The risk here is reputational rather than regulatory, but it lands faster.</em>",
-        "cite": "Public-facing or customer-facing content"
-      },
-      {
-        "q": "What does the module say about masculine-coded language in AI-generated job descriptions?",
-        "options": [
-          "It has no measurable effect",
-          "It improves application rates overall",
-          "It is well-evidenced to reduce female application rates",
-          "It only affects senior roles",
-          "It is required by the EU AI Act"
-        ],
-        "correct": 2,
-        "why": "Body: <em>AI-generated job descriptions sometimes default to masculine-coded language (\"dominant\", \"competitive\", \"rockstar\", \"ninja\") which is well-evidenced to reduce female application rates.</em>",
-        "cite": "Gendered language and assumptions"
-      },
-      {
-        "q": "When using AI-generated imagery in public-facing material, what does the module say you must do?",
-        "options": [
-          "Take the first plausible image to save time",
-          "Actively curate the output, not just take the first plausible image",
-          "Avoid all AI imagery entirely",
-          "Use only stock photography instead",
-          "Let the vendor pick the image"
-        ],
-        "correct": 1,
-        "why": "Body: <em>If you use AI-generated imagery in any public-facing material, you have to actively curate the output, not just take the first plausible image.</em>",
-        "cite": "Stereotyped imagery"
-      },
-      {
-        "q": "In the practical checks, which four words does the module tell you to search the text for?",
-        "options": [
-          "\"the\", \"and\", \"of\", \"to\"",
-          "\"he\", \"she\", \"guys\", and \"young\"",
-          "\"man\", \"woman\", \"boy\", \"girl\"",
-          "\"fair\", \"unbiased\", \"neutral\", \"safe\"",
-          "\"please\", \"thanks\", \"sorry\", \"sure\""
-        ],
-        "correct": 1,
-        "why": "Body: <em>Search the text for the four words \"he\", \"she\", \"guys\", and \"young\".</em>",
-        "cite": "Practical checks"
-      },
-      {
-        "q": "The module says some vendors market their models as \"fair\" or \"unbiased\". How does it describe such claims?",
-        "options": [
-          "Verified by the regulator",
-          "Generally accurate for newer models",
-          "That is marketing — every model carries biases",
-          "True only for paid models",
-          "A legal requirement under GDPR"
-        ],
-        "correct": 2,
-        "why": "Body: <em>Some vendors market their models as \"fair\" or \"unbiased\". That is marketing. Every model carries biases.</em>",
-        "cite": "\"Bias-free AI\" doesn't exist"
-      },
-      {
-        "q": "What is the single sentence the module tells you to take with you?",
-        "options": [
-          "\"The AI's first draft is its laziest draft.\"",
-          "\"Bias-free AI is just around the corner.\"",
-          "\"If it sounds fluent, it's fine.\"",
-          "\"Always trust the model's first answer.\"",
-          "\"Compliance is someone else's job.\""
-        ],
-        "correct": 0,
-        "why": "Body: <em>\"The AI's first draft is its laziest draft.\" Treat it that way. Edit harder than you would your own writing.</em>",
-        "cite": "One sentence to take with you"
-      }
-    ]
-  }
-  </script>
+ <div id="quiz-mount"></div>
+ <script type="application/json" id="quiz-data">
+ {
+ "module": 7,
+ "passThreshold": 8,
+ "quizTitle": "Test your <em>understanding</em>.",
+ "quizLede": "Ten questions drawn only from this module. Pass mark 8 out of 10. Retake as many times as you like.",
+ "questions": [
+ {
+ "q": "According to the module, an AI model's outputs reflect three things layered on top of each other. What are they?",
+ "options": [
+ "The hardware, the software, and the network",
+ "The training data, the fine-tuning, and your prompt",
+ "The vendor, the price, and the country",
+ "The user, the manager, and the regulator",
+ "The model size, the temperature, and the speed"
+ ],
+ "correct": 1,
+ "why": "Body: <em>An AI model's outputs reflect three things layered on top of each other: The training data … The fine-tuning … Your prompt.</em>",
+ "cite": "Where bias comes from"
+ },
+ {
+ "q": "What does the module say about switching to a different model to remove bias?",
+ "options": [
+ "It removes most bias if the model is newer",
+ "It works only for image models",
+ "You can't eliminate bias by switching, they all share the same internet",
+ "It removes bias but adds cost",
+ "It works only for translation tasks"
+ ],
+ "correct": 2,
+ "why": "Body: <em>You can't eliminate bias by switching to a different model. They all share the same internet.</em>",
+ "cite": "Where bias comes from"
+ },
+ {
+ "q": "Under the EU AI Act, which Annex III point covers AI used in decisions about people such as hiring and promotion?",
+ "options": [
+ "Annex III, point 4 (employment-related)",
+ "Annex III, point 1 (biometrics)",
+ "Annex III, point 9 (elections)",
+ "Annex III, point 2 (infrastructure)",
+ "Annex III, point 7 (law enforcement)"
+ ],
+ "correct": 0,
+ "why": "Body: <em>certain AI systems used in these categories may be classified as high-risk under the EU AI Act (Annex III, point 4), depending on how they are used.</em>",
+ "cite": "The three categories that matter, Decisions about people"
+ },
+ {
+ "q": "Why does the module say \"I only use AI to draft the feedback, a human writes the final version\" is a weak mitigation?",
+ "options": [
+ "Because drafting with AI is never allowed",
+ "Because the human is too busy to edit",
+ "Because in practice the final version is usually 80% the draft with minor edits, so a biased draft stays biased",
+ "Because AI cannot write feedback at all",
+ "Because the regulator bans all drafts"
+ ],
+ "correct": 2,
+ "why": "Body: <em>in practice the final version is usually 80% the draft with minor edits. If the draft was biased in tone or substance, the final version is biased in tone or substance.</em>",
+ "cite": "\"It's just a draft\" isn't a defence"
+ },
+ {
+ "q": "How does the module describe the main risk from public-facing or customer-facing AI content?",
+ "options": [
+ "It is mainly a regulatory fine",
+ "It is reputational rather than regulatory, but it lands faster",
+ "It is purely an internal quality issue",
+ "It is only a translation problem",
+ "It carries no real risk"
+ ],
+ "correct": 1,
+ "why": "Body: <em>The risk here is reputational rather than regulatory, but it lands faster.</em>",
+ "cite": "Public-facing or customer-facing content"
+ },
+ {
+ "q": "What does the module say about masculine-coded language in AI-generated job descriptions?",
+ "options": [
+ "It has no measurable effect",
+ "It improves application rates overall",
+ "It is well-evidenced to reduce female application rates",
+ "It only affects senior roles",
+ "It is required by the EU AI Act"
+ ],
+ "correct": 2,
+ "why": "Body: <em>AI-generated job descriptions sometimes default to masculine-coded language (\"dominant\", \"competitive\", \"rockstar\", \"ninja\") which is well-evidenced to reduce female application rates.</em>",
+ "cite": "Gendered language and assumptions"
+ },
+ {
+ "q": "When using AI-generated imagery in public-facing material, what does the module say you must do?",
+ "options": [
+ "Take the first plausible image to save time",
+ "Actively curate the output, not just take the first plausible image",
+ "Avoid all AI imagery entirely",
+ "Use only stock photography instead",
+ "Let the vendor pick the image"
+ ],
+ "correct": 1,
+ "why": "Body: <em>If you use AI-generated imagery in any public-facing material, you have to actively curate the output, not just take the first plausible image.</em>",
+ "cite": "Stereotyped imagery"
+ },
+ {
+ "q": "In the practical checks, which four words does the module tell you to search the text for?",
+ "options": [
+ "\"the\", \"and\", \"of\", \"to\"",
+ "\"he\", \"she\", \"guys\", and \"young\"",
+ "\"man\", \"woman\", \"boy\", \"girl\"",
+ "\"fair\", \"unbiased\", \"neutral\", \"safe\"",
+ "\"please\", \"thanks\", \"sorry\", \"sure\""
+ ],
+ "correct": 1,
+ "why": "Body: <em>Search the text for the four words \"he\", \"she\", \"guys\", and \"young\".</em>",
+ "cite": "Practical checks"
+ },
+ {
+ "q": "The module says some vendors market their models as \"fair\" or \"unbiased\". How does it describe such claims?",
+ "options": [
+ "Verified by the regulator",
+ "Generally accurate for newer models",
+ "That is marketing, every model carries biases",
+ "True only for paid models",
+ "A legal requirement under GDPR"
+ ],
+ "correct": 2,
+ "why": "Body: <em>Some vendors market their models as \"fair\" or \"unbiased\". That is marketing. Every model carries biases.</em>",
+ "cite": "\"Bias-free AI\" doesn't exist"
+ },
+ {
+ "q": "What is the single sentence the module tells you to take with you?",
+ "options": [
+ "\"The AI's first draft is its laziest draft.\"",
+ "\"Bias-free AI is just around the corner.\"",
+ "\"If it sounds fluent, it's fine.\"",
+ "\"Always trust the model's first answer.\"",
+ "\"Compliance is someone else's job.\""
+ ],
+ "correct": 0,
+ "why": "Body: <em>\"The AI's first draft is its laziest draft.\" Treat it that way. Edit harder than you would your own writing.</em>",
+ "cite": "One sentence to take with you"
+ }
+ ]
+ }
+ </script>
 
 </main>
 
 <!-- completion-bar v1 -->
 <div class="module-complete-bar">
-  <button type="button" class="complete-btn" data-mark-complete="7">Mark this module complete</button>
-  <span class="complete-hint">Saved on this device. Finish every module to unlock the 60-second check.</span>
+ <button type="button" class="complete-btn" data-mark-complete="7">Mark this module complete</button>
+ <span class="complete-hint">Saved on this device. Finish every module to unlock the 60-second check.</span>
 </div>
 
 <nav class="module-bottom-nav">
-  <a class="nav-btn" href="module-6.html">
-    <span class="nav-dir">Previous</span>
-    <span class="nav-title">← 06 · AI-powered scams</span>
-  </a>
-  <a class="nav-btn next" href="module-8.html">
-    <span class="nav-dir">Next module</span>
-    <span class="nav-title">08 · Copyright, IP, and other people's content →</span>
-  </a>
+ <a class="nav-btn" href="module-6.html">
+ <span class="nav-dir">Previous</span>
+ <span class="nav-title">← 06 · AI-powered scams</span>
+ </a>
+ <a class="nav-btn next" href="module-8.html">
+ <span class="nav-dir">Next module</span>
+ <span class="nav-title">08 · Copyright, IP, and other people's content →</span>
+ </a>
 </nav>
 
 <footer class="site-foot">
-  <div class="foot-brand">
-    <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
-    <p>The AI Governance Platform — adopt AI safely, securely and responsibly.</p>
-  </div>
-  <div class="foot-col"><h4>Platform</h4><a href="course.html">AI Safe@Work Learning</a><a href="plus-pack.html">Governance Toolkit</a><a href="index.html#included">Reporting &amp; Evidence</a></div>
-  <div class="foot-col"><h4>Services</h4><a href="consultancy.html">Consultancy</a><a href="msp.html">Partner Programme</a><a href="consultancy.html">Health Checks</a></div>
-  <div class="foot-col"><h4>Resources</h4><a href="resources.html">Blog</a><a href="resources.html">FAQs</a><a href="about.html#contact">Support</a></div>
-  <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
-  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
+ <div class="foot-brand">
+ <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
+ <p>The AI Governance Platform, adopt AI safely, securely and responsibly.</p>
+ </div>
+ <div class="foot-col"><h4>Platform</h4><a href="course.html">AI Safe@Work Learning</a><a href="plus-pack.html">Governance Toolkit</a><a href="index.html#included">Reporting &amp; Evidence</a></div>
+ <div class="foot-col"><h4>Services</h4><a href="consultancy.html">Consultancy</a><a href="msp.html">Partner Programme</a><a href="consultancy.html">Health Checks</a></div>
+ <div class="foot-col"><h4>Resources</h4><a href="resources.html">Blog</a><a href="resources.html">FAQs</a><a href="about.html#contact">Support</a></div>
+ <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+ <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 
 </body>

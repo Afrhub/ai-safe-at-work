@@ -7,7 +7,7 @@
 <meta name="color-scheme" content="dark light" />
 <script>try{if(localStorage.getItem("aisw-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <script>/* ponytail: client-side course gate, content is free not secret; this is the login funnel, not security. Expired-but-present token still passes (fine for a free course). */try{if(!localStorage.getItem("sb-hanjrsslhnuauaysbhun-auth-token"))location.replace("/portal/login.html?next="+encodeURIComponent(location.pathname));}catch(e){}</script>
-<title>Module 5 · Verifying what the AI tells you — Attest AI</title>
+<title>Module 5 · Verifying what the AI tells you · Attest AI</title>
 <link rel="canonical" href="https://attest-ai.com/module-5.html" />
 <meta name="geo.region" content="GB" />
 <meta name="geo.placename" content="United Kingdom" />
@@ -18,13 +18,13 @@
 <meta name="description" content="Hallucinations. Fake citations. Made-up legal references. The two-source rule. The EU AI Act's human-oversight obligation in plain words." />
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="Attest AI" />
-<meta property="og:title" content="Module 5 · Verifying what the AI tells you — Attest AI" />
+<meta property="og:title" content="Module 5 · Verifying what the AI tells you · Attest AI" />
 <meta property="og:description" content="Hallucinations. Fake citations. Made-up legal references. The two-source rule. The EU AI Act's human-oversight obligation in plain words." />
 <meta property="og:url" content="https://attest-ai.com/module-5.html" />
 <meta property="og:image" content="https://attest-ai.com/og-card.png?v=3" />
 <meta property="og:locale" content="en_GB" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Module 5 · Verifying what the AI tells you — Attest AI" />
+<meta name="twitter:title" content="Module 5 · Verifying what the AI tells you · Attest AI" />
 <meta name="twitter:description" content="Hallucinations. Fake citations. Made-up legal references. The two-source rule. The EU AI Act's human-oversight obligation in plain words." />
 <meta name="twitter:image" content="https://attest-ai.com/og-card.png?v=3" />
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
@@ -94,115 +94,115 @@
 
 
 <header class="topbar">
-  <a href="index.html" class="brand"><img src="/assets/logo.png?v=2" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />Attest&nbsp;AI</a>
-  <nav class="topbar-nav">
-      <a href="index.html#platform">Platform</a>
-      <a href="index.html#included">Features</a>
-      <a href="consultancy.html">Consultancy</a>
-      <a href="msp.html">Partners</a>
-      <a href="resources.html">Resources</a>
-      <a href="about.html">About</a>
-      <a href="portal/manager.html">AIMP</a>
-      <a href="about.html#contact" class="nav-cta always-show">Book a Demo</a>
-    </nav>
+ <a href="index.html" class="brand"><img src="/assets/logo.png?v=2" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />Attest&nbsp;AI</a>
+ <nav class="topbar-nav">
+ <a href="index.html#platform">Platform</a>
+ <a href="index.html#included">Features</a>
+ <a href="consultancy.html">Consultancy</a>
+ <a href="msp.html">Partners</a>
+ <a href="resources.html">Resources</a>
+ <a href="about.html">About</a>
+ <a href="portal/manager.html">AIMP</a>
+ <a href="about.html#contact" class="nav-cta always-show">Book a Demo</a>
+ </nav>
 </header>
 
 <main id="main">
-  <p class="eyebrow">Module 05 · 8 min read</p>
-  <h1 class="page-title">Verifying what the AI <em>tells</em> you.</h1>
-  <p class="lede">Large language models sound confident, are sometimes wrong, and show no correlation between the two. A model delivers a hallucinated legal case in the same tone it uses for the boiling point of water.</p>
+ <p class="eyebrow">Module 05 · 8 min read</p>
+ <h1 class="page-title">Verifying what the AI <em>tells</em> you.</h1>
+ <p class="lede">Large language models sound confident, are sometimes wrong, and show no correlation between the two. A model delivers a hallucinated legal case in the same tone it uses for the boiling point of water.</p>
 
-  <figure class="module-banner" role="img" aria-label="Banner: a magnifier questioning AI output beside two independent sources, both checked, labelled then rely.">
-    <svg viewBox="0 0 760 132" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <text x="22" y="24" font-family='Atkinson Hyperlegible Mono, monospace' letter-spacing='1.5' font-size="9" fill="rgba(201,212,227,0.40)">FIG. 05</text>
-      <text x="738" y="24" text-anchor="end" font-family='Atkinson Hyperlegible Mono, monospace' letter-spacing='1.5' font-size="9" fill="rgba(201,212,227,0.40)">VERIFY BEFORE YOU RELY</text>
-      
-      <g font-family='Atkinson Hyperlegible Mono, monospace' letter-spacing='1.5' font-size="9.5">
-        <line x1="70" y1="52" x2="300" y2="52" stroke="rgba(201,212,227,0.28)" stroke-width="1.5"/>
-        <line x1="70" y1="68" x2="280" y2="68" stroke="rgba(201,212,227,0.28)" stroke-width="1.5"/>
-        <line x1="70" y1="84" x2="300" y2="84" stroke="rgba(201,212,227,0.28)" stroke-width="1.5"/>
-        <line x1="70" y1="100" x2="240" y2="100" stroke="rgba(201,212,227,0.28)" stroke-width="1.5"/>
-        <circle cx="310" cy="76" r="26" fill="none" stroke="rgba(201,212,227,0.55)" stroke-width="1.8"/>
-        <line x1="329" y1="95" x2="352" y2="116" stroke="rgba(201,212,227,0.55)" stroke-width="1.8"/>
-        <text x="310" y="82" text-anchor="middle" font-size="16" fill="rgba(201,212,227,0.70)">?</text>
-        <rect x="440" y="42" width="120" height="30" rx="2" fill="none" stroke="rgba(201,212,227,0.55)" stroke-width="1.2"/>
-        <text x="500" y="61" text-anchor="middle" fill="rgba(201,212,227,0.70)">SOURCE 1</text>
-        <rect x="440" y="82" width="120" height="30" rx="2" fill="none" stroke="rgba(201,212,227,0.55)" stroke-width="1.2"/>
-        <text x="500" y="101" text-anchor="middle" fill="rgba(201,212,227,0.70)">SOURCE 2</text>
-        <text x="600" y="61" fill="#1ab86a">✓</text>
-        <text x="600" y="101" fill="#1ab86a">✓</text>
-        <text x="640" y="82" font-family='Atkinson Hyperlegible Mono, monospace' letter-spacing='1.5' font-size="9.5" fill="rgba(201,212,227,0.40)">THEN RELY</text>
-      </g>
-    </svg>
-  </figure>
+ <figure class="module-banner" role="img" aria-label="Banner: a magnifier questioning AI output beside two independent sources, both checked, labelled then rely.">
+ <svg viewBox="0 0 760 132" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+ <text x="22" y="24" font-family='Atkinson Hyperlegible Mono, monospace' letter-spacing='1.5' font-size="9" fill="rgba(201,212,227,0.40)">FIG. 05</text>
+ <text x="738" y="24" text-anchor="end" font-family='Atkinson Hyperlegible Mono, monospace' letter-spacing='1.5' font-size="9" fill="rgba(201,212,227,0.40)">VERIFY BEFORE YOU RELY</text>
+ 
+ <g font-family='Atkinson Hyperlegible Mono, monospace' letter-spacing='1.5' font-size="9.5">
+ <line x1="70" y1="52" x2="300" y2="52" stroke="rgba(201,212,227,0.28)" stroke-width="1.5"/>
+ <line x1="70" y1="68" x2="280" y2="68" stroke="rgba(201,212,227,0.28)" stroke-width="1.5"/>
+ <line x1="70" y1="84" x2="300" y2="84" stroke="rgba(201,212,227,0.28)" stroke-width="1.5"/>
+ <line x1="70" y1="100" x2="240" y2="100" stroke="rgba(201,212,227,0.28)" stroke-width="1.5"/>
+ <circle cx="310" cy="76" r="26" fill="none" stroke="rgba(201,212,227,0.55)" stroke-width="1.8"/>
+ <line x1="329" y1="95" x2="352" y2="116" stroke="rgba(201,212,227,0.55)" stroke-width="1.8"/>
+ <text x="310" y="82" text-anchor="middle" font-size="16" fill="rgba(201,212,227,0.70)">?</text>
+ <rect x="440" y="42" width="120" height="30" rx="2" fill="none" stroke="rgba(201,212,227,0.55)" stroke-width="1.2"/>
+ <text x="500" y="61" text-anchor="middle" fill="rgba(201,212,227,0.70)">SOURCE 1</text>
+ <rect x="440" y="82" width="120" height="30" rx="2" fill="none" stroke="rgba(201,212,227,0.55)" stroke-width="1.2"/>
+ <text x="500" y="101" text-anchor="middle" fill="rgba(201,212,227,0.70)">SOURCE 2</text>
+ <text x="600" y="61" fill="#1ab86a">✓</text>
+ <text x="600" y="101" fill="#1ab86a">✓</text>
+ <text x="640" y="82" font-family='Atkinson Hyperlegible Mono, monospace' letter-spacing='1.5' font-size="9.5" fill="rgba(201,212,227,0.40)">THEN RELY</text>
+ </g>
+ </svg>
+ </figure>
 
-  <figure class="module-video">
-    <video class="module-video-el" controls preload="metadata" poster="assets/video/module-5-poster.jpg?v=1" playsinline>
-      <source src="assets/video/module-5.mp4?v=1" type="video/mp4" />
-      Your browser can't play this video. <a href="assets/video/module-5.mp4">Download it instead</a>.
-    </video>
-    <figcaption class="module-video-cap">Watch: the whole of Module 5 as a short narrated explainer.</figcaption>
-  </figure>
+ <figure class="module-video">
+ <video class="module-video-el" controls preload="metadata" poster="assets/video/module-5-poster.jpg?v=1" playsinline>
+ <source src="assets/video/module-5.mp4?v=1" type="video/mp4" />
+ Your browser can't play this video. <a href="assets/video/module-5.mp4">Download it instead</a>.
+ </video>
+ <figcaption class="module-video-cap">Watch: the whole of Module 5 as a short narrated explainer.</figcaption>
+ </figure>
 
-  <div class="objectives">
-    <div class="objectives-title">By the end of this module, you'll</div>
-    <ul>
-      <li>Understand why AI hallucinations are not a bug, but a property of how these systems work</li>
-      <li>Apply the two-source rule to anything an AI tells you that you'd put your name to</li>
-      <li>Know which categories of output need particularly careful verification</li>
-      <li>Recognise the "human oversight" obligation in the EU AI Act, in plain English</li>
-    </ul>
-  </div>
+ <div class="objectives">
+ <div class="objectives-title">By the end of this module, you'll</div>
+ <ul>
+ <li>Understand why AI hallucinations are not a bug, but a property of how these systems work</li>
+ <li>Apply the two-source rule to anything an AI tells you that you'd put your name to</li>
+ <li>Know which categories of output need particularly careful verification</li>
+ <li>Recognise the "human oversight" obligation in the EU AI Act, in plain English</li>
+ </ul>
+ </div>
 
-  <h2>Why hallucinations happen</h2>
-  <p>A large language model does not automatically look things up unless it is connected to external tools or search services. Left to itself, it generates text one piece at a time, choosing each next piece from patterns it learned in training. Patterns of facts produce factual output most of the time. Patterns of "what a legal citation looks like" produce something shaped like a legal citation, with no guarantee the citation exists.</p>
+ <h2>Why hallucinations happen</h2>
+ <p>A large language model does not automatically look things up unless it is connected to external tools or search services. Left to itself, it generates text one piece at a time, choosing each next piece from patterns it learned in training. Patterns of facts produce factual output most of the time. Patterns of "what a legal citation looks like" produce something shaped like a legal citation, with no guarantee the citation exists.</p>
  <p>Throughout this course we call this a <strong>hallucination</strong>, the term you'll see most often. A more precise word is "confabulation": the model fills gaps with plausible-shaped material, the way a person can confabulate a memory without realising they're doing it. Either way, the behaviour is the same.</p>
  <p>Connecting a model to live data, web search, your documents, a database, generally <em>reduces</em> the risk, because the model has something real to draw on. It does not remove it: a connected model can still misread a source, blend two of them, or hallucinate around the parts the data didn't cover. "It has access to the document" is not the same as "it read it correctly".</p>
 
-  <div class="callout note">
-    <span class="callout-icon">i</span>
-    <div>
-      <div class="callout-title">Confidence is not calibrated</div>
-      <p>A human expert says "I'm not sure" when they're not sure. A large language model usually doesn't. The probability that a model is wrong has no reliable relationship to how certain its answer <em>sounds</em>. The most dangerous outputs are the ones delivered in perfectly fluent, perfectly authoritative English.</p>
-    </div>
-  </div>
+ <div class="callout note">
+ <span class="callout-icon">i</span>
+ <div>
+ <div class="callout-title">Confidence is not calibrated</div>
+ <p>A human expert says "I'm not sure" when they're not sure. A large language model usually doesn't. The probability that a model is wrong has no reliable relationship to how certain its answer <em>sounds</em>. The most dangerous outputs are the ones delivered in perfectly fluent, perfectly authoritative English.</p>
+ </div>
+ </div>
 
-  <h2>What hallucinations look like</h2>
+ <h2>What hallucinations look like</h2>
 
-  <h3>Fake citations</h3>
+ <h3>Fake citations</h3>
  <p>The famous case. A model is asked to find legal precedents or academic references; it produces six that look perfect, names, years, journal, page numbers, holding, and none of them exist. This has led to sanctions, court criticism and professional embarrassment in multiple jurisdictions, as well as retractions for academics. The fix is simple: every citation goes to a primary source before you use it.</p>
 
-  <h3>Fabricated quotes</h3>
-  <p>Ask a model "what did [famous person] say about [topic]" and you may get a perfectly believable quote, attributed precisely, that the person never said. The phrasing matches their style. The sentiment matches their public positions. The quote is invented.</p>
+ <h3>Fabricated quotes</h3>
+ <p>Ask a model "what did [famous person] say about [topic]" and you may get a perfectly believable quote, attributed precisely, that the person never said. The phrasing matches their style. The sentiment matches their public positions. The quote is invented.</p>
 
-  <h3>Wrong numbers</h3>
-  <p>Statistics, dates, prices, percentages, conversions. Asking a model "how big is the European cybersecurity market" can produce a confident "€42 billion in 2023" that turns out to be off by a factor of ten, or to be a market that doesn't exist, or to be a number the model has interpolated from two reports that measured different things.</p>
+ <h3>Wrong numbers</h3>
+ <p>Statistics, dates, prices, percentages, conversions. Asking a model "how big is the European cybersecurity market" can produce a confident "€42 billion in 2023" that turns out to be off by a factor of ten, or to be a market that doesn't exist, or to be a number the model has interpolated from two reports that measured different things.</p>
 
-  <h3>Plausible but invented procedure</h3>
+ <h3>Plausible but invented procedure</h3>
  <p>"How do I file a [specific kind of] form with HMRC?" or "What's the procedure for declaring [specific situation] under the French URSSAF rules?", the model may produce confident step-by-step instructions that mix correct general principles with invented specifics. The form number is wrong, the threshold is wrong, the deadline is wrong, but the structure is right.</p>
 
-  <h3>Hallucinated APIs and functions</h3>
+ <h3>Hallucinated APIs and functions</h3>
  <p>For technical staff: a model writes code that calls <code>library.doTheThing(x, y)</code>, a perfectly plausible function name that doesn't exist in that library. The code looks right. The compiler says no.</p>
 
-  <hr class="section-divider" />
+ <hr class="section-divider" />
 
-  <h2>The two-source rule</h2>
+ <h2>The two-source rule</h2>
  <p>Anything an AI tells you that you'd <strong>put your name to</strong>, send to a client, file with a regulator, publish, or use to make a decision, verify against at least one independent source. For high-stakes claims, two.</p>
-  <p>"Independent" matters. Asking a second AI tool the same question often gives you a similar answer because the two models were trained on overlapping data. The second source needs to be of a different kind: a primary document, an official register, the actual library documentation, a person who would know.</p>
+ <p>"Independent" matters. Asking a second AI tool the same question often gives you a similar answer because the two models were trained on overlapping data. The second source needs to be of a different kind: a primary document, an official register, the actual library documentation, a person who would know.</p>
 
-  <div class="compare">
-    <div class="compare-cell good">
-      <h4>Counts as a real second source</h4>
-      <p>The original document. An official register or regulator's website. The vendor's actual documentation. A trusted colleague who knows the topic. An academic paper you can read. A government statistic at its own source.</p>
-      <p>Where the question is about your own organisation, the authoritative source is internal: <strong>company policy, internal procedures, and your contractual obligations</strong>. The model's general answer does not override what your own rules and contracts actually say.</p>
-    </div>
-    <div class="compare-cell bad">
-      <h4>Doesn't count</h4>
-   <p>Another chatbot. A blog post that may itself have been AI-written. A summary article that doesn't cite primary sources. The model "double-checking" its own answer, it can't.</p>
-    </div>
-  </div>
+ <div class="compare">
+ <div class="compare-cell good">
+ <h4>Counts as a real second source</h4>
+ <p>The original document. An official register or regulator's website. The vendor's actual documentation. A trusted colleague who knows the topic. An academic paper you can read. A government statistic at its own source.</p>
+ <p>Where the question is about your own organisation, the authoritative source is internal: <strong>company policy, internal procedures, and your contractual obligations</strong>. The model's general answer does not override what your own rules and contracts actually say.</p>
+ </div>
+ <div class="compare-cell bad">
+ <h4>Doesn't count</h4>
+ <p>Another chatbot. A blog post that may itself have been AI-written. A summary article that doesn't cite primary sources. The model "double-checking" its own answer, it can't.</p>
+ </div>
+ </div>
 
-  <style>
+ <style>
   /* interactive diagram — scoped */
   .risk-fig { margin: 1.6rem 0 2.4rem; }
   .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
@@ -221,36 +221,36 @@
   .rd-cap strong { color: var(--text); }
   .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
   </style>
-  <figure id="risk-fig-5" class="risk-fig" aria-labelledby="risk-fig-cap">
-    <svg viewBox="0 0 760 250" class="risk-svg" role="group" aria-label="The verify-before-you-rely workflow. Select a step to learn more.">
-      <g class="rnode" data-k="out" tabindex="0" role="button" aria-label="The AI output — confident but unproven">
-        <rect class="rcard" x="14" y="14" width="232" height="118" rx="14"/>
-        <g transform="translate(34,34)"><path class="ric" d="M5 4h14v16H5zM8 9h8M8 13h8M8 17h5"/></g>
-        <text class="rtt" x="34" y="96">The AI output</text>
-        <text class="rss" x="34" y="116">confident, unproven</text>
-      </g>
-      <g class="rnode" data-k="independent" tabindex="0" role="button" aria-label="Independent source — a different kind of evidence">
-        <rect class="rcard" x="262" y="14" width="232" height="118" rx="14"/>
-        <g transform="translate(282,34)"><circle class="ric" cx="10" cy="10" r="7"/><path class="ric" d="M15 15l6 6"/></g>
-        <text class="rtt" x="282" y="96">Independent source</text>
-        <text class="rss" x="282" y="116">different evidence</text>
-      </g>
-      <g class="rnode" data-k="mandatory" tabindex="0" role="button" aria-label="Always verify — the high-risk categories">
-        <rect class="rcard" x="510" y="14" width="236" height="118" rx="14"/>
-        <g transform="translate(530,34)"><path class="ric" d="M12 3v8m0 4h.01M5 21h14a1 1 0 0 0 .9-1.5l-7-12a1 1 0 0 0-1.8 0l-7 12A1 1 0 0 0 5 21z"/></g>
-        <text class="rtt" x="530" y="96">Always verify</text>
-        <text class="rss" x="530" y="116">high-risk output</text>
-      </g>
-      <g class="rnode rgood" data-k="oversight" tabindex="0" role="button" aria-label="Then a human signs off — real oversight, not rubber-stamping">
-        <rect class="rcard" x="14" y="150" width="732" height="84" rx="14"/>
-        <g transform="translate(34,176)"><path class="ric" d="M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6zM9 12l2 2 4-4"/></g>
-        <text class="rtt" x="72" y="188">Then a human signs off</text>
-        <text class="rss" x="72" y="210">real oversight, not a rubber stamp</text>
-      </g>
-    </svg>
-    <p class="rd-cap" id="risk-fig-cap" aria-live="polite"><strong>Verify before you rely.</strong> Select a step above — this is the two-source rule and human oversight in one picture.</p>
-  </figure>
-  <script>
+ <figure id="risk-fig-5" class="risk-fig" aria-labelledby="risk-fig-cap">
+ <svg viewBox="0 0 760 250" class="risk-svg" role="group" aria-label="The verify-before-you-rely workflow. Select a step to learn more.">
+ <g class="rnode" data-k="out" tabindex="0" role="button" aria-label="The AI output, confident but unproven">
+ <rect class="rcard" x="14" y="14" width="232" height="118" rx="14"/>
+ <g transform="translate(34,34)"><path class="ric" d="M5 4h14v16H5zM8 9h8M8 13h8M8 17h5"/></g>
+ <text class="rtt" x="34" y="96">The AI output</text>
+ <text class="rss" x="34" y="116">confident, unproven</text>
+ </g>
+ <g class="rnode" data-k="independent" tabindex="0" role="button" aria-label="Independent source, a different kind of evidence">
+ <rect class="rcard" x="262" y="14" width="232" height="118" rx="14"/>
+ <g transform="translate(282,34)"><circle class="ric" cx="10" cy="10" r="7"/><path class="ric" d="M15 15l6 6"/></g>
+ <text class="rtt" x="282" y="96">Independent source</text>
+ <text class="rss" x="282" y="116">different evidence</text>
+ </g>
+ <g class="rnode" data-k="mandatory" tabindex="0" role="button" aria-label="Always verify, the high-risk categories">
+ <rect class="rcard" x="510" y="14" width="236" height="118" rx="14"/>
+ <g transform="translate(530,34)"><path class="ric" d="M12 3v8m0 4h.01M5 21h14a1 1 0 0 0 .9-1.5l-7-12a1 1 0 0 0-1.8 0l-7 12A1 1 0 0 0 5 21z"/></g>
+ <text class="rtt" x="530" y="96">Always verify</text>
+ <text class="rss" x="530" y="116">high-risk output</text>
+ </g>
+ <g class="rnode rgood" data-k="oversight" tabindex="0" role="button" aria-label="Then a human signs off, real oversight, not rubber-stamping">
+ <rect class="rcard" x="14" y="150" width="732" height="84" rx="14"/>
+ <g transform="translate(34,176)"><path class="ric" d="M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6zM9 12l2 2 4-4"/></g>
+ <text class="rtt" x="72" y="188">Then a human signs off</text>
+ <text class="rss" x="72" y="210">real oversight, not a rubber stamp</text>
+ </g>
+ </svg>
+ <p class="rd-cap" id="risk-fig-cap" aria-live="polite"><strong>Verify before you rely.</strong> Select a step above, this is the two-source rule and human oversight in one picture.</p>
+ </figure>
+ <script>
   (function(){
     var data = {
       out:         {t:'The AI output', d:'Fluent and authoritative — but the confidence has no reliable link to whether it is correct.', m:'See "Confidence is not calibrated".'},
@@ -276,238 +276,238 @@
   })();
   </script>
 
-  <h2>Where verification is mandatory</h2>
-  <p>Some categories of output should always be verified before use, even when the model sounds completely confident:</p>
-  <ul>
-  <li><strong>Legal claims</strong>, case law, statute references, regulatory deadlines, contractual implications.</li>
-  <li><strong>Medical or health information</strong>, diagnoses, drug interactions, dosages, anything that could affect someone's wellbeing.</li>
-  <li><strong>Financial figures</strong>, tax rules, accounting treatments, market data, calculations.</li>
-  <li><strong>Citations of any kind</strong>, academic, journalistic, legal. Always check the source exists and says what the model says it says.</li>
-  <li><strong>Statements about real people</strong>, biographies, positions held, things said. Reputation damage is a fast lawsuit.</li>
-  <li><strong>Technical instructions for operating systems, networks, security</strong>, a wrong command in a terminal can lose data.</li>
-  </ul>
+ <h2>Where verification is mandatory</h2>
+ <p>Some categories of output should always be verified before use, even when the model sounds completely confident:</p>
+ <ul>
+ <li><strong>Legal claims</strong>, case law, statute references, regulatory deadlines, contractual implications.</li>
+ <li><strong>Medical or health information</strong>, diagnoses, drug interactions, dosages, anything that could affect someone's wellbeing.</li>
+ <li><strong>Financial figures</strong>, tax rules, accounting treatments, market data, calculations.</li>
+ <li><strong>Citations of any kind</strong>, academic, journalistic, legal. Always check the source exists and says what the model says it says.</li>
+ <li><strong>Statements about real people</strong>, biographies, positions held, things said. Reputation damage is a fast lawsuit.</li>
+ <li><strong>Technical instructions for operating systems, networks, security</strong>, a wrong command in a terminal can lose data.</li>
+ </ul>
 
-  <div class="callout warn">
-    <span class="callout-icon">!</span>
-    <div>
-      <div class="callout-title">"AI-written" with AI-fact-checked is still AI-checked</div>
-      <p>It's tempting to use one AI to fact-check the output of another. This is better than nothing, but it's much weaker than people assume. Models share training data, share architectures, and share blind spots. Two models can produce two confident answers that are wrong in the same way for the same reason. Real verification involves a different kind of evidence, not a different model.</p>
-    </div>
-  </div>
+ <div class="callout warn">
+ <span class="callout-icon">!</span>
+ <div>
+ <div class="callout-title">"AI-written" with AI-fact-checked is still AI-checked</div>
+ <p>It's tempting to use one AI to fact-check the output of another. This is better than nothing, but it's much weaker than people assume. Models share training data, share architectures, and share blind spots. Two models can produce two confident answers that are wrong in the same way for the same reason. Real verification involves a different kind of evidence, not a different model.</p>
+ </div>
+ </div>
 
  <h2>Human oversight, the EU AI Act in plain English</h2>
-  <p>Article 14 of the EU AI Act requires that "high-risk" AI systems be designed and used in a way that allows a human to oversee them effectively. In practice, for the kind of work covered in this course, that means:</p>
-  <ul>
-    <li><strong>Appropriate human oversight should be applied before AI-generated outputs are relied upon in decisions affecting individuals.</strong> In plain terms: a person reads it before it's acted upon.</li>
-  <li>That human is in a position to <strong>not act</strong> on the AI's output, to override it, correct it, or set it aside.</li>
-    <li>The human understands the AI well enough to know <em>when</em> to be suspicious of its output. That's what this module is teaching.</li>
-  </ul>
+ <p>Article 14 of the EU AI Act requires that "high-risk" AI systems be designed and used in a way that allows a human to oversee them effectively. In practice, for the kind of work covered in this course, that means:</p>
+ <ul>
+ <li><strong>Appropriate human oversight should be applied before AI-generated outputs are relied upon in decisions affecting individuals.</strong> In plain terms: a person reads it before it's acted upon.</li>
+ <li>That human is in a position to <strong>not act</strong> on the AI's output, to override it, correct it, or set it aside.</li>
+ <li>The human understands the AI well enough to know <em>when</em> to be suspicious of its output. That's what this module is teaching.</li>
+ </ul>
 
-  <div class="callout govern">
-    <span class="callout-icon">G</span>
-    <div>
-      <div class="callout-title">Governance Insight</div>
-   <p>Human oversight is one of the core principles found across <strong>ISO/IEC 42001</strong>, the <strong>EU AI Act</strong> and many emerging AI governance frameworks. It is not a single rule from a single regulator, it is a shared expectation, which is why "a person stays accountable for the decision" is a safe default wherever you operate.</p>
-    </div>
-  </div>
-  <p>"Human in the loop" is the slogan version. The substance is: <strong>the human signing off has to actually do the work of signing off</strong>, not click "approve" on autopilot.</p>
+ <div class="callout govern">
+ <span class="callout-icon">G</span>
+ <div>
+ <div class="callout-title">Governance Insight</div>
+ <p>Human oversight is one of the core principles found across <strong>ISO/IEC 42001</strong>, the <strong>EU AI Act</strong> and many emerging AI governance frameworks. It is not a single rule from a single regulator, it is a shared expectation, which is why "a person stays accountable for the decision" is a safe default wherever you operate.</p>
+ </div>
+ </div>
+ <p>"Human in the loop" is the slogan version. The substance is: <strong>the human signing off has to actually do the work of signing off</strong>, not click "approve" on autopilot.</p>
 
-  <h3>What rubber-stamping looks like</h3>
-  <p>The failure mode the law is trying to prevent isn't "no human reviewed it". It's "a human reviewed it and approved it without really reading it". You see this with auto-generated emails that include sentences nobody at the company would actually write, with marketing copy nobody proofread, with AI-summarised meeting notes circulated as the official record without anyone checking they're accurate.</p>
+ <h3>What rubber-stamping looks like</h3>
+ <p>The failure mode the law is trying to prevent isn't "no human reviewed it". It's "a human reviewed it and approved it without really reading it". You see this with auto-generated emails that include sentences nobody at the company would actually write, with marketing copy nobody proofread, with AI-summarised meeting notes circulated as the official record without anyone checking they're accurate.</p>
  <p>The defence against rubber-stamping is friction. If an AI-generated output is about to leave your team, go to a customer, a regulator, a court, a public website, someone needs to read it line by line, with the question "do I actually believe this?" in mind.</p>
 
-  <div class="callout do">
-    <span class="callout-icon">✓</span>
-    <div>
-      <div class="callout-title">Three verification habits worth keeping</div>
-      <ol>
-        <li><strong>Read every AI output before you send it.</strong> Out loud, slowly, when the stakes are high. The number of errors you catch this way is shockingly high.</li>
-        <li><strong>Click every citation.</strong> If it doesn't open, the source isn't real. If it opens but says something different, the model misrepresented it.</li>
-    <li><strong>If the model is unusually confident about something obscure, treat that as a warning, not as reassurance.</strong> Models hallucinate most fluently in domains that have lots of text in their training data but few external fact-checks, niche regulations, mid-list academic literature, smaller-jurisdiction case law.</li>
-      </ol>
-    </div>
-  </div>
+ <div class="callout do">
+ <span class="callout-icon">✓</span>
+ <div>
+ <div class="callout-title">Three verification habits worth keeping</div>
+ <ol>
+ <li><strong>Read every AI output before you send it.</strong> Out loud, slowly, when the stakes are high. The number of errors you catch this way is shockingly high.</li>
+ <li><strong>Click every citation.</strong> If it doesn't open, the source isn't real. If it opens but says something different, the model misrepresented it.</li>
+ <li><strong>If the model is unusually confident about something obscure, treat that as a warning, not as reassurance.</strong> Models hallucinate most fluently in domains that have lots of text in their training data but few external fact-checks, niche regulations, mid-list academic literature, smaller-jurisdiction case law.</li>
+ </ol>
+ </div>
+ </div>
 
-  <div class="callout standard">
-    <span class="callout-icon">§</span>
-    <div>
-      <div class="callout-title">Where the standards land</div>
-   <p><strong>EU AI Act Article 14</strong>: human oversight obligations for high-risk AI. <strong>Article 50</strong>: transparency obligations, AI-generated content sometimes has to be marked as such. <strong>ISO/IEC 42001:2023 Annex A.9</strong>: performance evaluation of AI systems, including their accuracy and reliability over time. <strong>ISO/IEC 27001:2022 Annex A.5.36</strong>: compliance with policies, rules and standards for information security, the verification habits in this module are part of compliance with your own AI policy, if you have one.</p>
-    </div>
-  </div>
+ <div class="callout standard">
+ <span class="callout-icon">§</span>
+ <div>
+ <div class="callout-title">Where the standards land</div>
+ <p><strong>EU AI Act Article 14</strong>: human oversight obligations for high-risk AI. <strong>Article 50</strong>: transparency obligations, AI-generated content sometimes has to be marked as such. <strong>ISO/IEC 42001:2023 Annex A.9</strong>: performance evaluation of AI systems, including their accuracy and reliability over time. <strong>ISO/IEC 27001:2022 Annex A.5.36</strong>: compliance with policies, rules and standards for information security, the verification habits in this module are part of compliance with your own AI policy, if you have one.</p>
+ </div>
+ </div>
 
-  <div id="quiz-mount"></div>
-  <script type="application/json" id="quiz-data">
-  {
-    "module": 5,
-    "passThreshold": 8,
-    "quizTitle": "Test your <em>understanding</em>.",
-    "quizLede": "Ten questions drawn only from this module. Pass mark 8 out of 10. Retake as many times as you like.",
-    "questions": [
-      {
-        "q": "According to this module, what relationship exists between how confident an AI sounds and whether it is correct?",
-        "options": [
-          "Confident answers are reliably more accurate",
-          "There is no reliable relationship — confidence is not calibrated",
-          "Confidence always signals a hallucination",
-          "The two are inversely proportional",
-          "Confidence only matters for numerical answers"
-        ],
-        "correct": 1,
-        "why": "Body: <em>The probability that a model is wrong has no reliable relationship to how certain its answer sounds.</em>",
-        "cite": "Confidence is not calibrated"
-      },
-      {
-        "q": "Why do hallucinations happen in the first place?",
-        "options": [
-          "The model is deliberately lying",
-          "The training data was corrupted",
-          "Left to itself, the model generates text one piece at a time from learned patterns, so a citation-shaped pattern produces something shaped like a citation with no guarantee it exists",
-          "The user phrased the prompt incorrectly",
-          "The model ran out of memory"
-        ],
-        "correct": 2,
-        "why": "Body: <em>Patterns of \"what a legal citation looks like\" produce something shaped like a legal citation, with no guarantee the citation exists.</em>",
-        "cite": "Why hallucinations happen"
-      },
-      {
-        "q": "What is the more precise word the module offers for a hallucination?",
-        "options": [
-          "Confabulation",
-          "Approximation",
-          "Extrapolation",
-          "Speculation",
-          "Improvisation"
-        ],
-        "correct": 0,
-        "why": "Body: <em>A more precise word is \"confabulation\": the model fills gaps with plausible-shaped material.</em>",
-        "cite": "Why hallucinations happen"
-      },
-      {
-        "q": "Does connecting a model to live data, web search or your documents remove the risk of hallucination?",
-        "options": [
-          "Yes, a connected model cannot hallucinate",
-          "Yes, but only for numerical answers",
-          "No — it generally reduces the risk but does not remove it; a connected model can still misread or blend sources",
-          "No — connecting data actually increases hallucinations",
-          "It makes no difference at all"
-        ],
-        "correct": 2,
-        "why": "Body: <em>Connecting a model to live data … generally reduces the risk … It does not remove it: a connected model can still misread a source, blend two of them, or hallucinate around the parts the data didn't cover.</em>",
-        "cite": "Why hallucinations happen"
-      },
-      {
-        "q": "What is the fix the module gives for fake citations?",
-        "options": [
-          "Ask the model to double-check its own answer",
-          "Use a more expensive model",
-          "Every citation goes to a primary source before you use it",
-          "Only cite sources older than five years",
-          "Add the citations to a footnote instead of the body"
-        ],
-        "correct": 2,
-        "why": "Body: <em>The fix is simple: every citation goes to a primary source before you use it.</em>",
-        "cite": "Fake citations"
-      },
-      {
-        "q": "Under the two-source rule, what should you do with anything an AI tells you that you'd put your name to?",
-        "options": [
-          "Send it as-is if it sounds plausible",
-          "Verify it against at least one independent source — for high-stakes claims, two",
-          "Run it through a second chatbot",
-          "Wait 24 hours before sending it",
-          "Only verify it if a colleague questions it"
-        ],
-        "correct": 1,
-        "why": "Body: <em>verify against at least one independent source. For high-stakes claims, two.</em>",
-        "cite": "The two-source rule"
-      },
-      {
-        "q": "Why does asking a second AI tool the same question often NOT count as an independent source?",
-        "options": [
-          "Because the second model is usually slower",
-          "Because the two models were trained on overlapping data and often give a similar answer",
-          "Because chatbots are not allowed to cite each other",
-          "Because the second model always agrees out of politeness",
-          "Because it costs more money"
-        ],
-        "correct": 1,
-        "why": "Body: <em>Asking a second AI tool the same question often gives you a similar answer because the two models were trained on overlapping data.</em>",
-        "cite": "The two-source rule"
-      },
-      {
-        "q": "When the question is about your own organisation, what is the authoritative source?",
-        "options": [
-          "The most popular AI model",
-          "A well-known industry blog",
-          "Internal sources — company policy, internal procedures, and your contractual obligations",
-          "The model's general answer, since it is impartial",
-          "Whichever source was published most recently"
-        ],
-        "correct": 2,
-        "why": "Body: <em>the authoritative source is internal: company policy, internal procedures, and your contractual obligations.</em>",
-        "cite": "Counts as a real second source"
-      },
-      {
-        "q": "Which article of the EU AI Act sets out the human-oversight obligation discussed in this module?",
-        "options": [
-          "Article 5",
-          "Article 14",
-          "Article 30",
-          "Article 50",
-          "Article 99"
-        ],
-        "correct": 1,
-        "why": "Body: <em>Article 14 of the EU AI Act requires that \"high-risk\" AI systems be designed and used in a way that allows a human to oversee them effectively.</em>",
-        "cite": "Human oversight, the EU AI Act in plain English"
-      },
-      {
-        "q": "According to the module, what is the defence against 'rubber-stamping' AI output?",
-        "options": [
-          "Speed — approve quickly so work isn't held up",
-          "Friction — someone needs to read it line by line, asking 'do I actually believe this?'",
-          "Automation — let a second AI approve it",
-          "Volume — review only a random sample",
-          "Anonymity — hide who approved it"
-        ],
-        "correct": 1,
-        "why": "Body: <em>The defence against rubber-stamping is friction … someone needs to read it line by line, with the question \"do I actually believe this?\" in mind.</em>",
-        "cite": "What rubber-stamping looks like"
-      }
-    ]
-  }
-  </script>
+ <div id="quiz-mount"></div>
+ <script type="application/json" id="quiz-data">
+ {
+ "module": 5,
+ "passThreshold": 8,
+ "quizTitle": "Test your <em>understanding</em>.",
+ "quizLede": "Ten questions drawn only from this module. Pass mark 8 out of 10. Retake as many times as you like.",
+ "questions": [
+ {
+ "q": "According to this module, what relationship exists between how confident an AI sounds and whether it is correct?",
+ "options": [
+ "Confident answers are reliably more accurate",
+ "There is no reliable relationship, confidence is not calibrated",
+ "Confidence always signals a hallucination",
+ "The two are inversely proportional",
+ "Confidence only matters for numerical answers"
+ ],
+ "correct": 1,
+ "why": "Body: <em>The probability that a model is wrong has no reliable relationship to how certain its answer sounds.</em>",
+ "cite": "Confidence is not calibrated"
+ },
+ {
+ "q": "Why do hallucinations happen in the first place?",
+ "options": [
+ "The model is deliberately lying",
+ "The training data was corrupted",
+ "Left to itself, the model generates text one piece at a time from learned patterns, so a citation-shaped pattern produces something shaped like a citation with no guarantee it exists",
+ "The user phrased the prompt incorrectly",
+ "The model ran out of memory"
+ ],
+ "correct": 2,
+ "why": "Body: <em>Patterns of \"what a legal citation looks like\" produce something shaped like a legal citation, with no guarantee the citation exists.</em>",
+ "cite": "Why hallucinations happen"
+ },
+ {
+ "q": "What is the more precise word the module offers for a hallucination?",
+ "options": [
+ "Confabulation",
+ "Approximation",
+ "Extrapolation",
+ "Speculation",
+ "Improvisation"
+ ],
+ "correct": 0,
+ "why": "Body: <em>A more precise word is \"confabulation\": the model fills gaps with plausible-shaped material.</em>",
+ "cite": "Why hallucinations happen"
+ },
+ {
+ "q": "Does connecting a model to live data, web search or your documents remove the risk of hallucination?",
+ "options": [
+ "Yes, a connected model cannot hallucinate",
+ "Yes, but only for numerical answers",
+ "No, it generally reduces the risk but does not remove it; a connected model can still misread or blend sources",
+ "No, connecting data actually increases hallucinations",
+ "It makes no difference at all"
+ ],
+ "correct": 2,
+ "why": "Body: <em>Connecting a model to live data … generally reduces the risk … It does not remove it: a connected model can still misread a source, blend two of them, or hallucinate around the parts the data didn't cover.</em>",
+ "cite": "Why hallucinations happen"
+ },
+ {
+ "q": "What is the fix the module gives for fake citations?",
+ "options": [
+ "Ask the model to double-check its own answer",
+ "Use a more expensive model",
+ "Every citation goes to a primary source before you use it",
+ "Only cite sources older than five years",
+ "Add the citations to a footnote instead of the body"
+ ],
+ "correct": 2,
+ "why": "Body: <em>The fix is simple: every citation goes to a primary source before you use it.</em>",
+ "cite": "Fake citations"
+ },
+ {
+ "q": "Under the two-source rule, what should you do with anything an AI tells you that you'd put your name to?",
+ "options": [
+ "Send it as-is if it sounds plausible",
+ "Verify it against at least one independent source, for high-stakes claims, two",
+ "Run it through a second chatbot",
+ "Wait 24 hours before sending it",
+ "Only verify it if a colleague questions it"
+ ],
+ "correct": 1,
+ "why": "Body: <em>verify against at least one independent source. For high-stakes claims, two.</em>",
+ "cite": "The two-source rule"
+ },
+ {
+ "q": "Why does asking a second AI tool the same question often NOT count as an independent source?",
+ "options": [
+ "Because the second model is usually slower",
+ "Because the two models were trained on overlapping data and often give a similar answer",
+ "Because chatbots are not allowed to cite each other",
+ "Because the second model always agrees out of politeness",
+ "Because it costs more money"
+ ],
+ "correct": 1,
+ "why": "Body: <em>Asking a second AI tool the same question often gives you a similar answer because the two models were trained on overlapping data.</em>",
+ "cite": "The two-source rule"
+ },
+ {
+ "q": "When the question is about your own organisation, what is the authoritative source?",
+ "options": [
+ "The most popular AI model",
+ "A well-known industry blog",
+ "Internal sources, company policy, internal procedures, and your contractual obligations",
+ "The model's general answer, since it is impartial",
+ "Whichever source was published most recently"
+ ],
+ "correct": 2,
+ "why": "Body: <em>the authoritative source is internal: company policy, internal procedures, and your contractual obligations.</em>",
+ "cite": "Counts as a real second source"
+ },
+ {
+ "q": "Which article of the EU AI Act sets out the human-oversight obligation discussed in this module?",
+ "options": [
+ "Article 5",
+ "Article 14",
+ "Article 30",
+ "Article 50",
+ "Article 99"
+ ],
+ "correct": 1,
+ "why": "Body: <em>Article 14 of the EU AI Act requires that \"high-risk\" AI systems be designed and used in a way that allows a human to oversee them effectively.</em>",
+ "cite": "Human oversight, the EU AI Act in plain English"
+ },
+ {
+ "q": "According to the module, what is the defence against 'rubber-stamping' AI output?",
+ "options": [
+ "Speed, approve quickly so work isn't held up",
+ "Friction, someone needs to read it line by line, asking 'do I actually believe this?'",
+ "Automation, let a second AI approve it",
+ "Volume, review only a random sample",
+ "Anonymity, hide who approved it"
+ ],
+ "correct": 1,
+ "why": "Body: <em>The defence against rubber-stamping is friction … someone needs to read it line by line, with the question \"do I actually believe this?\" in mind.</em>",
+ "cite": "What rubber-stamping looks like"
+ }
+ ]
+ }
+ </script>
 
-  <div id="widget-mount"></div>
+ <div id="widget-mount"></div>
 </main>
 
 <!-- completion-bar v1 -->
 <div class="module-complete-bar">
-  <button type="button" class="complete-btn" data-mark-complete="5">Mark this module complete</button>
-  <span class="complete-hint">Saved on this device. Finish every module to unlock the 60-second check.</span>
+ <button type="button" class="complete-btn" data-mark-complete="5">Mark this module complete</button>
+ <span class="complete-hint">Saved on this device. Finish every module to unlock the 60-second check.</span>
 </div>
 
 <nav class="module-bottom-nav">
-  <a class="nav-btn" href="module-4.html">
-    <span class="nav-dir">Previous</span>
-    <span class="nav-title">← 04 · Picking the right tool</span>
-  </a>
-  <a class="nav-btn next" href="module-6.html">
-    <span class="nav-dir">Next module</span>
-    <span class="nav-title">06 · AI-powered scams aimed at you →</span>
-  </a>
+ <a class="nav-btn" href="module-4.html">
+ <span class="nav-dir">Previous</span>
+ <span class="nav-title">← 04 · Picking the right tool</span>
+ </a>
+ <a class="nav-btn next" href="module-6.html">
+ <span class="nav-dir">Next module</span>
+ <span class="nav-title">06 · AI-powered scams aimed at you →</span>
+ </a>
 </nav>
 
 <footer class="site-foot">
-  <div class="foot-brand">
-    <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
-    <p>The AI Governance Platform — adopt AI safely, securely and responsibly.</p>
-  </div>
-  <div class="foot-col"><h4>Platform</h4><a href="course.html">AI Safe@Work Learning</a><a href="plus-pack.html">Governance Toolkit</a><a href="index.html#included">Reporting &amp; Evidence</a></div>
-  <div class="foot-col"><h4>Services</h4><a href="consultancy.html">Consultancy</a><a href="msp.html">Partner Programme</a><a href="consultancy.html">Health Checks</a></div>
-  <div class="foot-col"><h4>Resources</h4><a href="resources.html">Blog</a><a href="resources.html">FAQs</a><a href="about.html#contact">Support</a></div>
-  <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
-  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
+ <div class="foot-brand">
+ <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
+ <p>The AI Governance Platform, adopt AI safely, securely and responsibly.</p>
+ </div>
+ <div class="foot-col"><h4>Platform</h4><a href="course.html">AI Safe@Work Learning</a><a href="plus-pack.html">Governance Toolkit</a><a href="index.html#included">Reporting &amp; Evidence</a></div>
+ <div class="foot-col"><h4>Services</h4><a href="consultancy.html">Consultancy</a><a href="msp.html">Partner Programme</a><a href="consultancy.html">Health Checks</a></div>
+ <div class="foot-col"><h4>Resources</h4><a href="resources.html">Blog</a><a href="resources.html">FAQs</a><a href="about.html#contact">Support</a></div>
+ <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+ <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 
 </body>
