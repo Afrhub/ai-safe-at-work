@@ -101,11 +101,28 @@
  <section id="contact">
  <h2 style="margin-top:2.6rem">Contact</h2>
  <div class="contact-grid">
- <div class="contact-card">
+ <div class="contact-card" id="demo">
  <h3>Request a Demo</h3>
- <p>See the course, the Plus Pack and the portals in a 20-minute walkthrough.</p>
- <a class="cta" href="mailto:hello@attest-ai.com?subject=Demo%20request">Book a demo →</a>
+ <p>See the course, the Plus Pack and the portals in a 20-minute walkthrough. Leave your details and we'll be in touch.</p>
+ <form name="demo" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/demo-thanks.html" class="demo-form">
+  <input type="hidden" name="form-name" value="demo" />
+  <p hidden><label>Leave this empty <input name="bot-field" /></label></p>
+  <label>Name <input type="text" name="name" autocomplete="name" required /></label>
+  <label>Work email <input type="email" name="email" autocomplete="email" required /></label>
+  <label>Company <input type="text" name="company" autocomplete="organization" /></label>
+  <label>Team size <input type="text" name="team_size" inputmode="numeric" placeholder="e.g. 25" /></label>
+  <label>Anything specific you want to see? <textarea name="message" rows="3"></textarea></label>
+  <button type="submit" class="cta">Request demo →</button>
+ </form>
  </div>
+ <style>
+  .demo-form { display:flex; flex-direction:column; gap:0.7rem; margin-top:0.5rem; }
+  .demo-form label { display:flex; flex-direction:column; gap:0.3rem; font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--text3); }
+  .demo-form input, .demo-form textarea { font-family:var(--font-body); font-size:1rem; color:var(--text); background:var(--bg-soft); border:1px solid var(--border-bold); border-radius:var(--r-sm); padding:0.6rem 0.75rem; width:100%; }
+  .demo-form input:focus, .demo-form textarea:focus { outline:2px solid var(--accent); outline-offset:1px; }
+  .demo-form button.cta { align-self:flex-start; margin-top:0.4rem; cursor:pointer; border:none; background:var(--accent); color:#fff; font-family:var(--font-display); font-weight:800; font-size:0.95rem; padding:0.7rem 1.4rem; border-radius:var(--r-sm); transition:transform 140ms var(--ease-out); }
+  .demo-form button.cta:hover { transform:translateY(-1px); background:var(--accent); }
+ </style>
  <div class="contact-card">
  <h3>Partner Enquiries</h3>
  <p>For MSPs and resellers who want to offer AI Safe@Work to their customers.</p>
