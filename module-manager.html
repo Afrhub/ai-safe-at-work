@@ -31,7 +31,9 @@
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
 <link rel="stylesheet" href="assets/style.css?v=20" />
+<link rel="stylesheet" href="assets/quiz.css?v=3" />
 <script defer src="assets/cinema.js?v=11"></script>
+<script defer src="assets/quiz.js?v=2"></script>
 <style>
 .role-banner {
   display: inline-flex;
@@ -365,6 +367,149 @@
  </ol>
  </div>
  </div>
+ <h2>Test your understanding</h2>
+ <div id="quiz-mount"></div>
+ <script type="application/json" id="quiz-data">
+ {
+ "module": "manager",
+ "moduleLabel": "Manager track",
+ "passThreshold": 8,
+ "quizTitle": "Test your <em>understanding</em>.",
+ "quizLede": "Ten questions drawn only from this track. Pass mark 8 out of 10. Retake as many times as you like.",
+ "questions": [
+ {
+ "q": "The standards landing in 2025 and 2026 converge on a single point about AI-assisted outputs. What is it?",
+ "options": [
+ "The AI vendor is legally responsible for any output error",
+ "A human, named, with the authority to refuse, must do something between the AI's output and the world",
+ "Every output must be reviewed by at least three people",
+ "AI use must be forbidden for any customer-facing work",
+ "Outputs must be logged but never need human review"
+ ],
+ "correct": 1,
+ "why": "Body: <em>a human, named, with the authority to refuse, must do something between the AI's output and the world.</em>",
+ "cite": "Why this module exists for you"
+ },
+ {
+ "q": "According to the &quot;rubber-stamp test&quot;, what phrase captures what the standards actually say?",
+ "options": [
+ "You have to be slower",
+ "The AI is well-designed, so trust it",
+ "If you couldn't have said no, you didn't really say yes",
+ "Read it and if it sounds fine, approve it",
+ "Two reviewers are always better than one"
+ ],
+ "correct": 2,
+ "why": "Body: <em>if you couldn't have said no, you didn't really say yes.</em>",
+ "cite": "The rubber-stamp test callout"
+ },
+ {
+ "q": "In the four-question review, what is Question 1?",
+ "options": [
+ "Could I produce this myself?",
+ "Have I read the whole thing?",
+ "Did I check the claims that matter?",
+ "If I'm wrong, who pays the cost?",
+ "Which tool produced this?"
+ ],
+ "correct": 0,
+ "why": "Body: <em>Question 1, Could I produce this myself?</em> You need to know what good looks like for this kind of work.",
+ "cite": "The four-question review"
+ },
+ {
+ "q": "For Question 2 of the review, what does the module say you must do with anything going to a customer, regulator, court, or public surface?",
+ "options": [
+ "Skim it for obvious errors",
+ "Ask the AI to summarise it for you",
+ "Delegate it to a junior reviewer",
+ "Read it, line by line, out loud for high-stakes pieces",
+ "Check only the opening and closing paragraphs"
+ ],
+ "correct": 3,
+ "why": "Body: <em>Not skimmed. Read. Line by line for anything that goes to a customer, a regulator, a court, or a public surface. Out loud for high-stakes pieces.</em>",
+ "cite": "Question 2, Have I read the whole thing?"
+ },
+ {
+ "q": "The module lists things &quot;meaningful human oversight&quot; under Article 14 is NOT. Which of these is one of them?",
+ "options": [
+ "A person named in the organisational documentation",
+ "A person with the competence to interpret the output",
+ "A person with the time and authority to set the output aside",
+ "An interface that surfaces the information needed to review",
+ "A human reviewing summaries that the system itself produced"
+ ],
+ "correct": 4,
+ "why": "Body: the module says oversight is <em>Not a human reviewing summaries that the system itself produced.</em>",
+ "cite": "What &quot;meaningful human oversight&quot; actually means"
+ },
+ {
+ "q": "The module gives three habits to make an approval record audit-proof. Which is one of them?",
+ "options": [
+ "Approve in the system, not in conversation",
+ "Always approve within 24 hours",
+ "Keep records only for high-stakes decisions",
+ "Record the exact percentage the AI contributed",
+ "Delete the AI's original draft once approved"
+ ],
+ "correct": 0,
+ "why": "Body: <em>Approve in the system, not in conversation.</em> A Slack message is not an approval record; the same words on the ticket, PR or document is.",
+ "cite": "Documenting an approval that survives an audit"
+ },
+ {
+ "q": "Why does writing down a disagreement with the AI matter under GDPR Article 22?",
+ "options": [
+ "It shortens the audit process",
+ "It transfers liability to the AI vendor",
+ "It proves the decision wasn't solely automated",
+ "It is required before any output can be shipped",
+ "It lets you skip the four-question review"
+ ],
+ "correct": 2,
+ "why": "Body: that sentence <em>is gold under Article 22, it proves the decision wasn't solely automated.</em>",
+ "cite": "Documenting an approval that survives an audit"
+ },
+ {
+ "q": "Which statement about a hiring decision is described as DEFENSIBLE under GDPR Article 22?",
+ "options": [
+ "The AI flagged the candidate as low-fit, so we didn't interview them",
+ "The AI is well-designed, so the outcome is sound",
+ "We followed the AI's ranking exactly to stay consistent",
+ "I read the application, considered the AI's summary, and chose not to progress because the experience didn't match the role",
+ "We didn't interview them because the system scored them below the threshold"
+ ],
+ "correct": 3,
+ "why": "Body: the defensible example is <em>&quot;I read the application, considered the AI's summary, and chose not to progress because the candidate's prior experience didn't match what the role actually requires.&quot;</em>",
+ "cite": "The &quot;solely automated&quot; test (GDPR Art 22)"
+ },
+ {
+ "q": "In the five expectations for your team, what does &quot;Tell me what tool you used&quot; ask for?",
+ "options": [
+ "A signed declaration for every AI use",
+ "The tier and product, not just &quot;I used AI&quot;",
+ "The exact percentage the AI contributed",
+ "Only the name of the vendor's company",
+ "A screenshot of every prompt entered"
+ ],
+ "correct": 1,
+ "why": "Body: <em>Tier and product. Not &quot;I used AI&quot; but &quot;I used ChatGPT Team for the draft, then edited&quot;.</em>",
+ "cite": "What to expect from your team"
+ },
+ {
+ "q": "The module calls one sentence &quot;the most legally indefensible sentence in the new era of AI governance&quot;. Which is it?",
+ "options": [
+ "I considered the AI's output and applied my own judgement",
+ "I read it and it sounded fine",
+ "The AI told me to",
+ "I approved it in the system",
+ "I refused to approve it on what I was shown"
+ ],
+ "correct": 2,
+ "why": "Body: <em>&quot;The AI told me to&quot; is the most legally indefensible sentence in the new era of AI governance.</em>",
+ "cite": "What you can't escape"
+ }
+ ]
+ }
+ </script>
 </main>
 
 <nav class="module-bottom-nav">

@@ -31,7 +31,9 @@
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
 <link rel="stylesheet" href="assets/style.css?v=20" />
+<link rel="stylesheet" href="assets/quiz.css?v=3" />
 <script defer src="assets/cinema.js?v=11"></script>
+<script defer src="assets/quiz.js?v=2"></script>
 <style>
 .role-banner { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.95rem; border-radius: 2px; background: rgba(250,88,45, 0.08); border: 1px solid rgba(250,88,45, 0.32); color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.2rem; }
 .role-banner::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px rgba(250,88,45, 0.65); }
@@ -476,45 +478,148 @@
  <h2>Final assessment</h2>
  <p>Ten judgement-call questions. Self-mark. Suggested pass: 8/10. Use it to feel where you're confident and where the gap is.</p>
 
- <h3>Question 1</h3>
- <p>Discovery surfaces 47 different AI tools in use across an SMB of 90 staff. The CEO wants to "ban everything that's not approved by Friday". What do you say?</p>
- <details><summary>Answer</summary><p>Push back. A Friday ban on 47 tools will (a) not be enforceable, (b) push use to personal accounts, (c) destroy goodwill, (d) leave the underlying job-to-be-done unaddressed. Counter-propose: 30 days to procure approved alternatives + draft the specific AUP + identify forbidden-data categories. Then transition staff to the approved set. The ban only works after the alternative is available.</p></details>
-
- <h3>Question 2</h3>
- <p>You discover via DNS logs that 60% of staff have visited chat.openai.com from a corporate device in the last 30 days. What's the immediate next step?</p>
- <details><summary>Answer</summary><p>Not "block chat.openai.com". The immediate next step is to understand what they were doing, anonymous survey + sample manager 1:1 conversations. If they're drafting client communications, the answer is "procure the approved alternative + transition them". If they're doing personal-time research, that's different. The block is a tool; the wrong tool to lead with.</p></details>
-
- <h3>Question 3</h3>
- <p>A staff member walks up and says "I've been using ChatGPT for our M&amp;A workstream. I just realised the documents I uploaded included board minutes. Have I broken the rules?" What's your response?</p>
- <details><summary>Answer</summary><p>"Thank you for telling me. The fact you flagged it is exactly what we need. You haven't broken any rule about reporting, but yes, we shouldn't have those documents in a consumer AI. Let's contain: I need the chat link so we can preserve and request deletion from OpenAI. Then we work out whether this triggers any client / regulator notification. You are not in trouble for reporting. We may need to walk what other documents you've used; that conversation is supportive, not disciplinary."</p></details>
-
- <h3>Question 4</h3>
- <p>HR is using Otter.ai to record and transcribe interviews with candidates. Is this Shadow AI?</p>
- <details><summary>Answer</summary><p>Probably, if Otter wasn't approved through procurement with AI-feature scrutiny. Worse, candidate interviews involve special-category considerations (often health, beliefs, characteristics revealed in interview). Even worse, candidates may not have consented to AI transcription. Fix: stop the use, switch to an approved tool with appropriate DPA + consent flow, and consult on whether the existing interviews need to be addressed under the data subject rights framework.</p></details>
-
- <h3>Question 5</h3>
- <p>You decide to procure ChatGPT Enterprise. You can roll it out to (a) everyone immediately; (b) IT + finance pilot for 30 days then expand; (c) just managers. Which?</p>
- <details><summary>Answer</summary><p>(b). The pilot lets you validate the data-handling posture, train the working group, refine the AUP, identify the manager talking points before the all-hands rollout. Going straight to everyone (a) skips learning; going to just managers (c) doesn't address the staff who are currently using shadow AI most heavily.</p></details>
-
- <h3>Question 6</h3>
- <p>Your CRM vendor pushes a release notes update: "AI-powered email assistant now available, automatically enabled for all users in your tenant". What do you do this week?</p>
- <details><summary>Answer</summary><p>(1) Read the AI-assistant terms, what data is sent where, training opt-out, sub-processor list. (2) Check whether this triggers GDPR Article 28(2) sub-processor notification window. (3) Decide whether to keep it on, opt out tenant-wide, or feature-gate. (4) Update the approved-tool inventory entry for the CRM. (5) Communicate to staff what's happening. (6) If it's material, brief the DPO. None of this is panicked; all of it is procedural.</p></details>
-
- <h3>Question 7</h3>
- <p>Your AUP says "AI tools must be approved before use". An auditor asks "how do staff know what's approved?". You say "it's on the intranet". Auditor finds the intranet page; it was last updated 14 months ago and lists three tools. What's wrong?</p>
- <details><summary>Answer</summary><p>The approved-tool list is stale + hidden. Two issues: (1) the list must be current, monthly review minimum (Sub-module 4 of MSP / IT Admin track + Sub-module 6 here); (2) the list must be in the AUP itself (Sub-module 5, three things the AUP must say), not somewhere staff have to remember to look. Fix both.</p></details>
-
- <h3>Question 8</h3>
- <p>Browser extension audit surfaces 12 staff using a Chrome extension called "AI Email Composer" that the team installed individually. What do you do first?</p>
- <details><summary>Answer</summary><p>Check the extension's data handling, does it transmit email contents to a third-party AI? If yes (commonly), this is potentially a personal-data-out-to-an-unauthorised-processor event. (1) Block the extension at the browser-management layer. (2) Engage DPO on whether this triggers Art 33 notification. (3) Identify the underlying need ("I want help composing emails") and direct affected staff at the approved alternative. (4) Update browser-extension allowlist. (5) Add this to the AUP forbidden list with the example named.</p></details>
-
- <h3>Question 9</h3>
- <p>A senior leader insists on using personal ChatGPT Plus for work because "Enterprise is too slow". What's the right escalation?</p>
- <details><summary>Answer</summary><p>Not enforcement. (1) Surface to their peer (CISO to CIO, CIO to COO). (2) Address the speed complaint, is it real (configuration / region)? Often it's perception, not measured. (3) Document the exception with the named individual + risk + mitigations agreed. (4) Time-bound the exception, "we'll revisit in 60 days". Senior exceptions become culture norms; manage the optics and the precedent carefully.</p></details>
-
- <h3>Question 10</h3>
- <p>You're an MSP. A customer says "we've discovered shadow AI; what's your 90-day fix?" What's the answer?</p>
- <details><summary>Answer</summary><p>Days 0-30 discovery (proxy + survey + manager 1:1); days 30-60 procure + draft (license M365 Copilot or ChatGPT Enterprise + AUP + amnesty comm); days 60-90 train + embed (rollout guide + manager scripts + procurement gating + drill). The <a href="rollout-guide.html" class="accent">30-day rollout guide</a> covers the weeks 8-12 training rollout; the <a href="module-msp-admin.html" class="accent">MSP / IT Admin track</a> sub-module 5 covers your provider-side onboarding choreography. The 90-day plan in this track's Sub-module 9 is the answer.</p></details>
+ <div id="quiz-mount"></div>
+ <script type="application/json" id="quiz-data">
+{
+  "module": "shadow",
+  "moduleLabel": "Shadow AI track",
+  "passThreshold": 8,
+  "quizTitle": "Test your <em>understanding</em>.",
+  "quizLede": "Ten questions drawn only from this track. Pass mark 8 out of 10. Retake as many times as you like.",
+  "questions": [
+    {
+      "q": "Discovery surfaces 47 different AI tools in use across an SMB of 90 staff. The CEO wants to \"ban everything that's not approved by Friday\". What is the right response?",
+      "options": [
+        "Push back: a Friday ban is unenforceable, pushes use to personal accounts and leaves the job-to-be-done unaddressed. Counter-propose 30 days to procure approved alternatives, draft the AUP and name forbidden-data categories first",
+        "Agree and block all 47 tools at the proxy by Friday to demonstrate decisive leadership",
+        "Ban 46 and keep the single most popular tool so staff have something to use",
+        "Do nothing until the annual policy review, when tooling is formally reassessed",
+        "Ban everything immediately and rely on staff self-reporting any tool they still need"
+      ],
+      "correct": 0,
+      "why": "Body: <em>A Friday ban will not be enforceable, pushes use to personal accounts, destroys goodwill and leaves the underlying job-to-be-done unaddressed. The ban only works after the approved alternative is available, so procure and draft the AUP first.</em>",
+      "cite": "Sub-module 5 &amp; 9 — why bans fail; the 90-day plan"
+    },
+    {
+      "q": "DNS logs show 60% of staff visited chat.openai.com from a corporate device in the last 30 days. What is the immediate next step?",
+      "options": [
+        "Block chat.openai.com at the firewall immediately, since the traffic proves a breach",
+        "Understand what they were actually doing first — anonymous survey plus sample manager 1:1 conversations — before reaching for a block",
+        "Issue disciplinary warnings to the 60% who visited the site",
+        "Report all 90 staff to the DPO as a confirmed data breach",
+        "Assume it is personal-time research and take no action"
+      ],
+      "correct": 1,
+      "why": "Body: <em>The immediate next step is to understand what they were doing via anonymous survey plus sample 1:1 conversations. If they are drafting client communications, procure the approved alternative and transition them. The block is a tool, and the wrong one to lead with.</em>",
+      "cite": "Sub-module 2 &amp; 6 — discovery via DNS/proxy, then understand before blocking"
+    },
+    {
+      "q": "A staff member says: \"I've been using ChatGPT for our M&amp;A workstream and I just realised the documents I uploaded included board minutes. Have I broken the rules?\" What is the right response?",
+      "options": [
+        "Begin a disciplinary process, since confidential documents went into a consumer AI",
+        "Tell them not to worry and that nothing needs to happen",
+        "Thank them for flagging it, reassure them they are not in trouble for reporting, then contain: get the chat link to preserve and request deletion, and assess any client or regulator notification",
+        "Instruct them to delete the chat themselves and say nothing further",
+        "Escalate straight to the regulator before speaking to the staff member again"
+      ],
+      "correct": 2,
+      "why": "Body: <em>Thank them — flagging it is exactly what you need, and they are not in trouble for reporting. Then contain: get the chat link to preserve and request deletion from OpenAI, and work out whether it triggers client or regulator notification. The conversation is supportive, not disciplinary.</em>",
+      "cite": "Sub-module 7 — supportive incident posture"
+    },
+    {
+      "q": "HR is using Otter.ai to record and transcribe interviews with candidates. Is this Shadow AI, and what should happen?",
+      "options": [
+        "No — transcription tools are administrative software and fall outside any AI policy",
+        "Probably yes if Otter was not approved through procurement with AI-feature scrutiny; worse, interviews carry special-category data and candidates may not have consented — stop the use, switch to an approved tool with a DPA and consent flow, and review existing interviews",
+        "No, provided HR deletes the recordings within 30 days",
+        "Yes, but the only fix needed is to add a line to the privacy notice",
+        "No, because Otter.ai is a well-known commercial vendor"
+      ],
+      "correct": 1,
+      "why": "Body: <em>Probably Shadow AI if Otter was not approved through procurement with AI-feature scrutiny. Interviews involve special-category considerations and candidates may not have consented to AI transcription. Stop the use, switch to an approved tool with a DPA and consent flow, and consult on the existing interviews under data subject rights.</em>",
+      "cite": "Sub-module 1 — four shapes of Shadow AI (embedded feature / unapproved tool)"
+    },
+    {
+      "q": "You decide to procure ChatGPT Enterprise. You can roll it out to (a) everyone immediately, (b) an IT and finance pilot for 30 days then expand, or (c) just managers. Which is right?",
+      "options": [
+        "Everyone immediately, to shut down shadow use as fast as possible",
+        "Just managers, so leadership models good behaviour first",
+        "Do not roll out at all until the AUP is finalised months later",
+        "A 30-day IT and finance pilot, then expand — it validates the data-handling posture, trains the working group and refines the AUP and manager talking points before the all-hands rollout",
+        "Split the licences evenly across every department on day one"
+      ],
+      "correct": 3,
+      "why": "Body: <em>The pilot lets you validate the data-handling posture, train the working group, refine the AUP and identify manager talking points before the all-hands rollout. Going straight to everyone skips learning; going to just managers ignores the staff using shadow AI most heavily.</em>",
+      "cite": "Sub-module 9 — 90-day plan, pilot before all-hands"
+    },
+    {
+      "q": "Your CRM vendor pushes release notes: \"AI-powered email assistant now available, automatically enabled for all users in your tenant.\" What do you do this week?",
+      "options": [
+        "Nothing — the vendor enabled it, so it is their responsibility",
+        "Immediately cancel the CRM contract",
+        "Tell staff to ignore the feature and hope it goes away",
+        "Wait for a customer complaint before investigating",
+        "Read the AI-assistant terms (data flow, training opt-out, sub-processors), check whether it triggers GDPR Article 28(2) sub-processor notification, decide keep/opt-out/feature-gate, update the approved-tool inventory, communicate to staff and brief the DPO if material"
+      ],
+      "correct": 4,
+      "why": "Body: <em>Read the terms, check the Article 28(2) sub-processor notification window, decide whether to keep it on, opt out tenant-wide or feature-gate, update the approved-tool inventory, communicate to staff and brief the DPO if material. None of this is panicked; all of it is procedural.</em>",
+      "cite": "Sub-module 1 &amp; 6 — embedded-feature Shadow AI; procedural response"
+    },
+    {
+      "q": "Your AUP says \"AI tools must be approved before use\". An auditor asks how staff know what is approved; you say \"it's on the intranet\". The intranet page was last updated 14 months ago and lists three tools. What is wrong?",
+      "options": [
+        "The approved-tool list is stale and hidden — it must be kept current (monthly review minimum) and must live in the AUP itself, not somewhere staff have to remember to look",
+        "Nothing — pointing the auditor at a documented page is sufficient",
+        "The only problem is that three tools is too few to list",
+        "The list should be secret, so exposing it to an auditor is the real error",
+        "The AUP wording is fine; the fix is simply to email staff a reminder"
+      ],
+      "correct": 0,
+      "why": "Body: <em>Two issues: the list must be current with a monthly review minimum, and it must be in the AUP itself — not somewhere staff have to remember to look. Fix both.</em>",
+      "cite": "Sub-module 5 &amp; 6 — what the AUP must say; steady-state cadence"
+    },
+    {
+      "q": "A browser-extension audit surfaces 12 staff using a Chrome extension called \"AI Email Composer\" that they installed individually. What do you do first?",
+      "options": [
+        "Uninstall it silently on all 12 machines and move on",
+        "Check the extension's data handling — does it transmit email contents to a third-party AI? If yes, treat it as a possible personal-data-to-unauthorised-processor event, then block it, engage the DPO on Article 33, redirect staff to the approved tool and update the allowlist and AUP",
+        "Do nothing, since only 12 of the workforce are affected",
+        "Immediately notify every client that their emails may have been exposed",
+        "Ask the 12 staff to each contact the extension vendor themselves"
+      ],
+      "correct": 1,
+      "why": "Body: <em>First check the extension's data handling — if it transmits email contents to a third-party AI this is potentially a personal-data-out-to-an-unauthorised-processor event. Then block it at the browser-management layer, engage the DPO on Article 33, direct staff to the approved alternative, update the allowlist and add it to the AUP forbidden list.</em>",
+      "cite": "Sub-module 1 &amp; 8 — browser-extension Shadow AI; contain and redirect"
+    },
+    {
+      "q": "A senior leader insists on using personal ChatGPT Plus for work because \"Enterprise is too slow\". What is the right escalation?",
+      "options": [
+        "Immediately revoke their account access to force compliance",
+        "Grant a permanent, undocumented exception to keep the peace",
+        "Ignore it, because senior leaders are trusted to use judgement",
+        "Not enforcement: surface it to their peer, test whether the speed complaint is real or perception, document a named, time-bound exception with agreed mitigations and revisit in 60 days",
+        "Announce the breach to the whole company as a warning to others"
+      ],
+      "correct": 3,
+      "why": "Body: <em>Not enforcement. Surface to their peer (CISO to CIO, CIO to COO), address the speed complaint (often perception, not measured), document the exception with the named individual, risk and mitigations, and time-bound it. Senior exceptions become culture norms, so manage the precedent carefully.</em>",
+      "cite": "Sub-module 7 &amp; 9 — handling senior exceptions"
+    },
+    {
+      "q": "You are an MSP. A customer says \"we've discovered shadow AI; what's your 90-day fix?\" What is the answer?",
+      "options": [
+        "Block all AI traffic on day one and revisit in 90 days",
+        "Days 0-30 discovery (proxy, survey, manager 1:1); days 30-60 procure and draft (license Copilot or ChatGPT Enterprise, AUP, amnesty comm); days 60-90 train and embed (rollout guide, manager scripts, procurement gating, drill)",
+        "Write a policy document and consider the job done",
+        "Roll out an enterprise tool immediately with no discovery or AUP",
+        "Wait 90 days to see whether the shadow use stops on its own"
+      ],
+      "correct": 1,
+      "why": "Body: <em>Days 0-30 discovery; days 30-60 procure and draft the AUP and amnesty comm; days 60-90 train and embed with manager scripts, procurement gating and a drill. Skip discovery and you ban the wrong things; skip procurement and staff have nothing to point at; skip the culture work and it is compliance theatre.</em>",
+      "cite": "Sub-module 9 — the 90-day containment plan"
+    }
+  ]
+}
+ </script>
 
  <div class="signature">
  <div class="label">Track complete</div>

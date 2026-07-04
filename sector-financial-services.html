@@ -30,7 +30,9 @@
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
 <link rel="stylesheet" href="assets/style.css?v=20" />
+<link rel="stylesheet" href="assets/quiz.css?v=3" />
 <script defer src="assets/cinema.js?v=11"></script>
+<script defer src="assets/quiz.js?v=2"></script>
 <style>
 .role-banner { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.95rem; border-radius: 2px; background: rgba(95, 168, 255, 0.10); border: 1px solid rgba(95, 168, 255, 0.32); color: var(--blue); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.2rem; }
 .role-banner::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 10px rgba(95, 168, 255, 0.55); }
@@ -458,45 +460,148 @@
  <h2>Final assessment</h2>
  <p>Ten judgement questions exercising the financial-services overlay. Self-mark. Suggested pass: 8/10.</p>
 
- <h3>Question 1</h3>
- <p>Your firm runs in M365 with Copilot for M365 enabled. Your CIO regards it as a productivity tool. DORA Article 13, does it apply?</p>
- <details><summary>Answer</summary><p>Yes. Microsoft + Copilot is an ICT third party providing services to your firm. Article 13 due diligence + contractual provisions + concentration assessment + exit strategy + monitoring all apply. Where Copilot is used in support of a critical or important function (e.g. drafting regulator correspondence, supporting customer-facing decisions), additional scrutiny applies.</p></details>
-
- <h3>Question 2</h3>
- <p>Your AML analyst uses ChatGPT free to translate a suspicious Russian-language transcript so they can understand it. They don't include any names. Have they violated anything?</p>
- <details><summary>Answer</summary><p>Almost certainly. The transcript is AML investigation material. Even without names, transmitting it to a consumer AI takes it outside the controlled environment, breaches your firm's AUP, may breach the SAR confidentiality regime, and may meet the "tipping off" threshold depending on what's in the transcript. Fix: deploy an approved AI translation tool inside the controlled environment; train analysts on AML never-paste rules; treat the historical exposure as a reportable incident.</p></details>
-
- <h3>Question 3</h3>
- <p>You use AI to draft a credit-decision explanation that's sent to a declined consumer. Which regulatory frameworks engage?</p>
- <details><summary>Answer</summary><p>(a) GDPR Article 22 (automated decisions if AI's role is determinative); (b) EU AI Act high-risk classification under Annex III §5(b) (creditworthiness) + Article 27 FRIA mandatory if you are a non-public deployer; (c) Consumer Duty Principle 12 (UK), the consumer must reasonably understand the explanation; (d) Consumer credit law (national); (e) SR 11-7 / SS1/23 model risk management, the AI is a model; (f) Equality / anti-discrimination law where the decision pattern has disparate impact.</p></details>
-
- <h3>Question 4</h3>
- <p>Your firm has an algo-trading desk. The trader replaces the trading algorithm with one that uses an LLM to interpret news. Does MiFID II Article 17 apply?</p>
- <details><summary>Answer</summary><p>Yes. Article 17 applies to all algorithmic trading. The LLM-based system must demonstrate effective systems + risk controls + kill switch + pre/post-trade controls + resilience testing + records. EU AI Act provider/deployer duties apply on top, this is high-risk AI in a financial-services Annex III context, so Article 26 deployer obligations bite. Combined controls likely include independent validation per SR 11-7 / SS1/23.</p></details>
-
- <h3>Question 5</h3>
- <p>Your firm runs a model-risk register per SR 11-7. You procured GitHub Copilot for the dev team. Is the model on the register?</p>
- <details><summary>Answer</summary><p>Probably yes if engineers are using Copilot to write code that runs in production for regulated decisions. Risk tier likely low-to-medium. Compensating controls: code review + secrets scanning + dependency review + SAST in CI. The register entry need not be heavy, but the model should appear.</p></details>
-
- <h3>Question 6</h3>
- <p>Microsoft updates Copilot to use a new model. Output behaviour shifts. You are a regulated FS firm. What's the cascade?</p>
- <details><summary>Answer</summary><p>(a) Model-change registered per SR 11-7 / SS1/23 change-control; (b) DORA Article 13 ongoing-monitoring + potential vendor-notification trigger; (c) re-validation of any business processes that depend on the model; (d) potential customer-impact review if the model affects regulated decisions; (e) update vendor register entry + critical-function designation if applicable; (f) board notification if material.</p></details>
-
- <h3>Question 7</h3>
- <p>Your customer chatbot recommends a savings product. The recommendation triggers Section 21 (financial promotion). What's the workflow?</p>
- <details><summary>Answer</summary><p>The chatbot's outputs that constitute promotions must be approved by an FCA-authorised person before they go live. AI-generated promotions are not exempt from the approval regime. Practical workflow: (a) prompt-engineer the bot to a set of approved responses; (b) compliance reviews the response set; (c) approved responses go live; (d) bot doesn't deviate (constrained generation); (e) monitoring detects drift; (f) re-approval as content evolves.</p></details>
-
- <h3>Question 8</h3>
- <p>You discover the AML triage AI is rejecting alerts at a rate disproportionately higher for one customer segment. What's the right escalation?</p>
- <details><summary>Answer</summary><p>(1) Halt the model's auto-disposition (or downgrade to human-review-only) immediately. (2) Document the disparate-impact finding. (3) Escalate to MLRO + Head of Compliance + DPO. (4) Re-validate the model per SR 11-7. (5) Consider whether under-reporting has resulted; if so, file required catch-up SARs. (6) Determine whether the disparate impact requires notification to FCA / national regulator under SUP 15. (7) Address upstream training-data bias before re-enabling. (8) Document the lesson for board reporting.</p></details>
-
- <h3>Question 9</h3>
- <p>Your firm is the EU subsidiary of a US bank. SR 11-7 and PRA SS1/23 both apply. They differ in scope. Which do you follow?</p>
- <details><summary>Answer</summary><p>Both, but specifically, you operate to the tighter requirement clause-by-clause, document compliance with each separately, and clearly indicate where one's compensating controls satisfy the other. Don't merge them into a single document; that obscures regulator-by-regulator readability.</p></details>
-
- <h3>Question 10</h3>
- <p>An MSP wants to deliver a "DORA + AI Safe@Work" Copilot rollout for a financial-services SMB. What's the standard deliverable?</p>
- <details><summary>Answer</summary><p>(a) <a href="rollout-guide.html" class="accent">30-day rollout guide</a> + the <a href="module-copilot.html" class="accent">Microsoft Copilot track</a> for the M365 governance; (b) this FS sector overlay for the regulatory layer; (c) <a href="templates/aup-template.html" class="accent">AUP</a> extended with the FS never-paste list (Sub-module 2); (d) <a href="templates/dpia-template.html" class="accent">DPIA</a> + <a href="templates/fria-template.html" class="accent">FRIA</a> where credit / insurance pricing in scope; (e) Article 13 due-diligence pack on Microsoft as ICT third party; (f) model-inventory entries for Copilot per SR 11-7 / SS1/23; (g) updated incident-form (Sub-module 8 escalation order); (h) <a href="templates/training-register.html" class="accent">training register</a> with the FS overlay assessment recorded. End state: an audit binder that satisfies the firm's auditor, the DPO, and the supervisory regulator visit.</p></details>
+ <div id="quiz-mount"></div>
+ <script type="application/json" id="quiz-data">
+ {
+ "module": "fs",
+ "moduleLabel": "Financial services overlay",
+ "passThreshold": 8,
+ "quizTitle": "Test your <em>understanding</em>.",
+ "quizLede": "Ten questions drawn only from this overlay. Pass mark 8 out of 10. Retake as many times as you like.",
+ "questions": [
+ {
+ "q": "Your firm runs in M365 with Copilot enabled, and your CIO regards it as a mere productivity tool. Does DORA Article 13 apply?",
+ "options": [
+ "Yes &mdash; Microsoft with Copilot is an ICT third party, so due diligence, contractual provisions, concentration assessment, exit strategy and monitoring all apply",
+ "No &mdash; Copilot is a built-in feature of software you already licence, not a separate third party",
+ "Only if Copilot is used by more than 250 employees across the firm",
+ "No &mdash; DORA Article 13 covers cloud infrastructure providers only, not productivity software",
+ "Only once the firm has suffered a reportable ICT incident involving Copilot"
+ ],
+ "correct": 0,
+ "why": "Body: <em>Microsoft plus Copilot is an ICT third party providing services to your firm, so Article 13 due diligence, contractual provisions, concentration assessment, exit strategy and monitoring all apply &mdash; with extra scrutiny where it supports a critical or important function.</em>",
+ "cite": "DORA Article 13 &mdash; ICT third-party risk"
+ },
+ {
+ "q": "An AML analyst pastes a suspicious Russian-language transcript into free ChatGPT to translate it, omitting all names. Have they violated anything?",
+ "options": [
+ "No &mdash; stripping the names removes the personal data, so nothing confidential left the firm",
+ "No &mdash; translation is a permitted use because the analyst never intended to disclose the investigation",
+ "Only the firm's AUP, and that is an internal matter with no external consequences",
+ "Almost certainly &mdash; it takes AML material outside the controlled environment, breaches the AUP, may breach the SAR confidentiality regime and may meet the tipping-off threshold",
+ "Only if the transcript is later found to contain a genuine money-laundering typology"
+ ],
+ "correct": 3,
+ "why": "Body: <em>Even without names, transmitting AML investigation material to a consumer AI takes it outside the controlled environment, breaches the AUP, may breach the SAR confidentiality regime and may meet the tipping-off threshold. Treat the historical exposure as a reportable incident.</em>",
+ "cite": "AML / KYC &mdash; SAR confidentiality and tipping-off"
+ },
+ {
+ "q": "You use AI to draft a credit-decision explanation sent to a declined consumer. Which regulatory frameworks engage?",
+ "options": [
+ "GDPR Article 22 alone, since only the automated-decision rules are relevant to a decline letter",
+ "None until the consumer complains, at which point the FCA complaints regime takes over",
+ "GDPR Art 22, EU AI Act high-risk creditworthiness plus Article 27 FRIA, Consumer Duty Principle 12, consumer credit law, SR 11-7 / SS1/23, and anti-discrimination law",
+ "Only the EU AI Act, because credit scoring is classified as high-risk under Annex III",
+ "Consumer Duty Principle 12 and consumer credit law, but not model-risk rules because a letter is not a model"
+ ],
+ "correct": 2,
+ "why": "Body: <em>The answer stacks GDPR Article 22, EU AI Act high-risk classification (Annex III creditworthiness) plus a mandatory Article 27 FRIA, Consumer Duty Principle 12, national consumer credit law, SR 11-7 / SS1/23 model risk, and equality / anti-discrimination law.</em>",
+ "cite": "Consumer credit AI &mdash; overlapping frameworks"
+ },
+ {
+ "q": "Your algo-trading desk swaps its trading algorithm for one that uses an LLM to interpret news. Does MiFID II Article 17 apply?",
+ "options": [
+ "No &mdash; Article 17 was written for deterministic algorithms and does not reach generative models",
+ "Only if the LLM is allowed to place orders without a human in the loop",
+ "No &mdash; because an LLM interpreting news is a research tool, not the trading algorithm itself",
+ "Only the EU AI Act applies; MiFID II is displaced once AI enters the trading path",
+ "Yes &mdash; Article 17 applies to all algorithmic trading, requiring effective systems, risk controls, a kill switch, pre/post-trade controls, resilience testing and records"
+ ],
+ "correct": 4,
+ "why": "Body: <em>Article 17 applies to all algorithmic trading; the LLM system must show effective systems, risk controls, a kill switch, pre/post-trade controls, resilience testing and records &mdash; with EU AI Act deployer duties (Article 26) and SR 11-7 / SS1/23 validation on top.</em>",
+ "cite": "MiFID II Article 17 &mdash; algorithmic trading"
+ },
+ {
+ "q": "Your firm keeps a model-risk register per SR 11-7. You procured GitHub Copilot for the dev team. Does the model belong on the register?",
+ "options": [
+ "No &mdash; a coding assistant is developer tooling and never counts as a model",
+ "Probably yes if engineers use it to write code running in production for regulated decisions; tier it low-to-medium with compensating controls",
+ "Only if Copilot's suggestions are accepted without any human review",
+ "No &mdash; only customer-facing models are in scope for SR 11-7",
+ "Only once a defect traced to Copilot-generated code causes a regulated-decision error"
+ ],
+ "correct": 1,
+ "why": "Body: <em>Probably yes if engineers use Copilot to write code that runs in production for regulated decisions. Tier it low-to-medium with compensating controls &mdash; code review, secrets scanning, dependency review and SAST in CI &mdash; but the model should appear on the register.</em>",
+ "cite": "SR 11-7 &mdash; model-risk register scope"
+ },
+ {
+ "q": "Microsoft updates Copilot to a new model and its output behaviour shifts. You are a regulated FS firm. What is the cascade?",
+ "options": [
+ "Nothing formal &mdash; the vendor owns the model, so the change is outside your governance",
+ "Wait for the next scheduled model-validation cycle and note the change then",
+ "Register the change per SR 11-7 / SS1/23, trigger DORA Art 13 monitoring, re-validate dependent processes, review customer impact, update the register and notify the board if material",
+ "Only re-run the DPIA, since a behaviour shift is purely a data-protection matter",
+ "Simply switch Copilot off until Microsoft confirms the new model is equivalent"
+ ],
+ "correct": 2,
+ "why": "Body: <em>A vendor model change registers per SR 11-7 / SS1/23 change-control, triggers DORA Article 13 ongoing monitoring and a possible vendor-notification, forces re-validation of dependent processes, a customer-impact review, a register update and critical-function review, and board notification if material.</em>",
+ "cite": "DORA / SR 11-7 &mdash; vendor model-change cascade"
+ },
+ {
+ "q": "Your customer chatbot recommends a savings product, and the recommendation triggers Section 21 (financial promotion). What is the workflow?",
+ "options": [
+ "Publish freely &mdash; AI-generated promotions are exempt from the approval regime",
+ "An FCA-authorised person must approve the promotional outputs before they go live; constrain the bot to approved responses and monitor for drift",
+ "A compliance sign-off is only needed once per year for the chatbot as a whole",
+ "The consumer's acceptance of the recommendation constitutes the required approval",
+ "Only display a risk disclaimer; that satisfies Section 21 for automated recommendations"
+ ],
+ "correct": 1,
+ "why": "Body: <em>AI-generated promotions are not exempt: outputs that constitute promotions must be approved by an FCA-authorised person before going live. Prompt-engineer the bot to approved responses, have compliance review the set, constrain generation, monitor for drift and re-approve as content evolves.</em>",
+ "cite": "FCA Section 21 &mdash; financial-promotion approval"
+ },
+ {
+ "q": "You discover the AML triage AI rejects alerts at a rate disproportionately higher for one customer segment. What is the right escalation?",
+ "options": [
+ "Retrain the model quietly overnight and carry on if the disparity disappears",
+ "Log it as a data-quality issue and revisit at the next model-validation cycle",
+ "Halt auto-disposition, document the disparate impact, escalate to MLRO / Compliance / DPO, re-validate, file catch-up SARs if under-reporting occurred, and consider SUP 15 notification",
+ "Escalate only to the DPO, since disparate impact is solely a data-protection concern",
+ "Do nothing until an external audit independently confirms the pattern"
+ ],
+ "correct": 2,
+ "why": "Body: <em>Halt the model's auto-disposition, document the disparate-impact finding, escalate to MLRO plus Head of Compliance plus DPO, re-validate per SR 11-7, file catch-up SARs if under-reporting resulted, weigh an FCA / national-regulator SUP 15 notification, fix upstream training-data bias, and record the lesson for the board.</em>",
+ "cite": "AML triage AI &mdash; disparate-impact escalation"
+ },
+ {
+ "q": "Your firm is the EU subsidiary of a US bank, so SR 11-7 and PRA SS1/23 both apply but differ in scope. Which do you follow?",
+ "options": [
+ "SR 11-7 only, because the US parent's home framework governs the group",
+ "SS1/23 only, because the EU subsidiary answers to its local supervisor",
+ "Merge both into a single unified model-risk policy to avoid duplication",
+ "Whichever is less onerous, provided you document the reasoning once",
+ "Both &mdash; operate to the tighter requirement clause-by-clause, document compliance with each separately, and show where one's controls satisfy the other"
+ ],
+ "correct": 4,
+ "why": "Body: <em>You follow both: operate to the tighter requirement clause-by-clause, document compliance with each separately, and clearly indicate where one framework's compensating controls satisfy the other. Do not merge them &mdash; that obscures regulator-by-regulator readability.</em>",
+ "cite": "SR 11-7 vs PRA SS1/23 &mdash; overlapping model-risk regimes"
+ },
+ {
+ "q": "An MSP wants to deliver a \"DORA + AI Safe@Work\" Copilot rollout for a financial-services SMB. What is the standard deliverable?",
+ "options": [
+ "A single signed AUP and a one-page Copilot quick-start, nothing more",
+ "The 30-day rollout guide plus Copilot track, this FS overlay, an FS-extended AUP, DPIA / FRIA, an Article 13 due-diligence pack, model-inventory entries, an updated incident form and the training register",
+ "A DORA gap analysis alone, since AI governance is covered by DORA in full",
+ "Whatever the client's existing procurement template already requires",
+ "Just the model-inventory entries for Copilot under SR 11-7 / SS1/23"
+ ],
+ "correct": 1,
+ "why": "Body: <em>The deliverable is an audit binder: the 30-day rollout guide plus the Copilot track, this FS overlay, an FS never-paste-extended AUP, DPIA plus FRIA where credit / insurance pricing is in scope, an Article 13 due-diligence pack on Microsoft, SR 11-7 / SS1/23 model-inventory entries, an updated incident form and the training register.</em>",
+ "cite": "MSP deliverable &mdash; DORA + AI Safe@Work rollout"
+ }
+ ]
+ }
+ </script>
 
  <div class="signature">
  <div class="label">Overlay complete</div>

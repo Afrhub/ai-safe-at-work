@@ -31,7 +31,9 @@
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
 <link rel="stylesheet" href="assets/style.css?v=20" />
+<link rel="stylesheet" href="assets/quiz.css?v=3" />
 <script defer src="assets/cinema.js?v=11"></script>
+<script defer src="assets/quiz.js?v=2"></script>
 <style>
 .role-banner {
   display: inline-flex;
@@ -387,6 +389,149 @@
  </ol>
  </div>
  </div>
+ <h2>Test your understanding</h2>
+ <div id="quiz-mount"></div>
+ <script type="application/json" id="quiz-data">
+ {
+ "module": "dpo",
+ "moduleLabel": "DPO track",
+ "passThreshold": 8,
+ "quizTitle": "Test your <em>understanding</em>.",
+ "quizLede": "Ten questions drawn only from this track. Pass mark 8 out of 10. Retake as many times as you like.",
+ "questions": [
+ {
+ "q": "According to the track, what is the substantive change for DPOs since 2024?",
+ "options": [
+ "GDPR was fully rewritten to address AI",
+ "ISO 27001 was replaced by a new AI-only standard",
+ "Every existing obligation now has an AI-specific edge case the business expects you to recognise before it commits",
+ "AI use has been made exempt from data-protection law",
+ "DPIAs are no longer required for any AI processing"
+ ],
+ "correct": 2,
+ "why": "Body: <em>every existing obligation now has an AI-specific edge case, and the business expects you to recognise it before it commits.</em>",
+ "cite": "What's actually changed for you"
+ },
+ {
+ "q": "Under which article is a DPIA triggered, and on what basis?",
+ "options": [
+ "GDPR Article 35, where processing is likely to result in high risk to rights and freedoms of natural persons",
+ "GDPR Article 30, whenever any personal data is stored",
+ "EU AI Act Article 27, for all AI systems",
+ "GDPR Article 33, once a breach has occurred",
+ "EU AI Act Article 4, for staff training"
+ ],
+ "correct": 0,
+ "why": "Body: <em>A DPIA (GDPR Art 35) is triggered where processing is likely to result in high risk to rights and freedoms.</em>",
+ "cite": "DPIA, FRIA, or both?"
+ },
+ {
+ "q": "For which deployers does the track say a FRIA (EU AI Act Art 27) is triggered?",
+ "options": [
+ "Any business that uses a chatbot on its website",
+ "Deployers of high-risk AI that are public-law bodies, private bodies providing public services, or those using high-risk AI for credit-worthiness or life and health insurance pricing",
+ "Only companies with more than 250 employees",
+ "Any organisation that has already run a DPIA",
+ "Only AI developers, never deployers"
+ ],
+ "correct": 1,
+ "why": "Body: <em>deployer of a high-risk AI system that is a body governed by public law, a private body providing public services, or one using high-risk AI for credit-worthiness / life and health insurance pricing.</em>",
+ "cite": "FRIA (EU AI Act Art 27)"
+ },
+ {
+ "q": "For most EU SMBs deploying AI in HR or customer-facing decisions, what does the track recommend on DPIA versus FRIA?",
+ "options": [
+ "Run only the DPIA and skip the FRIA",
+ "Run only the FRIA because it supersedes the DPIA",
+ "Wait for the regulator to decide which is needed",
+ "Run both, together, as one combined document with two cross-referenced sections",
+ "Run neither unless a breach occurs"
+ ],
+ "correct": 3,
+ "why": "Body: <em>both. Run them together, output a combined document, keep two cross-referenced sections.</em>",
+ "cite": "DPIA, FRIA, or both?"
+ },
+ {
+ "q": "How many scoping questions does the track say a fifteen-minute conversation with the proposing business unit should cover?",
+ "options": [
+ "Three",
+ "Ten",
+ "Six",
+ "Twelve",
+ "Five"
+ ],
+ "correct": 2,
+ "why": "Body: <em>six questions extracted from a fifteen-minute conversation with the proposing business unit will determine the shape of the work.</em>",
+ "cite": "The scoping conversation"
+ },
+ {
+ "q": "Under which article does the RoPA sit, and what does the track say its AI entry must capture about the tool?",
+ "options": [
+ "Article 22; only whether a human is in the loop",
+ "Article 35; only the residual risk score",
+ "Article 33; only the breach-notification contact",
+ "Article 6; only the lawful basis",
+ "Article 30; the model behind the product, with sub-processors disclosed, rather than just a product name"
+ ],
+ "correct": 4,
+ "why": "Body: <em>your RoPA (Art 30) entry needs five things … Not \"ChatGPT\", \"OpenAI GPT-4o via ChatGPT Enterprise tenant … Sub-processors disclosed.</em>",
+ "cite": "Records of Processing Activities, the AI entry"
+ },
+ {
+ "q": "What default review cadence does the track give for a RoPA AI entry, and what exception?",
+ "options": [
+ "Annual by default; monthly for HR",
+ "Quarterly by default; monthly for finance and health",
+ "Monthly by default; quarterly for finance",
+ "Weekly by default; no exceptions",
+ "Only when the vendor changes terms"
+ ],
+ "correct": 1,
+ "why": "Body: <em>Default cadence quarterly; finance / health monthly.</em>",
+ "cite": "Review cadence"
+ },
+ {
+ "q": "Under Article 33, when does the 72-hour breach clock start?",
+ "options": [
+ "When the supervisory authority requests notification",
+ "When the vendor confirms exactly what data was exposed",
+ "When the controller has reasonable awareness, not certainty, that a personal-data breach has occurred",
+ "Exactly 72 hours after the incident first happened",
+ "Only once the affected data subjects have been informed"
+ ],
+ "correct": 2,
+ "why": "Body: <em>Article 33 starts the clock when the controller has reasonable awareness, not certainty, that a personal-data breach has occurred.</em>",
+ "cite": "The 72-hour breach clock"
+ },
+ {
+ "q": "The track gives three principles for the clock. What does it advise if you are still unsure at 60 hours?",
+ "options": [
+ "Notify: a precautionary notification you later refine or withdraw costs far less than a missed deadline",
+ "Wait until you reach certainty before doing anything",
+ "Delete the affected records to contain the incident",
+ "Notify only the data subjects, never the regulator",
+ "Restart the clock from the point of certainty"
+ ],
+ "correct": 0,
+ "why": "Body: <em>If unsure at 60 hours, notify. A precautionary notification you later refine or withdraw is much smaller cost than a missed deadline.</em>",
+ "cite": "The 72-hour breach clock"
+ },
+ {
+ "q": "What does the track's DPO first-90-days plan schedule for Weeks 9-12?",
+ "options": [
+ "Inventory of which teams use which AI tools",
+ "Matching the inventory against existing DPAs and RoPA entries (the gap)",
+ "Drafting or updating the AUP for AI",
+ "Rolling out AI literacy training, establishing an AI-use logging cadence, and calendaring the quarterly review",
+ "Running DPIA and FRIA on the top three use cases"
+ ],
+ "correct": 3,
+ "why": "Body: <em>Weeks 9-12, train + log … Roll out AI literacy training … Establish AI-use logging cadence … Calendar the quarterly review.</em>",
+ "cite": "The DPO's first 90 days on AI governance"
+ }
+ ]
+ }
+ </script>
 </main>
 
 <nav class="module-bottom-nav">

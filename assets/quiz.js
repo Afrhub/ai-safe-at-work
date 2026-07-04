@@ -49,7 +49,7 @@
     mount.innerHTML = '';
     const block = el('section', { class: 'quiz-block', 'aria-labelledby': 'quiz-h' });
 
-    block.appendChild(el('span', { class: 'quiz-eyebrow' }, [`Knowledge check · Module ${pad2(state.cfg.module)}`]));
+    block.appendChild(el('span', { class: 'quiz-eyebrow' }, [`Knowledge check · ${state.cfg.moduleLabel || 'Module ' + pad2(state.cfg.module)}`]));
     block.appendChild(el('h2', { class: 'quiz-title', id: 'quiz-h' },
       htmlNodes(state.cfg.quizTitle || `Test your <em>understanding</em>.`)));
     block.appendChild(el('p', { class: 'quiz-lede' }, [state.cfg.quizLede ||
@@ -215,7 +215,7 @@
 
     wrap.appendChild(el('p', { class: 'ev-note' }, htmlNodes(
       pass
-        ? `Your score is saved locally on this device only (<code>localStorage</code>) — nothing is sent anywhere. Generate a printable certificate to keep in your training file.`
+        ? `Your score is saved locally on this device only (<code>localStorage</code>) — nothing is sent anywhere.${typeof state.cfg.module === 'number' ? ' Generate a printable certificate to keep in your training file.' : ''}`
         : `Read the module sections you missed, then retake. Each attempt overwrites the previous one. No record leaves this device.`
     )));
 
@@ -227,7 +227,7 @@
       scrollIntoView(document.getElementById('quiz-mount'));
     });
     controls.appendChild(retry);
-    if (pass) {
+    if (pass && typeof state.cfg.module === 'number') {
       const cert = el('a', {
         class: 'quiz-btn',
         href: `cert.html?m=${state.cfg.module}&s=${score}&n=${total}`
