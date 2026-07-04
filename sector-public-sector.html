@@ -127,6 +127,49 @@
 
  <hr class="section-divider" />
 
+ <style>
+  /* interactive diagram — scoped */
+  .risk-fig { margin: 1.6rem 0 2.4rem; }
+  .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
+  .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
+  .risk-svg .rnode { cursor: pointer; }
+  .risk-svg .rnode:hover .rcard { stroke: var(--border-bold); }
+  .risk-svg .rnode.is-active .rcard { stroke: var(--accent); fill: var(--accent-soft); }
+  .risk-svg .rnode.rgood.is-active .rcard { stroke: var(--green); fill: rgba(14,125,73,.08); }
+  .risk-svg .rnode:focus { outline: none; }
+  .risk-svg .rnode:focus-visible .rcard { stroke: var(--accent); stroke-width: 2.5; }
+  .risk-svg .rtt { fill: var(--text); font-weight: 800; font-size: 19px; }
+  .risk-svg .rss { fill: var(--text3); font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .risk-svg .ric { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .risk-svg .rgood .ric { stroke: var(--green); }
+  .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
+  .rd-cap strong { color: var(--text); }
+  .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
+  </style>
+ <figure id="risk-fig-ps" class="risk-fig" aria-labelledby="risk-fig-ps-cap">
+ <svg viewBox="0 0 760 250" class="risk-svg" role="group" aria-label="The public-sector AI governance stack. Select a card to learn more.">
+ <g class="rnode" data-k="k1" tabindex="0" role="button" aria-label="Annex III high-risk, most public-services AI"><rect class="rcard" x="14" y="14" width="232" height="118" rx="14"/><g transform="translate(34,34)"><path class="ric" d="M3 20h18M4 10l8-6 8 6M6 10v10M18 10v10M12 10v10"/></g><text class="rtt" x="34" y="96">Annex III high-risk</text><text class="rss" x="34" y="116">public-services AI</text></g>
+ <g class="rnode" data-k="k2" tabindex="0" role="button" aria-label="Article 27 FRIA, mandatory before deployment"><rect class="rcard" x="262" y="14" width="232" height="118" rx="14"/><g transform="translate(282,34)"><path class="ric" d="M12 3v18M3 8l9-5 9 5-9 5zM5 11v6l7 4 7-4v-6"/></g><text class="rtt" x="282" y="96">Article 27 FRIA</text><text class="rss" x="282" y="116">mandatory pathway</text></g>
+ <g class="rnode" data-k="k3" tabindex="0" role="button" aria-label="ATRS plus AI Playbook, publish before you deploy"><rect class="rcard" x="510" y="14" width="236" height="118" rx="14"/><g transform="translate(530,34)"><circle class="ric" cx="12" cy="12" r="9"/><circle class="ric" cx="12" cy="12" r="3"/></g><text class="rtt" x="530" y="96">ATRS &amp; AI Playbook</text><text class="rss" x="530" y="116">publish before deploy</text></g>
+ <g class="rnode rgood" data-k="k4" tabindex="0" role="button" aria-label="The takeaway, the public is the audience and the venue"><rect class="rcard" x="14" y="150" width="732" height="84" rx="14"/><g transform="translate(34,176)"><path class="ric" d="M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6zM9 12l2 2 4-4"/></g><text class="rtt" x="72" y="188">The public is the audience</text><text class="rss" x="72" y="210">map first, deploy second</text></g>
+ </svg>
+ <p class="rd-cap" id="risk-fig-ps-cap" aria-live="polite"><strong>The public-sector governance stack.</strong> Select a card above to see what each part means.</p>
+ </figure>
+ <script>
+ (function(){
+   var data = {
+     k1:{t:'Annex III high-risk', d:'The EU AI Act lists most public-services AI as high-risk by default — education scoring (§3), employment (§4), emergency triage and eligibility for public assistance benefits (§5), law enforcement (§6), migration and asylum (§7), administration of justice (§8).', m:'Classify before you build.'},
+     k2:{t:'Article 27 FRIA', d:'A Fundamental Rights Impact Assessment is mandatory for public-sector deployers before first use — six elements per Article 27(1), companion to the DPIA and the Equality Act s.149 PSED assessment, with Article 27(3) notification to the market-surveillance authority.', m:'Cross-reference DPIA &amp; PSED.'},
+     k3:{t:'ATRS &amp; UK AI Playbook', d:'The Algorithmic Transparency Recording Standard is the public-sector “show your working” — Tier 1 and Tier 2 records published before deployment; the UK AI Playbook (Cabinet Office / DSIT / GDS) sets the government-wide controls you apply.', m:'“Not yet published” is the worst answer.'},
+     k4:{t:'The public is the audience', d:'Citizens, ombudsmen, judicial review, FOI, the NAO and select committees are all venues the private sector never faces. Build the audit binder before the FOI request arrives.', m:'Map first; deploy second.'}
+   };
+   var fig = document.getElementById('risk-fig-ps'); if(!fig) return;
+   var cap = fig.querySelector('.rd-cap'); var nodes = fig.querySelectorAll('.rnode');
+   function sel(k){ nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k')===k); }); var x=data[k]; if(!x) return; cap.innerHTML='<strong>'+x.t+'.</strong> '+x.d+' <span class="rd-m">'+x.m+'</span>'; }
+   nodes.forEach(function(n){ var k=n.getAttribute('data-k'); n.addEventListener('click',function(){sel(k);}); n.addEventListener('mouseenter',function(){sel(k);}); n.addEventListener('focus',function(){sel(k);}); n.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(k);} }); });
+ })();
+ </script>
+
  <span class="sub-tag" id="sub-1">Sub-module 1 of 9</span>
  <h2>The public-sector governance layer, Annex III + UK AI Playbook + national-regulator overlays</h2>
  <p>The universal AI Act + GDPR baseline is the floor. Public-sector AI adds three things the private sector doesn't have: (a) explicit Annex III high-risk categorisation for most public-services use cases; (b) mandatory Article 27 FRIA before deployment; (c) public-accountability venues that don't exist for private-sector AI failures, ombudsmen, judicial review, select committees, the FOI Act, the press.</p>

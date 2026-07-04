@@ -105,6 +105,69 @@
 
  <hr class="section-divider" />
 
+ <style>
+  /* interactive diagram — scoped */
+  .risk-fig { margin: 1.6rem 0 2.4rem; }
+  .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
+  .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
+  .risk-svg .rnode { cursor: pointer; }
+  .risk-svg .rnode:hover .rcard { stroke: var(--border-bold); }
+  .risk-svg .rnode.is-active .rcard { stroke: var(--accent); fill: var(--accent-soft); }
+  .risk-svg .rnode.rgood.is-active .rcard { stroke: var(--green); fill: rgba(14,125,73,.08); }
+  .risk-svg .rnode:focus { outline: none; }
+  .risk-svg .rnode:focus-visible .rcard { stroke: var(--accent); stroke-width: 2.5; }
+  .risk-svg .rtt { fill: var(--text); font-weight: 800; font-size: 19px; }
+  .risk-svg .rss { fill: var(--text3); font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .risk-svg .ric { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .risk-svg .rgood .ric { stroke: var(--green); }
+  .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
+  .rd-cap strong { color: var(--text); }
+  .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
+  </style>
+ <figure id="risk-fig-msp" class="risk-fig" aria-labelledby="risk-fig-msp-cap">
+ <svg viewBox="0 0 760 250" class="risk-svg" role="group" aria-label="Where the MSP sits in AI governance. Select a card to learn more.">
+ <g class="rnode" data-k="k1" tabindex="0" role="button" aria-label="Your own staff, Article 4">
+ <rect class="rcard" x="14" y="14" width="232" height="118" rx="14"/>
+ <g transform="translate(34,34)"><path class="ric" d="M4 7h16v12H4zM4 7l4-4h8l4 4"/></g>
+ <text class="rtt" x="34" y="96">Your own staff</text>
+ <text class="rss" x="34" y="116">Article 4</text>
+ </g>
+ <g class="rnode" data-k="k2" tabindex="0" role="button" aria-label="Your customers' AI, Article 26">
+ <rect class="rcard" x="262" y="14" width="232" height="118" rx="14"/>
+ <g transform="translate(282,34)"><circle class="ric" cx="8" cy="8" r="4"/><path class="ric" d="M2 20c0-4 3-6 6-6s6 2 6 6M15 11h6M18 8v6"/></g>
+ <text class="rtt" x="282" y="96">Customers' AI</text>
+ <text class="rss" x="282" y="116">Article 26</text>
+ </g>
+ <g class="rnode" data-k="k3" tabindex="0" role="button" aria-label="Your approved-tool inventory">
+ <rect class="rcard" x="510" y="14" width="236" height="118" rx="14"/>
+ <g transform="translate(530,34)"><path class="ric" d="M4 4h16v16H4zM8 9h8M8 13h5"/></g>
+ <text class="rtt" x="530" y="96">The tool register</text>
+ <text class="rss" x="530" y="116">approved estate</text>
+ </g>
+ <g class="rnode rgood" data-k="k4" tabindex="0" role="button" aria-label="One baseline, handed over as evidence">
+ <rect class="rcard" x="14" y="150" width="732" height="84" rx="14"/>
+ <g transform="translate(34,176)"><path class="ric" d="M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6zM9 12l2 2 4-4"/></g>
+ <text class="rtt" x="72" y="188">One baseline, handed over</text>
+ <text class="rss" x="72" y="210">audit-pack &amp; incident-ready</text>
+ </g>
+ </svg>
+ <p class="rd-cap" id="risk-fig-msp-cap" aria-live="polite"><strong>Where the MSP sits.</strong> Select a card above to see what each part means.</p>
+ </figure>
+ <script>
+  (function(){
+    var data = {
+      k1: {t:'Your own staff', d:'You are a deployer of AI before you are anyone&rsquo;s supplier. Technicians run Copilot, account managers draft in ChatGPT. Article 4 asks you to ensure a sufficient level of AI literacy, evidenced by a signed AUP and a training register.', m:'Sub-modules 1 &amp; 10.'},
+      k2: {t:'Your customers&rsquo; AI', d:'When you configure or operate AI on a customer&rsquo;s behalf, their Article 26 duties, human oversight, log retention, incident reporting, become your operational task. Their regulator looks at your operations as much as their policy.', m:'Sub-module 2.'},
+      k3: {t:'The tool register', d:'The approved-tool inventory is the most-asked-about artefact when you sit a customer down. Build it once, refresh it monthly, and survive Copilot version bumps, model swaps, and vendor terms changes without losing your specificity.', m:'Sub-modules 4 &amp; 6.'},
+      k4: {t:'One baseline, handed over', d:'Run a single governance baseline across the customer base, vary at the edges, then hand over an audit pack a regulator would accept, and be ready to run the first ten minutes of a customer-side incident without panic.', m:'Sub-modules 3, 5, 7 &amp; 8.'}
+    };
+    var fig = document.getElementById('risk-fig-msp'); if(!fig) return;
+    var cap = fig.querySelector('.rd-cap'); var nodes = fig.querySelectorAll('.rnode');
+    function sel(k){ nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k')===k); }); var x=data[k]; if(!x) return; cap.innerHTML='<strong>'+x.t+'.</strong> '+x.d+' <span class="rd-m">'+x.m+'</span>'; }
+    nodes.forEach(function(n){ var k=n.getAttribute('data-k'); n.addEventListener('click',function(){sel(k);}); n.addEventListener('mouseenter',function(){sel(k);}); n.addEventListener('focus',function(){sel(k);}); n.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(k);} }); });
+  })();
+ </script>
+
  <span class="sub-tag" id="sub-1">Sub-module 1 of 10</span>
  <h2>MSP as deployer, your Article 4 obligation to your own staff</h2>
  <p>Before you sell AI governance to anyone, you owe it to your own team. The MSP is itself a deployer of AI, your technicians use Copilot to write scripts, your account managers use ChatGPT to draft proposals, your service desk pipes ticket summaries through whatever is closest to hand. Article 4 of the EU AI Act applies to you as your own employer first.</p>

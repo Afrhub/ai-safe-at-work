@@ -124,6 +124,49 @@
 
  <hr class="section-divider" />
 
+ <style>
+  /* interactive diagram — scoped */
+  .risk-fig { margin: 1.6rem 0 2.4rem; }
+  .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
+  .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
+  .risk-svg .rnode { cursor: pointer; }
+  .risk-svg .rnode:hover .rcard { stroke: var(--border-bold); }
+  .risk-svg .rnode.is-active .rcard { stroke: var(--accent); fill: var(--accent-soft); }
+  .risk-svg .rnode.rgood.is-active .rcard { stroke: var(--green); fill: rgba(14,125,73,.08); }
+  .risk-svg .rnode:focus { outline: none; }
+  .risk-svg .rnode:focus-visible .rcard { stroke: var(--accent); stroke-width: 2.5; }
+  .risk-svg .rtt { fill: var(--text); font-weight: 800; font-size: 19px; }
+  .risk-svg .rss { fill: var(--text3); font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .risk-svg .ric { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .risk-svg .rgood .ric { stroke: var(--green); }
+  .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
+  .rd-cap strong { color: var(--text); }
+  .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
+  </style>
+ <figure id="risk-fig-shadow" class="risk-fig" aria-labelledby="risk-fig-shadow-cap">
+ <svg viewBox="0 0 760 250" class="risk-svg" role="group" aria-label="The four shapes of Shadow AI. Select a card to learn more.">
+ <g class="rnode" data-k="k1" tabindex="0" role="button" aria-label="Consumer chatbots, ChatGPT and Claude in a browser tab"><rect class="rcard" x="14" y="14" width="232" height="118" rx="14"/><g transform="translate(34,34)"><path class="ric" d="M4 5h16v10H4zM8 19h8M12 15v4"/></g><text class="rtt" x="34" y="96">Consumer chatbots</text><text class="rss" x="34" y="116">ChatGPT, Claude, Gemini</text></g>
+ <g class="rnode" data-k="k2" tabindex="0" role="button" aria-label="Browser extensions, AI sidebars and summarisers"><rect class="rcard" x="262" y="14" width="232" height="118" rx="14"/><g transform="translate(282,34)"><path class="ric" d="M4 4h10v10H4zM14 9h6v11H8v-6"/></g><text class="rtt" x="282" y="96">Browser extensions</text><text class="rss" x="282" y="116">AI sidebars &amp; summarisers</text></g>
+ <g class="rnode" data-k="k3" tabindex="0" role="button" aria-label="AI-in-SaaS, features bolted onto tools you already use"><rect class="rcard" x="510" y="14" width="236" height="118" rx="14"/><circle class="ric" cx="538" cy="42" r="4"/><path class="ric" d="M532 62c0-4 3-6 6-6s6 2 6 6"/><text class="rtt" x="530" y="96">AI-in-SaaS</text><text class="rss" x="530" y="116">features in tools you use</text></g>
+ <g class="rnode rgood" data-k="k4" tabindex="0" role="button" aria-label="Contain and replace, block plus an approved alternative"><rect class="rcard" x="14" y="150" width="732" height="84" rx="14"/><g transform="translate(34,176)"><path class="ric" d="M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6zM9 12l2 2 4-4"/></g><text class="rtt" x="72" y="188">Contain &amp; replace</text><text class="rss" x="72" y="210">block, then offer an approved tool</text></g>
+ </svg>
+ <p class="rd-cap" id="risk-fig-shadow-cap" aria-live="polite"><strong>The four shapes of Shadow AI.</strong> Three shapes, plus the good-practice response, personal AI accounts used for work are the fourth, hardest-to-detect shape. Select a card above to see what each part means.</p>
+ </figure>
+ <script>
+  (function(){
+    var data = {
+      k1:{t:'Consumer chatbots', d:'Free or paid-individual ChatGPT, Claude, Gemini, Perplexity, and the dozens of clones. The user opens a browser tab and types.', m:'Detection: proxy logs, DNS, network analytics. Highest data-exposure risk per use; easiest to contain.'},
+      k2:{t:'Browser extensions', d:'Grammarly AI, Compose AI, sidebar assistants, AI summarisers and note-takers, often installed casually because they are free, many transmit page content to a third party.', m:'Detection: Edge or Chrome enterprise extension inventory, Defender for Cloud Apps. Fix: browser policy plus an allowlist.'},
+      k3:{t:'AI-in-SaaS', d:'AI features bolted onto tools you already use, Notion AI, Slack AI, Zoom AI Companion, Otter.ai, HubSpot AI. The SaaS was approved; the AI feature arrived in an update.', m:'Detection: SaaS Management Platforms, your inventory plus vendor release notes. Fix: vendor questionnaire plus selective feature disable.'},
+      k4:{t:'Contain &amp; replace', d:'A ban only changes visibility, not behaviour. What works is blocking the risky route while giving staff an approved alternative for every job that needs AI, plus a clear forbidden-data list.', m:'The fourth shape, personal AI accounts used for work, is contained by culture, education, and acceptable-use clarity, not a control surface.'}
+    };
+    var fig = document.getElementById('risk-fig-shadow'); if(!fig) return;
+    var cap = fig.querySelector('.rd-cap'); var nodes = fig.querySelectorAll('.rnode');
+    function sel(k){ nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k')===k); }); var x=data[k]; if(!x) return; cap.innerHTML='<strong>'+x.t+'.</strong> '+x.d+' <span class="rd-m">'+x.m+'</span>'; }
+    nodes.forEach(function(n){ var k=n.getAttribute('data-k'); n.addEventListener('click',function(){sel(k);}); n.addEventListener('mouseenter',function(){sel(k);}); n.addEventListener('focus',function(){sel(k);}); n.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(k);} }); });
+  })();
+  </script>
+
  <span class="sub-tag" id="sub-1">Sub-module 1 of 10</span>
  <h2>What Shadow AI is, and why it spreads faster than any internal control</h2>
  <p>Shadow AI is any AI use inside the business that hasn't been approved through the organisation's normal procurement, security, or governance processes. It usually starts because someone wanted to do their job better, not because they were trying to break a rule.</p>

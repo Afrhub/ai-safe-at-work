@@ -109,6 +109,43 @@
  <hr class="section-divider" />
 
  <span class="sub-tag" id="sub-1">Sub-module 1 of 12</span>
+ <style>
+  /* interactive diagram — scoped */
+  .risk-fig { margin: 1.6rem 0 2.4rem; }
+  .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
+  .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
+  .risk-svg .rnode { cursor: pointer; }
+  .risk-svg .rnode:hover .rcard { stroke: var(--border-bold); }
+  .risk-svg .rnode.is-active .rcard { stroke: var(--accent); fill: var(--accent-soft); }
+  .risk-svg .rnode.rgood.is-active .rcard { stroke: var(--green); fill: rgba(14,125,73,.08); }
+  .risk-svg .rnode:focus { outline: none; }
+  .risk-svg .rnode:focus-visible .rcard { stroke: var(--accent); stroke-width: 2.5; }
+  .risk-svg .rtt { fill: var(--text); font-weight: 800; font-size: 19px; }
+  .risk-svg .rss { fill: var(--text3); font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .risk-svg .ric { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .risk-svg .rgood .ric { stroke: var(--green); }
+  .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
+  .rd-cap strong { color: var(--text); }
+  .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
+  </style>
+ <figure id="risk-fig-copilot" class="risk-fig" aria-labelledby="risk-fig-copilot-cap">
+ <svg viewBox="0 0 760 250" class="risk-svg" role="group" aria-label="The three Copilot governance levers. Select a card to learn more.">
+ <g class="rnode" data-k="k1" tabindex="0" role="button" aria-label="Which Copilot, five products share the brand"><rect class="rcard" x="14" y="14" width="232" height="118" rx="14"/><g transform="translate(34,34)"><path class="ric" d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></g><text class="rtt" x="34" y="96">Which Copilot?</text><text class="rss" x="34" y="116">five products, one brand</text></g>
+ <g class="rnode" data-k="k2" tabindex="0" role="button" aria-label="Permissions inheritance, Copilot surfaces what you forgot you could see"><rect class="rcard" x="262" y="14" width="232" height="118" rx="14"/><g transform="translate(282,34)"><rect class="ric" x="5" y="11" width="14" height="10" rx="2"/><path class="ric" d="M8 11V7a4 4 0 0 1 8 0v4"/></g><text class="rtt" x="282" y="96">Permissions inheritance</text><text class="rss" x="282" y="116">the forgotten-access problem</text></g>
+ <g class="rnode" data-k="k3" tabindex="0" role="button" aria-label="Data residency, five levers decide where the data lives"><rect class="rcard" x="510" y="14" width="236" height="118" rx="14"/><g transform="translate(530,34)"><path class="ric" d="M3 6h18M3 12h18M3 18h12"/></g><text class="rtt" x="530" y="96">Data residency</text><text class="rss" x="530" y="116">five levers, not one</text></g>
+ <g class="rnode rgood" data-k="k4" tabindex="0" role="button" aria-label="Good practice, labels plus the audit log make it enforceable"><rect class="rcard" x="14" y="150" width="732" height="84" rx="14"/><g transform="translate(34,176)"><path class="ric" d="M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6zM9 12l2 2 4-4"/></g><text class="rtt" x="72" y="188">Make it enforceable</text><text class="rss" x="72" y="210">labels &amp; the audit log</text></g>
+ </svg>
+ <p class="rd-cap" id="risk-fig-copilot-cap" aria-live="polite"><strong>Governing Copilot, the levers that matter.</strong> Select a card above to see what each part means.</p>
+ </figure>
+<script>
+ (function(){
+   var data = { k1:{t:'Which Copilot?',d:'Five materially-different products share the Copilot brand, from consumer Copilot in Edge to Microsoft 365 Copilot, Copilot Studio, and Copilot for Sales &amp; Service. Each has a different data-residency posture and a different owner.',m:'Govern the variant you actually have, Sub-module 1.'}, k2:{t:'Permissions inheritance',d:'Copilot never breaks permissions, it surfaces what a user could already see but forgot they could, salary sheets, board minutes, files over-shared reorgs ago. Most Copilot incidents trace back here.',m:'Clean SharePoint over-sharing first, Sub-modules 2 &amp; 6.'}, k3:{t:'Data residency',d:'Five levers combine to decide where prompts and responses live, tenant region, Multi-Geo, the M365 service boundary, Bing grounding, and Copilot Studio calls to external endpoints. A DPO deserves a five-line answer, not a wave at &ldquo;the tenant&rdquo;.',m:'Confirm the EU Data Boundary, don&rsquo;t assume, Sub-module 3.'}, k4:{t:'Make it enforceable',d:'Purview sensitivity labels with encryption are the strongest preventive control, Copilot won&rsquo;t surface a labelled file a user can&rsquo;t decrypt, and the unified audit log records who asked what when. Together they turn policy into something you can evidence.',m:'Three labels with protection, plus retention that outlasts an investigation, Sub-modules 4 &amp; 8.'} };
+   var fig = document.getElementById('risk-fig-copilot'); if(!fig) return;
+   var cap = fig.querySelector('.rd-cap'); var nodes = fig.querySelectorAll('.rnode');
+   function sel(k){ nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k')===k); }); var x=data[k]; if(!x) return; cap.innerHTML='<strong>'+x.t+'.</strong> '+x.d+' <span class="rd-m">'+x.m+'</span>'; }
+   nodes.forEach(function(n){ var k=n.getAttribute('data-k'); n.addEventListener('click',function(){sel(k);}); n.addEventListener('mouseenter',function(){sel(k);}); n.addEventListener('focus',function(){sel(k);}); n.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(k);} }); });
+ })();
+ </script>
  <h2>What Microsoft Copilot is, exactly</h2>
  <p>"Copilot" is now a brand, not a product. Five materially-different things share the name. The governance posture differs at every one. Get the naming right or you'll govern the wrong surface.</p>
 

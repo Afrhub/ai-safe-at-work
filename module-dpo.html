@@ -181,6 +181,69 @@
  </ul>
  </div>
 
+ <style>
+ /* interactive diagram — scoped */
+ .risk-fig { margin: 1.6rem 0 2.4rem; }
+ .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
+ .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
+ .risk-svg .rnode { cursor: pointer; }
+ .risk-svg .rnode:hover .rcard { stroke: var(--border-bold); }
+ .risk-svg .rnode.is-active .rcard { stroke: var(--accent); fill: var(--accent-soft); }
+ .risk-svg .rnode.rgood.is-active .rcard { stroke: var(--green); fill: rgba(14,125,73,.08); }
+ .risk-svg .rnode:focus { outline: none; }
+ .risk-svg .rnode:focus-visible .rcard { stroke: var(--accent); stroke-width: 2.5; }
+ .risk-svg .rtt { fill: var(--text); font-weight: 800; font-size: 19px; }
+ .risk-svg .rss { fill: var(--text3); font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+ .risk-svg .ric { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+ .risk-svg .rgood .ric { stroke: var(--green); }
+ .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
+ .rd-cap strong { color: var(--text); }
+ .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
+ </style>
+<figure id="risk-fig-dpo" class="risk-fig" aria-labelledby="risk-fig-dpo-cap">
+ <svg viewBox="0 0 760 250" class="risk-svg" role="group" aria-label="Three core compliance tasks for AI, plus the takeaway. Select a card to learn more.">
+ <g class="rnode" data-k="k1" tabindex="0" role="button" aria-label="DPIA, FRIA, or both">
+ <rect class="rcard" x="14" y="14" width="232" height="118" rx="14"/>
+ <g transform="translate(34,34)"><path class="ric" d="M4 4h16v16H4zM8 9h8M8 13h5"/></g>
+ <text class="rtt" x="34" y="96">DPIA, FRIA, or both?</text>
+ <text class="rss" x="34" y="116">Scope in under a day</text>
+ </g>
+ <g class="rnode" data-k="k2" tabindex="0" role="button" aria-label="The 72-hour breach clock">
+ <rect class="rcard" x="262" y="14" width="232" height="118" rx="14"/>
+ <g transform="translate(282,34)"><circle class="ric" cx="12" cy="12" r="9"/><path class="ric" d="M12 7v5l3 2"/></g>
+ <text class="rtt" x="282" y="96">The 72-hour clock</text>
+ <text class="rss" x="282" y="116">Art 33 breach notice</text>
+ </g>
+ <g class="rnode" data-k="k3" tabindex="0" role="button" aria-label="The RoPA AI entry">
+ <rect class="rcard" x="510" y="14" width="236" height="118" rx="14"/>
+ <g transform="translate(530,34)"><path class="ric" d="M3 6h18M3 12h18M3 18h12"/></g>
+ <text class="rtt" x="530" y="96">The RoPA AI entry</text>
+ <text class="rss" x="530" y="116">Art 30 records</text>
+ </g>
+ <g class="rnode rgood" data-k="k4" tabindex="0" role="button" aria-label="Be the first call">
+ <rect class="rcard" x="14" y="150" width="732" height="84" rx="14"/>
+ <g transform="translate(34,176)"><path class="ric" d="M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6zM9 12l2 2 4-4"/></g>
+ <text class="rtt" x="72" y="188">Be the first call, not the last</text>
+ <text class="rss" x="72" y="210">The 90-day plan turns standards into a calendar</text>
+ </g>
+ </svg>
+ <p class="rd-cap" id="risk-fig-dpo-cap" aria-live="polite"><strong>The DPO's three cross-cutting tasks.</strong> Select a card above to see what each step means.</p>
+ </figure>
+<script>
+ (function(){
+   var data = {
+     k1:{t:'DPIA, FRIA, or both?',d:'A DPIA (GDPR Art 35) is triggered where processing is likely to result in high risk to rights and freedoms &mdash; AI use almost always meets this. A FRIA (EU AI Act Art 27) is triggered for deployers of high-risk AI in public services or credit / insurance pricing. Six scoping questions from a fifteen-minute conversation shape the depth of the work.',m:'For most EU SMBs deploying AI in HR or customer-facing decisions: both. Run them together, one combined document.'},
+     k2:{t:'The 72-hour breach clock',d:'Article 33 starts the clock at reasonable awareness, not certainty. The common AI cases &mdash; data pasted into a free-tier tool, a vendor security incident, a model disclosing data it shouldn\'t &mdash; are the hardest to time.',m:'If your gut says breach, the clock is running. If unsure at 60 hours, notify. Always notify in writing.'},
+     k3:{t:'The RoPA AI entry',d:'Each AI use case needs an Art 30 record covering five things many entries skip: the model behind the product (with sub-processors), the data flow and retention, the specific legal basis, the decision boundary between AI output and human choice, and the vendor incident contact &mdash; plus a review cadence.',m:'Default cadence quarterly; finance and health monthly.'},
+     k4:{t:'Be the first call, not the last',d:'Most AI incidents at an SMB start with a tool procurement bought before the DPO got involved. The 90-day plan &mdash; inventory, gap, triage, policy, DPIAs, then train and log &mdash; turns the standards from background reading into a weekly calendar.',m:'The cheapest insurance is to be the first call when a new AI tool is proposed.'}
+   };
+   var fig = document.getElementById('risk-fig-dpo'); if(!fig) return;
+   var cap = fig.querySelector('.rd-cap');
+   var nodes = fig.querySelectorAll('.rnode');
+   function sel(k){ nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k')===k); }); var x=data[k]; if(!x) return; cap.innerHTML='<strong>'+x.t+'.</strong> '+x.d+' <span class="rd-m">'+x.m+'</span>'; }
+   nodes.forEach(function(n){ var k=n.getAttribute('data-k'); n.addEventListener('click',function(){sel(k);}); n.addEventListener('mouseenter',function(){sel(k);}); n.addEventListener('focus',function(){sel(k);}); n.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(k);} }); });
+ })();
+ </script>
  <h2>What's actually changed for you</h2>
  <p>The substantive shift since 2024 is small and large at once. GDPR was not rewritten. ISO 27001 was not rewritten. The EU AI Act layered on top of both. The change for you: <strong>every existing obligation now has an AI-specific edge case</strong>, and the business expects you to recognise it before it commits.</p>
 

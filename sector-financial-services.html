@@ -123,6 +123,50 @@
  <hr class="section-divider" />
 
  <span class="sub-tag" id="sub-1">Sub-module 1 of 9</span>
+
+ <style>
+  /* interactive diagram — scoped */
+  .risk-fig { margin: 1.6rem 0 2.4rem; }
+  .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
+  .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
+  .risk-svg .rnode { cursor: pointer; }
+  .risk-svg .rnode:hover .rcard { stroke: var(--border-bold); }
+  .risk-svg .rnode.is-active .rcard { stroke: var(--accent); fill: var(--accent-soft); }
+  .risk-svg .rnode.rgood.is-active .rcard { stroke: var(--green); fill: rgba(14,125,73,.08); }
+  .risk-svg .rnode:focus { outline: none; }
+  .risk-svg .rnode:focus-visible .rcard { stroke: var(--accent); stroke-width: 2.5; }
+  .risk-svg .rtt { fill: var(--text); font-weight: 800; font-size: 19px; }
+  .risk-svg .rss { fill: var(--text3); font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .risk-svg .ric { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .risk-svg .rgood .ric { stroke: var(--green); }
+  .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
+  .rd-cap strong { color: var(--text); }
+  .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
+  </style>
+ <figure id="risk-fig-fs" class="risk-fig" aria-labelledby="risk-fig-fs-cap">
+ <svg viewBox="0 0 760 250" class="risk-svg" role="group" aria-label="The financial-services regulatory layer that sits on top of the universal course. Select a card to learn more.">
+ <g class="rnode" data-k="k1" tabindex="0" role="button" aria-label="DORA Article 13, AI vendors as ICT third-party risk"><rect class="rcard" x="14" y="14" width="232" height="118" rx="14"/><g transform="translate(34,34)"><path class="ric" d="M3 20h18M4 10l8-6 8 6M6 10v10M18 10v10M12 10v10"/></g><text class="rtt" x="34" y="96">DORA Article 13</text><text class="rss" x="34" y="116">ICT third-party AI</text></g>
+ <g class="rnode" data-k="k2" tabindex="0" role="button" aria-label="SR 11-7 and SS1/23 model risk management applied to AI"><rect class="rcard" x="262" y="14" width="232" height="118" rx="14"/><g transform="translate(282,34)"><path class="ric" d="M3 17l5-5 4 4 8-8M15 4h5v5"/></g><text class="rtt" x="282" y="96">SR 11-7 / SS1/23</text><text class="rss" x="282" y="116">model risk</text></g>
+ <g class="rnode" data-k="k3" tabindex="0" role="button" aria-label="FCA Consumer Duty and MiFID II algorithmic trading governance"><rect class="rcard" x="510" y="14" width="236" height="118" rx="14"/><g transform="translate(530,34)"><path class="ric" d="M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6z"/></g><text class="rtt" x="530" y="96">FCA + MiFID II</text><text class="rss" x="530" y="116">conduct + algo</text></g>
+ <g class="rnode rgood" data-k="k4" tabindex="0" role="button" aria-label="Good practice, map your firm to the stack before you map your AI tools"><rect class="rcard" x="14" y="150" width="732" height="84" rx="14"/><g transform="translate(34,176)"><path class="ric" d="M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6zM9 12l2 2 4-4"/></g><text class="rtt" x="72" y="188">Map the firm to the stack first</text><text class="rss" x="72" y="210">good practice</text></g>
+ </svg>
+ <p class="rd-cap" id="risk-fig-fs-cap" aria-live="polite"><strong>The financial-services governance layer.</strong> Select a card above to see what each part means.</p>
+ </figure>
+ <script>
+ (function(){
+   var data = {
+     k1:{t:'DORA Article 13, AI vendors as ICT third-party risk',d:'DORA (Regulation 2022/2554) came into force 17 January 2025. AI vendors are ICT third parties, so vendor selection is board-reportable: pre-contract due diligence, contractual provisions, concentration-risk assessment (Art 28), exit strategy, and a register of contracts.',m:'Not optional, not delegable to procurement.'},
+     k2:{t:'SR 11-7 / SS1/23 model risk management',d:'SR 11-7 (US Fed / OCC) and PRA SS1/23 (UK) require firms to identify, measure, monitor and control model risk, and "model" now includes AI / ML. Every AI tool in a regulated decision maps to a model-inventory entry with an independent validator.',m:'Document compensating controls where vendor opacity blocks standard practice.'},
+     k3:{t:'FCA Consumer Duty + MiFID II algorithmic trading',d:'Consumer Duty (Principle 12, PRIN 2A) makes AI customer-impact a firm-level reportable across the four outcome areas. MiFID II Article 17 governs algorithmic trading, demanding effective systems, risk controls and a kill switch, with EU AI Act high-risk duties stacking on top.',m:'Conduct and market-integrity levers land on top of the AI Act.'},
+     k4:{t:'Map the firm to the stack first',d:'Universal AI Act + GDPR + ISO is the floor; DORA + FCA Consumer Duty + SR 11-7 + EBA + MiFID II is the ceiling for FS firms. Extend the never-paste list to the FS categories (MNPI, AML / KYC records, credit-model internals, customer financial PII) where the edge is criminal, not just regulatory.',m:'Map your firm to the stack before you map your AI tools.'}
+   };
+   var fig = document.getElementById('risk-fig-fs'); if(!fig) return;
+   var cap = fig.querySelector('.rd-cap'); var nodes = fig.querySelectorAll('.rnode');
+   function sel(k){ nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k')===k); }); var x=data[k]; if(!x) return; cap.innerHTML='<strong>'+x.t+'.</strong> '+x.d+' <span class="rd-m">'+x.m+'</span>'; }
+   nodes.forEach(function(n){ var k=n.getAttribute('data-k'); n.addEventListener('click',function(){sel(k);}); n.addEventListener('mouseenter',function(){sel(k);}); n.addEventListener('focus',function(){sel(k);}); n.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(k);} }); });
+ })();
+ </script>
+
  <h2>The financial-services governance layer, how DORA + EU AI Act + sector guidance combine</h2>
  <p>The universal AI Act + GDPR baseline is necessary but not sufficient for financial services. Three additional bodies of regulation interact, and they each pull a different lever.</p>
 
