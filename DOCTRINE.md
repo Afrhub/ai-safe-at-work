@@ -956,10 +956,52 @@ Long-term objective: governance-focused SaaS ecosystem · supported by MSP partn
 
 ---
 
+## § Go-to-market — remaining launch actions (added 2026-07-06)
+
+> Ground-truth audit of what still blocks a real go-to-market. Verified against the live site + DNS on 2026-07-06, not aspirational. Product is built (12 core modules + 6 role tracks + 3 sector overlays, all with interactive figures + MCQ quizzes; templates; portals; demo funnel). What is missing is the **commercial and infrastructure plumbing** to actually take a visitor → lead → paying customer. Ranked by whether it blocks launch.
+
+### A — Launch blockers (must clear before public "we are live")
+
+| # | Action | State on 2026-07-06 | Ties to |
+|---|---|---|---|
+| A1 | **Canonical domain live over HTTPS** — finish `attest-ai.com` custom-domain + SSL on Netlify, set as primary, 301 the `*.netlify.app` origin to it | apex A points at Netlify but `https://attest-ai.com` returned no response — domain/SSL not finished; site still primarily on `aisafework.netlify.app` | § Distribution doctrine #1; anti-scraping Test 1 (deferred "until canonical domain indexed") |
+| A2 | **Re-enable portal auth before any paying customer** — flip `AUTH_DISABLED=false` in `portal/assets/portal.js`, remove the demo credentials shipped in client JS, restore 2FA (MFA was stripped for inspection) | Auth intentionally OFF for inspection; demo creds public in JS; RLS still protects data | § Pre-launch checklist 2.5; Procurement-readiness gate 17 |
+| A3 | **Business email `hello@attest-ai.com`** — Google Workspace chosen; add MX + SPF + DKIM + DMARC in 123reg DNS, create `hello@` alias/group, point the Netlify demo-form notification at it | No MX records; demo-form leads currently land nowhere a human reads | demo funnel (`about.html#contact` Netlify form) |
+| A4 | **Commercial Terms of Service extension** — publish the paid-tier terms; blocker before `pricing.html` leaves `noindex` | `terms.html` covers free core only | § Procurement-readiness gates item 18; § Pre-launch checklist 1.5 |
+
+### B — Revenue plumbing (cannot take money until these exist)
+
+| # | Action | State on 2026-07-06 | Ties to |
+|---|---|---|---|
+| B1 | **Payment rail** — pick one (Stripe = fastest for UK), wire Tier-1 one-off (Plus Pack / templates) + Tier-2 AIMP subscription | No Stripe/Paddle/any checkout anywhere in the repo | § Commercial scope; SCOPE.md tiers |
+| B2 | **Finalise + publish prices** — decide public-price vs quote-only per tier, add real `Offer` prices, lift `pricing.html` `noindex` once A4 + B1 land | `pricing.html` is `noindex`; Offer schema present but no £ figures; visible prices are placeholders | § Commercial scope guardrails; SCOPE.md scope-creep gate |
+| B3 | **Post-purchase fulfilment** — on payment: provision the AIMP seat / deliver the templates pack; today the portal auto-logs-in a demo account only | Fulfilment path not wired to any purchase event | § MSP commercial model; portal seats/credits model |
+
+### C — Measurement + discoverability (needed to run GTM, not to open the doors)
+
+| # | Action | State on 2026-07-06 | Ties to |
+|---|---|---|---|
+| C1 | **Privacy-friendly analytics** — cookieless (Plausible / Fathom / Netlify Analytics); no cookie banner, keeps zero-cookie posture | None installed | § Pre-launch checklist 1.2/1.3 (must stay zero-cookie) |
+| C2 | **Search Console + sitemap submission** — submit `sitemap.xml` to Google + Bing Search Console once A1 is live; confirm indexing (runs anti-scraping **Test 1**) | `sitemap.xml` exists but unsubmitted; Test 1 explicitly deferred to 4 weeks post-DNS | Open TODOs → "Schedule Test 1 + Test 2 quarterly"; § Distribution doctrine #6 (EU/UK-first SEO) |
+| C3 | **Launch changelog entry** — first public release note when the domain goes live; quarterly cadence already automated via the `quarterly-content-refresh` routine | Changelog live; no "launch" entry yet | § Refresh cadence; llms.txt quarterly promise |
+
+### D — Sales + partner activation (parallel track, not launch-blocking)
+
+| # | Action | State on 2026-07-06 | Ties to |
+|---|---|---|---|
+| D1 | **Execute RORtech reseller agreement** — sign, then fill Territory / Tiers / Margin in the § Sales partners table and log the agreement PDF | Row present, "Onboarding · contract pending", all terms TBD | § Sales partners onboarding requirements |
+| D2 | **Activate Founding MSP Partner programme** — open recruitment for the first cohort | Programme defined in doctrine; not yet opened | § Founding MSP Partner programme |
+| D3 | **Define the demo → sale loop** — SLA + owner for replying to demo-form leads from `hello@`, and where leads are tracked (lightweight CRM or a log) | Demo form captures; no defined follow-up process | A3; § Distribution doctrine |
+
+**Critical path to first pound of revenue:** A1 → A3 → A4 → B1 → B2 → B3. Everything else can trail. C and D run in parallel and do not gate the first sale.
+
+---
+
 ## Decision log
 
 | Date | Decision | Why |
 |---|---|---|
+| 2026-07-06 | § Go-to-market remaining-launch-actions section added | Ground-truth audit: product built, but commercial/infra plumbing (domain+SSL, business email, payment rail, public prices, commercial ToS, re-enable auth) still blocks first revenue. Critical path recorded A1→A3→A4→B1→B2→B3 |
 | 2026-05-19 | Initial doctrine locked | Established wedge, principles, gates |
 | 2026-05-19 | Caveman doctrine prose style for internal docs | Speed; matches user preference |
 | 2026-05-19 | Static HTML only; no JS framework | Maintainability, free hosting, no build |
