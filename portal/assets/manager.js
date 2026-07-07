@@ -19,10 +19,27 @@ if (profile) {
     (prog || []).forEach(p => { if (p.status === "done") counts[p.user_id] = (counts[p.user_id]||0)+1; });
     document.getElementById("seated").textContent = (seats || []).length;
     document.querySelector("#seats tbody").innerHTML = (seats || []).map(s =>
-      `<tr><td>${esc(s.profiles?.email || s.end_user_id)}</td><td>${counts[s.end_user_id]||0} / 11</td><td>${new Date(s.created_at).toLocaleDateString()}</td></tr>`
-    ).join("") || `<tr><td colspan="3" style="color:var(--text3)">No seats yet.</td></tr>`;
+      `<tr><td>${esc(s.profiles?.email || s.end_user_id)}</td><td>${counts[s.end_user_id]||0} / 11</td><td>${new Date(s.created_at).toLocaleDateString()}</td>`+
+      `<td><button type="button" class="seat-remove" data-eu="${esc(s.end_user_id)}" data-email="${esc(s.profiles?.email || "this user")}">Remove</button></td></tr>`
+    ).join("") || `<tr><td colspan="4" style="color:var(--text3)">No seats yet.</td></tr>`;
   }
   await loadSeats();
+
+  async function refreshCredits() {
+    const p = await (await import("./portal.js")).getRole();
+    document.getElementById("credits").textContent = p.credits_balance ?? 0;
+  }
+
+  // Remove a seat: frees it and returns the credit (server-side remove_seat RPC).
+  document.querySelector("#seats tbody").addEventListener("click", async (e) => {
+    const btn = e.target.closest(".seat-remove"); if (!btn) return;
+    if (!confirm(`Remove ${btn.dataset.email}? Their seat is freed and the credit returned to your balance.`)) return;
+    btn.disabled = true; btn.textContent = "Removing…";
+    const { error } = await sb.rpc("remove_seat", { p_end_user: btn.dataset.eu });
+    if (error) { btn.disabled = false; btn.textContent = "Remove"; alert(error.message); return; }
+    await refreshCredits();
+    await loadSeats();
+  });
 
   document.getElementById("assign").addEventListener("submit", async (e) => {
     e.preventDefault();

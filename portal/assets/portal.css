@@ -88,6 +88,9 @@ html[data-theme="dark"] .portal-top { background: rgba(6,6,8,0.92); }
 .ptable th { background: rgba(250,88,45,0.05); color: var(--accent); text-align: left; padding: 0.7rem 0.9rem; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; }
 .ptable td { padding: 0.7rem 0.9rem; border-top: 1px solid var(--border); color: var(--text2); }
 .chip { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 2px; border: 1px solid var(--border-bold); }
+.seat-remove { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text2); background: var(--glass); border: 1px solid var(--border-bold); border-radius: 999px; padding: 0.3rem 0.7rem; cursor: pointer; }
+.seat-remove:hover:not(:disabled) { border-color: var(--red); color: var(--red); }
+.seat-remove:disabled { opacity: 0.5; cursor: default; }
 .chip.registered { color: var(--accent); border-color: rgba(250,88,45,0.5); }
 .chip.qualified { color: var(--blue); }
 .chip.won { color: var(--green); border-color: rgba(52,211,153,0.5); }
