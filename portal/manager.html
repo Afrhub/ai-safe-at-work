@@ -20,7 +20,7 @@
  <span style="display:flex;align-items:center;gap:1rem"><span class="who" id="who"></span><button id="out">Sign out</button></span>
 </header>
 <main class="portal-main">
- <nav class="section-nav" aria-label="Portal sections"><a href="#add-users">Add Users</a><a href="#remove-users">Remove Users</a><a href="#completion">View Completion %</a><a href="#certificates">Download Certificates</a></nav>
+ <nav class="section-nav" aria-label="Portal sections"><a href="#add-users">Add Users</a><a href="#remove-users">Remove Users</a><a href="#completion">Completion</a><a href="#updates">Regulatory updates</a><a href="#certificates">Certificates</a></nav>
 
  <p class="eyebrow">Manager portal</p>
  <h1 class="page-title">Your <em>team</em>.</h1>
@@ -47,14 +47,25 @@
 
  <section id="completion" style="margin-top:2.4rem">
  <h2>View Completion %</h2>
- <p class="lede">Each seated team member's completed modules, out of 11.</p>
+ <p class="lede">Each seated team member's completed modules, out of 11. This table is your audit-ready completion record — export it for your evidence pack.</p>
  <table class="ptable" id="seats"><thead><tr><th>Team member</th><th>Modules done</th><th>Assigned</th><th></th></tr></thead><tbody></tbody></table>
+ <p style="margin-top:0.9rem"><button type="button" id="export-csv" class="seat-remove">Export completion CSV →</button></p>
+ </section>
+
+ <section id="updates" style="margin-top:2.4rem">
+ <h2>Regulatory updates &amp; guidance</h2>
+ <p class="lede">What changed in the standards and in the course, and where every claim is sourced. Reviewed each quarter.</p>
+ <div class="tiles">
+ <a class="tile" href="../changelog.html"><span class="k">Updates</span><h2>Release &amp; regulatory changelog</h2><span class="arrow">Open →</span></a>
+ <a class="tile" href="../citations.html"><span class="k">Sources</span><h2>Standards &amp; citations</h2><span class="arrow">Open →</span></a>
+ <a class="tile" href="../standards-map.html"><span class="k">Mapping</span><h2>Standards map</h2><span class="arrow">Open →</span></a>
+ </div>
  </section>
 
  <section id="certificates" style="margin-top:2.4rem">
- <h2>Download Certificates</h2>
- <p class="lede">Verify and download completion certificates for your team.</p>
- <p><a href="../cert.html">Open the certificate verification page →</a></p>
+ <h2>Certificates</h2>
+ <p class="lede">Each learner generates their own completion certificate from their account when they finish. Your team's completion evidence is the table above — export the CSV for your audit pack.</p>
+ <p><a href="../cert.html">Open the certificate page →</a></p>
  <h3 style="margin-top:1.6rem">Governance templates</h3>
  <p class="lede">Audit-ready documents for your AI governance pack.</p>
  <div id="templates" class="tiles"></div>
@@ -63,6 +74,6 @@
  <h2 style="margin-top:2.4rem">Course</h2>
  <div id="grid" class="tiles"></div>
 </main>
-<script type="module" src="assets/manager.js"></script>
+<script type="module" src="assets/manager.js?v=2"></script>
 </body>
 </html>

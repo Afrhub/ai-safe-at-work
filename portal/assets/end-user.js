@@ -24,10 +24,18 @@ if (profile) {
   const { data: prog } = await sb.from("module_progress").select("module,status").eq("user_id", user.id);
   const done = new Set((prog || []).filter(p => p.status === "done").map(p => p.module));
   localDone.forEach(n => done.add(n));   // show immediately even if a sync lagged
-  document.getElementById("grid").innerHTML = MODULES.map(m => `
+  const tiles = MODULES.map(m => `
     <a class="tile" href="/module-${m.n}.html">
       <span class="k">Module ${String(m.n).padStart(2,"0")} ${done.has(m.n) ? "· ✓ done" : ""}</span>
       <h2>${m.t}</h2>
       <span class="arrow">${done.has(m.n) ? "Review →" : "Start →"}</span>
-    </a>`).join("");
+    </a>`);
+  // Module 11 is the gated finale — not counted in the 11, but still reachable here.
+  tiles.push(`
+    <a class="tile" href="/module-11.html">
+      <span class="k">Finale ${done.has(11) ? "· ✓ done" : ""}</span>
+      <h2>The 60-second pre-submit checklist</h2>
+      <span class="arrow">${done.has(11) ? "Review →" : "Open →"}</span>
+    </a>`);
+  document.getElementById("grid").innerHTML = tiles.join("");
 }

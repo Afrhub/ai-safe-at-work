@@ -30,6 +30,22 @@ if (profile) {
     document.getElementById("credits").textContent = p.credits_balance ?? 0;
   }
 
+  // Export the team's completion table as CSV — the manager's audit evidence record.
+  document.getElementById("export-csv")?.addEventListener("click", () => {
+    const out = [["Team member", "Modules done", "Assigned"]];
+    document.querySelectorAll("#seats tbody tr").forEach(tr => {
+      const c = [...tr.querySelectorAll("td")];
+      if (c.length < 3 || /no seats/i.test(c[0].textContent)) return;
+      out.push([c[0].textContent, c[1].textContent, c[2].textContent].map(v => v.trim()));
+    });
+    const csv = out.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\r\n");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+    a.download = "aimp-completion-" + new Date().toISOString().slice(0, 10) + ".csv";
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+
   // Remove a seat: frees it and returns the credit (server-side remove_seat RPC).
   document.querySelector("#seats tbody").addEventListener("click", async (e) => {
     const btn = e.target.closest(".seat-remove"); if (!btn) return;
@@ -45,7 +61,7 @@ if (profile) {
     e.preventDefault();
     const amsg = document.getElementById("amsg");
     amsg.textContent = "Assigning…"; amsg.className = "auth-msg";
-    const email = document.getElementById("eu").value.trim();
+    const email = document.getElementById("eu").value.trim().toLowerCase();
     const { data: eu } = await sb.from("profiles").select("id").eq("email", email).maybeSingle();
     if (!eu) { amsg.textContent = "No account found for that email. They need to sign up first."; amsg.className = "auth-msg err"; return; }
     const { error } = await sb.rpc("assign_seat", { p_end_user: eu.id });
