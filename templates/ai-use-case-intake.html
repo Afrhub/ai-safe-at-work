@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<meta name="color-scheme" content="dark light" />
+<script>try{if(localStorage.getItem("aisw-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+<title>AI Use Case Intake &amp; Approval Form template · Attest AI</title>
+<meta name="description" content="The approval gate before any new AI use goes live: request, assess, approve or refuse, with sign-off recorded. Aligns with ISO/IEC 42001 Clause 6.1, EU AI Act Articles 4 and 26, and the GDPR Article 35 DPIA trigger check." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Attest AI" />
+<meta property="og:title" content="AI Use Case Intake &amp; Approval Form template · Attest AI" />
+<meta property="og:description" content="The approval gate before any new AI use goes live: request, assess, approve or refuse, with sign-off recorded. Aligns with ISO/IEC 42001 Clause 6.1, EU AI Act Articles 4 and 26, and the GDPR Article 35 DPIA trigger check." />
+<meta property="og:url" content="https://attest-ai.com/templates/ai-use-case-intake.html" />
+<meta property="og:image" content="https://attest-ai.com/og-card.png?v=3" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Use Case Intake &amp; Approval Form template · Attest AI" />
+<meta name="twitter:description" content="The approval gate before any new AI use goes live: request, assess, approve or refuse, with sign-off recorded. Aligns with ISO/IEC 42001 Clause 6.1, EU AI Act Articles 4 and 26, and the GDPR Article 35 DPIA trigger check." />
+<meta name="twitter:image" content="https://attest-ai.com/og-card.png?v=3" />
+<link rel="preload" href="../assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=20" />
+<script defer src="../assets/cinema.js?v=11"></script>
+<style>
+.template-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 2px;
+  background: rgba(250,88,45, 0.08);
+  border: 1px solid rgba(250,88,45, 0.32);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.template-tag::before {
+  content: '§';
+  color: var(--accent);
+  font-weight: 800;
+}
+.print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0 2rem; align-items: center; flex-wrap: wrap; }
+.print-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--accent); color: #0b0e14;
+  font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.7rem 1.25rem; border-radius: 2px;
+  border: none; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 0 1px rgba(250,88,45,0.4), 0 8px 24px rgba(250,88,45,0.2);
+}
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(250,88,45,0.55), 0 12px 32px rgba(250,88,45,0.3); }
+.print-btn:active { transform: translateY(-1px) scale(0.97); }
+.print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
+.fill {
+  display: inline-block;
+  padding: 0.1rem 0.55rem;
+  border-radius: 2px;
+  background: rgba(250,88,45, 0.10);
+  color: var(--accent);
+  border: 1px dashed rgba(250,88,45, 0.42);
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+}
+.register-table {
+  margin: 1.5rem 0;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.register-table thead {
+  background: rgba(250,88,45, 0.08);
+  border: 1px solid var(--border);
+}
+.register-table th {
+  padding: 0.9rem 1rem;
+  text-align: left;
+  font-weight: 700;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.register-table td {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  color: var(--text2);
+}
+.register-table tbody tr:nth-child(even) {
+  background: rgba(250,88,45, 0.02);
+}
+.status-approved { color: #2da45f; font-weight: 700; }
+.status-pending { color: #f7a600; font-weight: 700; }
+.status-blocked { color: #d62828; font-weight: 700; }
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+.policy-doc {
+  margin: 1.5rem 0;
+  padding: 2rem 2.2rem;
+  background: var(--plate);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  box-shadow: var(--shadow-card);
+}
+.policy-doc h2 { margin-top: 2.2rem; }
+.policy-doc h2:first-child { margin-top: 0; }
+.policy-doc h3 { margin-top: 1.6rem; }
+.policy-doc ol, .policy-doc ul { padding-left: 1.4rem; }
+.policy-doc li { margin-bottom: 0.55rem; }
+@media (max-width: 640px) {
+  .register-table { font-size: 0.75rem; }
+  .register-table th, .register-table td { padding: 0.6rem 0.7rem; }
+}
+@media print {
+  .policy-doc { background: white !important; border: 1px solid #ccc !important; box-shadow: none !important; padding: 1rem 0 !important; }
+  .register-table { border: 1px solid #ccc; }
+  .register-table thead { background: #f5f5f5 !important; }
+  .register-table th { color: #46505e !important; }
+  .fill { background: white !important; color: #0b0e14 !important; border-color: #46505e !important; }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HowTo",
+      "name": "AI Use Case Intake &amp; Approval Form template",
+      "description": "The approval gate before any new AI use goes live: request, assess, approve or refuse, with sign-off recorded.",
+      "url": "https://attest-ai.com/templates/ai-use-case-intake.html",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://attest-ai.com/#organization"
+      },
+      "totalTime": "PT30M",
+      "dateModified": "2026-07-08"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://attest-ai.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Templates",
+          "item": "https://attest-ai.com/templates/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AI Use Case Intake &amp; Approval Form template · Attest AI",
+          "item": "https://attest-ai.com/templates/ai-use-case-intake.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="topbar no-print">
+ <a href="../index.html" class="brand"><img src="/assets/logo.png?v=2" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />Attest&nbsp;AI</a>
+ <nav class="topbar-nav">
+ <a href="../index.html#platform">Platform</a>
+ <a href="../index.html#included">Features</a>
+ <a href="../consultancy.html">Consultancy</a>
+ <a href="../msp.html">Partners</a>
+ <a href="../resources.html">Resources</a>
+ <a href="../about.html">About</a>
+ <a href="../portal/login.html">AIMP log in</a>
+ <a href="../about.html#contact" class="nav-cta always-show">Book a Demo</a>
+ </nav>
+</header>
+
+<main id="main">
+ <span class="template-tag no-print">Template · Use Case Intake v1.0</span>
+ <p class="eyebrow no-print">Approval workflow</p>
+ <h1 class="page-title">AI Use Case Intake &amp; Approval Form for <span class="fill">[Company Name]</span></h1>
+ <p class="lede no-print">The gate before any new AI use goes live: someone requests it, someone assesses it, someone approves or refuses it, and the sign-off is recorded. Aligns with ISO/IEC 42001 Clause 6.1 (risk and opportunity assessment), EU AI Act Art 4 (AI literacy) and Art 26 (deployer obligations), and the GDPR Art 35 DPIA trigger check.</p>
+
+ <div class="print-row no-print">
+ <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF →</button>
+ <span class="print-hint">Use one copy per request. File completed forms with your AI Tool Register. Keep refused requests too, they are audit evidence of governance working.</span>
+ </div>
+
+ <article class="policy-doc">
+
+ <span class="section-tag">Purpose and scope</span>
+ <h2>Why approval comes before use</h2>
+ <p>Governing AI means deciding <strong>before</strong> deployment, not recording after. If the first time your DPO hears about a tool is when a customer complains, you are not governing, you are firefighting. This form is your anti-shadow-AI mechanism:</p>
+ <ul>
+ <li><strong>A clear front door.</strong> Staff know exactly how to get a new AI use approved, so they do not quietly start using tools on personal accounts.</li>
+ <li><strong>A consistent assessment.</strong> Every request gets the same data, risk, and legal checks, whoever asks and whoever assesses.</li>
+ <li><strong>A recorded decision.</strong> Approve or refuse, with named sign-off and a date. That record is what an auditor, insurer, or regulator asks to see.</li>
+ <li><strong>A feed into your registers.</strong> Approved use cases go straight onto your AI Tool Register and AI Risk Register, so nothing goes live untracked.</li>
+ </ul>
+ <p>Use this form for any <em>new</em> AI use: a new tool, a new use of an approved tool, or a change that moves an existing use into a new data category (for example, starting to put customer data into a tool that was approved for internal drafting only).</p>
+
+ <h2>Part A · The request (requester fills in)</h2>
+ <p><strong>Requested by:</strong> <span class="fill">[Name]</span> &nbsp;&nbsp; <strong>Team:</strong> <span class="fill">[Team / department]</span> &nbsp;&nbsp; <strong>Date:</strong> <span class="fill">[Date]</span></p>
+
+ <h3>What do you want to use AI for?</h3>
+ <p>Describe the task in plain English, one or two sentences. What goes in, what comes out, and who sees the output?</p>
+ <p><span class="fill">[e.g. "Draft first-pass responses to routine customer support emails, which a support agent reviews and edits before sending."]</span></p>
+
+ <h3>Which tool / vendor?</h3>
+ <p><strong>Tool and tier:</strong> <span class="fill">[e.g. Claude for Work, ChatGPT Enterprise, Copilot in Microsoft 365]</span></p>
+ <p><strong>Already on our AI Tool Register?</strong> <span class="fill">[Yes / No / Don't know]</span></p>
+
+ <h3>What data goes in?</h3>
+ <p>Tick every category the tool would receive, even occasionally:</p>
+ <ul>
+ <li>☐ Public information only (published content, general knowledge)</li>
+ <li>☐ Internal non-sensitive (memos, general office material)</li>
+ <li>☐ Confidential business (pricing, contracts, strategy, unreleased work)</li>
+ <li>☐ Personal data (names, emails, addresses, customer or staff records)</li>
+ <li>☐ Special category personal data (health, ethnicity, religion, trade union membership, etc.)</li>
+ <li>☐ Children's data</li>
+ <li>☐ Data belonging to a client or partner under contract</li>
+ </ul>
+
+ <h3>Who is affected by the output?</h3>
+ <p><span class="fill">[Internal only / customers / job applicants / the public]</span></p>
+
+ <h3>How often, and how many people would use it?</h3>
+ <p><span class="fill">[e.g. daily, 6 staff in the support team]</span></p>
+
+ <h2>Part B · The assessment (assessor fills in)</h2>
+ <p><strong>Assessed by:</strong> <span class="fill">[DPO / IT lead / AI owner]</span> &nbsp;&nbsp; <strong>Date:</strong> <span class="fill">[Date]</span></p>
+
+ <h3>Tool check</h3>
+ <ul>
+ <li>Is the tool on the AI Tool Register with status <strong>Approved</strong>? <span class="fill">[Yes / No, add to register first]</span></li>
+ <li>Is there a signed DPA covering the data categories ticked in Part A? <span class="fill">[Yes / No / N/A, public data only]</span></li>
+ <li>Do the vendor's terms permit this use (no training on our inputs, acceptable retention)? <span class="fill">[Yes / No / Unclear, escalate]</span></li>
+ </ul>
+
+ <h3>Data protection check</h3>
+ <ul>
+ <li>Personal data involved? If yes: lawful basis identified? <span class="fill">[Basis]</span></li>
+ <li><strong>GDPR Art 35 DPIA trigger check:</strong> does the use involve systematic evaluation of individuals, large-scale processing, special category data, or decisions with legal or similarly significant effects? <span class="fill">[Yes, DPIA required before approval / No]</span></li>
+ <li>Can the task be done with less data (anonymised, redacted, or synthetic inputs)? <span class="fill">[Notes]</span></li>
+ </ul>
+
+ <h3>Risk check</h3>
+ <ul>
+ <li>What happens if the output is wrong, and would anyone notice before harm occurs? <span class="fill">[Notes]</span></li>
+ <li>Is a human reviewing every output before it reaches an affected person? <span class="fill">[Yes / No]</span></li>
+ <li>Could the use case fall into an EU AI Act high-risk category (recruitment, credit, essential services, etc.)? <span class="fill">[Yes, escalate / No]</span></li>
+ <li>Are the intended users trained for this use (EU AI Act Art 4)? <span class="fill">[Yes / Training needed first]</span></li>
+ </ul>
+
+ <h3>Conditions</h3>
+ <p>If approval is conditional, list the conditions here (e.g. "human review of every output", "no personal data in prompts", "re-review after 3 months"):</p>
+ <p><span class="fill">[Conditions]</span></p>
+
+ <h2>Part C · The decision (approver fills in)</h2>
+ <table class="register-table">
+ <thead>
+ <tr>
+ <th>Decision</th>
+ <th>Meaning</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td><span class="status-approved">Approved</span></td>
+ <td>Use may go live as described, subject to any conditions in Part B. Add to the AI Tool Register and, where relevant, the AI Risk Register.</td>
+ </tr>
+ <tr>
+ <td><span class="status-pending">Approved with conditions / Deferred</span></td>
+ <td>Not yet live. Conditions must be met first (DPIA, training, DPA, pilot with review), or more information is needed from the requester or vendor.</td>
+ </tr>
+ <tr>
+ <td><span class="status-blocked">Refused</span></td>
+ <td>Use must not proceed. Record the reason. Tell the requester what alternative, if any, is acceptable.</td>
+ </tr>
+ </tbody>
+ </table>
+ <p><strong>Decision:</strong> <span class="fill">[Approved / Approved with conditions / Deferred / Refused]</span></p>
+ <p><strong>Reason (required for refusals and conditions):</strong> <span class="fill">[Reason]</span></p>
+ <p><strong>Approved / refused by:</strong> <span class="fill">[Name, role]</span> &nbsp;&nbsp; <strong>Signature:</strong> <span class="fill">[Signature]</span> &nbsp;&nbsp; <strong>Date:</strong> <span class="fill">[Date]</span></p>
+ <p><strong>Review date (approved uses):</strong> <span class="fill">[Date, typically 6 or 12 months]</span></p>
+
+ <h2>How to run the process</h2>
+ <ol>
+ <li><strong>Publish the front door.</strong> Put this form (or a shared-drive / intranet version of it) where staff will find it, and say plainly: no new AI use goes live without it.</li>
+ <li><strong>Keep the request light.</strong> Part A should take a requester ten minutes. If the form is painful, people will route around it, and you are back to shadow AI.</li>
+ <li><strong>Set a service standard.</strong> Commit to a decision within <span class="fill">[e.g. 5 working days]</span> for routine requests. Slow approval is the biggest driver of unapproved use.</li>
+ <li><strong>Record everything.</strong> File every completed form, including refusals, with your AI Tool Register. Refusals are some of your best audit evidence: they show the gate actually stops things.</li>
+ <li><strong>Feed the registers.</strong> On approval, update the AI Tool Register (tool, tier, data categories, conditions) and add any notable risks to the AI Risk Register.</li>
+ <li><strong>Review on schedule.</strong> Re-check approved use cases at their review date, or immediately if the vendor changes terms, the data categories change, or an incident occurs.</li>
+ </ol>
+
+ <h2>Standards referenced</h2>
+ <ul>
+ <li><strong>ISO/IEC 42001:2023</strong>, Clause 6.1 (actions to address risks and opportunities, including AI risk assessment and AI system impact assessment before deployment).</li>
+ <li><strong>EU AI Act 2024/1689</strong>, Article 4 (AI literacy for staff using AI systems), Article 26 (deployer obligations: use in accordance with instructions, human oversight, monitoring).</li>
+ <li><strong>GDPR 2016/679</strong>, Article 35 (Data Protection Impact Assessment where processing is likely to result in high risk to individuals).</li>
+ </ul>
+
+ </article>
+
+ <div class="callout note no-print">
+ <span class="callout-icon">i</span>
+ <div>
+ <div class="callout-title">Rolling this out</div>
+ <ol>
+ <li>Name one owner for intake decisions (e.g. DPO or IT lead) and one deputy, so requests never sit waiting for a single person.</li>
+ <li>Announce the process to all staff: "Want to use AI for something new? Fill in Part A, decision within <span class="fill">[X]</span> days."</li>
+ <li>Run your existing AI uses through the form retrospectively, it is the fastest way to surface shadow AI and build the habit.</li>
+ <li>Keep a simple log of requests and decisions (date, requester, use case, decision), and review it quarterly for patterns.</li>
+ <li>Link the form from your Acceptable Use Policy and your AI Tool Register so the three documents reference each other.</li>
+ </ol>
+ </div>
+ </div>
+
+</main>
+
+<nav class="module-bottom-nav no-print">
+ <a class="nav-btn" href="ai-tool-register.html">
+ <span class="nav-dir">Previous template</span>
+ <span class="nav-title">← AI Tool Register</span>
+ </a>
+ <a class="nav-btn next" href="ai-risk-register.html">
+ <span class="nav-dir">Next template</span>
+ <span class="nav-title">AI Risk Register →</span>
+ </a>
+</nav>
+
+<footer class="site-foot no-print">
+ <div class="foot-brand">
+ <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
+ <p>The AI Governance Platform, adopt AI safely, securely and responsibly.</p>
+ </div>
+ <div class="foot-col"><h4>Platform</h4><a href="../course.html">AI Safe@Work Learning</a><a href="../plus-pack.html">Governance Toolkit</a><a href="../index.html#included">Reporting &amp; Evidence</a></div>
+ <div class="foot-col"><h4>Services</h4><a href="../consultancy.html">Consultancy</a><a href="../msp.html">Partner Programme</a><a href="../consultancy.html">Health Checks</a></div>
+ <div class="foot-col"><h4>Resources</h4><a href="../resources.html">Blog</a><a href="../resources.html">FAQs</a><a href="../about.html#contact">Support</a></div>
+ <div class="foot-col"><h4>Company</h4><a href="../about.html">About</a><a href="../about.html#contact">Contact</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a></div>
+ <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
+</footer>
+
+</body>
+</html>

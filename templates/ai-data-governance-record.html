@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<meta name="color-scheme" content="dark light" />
+<script>try{if(localStorage.getItem("aisw-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+<title>AI Data Governance Record template · Attest AI</title>
+<meta name="description" content="A dataset-level provenance, quality and bias record for high-risk and material AI systems. Track source, lawful basis, representativeness, bias checks, and retention. Aligns with EU AI Act Article 10; GDPR Articles 5 &amp; 9; ISO/IEC 42001 Clause 7.4." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Attest AI" />
+<meta property="og:title" content="AI Data Governance Record template · Attest AI" />
+<meta property="og:description" content="A dataset-level provenance, quality and bias record for high-risk and material AI systems. Track source, lawful basis, representativeness, bias checks, and retention. Aligns with EU AI Act Article 10; GDPR Articles 5 &amp; 9; ISO/IEC 42001 Clause 7.4." />
+<meta property="og:url" content="https://attest-ai.com/templates/ai-data-governance-record.html" />
+<meta property="og:image" content="https://attest-ai.com/og-card.png?v=3" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Data Governance Record template · Attest AI" />
+<meta name="twitter:description" content="A dataset-level provenance, quality and bias record for high-risk and material AI systems. Track source, lawful basis, representativeness, bias checks, and retention. Aligns with EU AI Act Article 10; GDPR Articles 5 &amp; 9; ISO/IEC 42001 Clause 7.4." />
+<meta name="twitter:image" content="https://attest-ai.com/og-card.png?v=3" />
+<link rel="preload" href="../assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=20" />
+<script defer src="../assets/cinema.js?v=11"></script>
+<style>
+.template-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 2px;
+  background: rgba(250,88,45, 0.08);
+  border: 1px solid rgba(250,88,45, 0.32);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.template-tag::before {
+  content: '§';
+  color: var(--accent);
+  font-weight: 800;
+}
+.print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0 2rem; align-items: center; flex-wrap: wrap; }
+.print-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--accent); color: #0b0e14;
+  font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.7rem 1.25rem; border-radius: 2px;
+  border: none; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 0 1px rgba(250,88,45,0.4), 0 8px 24px rgba(250,88,45,0.2);
+}
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(250,88,45,0.55), 0 12px 32px rgba(250,88,45,0.3); }
+.print-btn:active { transform: translateY(-1px) scale(0.97); }
+.print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
+.fill {
+  display: inline-block;
+  padding: 0.1rem 0.55rem;
+  border-radius: 2px;
+  background: rgba(250,88,45, 0.10);
+  color: var(--accent);
+  border: 1px dashed rgba(250,88,45, 0.42);
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+}
+.register-table {
+  margin: 1.5rem 0;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.register-table thead {
+  background: rgba(250,88,45, 0.08);
+  border: 1px solid var(--border);
+}
+.register-table th {
+  padding: 0.9rem 1rem;
+  text-align: left;
+  font-weight: 700;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.register-table td {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  color: var(--text2);
+}
+.register-table tbody tr:nth-child(even) {
+  background: rgba(250,88,45, 0.02);
+}
+.status-approved { color: #2da45f; font-weight: 700; }
+.status-pending { color: #f7a600; font-weight: 700; }
+.status-blocked { color: #d62828; font-weight: 700; }
+.tier-enterprise { background: rgba(250,88,45, 0.1); color: var(--accent); }
+.tier-free { background: rgba(200,200,200, 0.1); color: var(--text2); }
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+.policy-doc {
+  margin: 1.5rem 0;
+  padding: 2rem 2.2rem;
+  background: var(--plate);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  box-shadow: var(--shadow-card);
+}
+.policy-doc h2 { margin-top: 2.2rem; }
+.policy-doc h2:first-child { margin-top: 0; }
+.policy-doc h3 { margin-top: 1.6rem; }
+.policy-doc ol, .policy-doc ul { padding-left: 1.4rem; }
+.policy-doc li { margin-bottom: 0.55rem; }
+@media (max-width: 640px) {
+  .register-table { font-size: 0.75rem; }
+  .register-table th, .register-table td { padding: 0.6rem 0.7rem; }
+}
+@media print {
+  .policy-doc { background: white !important; border: 1px solid #ccc !important; box-shadow: none !important; padding: 1rem 0 !important; }
+  .register-table { border: 1px solid #ccc; }
+  .register-table thead { background: #f5f5f5 !important; }
+  .register-table th { color: #46505e !important; }
+  .fill { background: white !important; color: #0b0e14 !important; border-color: #46505e !important; }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HowTo",
+      "name": "AI Data Governance Record template",
+      "description": "Dataset-level provenance, quality and bias record for high-risk and material AI systems, per EU AI Act Article 10.",
+      "url": "https://attest-ai.com/templates/ai-data-governance-record.html",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://attest-ai.com/#organization"
+      },
+      "totalTime": "PT30M",
+      "dateModified": "2026-07-08"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://attest-ai.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Templates",
+          "item": "https://attest-ai.com/templates/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AI Data Governance Record template · Attest AI",
+          "item": "https://attest-ai.com/templates/ai-data-governance-record.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="topbar no-print">
+ <a href="../index.html" class="brand"><img src="/assets/logo.png?v=2" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />Attest&nbsp;AI</a>
+ <nav class="topbar-nav">
+ <a href="../index.html#platform">Platform</a>
+ <a href="../index.html#included">Features</a>
+ <a href="../consultancy.html">Consultancy</a>
+ <a href="../msp.html">Partners</a>
+ <a href="../resources.html">Resources</a>
+ <a href="../about.html">About</a>
+ <a href="../portal/login.html">AIMP log in</a>
+ <a href="../about.html#contact" class="nav-cta always-show">Book a Demo</a>
+ </nav>
+</header>
+
+<main id="main">
+ <span class="template-tag no-print">Template · AI Data Governance Record v1.0</span>
+ <p class="eyebrow no-print">Data governance</p>
+ <h1 class="page-title">AI Data Governance Record for <span class="fill">[Dataset Name]</span></h1>
+ <p class="lede no-print">One record per dataset feeding a high-risk or material AI system. Document where the data came from, its lawful basis, how representative it is, what bias and quality checks you ran, and how long you keep it. Aligns with EU AI Act Art 10 (data governance, relevance, representativeness, errors, completeness, bias), GDPR Art 5 &amp; Art 9 (lawfulness, special-category data), ISO/IEC 42001 Clause 7.4 &amp; Annex A data controls.</p>
+
+ <div class="print-row no-print">
+ <button type="button" class="print-btn" onclick="window.print()">Print / Export as CSV →</button>
+ <span class="print-hint">Keep one record per dataset. Review at each retraining and at least annually. Update when the source, lawful basis, or use changes.</span>
+ </div>
+
+ <article class="policy-doc">
+
+ <span class="section-tag">Purpose and scope</span>
+ <h2>Why we document data governance</h2>
+ <p>An AI Data Governance Record captures the provenance, quality and bias posture of a single dataset that feeds an AI system. It is:</p>
+ <ul>
+ <li><strong>Provenance</strong>, shows where the data came from, on what lawful basis, and who is responsible for it.</li>
+ <li><strong>Quality</strong>, records the accuracy, completeness and error checks you performed before the data was used.</li>
+ <li><strong>Bias</strong>, documents how representative the data is of the target population and what under-represented groups or gaps remain.</li>
+ <li><strong>Audit evidence</strong>, demonstrates that data governance and management practices are in place (EU AI Act Art 10, GDPR Art 5, ISO/IEC 42001 Clause 7.4).</li>
+ </ul>
+
+ <h2>Scope</h2>
+ <p>Complete one record for each dataset that:</p>
+ <ol>
+ <li>Is used to train, validate or test a <strong>high-risk AI system</strong> (EU AI Act Annex III), or</li>
+ <li>Materially affects the behaviour of any AI system your organisation relies on for a significant decision, or</li>
+ <li>Contains personal data or special-category data processed by an AI system.</li>
+ </ol>
+ <p>Where a system draws on several datasets, keep a separate record for each and link them all to the same <a href="ai-system-card.html">AI System Card</a>.</p>
+
+ <h2>Who maintains this record</h2>
+ <p><strong>Ownership:</strong> <span class="fill">[Dataset owner / Data steward]</span></p>
+ <p><strong>Input sources:</strong> data acquisition and procurement records, DPIA, vendor data sheets, labelling / annotation logs, bias and quality test outputs.</p>
+ <p><strong>Review cadence:</strong> At every retraining and at least annually. Update within one week of any change to the data source, lawful basis, or intended use.</p>
+
+ <span class="section-tag">The record</span>
+ <h2>Dataset record fields</h2>
+ <p>Complete every row. Use <span class="fill">[square brackets]</span> to mark fields awaiting sign-off.</p>
+
+ <table class="register-table">
+ <thead>
+ <tr>
+ <th>Field</th>
+ <th>Entry</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td><strong>Dataset name &amp; version</strong></td>
+ <td><span class="fill">[e.g. Customer-churn-training-set v3.2]</span></td>
+ </tr>
+ <tr>
+ <td><strong>Owner / data steward</strong></td>
+ <td><span class="fill">[Name, role, team]</span></td>
+ </tr>
+ <tr>
+ <td><strong>Linked AI system(s)</strong></td>
+ <td><span class="fill">[System name]</span>, see the <a href="ai-system-card.html">AI System Card</a></td>
+ </tr>
+ <tr>
+ <td><strong>Source &amp; provenance</strong></td>
+ <td>First-party / Licensed / Publicly scraped / Synthetic, <span class="fill">[which, and supplier or origin]</span></td>
+ </tr>
+ <tr>
+ <td><strong>Lawful basis (GDPR Art 6)</strong></td>
+ <td><span class="fill">[Consent / Contract / Legal obligation / Legitimate interests / Public task]</span></td>
+ </tr>
+ <tr>
+ <td><strong>Special-category handling (GDPR Art 9)</strong></td>
+ <td>Present? Yes / No. If yes: <span class="fill">[Art 9 condition + DPIA reference]</span></td>
+ </tr>
+ <tr>
+ <td><strong>Collection period</strong></td>
+ <td><span class="fill">[From, to]</span></td>
+ </tr>
+ <tr>
+ <td><strong>Geography / jurisdiction</strong></td>
+ <td><span class="fill">[Countries / regions the data covers]</span></td>
+ </tr>
+ <tr>
+ <td><strong>Data categories &amp; sensitivity</strong></td>
+ <td><span class="fill">[Fields held; sensitivity tier]</span></td>
+ </tr>
+ <tr>
+ <td><strong>Representativeness vs target population</strong></td>
+ <td><span class="fill">[Who the model serves vs who is in the data; how measured]</span></td>
+ </tr>
+ <tr>
+ <td><strong>Known gaps / under-represented groups</strong></td>
+ <td><span class="fill">[Groups thin or absent; mitigation]</span></td>
+ </tr>
+ <tr>
+ <td><strong>Bias checks performed + result</strong></td>
+ <td><span class="fill">[Method, protected attributes tested, metric, outcome, date]</span></td>
+ </tr>
+ <tr>
+ <td><strong>Data-quality checks</strong></td>
+ <td>Accuracy, completeness, error rate, <span class="fill">[method + result]</span></td>
+ </tr>
+ <tr>
+ <td><strong>Labelling / annotation method &amp; QA</strong></td>
+ <td><span class="fill">[How labelled, by whom, inter-annotator QA]</span></td>
+ </tr>
+ <tr>
+ <td><strong>Retention &amp; deletion schedule</strong></td>
+ <td><span class="fill">[Retention period + trigger for deletion]</span></td>
+ </tr>
+ <tr>
+ <td><strong>Access controls</strong></td>
+ <td><span class="fill">[Who can access, storage location, encryption]</span></td>
+ </tr>
+ <tr>
+ <td><strong>Review date</strong></td>
+ <td><span class="fill">[Last reviewed]</span> / next due <span class="fill">[date]</span></td>
+ </tr>
+ </tbody>
+ </table>
+
+ <h2>Field notes</h2>
+
+ <h3>Source &amp; provenance</h3>
+ <p>State whether the data is <strong>first-party</strong> (you collected it), <strong>licensed</strong> (bought or licensed from a supplier), <strong>publicly scraped</strong>, or <strong>synthetic</strong>. For licensed or scraped data, record the licence terms and whether they permit AI training. Scraped data carries the highest lawful-basis and copyright risk, be explicit.</p>
+
+ <h3>Lawful basis &amp; special-category handling</h3>
+ <p>Record the GDPR Article 6 basis for processing the personal data in this dataset. If it contains special-category data (health, ethnicity, religion, biometrics, sexual orientation, etc.), you also need an Article 9 condition and, in almost all cases, a documented DPIA. If neither is in place, <strong>stop and escalate to the DPO</strong>.</p>
+
+ <h3>Representativeness and bias</h3>
+ <p>EU AI Act Article 10 requires training, validation and testing data to be relevant, sufficiently representative, and free of errors as far as possible. Describe the target population, compare it to what the dataset actually contains, and name any groups that are thin or missing. Record the bias test you ran (method, protected attributes, metric, result and date), not just that one was "done".</p>
+
+ <h3>Data-quality and labelling</h3>
+ <p>Note the accuracy, completeness and error checks performed, and how labels or annotations were produced and quality-assured. Article 10 expects appropriate data-preparation processing, including annotation, labelling, cleaning and the examination for possible biases.</p>
+
+ <h2>Worked example</h2>
+ <table class="register-table">
+ <thead>
+ <tr>
+ <th>Field</th>
+ <th>Example entry</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td><strong>Dataset name &amp; version</strong></td>
+ <td>Loan-eligibility-training-set v2.1</td>
+ </tr>
+ <tr>
+ <td><strong>Owner</strong></td>
+ <td>J. Okoro, Data Steward, Credit Risk</td>
+ </tr>
+ <tr>
+ <td><strong>Linked AI system(s)</strong></td>
+ <td>Automated loan-eligibility scorer (high-risk, Annex III)</td>
+ </tr>
+ <tr>
+ <td><strong>Source &amp; provenance</strong></td>
+ <td>First-party: internal loan applications 2021-2025</td>
+ </tr>
+ <tr>
+ <td><strong>Lawful basis / Art 9</strong></td>
+ <td>Contract (Art 6(1)(b)). No special-category data (ethnicity excluded at source)</td>
+ </tr>
+ <tr>
+ <td><strong>Representativeness</strong></td>
+ <td>Serves UK adult applicants; under-25s and rural postcodes under-represented (&lt;4%)</td>
+ </tr>
+ <tr>
+ <td><strong>Bias checks + result</strong></td>
+ <td>Demographic-parity + equal-opportunity by sex and age band, June 2026. Age-band gap 0.09, above 0.05 threshold, reweighting applied, re-tested</td>
+ </tr>
+ <tr>
+ <td><strong>Retention</strong></td>
+ <td>6 years from last decision, then deleted (aligned to lending records policy)</td>
+ </tr>
+ <tr>
+ <td><strong>Review date</strong></td>
+ <td>Reviewed 2026-06-30; next due at retraining or 2027-06-30</td>
+ </tr>
+ </tbody>
+ </table>
+
+ <h2>Standards referenced</h2>
+ <ul>
+ <li><strong>EU AI Act 2024/1689</strong>, Article 10 (data and data governance, relevance, representativeness, freedom from errors, completeness, and examination for bias in training, validation and testing data).</li>
+ <li><strong>GDPR 2016/679</strong>, Article 5 (lawfulness, fairness, purpose limitation, minimisation, accuracy), Article 9 (processing of special categories of personal data).</li>
+ <li><strong>ISO/IEC 42001:2023</strong>, Clause 7.4 (documented information) and Annex A controls on data for AI systems (data provenance, quality and preparation).</li>
+ <li><strong>ISO/IEC 27001:2022</strong>, Annex A.5.34 (privacy and protection of PII), A.8.10 (information deletion).</li>
+ </ul>
+
+ </article>
+
+ <div class="callout note no-print">
+ <span class="callout-icon">i</span>
+ <div>
+ <div class="callout-title">Rolling this out</div>
+ <ol>
+ <li>List every dataset that feeds a high-risk or material AI system. Create one record per dataset.</li>
+ <li>For each, gather the acquisition record, licence or consent evidence, and any DPIA. Confirm the lawful basis with your DPO.</li>
+ <li>Run and record representativeness, bias and data-quality checks before the data is used to train or evaluate a model.</li>
+ <li>Link each record to its <a href="ai-system-card.html">AI System Card</a> so provenance is traceable from the system down to the data.</li>
+ <li>Assign a single owner to review each record at every retraining and at least annually. Escalate any source or lawful-basis change the same week.</li>
+ </ol>
+ </div>
+ </div>
+
+</main>
+
+<nav class="module-bottom-nav no-print">
+ <a class="nav-btn" href="../module-procurement.html">
+ <span class="nav-dir">Back to</span>
+ <span class="nav-title">← Procurement track</span>
+ </a>
+ <a class="nav-btn next" href="ai-risk-register.html">
+ <span class="nav-dir">Next template</span>
+ <span class="nav-title">AI Risk Register →</span>
+ </a>
+</nav>
+
+<footer class="site-foot no-print">
+ <div class="foot-brand">
+ <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
+ <p>The AI Governance Platform, adopt AI safely, securely and responsibly.</p>
+ </div>
+ <div class="foot-col"><h4>Platform</h4><a href="../course.html">AI Safe@Work Learning</a><a href="../plus-pack.html">Governance Toolkit</a><a href="../index.html#included">Reporting &amp; Evidence</a></div>
+ <div class="foot-col"><h4>Services</h4><a href="../consultancy.html">Consultancy</a><a href="../msp.html">Partner Programme</a><a href="../consultancy.html">Health Checks</a></div>
+ <div class="foot-col"><h4>Resources</h4><a href="../resources.html">Blog</a><a href="../resources.html">FAQs</a><a href="../about.html#contact">Support</a></div>
+ <div class="foot-col"><h4>Company</h4><a href="../about.html">About</a><a href="../about.html#contact">Contact</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a></div>
+ <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
+</footer>
+
+</body>
+</html>

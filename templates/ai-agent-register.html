@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<meta name="color-scheme" content="dark light" />
+<script>try{if(localStorage.getItem("aisw-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+<title>AI Agent Register template · Attest AI</title>
+<meta name="description" content="A register of autonomous and tool-using AI agents (agentic AI, MCP servers) with their permissions, autonomy level, human-in-the-loop checkpoints, and kill-switch. Aligns with EU AI Act Articles 4, 14, 26; ISO/IEC 42001 Annex A operational controls." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Attest AI" />
+<meta property="og:title" content="AI Agent Register template · Attest AI" />
+<meta property="og:description" content="A register of autonomous and tool-using AI agents (agentic AI, MCP servers) with their permissions, autonomy level, human-in-the-loop checkpoints, and kill-switch. Aligns with EU AI Act Articles 4, 14, 26; ISO/IEC 42001 Annex A operational controls." />
+<meta property="og:url" content="https://attest-ai.com/templates/ai-agent-register.html" />
+<meta property="og:image" content="https://attest-ai.com/og-card.png?v=3" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Agent Register template · Attest AI" />
+<meta name="twitter:description" content="A register of autonomous and tool-using AI agents (agentic AI, MCP servers) with their permissions, autonomy level, human-in-the-loop checkpoints, and kill-switch. Aligns with EU AI Act Articles 4, 14, 26; ISO/IEC 42001 Annex A operational controls." />
+<meta name="twitter:image" content="https://attest-ai.com/og-card.png?v=3" />
+<link rel="preload" href="../assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=20" />
+<script defer src="../assets/cinema.js?v=11"></script>
+<style>
+.template-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 2px;
+  background: rgba(250,88,45, 0.08);
+  border: 1px solid rgba(250,88,45, 0.32);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.template-tag::before {
+  content: '§';
+  color: var(--accent);
+  font-weight: 800;
+}
+.print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0 2rem; align-items: center; flex-wrap: wrap; }
+.print-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--accent); color: #0b0e14;
+  font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.7rem 1.25rem; border-radius: 2px;
+  border: none; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 0 1px rgba(250,88,45,0.4), 0 8px 24px rgba(250,88,45,0.2);
+}
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(250,88,45,0.55), 0 12px 32px rgba(250,88,45,0.3); }
+.print-btn:active { transform: translateY(-1px) scale(0.97); }
+.print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
+.fill {
+  display: inline-block;
+  padding: 0.1rem 0.55rem;
+  border-radius: 2px;
+  background: rgba(250,88,45, 0.10);
+  color: var(--accent);
+  border: 1px dashed rgba(250,88,45, 0.42);
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+}
+.register-table {
+  margin: 1.5rem 0;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.register-table thead {
+  background: rgba(250,88,45, 0.08);
+  border: 1px solid var(--border);
+}
+.register-table th {
+  padding: 0.9rem 1rem;
+  text-align: left;
+  font-weight: 700;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.register-table td {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  color: var(--text2);
+}
+.register-table tbody tr:nth-child(even) {
+  background: rgba(250,88,45, 0.02);
+}
+.status-approved { color: #2da45f; font-weight: 700; }
+.status-pending { color: #f7a600; font-weight: 700; }
+.status-blocked { color: #d62828; font-weight: 700; }
+.tier-enterprise { background: rgba(250,88,45, 0.1); color: var(--accent); }
+.tier-free { background: rgba(200,200,200, 0.1); color: var(--text2); }
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+.policy-doc {
+  margin: 1.5rem 0;
+  padding: 2rem 2.2rem;
+  background: var(--plate);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  box-shadow: var(--shadow-card);
+}
+.policy-doc h2 { margin-top: 2.2rem; }
+.policy-doc h2:first-child { margin-top: 0; }
+.policy-doc h3 { margin-top: 1.6rem; }
+.policy-doc ol, .policy-doc ul { padding-left: 1.4rem; }
+.policy-doc li { margin-bottom: 0.55rem; }
+@media (max-width: 640px) {
+  .register-table { font-size: 0.75rem; }
+  .register-table th, .register-table td { padding: 0.6rem 0.7rem; }
+}
+@media print {
+  .policy-doc { background: white !important; border: 1px solid #ccc !important; box-shadow: none !important; padding: 1rem 0 !important; }
+  .register-table { border: 1px solid #ccc; }
+  .register-table thead { background: #f5f5f5 !important; }
+  .register-table th { color: #46505e !important; }
+  .fill { background: white !important; color: #0b0e14 !important; border-color: #46505e !important; }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HowTo",
+      "name": "AI Agent Register template",
+      "description": "Register of autonomous and tool-using AI agents; record permissions, autonomy level, human oversight checkpoints, and kill-switch.",
+      "url": "https://attest-ai.com/templates/ai-agent-register.html",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://attest-ai.com/#organization"
+      },
+      "totalTime": "PT30M",
+      "dateModified": "2026-07-08"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://attest-ai.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Templates",
+          "item": "https://attest-ai.com/templates/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AI Agent Register template · Attest AI",
+          "item": "https://attest-ai.com/templates/ai-agent-register.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="topbar no-print">
+ <a href="../index.html" class="brand"><img src="/assets/logo.png?v=2" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />Attest&nbsp;AI</a>
+ <nav class="topbar-nav">
+ <a href="../index.html#platform">Platform</a>
+ <a href="../index.html#included">Features</a>
+ <a href="../consultancy.html">Consultancy</a>
+ <a href="../msp.html">Partners</a>
+ <a href="../resources.html">Resources</a>
+ <a href="../about.html">About</a>
+ <a href="../portal/login.html">AIMP log in</a>
+ <a href="../about.html#contact" class="nav-cta always-show">Book a Demo</a>
+ </nav>
+</header>
+
+<main id="main">
+ <span class="template-tag no-print">Template · AI Agent Register v1.0</span>
+ <p class="eyebrow no-print">Governance inventory</p>
+ <h1 class="page-title">AI Agent Register for <span class="fill">[Company Name]</span></h1>
+ <p class="lede no-print">Register every AI agent that can take actions on its own, calling tools, APIs and MCP servers, browsing, or transacting. Record what each agent is authorised to do, its autonomy level, its human-in-the-loop checkpoints, and how to stop it. Aligns with EU AI Act Art 4 (AI literacy), Art 14 (human oversight), Art 26 (deployer obligations), and ISO/IEC 42001 Annex A operational controls.</p>
+
+ <div class="print-row no-print">
+ <button type="button" class="print-btn" onclick="window.print()">Print / Export as CSV →</button>
+ <span class="print-hint">Maintain this register in a shared spreadsheet. Review monthly. Update the same day an agent's tools, permissions, or autonomy level change.</span>
+ </div>
+
+ <article class="policy-doc">
+
+ <span class="section-tag">Purpose and scope</span>
+ <h2>Why we register agents</h2>
+ <p>An AI agent is not just a chatbot, it can <strong>take actions</strong> on your systems and on the outside world: call tools and APIs, browse the web, read and write data, send messages, move money, or connect to MCP servers. An AI Agent Register records what each agent is, what it may do, who is accountable for it, and how a human can stop it. It is:</p>
+ <ul>
+ <li><strong>Control</strong>, makes explicit what actions each agent is permitted to take and what it is forbidden to do.</li>
+ <li><strong>Oversight</strong>, documents the human-in-the-loop checkpoints and kill-switch required by EU AI Act Article 14.</li>
+ <li><strong>Accountability</strong>, names a single accountable human for every autonomous system (Art 26 deployer obligations).</li>
+ <li><strong>Audit evidence</strong>, shows that autonomy is bounded, logged, and reversible, key to demonstrating governance maturity under ISO/IEC 42001 Annex A.</li>
+ </ul>
+ <p><strong>Re-assessment trigger:</strong> if an agent is given new tools, wider permissions, a higher autonomy level, or is repurposed so that it <em>materially changes what it does</em>, treat it as a new deployment, re-run the risk assessment and re-approve before the change goes live.</p>
+
+ <h2>Scope (what counts as an agent)</h2>
+ <p>This register covers any AI system that can act, not just answer. Register it here if it:</p>
+ <ol>
+ <li>Calls tools, functions, APIs, or MCP servers (e.g. an assistant that can create tickets, send email, or query a database).</li>
+ <li>Browses or operates software autonomously (e.g. a computer-use or browser agent that clicks and fills forms).</li>
+ <li>Transacts or changes state (e.g. places orders, refunds customers, updates records, deploys code).</li>
+ <li>Runs on a schedule or a trigger without a human prompting each action (e.g. a nightly reconciliation agent, an inbox-triage agent).</li>
+ <li>Chains multiple steps or sub-agents to complete a task with limited or no human intervention.</li>
+ </ol>
+ <p>A plain chat tool with no ability to take actions belongs in the <strong>AI Tool Register</strong>, not here. If it can act, it belongs here.</p>
+
+ <h2>Who maintains this register</h2>
+ <p><strong>Ownership:</strong> <span class="fill">[AI governance lead / Head of Engineering / DPO]</span></p>
+ <p><strong>Input sources:</strong> engineering deployment records, MCP server configurations, integration and API-key audits, procurement requests, incident reports, vendor change notifications.</p>
+ <p><strong>Review cadence:</strong> Monthly. Update the register the same day an agent's tools, permitted actions, data access, autonomy level, or spend limits change, and re-run the risk assessment before any material change goes live.</p>
+
+ <h2>Register fields explained</h2>
+
+ <h3>Agent name &amp; version</h3>
+ <p>The name staff and engineers use for the agent, plus a version or build reference so you can tell which behaviour is live (e.g. "Invoice-Triage Agent v2.3"). Behaviour changes between versions, pin the version.</p>
+
+ <h3>Owner / accountable human</h3>
+ <p>One <strong>named person</strong> accountable for the agent's behaviour, not a team inbox. This is the human who answers for what the agent does and who can authorise its shutdown (EU AI Act Art 26).</p>
+
+ <h3>Purpose &amp; authorised task</h3>
+ <p>The specific job the agent is authorised to do, in plain English. Be narrow: "reconcile supplier invoices against purchase orders and flag mismatches", not "help with finance". Anything outside this is out of scope and triggers re-assessment.</p>
+
+ <h3>Autonomy level</h3>
+ <p>How much the agent may do without a human. Choose one:</p>
+ <ul>
+ <li><strong>Suggest-only:</strong> the agent proposes; a human takes every action. Lowest risk.</li>
+ <li><strong>Act-with-approval:</strong> the agent prepares an action but a human must approve it before it executes (human-in-the-loop).</li>
+ <li><strong>Act-autonomously:</strong> the agent executes without per-action approval, within its bounded permissions. Highest risk, requires the strongest oversight, limits, and logging.</li>
+ </ul>
+
+ <h3>Human-in-the-loop checkpoints (Art 14)</h3>
+ <p>The specific points at which a human must review, approve, or can intervene, and who that human is. EU AI Act Article 14 requires that oversight is effective: the person must be able to understand the agent's output, decide not to use it, and override or stop it. Name the checkpoints (e.g. "any payment over &pound;500 requires finance approval").</p>
+
+ <h3>Kill-switch / how to stop it</h3>
+ <p>The concrete way to stop the agent immediately, and who can trigger it (e.g. "disable API key in vault", "toggle feature flag <span class="fill">[flag-name]</span>", "revoke MCP server token"). If there is no fast way to stop it, that is a finding, fix it before go-live.</p>
+
+ <h2>Register columns</h2>
+ <p>Capture at least the following for every agent. The sample below shows the layout; keep the full field set in your spreadsheet.</p>
+
+ <table class="register-table">
+ <thead>
+ <tr>
+ <th>Field</th>
+ <th>What to record</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr><td><strong>Agent name &amp; version</strong></td><td>Name and live version/build reference.</td></tr>
+ <tr><td><strong>Owner / accountable human</strong></td><td>One named person accountable for its behaviour.</td></tr>
+ <tr><td><strong>Purpose &amp; authorised task</strong></td><td>The specific task it is authorised to do, narrowly stated.</td></tr>
+ <tr><td><strong>Underlying model &amp; vendor</strong></td><td>Model and provider (e.g. Claude Opus, Anthropic; GPT-4o, OpenAI).</td></tr>
+ <tr><td><strong>Tools / APIs / MCP servers</strong></td><td>Every tool, API, and MCP server it may call.</td></tr>
+ <tr><td><strong>Permitted actions</strong></td><td>Actions it is allowed to take.</td></tr>
+ <tr><td><strong>Forbidden actions</strong></td><td>Actions it must never take (explicit deny-list).</td></tr>
+ <tr><td><strong>Data it can read / write</strong></td><td>Which data stores and categories it may read and which it may write.</td></tr>
+ <tr><td><strong>Autonomy level</strong></td><td>Suggest-only / act-with-approval / act-autonomously.</td></tr>
+ <tr><td><strong>Human-in-the-loop checkpoints</strong></td><td>Where a human reviews/approves/can intervene, and who (Art 14).</td></tr>
+ <tr><td><strong>Kill-switch / how to stop it</strong></td><td>Concrete stop mechanism and who can trigger it.</td></tr>
+ <tr><td><strong>Spend / rate limits</strong></td><td>Budget caps, per-action limits, request-rate ceilings.</td></tr>
+ <tr><td><strong>Logging &amp; audit-trail location</strong></td><td>Where the agent's actions are logged and how to retrieve them.</td></tr>
+ <tr><td><strong>Failure / rollback behaviour</strong></td><td>What happens on error; how actions are reversed.</td></tr>
+ <tr><td><strong>Linked AI System Card + Risk Assessment</strong></td><td>Links to the system card and current risk assessment.</td></tr>
+ <tr><td><strong>Review date</strong></td><td>Date last reviewed and next review due.</td></tr>
+ </tbody>
+ </table>
+
+ <h2>Sample register entries</h2>
+
+ <table class="register-table">
+ <thead>
+ <tr>
+ <th>Agent &amp; owner</th>
+ <th>Model &amp; vendor</th>
+ <th>Tools / MCP</th>
+ <th>Autonomy</th>
+ <th>Human checkpoints (Art 14)</th>
+ <th>Kill-switch</th>
+ <th>Limits &amp; logging</th>
+ <th>Status</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td><strong>Invoice-Triage Agent v2.3</strong><br/>Owner: A. Okafor, Finance Ops</td>
+ <td>Claude Opus (Anthropic)</td>
+ <td>Accounts API (read), PO database (read), Slack MCP (post to #ap-review)</td>
+ <td><span class="tier-free">Act-with-approval</span></td>
+ <td>Flags mismatches only. Any write to the ledger or payment requires finance approval in-app.</td>
+ <td>Disable API key in vault; toggle flag <code>agent.invoice.enabled</code></td>
+ <td>No spend authority. All actions logged to Datadog (agent-audit index). Rollback: no writes, so none needed.</td>
+ <td><span class="status-approved">Approved</span></td>
+ </tr>
+ <tr>
+ <td><strong>Inbox-Triage Agent v1.1</strong><br/>Owner: R. Devi, IT</td>
+ <td>GPT-4o (OpenAI)</td>
+ <td>Gmail MCP (label, draft), calendar API (read)</td>
+ <td><span class="tier-free">Act-with-approval</span></td>
+ <td>May label and draft only. Cannot send; every reply drafted for human send.</td>
+ <td>Revoke Gmail MCP token; disable scheduled trigger</td>
+ <td>Rate: 200 messages/hour. Logged to SIEM. Forbidden: sending, deleting, forwarding externally.</td>
+ <td><span class="status-approved">Approved</span></td>
+ </tr>
+ <tr>
+ <td><strong>Refund Agent v0.4 (pilot)</strong><br/>Owner: pending</td>
+ <td>Claude Sonnet (Anthropic)</td>
+ <td>Payments API (write), CRM MCP (write)</td>
+ <td><span class="tier-enterprise">Act-autonomously</span></td>
+ <td>Proposed: auto-refund under &pound;50; over &pound;50 to human. Not yet signed off.</td>
+ <td>Not yet defined, blocker</td>
+ <td>No spend cap set yet. Logging not yet wired to audit index.</td>
+ <td><span class="status-blocked">Blocked</span></td>
+ </tr>
+ </tbody>
+ </table>
+
+ <h2>How to complete and maintain this register</h2>
+ <ol>
+ <li><strong>Find the agents:</strong> ask engineering and IT what runs on a schedule or has tool/API/MCP access. Audit API keys, service accounts, and MCP server configs. List every agent that can take an action.</li>
+ <li><strong>Bound each agent:</strong> for every agent, write down its narrow authorised task, its permitted and forbidden actions, and its data read/write scope. If any of these is vague, tighten it before approval.</li>
+ <li><strong>Set oversight and limits:</strong> assign one accountable human, define the autonomy level, the Article 14 checkpoints, the kill-switch, and the spend/rate limits. Confirm logging is wired to a retrievable audit trail.</li>
+ <li><strong>Approve and link:</strong> link the agent to its AI System Card and current risk assessment. Do not approve act-autonomously agents without a working kill-switch and audit logging.</li>
+ <li><strong>Maintain monthly:</strong> review every agent. Any new tool, wider permission, higher autonomy level, or change of purpose is a material change, re-run the risk assessment and re-approve before it goes live. Update the register the same day.</li>
+ </ol>
+
+ <h2>Standards referenced</h2>
+ <ul>
+ <li><strong>EU AI Act 2024/1689</strong>, Article 4 (AI literacy), Article 14 (human oversight, including the ability to intervene and stop the system), Article 26 (deployer obligations, including monitoring and named accountability).</li>
+ <li><strong>ISO/IEC 42001:2023</strong>, Annex A operational controls (operational planning and control of AI systems, including monitoring, logging, and control of changes).</li>
+ <li><strong>ISO/IEC 27001:2022</strong>, Annex A.8.16 (monitoring activities), A.5.15 / A.8.2 (access control and privileged access) for the tools and credentials agents are granted.</li>
+ </ul>
+
+ </article>
+
+ <div class="callout note no-print">
+ <span class="callout-icon">i</span>
+ <div>
+ <div class="callout-title">Rolling this out</div>
+ <ol>
+ <li>Set up the register in a shared spreadsheet (Google Sheets, Excel, Notion, etc.). Copy the full field set above.</li>
+ <li>Ask engineering and IT: "What agents can take actions here, on a schedule, a trigger, or with tool/API/MCP access?" Audit keys and MCP configs.</li>
+ <li>For each agent, bound its task, permitted vs forbidden actions, data scope, autonomy level, checkpoints, kill-switch, and limits.</li>
+ <li>Link each agent to its AI System Card and risk assessment. Block any autonomous agent that lacks a kill-switch or audit logging.</li>
+ <li>Assign one owner to review monthly and re-assess on any material change (new tools, wider permissions, higher autonomy, new purpose).</li>
+ </ol>
+ </div>
+ </div>
+
+</main>
+
+<nav class="module-bottom-nav no-print">
+ <a class="nav-btn" href="ai-tool-register.html">
+ <span class="nav-dir">Back to</span>
+ <span class="nav-title">← AI Tool Register</span>
+ </a>
+ <a class="nav-btn next" href="ai-risk-register.html">
+ <span class="nav-dir">Next template</span>
+ <span class="nav-title">AI Risk Register →</span>
+ </a>
+</nav>
+
+<footer class="site-foot no-print">
+ <div class="foot-brand">
+ <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
+ <p>The AI Governance Platform, adopt AI safely, securely and responsibly.</p>
+ </div>
+ <div class="foot-col"><h4>Platform</h4><a href="../course.html">AI Safe@Work Learning</a><a href="../plus-pack.html">Governance Toolkit</a><a href="../index.html#included">Reporting &amp; Evidence</a></div>
+ <div class="foot-col"><h4>Services</h4><a href="../consultancy.html">Consultancy</a><a href="../msp.html">Partner Programme</a><a href="../consultancy.html">Health Checks</a></div>
+ <div class="foot-col"><h4>Resources</h4><a href="../resources.html">Blog</a><a href="../resources.html">FAQs</a><a href="../about.html#contact">Support</a></div>
+ <div class="foot-col"><h4>Company</h4><a href="../about.html">About</a><a href="../about.html#contact">Contact</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a></div>
+ <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
+</footer>
+
+</body>
+</html>

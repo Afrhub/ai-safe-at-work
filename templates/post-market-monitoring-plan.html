@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<meta name="color-scheme" content="dark light" />
+<script>try{if(localStorage.getItem("aisw-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+<title>AI Post-Market Monitoring Plan template · Attest AI</title>
+<meta name="description" content="A living plan for monitoring a high-risk AI system in operation. Track signals, thresholds, escalation, serious-incident reporting, and corrective actions. Aligns with EU AI Act Articles 72, 73, 26(5); ISO/IEC 42001 Clauses 9 and 10." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Attest AI" />
+<meta property="og:title" content="AI Post-Market Monitoring Plan template · Attest AI" />
+<meta property="og:description" content="A living plan for monitoring a high-risk AI system in operation. Track signals, thresholds, escalation, serious-incident reporting, and corrective actions. Aligns with EU AI Act Articles 72, 73, 26(5); ISO/IEC 42001 Clauses 9 and 10." />
+<meta property="og:url" content="https://attest-ai.com/templates/post-market-monitoring-plan.html" />
+<meta property="og:image" content="https://attest-ai.com/og-card.png?v=3" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Post-Market Monitoring Plan template · Attest AI" />
+<meta name="twitter:description" content="A living plan for monitoring a high-risk AI system in operation. Track signals, thresholds, escalation, serious-incident reporting, and corrective actions. Aligns with EU AI Act Articles 72, 73, 26(5); ISO/IEC 42001 Clauses 9 and 10." />
+<meta name="twitter:image" content="https://attest-ai.com/og-card.png?v=3" />
+<link rel="preload" href="../assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=20" />
+<script defer src="../assets/cinema.js?v=11"></script>
+<style>
+.template-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 2px;
+  background: rgba(250,88,45, 0.08);
+  border: 1px solid rgba(250,88,45, 0.32);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.template-tag::before {
+  content: '§';
+  color: var(--accent);
+  font-weight: 800;
+}
+.print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0 2rem; align-items: center; flex-wrap: wrap; }
+.print-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--accent); color: #0b0e14;
+  font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.7rem 1.25rem; border-radius: 2px;
+  border: none; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 0 1px rgba(250,88,45,0.4), 0 8px 24px rgba(250,88,45,0.2);
+}
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(250,88,45,0.55), 0 12px 32px rgba(250,88,45,0.3); }
+.print-btn:active { transform: translateY(-1px) scale(0.97); }
+.print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
+.fill {
+  display: inline-block;
+  padding: 0.1rem 0.55rem;
+  border-radius: 2px;
+  background: rgba(250,88,45, 0.10);
+  color: var(--accent);
+  border: 1px dashed rgba(250,88,45, 0.42);
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+}
+.register-table {
+  margin: 1.5rem 0;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.register-table thead {
+  background: rgba(250,88,45, 0.08);
+  border: 1px solid var(--border);
+}
+.register-table th {
+  padding: 0.9rem 1rem;
+  text-align: left;
+  font-weight: 700;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.register-table td {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  color: var(--text2);
+}
+.register-table tbody tr:nth-child(even) {
+  background: rgba(250,88,45, 0.02);
+}
+.status-approved { color: #2da45f; font-weight: 700; }
+.status-pending { color: #f7a600; font-weight: 700; }
+.status-blocked { color: #d62828; font-weight: 700; }
+.tier-enterprise { background: rgba(250,88,45, 0.1); color: var(--accent); }
+.tier-free { background: rgba(200,200,200, 0.1); color: var(--text2); }
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+.policy-doc {
+  margin: 1.5rem 0;
+  padding: 2rem 2.2rem;
+  background: var(--plate);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  box-shadow: var(--shadow-card);
+}
+.policy-doc h2 { margin-top: 2.2rem; }
+.policy-doc h2:first-child { margin-top: 0; }
+.policy-doc h3 { margin-top: 1.6rem; }
+.policy-doc ol, .policy-doc ul { padding-left: 1.4rem; }
+.policy-doc li { margin-bottom: 0.55rem; }
+@media (max-width: 640px) {
+  .register-table { font-size: 0.75rem; }
+  .register-table th, .register-table td { padding: 0.6rem 0.7rem; }
+}
+@media print {
+  .policy-doc { background: white !important; border: 1px solid #ccc !important; box-shadow: none !important; padding: 1rem 0 !important; }
+  .register-table { border: 1px solid #ccc; }
+  .register-table thead { background: #f5f5f5 !important; }
+  .register-table th { color: #46505e !important; }
+  .fill { background: white !important; color: #0b0e14 !important; border-color: #46505e !important; }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HowTo",
+      "name": "AI Post-Market Monitoring Plan template",
+      "description": "A living plan for monitoring a high-risk AI system in operation: signals, thresholds, escalation, serious-incident reporting, and corrective actions.",
+      "url": "https://attest-ai.com/templates/post-market-monitoring-plan.html",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://attest-ai.com/#organization"
+      },
+      "totalTime": "PT45M",
+      "dateModified": "2026-07-08"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://attest-ai.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Templates",
+          "item": "https://attest-ai.com/templates/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AI Post-Market Monitoring Plan template · Attest AI",
+          "item": "https://attest-ai.com/templates/post-market-monitoring-plan.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="topbar no-print">
+ <a href="../index.html" class="brand"><img src="/assets/logo.png?v=2" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />Attest&nbsp;AI</a>
+ <nav class="topbar-nav">
+ <a href="../index.html#platform">Platform</a>
+ <a href="../index.html#included">Features</a>
+ <a href="../consultancy.html">Consultancy</a>
+ <a href="../msp.html">Partners</a>
+ <a href="../resources.html">Resources</a>
+ <a href="../about.html">About</a>
+ <a href="../portal/login.html">AIMP log in</a>
+ <a href="../about.html#contact" class="nav-cta always-show">Book a Demo</a>
+ </nav>
+</header>
+
+<main id="main">
+ <span class="template-tag no-print">Template · AI Post-Market Monitoring Plan v1.0</span>
+ <p class="eyebrow no-print">Post-market monitoring</p>
+ <h1 class="page-title">AI Post-Market Monitoring Plan for <span class="fill">[System Name]</span></h1>
+ <p class="lede no-print">The living record of how you watch a high-risk AI system once it is in use, what you measure, the thresholds that trigger action, who reviews it, and how serious incidents get reported. Aligns with EU AI Act Art 72 (post-market monitoring system), Art 73 (reporting of serious incidents), Art 26(5) (deployer monitoring duty), and ISO/IEC 42001 Clause 9 (performance evaluation) &amp; Clause 10 (improvement).</p>
+
+ <div class="print-row no-print">
+ <button type="button" class="print-btn" onclick="window.print()">Print / Export as CSV →</button>
+ <span class="print-hint">Keep this plan alongside the AI System Card. Review on the cadence set below, and after every model, data, or usage change. Update the corrective-action log the same day as any breach.</span>
+ </div>
+
+ <article class="policy-doc">
+
+ <span class="section-tag">Purpose and scope</span>
+ <h2>Why post-market monitoring is required</h2>
+ <p>Governance done at procurement and deployment tells you a system was safe on the day it went live. It does not tell you it stayed that way. Models drift, data shifts, people use tools in ways nobody designed for, and harms often only show up in the aggregate over weeks. A Post-Market Monitoring Plan is:</p>
+ <ul>
+ <li><strong>A legal obligation</strong>, the EU AI Act requires providers to operate a post-market monitoring system (Art 72) and to report serious incidents (Art 73). Deployers of high-risk systems must monitor operation and inform the provider or authority when they spot a risk or a serious incident (Art 26(5)).</li>
+ <li><strong>An early-warning system</strong>, defined thresholds turn a vague "something feels off" into a specific, actionable breach with an owner and a clock.</li>
+ <li><strong>The improvement loop</strong>, ISO/IEC 42001 Clause 9 (performance evaluation) and Clause 10 (improvement) expect measured performance to feed corrective action.</li>
+ <li><strong>Audit evidence</strong>, it shows a regulator that oversight is continuous, not front-loaded.</li>
+ </ul>
+
+ <h2>Scope</h2>
+ <p>Complete <strong>one plan per high-risk AI system</strong>. This plan covers:</p>
+ <ol>
+ <li>The AI system named above, in its production deployment (not development or test instances).</li>
+ <li>All the ways it can degrade or cause harm, drift, accuracy or quality loss, safety failures, bias, misuse, and loss of availability.</li>
+ <li>The full monitoring loop, from raw telemetry through thresholds, review, escalation, incident reporting, and corrective action.</li>
+ <li>The triggers that force this plan (and the underlying risk assessment) to be re-reviewed.</li>
+ </ol>
+
+ <h2>Who maintains this plan</h2>
+ <p><strong>Plan owner:</strong> <span class="fill">[named individual, e.g. AI system owner / product lead]</span></p>
+ <p><strong>Reviewers:</strong> <span class="fill">[e.g. DPO, risk lead, model owner]</span></p>
+ <p><strong>Input sources:</strong> production telemetry and dashboards, user feedback and complaints, provider change notices, incident reports, periodic quality audits.</p>
+ <p><strong>Review cadence:</strong> <span class="fill">[e.g. monthly]</span>. Update within one week of any model change, data change, usage change, or serious incident.</p>
+
+ <span class="section-tag">The plan</span>
+ <h2>1. System &amp; owner</h2>
+ <table class="register-table">
+ <thead>
+ <tr><th>Field</th><th>Value</th></tr>
+ </thead>
+ <tbody>
+ <tr><td>System name</td><td><span class="fill">[System Name]</span></td></tr>
+ <tr><td>Version / model in production</td><td><span class="fill">[e.g. v3.2, provider model + date]</span></td></tr>
+ <tr><td>Purpose &amp; intended use</td><td><span class="fill">[what it does, for whom]</span></td></tr>
+ <tr><td>Risk classification</td><td><span class="fill">[High-risk, EU AI Act Annex III ref]</span></td></tr>
+ <tr><td>Provider</td><td><span class="fill">[vendor / internal team]</span></td></tr>
+ <tr><td>Plan owner (accountable)</td><td><span class="fill">[named individual]</span></td></tr>
+ <tr><td>Date plan created / last reviewed</td><td><span class="fill">[DD/MM/YYYY]</span></td></tr>
+ <tr><td>Linked artefacts</td><td>AI System Card · AI Incident Form · Monitoring &amp; KPI dashboard</td></tr>
+ </tbody>
+ </table>
+
+ <h2>2. What we monitor, signals, sources &amp; methods</h2>
+ <p>For each signal, record where the data comes from, how and how often you check it, the acceptable range, and the threshold that triggers escalation. The rows below are worked examples, replace with your own.</p>
+ <table class="register-table">
+ <thead>
+ <tr>
+ <th>Signal</th>
+ <th>What it means</th>
+ <th>Source / telemetry</th>
+ <th>Method &amp; frequency</th>
+ <th>Acceptable range</th>
+ <th>Escalation threshold</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td><strong>Drift</strong></td>
+ <td>Input or output distribution has moved away from what the system was validated on.</td>
+ <td>Input-feature distribution logs; output-class distribution</td>
+ <td>Automated statistical drift check, weekly</td>
+ <td>Population Stability Index &lt; 0.1</td>
+ <td>PSI ≥ 0.25 on any key feature</td>
+ </tr>
+ <tr>
+ <td><strong>Accuracy / quality</strong></td>
+ <td>The system's outputs are correct and useful.</td>
+ <td>Labelled sample review; ground-truth back-testing</td>
+ <td>Human audit of sampled outputs, monthly</td>
+ <td>≥ 95% acceptable on audit sample</td>
+ <td>&lt; 90% acceptable, or a 3-point drop month-on-month</td>
+ </tr>
+ <tr>
+ <td><strong>Safety</strong></td>
+ <td>Harmful, unsafe, or out-of-policy outputs reaching users.</td>
+ <td>Safety-filter logs; user reports; guardrail hits</td>
+ <td>Automated log review + report triage, weekly</td>
+ <td>0 confirmed harmful outputs reaching users</td>
+ <td>Any confirmed harmful output reaching a user</td>
+ </tr>
+ <tr>
+ <td><strong>Bias</strong></td>
+ <td>Outcomes differ unfairly across protected groups.</td>
+ <td>Outcome metrics segmented by group (where lawful)</td>
+ <td>Disparity analysis, quarterly</td>
+ <td>Selection-rate ratio within 0.8-1.25 (four-fifths)</td>
+ <td>Ratio outside 0.8-1.25 for any group</td>
+ </tr>
+ <tr>
+ <td><strong>Misuse</strong></td>
+ <td>The system used outside its intended purpose or scope.</td>
+ <td>Usage logs; anomaly detection; access reviews</td>
+ <td>Usage-pattern review, monthly</td>
+ <td>Usage within documented intended-use cases</td>
+ <td>Any material out-of-scope use pattern</td>
+ </tr>
+ <tr>
+ <td><strong>Availability</strong></td>
+ <td>The system is up and responding within tolerance.</td>
+ <td>Uptime monitor; latency / error-rate telemetry</td>
+ <td>Automated, continuous</td>
+ <td>≥ 99.5% uptime; error rate &lt; 1%</td>
+ <td>&lt; 99% uptime in any week, or error rate ≥ 5%</td>
+ </tr>
+ </tbody>
+ </table>
+
+ <h2>3. Who reviews, and how often</h2>
+ <table class="register-table">
+ <thead>
+ <tr><th>Review</th><th>Owner</th><th>Frequency</th><th>Output</th></tr>
+ </thead>
+ <tbody>
+ <tr><td>Signal / dashboard check</td><td><span class="fill">[e.g. model owner]</span></td><td><span class="fill">[weekly]</span></td><td>Logged read; flag any breach</td></tr>
+ <tr><td>Monitoring review meeting</td><td><span class="fill">[e.g. AI governance group]</span></td><td><span class="fill">[monthly]</span></td><td>Minuted review; actions raised</td></tr>
+ <tr><td>Bias / fairness review</td><td><span class="fill">[e.g. DPO + model owner]</span></td><td><span class="fill">[quarterly]</span></td><td>Disparity report</td></tr>
+ <tr><td>Full plan &amp; risk re-review</td><td><span class="fill">[plan owner]</span></td><td><span class="fill">[annually + on trigger]</span></td><td>Updated plan &amp; risk register entry</td></tr>
+ </tbody>
+ </table>
+
+ <h2>4. Escalation path when a threshold is breached</h2>
+ <ol>
+ <li><strong>Detect &amp; log.</strong> Whoever spots the breach records it (date, signal, observed value vs threshold) and notifies the plan owner.</li>
+ <li><strong>Triage.</strong> The plan owner assesses severity: routine degradation, material risk, or potential serious incident.</li>
+ <li><strong>Contain.</strong> Where user harm is plausible, apply mitigations, tighten guardrails, restrict scope, or take the system offline pending review.</li>
+ <li><strong>Report up.</strong> Notify <span class="fill">[risk lead / DPO / senior owner]</span>. For deployers, inform the provider of any risk identified (Art 26(5)).</li>
+ <li><strong>Serious incident?</strong> If it meets the definition below, start the Art 73 reporting clock and complete the AI Incident Form.</li>
+ <li><strong>Record corrective action.</strong> Log the action, owner, and outcome in section 6.</li>
+ </ol>
+
+ <h2>5. Serious incidents &amp; the reporting clock</h2>
+ <p>A <strong>serious incident</strong> (EU AI Act Art 3(49) / Art 73) is any incident or malfunction of an AI system that directly or indirectly leads to, or could lead to, one of the following:</p>
+ <ul>
+ <li>The death of a person, or serious harm to a person's health.</li>
+ <li>A serious and irreversible disruption of critical infrastructure.</li>
+ <li>An infringement of obligations under Union law intended to protect fundamental rights.</li>
+ <li>Serious harm to property or the environment.</li>
+ </ul>
+ <p><strong>The Art 73 reporting clock (report to the relevant market surveillance authority):</strong></p>
+ <table class="register-table">
+ <thead>
+ <tr><th>Situation</th><th>Reporting deadline (from awareness)</th></tr>
+ </thead>
+ <tbody>
+ <tr><td>Serious incident (general)</td><td>Without undue delay, and no later than <strong>15 days</strong></td></tr>
+ <tr><td>Widespread infringement or serious &amp; irreversible disruption of critical infrastructure</td><td>Immediately, no later than <strong>2 days</strong></td></tr>
+ <tr><td>Death of a person</td><td>Immediately once the link is established, no later than <strong>10 days</strong></td></tr>
+ </tbody>
+ </table>
+ <p class="no-print" style="margin-top:1rem;">Do not wait for full facts to file, an initial report followed by a complete one is expected. Capture every detail on the <strong>AI Incident Form</strong> and start the clock from the moment you become aware.</p>
+ <p><strong>Who owns reporting:</strong> <span class="fill">[named individual]</span>. <strong>Deputy:</strong> <span class="fill">[named individual]</span>.</p>
+
+ <h2>6. Corrective-action log</h2>
+ <p>Every breach, incident, and improvement is recorded here. This is your ISO/IEC 42001 Clause 10 evidence.</p>
+ <table class="register-table">
+ <thead>
+ <tr><th>Date</th><th>Trigger</th><th>Action taken</th><th>Owner</th><th>Outcome / status</th></tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>12/06/2026</td>
+ <td>Drift PSI 0.27 on key input feature</td>
+ <td>Paused new intake; recalibrated against fresh sample; asked provider for retrained model</td>
+ <td>Model owner</td>
+ <td>PSI back to 0.08; monitoring resumed</td>
+ </tr>
+ <tr>
+ <td><span class="fill">[DD/MM/YYYY]</span></td>
+ <td><span class="fill">[what triggered it]</span></td>
+ <td><span class="fill">[what you did]</span></td>
+ <td><span class="fill">[who owns it]</span></td>
+ <td><span class="fill">[result / open / closed]</span></td>
+ </tr>
+ </tbody>
+ </table>
+
+ <h2>7. Re-review triggers</h2>
+ <p>Re-run this plan and the underlying risk assessment whenever any of the following occurs, do not wait for the scheduled cadence:</p>
+ <ul>
+ <li><strong>Model change</strong>, provider ships a new model version, you retrain, or you change providers.</li>
+ <li><strong>Data change</strong>, the input data source, schema, population, or labelling approach shifts.</li>
+ <li><strong>Usage change</strong>, a new user group, use case, jurisdiction, or volume step-change.</li>
+ <li><strong>Any serious incident</strong>, or a cluster of lower-severity breaches pointing at a systemic issue.</li>
+ <li><strong>Regulatory change</strong>, new guidance, standard, or authority requirement.</li>
+ </ul>
+
+ <h2>8. Records retention &amp; plan review date</h2>
+ <p><strong>Retention:</strong> Monitoring logs, review minutes, incident records, and the corrective-action log are retained for <span class="fill">[e.g. 10 years / life of the system + 10 years]</span>, consistent with EU AI Act record-keeping expectations and your own data-retention policy.</p>
+ <p><strong>Storage location:</strong> <span class="fill">[path / system]</span></p>
+ <p><strong>This plan next reviewed on:</strong> <span class="fill">[DD/MM/YYYY]</span></p>
+
+ <h2>Standards referenced</h2>
+ <ul>
+ <li><strong>EU AI Act 2024/1689</strong>, Article 72 (post-market monitoring system), Article 73 (reporting of serious incidents), Article 26(5) (deployer duty to monitor operation and inform provider / authority), Article 3(49) (definition of serious incident).</li>
+ <li><strong>ISO/IEC 42001:2023</strong>, Clause 9 (performance evaluation, monitoring, measurement, analysis), Clause 10 (improvement, nonconformity and corrective action).</li>
+ <li><strong>ISO/IEC 27001:2022</strong>, Annex A.5.24-A.5.28 (information security incident management).</li>
+ </ul>
+
+ </article>
+
+ <div class="callout note no-print">
+ <span class="callout-icon">i</span>
+ <div>
+ <div class="callout-title">Rolling this out</div>
+ <ol>
+ <li>Complete one plan per high-risk system. Start from the AI System Card so system details stay consistent.</li>
+ <li>Define your signals, sources, and thresholds in section 2. Make thresholds specific and measurable, so a breach is unambiguous.</li>
+ <li>Wire the signals into your Monitoring &amp; KPI dashboard where you can, and name a human reviewer for the rest.</li>
+ <li>Rehearse the escalation and Art 73 reporting clock before you need it. Confirm who files, and their deputy.</li>
+ <li>Review on cadence, and re-run the plan on any model, data, or usage change. Log every corrective action the same day.</li>
+ </ol>
+ </div>
+ </div>
+
+</main>
+
+<nav class="module-bottom-nav no-print">
+ <a class="nav-btn" href="../module-procurement.html">
+ <span class="nav-dir">Back to</span>
+ <span class="nav-title">← Procurement track</span>
+ </a>
+ <a class="nav-btn next" href="incident-form.html">
+ <span class="nav-dir">Next template</span>
+ <span class="nav-title">AI Incident Form →</span>
+ </a>
+</nav>
+
+<footer class="site-foot no-print">
+ <div class="foot-brand">
+ <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
+ <p>The AI Governance Platform, adopt AI safely, securely and responsibly.</p>
+ </div>
+ <div class="foot-col"><h4>Platform</h4><a href="../course.html">AI Safe@Work Learning</a><a href="../plus-pack.html">Governance Toolkit</a><a href="../index.html#included">Reporting &amp; Evidence</a></div>
+ <div class="foot-col"><h4>Services</h4><a href="../consultancy.html">Consultancy</a><a href="../msp.html">Partner Programme</a><a href="../consultancy.html">Health Checks</a></div>
+ <div class="foot-col"><h4>Resources</h4><a href="../resources.html">Blog</a><a href="../resources.html">FAQs</a><a href="../about.html#contact">Support</a></div>
+ <div class="foot-col"><h4>Company</h4><a href="../about.html">About</a><a href="../about.html#contact">Contact</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a></div>
+ <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
+</footer>
+
+</body>
+</html>

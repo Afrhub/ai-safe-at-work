@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<meta name="color-scheme" content="dark light" />
+<script>try{if(localStorage.getItem("aisw-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+<title>AI System Card template · Attest AI</title>
+<meta name="description" content="A per-system model and technical-documentation record for each AI system in use. Capture purpose, models, data, limitations, oversight, and risk tier. Aligns with EU AI Act Article 11 and Annex IV, Article 13, Article 14; ISO/IEC 42001 Clause 8." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Attest AI" />
+<meta property="og:title" content="AI System Card template · Attest AI" />
+<meta property="og:description" content="A per-system model and technical-documentation record for each AI system in use. Capture purpose, models, data, limitations, oversight, and risk tier. Aligns with EU AI Act Article 11 and Annex IV, Article 13, Article 14; ISO/IEC 42001 Clause 8." />
+<meta property="og:url" content="https://attest-ai.com/templates/ai-system-card.html" />
+<meta property="og:image" content="https://attest-ai.com/og-card.png?v=3" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI System Card template · Attest AI" />
+<meta name="twitter:description" content="A per-system model and technical-documentation record for each AI system in use. Capture purpose, models, data, limitations, oversight, and risk tier. Aligns with EU AI Act Article 11 and Annex IV, Article 13, Article 14; ISO/IEC 42001 Clause 8." />
+<meta name="twitter:image" content="https://attest-ai.com/og-card.png?v=3" />
+<link rel="preload" href="../assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=20" />
+<script defer src="../assets/cinema.js?v=11"></script>
+<style>
+.template-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 2px;
+  background: rgba(250,88,45, 0.08);
+  border: 1px solid rgba(250,88,45, 0.32);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.template-tag::before {
+  content: '§';
+  color: var(--accent);
+  font-weight: 800;
+}
+.print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0 2rem; align-items: center; flex-wrap: wrap; }
+.print-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--accent); color: #0b0e14;
+  font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.7rem 1.25rem; border-radius: 2px;
+  border: none; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 0 1px rgba(250,88,45,0.4), 0 8px 24px rgba(250,88,45,0.2);
+}
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(250,88,45,0.55), 0 12px 32px rgba(250,88,45,0.3); }
+.print-btn:active { transform: translateY(-1px) scale(0.97); }
+.print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
+.fill {
+  display: inline-block;
+  padding: 0.1rem 0.55rem;
+  border-radius: 2px;
+  background: rgba(250,88,45, 0.10);
+  color: var(--accent);
+  border: 1px dashed rgba(250,88,45, 0.42);
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+}
+.register-table {
+  margin: 1.5rem 0;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.register-table thead {
+  background: rgba(250,88,45, 0.08);
+  border: 1px solid var(--border);
+}
+.register-table th {
+  padding: 0.9rem 1rem;
+  text-align: left;
+  font-weight: 700;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.register-table td {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  color: var(--text2);
+}
+.register-table tbody tr:nth-child(even) {
+  background: rgba(250,88,45, 0.02);
+}
+.field-label { width: 34%; font-weight: 700; color: var(--text); }
+.status-approved { color: #2da45f; font-weight: 700; }
+.status-pending { color: #f7a600; font-weight: 700; }
+.status-blocked { color: #d62828; font-weight: 700; }
+.tier-enterprise { background: rgba(250,88,45, 0.1); color: var(--accent); }
+.tier-free { background: rgba(200,200,200, 0.1); color: var(--text2); }
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+.policy-doc {
+  margin: 1.5rem 0;
+  padding: 2rem 2.2rem;
+  background: var(--plate);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  box-shadow: var(--shadow-card);
+}
+.policy-doc h2 { margin-top: 2.2rem; }
+.policy-doc h2:first-child { margin-top: 0; }
+.policy-doc h3 { margin-top: 1.6rem; }
+.policy-doc ol, .policy-doc ul { padding-left: 1.4rem; }
+.policy-doc li { margin-bottom: 0.55rem; }
+@media (max-width: 640px) {
+  .register-table { font-size: 0.75rem; }
+  .register-table th, .register-table td { padding: 0.6rem 0.7rem; }
+  .field-label { width: auto; }
+}
+@media print {
+  .policy-doc { background: white !important; border: 1px solid #ccc !important; box-shadow: none !important; padding: 1rem 0 !important; }
+  .register-table { border: 1px solid #ccc; }
+  .register-table thead { background: #f5f5f5 !important; }
+  .register-table th { color: #46505e !important; }
+  .fill { background: white !important; color: #0b0e14 !important; border-color: #46505e !important; }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HowTo",
+      "name": "AI System Card template",
+      "description": "Per-system technical documentation record capturing purpose, models, data, limitations, human oversight, and risk tier for each AI system in use.",
+      "url": "https://attest-ai.com/templates/ai-system-card.html",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://attest-ai.com/#organization"
+      },
+      "totalTime": "PT45M",
+      "dateModified": "2026-07-08"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://attest-ai.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Templates",
+          "item": "https://attest-ai.com/templates/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AI System Card template · Attest AI",
+          "item": "https://attest-ai.com/templates/ai-system-card.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="topbar no-print">
+ <a href="../index.html" class="brand"><img src="/assets/logo.png?v=2" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />Attest&nbsp;AI</a>
+ <nav class="topbar-nav">
+ <a href="../index.html#platform">Platform</a>
+ <a href="../index.html#included">Features</a>
+ <a href="../consultancy.html">Consultancy</a>
+ <a href="../msp.html">Partners</a>
+ <a href="../resources.html">Resources</a>
+ <a href="../about.html">About</a>
+ <a href="../portal/login.html">AIMP log in</a>
+ <a href="../about.html#contact" class="nav-cta always-show">Book a Demo</a>
+ </nav>
+</header>
+
+<main id="main">
+ <span class="template-tag no-print">Template · AI System Card v1.0</span>
+ <p class="eyebrow no-print">Technical documentation</p>
+ <h1 class="page-title">AI System Card for <span class="fill">[System Name]</span></h1>
+ <p class="lede no-print">One card per AI system in use, the model and technical-documentation record that shows what the system is, what it does, how it is overseen, and how risky it is. This is your evidence artefact for EU AI Act Art 11 &amp; Annex IV (technical documentation), Art 13 (transparency), Art 14 (human oversight), and ISO/IEC 42001 Clause 8 (operation).</p>
+
+ <div class="print-row no-print">
+ <button type="button" class="print-btn" onclick="window.print()">Print / Export as PDF →</button>
+ <span class="print-hint">Keep one card per system. Review on the date below, and whenever the model, data, purpose, or risk tier changes.</span>
+ </div>
+
+ <article class="policy-doc">
+
+ <span class="section-tag">Purpose and scope</span>
+ <h2>Why we keep a system card</h2>
+ <p>An AI System Card is the single technical-documentation record for one AI system your organisation builds, buys, or deploys. Where the AI Tool Register answers "what tools do we use?", the system card answers "what exactly is this system, and can we account for it?". It is:</p>
+ <ul>
+ <li><strong>Technical documentation</strong>, the artefact the EU AI Act Article 11 and Annex IV require you to hold and keep current for each system.</li>
+ <li><strong>Transparency evidence</strong>, records intended use, limitations, and known failure modes so users and affected people can be told what the system does (Art 13).</li>
+ <li><strong>Oversight record</strong>, documents the human controls that keep the system in check (Art 14).</li>
+ <li><strong>Audit trail</strong>, links the system to its DPIA, FRIA, and risk assessment, and shows a named owner is accountable for it (ISO/IEC 42001 Clause 8).</li>
+ </ul>
+
+ <h2>Scope</h2>
+ <p>Keep one system card for each of the following:</p>
+ <ol>
+ <li>Any AI system you deploy in a business process, whether third-party (a vendor model or SaaS AI feature) or built in-house.</li>
+ <li>Any system that makes, recommends, ranks, scores, classifies, or generates outputs that affect people or decisions.</li>
+ <li>Any high-risk system under EU AI Act Annex III (e.g. recruitment, worker management, access to services, creditworthiness), regardless of vendor.</li>
+ <li>Material configurations of a general model where the use case changes the risk (e.g. the same LLM used for internal drafting versus for CV screening needs two cards).</li>
+ </ol>
+
+ <h2>Who maintains this card</h2>
+ <p><strong>Owner / accountable person:</strong> <span class="fill">[named individual, e.g. System Owner / Product Lead]</span></p>
+ <p><strong>Input sources:</strong> vendor model documentation and datasheets, your DPIA / FRIA, risk assessment, incident log, performance monitoring, and change notifications from the provider.</p>
+ <p><strong>Review cadence:</strong> at least annually, and within one week of any material change, a new model version, a change of purpose, a data-handling shift, a new limitation discovered, or a change in risk tier.</p>
+
+ <h2>The system card</h2>
+ <p>Complete every field below. Where a field does not apply, write "N/A" and say why, do not leave it blank.</p>
+
+ <table class="register-table">
+ <thead>
+ <tr>
+ <th style="width:34%;">Field</th>
+ <th>Record</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td class="field-label">System name &amp; version</td>
+ <td><span class="fill">[e.g. CV-Screener v2.3, running Provider Model X-4.1]</span></td>
+ </tr>
+ <tr>
+ <td class="field-label">Owner / accountable person</td>
+ <td><span class="fill">[named individual + role; who answers for this system]</span></td>
+ </tr>
+ <tr>
+ <td class="field-label">Provider vs deployer role (Art 4 / 26)</td>
+ <td><span class="fill">[Are we the provider, the deployer, or both? Name the third-party provider if we deploy their system]</span></td>
+ </tr>
+ <tr>
+ <td class="field-label">Purpose &amp; intended use</td>
+ <td><span class="fill">[What the system is for, in plain English; the specific tasks and business process it supports]</span></td>
+ </tr>
+ <tr>
+ <td class="field-label">Prohibited / out-of-scope uses</td>
+ <td><span class="fill">[Uses that are explicitly not permitted; e.g. no fully automated rejection, no use on special-category data]</span></td>
+ </tr>
+ <tr>
+ <td class="field-label">Model(s) &amp; vendor</td>
+ <td><span class="fill">[Underlying model(s), version, and vendor; note if fine-tuned or retrieval-augmented]</span></td>
+ </tr>
+ <tr>
+ <td class="field-label">Training / tuning data summary</td>
+ <td><span class="fill">[Summary of data used to train, fine-tune, or ground the system]</span>, link to the <span class="fill">[Data Governance Record]</span>.</td>
+ </tr>
+ <tr>
+ <td class="field-label">Input &amp; output data types</td>
+ <td><span class="fill">[What goes in (e.g. CV text, applicant details) and what comes out (e.g. shortlist score 0-100, ranked list)]</span></td>
+ </tr>
+ <tr>
+ <td class="field-label">Known limitations &amp; failure modes</td>
+ <td><span class="fill">[Where the system is weak or wrong; hallucination, bias, degradation on edge cases, out-of-distribution inputs]</span></td>
+ </tr>
+ <tr>
+ <td class="field-label">Human-oversight measures (Art 14)</td>
+ <td><span class="fill">[Who reviews outputs, when, and how; the "stop" and override controls; how a person can intervene or reverse a decision]</span></td>
+ </tr>
+ <tr>
+ <td class="field-label">Performance metrics &amp; acceptance thresholds</td>
+ <td><span class="fill">[Metrics tracked (accuracy, precision/recall, false-positive rate, fairness metric) and the threshold below which the system must not be used]</span></td>
+ </tr>
+ <tr>
+ <td class="field-label">Risk tier (Annex III high-risk? yes/no)</td>
+ <td><span class="fill">[High-risk under Annex III? Yes / No; if yes, cite the Annex III category]</span></td>
+ </tr>
+ <tr>
+ <td class="field-label">Linked assessments</td>
+ <td><span class="fill">[Links to DPIA, FRIA, and Risk Assessment for this system]</span></td>
+ </tr>
+ <tr>
+ <td class="field-label">Lifecycle status &amp; review date</td>
+ <td><span class="fill">[Pilot / Live / Deprecated / Retired]</span> · Next review: <span class="fill">[DD/MM/YYYY]</span></td>
+ </tr>
+ </tbody>
+ </table>
+
+ <h2>Fields explained</h2>
+
+ <h3>Provider vs deployer role (Art 4 / 26)</h3>
+ <p>Your obligations differ depending on the role you play. If you build or substantially modify a system, you may be a <strong>provider</strong> with full technical-documentation duties. If you use a third-party system in your own process, you are a <strong>deployer</strong> with monitoring and human-oversight duties under Article 26. Be honest, deploying a vendor system does not remove your responsibility for how you use it.</p>
+
+ <h3>Prohibited / out-of-scope uses</h3>
+ <p>Say what the system must not be used for, as clearly as you say what it is for. This is where you write down the guard-rails: no fully automated adverse decision without human review, no use on special-category data, no use outside the population it was validated on.</p>
+
+ <h3>Known limitations &amp; failure modes</h3>
+ <p>Be specific and honest. "It can hallucinate" is not enough, record the conditions under which it fails (rare inputs, non-English text, small sample sizes), the observed error patterns, and any populations on which performance drops. This is the field auditors read most closely.</p>
+
+ <h3>Human-oversight measures (Art 14)</h3>
+ <p>Document real controls, not aspirations. Who sees the output before it is acted on? What can they change? How does a person stop the system or reverse an outcome? If oversight is "a human clicks approve", say whether that human has the information, time, and authority to disagree.</p>
+
+ <h3>Performance metrics &amp; acceptance thresholds</h3>
+ <p>Record the metrics you actually monitor and the line below which the system must be paused. A card that says "accuracy 94%" is weaker than one that says "recall must stay above 0.90 on the monthly validation set; below that, route all cases to manual review".</p>
+
+ <h2>Worked example (extract)</h2>
+ <table class="register-table">
+ <thead>
+ <tr>
+ <th style="width:34%;">Field</th>
+ <th>Record</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td class="field-label">System name &amp; version</td>
+ <td>CV-Screener v2.3 (fine-tuned on Provider Model X-4.1)</td>
+ </tr>
+ <tr>
+ <td class="field-label">Provider vs deployer role</td>
+ <td>Deployer of Provider Model X-4.1; provider of the in-house fine-tune and prompt layer.</td>
+ </tr>
+ <tr>
+ <td class="field-label">Purpose &amp; intended use</td>
+ <td>Rank applicants against a role's essential criteria to produce a longlist for human review.</td>
+ </tr>
+ <tr>
+ <td class="field-label">Prohibited / out-of-scope uses</td>
+ <td>Must not auto-reject any candidate. Not to be used for final hiring decisions. Not to score on protected characteristics.</td>
+ </tr>
+ <tr>
+ <td class="field-label">Human-oversight measures</td>
+ <td>A recruiter reviews the full longlist and all borderline scores; the recruiter can override any score and reinstate any candidate. System can be paused by the System Owner.</td>
+ </tr>
+ <tr>
+ <td class="field-label">Risk tier</td>
+ <td><span class="status-blocked">Yes, high-risk</span> (Annex III, point 4: employment / worker management).</td>
+ </tr>
+ <tr>
+ <td class="field-label">Linked assessments</td>
+ <td>DPIA-2026-014, FRIA-2026-003, Risk Assessment RA-CV-Screener.</td>
+ </tr>
+ <tr>
+ <td class="field-label">Lifecycle status &amp; review date</td>
+ <td><span class="status-approved">Live</span> · Next review: 01/12/2026.</td>
+ </tr>
+ </tbody>
+ </table>
+
+ <h2>How to complete and maintain this card</h2>
+ <ol>
+ <li><strong>Identify the system:</strong> pin down exactly which system and version this card covers. If the same model serves two distinct use cases, create two cards.</li>
+ <li><strong>Pull vendor documentation:</strong> gather the provider's model card, datasheet, and DPA. Record what you can, and note gaps you have asked the vendor to fill.</li>
+ <li><strong>Determine your role and risk tier:</strong> decide provider vs deployer (Art 4 / 26) and whether the use case is high-risk under Annex III. This sets the depth of documentation required.</li>
+ <li><strong>Link the assessments:</strong> attach the DPIA, FRIA, and risk assessment. If any are missing for a high-risk system, that is a finding, escalate it.</li>
+ <li><strong>Set thresholds and oversight:</strong> agree the performance thresholds and the human-oversight controls with the owner before go-live. Write down the "stop" condition.</li>
+ <li><strong>Maintain:</strong> review at least annually and within one week of any material change (new model version, new limitation, purpose change, risk-tier change). Record the change and the date.</li>
+ </ol>
+
+ <h2>Standards referenced</h2>
+ <ul>
+ <li><strong>EU AI Act 2024/1689</strong>, Article 11 and Annex IV (technical documentation), Article 13 (transparency and provision of information to deployers), Article 14 (human oversight), Article 4 / Article 26 (provider and deployer roles and obligations), Annex III (high-risk classification).</li>
+ <li><strong>ISO/IEC 42001:2023</strong>, Clause 8 (operation, including AI system life-cycle and operational controls).</li>
+ <li><strong>ISO/IEC 23894:2023</strong>, guidance on AI risk management (limitations, failure modes, monitoring).</li>
+ <li><strong>GDPR 2016/679</strong>, Article 35 (DPIA) where the system processes personal data.</li>
+ </ul>
+
+ </article>
+
+ <div class="callout note no-print">
+ <span class="callout-icon">i</span>
+ <div>
+ <div class="callout-title">Rolling this out</div>
+ <ol>
+ <li>List every AI system you deploy (start from your AI Tool Register). Create one card per system, or per use case where the risk differs.</li>
+ <li>For each, gather vendor model documentation and complete the fields above. Mark gaps you have asked vendors to fill.</li>
+ <li>Confirm provider/deployer role and high-risk status. For high-risk systems, ensure the DPIA, FRIA, and risk assessment exist and are linked.</li>
+ <li>Agree performance thresholds and human-oversight controls with the named owner before go-live.</li>
+ <li>Assign the owner to review the card annually and within a week of any material change. Keep printed / PDF copies as audit evidence.</li>
+ </ol>
+ </div>
+ </div>
+
+</main>
+
+<nav class="module-bottom-nav no-print">
+ <a class="nav-btn" href="ai-tool-register.html">
+ <span class="nav-dir">Back to</span>
+ <span class="nav-title">← AI Tool Register</span>
+ </a>
+ <a class="nav-btn next" href="ai-risk-register.html">
+ <span class="nav-dir">Next template</span>
+ <span class="nav-title">AI Risk Register →</span>
+ </a>
+</nav>
+
+<footer class="site-foot no-print">
+ <div class="foot-brand">
+ <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
+ <p>The AI Governance Platform, adopt AI safely, securely and responsibly.</p>
+ </div>
+ <div class="foot-col"><h4>Platform</h4><a href="../course.html">AI Safe@Work Learning</a><a href="../plus-pack.html">Governance Toolkit</a><a href="../index.html#included">Reporting &amp; Evidence</a></div>
+ <div class="foot-col"><h4>Services</h4><a href="../consultancy.html">Consultancy</a><a href="../msp.html">Partner Programme</a><a href="../consultancy.html">Health Checks</a></div>
+ <div class="foot-col"><h4>Resources</h4><a href="../resources.html">Blog</a><a href="../resources.html">FAQs</a><a href="../about.html#contact">Support</a></div>
+ <div class="foot-col"><h4>Company</h4><a href="../about.html">About</a><a href="../about.html#contact">Contact</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a></div>
+ <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
+</footer>
+
+</body>
+</html>
