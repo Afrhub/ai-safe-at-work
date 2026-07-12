@@ -1,4 +1,4 @@
-import { sb, DASH, getRole, AUTH_DISABLED, DEMO } from "./portal.js";
+import { sb, DASH, getRole } from "./portal.js";
 
 const $ = (id) => document.getElementById(id);
 const msg = $("msg");
@@ -11,40 +11,16 @@ async function route() {
   location.replace((p && DASH[p.role]) || "end-user.html");
 }
 
-// Auth disabled → skip the login page entirely: ensure a demo session and route straight in.
-// Otherwise, if already signed in, go straight in.
+// Already signed in (including a demo session from inspecting AIMP) → go straight in.
+// Otherwise show the sign-in form. Sign-up is gated: accounts are provisioned, not self-serve.
 (async () => {
   const { data: { session } } = await sb.auth.getSession();
-  if (AUTH_DISABLED) {
-    if (!session) await sb.auth.signInWithPassword(DEMO);
-    return route();
-  }
   if (session) route();
 })();
 
-let mode = "in";
-$("toggle").addEventListener("click", (e) => {
-  e.preventDefault();
-  mode = mode === "in" ? "up" : "in";
-  $("login-title").textContent = mode === "in" ? "Sign in" : "Create account";
-  $("login-btn").textContent  = mode === "in" ? "Continue" : "Sign up";
-  $("toggle-q").textContent   = mode === "in" ? "No account?" : "Already have one?";
-  $("toggle").textContent     = mode === "in" ? "Create one" : "Sign in";
-  say("");
-});
-
 $("step-login").addEventListener("submit", async (e) => {
   e.preventDefault();
-  const email = $("email").value.trim(), password = $("pw").value;
-  if (mode === "up") {
-    say("Creating account…");
-    // confirm link lands back here on the live origin, not the project's localhost Site URL
-    const emailRedirectTo = new URL("login.html", location.href).href;
-    const { data, error } = await sb.auth.signUp({ email, password, options: { emailRedirectTo } });
-    if (error) return say(error.message, "err");
-    if (!data.session) return say("Account created. Check your email to confirm, then sign in.", "ok");
-    return route();
-  }
+  const email = $("email").value.trim().toLowerCase(), password = $("pw").value;
   say("Signing in…");
   const { error } = await sb.auth.signInWithPassword({ email, password });
   if (error) return say(error.message, "err");

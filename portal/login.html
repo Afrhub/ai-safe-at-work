@@ -20,40 +20,22 @@
 <div class="auth-wrap">
  <div class="auth-card">
  <img src="/assets/logo.png?v=2" alt="AI Safe@Work" class="brand-logo" style="height:184px;width:auto;display:block;margin:0 auto .8rem" />
- <div class="ey" style="font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent)">AI Safe@Work · Partner Portal</div>
+ <div class="ey" style="font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent)">Attest AI · Sign in</div>
 
- <!-- Step 1: credentials -->
+ <!-- Credentials (sign-up is gated: accounts are provisioned on purchase or by a manager/reseller) -->
  <form id="step-login">
  <h1 id="login-title">Sign in</h1>
  <p class="sub">Reseller, manager and team access.</p>
  <div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="username" required /></div>
  <div class="field"><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password" required minlength="8" /></div>
  <button class="btn-primary" type="submit" id="login-btn">Continue</button>
- <p style="margin-top:1rem;font-size:0.85rem;color:var(--text2)"><span id="toggle-q">No account?</span>
- <a href="#" id="toggle" style="color:var(--accent);font-weight:700">Create one</a></p>
- </form>
-
- <!-- Step 2: MFA enrol (first time) -->
- <form id="step-enrol" hidden>
- <h1>Set up 2-factor</h1>
- <p class="sub">Scan with an authenticator app (Google Authenticator, 1Password, Authy), then enter the 6-digit code.</p>
- <img id="qr" class="qr" alt="TOTP QR code" />
- <div class="field"><label for="enrol-code">6-digit code</label><input id="enrol-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" /></div>
- <button class="btn-primary" type="submit">Verify &amp; finish</button>
- </form>
-
- <!-- Step 3: MFA challenge (returning) -->
- <form id="step-mfa" hidden>
- <h1>Enter your code</h1>
- <p class="sub">Open your authenticator app and enter the current 6-digit code.</p>
- <div class="field"><label for="mfa-code">6-digit code</label><input id="mfa-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" /></div>
- <button class="btn-primary" type="submit">Verify</button>
+ <p style="margin-top:1rem;font-size:0.82rem;color:var(--text2)">No account yet? Access is set up when you buy a plan or when your manager invites you. <a href="/about.html#contact" style="color:var(--accent);font-weight:700">Get in touch</a>.</p>
  </form>
 
  <p id="msg" class="auth-msg" role="status"></p>
  </div>
 </div>
 
-<script type="module" src="assets/login.js"></script>
+<script type="module" src="assets/login.js?v=2"></script>
 </body>
 </html>
