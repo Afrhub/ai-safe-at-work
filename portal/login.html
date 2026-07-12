@@ -30,7 +30,17 @@
  <div class="field"><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password" minlength="8" /></div>
  <button class="btn-primary" type="submit" id="login-btn">Continue</button>
  <button type="button" id="magic" style="width:100%;margin-top:0.6rem;background:transparent;border:1px solid var(--border-bold);color:var(--text2);border-radius:var(--r-sm);padding:0.7rem;font-family:var(--font-display);font-weight:700;font-size:0.9rem;cursor:pointer">Email me a sign-in link</button>
- <p style="margin-top:1rem;font-size:0.82rem;color:var(--text2)">No account yet? Access is set up when you buy a plan or when your manager invites you. <a href="/about.html#contact" style="color:var(--accent);font-weight:700">Get in touch</a>.</p>
+ <p style="margin-top:0.9rem;font-size:0.82rem;text-align:center"><a href="#" id="forgot" style="color:var(--text2)">Forgot your password?</a></p>
+ <p style="margin-top:0.6rem;font-size:0.82rem;color:var(--text2)">No account yet? Access is set up when you buy a plan or when your manager invites you. <a href="/about.html#contact" style="color:var(--accent);font-weight:700">Get in touch</a>.</p>
+ </form>
+
+ <!-- Password reset: set a new password after clicking the emailed reset link -->
+ <form id="step-reset" hidden>
+ <h1>Choose a new password</h1>
+ <p class="sub">Enter a new password for your account.</p>
+ <div class="field"><label for="new-pw">New password</label><input id="new-pw" type="password" autocomplete="new-password" minlength="8" required /></div>
+ <div class="field"><label for="new-pw2">Confirm new password</label><input id="new-pw2" type="password" autocomplete="new-password" minlength="8" required /></div>
+ <button class="btn-primary" type="submit">Update password</button>
  </form>
 
  <!-- MFA enrol (managers/resellers, first sign-in) -->
@@ -54,6 +64,6 @@
  </div>
 </div>
 
-<script type="module" src="assets/login.js?v=3"></script>
+<script type="module" src="assets/login.js?v=4"></script>
 </body>
 </html>

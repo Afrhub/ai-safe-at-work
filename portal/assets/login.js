@@ -3,7 +3,7 @@ import { sb, DASH, getRole, AUTH_DISABLED } from "./portal.js";
 const $ = (id) => document.getElementById(id);
 const msg = $("msg");
 const say = (t, cls = "") => { msg.textContent = t; msg.className = "auth-msg " + cls; };
-const show = (id) => ["step-login", "step-enrol", "step-mfa"].forEach(s => $(s).hidden = (s !== id));
+const show = (id) => ["step-login", "step-enrol", "step-mfa", "step-reset"].forEach(s => $(s).hidden = (s !== id));
 
 async function route() {
   const next = new URLSearchParams(location.search).get("next");
@@ -33,8 +33,17 @@ async function startEnrol() {
   say(""); show("step-enrol");
 }
 
+// Password-reset landing: the emailed link returns here with a recovery token.
+// Show the set-new-password form instead of auto-routing.
+const isRecovery = location.hash.includes("type=recovery") ||
+  new URLSearchParams(location.search).get("type") === "recovery";
+sb.auth.onAuthStateChange((event) => {
+  if (event === "PASSWORD_RECOVERY") { show("step-reset"); say("Choose a new password."); }
+});
+
 // Already signed in (incl. a demo session from inspecting AIMP) -> continue.
 (async () => {
+  if (isRecovery) { show("step-reset"); say("Choose a new password."); return; }
   const { data: { session } } = await sb.auth.getSession();
   if (session) afterAuth();
 })();
@@ -59,6 +68,31 @@ $("magic").addEventListener("click", async () => {
   const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo, shouldCreateUser: false } });
   if (error) return say(error.message, "err");
   say("Check your email for a sign-in link.", "ok");
+});
+
+// Forgot password: email a reset link (password accounts only; team members use the magic link)
+$("forgot").addEventListener("click", async (e) => {
+  e.preventDefault();
+  const email = $("email").value.trim().toLowerCase();
+  if (!email) return say("Enter your email first, then tap reset.", "err");
+  say("Sending a reset link…");
+  const redirectTo = new URL("login.html", location.href).href;
+  const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo });
+  if (error) return say(error.message, "err");
+  say("Check your email for a password-reset link.", "ok");
+});
+
+// Set the new password (after clicking the reset link)
+$("step-reset").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const pw = $("new-pw").value, pw2 = $("new-pw2").value;
+  if (pw.length < 8) return say("Use at least 8 characters.", "err");
+  if (pw !== pw2) return say("Those passwords do not match.", "err");
+  say("Updating…");
+  const { error } = await sb.auth.updateUser({ password: pw });
+  if (error) return say(error.message, "err");
+  say("Password updated. Signing you in…", "ok");
+  afterAuth();
 });
 
 // MFA enrol (first time)
