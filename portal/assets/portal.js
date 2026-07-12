@@ -25,10 +25,14 @@ export const DASH = { end_user: "end-user.html", manager: "manager.html", resell
 export const AUTH_DISABLED = true;
 export const DEMO = { email: "demo@attest-ai.com", password: "attest-manager-demo-2026" };
 
-// Signed in is enough (MFA removed for now).
+// Signed in, and (for accounts with a TOTP factor) MFA satisfied. When AUTH_DISABLED,
+// guard() auto-demos before this is reached, so the live MFA rule doesn't gate inspection.
 export async function isAuthed() {
   const { data: { session } } = await sb.auth.getSession();
-  return !!session;
+  if (!session) return false;
+  const { data: aal } = await sb.auth.mfa.getAuthenticatorAssuranceLevel();
+  if (aal.nextLevel === "aal2" && aal.currentLevel !== "aal2") return false; // factor enrolled, not yet challenged
+  return true;
 }
 
 export async function getRole() {
