@@ -995,6 +995,28 @@ Long-term objective: governance-focused SaaS ecosystem · supported by MSP partn
 
 **Critical path to first pound of revenue:** A1 → A3 → A4 → B1 → B2 → B3. Everything else can trail. C and D run in parallel and do not gate the first sale.
 
+### Update — 2026-07-08 (reconciled after product completion + email/domain diligence)
+
+**Product side is now effectively launch-ready — the remaining GTM work is entirely infra + commercial.** Shipped since 2026-07-06: every learning page now carries an interactive MCQ quiz on the shared engine (12 core modules + all 6 Relevant Roles + all 3 sector overlays — previously the 9 tracks/overlays used self-mark `<details>`); templates pack expanded 22 → 27 with the EU AI Act technical-evidence artefacts OneTrust has and we lacked (AI System Card / Art 11+Annex IV, Data Governance Record / Art 10, Post-Market Monitoring Plan / Art 72, Agent Register, Use Case Intake); AIMP portal audit closed (case-insensitive seat email, seat removal + credit refund, CSV completion export, regulatory-updates surface, module-11 finale reachable). None of this changes the blocker list below; it removes "product not finished" as an excuse.
+
+**State changes to the A–D tables:**
+
+| Ref | Change since 2026-07-06 |
+|---|---|
+| A2 | A formal **SECURITY TRIPWIRE** comment now sits on `AUTH_DISABLED` in `portal.js` (added during 07 Jul security review). The demo password ships in this PUBLIC repo → treat as burned. Hard gate, now written into the code: **before any real client/user data enters the Supabase project — (1) `AUTH_DISABLED=false`, (2) delete/rotate the `demo@attest-ai.com` account, (3) redeploy.** MFA was stripped for inspection; decide at flip time whether to restore it. |
+| A3 | Email host **decided: Google Workspace**. DNS confirmed: registrar is **123-Reg**, but nameservers are GoDaddy's `domaincontrol.com` (123reg runs on GoDaddy's DNS platform) → **records are added in the 123reg control panel**, not a separate GoDaddy account. Exact records prepared this session (MX `smtp.google.com` pri 1; SPF `v=spf1 include:_spf.google.com ~all`; DMARC `_dmarc` `p=none`; DKIM from the Workspace admin console). Still zero MX live. |
+| A3 / D3 | **Book-a-Demo is now a real capture path.** It was a dead `mailto:` (silently did nothing without a desktop mail client); replaced with a **Netlify Form** (`about.html#contact`) → branded `demo-thanks.html`. Remaining wiring: **turn on the Netlify Forms email notification → `hello@` once A3 lands** (Netlify dashboard → Forms → notifications). Until then leads sit in the Netlify dashboard only. |
+
+**Newly-surfaced actions (add to the tables):**
+
+| # | Action | State | Ties to |
+|---|---|---|---|
+| A5 | **Redirect the spare TLDs** — `attest-ai.info / .net / .online / .store` → 301 to `attest-ai.com` (123reg domain forwarding). Owned, currently unpointed. | Not set | A1; brand protection |
+| A6 | **Netlify Forms notification** — email demo-form submissions to `hello@attest-ai.com` (dashboard toggle, ~2 min once A3 exists). | Not set | A3, D3 |
+| B4 | **Post-purchase Supabase wiring** — on payment, set the buyer's Supabase Auth Site URL/redirect allowlist + provision role + credits (the seams exist; nothing is connected to a payment event). | Not wired | B1, B3 |
+
+Money/domain/DNS actions remain **human-only** (per operating principles): I prepare records, recipes and copy; Alastair executes the purchase/DNS/Workspace/Stripe steps. **Critical path unchanged:** A1 → A3 → A4 → B1 → B2 → B3, with A2 as the non-negotiable gate the instant any real user data appears.
+
 ---
 
 ## Decision log
