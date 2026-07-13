@@ -20,7 +20,7 @@
  <span style="display:flex;align-items:center;gap:1rem"><span class="who" id="who"></span><button id="out">Sign out</button></span>
 </header>
 <main class="portal-main">
- <nav class="section-nav" aria-label="Portal sections"><a href="#my-courses">My Courses</a><a href="#module-progress">Module Progress</a><a href="#governance">Company governance</a><a href="#certificate">Certificate Download</a></nav>
+ <nav class="section-nav" aria-label="Portal sections"><a href="#my-courses">My Courses</a><a href="#module-progress">Module Progress</a><a href="#governance" id="gov-nav">Company governance</a><a href="#certificate">Certificate Download</a></nav>
 
  <section id="my-courses">
  <p class="eyebrow">Your learning</p>
@@ -35,8 +35,8 @@
  </section>
 
  <section id="governance" style="margin-top:2.4rem">
- <h2>Company governance</h2>
- <p class="lede">Policies your organisation has published. Read each one, then acknowledge it.</p>
+ <h2>Company governance <span id="gov-badge" hidden style="display:inline-block;background:var(--accent);color:#fff;font-family:var(--font-mono);font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.22rem 0.6rem;border-radius:999px;vertical-align:middle;margin-left:0.55rem"></span></h2>
+ <p class="lede" id="gov-lede">Policies your organisation has published. Read each one, then acknowledge it.</p>
  <div id="gov" class="tiles"></div>
  </section>
 
@@ -46,6 +46,6 @@
  <p><a class="tile" href="../cert.html"><span class="k">Certificate</span><h2>View your certificate</h2><span class="arrow">Open →</span></a></p>
  </section>
 </main>
-<script type="module" src="assets/end-user.js?v=3"></script>
+<script type="module" src="assets/end-user.js?v=4"></script>
 </body>
 </html>

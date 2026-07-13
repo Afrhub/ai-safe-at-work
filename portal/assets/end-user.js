@@ -48,6 +48,16 @@ if (profile) {
   const acked = new Set((myAcks || []).map(a => a.doc_id));
 
   function renderGov() {
+    // In-portal nudge: how many live policies still need this staff member's acknowledgement.
+    const pending = (liveDocs || []).filter(d => !acked.has(d.id)).length;
+    const badge = document.getElementById("gov-badge");
+    badge.hidden = pending === 0;
+    badge.textContent = pending ? `${pending} awaiting` : "";
+    document.getElementById("gov-nav").textContent = "Company governance" + (pending ? ` (${pending})` : "");
+    document.getElementById("gov-lede").textContent = pending
+      ? `You have ${pending} ${pending === 1 ? "policy" : "policies"} awaiting your acknowledgement.`
+      : ((liveDocs || []).length ? "You're up to date. All published policies acknowledged." : "Policies your organisation publishes will appear here.");
+
     gov.innerHTML = (liveDocs || []).map(d => {
       const done = acked.has(d.id);
       return `<div class="tile" style="min-height:auto">
