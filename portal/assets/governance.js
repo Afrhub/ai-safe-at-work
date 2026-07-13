@@ -26,18 +26,19 @@ if (profile) {
   await sb.rpc("ensure_governance_docs");
 
   async function load() {
-    const [{ data: docs }, { data: items }, { data: seats }, { data: acks }] = await Promise.all([
+    const [{ data: docs }, { data: items }, { data: seats }, { data: acks }, { data: progress }] = await Promise.all([
       sb.from("governance_docs").select("*").order("category", { ascending: true }).order("title", { ascending: true }),
       sb.from("governance_items").select("*").order("created_at", { ascending: false }),
       sb.from("seats").select("end_user_id"),
       sb.from("governance_acks").select("doc_id,end_user_id"),
+      sb.from("module_progress").select("user_id,status"),   // seated staff, via mp_mgr RLS
     ]);
     allItems = items || [];
-    renderDashboard(docs || [], allItems, seats || [], acks || []);
+    renderDashboard(docs || [], allItems, seats || [], acks || [], progress || []);
     renderItems();
   }
 
-  function renderDashboard(docs, items, seats, acks) {
+  function renderDashboard(docs, items, seats, acks, progress) {
     const total = docs.length, done = docs.filter(d => d.status !== "draft").length, draft = total - done;
     const liveDocs = docs.filter(d => d.status === "live");
     const seatIds = new Set(seats.map(s => s.end_user_id));
@@ -49,8 +50,16 @@ if (profile) {
     const openRisks = items.filter(i => i.kind === "risk" && i.status === "open").length;
     const openIncidents = items.filter(i => i.kind === "incident" && i.status !== "closed").length;
 
+    // AI literacy training (EU AI Act Art 4): staff who completed the AI Safe@Work course.
+    const COURSE_MODULES = 11;
+    const doneByUser = {};
+    progress.forEach(p => { if (p.status === "done") doneByUser[p.user_id] = (doneByUser[p.user_id] || 0) + 1; });
+    const trained = seats.filter(s => (doneByUser[s.end_user_id] || 0) >= COURSE_MODULES).length;
+    const trainPct = seatIds.size ? Math.round(trained / seatIds.size * 100) : 0;
+
     $("stats").innerHTML = `
       <div class="gv-stat"><div class="n">${done}/${total}</div><div class="l">Documents ready or live</div><div class="sub">${total ? Math.round(done / total * 100) : 0}% of the pack</div></div>
+      <div class="gv-stat"><div class="n">${trainPct}%</div><div class="l">AI literacy trained</div><div class="sub">${seatIds.size ? `${trained}/${seatIds.size} completed the course · Art 4` : "no staff seated yet"}</div></div>
       <div class="gv-stat"><div class="n">${ackPct}%</div><div class="l">Staff acknowledgement</div><div class="sub">${required ? `${validAcks}/${required} across ${seatIds.size} staff` : "no live policies yet"}</div></div>
       <div class="gv-stat"><div class="n">${openRisks}</div><div class="l">Open risks</div><div class="sub">${count("risk")} on the register</div></div>
       <div class="gv-stat"><div class="n">${openIncidents}</div><div class="l">Open incidents</div><div class="sub">In progress</div></div>`;
