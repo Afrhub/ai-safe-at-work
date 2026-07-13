@@ -1021,7 +1021,7 @@ Money/domain/DNS actions remain **human-only** (per operating principles): I pre
 
 ### ✅ Consolidated remaining GTM checklist — single source of truth (reconciled 2026-07-08)
 
-**Done this session (removed as blockers):** product complete (quizzes site-wide, 27 templates incl. EU-AI-Act evidence pack); AIMP portal audit closed; front-door auth built behind `AUTH_DISABLED` (password+TOTP, magic-link, reset, invite-seat Edge Function); paid-tier Terms drafted; demo funnel live (Netlify form); credit-model security hole closed + `grant_credits` seam; email/DNS records + runbooks prepared.
+**Done this session (removed as blockers):** product complete (quizzes site-wide, 27 templates incl. EU-AI-Act evidence pack); AIMP portal audit closed; front-door auth built behind `AUTH_DISABLED` (password+TOTP, magic-link, reset, invite-seat Edge Function); paid-tier Terms drafted; demo funnel live (Netlify form); credit-model security hole closed + `grant_credits` seam; email/DNS records + runbooks prepared. **Pricing locked to the simple 3-tier model** (Tier 1 Training · Tier 2 Plus Pack · Tier 3 Consultancy); **AIMP repositioned as the delivery platform, not a tier**, reconciled site-wide (pricing, homepage copy + FAQ + FAQPage schema, llms.txt, plus-pack, terms); `profiles` access-control hardened (self-grant hole closed, black-box verified); em-dash house style applied to llms.txt.
 
 **The rest that still needs completing** — owner is who must act (🧑 = Alastair / account-gated · 🤖 = Claude can do in-repo/DB now · 🧑+🤖 = human account step then I wire):
 
@@ -1034,8 +1034,8 @@ Money/domain/DNS actions remain **human-only** (per operating principles): I pre
 | AUTH-1 | Supabase: configure SMTP (so magic-link/invite emails send) + add `…/portal/login.html` to redirect allowlist | 🧑 | A3 |
 | A2 | Flip `AUTH_DISABLED=false`, rotate/delete demo account, redeploy (the tripwire) | 🧑+🤖 | AUTH-1; any real data |
 | A4 | Solicitor review of the drafted paid-tier Terms before pricing leaves `noindex` | 🧑 | — |
-| B1 | Stripe account + checkout (Tier-1 one-off + Tier-2 subscription) | 🧑+🤖 | Stripe keys |
-| B2 | Finalise prices, add real `Offer` values, lift `pricing.html` `noindex` | 🧑+🤖 | A4, B1 |
+| B1 | Stripe account + checkout for the paid tiers (Tier 2 Plus Pack; Tier 3 Consultancy; payment model per tier shown at checkout) | 🧑+🤖 | Stripe keys |
+| B2 | **Tier contents now locked** (Training / Plus Pack / Consultancy, shipped 2026-07-08). Remaining: set real prices + per-tier payment model, add `Offer` values, lift `pricing.html` `noindex` | 🧑+🤖 | A4, B1 |
 | B3/B4 | Payment webhook → `grant_credits` + provision role/seat on purchase | 🤖 | B1 |
 | C1 | Cookieless analytics (Plausible/Fathom/Netlify) | 🧑+🤖 | account |
 | C2 | Submit sitemap to Google/Bing Search Console; run anti-scraping Test 1 | 🧑 | A1 |
@@ -1054,6 +1054,8 @@ Money/domain/DNS actions remain **human-only** (per operating principles): I pre
 
 | Date | Decision | Why |
 |---|---|---|
+| 2026-07-08 | **Pricing simplified to three tiers**: Tier 1 AI Safe@Work Training · Tier 2 Plus Pack (governance toolkit) · Tier 3 Consultancy. MSP framing: Course → Course + Plus Pack → Course + Plus Pack + Consultancy. **AIMP repositioned** as the delivery platform (the portal customers log in to), NOT a separately-sold subscription tier. Reconciled site-wide: pricing.html, homepage copy + FAQ + FAQPage JSON-LD, llms.txt, plus-pack.html, terms.html. Tier contents locked; only prices + payment model remain (B2). | Simple, MSP-legible packaging; kills the "is AIMP a tier or the platform?" ambiguity that made the offer hard to explain |
+| 2026-07-08 | **Credit model + access control hardened.** Closed the `profiles` self-update hole (any logged-in manager could self-grant credits / self-escalate role from the browser): column-grant lockdown + INSERT/DELETE revoke, verified by black-box exploitation tests (self-grant/mass-assign/insert/IDOR all 403/blocked). `grant_credits()` service-role function added as the seam the Stripe purchase webhook will call. Front-door auth built behind `AUTH_DISABLED` (password+TOTP for managers/resellers, magic-link for team, self-serve reset, `invite-seat` Edge Function). Open security gaps logged: SEC-A09 (audit logging), SEC-A08 (script SRI). | Money/privilege integrity before real accounts exist; auth ready to arm (A2) at launch |
 | 2026-07-06 | § Go-to-market remaining-launch-actions section added | Ground-truth audit: product built, but commercial/infra plumbing (domain+SSL, business email, payment rail, public prices, commercial ToS, re-enable auth) still blocks first revenue. Critical path recorded A1→A3→A4→B1→B2→B3 |
 | 2026-05-19 | Initial doctrine locked | Established wedge, principles, gates |
 | 2026-05-19 | Caveman doctrine prose style for internal docs | Speed; matches user preference |
