@@ -960,6 +960,33 @@ Long-term objective: governance-focused SaaS ecosystem · supported by MSP partn
 
 > Ground-truth audit of what still blocks a real go-to-market. Verified against the live site + DNS on 2026-07-06, not aspirational. Product is built (12 core modules + 6 role tracks + 3 sector overlays, all with interactive figures + MCQ quizzes; templates; portals; demo funnel). What is missing is the **commercial and infrastructure plumbing** to actually take a visitor → lead → paying customer. Ranked by whether it blocks launch.
 
+### ★ Current status snapshot — 2026-07-08 (single source of truth)
+
+Legend: ✅ done · 🟡 built/ready-to-arm · 🧑 human-only step remaining · 🤖 buildable by Claude · ❌ not started
+
+| Ref | GTM action | Status | The one remaining step |
+|---|---|---|---|
+| A1 | Canonical domain `attest-ai.com` live over HTTPS | 🧑 not done | Finish Netlify custom-domain + SSL, set primary, 301 the `*.netlify.app` origin |
+| A2 | Arm portal auth (flip `AUTH_DISABLED=false`, rotate/delete demo, redeploy) | 🟡 **code done** | Now a *flip*, not a build — front-door auth (password+TOTP, magic-link, reset) built this session; do it the instant real user data appears |
+| AUTH-1 | Supabase custom SMTP + raise rate limits + redirect allowlist | 🧑 not done | Configure SMTP (Resend), raise Auth email cap, allowlist `…/portal/login.html`. **Blocks all auth email** (hit the built-in cap 08 Jul) |
+| A3 | Business email `hello@attest-ai.com` (Google Workspace) | 🧑 not done | Add MX/SPF/DKIM/DMARC in 123reg DNS; create `hello@`; point Netlify demo-form notification at it |
+| A4 | Commercial (paid-tier) Terms | 🟡 **draft shipped** | Solicitor review, then it can leave `noindex` with B-track |
+| B1 | Payment rail (Stripe, UK) | 🤖+🧑 not started | Claude scaffolds Checkout + webhook → `grant_credits`/`invite-seat` (seams exist); human supplies Stripe account + keys |
+| B2 | Finalise + publish prices, lift `pricing.html` `noindex` | 🧑 decision | Set £ figures + one-off/subscription model per tier (business decision); Claude then applies `Offer` schema + lifts noindex |
+| B3 | Post-purchase fulfilment (provision seat / deliver pack on payment) | 🤖 blocked on B1 | Wire the payment webhook to the existing `invite-seat`/`grant_credits` seams |
+| C1 | Cookieless analytics | 🤖+🧑 not started | Netlify Analytics (dashboard toggle) or a Plausible snippet (needs account) — keep zero-cookie |
+| C2 | Search Console + sitemap submission | 🧑 after A1 | Submit `sitemap.xml` to Google+Bing once the canonical domain is indexed (runs anti-scraping Test 1) |
+| C3 | Launch changelog entry | 🤖 after A1 | One release note when the domain goes live |
+| D1 | Execute RORtech reseller agreement | 🧑 not done | Sign; fill Territory/Tiers/Margin in § Sales partners; log the PDF |
+| D2 | Activate Founding MSP Partner programme | 🧑 not done | Open first-cohort recruitment |
+| D3 | Demo → sale loop (SLA, owner, lead tracking) | 🧑 needs A3 | Define who replies to demo leads from `hello@` and where they're logged |
+| SEC-A09 | Security audit logging (populate `audit_log` on credit/seat/login events) | 🤖 not started | Log sensitive server-side actions before real customers (open OWASP A09 gap) |
+| SEC-A08 | Add SRI to the jsDelivr supabase-js script tag | 🤖 quick | Sub-resource-integrity hash on the CDN script |
+
+**Done this session (no longer blockers):** pricing locked to the 3-tier model + site reconciled (AIMP = platform, not a tier); front-door auth **built** behind the flag (password+TOTP for managers/resellers, magic-link for team, self-serve reset, `invite-seat` Edge Function); credit model + `profiles` access control **hardened** (self-grant hole closed, verified); password-reset dead-end **fixed**; commercial Terms **drafted**; product **complete** (all 21 learning pages on the quiz engine; templates 22→27).
+
+**Critical path to first £ (updated):** **A1** (domain) → **A3 + AUTH-1** (email + SMTP) → **B1** (Stripe) → **B2** (prices) → **B3** (fulfilment). **A4** (solicitor) gates lifting `pricing.html` off `noindex`; **A2** (arm auth) is now a one-line flip triggered by real data, not a build. C + D run in parallel and don't gate the first sale.
+
 ### A — Launch blockers (must clear before public "we are live")
 
 | # | Action | State on 2026-07-06 | Ties to |
