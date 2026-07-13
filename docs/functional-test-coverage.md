@@ -24,6 +24,7 @@ fixtures and gotchas each scenario needs. Keep it current as behaviour changes.
 - FT-INVITE-01 — manager invites a seat (below)
 - FT-GOV-ACK-01 — publish policy → staff acknowledges → manager % updates (below)
 - FT-GOV-CRUD-01 — dashboard doc-pack status + risks/incidents/use-cases/vendors add/edit/delete
+- FT-GDPR-01 — Data protection (GDPR) section renders separately from the AI pack (`domain='gdpr'`); its status pills cycle; publishing a GDPR doc Live flows into staff acknowledgement + the nudge count (shares FT-GOV-ACK-01's mechanism)
 - FT-TRAIN-01 — module completion syncs to `module_progress` and the manager completion + AI-literacy tiles
 - FT-DEMO-01 — Book-a-Demo form submits and records to Netlify Forms
 
@@ -59,15 +60,19 @@ fixtures and gotchas each scenario needs. Keep it current as behaviour changes.
 **Preconditions:** manager with ≥1 seated staff; a governance document in the manager's pack.
 
 **Steps:**
-1. **As manager** (`/portal/governance.html`): in the **Document pack** table, tap a document's status pill until it reads **Live** (Draft → Ready → Live). Note the **Staff acknowledgement** tile denominator now includes this live doc (e.g. `0/1 across 1 staff`, `0%`).
+1. **As manager** (`/portal/governance.html`): publish **two** documents by tapping their status pills to **Live** (Draft → Ready → Live). The **Staff acknowledgement** tile denominator now reflects them (e.g. `0/2 across 1 staff`, `0%`). *(GDPR-domain docs in the Data protection section count identically — publishing a GDPR policy Live surfaces it to staff the same way.)*
 2. Assert **no outbound email** is triggered by publishing (no message to the staff address; nothing queued). Publishing is a pure DB status change.
-3. **As the staff member** (sign in → `/portal/end-user.html`): in **Company governance**, assert the newly-live policy appears with a **Read →** link and an **Acknowledge** button, and did **not** require any email/notification to surface — it is present purely because status = Live and the staff member is seated (RLS `gd_seat_read`).
-4. Click **Acknowledge**. Assert the card flips to **Acknowledged** (badge, no button).
-5. **As manager** (reload `/portal/governance.html`): assert the **Staff acknowledgement** tile updates to reflect the acknowledgement (e.g. `1/1 across 1 staff`, `100%`).
+3. **As the staff member** (sign in → `/portal/end-user.html`) → **Company governance**:
+   - **In-portal nudge assertions:** `#gov-badge` is visible and reads **`2 awaiting`**; the section-nav link `#gov-nav` reads **`Company governance (2)`**; the lede `#gov-lede` reads **`You have 2 policies awaiting your acknowledgement.`**
+   - Both live policies appear with a **Read →** link and an **Acknowledge** button — surfaced purely because status = Live and the staff member is seated (RLS `gd_seat_read`), with **no** email/notification.
+4. Click **Acknowledge** on the first policy. Assert its card flips to **Acknowledged**, and the nudge decrements: badge **`1 awaiting`**, nav **`Company governance (1)`**, lede **`You have 1 policy awaiting your acknowledgement.`** (note the **singular** "1 policy").
+5. Acknowledge the second policy. Assert badge is now **hidden** (`#gov-badge.hidden === true`), nav reads plain **`Company governance`** (no count), lede reads **`You're up to date. All published policies acknowledged.`**, and both cards show **Acknowledged** (no buttons).
+6. **As manager** (reload `/portal/governance.html`): assert the **Staff acknowledgement** tile reads **`2/2 across 1 staff`**, **`100%`**.
 
 **Expected:**
 - Moving a doc to **Live** is the trigger that makes it visible to staff; Draft/Ready docs are **not** shown to staff.
-- **Nothing is emailed on publish** — staff discover the policy only by opening their portal (the known gap; a future "notify staff on publish" depends on SMTP/AUTH-1).
+- **Nothing is emailed on publish** — staff discover pending policies only by opening their portal, where the **nudge badge** makes the count unmissable (the known gap; a future "notify staff on publish" depends on SMTP/AUTH-1).
+- The nudge (`#gov-badge` / `#gov-nav` / `#gov-lede`) tracks **unacknowledged Live docs** and updates on every acknowledge, with correct singular/plural and an "up to date" empty state.
 - Acknowledgement is per staff member (`governance_acks` unique on `(doc_id, end_user_id)`); the manager metric = acks ÷ (seats × live docs).
 
 **Gotchas:**
