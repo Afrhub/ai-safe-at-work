@@ -1019,6 +1019,35 @@ Long-term objective: governance-focused SaaS ecosystem · supported by MSP partn
 
 Money/domain/DNS actions remain **human-only** (per operating principles): I prepare records, recipes and copy; Alastair executes the purchase/DNS/Workspace/Stripe steps. **Critical path unchanged:** A1 → A3 → A4 → B1 → B2 → B3, with A2 as the non-negotiable gate the instant any real user data appears.
 
+### ✅ Consolidated remaining GTM checklist — single source of truth (reconciled 2026-07-08)
+
+**Done this session (removed as blockers):** product complete (quizzes site-wide, 27 templates incl. EU-AI-Act evidence pack); AIMP portal audit closed; front-door auth built behind `AUTH_DISABLED` (password+TOTP, magic-link, reset, invite-seat Edge Function); paid-tier Terms drafted; demo funnel live (Netlify form); credit-model security hole closed + `grant_credits` seam; email/DNS records + runbooks prepared.
+
+**The rest that still needs completing** — owner is who must act (🧑 = Alastair / account-gated · 🤖 = Claude can do in-repo/DB now · 🧑+🤖 = human account step then I wire):
+
+| ID | Remaining action | Owner | Gated on |
+|---|---|---|---|
+| A1 | Finish `attest-ai.com` custom domain + SSL on Netlify; set primary; 301 `*.netlify.app` | 🧑 | — |
+| A3 | Google Workspace signup + MX/SPF/DKIM/DMARC in 123reg; create `hello@` | 🧑 | — |
+| A5 | 301 the spare TLDs (`.info/.net/.online/.store`) → `.com` (123reg forwarding) | 🧑 | — |
+| A6 | Netlify Forms → email demo leads to `hello@` | 🧑 | A3 |
+| AUTH-1 | Supabase: configure SMTP (so magic-link/invite emails send) + add `…/portal/login.html` to redirect allowlist | 🧑 | A3 |
+| A2 | Flip `AUTH_DISABLED=false`, rotate/delete demo account, redeploy (the tripwire) | 🧑+🤖 | AUTH-1; any real data |
+| A4 | Solicitor review of the drafted paid-tier Terms before pricing leaves `noindex` | 🧑 | — |
+| B1 | Stripe account + checkout (Tier-1 one-off + Tier-2 subscription) | 🧑+🤖 | Stripe keys |
+| B2 | Finalise prices, add real `Offer` values, lift `pricing.html` `noindex` | 🧑+🤖 | A4, B1 |
+| B3/B4 | Payment webhook → `grant_credits` + provision role/seat on purchase | 🤖 | B1 |
+| C1 | Cookieless analytics (Plausible/Fathom/Netlify) | 🧑+🤖 | account |
+| C2 | Submit sitemap to Google/Bing Search Console; run anti-scraping Test 1 | 🧑 | A1 |
+| C3 | Public "launch" changelog entry | 🤖 | A1 |
+| D1 | Execute RORtech reseller agreement; fill terms in § Sales partners | 🧑 | — |
+| D2 | Open Founding MSP Partner cohort recruitment | 🧑 | — |
+| D3 | Define demo→sale SLA + lead tracking (CRM or log) | 🧑 | A3 |
+| SEC-A09 | Audit logging on sensitive actions (`grant_credits`, `assign_seat`, `remove_seat`, invite, sign-in) — procurement/OWASP A09 gap; DB-side | 🤖 | — |
+| SEC-A08 | Add SRI hash to the jsDelivr `supabase-js` script (minor integrity) | 🤖 | — |
+
+**Fastest path to first revenue:** A1 → A3 → A4 → B1 → B2 → B3. **Highest-value work I can do without any of your accounts:** SEC-A09 (audit logging), B3/B4 (webhook→`grant_credits`, ready to connect the moment Stripe exists), C3 (launch note).
+
 ---
 
 ## Decision log
