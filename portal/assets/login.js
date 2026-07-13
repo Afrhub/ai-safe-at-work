@@ -33,17 +33,28 @@ async function startEnrol() {
   say(""); show("step-enrol");
 }
 
-// Password-reset landing: the emailed link returns here with a recovery token.
-// Show the set-new-password form instead of auto-routing.
-const isRecovery = location.hash.includes("type=recovery") ||
-  new URLSearchParams(location.search).get("type") === "recovery";
+// Password-reset landing: the emailed link returns here with a recovery token
+// (implicit flow -> #type=recovery + #access_token; PKCE flow -> ?code=). A recovery
+// establishes a session, so we must NOT let the auto-route below clobber the reset form.
+const _p = new URLSearchParams(location.search);
+const isRecovery = location.hash.includes("type=recovery") || _p.get("type") === "recovery";
+const isAuthCallback = isRecovery || location.hash.includes("access_token") || _p.has("code");
+let recovering = isRecovery;
+let awaitingCallback = isAuthCallback;
+
 sb.auth.onAuthStateChange((event) => {
-  if (event === "PASSWORD_RECOVERY") { show("step-reset"); say("Choose a new password."); }
+  if (event === "PASSWORD_RECOVERY") {
+    recovering = true; awaitingCallback = false;
+    show("step-reset"); say("Choose a new password.");
+  } else if (event === "SIGNED_IN" && awaitingCallback && !recovering) {
+    awaitingCallback = false; afterAuth();          // magic-link sign-in completed
+  }
 });
 
 // Already signed in (incl. a demo session from inspecting AIMP) -> continue.
 (async () => {
   if (isRecovery) { show("step-reset"); say("Choose a new password."); return; }
+  if (isAuthCallback) return;   // recovery/magic-link still exchanging -> onAuthStateChange routes it
   const { data: { session } } = await sb.auth.getSession();
   if (session) afterAuth();
 })();
