@@ -13,6 +13,19 @@
 <link rel="stylesheet" href="assets/portal.css?v=4" />
 <script defer src="../assets/cinema.js?v=11"></script>
 <script src="config.js"></script>
+<style>
+/* Team photo faded into the "Your team" band — hero-art pattern (matches consultancy/homepage). */
+.page-hero::after {
+  content: ''; position: absolute; top: 0; right: 0; bottom: 0; z-index: 0; pointer-events: none;
+  width: min(44%, 560px);
+  background: url('../assets/hero-team.jpg?v=1') center 16% / cover no-repeat;
+  -webkit-mask-image: radial-gradient(118% 96% at 82% 42%, #000 22%, transparent 72%);
+          mask-image: radial-gradient(118% 96% at 82% 42%, #000 22%, transparent 72%);
+  opacity: 0.95;
+}
+html[data-theme="dark"] .page-hero::after { opacity: 0.72; filter: grayscale(0.18) brightness(0.82) contrast(1.02); }
+@media (max-width: 900px) { .page-hero::after { display: none; } }
+</style>
 </head>
 <body>
 <header class="portal-top">
