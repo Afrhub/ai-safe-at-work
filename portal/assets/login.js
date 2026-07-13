@@ -1,4 +1,4 @@
-import { sb, DASH, getRole, AUTH_DISABLED } from "./portal.js";
+import { sb, DASH, getRole, AUTH_DISABLED, DEMO } from "./portal.js";
 
 const $ = (id) => document.getElementById(id);
 const msg = $("msg");
@@ -53,6 +53,15 @@ sb.auth.onAuthStateChange((event) => {
 
 // Already signed in (incl. a demo session from inspecting AIMP) -> continue.
 (async () => {
+  // AIMP inspection: the login workflow is bypassed while AUTH_DISABLED — drop straight
+  // into the platform as the demo account, no form. (Removed automatically when auth is armed.)
+  if (AUTH_DISABLED) {
+    ["step-login", "step-enrol", "step-mfa", "step-reset"].forEach(s => { const e = $(s); if (e) e.hidden = true; });
+    say("Opening the platform…");
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) await sb.auth.signInWithPassword(DEMO);
+    return route();
+  }
   if (isRecovery) { show("step-reset"); say("Choose a new password."); return; }
   if (isAuthCallback) return;   // recovery/magic-link still exchanging -> onAuthStateChange routes it
   const { data: { session } } = await sb.auth.getSession();
