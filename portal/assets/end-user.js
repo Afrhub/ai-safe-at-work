@@ -38,4 +38,38 @@ if (profile) {
       <span class="arrow">${done.has(11) ? "Review →" : "Open →"}</span>
     </a>`);
   document.getElementById("grid").innerHTML = tiles.join("");
+
+  // ---- Company governance: read + acknowledge the org's published (live) policies ----
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const gov = document.getElementById("gov");
+  const { data: liveDocs } = await sb.from("governance_docs")
+    .select("id,title,href,category,manager_id").eq("status", "live").order("title");
+  const { data: myAcks } = await sb.from("governance_acks").select("doc_id");
+  const acked = new Set((myAcks || []).map(a => a.doc_id));
+
+  function renderGov() {
+    gov.innerHTML = (liveDocs || []).map(d => {
+      const done = acked.has(d.id);
+      return `<div class="tile" style="min-height:auto">
+        <span class="k">${esc(d.category || "Policy")}${done ? " · ✓ acknowledged" : ""}</span>
+        <h2 style="font-size:1.2rem">${esc(d.title)}</h2>
+        <div style="display:flex;gap:0.7rem;margin-top:0.7rem;align-items:center">
+          ${d.href ? `<a href="${esc(d.href)}" class="arrow">Read →</a>` : ""}
+          ${done
+            ? `<span style="font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);border:1px solid rgba(52,211,153,0.5);border-radius:999px;padding:0.24rem 0.62rem">Acknowledged</span>`
+            : `<button type="button" class="btn-primary" style="width:auto;padding:0.45rem 0.95rem;font-size:0.8rem" data-ack="${esc(d.id)}" data-mgr="${esc(d.manager_id)}">Acknowledge</button>`}
+        </div>
+      </div>`;
+    }).join("") || `<p class="lede" style="color:var(--text3)">No published policies yet. Your organisation will publish them here.</p>`;
+  }
+  renderGov();
+
+  gov.addEventListener("click", async (e) => {
+    const btn = e.target.closest("[data-ack]"); if (!btn) return;
+    btn.disabled = true; btn.textContent = "Saving…";
+    const { error } = await sb.from("governance_acks")
+      .insert({ doc_id: btn.dataset.ack, manager_id: btn.dataset.mgr, end_user_id: user.id });
+    if (error) { btn.disabled = false; btn.textContent = "Acknowledge"; alert(error.message); return; }
+    acked.add(btn.dataset.ack); renderGov();
+  });
 }

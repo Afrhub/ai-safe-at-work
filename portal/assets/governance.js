@@ -5,12 +5,11 @@ const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": 
 const cap = s => s ? s[0].toUpperCase() + s.slice(1).replace(/_/g, " ") : s;
 const DOC_NEXT = { draft: "ready", ready: "live", live: "draft" };
 
-// Per-kind config for the risks/incidents/use-cases/vendors manager.
 const KINDS = {
-  risk:     { label: "Risks",     noun: "risk",       statuses: ["open", "mitigated", "closed"],     severity: ["low", "medium", "high"] },
-  incident: { label: "Incidents", noun: "incident",   statuses: ["open", "investigating", "closed"], severity: null },
-  use_case: { label: "Use cases", noun: "use case",   statuses: ["proposed", "approved", "rejected"], severity: ["low", "medium", "high"] },
-  vendor:   { label: "Vendors",   noun: "vendor",     statuses: ["pending", "assessed", "rejected"], severity: ["green", "amber", "red"] },
+  risk:     { label: "Risks",     noun: "risk",     statuses: ["open", "mitigated", "closed"],     severity: ["low", "medium", "high"] },
+  incident: { label: "Incidents", noun: "incident", statuses: ["open", "investigating", "closed"], severity: null },
+  use_case: { label: "Use cases", noun: "use case", statuses: ["proposed", "approved", "rejected"], severity: ["low", "medium", "high"] },
+  vendor:   { label: "Vendors",   noun: "vendor",   statuses: ["pending", "assessed", "rejected"], severity: ["green", "amber", "red"] },
 };
 
 const profile = await guard(["manager"]);
@@ -22,28 +21,37 @@ if (profile) {
   const myId = user.id;
   let activeKind = "risk";
   let allItems = [];
+  let editingId = null;
 
   await sb.rpc("ensure_governance_docs");
 
   async function load() {
-    const [{ data: docs }, { data: items }] = await Promise.all([
+    const [{ data: docs }, { data: items }, { data: seats }, { data: acks }] = await Promise.all([
       sb.from("governance_docs").select("*").order("category", { ascending: true }).order("title", { ascending: true }),
       sb.from("governance_items").select("*").order("created_at", { ascending: false }),
+      sb.from("seats").select("end_user_id"),
+      sb.from("governance_acks").select("doc_id,end_user_id"),
     ]);
     allItems = items || [];
-    renderDashboard(docs || [], allItems);
+    renderDashboard(docs || [], allItems, seats || [], acks || []);
     renderItems();
   }
 
-  function renderDashboard(docs, items) {
+  function renderDashboard(docs, items, seats, acks) {
     const total = docs.length, done = docs.filter(d => d.status !== "draft").length, draft = total - done;
+    const liveDocs = docs.filter(d => d.status === "live");
+    const seatIds = new Set(seats.map(s => s.end_user_id));
+    const liveIds = new Set(liveDocs.map(d => d.id));
+    const validAcks = acks.filter(a => liveIds.has(a.doc_id) && seatIds.has(a.end_user_id)).length;
+    const required = seatIds.size * liveDocs.length;
+    const ackPct = required ? Math.round(validAcks / required * 100) : 0;
     const count = k => items.filter(i => i.kind === k).length;
-    const openRisks = items.filter(i => i.kind === "risk" && i.status !== "closed" && i.status !== "mitigated").length;
+    const openRisks = items.filter(i => i.kind === "risk" && i.status === "open").length;
     const openIncidents = items.filter(i => i.kind === "incident" && i.status !== "closed").length;
 
     $("stats").innerHTML = `
-      <div class="gv-stat"><div class="n">${done}/${total}</div><div class="l">Documents ready or live</div><div class="sub">${draft} still in draft</div></div>
-      <div class="gv-stat"><div class="n">${total ? Math.round(done / total * 100) : 0}%</div><div class="l">Pack completion</div><div class="sub">Across the governance set</div></div>
+      <div class="gv-stat"><div class="n">${done}/${total}</div><div class="l">Documents ready or live</div><div class="sub">${total ? Math.round(done / total * 100) : 0}% of the pack</div></div>
+      <div class="gv-stat"><div class="n">${ackPct}%</div><div class="l">Staff acknowledgement</div><div class="sub">${required ? `${validAcks}/${required} across ${seatIds.size} staff` : "no live policies yet"}</div></div>
       <div class="gv-stat"><div class="n">${openRisks}</div><div class="l">Open risks</div><div class="sub">${count("risk")} on the register</div></div>
       <div class="gv-stat"><div class="n">${openIncidents}</div><div class="l">Open incidents</div><div class="sub">In progress</div></div>`;
 
@@ -59,7 +67,6 @@ if (profile) {
       || `<tr><td colspan="4" style="color:var(--text3)">No documents yet.</td></tr>`;
   }
 
-  // ---- Risks / incidents / use cases / vendors manager ----
   function renderTabs() {
     $("gv-tabs").innerHTML = Object.entries(KINDS).map(([k, c]) =>
       `<button type="button" data-kind="${k}" class="${k === activeKind ? "on" : ""}">${c.label} (${allItems.filter(i => i.kind === k).length})</button>`).join("");
@@ -76,25 +83,35 @@ if (profile) {
 
   function renderItems() {
     renderTabs();
+    const cfg = KINDS[activeKind];
     const rows = allItems.filter(i => i.kind === activeKind);
-    $("gi-list").querySelector("tbody").innerHTML = rows.map(i => `
-      <tr>
+    $("gi-list").querySelector("tbody").innerHTML = rows.map(i => {
+      if (i.id === editingId) {
+        const sev = cfg.severity ? `<select class="gi-e-sev">${cfg.severity.map(s => `<option value="${s}" ${s === i.severity ? "selected" : ""}>${cap(s)}</option>`).join("")}</select>` : "";
+        return `<tr data-row="${esc(i.id)}">
+          <td><input class="gi-e-title" type="text" value="${esc(i.title || "")}" /></td>
+          <td>${sev}</td>
+          <td><button type="button" class="pill">${esc(i.status || "")}</button></td>
+          <td><button type="button" class="btn-primary" style="width:auto;padding:0.3rem 0.7rem;font-size:0.75rem" data-save="${esc(i.id)}">Save</button> <button type="button" class="gi-del" data-cancel="1">✕</button></td>
+        </tr>`;
+      }
+      return `<tr>
         <td>${esc(i.title || "(untitled)")}</td>
         <td>${i.severity ? `<span class="gv-sev">${esc(i.severity)}</span>` : ""}</td>
         <td><button type="button" class="pill" data-id="${esc(i.id)}" data-status="${esc(i.status || "")}">${esc(i.status || "set")}</button></td>
-        <td><button type="button" class="gi-del" data-del="${esc(i.id)}" aria-label="Remove">✕</button></td>
-      </tr>`).join("") || `<tr><td colspan="4" style="color:var(--text3)">No ${esc(KINDS[activeKind].noun)}s yet. Add one above.</td></tr>`;
+        <td><button type="button" class="gi-del" data-edit="${esc(i.id)}" aria-label="Edit" style="margin-right:0.3rem">✎</button><button type="button" class="gi-del" data-del="${esc(i.id)}" aria-label="Remove">✕</button></td>
+      </tr>`;
+    }).join("") || `<tr><td colspan="4" style="color:var(--text3)">No ${esc(cfg.noun)}s yet. Add one above.</td></tr>`;
   }
 
   $("gv-tabs").addEventListener("click", e => {
     const b = e.target.closest("button[data-kind]"); if (!b) return;
-    activeKind = b.dataset.kind; renderForm(); renderItems();
+    activeKind = b.dataset.kind; editingId = null; renderForm(); renderItems();
   });
 
   $("gi-form").addEventListener("submit", async e => {
     e.preventDefault();
-    const msg = $("gi-msg");
-    const title = $("gi-title").value.trim();
+    const msg = $("gi-msg"), title = $("gi-title").value.trim();
     if (!title) return;
     const cfg = KINDS[activeKind];
     const row = { manager_id: myId, kind: activeKind, title, status: $("gi-status").value };
@@ -106,17 +123,30 @@ if (profile) {
     await load();
   });
 
-  // Cycle an item's status through its kind's list; delete on ✕.
   $("gi-list").querySelector("tbody").addEventListener("click", async e => {
+    const edit = e.target.closest("[data-edit]");
+    const save = e.target.closest("[data-save]");
+    const cancel = e.target.closest("[data-cancel]");
     const del = e.target.closest("[data-del]");
     const pill = e.target.closest(".pill");
+    if (edit) { editingId = edit.dataset.edit; return renderItems(); }
+    if (cancel) { editingId = null; return renderItems(); }
+    if (save) {
+      const tr = save.closest("tr");
+      const patch = { title: tr.querySelector(".gi-e-title").value.trim() || "(untitled)" };
+      const sevEl = tr.querySelector(".gi-e-sev"); if (sevEl) patch.severity = sevEl.value;
+      save.disabled = true;
+      const { error } = await sb.from("governance_items").update(patch).eq("id", save.dataset.save);
+      if (error) { save.disabled = false; alert(error.message); return; }
+      editingId = null; return load();
+    }
     if (del) {
       del.disabled = true;
       const { error } = await sb.from("governance_items").delete().eq("id", del.dataset.del);
       if (error) { del.disabled = false; alert(error.message); return; }
       return load();
     }
-    if (pill) {
+    if (pill && pill.dataset.id) {
       const list = KINDS[activeKind].statuses;
       const next = list[(list.indexOf(pill.dataset.status) + 1) % list.length];
       pill.disabled = true;
@@ -126,7 +156,6 @@ if (profile) {
     }
   });
 
-  // Document-pack status pills (Draft -> Ready -> Live).
   $("docs").querySelector("tbody").addEventListener("click", async e => {
     const btn = e.target.closest(".pill"); if (!btn) return;
     btn.disabled = true;
