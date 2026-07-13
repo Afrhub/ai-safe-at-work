@@ -69,11 +69,12 @@ if (profile) {
       <a class="tile" href="/templates/vendor-questionnaire.html"><span class="k">Diligence</span><h2>Vendors</h2><p>${count("vendor")} tracked. Score AI suppliers before you buy.</p><span class="arrow">Open diligence →</span></a>
       <a class="tile" href="/templates/ai-steering-group-tor.html"><span class="k">Oversight</span><h2>Steering group</h2><p>Define the group that owns AI governance and signs it off.</p><span class="arrow">Open ToR →</span></a>`;
 
-    $("docs").querySelector("tbody").innerHTML = docs.map(d => `
-      <tr><td>${esc(d.title)}</td><td>${esc(d.category || "")}</td>
-      <td><button type="button" class="pill ${esc(d.status)}" data-id="${esc(d.id)}" data-status="${esc(d.status)}">${esc(d.status)}</button></td>
-      <td>${d.href ? `<a href="${esc(d.href)}">Open →</a>` : ""}</td></tr>`).join("")
-      || `<tr><td colspan="4" style="color:var(--text3)">No documents yet.</td></tr>`;
+    const docRow = d => `<tr><td>${esc(d.title)}</td><td>${esc(d.category || "")}</td>`
+      + `<td><button type="button" class="pill ${esc(d.status)}" data-id="${esc(d.id)}" data-status="${esc(d.status)}">${esc(d.status)}</button></td>`
+      + `<td>${d.href ? `<a href="${esc(d.href)}">Open →</a>` : ""}</td></tr>`;
+    const fillDocs = (id, rows) => { $(id).querySelector("tbody").innerHTML = rows.map(docRow).join("") || `<tr><td colspan="4" style="color:var(--text3)">No documents yet.</td></tr>`; };
+    fillDocs("docs", docs.filter(d => (d.domain || "ai") === "ai"));
+    fillDocs("gdpr-docs", docs.filter(d => d.domain === "gdpr"));
   }
 
   function renderTabs() {
@@ -165,7 +166,7 @@ if (profile) {
     }
   });
 
-  $("docs").querySelector("tbody").addEventListener("click", async e => {
+  async function docPill(e) {
     const btn = e.target.closest(".pill"); if (!btn) return;
     btn.disabled = true;
     const { error } = await sb.from("governance_docs")
@@ -173,7 +174,9 @@ if (profile) {
       .eq("id", btn.dataset.id);
     if (error) { btn.disabled = false; alert(error.message); return; }
     load();
-  });
+  }
+  $("docs").querySelector("tbody").addEventListener("click", docPill);
+  $("gdpr-docs").querySelector("tbody").addEventListener("click", docPill);
 
   renderForm();
   load();
