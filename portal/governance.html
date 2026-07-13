@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#ffffff" />
+<meta name="color-scheme" content="dark light" />
+<meta name="robots" content="noindex, nofollow" />
+<script src="/assets/theme.js"></script>
+<title>Governance dashboard · Attest AI</title>
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=20" />
+<link rel="stylesheet" href="assets/portal.css?v=4" />
+<script defer src="../assets/cinema.js?v=11"></script>
+<script src="config.js"></script>
+<style>
+ .gv-stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:1rem; margin:1.6rem 0 0.6rem; }
+ .gv-stat { position:relative; background:var(--plate); border:1px solid var(--border); border-radius:var(--r); padding:1.2rem 1.3rem; box-shadow:var(--shadow-card); }
+ .gv-stat .n { font-family:var(--font-display); font-weight:800; font-size:2.2rem; letter-spacing:-0.03em; line-height:1; color:var(--text); }
+ .gv-stat .l { font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--text3); margin-top:0.5rem; }
+ .gv-stat .sub { font-size:0.8rem; color:var(--text2); margin-top:0.25rem; }
+ .pill { font-family:var(--font-mono); font-size:0.6rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.24rem 0.62rem; border-radius:999px; border:1px solid var(--border-bold); background:transparent; cursor:pointer; transition:border-color .15s ease, color .15s ease; }
+ .pill.draft { color:var(--text3); }
+ .pill.ready { color:var(--blue); border-color:rgba(59,130,246,0.45); }
+ .pill.live  { color:var(--green); border-color:rgba(52,211,153,0.55); }
+ .pill:hover { border-color:var(--accent); }
+</style>
+</head>
+<body>
+<header class="portal-top">
+ <span class="brand"><img src="/assets/logo.png?v=2" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />Attest&nbsp;AI</span>
+ <span style="display:flex;align-items:center;gap:1rem"><span class="who" id="who"></span><button id="out">Sign out</button></span>
+</header>
+<main class="portal-main">
+ <nav class="section-nav" aria-label="Portal sections"><a href="manager.html">Team admin</a><a href="#registers">Registers</a><a href="#pack">Document pack</a></nav>
+
+ <p class="eyebrow">Governance platform</p>
+ <h1 class="page-title">Governance <em>dashboard</em>.</h1>
+ <p class="lede">Live status across your AI Safe@Work governance documentation, in one place, ready to show an auditor.</p>
+
+ <div class="gv-stats" id="stats"></div>
+
+ <section id="registers" style="margin-top:1.4rem">
+ <div class="tiles" id="cards"></div>
+ </section>
+
+ <section id="pack" style="margin-top:2.4rem">
+ <h2>Document pack, completion at a glance</h2>
+ <p class="lede">Tap a status to move a document Draft → Ready → Live. Open any document to fill it in.</p>
+ <table class="ptable" id="docs"><thead><tr><th>Document</th><th>Category</th><th>Status</th><th></th></tr></thead><tbody></tbody></table>
+ </section>
+</main>
+<script type="module" src="assets/governance.js?v=1"></script>
+</body>
+</html>
