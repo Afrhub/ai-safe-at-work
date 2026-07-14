@@ -7,8 +7,10 @@ if (profile) {
   document.getElementById("out").addEventListener("click", signOut);
   document.getElementById("credits").textContent = profile.credits_balance ?? 0;
 
+  // Round doc icon, same look as the landing page's .inc-card .ico.
+  const ico = t => t.ico ? `<span style="display:block;width:54px;height:54px;border-radius:50%;background:url('${t.ico}') center 30% / cover no-repeat;border:1px solid var(--border-bold);box-shadow:0 1px 4px rgba(16,24,40,0.18);margin-bottom:0.9rem"></span>` : "";
   document.getElementById("templates").innerHTML = TEMPLATES.map(t =>
-    `<a class="tile" href="/templates/${t.f}"><span class="k">Template</span><h2>${t.t}</h2><span class="arrow">Open →</span></a>`).join("");
+    `<a class="tile" href="/templates/${t.f}"><span class="k">Template</span>${ico(t)}<h2>${t.t}</h2><span class="arrow">Open →</span></a>`).join("");
   document.getElementById("grid").innerHTML = MODULES.map(m =>
     `<a class="tile" href="/module-${m.n}.html"><span class="k">Module ${String(m.n).padStart(2,"0")}</span><h2>${m.t}</h2><span class="arrow">Open →</span></a>`).join("");
 
