@@ -64,10 +64,12 @@ if (profile) {
       <div class="gv-stat"><div class="n">${openRisks}</div><div class="l">Open risks</div><div class="sub">${count("risk")} on the register</div></div>
       <div class="gv-stat"><div class="n">${openIncidents}</div><div class="l">Open incidents</div><div class="sub">In progress</div></div>`;
 
+    // Round doc icon, same look as the manager portal's template tiles.
+    const ico = src => `<span style="display:block;width:54px;height:54px;border-radius:50%;background:url('${src}') center 30% / cover no-repeat;border:1px solid var(--border-bold);box-shadow:0 1px 4px rgba(16,24,40,0.18);margin-bottom:0.9rem"></span>`;
     $("cards").innerHTML = `
-      <a class="tile" href="/templates/ai-use-case-register.html"><span class="k">Register</span><h2>Use cases</h2><p>${count("use_case")} logged. Track every AI use across the business.</p><span class="arrow">Open register →</span></a>
-      <a class="tile" href="/templates/vendor-questionnaire.html"><span class="k">Diligence</span><h2>Vendors</h2><p>${count("vendor")} tracked. Score AI suppliers before you buy.</p><span class="arrow">Open diligence →</span></a>
-      <a class="tile" href="/templates/ai-steering-group-tor.html"><span class="k">Oversight</span><h2>Steering group</h2><p>Define the group that owns AI governance and signs it off.</p><span class="arrow">Open ToR →</span></a>`;
+      <a class="tile" href="/templates/ai-use-case-register.html"><span class="k">Register</span>${ico("/assets/hero-use-case-register.jpg?v=1")}<h2>Use cases</h2><p>${count("use_case")} logged. Track every AI use across the business.</p><span class="arrow">Open register →</span></a>
+      <a class="tile" href="/templates/vendor-questionnaire.html"><span class="k">Diligence</span>${ico("/assets/hero-vendor-dd.jpg?v=1")}<h2>Vendors</h2><p>${count("vendor")} tracked. Score AI suppliers before you buy.</p><span class="arrow">Open diligence →</span></a>
+      <a class="tile" href="/templates/ai-steering-group-tor.html"><span class="k">Oversight</span>${ico("/assets/hero-tor.jpg?v=1")}<h2>Steering group</h2><p>Define the group that owns AI governance and signs it off.</p><span class="arrow">Open ToR →</span></a>`;
 
     const docRow = d => `<tr><td>${esc(d.title)}</td><td>${esc(d.category || "")}</td>`
       + `<td><button type="button" class="pill ${esc(d.status)}" data-id="${esc(d.id)}" data-status="${esc(d.status)}">${esc(d.status)}</button></td>`
