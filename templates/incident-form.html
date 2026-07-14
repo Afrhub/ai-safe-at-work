@@ -57,6 +57,18 @@
   .fill { background: white !important; color: #0b0e14 !important; border-color: #46505e !important; }
   .timeline-table th, .deadline-card strong { background: #f4ead0 !important; color: #0b0e14 !important; }
 }
+/* Page artwork faded into the banner — hero-art pattern (matches manager/consultancy). */
+.page-hero::after {
+  content:''; position:absolute; top:0; right:0; bottom:0; z-index:0; pointer-events:none;
+  width:min(44%, 560px);
+  background:url('../assets/hero-incident-form.jpg?v=1') center / cover no-repeat;
+  -webkit-mask-image: radial-gradient(118% 96% at 82% 42%, #000 22%, transparent 72%);
+          mask-image: radial-gradient(118% 96% at 82% 42%, #000 22%, transparent 72%);
+  opacity:0.9;
+}
+html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9); }
+@media (max-width: 900px) { .page-hero::after { display:none; } }
+@media print { .page-hero::after { display:none; } }
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"HowTo","name":"AI incident report form","description":"Audit-ready incident report form for AI-involved incidents — aligned with GDPR Art 33/34 and EU AI Act Art 73.","url":"https://attest-ai.com/templates/incident-form.html","inLanguage":"en","publisher":{"@id":"https://attest-ai.com/#organization"},"totalTime":"PT1H","dateModified":"2026-06-03"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://attest-ai.com/"},{"@type":"ListItem","position":2,"name":"Templates","item":"https://attest-ai.com/templates/"},{"@type":"ListItem","position":3,"name":"AI incident report form","item":"https://attest-ai.com/templates/incident-form.html"}]}]}
