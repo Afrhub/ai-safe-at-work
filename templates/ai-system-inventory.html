@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<meta name="color-scheme" content="dark light" />
+<script>try{if(localStorage.getItem("aisw-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+<title>AI System Inventory &amp; Model Card template · Attest AI</title>
+<meta name="description" content="An inventory of AI systems in use at your organisation, plus a one-page model card per system. Track models, datasets, vendors, owners, and lifecycle status. Aligns with EU AI Act Article 26, ISO/IEC 42001 Clause 8, GDPR Article 30." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Attest AI" />
+<meta property="og:title" content="AI System Inventory &amp; Model Card template · Attest AI" />
+<meta property="og:description" content="An inventory of AI systems in use at your organisation, plus a one-page model card per system. Track models, datasets, vendors, owners, and lifecycle status. Aligns with EU AI Act Article 26, ISO/IEC 42001 Clause 8, GDPR Article 30." />
+<meta property="og:url" content="https://attest-ai.com/templates/ai-system-inventory.html" />
+<meta property="og:image" content="https://attest-ai.com/og-card.png?v=3" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI System Inventory &amp; Model Card template · Attest AI" />
+<meta name="twitter:description" content="An inventory of AI systems in use at your organisation, plus a one-page model card per system. Track models, datasets, vendors, owners, and lifecycle status. Aligns with EU AI Act Article 26, ISO/IEC 42001 Clause 8, GDPR Article 30." />
+<meta name="twitter:image" content="https://attest-ai.com/og-card.png?v=3" />
+<link rel="preload" href="../assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=20" />
+<script defer src="../assets/cinema.js?v=11"></script>
+<style>
+.template-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 2px;
+  background: rgba(250,88,45, 0.08);
+  border: 1px solid rgba(250,88,45, 0.32);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.template-tag::before {
+  content: '§';
+  color: var(--accent);
+  font-weight: 800;
+}
+.print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0 2rem; align-items: center; flex-wrap: wrap; }
+.print-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--accent); color: #0b0e14;
+  font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.7rem 1.25rem; border-radius: 2px;
+  border: none; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 0 1px rgba(250,88,45,0.4), 0 8px 24px rgba(250,88,45,0.2);
+}
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(250,88,45,0.55), 0 12px 32px rgba(250,88,45,0.3); }
+.print-btn:active { transform: translateY(-1px) scale(0.97); }
+.print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
+.fill {
+  display: inline-block;
+  padding: 0.1rem 0.55rem;
+  border-radius: 2px;
+  background: rgba(250,88,45, 0.10);
+  color: var(--accent);
+  border: 1px dashed rgba(250,88,45, 0.42);
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+}
+.register-table {
+  margin: 1.5rem 0;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.register-table thead {
+  background: rgba(250,88,45, 0.08);
+  border: 1px solid var(--border);
+}
+.register-table th {
+  padding: 0.9rem 1rem;
+  text-align: left;
+  font-weight: 700;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.register-table td {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  color: var(--text2);
+}
+.register-table tbody tr:nth-child(even) {
+  background: rgba(250,88,45, 0.02);
+}
+.status-live { color: #2da45f; font-weight: 700; }
+.status-proposed { color: #f7a600; font-weight: 700; }
+.status-retired { color: #d62828; font-weight: 700; }
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+.policy-doc {
+  margin: 1.5rem 0;
+  padding: 2rem 2.2rem;
+  background: var(--plate);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  box-shadow: var(--shadow-card);
+}
+.policy-doc h2 { margin-top: 2.2rem; }
+.policy-doc h2:first-child { margin-top: 0; }
+.policy-doc h3 { margin-top: 1.6rem; }
+.policy-doc ol, .policy-doc ul { padding-left: 1.4rem; }
+.policy-doc li { margin-bottom: 0.55rem; }
+.model-card {
+  margin: 1.5rem 0;
+  border: 2px solid var(--border);
+  border-radius: 3px;
+}
+.model-card .mc-row {
+  display: flex;
+  gap: 1rem;
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+}
+.model-card .mc-row:last-child { border-bottom: none; }
+.model-card .mc-label {
+  flex: 0 0 220px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-top: 0.15rem;
+}
+.model-card .mc-value { flex: 1; color: var(--text2); }
+@media (max-width: 640px) {
+  .register-table { font-size: 0.75rem; }
+  .register-table th, .register-table td { padding: 0.6rem 0.7rem; }
+  .model-card .mc-row { flex-direction: column; gap: 0.3rem; }
+  .model-card .mc-label { flex: none; }
+}
+@media print {
+  .policy-doc { background: white !important; border: 1px solid #ccc !important; box-shadow: none !important; padding: 1rem 0 !important; }
+  .register-table { border: 1px solid #ccc; }
+  .register-table thead { background: #f5f5f5 !important; }
+  .register-table th { color: #46505e !important; }
+  .fill { background: white !important; color: #0b0e14 !important; border-color: #46505e !important; }
+  .model-card { border: 1px solid #ccc !important; }
+  .model-card .mc-row { border-bottom: 1px solid #ccc !important; }
+  .model-card .mc-label { color: #46505e !important; }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HowTo",
+      "name": "AI System Inventory & Model Card template",
+      "description": "Inventory of AI systems in use, plus a one-page model card per system covering model, data, oversight, and approved uses.",
+      "url": "https://attest-ai.com/templates/ai-system-inventory.html",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://attest-ai.com/#organization"
+      },
+      "totalTime": "PT45M",
+      "dateModified": "2026-07-08"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://attest-ai.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Templates",
+          "item": "https://attest-ai.com/templates/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AI System Inventory & Model Card template · AI Safe@Work",
+          "item": "https://attest-ai.com/templates/ai-system-inventory.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="topbar no-print">
+ <a href="../index.html" class="brand"><img src="/assets/logo.png?v=2" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />Attest&nbsp;AI</a>
+ <nav class="topbar-nav">
+ <a href="../index.html#platform">Platform</a>
+ <a href="../index.html#included">Features</a>
+ <a href="../consultancy.html">Consultancy</a>
+ <a href="../msp.html">Partners</a>
+ <a href="../resources.html">Resources</a>
+ <a href="../about.html">About</a>
+ <a href="../portal/login.html">AIMP log in</a>
+ <a href="../about.html#contact" class="nav-cta always-show">Book a Demo</a>
+ </nav>
+</header>
+
+<main id="main">
+ <span class="template-tag no-print">Template · AI System Inventory v1.0</span>
+ <p class="eyebrow no-print">Governance inventory</p>
+ <h1 class="page-title">AI System Inventory &amp; Model Card for <span class="fill">[Company Name]</span></h1>
+ <p class="lede no-print">Track every AI system in use, not just the tools: the models behind them, the datasets they touch, the vendors involved, a named owner, and where each system sits in its lifecycle. Aligns with EU AI Act Art 26 (deployer obligations), ISO/IEC 42001 Clause 8 (operational planning and control), GDPR Art 30 (records of processing).</p>
+
+ <div class="print-row no-print">
+ <button type="button" class="print-btn" onclick="window.print()">Print / Export as CSV →</button>
+ <span class="print-hint">Maintain the inventory in a shared spreadsheet and keep one model card per system alongside it. Review monthly; full review quarterly.</span>
+ </div>
+
+ <article class="policy-doc">
+
+ <span class="section-tag">Purpose and scope</span>
+ <h2>Why an inventory, not just a tool list</h2>
+ <p>A tool register tells you what software is installed. A system inventory tells you what your organisation actually <em>does</em> with AI. The difference matters:</p>
+ <ul>
+ <li><strong>One tool, many systems.</strong> A single tool (say, ChatGPT Enterprise) can power a CV-screening workflow, a customer-email drafter, and a contract summariser. Same tool, three systems, three very different risk profiles.</li>
+ <li><strong>Obligations attach to systems in context.</strong> The EU AI Act classifies risk by what the system is used <em>for</em>, not by the underlying model. CV screening is high-risk under Annex III; drafting a newsletter with the same model is not.</li>
+ <li><strong>Accountability needs a name.</strong> Every system gets a named owner who answers for its data, its oversight, and its review dates. "IT owns the tool" is not the same as "someone owns the system".</li>
+ <li><strong>Audit evidence.</strong> Regulators and auditors ask "show me what AI systems you deploy and how you control them" (EU AI Act Art 26, ISO/IEC 42001 Clause 8). This inventory, plus its model cards, is that answer.</li>
+ </ul>
+ <p>Keep your <a href="ai-tool-register.html">AI Tool Register</a> for the tools themselves. This inventory sits one level up: the workflows and use cases built on those tools.</p>
+
+ <span class="section-tag">Section 1 · The inventory</span>
+ <h2>The inventory</h2>
+ <p>One row per system. A system is a distinct use of AI with its own purpose, data, and users, even if it shares a tool with other systems. Two sample rows are filled in; add your own below.</p>
+
+ <table class="register-table">
+ <thead>
+ <tr>
+ <th>System name</th>
+ <th>Purpose</th>
+ <th>Underlying model / tool + tier</th>
+ <th>Data categories touched</th>
+ <th>Vendor(s)</th>
+ <th>Owner</th>
+ <th>Lifecycle status</th>
+ <th>EU AI Act risk tier</th>
+ <th>Last reviewed</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td><strong>CV screening assistant</strong></td>
+ <td>First-pass shortlisting of job applications against role criteria</td>
+ <td>GPT-5 via ChatGPT Enterprise</td>
+ <td>Personal data (names, work history, contact details)</td>
+ <td>OpenAI</td>
+ <td>HR lead</td>
+ <td><span class="status-proposed">Proposed</span></td>
+ <td>High-risk (Annex III, employment). Not to go live without Art 26 controls and DPIA.</td>
+ <td>12 Jun 2026</td>
+ </tr>
+ <tr>
+ <td><strong>Customer-email drafting</strong></td>
+ <td>Drafting replies to routine customer enquiries; human sends every message</td>
+ <td>Claude (Team tier)</td>
+ <td>Customer names, order details; no payment or special-category data</td>
+ <td>Anthropic</td>
+ <td>Customer services manager</td>
+ <td><span class="status-live">Live</span></td>
+ <td>Limited risk. Transparency note in email footer; human review before send.</td>
+ <td>02 Jul 2026</td>
+ </tr>
+ <tr>
+ <td><span class="fill">[System]</span></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+ </tr>
+ <tr>
+ <td><span class="fill">[System]</span></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+ </tr>
+ <tr>
+ <td><span class="fill">[System]</span></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+ </tr>
+ <tr>
+ <td><span class="fill">[System]</span></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+ </tr>
+ <tr>
+ <td><span class="fill">[System]</span></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+ </tr>
+ <tr>
+ <td><span class="fill">[System]</span></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+ </tr>
+ </tbody>
+ </table>
+
+ <h3>Column notes</h3>
+ <ul>
+ <li><strong>Lifecycle status:</strong> Proposed (idea or pilot, not approved) · Approved (signed off, not yet in use) · Live (in production use) · Retired (switched off; keep the row for audit history).</li>
+ <li><strong>EU AI Act risk tier:</strong> Prohibited · High-risk (Annex III use cases such as employment, credit, education) · Limited risk (transparency duties) · Minimal risk. Classify by the use, not the model.</li>
+ <li><strong>Data categories touched:</strong> Use the same categories as your Tool Register: public-only, internal non-sensitive, confidential business, personal data, special category.</li>
+ </ul>
+
+ <span class="section-tag">Section 2 · Model card</span>
+ <h2>Model card (one per system)</h2>
+ <p>Complete one card for every system on the inventory. Keep it to a single page; it is the "passport" a manager, auditor, or new starter reads to understand the system in two minutes. Print or copy this blank card for each system.</p>
+
+ <div class="model-card">
+ <div class="mc-row"><span class="mc-label">System name</span><span class="mc-value"><span class="fill">[System name]</span></span></div>
+ <div class="mc-row"><span class="mc-label">What it does</span><span class="mc-value"><span class="fill">[One or two sentences: purpose, users, and where it sits in the workflow]</span></span></div>
+ <div class="mc-row"><span class="mc-label">Model + version</span><span class="mc-value"><span class="fill">[e.g. GPT-5, accessed via ChatGPT Enterprise; record the version or date]</span></span></div>
+ <div class="mc-row"><span class="mc-label">Training-data provenance</span><span class="mc-value"><span class="fill">[What the vendor states about training data; link to the vendor statement or DPA]</span></span></div>
+ <div class="mc-row"><span class="mc-label">Known limitations</span><span class="mc-value"><span class="fill">[Hallucination, bias, knowledge cutoff, weak languages or domains]</span></span></div>
+ <div class="mc-row"><span class="mc-label">Human oversight in place (Art 14)</span><span class="mc-value"><span class="fill">[Who reviews outputs, at what point, and with what authority to override or stop]</span></span></div>
+ <div class="mc-row"><span class="mc-label">Performance checks run</span><span class="mc-value"><span class="fill">[What you tested, when, sample size, results; e.g. accuracy spot-check on 50 outputs]</span></span></div>
+ <div class="mc-row"><span class="mc-label">Approved uses</span><span class="mc-value"><span class="fill">[Explicit list of what this system may be used for]</span></span></div>
+ <div class="mc-row"><span class="mc-label">Prohibited uses</span><span class="mc-value"><span class="fill">[Explicit list of what it must not be used for, e.g. final decisions about individuals]</span></span></div>
+ <div class="mc-row"><span class="mc-label">Owner + review date</span><span class="mc-value"><span class="fill">[Named owner]</span> · next review <span class="fill">[date]</span></span></div>
+ </div>
+
+ <span class="section-tag">Section 3 · Review cadence</span>
+ <h2>Review cadence</h2>
+ <ol>
+ <li><strong>Monthly light check</strong> (15 minutes, by the inventory owner): any new systems appeared? Any owners changed roles? Any vendor notices received? Update rows; no deep review.</li>
+ <li><strong>Quarterly full review</strong> (owner plus each system owner): re-confirm every row, re-read each model card, check performance-check results are current, and confirm lifecycle status and risk tier still hold.</li>
+ <li><strong>Re-review on any material change</strong>, within one week of: a model swap or major version change, a new data category being fed to the system, a new use for an existing system, or a vendor terms change. A material change can move a system's risk tier, so treat it as a new approval, not a footnote.</li>
+ </ol>
+
+ <h2>Standards referenced</h2>
+ <ul>
+ <li><strong>EU AI Act 2024/1689</strong>, Article 26 (deployer obligations: oversight, monitoring, input-data control), Article 14 (human oversight), Annex III (high-risk use cases).</li>
+ <li><strong>ISO/IEC 42001:2023</strong>, Clause 8 (operational planning and control, including AI system impact assessment and lifecycle management).</li>
+ <li><strong>GDPR 2016/679</strong>, Article 30 (records of processing activities), Article 35 (DPIA where processing is likely high-risk).</li>
+ </ul>
+
+ </article>
+
+ <div class="callout note no-print">
+ <span class="callout-icon">i</span>
+ <div>
+ <div class="callout-title">Rolling this out</div>
+ <ol>
+ <li>Start from your <a href="ai-tool-register.html">AI Tool Register</a>: for each tool, ask "what workflows actually run on this?" Each answer is a system row.</li>
+ <li>Name an owner for every system before it goes on the inventory. No owner, no approval.</li>
+ <li>Complete a model card per system, starting with anything touching personal data or decisions about people.</li>
+ <li>Classify each system's EU AI Act risk tier by use case; escalate anything that looks Annex III (employment, credit, education) to your DPO before it goes live.</li>
+ <li>Put the monthly check and quarterly review in the diary now, owned by a named person.</li>
+ </ol>
+ </div>
+ </div>
+
+</main>
+
+<nav class="module-bottom-nav no-print">
+ <a class="nav-btn" href="ai-tool-register.html">
+ <span class="nav-dir">Back to</span>
+ <span class="nav-title">← AI Tool Register</span>
+ </a>
+ <a class="nav-btn next" href="ai-risk-register.html">
+ <span class="nav-dir">Next template</span>
+ <span class="nav-title">AI Risk Register →</span>
+ </a>
+</nav>
+
+<footer class="site-foot no-print">
+ <div class="foot-brand">
+ <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
+ <p>The AI Governance Platform, adopt AI safely, securely and responsibly.</p>
+ </div>
+ <div class="foot-col"><h4>Platform</h4><a href="../course.html">AI Safe@Work Learning</a><a href="../plus-pack.html">Governance Toolkit</a><a href="../index.html#included">Reporting &amp; Evidence</a></div>
+ <div class="foot-col"><h4>Services</h4><a href="../consultancy.html">Consultancy</a><a href="../msp.html">Partner Programme</a><a href="../consultancy.html">Health Checks</a></div>
+ <div class="foot-col"><h4>Resources</h4><a href="../resources.html">Blog</a><a href="../resources.html">FAQs</a><a href="../about.html#contact">Support</a></div>
+ <div class="foot-col"><h4>Company</h4><a href="../about.html">About</a><a href="../about.html#contact">Contact</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a></div>
+ <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
+</footer>
+
+</body>
+</html>
