@@ -16,7 +16,7 @@ export const MODULES = [
 export const TEMPLATES = [
   { f: "ai-management-system-manual.html", t: "AI Management System Manual", ico: "/assets/hero-manual.jpg?v=2" },
   { f: "ai-governance-charter.html", t: "AI Governance Charter", ico: "/assets/hero-charter.jpg?v=1" },
-  { f: "ai-steering-group-tor.html", t: "AI Steering Group ToR" },
+  { f: "ai-steering-group-tor.html", t: "AI Steering Group ToR", ico: "/assets/hero-tor.jpg?v=1" },
   { f: "ai-raci-matrix.html", t: "AI Governance Roles Matrix" },
   { f: "ai-objectives-register.html", t: "AI Objectives Register" },
   { f: "aup-template.html", t: "Acceptable Use Policy" },
