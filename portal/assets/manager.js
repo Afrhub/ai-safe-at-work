@@ -12,7 +12,7 @@ if (profile) {
   document.getElementById("templates").innerHTML = TEMPLATES.map(t =>
     `<a class="tile" href="/templates/${t.f}"><span class="k">Template</span>${ico(t)}<h2>${t.t}</h2><span class="arrow">Open →</span></a>`).join("");
   document.getElementById("grid").innerHTML = MODULES.map(m =>
-    `<a class="tile" href="/module-${m.n}.html"><span class="k">Module ${String(m.n).padStart(2,"0")}</span><h2>${m.t}</h2><span class="arrow">Open →</span></a>`).join("");
+    `<a class="tile" href="/module-${m.n}.html"><span class="k">Module ${String(m.n).padStart(2,"0")}</span>${ico(m)}<h2>${m.t}</h2><span class="arrow">Open →</span></a>`).join("");
 
   async function loadSeats() {
     const { data: seats } = await sb.from("seats").select("end_user_id, created_at, profiles!seats_end_user_id_fkey(email)");

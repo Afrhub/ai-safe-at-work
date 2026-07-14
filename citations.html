@@ -46,6 +46,18 @@
 .cite-header { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin: 2.6rem 0 0.4rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
 .cite-header h2 { margin: 0; }
 .cite-header .meta { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text3); }
+/* Page artwork faded into the banner — hero-art pattern (matches manager/consultancy). */
+.page-hero::after {
+  content:''; position:absolute; top:0; right:0; bottom:0; z-index:0; pointer-events:none;
+  width:min(44%, 560px);
+  background:url('assets/hero-citations.jpg?v=1') center / cover no-repeat;
+  -webkit-mask-image: radial-gradient(118% 96% at 82% 42%, #000 22%, transparent 72%);
+          mask-image: radial-gradient(118% 96% at 82% 42%, #000 22%, transparent 72%);
+  opacity:0.9;
+}
+html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9); }
+@media (max-width: 900px) { .page-hero::after { display:none; } }
+@media print { .page-hero::after { display:none; } }
 </style>
 <script type="application/ld+json">
 {

@@ -1,16 +1,16 @@
 // The 11 modules (M1–M10 + the Standards reference). M11, the 60-second checklist, is the gated finale.
 export const MODULES = [
-  { n: 1,  t: "Why this course exists" },
-  { n: 2,  t: "What AI tools do with what you type" },
-  { n: 3,  t: "The never-paste list" },
-  { n: 4,  t: "Picking the right tool" },
-  { n: 5,  t: "Verifying what the AI tells you" },
-  { n: 6,  t: "AI-powered scams aimed at you" },
-  { n: 7,  t: "Bias, fairness, high-stakes decisions" },
-  { n: 8,  t: "Copyright, IP and other people's content" },
-  { n: 9,  t: "Logging and accountability" },
-  { n: 10, t: "When something goes wrong" },
-  { n: 12, t: "The standards behind this course" },
+  { n: 1,  t: "Why this course exists" , ico: "/assets/hero-m1.jpg?v=1" },
+  { n: 2,  t: "What AI tools do with what you type" , ico: "/assets/hero-m2.jpg?v=1" },
+  { n: 3,  t: "The never-paste list" , ico: "/assets/hero-m3.jpg?v=1" },
+  { n: 4,  t: "Picking the right tool" , ico: "/assets/hero-m4.jpg?v=1" },
+  { n: 5,  t: "Verifying what the AI tells you" , ico: "/assets/hero-m5.jpg?v=1" },
+  { n: 6,  t: "AI-powered scams aimed at you" , ico: "/assets/hero-m6.jpg?v=1" },
+  { n: 7,  t: "Bias, fairness, high-stakes decisions" , ico: "/assets/hero-m7.jpg?v=1" },
+  { n: 8,  t: "Copyright, IP and other people's content" , ico: "/assets/hero-m8.jpg?v=1" },
+  { n: 9,  t: "Logging and accountability" , ico: "/assets/hero-m9.jpg?v=1" },
+  { n: 10, t: "When something goes wrong" , ico: "/assets/hero-m10.jpg?v=1" },
+  { n: 12, t: "The standards behind this course" , ico: "/assets/hero-m12.jpg?v=1" },
 ];
 
 export const TEMPLATES = [

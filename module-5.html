@@ -220,7 +220,19 @@
   .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
   .rd-cap strong { color: var(--text); }
   .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
-  </style>
+  /* Module artwork faded into the banner — hero-art pattern (matches manager/consultancy). */
+.page-hero::after {
+  content:''; position:absolute; top:0; right:0; bottom:0; z-index:0; pointer-events:none;
+  width:min(44%, 560px);
+  background:url('assets/hero-m5.jpg?v=1') center / cover no-repeat;
+  -webkit-mask-image: radial-gradient(118% 96% at 82% 42%, #000 22%, transparent 72%);
+          mask-image: radial-gradient(118% 96% at 82% 42%, #000 22%, transparent 72%);
+  opacity:0.9;
+}
+html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9); }
+@media (max-width: 900px) { .page-hero::after { display:none; } }
+@media print { .page-hero::after { display:none; } }
+</style>
  <figure id="risk-fig-5" class="risk-fig" aria-labelledby="risk-fig-cap">
  <svg viewBox="0 0 760 250" class="risk-svg" role="group" aria-label="The verify-before-you-rely workflow. Select a step to learn more.">
  <g class="rnode" data-k="out" tabindex="0" role="button" aria-label="The AI output, confident but unproven">
