@@ -126,12 +126,19 @@
  <div class="contact-card">
  <h3>Partner Enquiries</h3>
  <p>For MSPs and resellers who want to offer AI Safe@Work to their customers.</p>
- <a class="cta" href="mailto:hello@attest-ai.com?subject=Partner%20enquiry">Email partnerships →</a>
+ <form name="partner-enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/demo-thanks.html" class="demo-form">
+  <input type="hidden" name="form-name" value="partner-enquiry" />
+  <p hidden><label>Leave this empty <input name="bot-field" /></label></p>
+  <label>Name <input type="text" name="name" autocomplete="name" required /></label>
+  <label>Work email <input type="email" name="email" autocomplete="email" required /></label>
+  <label>Company <input type="text" name="company" autocomplete="organization" required /></label>
+  <button type="submit" class="cta">Enquire about partnership →</button>
+ </form>
  </div>
  <div class="contact-card">
- <h3>General Contact</h3>
- <p>Questions about the course, the packs, or anything else.</p>
- <a class="cta" href="mailto:hello@attest-ai.com">Email us →</a>
+ <h3>Buy Tier 1</h3>
+ <p>The AI Safe@Work course, all eleven modules, certificates, annual refreshers and the Plus Pack governance toolkit. £1,000 one-off.</p>
+ <a class="cta" href="checkout.html" style="display:inline-block;background:var(--accent);color:#fff;border:none;font-family:var(--font-display);font-weight:800;font-size:0.95rem;padding:0.7rem 1.4rem;border-radius:var(--r-sm)">Buy Tier 1 · £1,000 →</a>
  </div>
  </div>
  </section>
