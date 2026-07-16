@@ -150,31 +150,57 @@ html[data-theme="dark"] .inc-card .ico { border-color: rgba(255,255,255,0.22); b
 @media (max-width: 640px) { .gate-hero { padding: 3.5rem 1.5rem 3rem; } .sec { padding: 3.5rem 1.5rem; } }
 
 /* FAQ accordion */
-.faq { max-width: 800px; margin: 2.2rem 0 0; }
-.faq details { border-bottom: 1px solid var(--border); }
-.faq details:first-child { border-top: 1px solid var(--border); }
-.faq summary { list-style: none; cursor: pointer; padding: 1.25rem 2.4rem 1.25rem 0; font-family: var(--font-display); font-weight: 700; font-size: 1.12rem; color: var(--text); position: relative; }
-.faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: '+'; position: absolute; right: 0.3rem; top: 1.05rem; font-size: 1.5rem; line-height: 1; color: var(--accent); transition: transform 0.2s ease; }
-.faq details[open] summary::after { content: '−'; }
-.faq details > p { margin: 0 0 1.35rem; color: var(--text2); font-size: 1.03rem; line-height: 1.65; max-width: 66ch; }
 </style>
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@graph":[
-    {"@type":"Organization","@id":"https://attest-ai.com/#organization","name":"Attest AI","alternateName":"Attest AI Management Platform","url":"https://attest-ai.com/","logo":"https://attest-ai.com/assets/logo.png","description":"The AI Governance Platform helping organisations adopt AI safely, securely and responsibly through continuous learning, practical governance and expert support.","areaServed":["GB","EU"],"knowsAbout":["AI governance","EU AI Act","GDPR","ISO/IEC 42001","ISO/IEC 27001","AI risk management","AI compliance","AI literacy"]},
-    {"@type":"WebSite","@id":"https://attest-ai.com/#website","url":"https://attest-ai.com/","name":"Attest AI","publisher":{"@id":"https://attest-ai.com/#organization"},"inLanguage":"en"},
-    {"@type":"SoftwareApplication","@id":"https://attest-ai.com/#aimp","name":"Attest AI Management Platform (AIMP)","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"https://attest-ai.com/","description":"AI governance platform: AI-safety learning, living policies and registers, reporting and audit-ready evidence, regulatory updates and user management.","publisher":{"@id":"https://attest-ai.com/#organization"}},
-    {"@type":"FAQPage","@id":"https://attest-ai.com/#faq","mainEntity":[
-      {"@type":"Question","name":"What is Attest AI?","acceptedAnswer":{"@type":"Answer","text":"Attest AI is an AI governance platform that helps organisations adopt AI safely, securely and responsibly. It combines AI-safety training, practical governance templates, continuous regulatory updates, audit-ready evidence and expert support across three simple tiers: training, a governance toolkit and consultancy."}},
-      {"@type":"Question","name":"What is AI governance for a business?","acceptedAnswer":{"@type":"Answer","text":"AI governance is the policies, registers, risk assessments and human oversight that make sure your organisation uses AI safely, and can prove it. It covers acceptable use, data protection, supplier due diligence, incident response and reporting, aligned to the EU AI Act, GDPR and ISO/IEC 42001."}},
-      {"@type":"Question","name":"Does Attest AI cover the EU AI Act and ISO 42001?","acceptedAnswer":{"@type":"Answer","text":"Yes. Attest AI's training and templates are mapped to the EU AI Act (Regulation 2024/1689), GDPR, ISO/IEC 42001 and ISO/IEC 27001, so your governance evidence lines up with what an auditor or regulator expects to see."}},
-      {"@type":"Question","name":"Is the AI Safe@Work course free?","acceptedAnswer":{"@type":"Answer","text":"Yes. The core AI Safe@Work training modules are free to read with no login. Certificates, the governance Plus Pack and consultancy are the optional paid layers."}},
-      {"@type":"Question","name":"What are the three tiers?","acceptedAnswer":{"@type":"Answer","text":"Tier 1 is AI Safe@Work training: the course, per-module assessments, a completion certificate and annual refreshers. Tier 2 is the Plus Pack: Tier 1 plus a ready-to-fill governance toolkit of policies, registers and assessments. Tier 3 is consultancy: we implement and manage AI governance for you."}},
-      {"@type":"Question","name":"Who is Attest AI for?","acceptedAnswer":{"@type":"Answer","text":"Small and medium businesses and the managed service providers (MSPs) who support them, HR, IT managers, compliance leads and operations directors who need staff trained and AI governance documented, evidenced and audit-ready."}}
-    ]}
-  ]
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Organization",
+   "@id": "https://attest-ai.com/#organization",
+   "name": "Attest AI",
+   "alternateName": "Attest AI Management Platform",
+   "url": "https://attest-ai.com/",
+   "logo": "https://attest-ai.com/assets/logo.png",
+   "description": "The AI Governance Platform helping organisations adopt AI safely, securely and responsibly through continuous learning, practical governance and expert support.",
+   "areaServed": [
+    "GB",
+    "EU"
+   ],
+   "knowsAbout": [
+    "AI governance",
+    "EU AI Act",
+    "GDPR",
+    "ISO/IEC 42001",
+    "ISO/IEC 27001",
+    "AI risk management",
+    "AI compliance",
+    "AI literacy"
+   ]
+  },
+  {
+   "@type": "WebSite",
+   "@id": "https://attest-ai.com/#website",
+   "url": "https://attest-ai.com/",
+   "name": "Attest AI",
+   "publisher": {
+    "@id": "https://attest-ai.com/#organization"
+   },
+   "inLanguage": "en"
+  },
+  {
+   "@type": "SoftwareApplication",
+   "@id": "https://attest-ai.com/#aimp",
+   "name": "Attest AI Management Platform (AIMP)",
+   "applicationCategory": "BusinessApplication",
+   "operatingSystem": "Web",
+   "url": "https://attest-ai.com/",
+   "description": "AI governance platform: AI-safety learning, living policies and registers, reporting and audit-ready evidence, regulatory updates and user management.",
+   "publisher": {
+    "@id": "https://attest-ai.com/#organization"
+   }
+  }
+ ]
 }
 </script>
 </head>
@@ -393,19 +419,6 @@ html[data-theme="dark"] .inc-card .ico { border-color: rgba(255,255,255,0.22); b
  </div>
  </div></section>
 
- <!-- FAQ -->
- <section id="faq"><div class="sec">
- <p class="eyebrow">FAQ</p>
- <h2 class="big">Common questions</h2>
- <div class="faq">
- <details><summary>What is Attest AI?</summary><p>Attest AI is an AI governance platform that helps organisations adopt AI safely, securely and responsibly. It combines AI-safety training, practical governance templates, continuous regulatory updates, audit-ready evidence and expert support across three simple tiers: training, a governance toolkit and consultancy.</p></details>
- <details><summary>What is AI governance for a business?</summary><p>AI governance is the policies, registers, risk assessments and human oversight that make sure your organisation uses AI safely, and can prove it. It covers acceptable use, data protection, supplier due diligence, incident response and reporting, aligned to the EU AI Act, GDPR and ISO/IEC 42001.</p></details>
- <details><summary>Does Attest AI cover the EU AI Act and ISO 42001?</summary><p>Yes. Attest AI's training and templates are mapped to the EU AI Act (Regulation 2024/1689), GDPR, ISO/IEC 42001 and ISO/IEC 27001, so your governance evidence lines up with what an auditor or regulator expects to see.</p></details>
- <details><summary>Is the AI Safe@Work course free?</summary><p>Yes. The core AI Safe@Work training modules are free to read with no login. Certificates, the governance Plus Pack and consultancy are the optional paid layers.</p></details>
- <details><summary>What are the three tiers?</summary><p>Tier 1 is AI Safe@Work training: the course, per-module assessments, a completion certificate and annual refreshers. Tier 2 is the Plus Pack: Tier 1 plus a ready-to-fill governance toolkit of policies, registers and assessments. Tier 3 is consultancy: we implement and manage AI governance for you.</p></details>
- <details><summary>Who is Attest AI for?</summary><p>Small and medium businesses and the managed service providers (MSPs) who support them, HR, IT managers, compliance leads and operations directors who need staff trained and AI governance documented, evidenced and audit-ready.</p></details>
- </div>
- </div></section>
 
  <!-- FINAL CTA -->
  <section class="ctab"><div class="ctab-in">
@@ -426,7 +439,7 @@ html[data-theme="dark"] .inc-card .ico { border-color: rgba(255,255,255,0.22); b
  </div>
  <div class="foot-col"><h4>Platform</h4><a href="course.html">AI Safe@Work Learning</a><a href="plus-pack.html">Governance Toolkit</a><a href="index.html#included">Reporting &amp; Evidence</a></div>
  <div class="foot-col"><h4>Services</h4><a href="consultancy.html">Consultancy</a><a href="msp.html">Partner Programme</a><a href="consultancy.html">Health Checks</a></div>
- <div class="foot-col"><h4>Resources</h4><a href="resources.html">Blog</a><a href="resources.html">FAQs</a><a href="about.html#contact">Support</a></div>
+ <div class="foot-col"><h4>Resources</h4><a href="resources.html">Blog</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
  <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
