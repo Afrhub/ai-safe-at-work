@@ -19,7 +19,7 @@ body { display: grid; grid-template-columns: 250px 1fr; grid-template-rows: 100v
 
 /* sidebar */
 .side { display: flex; flex-direction: column; border-right: 1px solid var(--border); background: var(--bg-soft); min-height: 0; }
-.side .brand { display: flex; gap: 0.6rem; align-items: center; padding: 1.1rem 1.1rem 0.9rem; }
+.side .brand { text-decoration: none; display: flex; gap: 0.6rem; align-items: center; padding: 1.1rem 1.1rem 0.9rem; }
 .side .brand img { height: 40px; width: auto; }
 .side .brand .bt { display: flex; flex-direction: column; line-height: 1.15; }
 .side .brand .bt b { font-family: var(--font-display); font-weight: 800; font-size: 1rem; color: var(--text); }
@@ -102,7 +102,7 @@ body { display: grid; grid-template-columns: 250px 1fr; grid-template-rows: 100v
 <body>
 
 <aside class="side">
- <span class="brand"><img src="/assets/logo.png?v=2" alt="" /><span class="bt"><b>AI&nbsp;Safe@Work</b><span>Compliance platform</span></span></span>
+ <a class="brand" href="../index.html" title="Back to attest-ai.com"><img src="/assets/logo.png?v=2" alt="" /><span class="bt"><b>AI&nbsp;Safe@Work</b><span>Compliance platform</span></span></a>
  <nav aria-label="Dashboard sections">
   <span class="nav-lab">Overview</span>
   <button data-pane="dashboard" class="on"><span class="num">–</span>Dashboard</button>
@@ -125,6 +125,7 @@ body { display: grid; grid-template-columns: 250px 1fr; grid-template-rows: 100v
   <button data-pane="course"><span class="num">·</span>Course</button>
   <button data-pane="templates"><span class="num">·</span>Templates</button>
   <button data-pane="updates"><span class="num">·</span>Updates &amp; sources</button>
+  <a class="navlink" href="../index.html"><span class="num">←</span>Back to website</a>
  </nav>
  <div class="foot">
   <span class="plaque">Plus Pack · ISO/IEC 42001 &amp; EU AI Act mapped</span>
