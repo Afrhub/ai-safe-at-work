@@ -11,280 +11,78 @@
 <link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
 <link rel="stylesheet" href="../assets/style.css?v=21" />
 <link rel="stylesheet" href="assets/portal.css?v=4" />
+<link rel="stylesheet" href="assets/aimp.css?v=1" />
 <script src="config.js"></script>
-<style>
-/* ── App-shell dashboard: fixed viewport, grouped sidebar + switchable panes (artifact layout, white/orange) ── */
-html, body { height: 100%; overflow: hidden; }
-body { display: grid; grid-template-columns: 250px 1fr; grid-template-rows: 100vh; background: var(--bg); }
-
-/* sidebar */
-.side { display: flex; flex-direction: column; border-right: 1px solid var(--border); background: var(--bg-soft); min-height: 0; }
-.side .brand { text-decoration: none; display: flex; gap: 0.6rem; align-items: center; padding: 1.1rem 1.1rem 0.9rem; }
-.side .brand img { height: 40px; width: auto; }
-.side .brand .bt { display: flex; flex-direction: column; line-height: 1.15; }
-.side .brand .bt b { font-family: var(--font-display); font-weight: 800; font-size: 1rem; color: var(--text); }
-.side .brand .bt span { font-family: var(--font-mono); font-size: 0.54rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text3); }
-.side nav { flex: 1; overflow-y: auto; padding: 0.2rem 0.7rem 0.6rem; }
-.side nav .nav-lab { display: block; font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text3); padding: 0.95rem 0.55rem 0.3rem; }
-.side nav button, .side nav a.navlink { display: flex; align-items: center; gap: 0.6rem; width: 100%; text-align: left; font-family: var(--font-body); font-size: 0.9rem; font-weight: 600; color: var(--text2); background: transparent; border: none; border-radius: 8px; padding: 0.5rem 0.6rem; cursor: pointer; text-decoration: none; }
-.side nav button:hover, .side nav a.navlink:hover { background: var(--plate); color: var(--text); }
-.side nav button.on { background: var(--accent); color: #fff; }
-.side nav .num { font-family: var(--font-mono); font-size: 0.62rem; color: currentColor; opacity: 0.55; width: 1.4em; flex-shrink: 0; }
-.side .foot { border-top: 1px solid var(--border); padding: 0.75rem 1rem; display: flex; flex-direction: column; gap: 0.45rem; }
-.side .foot .plaque { font-size: 0.72rem; color: var(--text3); line-height: 1.4; }
-.side .foot .who { font-size: 0.76rem; color: var(--text3); }
-.side .foot button { align-self: flex-start; font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text2); background: transparent; border: 1px solid var(--border-bold); border-radius: 999px; padding: 0.38rem 0.9rem; cursor: pointer; }
-.side .foot button:hover { border-color: var(--accent); color: var(--accent); }
-
-/* main column */
-.appmain { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
-.panes { flex: 1; overflow: hidden; min-height: 0; position: relative; }
-.pane { position: absolute; inset: 0; overflow-y: auto; padding: 1.4rem 1.7rem 2rem; display: none; }
-.pane.on { display: block; }
-
-/* dashboard header row */
-.dash-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.2rem; flex-wrap: wrap; }
-.dash-head .eyebrow { margin-bottom: 0.5rem; }
-.dash-head h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 2.4vw, 1.9rem); letter-spacing: -0.02em; color: var(--text); margin: 0 0 0.5rem; }
-.dash-head .lede { font-size: 0.95rem; color: var(--text2); max-width: 62ch; margin: 0; }
-.aup-btn { flex-shrink: 0; background: var(--accent); color: #fff; font-family: var(--font-display); font-weight: 800; font-size: 0.92rem; padding: 0.65rem 1.2rem; border-radius: var(--r-btn); text-decoration: none; }
-.aup-btn:hover { background: var(--accent-d); color: #fff; }
-
-/* KPI cards */
-.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0.9rem; margin-top: 1.3rem; }
-.kpi { background: var(--plate); border: 1px solid var(--border); border-radius: var(--r); padding: 1.05rem 1.15rem; box-shadow: var(--shadow-card); }
-.kpi .n { font-family: var(--font-display); font-weight: 800; font-size: 1.9rem; letter-spacing: -0.03em; line-height: 1; color: var(--text); }
-.kpi .l { font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--text3); margin-top: 0.5rem; }
-.kpi .bar { height: 5px; border-radius: 3px; background: var(--bg-soft); border: 1px solid var(--border); margin-top: 0.6rem; overflow: hidden; }
-.kpi .bar i { display: block; height: 100%; background: var(--accent); width: 0; transition: width 400ms var(--ease-out); }
-
-/* register cards */
-.regs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.9rem; margin-top: 1rem; }
-.reg { background: var(--plate); border: 1px solid var(--border); border-radius: var(--r); padding: 1.1rem 1.2rem; box-shadow: var(--shadow-card); }
-.reg h3 { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; margin: 0 0 0.4rem; color: var(--text); }
-.reg p { font-size: 0.9rem; color: var(--text2); margin: 0 0 0.8rem; }
-.reg a.open { display: inline-block; font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text2); border: 1px solid var(--border-bold); border-radius: 8px; padding: 0.42rem 0.85rem; text-decoration: none; }
-.reg a.open:hover { border-color: var(--accent); color: var(--accent); }
-
-/* document pack table */
-.pack { background: var(--plate); border: 1px solid var(--border); border-radius: var(--r); box-shadow: var(--shadow-card); padding: 1.1rem 1.2rem; margin-top: 1rem; }
-.pack h3 { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; margin: 0 0 0.5rem; color: var(--text); }
-.pack table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-.pack th { font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--text3); text-align: left; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--border); }
-.pack td { padding: 0.6rem; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: middle; }
-.pack tr:last-child td { border-bottom: none; }
-.pack .dnum { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); }
-.pill { font-family: var(--font-mono); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.22rem 0.6rem; border-radius: 999px; border: 1px solid var(--border-bold); color: var(--text3); }
-.pill.draft { color: var(--accent); border-color: rgba(250,88,45,0.45); }
-.pill.ready { color: var(--blue); border-color: rgba(59,130,246,0.45); }
-.pill.live  { color: var(--green); border-color: rgba(52,211,153,0.55); }
-.pack a.open { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text2); border: 1px solid var(--border-bold); border-radius: 8px; padding: 0.35rem 0.8rem; text-decoration: none; }
-.pack a.open:hover { border-color: var(--accent); color: var(--accent); }
-
-/* manage panes reuse */
-.pane .tiles { grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 0.8rem; margin-top: 0.9rem; }
-.pane .tile { padding: 1rem 1.1rem; min-height: auto; }
-.pane .tile h2 { font-size: 1rem; }
-.pane .tile .arrow { position: static; display: block; margin-top: 0.55rem; }
-.pane h2.sec-t { font-size: 1.05rem; margin: 0 0 0.3rem; }
-.pane p.lede { font-size: 0.92rem; margin: 0 0 0.8rem; max-width: 70ch; }
-.chipline { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text2); margin-top: 0.6rem; }
-.chipline b { color: var(--accent); }
-
-@media (max-width: 860px) {
-  body { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
-  .side { flex-direction: row; align-items: center; border-right: none; border-bottom: 1px solid var(--border); overflow-x: auto; }
-  .side nav { display: flex; padding: 0.3rem; } .side nav .nav-lab { display: none; }
-  .side .foot { border-top: none; flex-direction: row; align-items: center; }
-}
-</style>
 </head>
 <body>
-
-<aside class="side">
- <a class="brand" href="../index.html" title="Back to attest-ai.com"><img src="/assets/logo.png?v=2" alt="" /><span class="bt"><b>AI&nbsp;Safe@Work</b><span>Compliance platform</span></span></a>
- <nav aria-label="Dashboard sections">
-  <span class="nav-lab">Overview</span>
-  <button data-pane="dashboard" class="on"><span class="num">–</span>Dashboard</button>
-  <span class="nav-lab">Policy</span>
-  <a class="navlink" href="/templates/aup-template.html"><span class="num">01</span>Acceptable Use Policy</a>
-  <span class="nav-lab">Registers</span>
-  <a class="navlink" href="/templates/ai-use-case-register.html"><span class="num">02</span>Use Case Register</a>
-  <a class="navlink" href="/templates/ai-risk-register.html"><span class="num">04</span>AI Risk Register</a>
-  <span class="nav-lab">Assessments</span>
-  <a class="navlink" href="/templates/ai-risk-assessment.html"><span class="num">03</span>Risk Assessments</a>
-  <a class="navlink" href="/templates/vendor-questionnaire.html"><span class="num">08</span>Vendor Due Diligence</a>
-  <a class="navlink" href="/templates/ai-supplier-risk-assessment.html"><span class="num">09</span>Supplier Risk Score</a>
-  <span class="nav-lab">Response</span>
-  <a class="navlink" href="/templates/incident-form.html"><span class="num">05</span>Incident Reports</a>
-  <span class="nav-lab">Governance</span>
-  <a class="navlink" href="/templates/ai-raci-matrix.html"><span class="num">06</span>Roles Matrix (RACI)</a>
-  <a class="navlink" href="governance.html"><span class="num">→</span>Governance dashboard</a>
-  <span class="nav-lab">Manage</span>
-  <button data-pane="team"><span class="num">·</span>Team</button>
-  <button data-pane="course"><span class="num">·</span>Course</button>
-  <button data-pane="templates"><span class="num">·</span>Templates</button>
-  <button data-pane="updates"><span class="num">·</span>Updates &amp; sources</button>
-  <a class="navlink" href="../index.html"><span class="num">←</span>Back to website</a>
- </nav>
- <div class="foot">
-  <span class="plaque">Plus Pack · ISO/IEC 42001 &amp; EU AI Act mapped</span>
-  <span class="who" id="who"></span>
-  <button id="out">Sign out</button>
- </div>
-</aside>
-
-<div class="appmain">
- <div class="panes">
-
-  <section class="pane on" id="pane-dashboard" aria-label="Dashboard">
-   <div class="dash-head">
-    <div>
-     <p class="eyebrow">Tier 2 · Attest AI Platform</p>
-     <h1 id="dash-title">AI Governance Dashboard</h1>
-     <p class="lede">Live status across your AI Safe@Work documentation set. Ten governance documents, tracked in one place, ready to send to staff.</p>
-     <p class="chipline">Credits <b id="credits">-</b> · Seats <b id="seated">-</b></p>
+<div id="shell">
+  <aside id="sidebar">
+    <div class="brand">
+      <a class="home" href="../index.html" title="Back to attest-ai.com"><div class="mark">A</div></a>
+      <h1>AI Safe@Work</h1>
+      <div class="sub">Compliance Platform</div>
     </div>
-    <a class="aup-btn" href="/templates/aup-template.html">Open Acceptable Use Policy →</a>
-   </div>
+    <nav id="navlist"></nav>
+    <div class="foot">
+      Plus Pack · ISO/IEC 42001 &amp; EU AI Act mapped
+      <div id="who" style="margin-top:6px"></div>
+      <button id="out">Sign out</button>
+      <div style="margin-top:6px"><a href="../index.html">← Back to website</a></div>
+    </div>
+  </aside>
+  <main id="main"></main>
+</div>
+<div id="modal-root"></div>
+<div id="toast-root"></div>
 
-   <div class="kpis">
-    <div class="kpi"><div class="n" id="k-policy">–</div><div class="l">Policy status (v1.0)</div></div>
-    <div class="kpi"><div class="n" id="k-ackpct">0%</div><div class="l"><span id="k-acksub">0 of 0 staff acknowledged</span></div><div class="bar"><i id="k-ackbar"></i></div></div>
-    <div class="kpi"><div class="n" id="k-risks">0</div><div class="l">High / critical open risks</div></div>
-    <div class="kpi"><div class="n" id="k-incidents">0</div><div class="l">Open incidents</div></div>
-   </div>
-
-   <div class="regs">
-    <div class="reg"><h3>Use Case Register</h3><p id="r-usecases">0 use case(s) logged · 0 rated High risk</p><a class="open" href="/templates/ai-use-case-register.html">Open register</a></div>
-    <div class="reg"><h3>Vendor diligence</h3><p id="r-vendors">0 vendor(s) tracked · 0 risk-scored</p><a class="open" href="/templates/vendor-questionnaire.html">Open vendors</a></div>
-    <div class="reg"><h3>Steering group</h3><p id="r-steering">5 roles defined · ToR not yet approved</p><a class="open" href="/templates/ai-raci-matrix.html">Open RACI</a></div>
-   </div>
-
-   <div class="pack">
-    <h3>Document pack, completion at a glance</h3>
-    <table id="pack-table"><thead><tr><th>#</th><th>Document</th><th>Status</th><th></th></tr></thead><tbody></tbody></table>
-   </div>
+<!-- Manage panes: bound once by manager.js, moved live into #main by aimp.js -->
+<div id="stash" style="display:none">
+  <section class="stash-pane" id="pane-team" aria-label="Team">
+    <div class="pagehead"><div><div class="eyebrow">Manage</div><h2>Invite your team</h2>
+    <p>Spend one credit to invite a team member. We email them a secure sign-in link, no account needed beforehand.</p></div></div>
+    <div class="grid cols-2" style="max-width:420px;margin-bottom:14px">
+      <div class="stat"><div class="v" id="credits">-</div><div class="l">Credits remaining</div></div>
+      <div class="stat"><div class="v" id="seated">-</div><div class="l">Seats assigned</div></div>
+    </div>
+    <div class="card">
+      <form id="assign" style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
+        <div style="flex:1;min-width:240px"><label for="eu">Team member email</label><input id="eu" type="email" required style="margin-bottom:0" /></div>
+        <button class="btn" type="submit">Invite team member</button>
+      </form>
+      <p id="amsg" class="auth-msg"></p>
+    </div>
+    <div class="card">
+      <h3>Completion</h3>
+      <p style="color:var(--ink-soft);font-size:13px;margin:0 0 10px">Each seated team member's completed modules, out of 11. This is your audit-ready completion record. Remove frees the seat and returns the credit.</p>
+      <div class="tbl-wrap"><table id="seats"><thead><tr><th>Team member</th><th>Modules done</th><th>Assigned</th><th></th></tr></thead><tbody></tbody></table></div>
+      <p style="margin-top:10px"><button type="button" id="export-csv" class="btn ghost sm">Export completion CSV →</button></p>
+    </div>
   </section>
 
-  <section class="pane" id="pane-team" aria-label="Team">
-   <h2 class="sec-t">Invite your team</h2>
-   <p class="lede">Spend one credit to invite a team member. We email them a secure sign-in link, no account needed beforehand.</p>
-   <form id="assign" style="display:flex;gap:0.6rem;flex-wrap:wrap;align-items:flex-end;margin:0 0 0.4rem">
-    <div class="field" style="margin:0;flex:1;min-width:240px"><label for="eu">Team member email</label><input id="eu" type="email" required /></div>
-    <button class="btn-primary" style="width:auto;padding:0.7rem 1.4rem" type="submit">Invite team member</button>
-   </form>
-   <p id="amsg" class="auth-msg"></p>
-   <h2 class="sec-t" style="margin-top:1.4rem">Completion</h2>
-   <p class="lede">Each seated team member's completed modules, out of 11. This table is your audit-ready completion record. <strong>Remove</strong> frees the seat and returns the credit.</p>
-   <table class="ptable" id="seats"><thead><tr><th>Team member</th><th>Modules done</th><th>Assigned</th><th></th></tr></thead><tbody></tbody></table>
-   <p style="margin-top:0.9rem"><button type="button" id="export-csv" class="seat-remove">Export completion CSV →</button></p>
+  <section class="stash-pane" id="pane-course" aria-label="Course">
+    <div class="pagehead"><div><div class="eyebrow">Manage</div><h2>The AI Safe@Work course</h2>
+    <p>Eleven modules, about ninety minutes. Your team works through these from their own portal.</p></div></div>
+    <div id="grid" class="tiles"></div>
   </section>
 
-  <section class="pane" id="pane-course" aria-label="Course">
-   <h2 class="sec-t">The AI Safe@Work course</h2>
-   <p class="lede">Eleven modules, about ninety minutes. Your team works through these from their own portal.</p>
-   <div id="grid" class="tiles"></div>
+  <section class="stash-pane" id="pane-templates" aria-label="Templates">
+    <div class="pagehead"><div><div class="eyebrow">Manage</div><h2>Governance templates</h2>
+    <p>The static template library. The live, in-portal versions of these documents are in the numbered sections. <a href="../cert.html">Certificate page →</a></p></div></div>
+    <div id="templates" class="tiles"></div>
   </section>
 
-  <section class="pane" id="pane-templates" aria-label="Templates">
-   <h2 class="sec-t">Governance templates</h2>
-   <p class="lede">Audit-ready documents for your AI governance pack. Certificates: each learner generates their own from their account; your evidence is the completion table in Team. <a href="../cert.html">Open the certificate page →</a></p>
-   <div id="templates" class="tiles"></div>
+  <section class="stash-pane" id="pane-updates" aria-label="Updates">
+    <div class="pagehead"><div><div class="eyebrow">Manage</div><h2>Regulatory updates &amp; guidance</h2>
+    <p>What changed in the standards and in the course, and where every claim is sourced.</p></div></div>
+    <div class="tiles">
+      <a class="tile" href="../changelog.html"><span class="k">Updates</span><h2>Release &amp; regulatory changelog</h2><span class="arrow">Open →</span></a>
+      <a class="tile" href="../citations.html"><span class="k">Sources</span><h2>Standards &amp; citations</h2><span class="arrow">Open →</span></a>
+      <a class="tile" href="../standards-map.html"><span class="k">Mapping</span><h2>Standards map</h2><span class="arrow">Open →</span></a>
+    </div>
   </section>
-
-  <section class="pane" id="pane-updates" aria-label="Updates and sources">
-   <h2 class="sec-t">Regulatory updates &amp; guidance</h2>
-   <p class="lede">What changed in the standards and in the course, and where every claim is sourced. Reviewed each quarter.</p>
-   <div class="tiles">
-    <a class="tile" href="../changelog.html"><span class="k">Updates</span><h2>Release &amp; regulatory changelog</h2><span class="arrow">Open →</span></a>
-    <a class="tile" href="../citations.html"><span class="k">Sources</span><h2>Standards &amp; citations</h2><span class="arrow">Open →</span></a>
-    <a class="tile" href="../standards-map.html"><span class="k">Mapping</span><h2>Standards map</h2><span class="arrow">Open →</span></a>
-   </div>
-  </section>
-
- </div>
 </div>
 
-<script>
-// Pane switching, hash-synced; the numbered document links go straight to their pages.
-(function () {
-  var panes = ["dashboard", "team", "course", "templates", "updates"];
-  function show(name) {
-    if (panes.indexOf(name) < 0) name = "dashboard";
-    document.querySelectorAll(".pane").forEach(function (p) { p.classList.toggle("on", p.id === "pane-" + name); });
-    document.querySelectorAll(".side nav button").forEach(function (b) { b.classList.toggle("on", b.dataset.pane === name); });
-    if (("#" + name) !== location.hash) history.replaceState(null, "", "#" + name);
-  }
-  document.querySelectorAll(".side nav button").forEach(function (b) { b.addEventListener("click", function () { show(b.dataset.pane); }); });
-  window.addEventListener("hashchange", function () { show(location.hash.slice(1)); });
-  show(location.hash.slice(1) || "dashboard");
-})();
-</script>
-<script type="module">
-// Dashboard numbers: computed live from the same governance data as governance.html.
-import { guard, sb } from "./assets/portal.js";
-const $ = id => document.getElementById(id);
-const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-const profile = await guard(["manager"]);
-if (profile) {
-  $("dash-title").textContent = (profile.full_name || "Your company") + ", AI Governance Dashboard";
-  await sb.rpc("ensure_governance_docs");
-  const [{ data: docs }, { data: items }, { data: seats }, { data: acks }] = await Promise.all([
-    sb.from("governance_docs").select("*"),
-    sb.from("governance_items").select("kind,severity,status"),
-    sb.from("seats").select("end_user_id"),
-    sb.from("governance_acks").select("doc_id,end_user_id"),
-  ]);
-  const byHref = f => (docs || []).find(d => (d.href || "").includes(f));
-
-  // KPI 1: Acceptable Use Policy status
-  const aup = byHref("aup-template");
-  $("k-policy").textContent = aup ? aup.status[0].toUpperCase() + aup.status.slice(1) : "Draft";
-
-  // KPI 2: staff acknowledgement of the AUP
-  const nSeats = (seats || []).length;
-  const nAck = aup ? (acks || []).filter(a => a.doc_id === aup.id).length : 0;
-  const pct = nSeats ? Math.round(nAck / nSeats * 100) : 0;
-  $("k-ackpct").textContent = pct + "%";
-  $("k-acksub").textContent = `${nAck} of ${nSeats} staff acknowledged`;
-  $("k-ackbar").style.width = pct + "%";
-
-  // KPI 3 + 4: risks and incidents
-  const it = items || [];
-  $("k-risks").textContent = it.filter(i => i.kind === "risk" && i.status === "open" && (i.severity === "high" || i.severity === "critical")).length;
-  $("k-incidents").textContent = it.filter(i => i.kind === "incident" && i.status !== "closed").length;
-
-  // register cards
-  const uc = it.filter(i => i.kind === "use_case");
-  $("r-usecases").textContent = `${uc.length} use case(s) logged · ${uc.filter(i => i.severity === "high").length} rated High risk`;
-  const vd = it.filter(i => i.kind === "vendor");
-  $("r-vendors").textContent = `${vd.length} vendor(s) tracked · ${vd.filter(i => i.status === "assessed").length} risk-scored`;
-  const tor = byHref("steering-group-tor");
-  $("r-steering").textContent = "5 roles defined · " + (tor && tor.status === "live" ? "ToR approved" : "ToR not yet approved");
-
-  // document pack table: the ten Plus Pack documents in artifact order
-  const PACK = [
-    ["01", "Acceptable Use Policy", "aup-template.html"],
-    ["02", "AI Use Case Register", "ai-use-case-register.html"],
-    ["03", "AI Risk Assessments", "ai-risk-assessment.html"],
-    ["04", "AI Risk Register", "ai-risk-register.html"],
-    ["05", "Incident Reports", "incident-form.html"],
-    ["06", "Roles Matrix (RACI)", "ai-raci-matrix.html"],
-    ["07", "Steering Group ToR", "ai-steering-group-tor.html"],
-    ["08", "Vendor Due Diligence", "vendor-questionnaire.html"],
-    ["09", "Supplier Risk Score", "ai-supplier-risk-assessment.html"],
-    ["10", "Implementation Guide", "../rollout-guide.html"],
-  ];
-  document.querySelector("#pack-table tbody").innerHTML = PACK.map(([n, t, f]) => {
-    const d = byHref(f.replace("../", ""));
-    const st = d ? d.status : "empty";
-    return `<tr><td class="dnum">${n}</td><td>${esc(t)}</td>` +
-      `<td><span class="pill ${esc(st)}">${esc(st === "empty" ? "Empty" : st[0].toUpperCase() + st.slice(1))}</span></td>` +
-      `<td><a class="open" href="${f.startsWith("..") ? f : "/templates/" + f}">Open</a></td></tr>`;
-  }).join("");
-}
-</script>
-<script type="module" src="assets/manager.js?v=5"></script>
+<script type="module" src="assets/aimp.js?v=1"></script>
+<script type="module" src="assets/manager.js?v=6"></script>
 </body>
 </html>
