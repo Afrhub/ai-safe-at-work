@@ -108,7 +108,7 @@
  <hr class="section-divider" />
 
  <style>
-  /* interactive diagram — scoped */
+  /* interactive diagram, scoped */
   .risk-fig { margin: 1.6rem 0 2.4rem; }
   .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
   .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
@@ -522,34 +522,34 @@
  "A single director's attestation that all staff are AI-literate, with no per-person records"
  ],
  "correct": 1,
- "why": "Body: <em>you need a written AI-use AUP signed by all 18 staff, a training register with a row per staff member showing completion with manager sign-off, and a named owner of the register and the approved-tool list</em> — the six free-ChatGPT users also need approval for non-confidential use or redirection to an approved tool.",
- "cite": "Sub-module 1 — Article 4 (your own staff)"
+ "why": "Body: <em>you need a written AI-use AUP signed by all 18 staff, a training register with a row per staff member showing completion with manager sign-off, and a named owner of the register and the approved-tool list</em>, the six free-ChatGPT users also need approval for non-confidential use or redirection to an approved tool.",
+ "cite": "Sub-module 1, Article 4 (your own staff)"
  },
  {
  "q": "You operate Microsoft 365 Copilot on behalf of a customer. The Copilot model is updated by Microsoft without notice. Which Article 26 sub-clauses does this update touch, and what's your operational response?",
  "options": [
  "Only Art 26(4); nothing needs re-testing because Microsoft validates its own updates",
  "Art 22 alone; log the change and take no further action",
- "None — Article 26 does not apply once a tool is in production",
- "Art 26(1) instructions for use, 26(3) input handling, 26(5) monitoring, and 26(6) log retention — log the change, re-test workflows, tell the customer, update the approved-tool list",
+ "None, Article 26 does not apply once a tool is in production",
+ "Art 26(1) instructions for use, 26(3) input handling, 26(5) monitoring, and 26(6) log retention, log the change, re-test workflows, tell the customer, update the approved-tool list",
  "Art 26(2) only; simply email the customer and close the ticket"
  ],
  "correct": 3,
- "why": "Body: <em>Art 26(1) instructions may have changed, 26(3) input handling may differ, 26(5) re-run critical workflow tests, 26(6) log retention may have shifted</em> — then log the change in your change-management register, re-test, communicate to the customer and update the approved-tool list.",
- "cite": "Sub-module 2 — Article 26 (your customers' AI)"
+ "why": "Body: <em>Art 26(1) instructions may have changed, 26(3) input handling may differ, 26(5) re-run critical workflow tests, 26(6) log retention may have shifted</em>, then log the change in your change-management register, re-test, communicate to the customer and update the approved-tool list.",
+ "cite": "Sub-module 2, Article 26 (your customers' AI)"
  },
  {
  "q": "Customer A is a solicitors' firm. Customer B is a manufacturer. They both use ChatGPT Enterprise. Should they share a single training register, AUP, and approved-tool list?",
  "options": [
- "Yes — a shared set is fine since both run identical ChatGPT Enterprise instances",
+ "Yes, a shared set is fine since both run identical ChatGPT Enterprise instances",
  "Yes for the AUP and register, but the approved-tool list must be split",
- "No — the training register and AUP signature pack must be per-customer; the approved-tool list shares a baseline but each customer's instance, forbidden-inputs section and DPA reference is per-customer",
- "No — everything including the ChatGPT Enterprise baseline specs must be authored separately per customer",
+ "No, the training register and AUP signature pack must be per-customer; the approved-tool list shares a baseline but each customer's instance, forbidden-inputs section and DPA reference is per-customer",
+ "No, everything including the ChatGPT Enterprise baseline specs must be authored separately per customer",
  "It doesn't matter provided both customers consent in writing to sharing"
  ],
  "correct": 2,
  "why": "Body: <em>the training register and AUP signature pack must be per-customer for data separation and audit handover</em>; the approved-tool list shares the underlying ChatGPT Enterprise baseline, but each customer's instance, forbidden-inputs section and DPA reference is per-customer.",
- "cite": "Sub-module 3 — Per-customer audit separation"
+ "cite": "Sub-module 3, Per-customer audit separation"
  },
  {
  "q": "You discover that 30% of a customer's staff have installed a browser extension called \"AI Email Composer\" without IT approval. The extension pipes email content to a third-party AI service. What do you do first?",
@@ -557,38 +557,38 @@
  "Email the affected staff asking them to uninstall it when convenient",
  "Wait until the next monthly review to assess whether any data actually left",
  "Notify the ICO immediately before doing anything else on your side",
- "Contain first — block the extension at the browser-management layer (or raise an urgent removal ticket), then assess whether personal data was piped out; if so, open the incident form, call the sponsor and start the 72-hour clock",
+ "Contain first, block the extension at the browser-management layer (or raise an urgent removal ticket), then assess whether personal data was piped out; if so, open the incident form, call the sponsor and start the 72-hour clock",
  "Reconfigure the extension to route through the customer's own tenant instead"
  ],
  "correct": 3,
- "why": "Body: <em>contain first — block the extension at the browser-management layer if you have admin access, else raise an urgent ticket; then assess whether personal data was piped externally</em>. If yes it's a potential GDPR Article 33 incident: open the incident form, call the sponsor, start the 72-hour clock.",
- "cite": "Sub-module 4 — Shadow-AI containment"
+ "why": "Body: <em>contain first, block the extension at the browser-management layer if you have admin access, else raise an urgent ticket; then assess whether personal data was piped externally</em>. If yes it's a potential GDPR Article 33 incident: open the incident form, call the sponsor, start the 72-hour clock.",
+ "cite": "Sub-module 4, Shadow-AI containment"
  },
  {
  "q": "A customer's AUP says \"AI tools may not process customer data\". Their salesperson uses Copilot in M365 to summarise meeting notes that contain client names. Is the AUP violated?",
  "options": [
- "No — Copilot in M365 is exempt from any AUP wording by default",
+ "No, Copilot in M365 is exempt from any AUP wording by default",
  "Yes on a literal reading, but the AUP is likely poorly drafted; refine it to distinguish data categories and tool tiers, then re-onboard staff to the updated policy",
- "No — client names are not personal data so no AUP could apply",
+ "No, client names are not personal data so no AUP could apply",
  "Yes, and the correct response is to terminate the salesperson's AI access permanently",
  "Yes, and you must report it to the regulator as a definite breach within 72 hours"
  ],
  "correct": 1,
- "why": "Body: <em>yes on a literal reading, but the AUP is also likely poorly drafted</em> — Copilot in a properly-tenanted M365 environment is usually low risk and intended. The fix is to refine the AUP to distinguish data categories and tool tiers (AUP template Section 5), then re-onboard staff.",
- "cite": "Sub-module 5 — Drafting AUPs by data category"
+ "why": "Body: <em>yes on a literal reading, but the AUP is also likely poorly drafted</em>, Copilot in a properly-tenanted M365 environment is usually low risk and intended. The fix is to refine the AUP to distinguish data categories and tool tiers (AUP template Section 5), then re-onboard staff.",
+ "cite": "Sub-module 5, Drafting AUPs by data category"
  },
  {
  "q": "A customer's regulator asks for their AI logs covering the last six months. You hold them. The customer asks you to provide them directly to the regulator. Should you?",
  "options": [
- "Yes — provide them straight to the regulator to save the customer time",
+ "Yes, provide them straight to the regulator to save the customer time",
  "Yes, but only after redacting anything you judge to be commercially sensitive",
- "No — provide the logs to the customer and let the customer provide them to the regulator; you are not the regulated entity. A court order or statutory request directed at you is the exception (follow legal advice, notify the customer)",
- "No — refuse to release the logs at all, even to the customer, without a court order",
- "Yes — but only if the regulator signs an NDA with your MSP first"
+ "No, provide the logs to the customer and let the customer provide them to the regulator; you are not the regulated entity. A court order or statutory request directed at you is the exception (follow legal advice, notify the customer)",
+ "No, refuse to release the logs at all, even to the customer, without a court order",
+ "Yes, but only if the regulator signs an NDA with your MSP first"
  ],
  "correct": 2,
- "why": "Body: <em>provide the logs to the customer; let the customer provide them to the regulator — you are not the regulated entity, the customer is</em>. Direct provision confuses privilege and chain of custody. Exception: a court order or statutory request directed at you, where you follow legal advice and notify the customer.",
- "cite": "Sub-module 6 — Regulator requests and chain of custody"
+ "why": "Body: <em>provide the logs to the customer; let the customer provide them to the regulator, you are not the regulated entity, the customer is</em>. Direct provision confuses privilege and chain of custody. Exception: a court order or statutory request directed at you, where you follow legal advice and notify the customer.",
+ "cite": "Sub-module 6, Regulator requests and chain of custody"
  },
  {
  "q": "Your monthly AI change-management ritual catches that a sub-processor has been added to a vendor's published list. GDPR Article 28(2) requires customer notification and an objection window. What's your workflow?",
@@ -600,34 +600,34 @@
  "Document the addition in your change register, notify each affected customer's sponsor and DPO in writing, give the objection window (typically 30 days), work with objectors on an alternative or documented acceptance of risk, and record everything in the audit binder"
  ],
  "correct": 4,
- "why": "Body: <em>document the sub-processor addition, notify each affected customer's sponsor and DPO in writing, give the objection window (typically 30 days), and if a customer objects work on an alternative tool or a documented acceptance of risk</em> — recording everything in the customer's audit binder.",
- "cite": "Sub-module 7 — Article 28(2) sub-processor changes"
+ "why": "Body: <em>document the sub-processor addition, notify each affected customer's sponsor and DPO in writing, give the objection window (typically 30 days), and if a customer objects work on an alternative tool or a documented acceptance of risk</em>, recording everything in the customer's audit binder.",
+ "cite": "Sub-module 7, Article 28(2) sub-processor changes"
  },
  {
  "q": "The customer's audit binder you handed over six months ago is going to an external auditor next week. The customer asks if there's anything you'd refresh. What do you check?",
  "options": [
  "Only whether the binder's cover page still has the correct customer logo",
- "Nothing — a handed-over binder is frozen and should never be updated",
- "Whether the AUP is still current, the training register is up to date, any incidents since handover are closed, the approved-tool list reflects current vendor terms, and no quarterly refresh entries are missing — then refresh the binder with the deltas",
+ "Nothing, a handed-over binder is frozen and should never be updated",
+ "Whether the AUP is still current, the training register is up to date, any incidents since handover are closed, the approved-tool list reflects current vendor terms, and no quarterly refresh entries are missing, then refresh the binder with the deltas",
  "Only the incident log; the other artefacts don't change between audits",
  "Whether the external auditor is on the MSP's approved-vendor list"
  ],
  "correct": 2,
- "why": "Body: <em>check whether the AUP is still current, the training register is up to date, any incidents since handover are closed, the approved-tool list reflects current vendor terms, and no quarterly refresh entries are missing</em> — then refresh the binder with the deltas.",
- "cite": "Sub-module 8 — Refreshing the audit binder"
+ "why": "Body: <em>check whether the AUP is still current, the training register is up to date, any incidents since handover are closed, the approved-tool list reflects current vendor terms, and no quarterly refresh entries are missing</em>, then refresh the binder with the deltas.",
+ "cite": "Sub-module 8, Refreshing the audit binder"
  },
  {
  "q": "A Tier 2 Growth-tier customer asks whether you can white-label the AI Safe@Work materials. What's your answer?",
  "options": [
- "Yes — Tier 2 includes full white-label rights as standard",
- "No — Tier 2 supports co-branded delivery, not white-label; white-label needs Tier 3 (Strategic Partner) and Schedule D. Offer co-branded \"Delivered by {MSP} · Powered by AI Safe@Work\", or escalate a genuine case to the head of partnerships",
- "Yes — provided the customer signs a one-page waiver of AI Safe@Work branding",
- "No — white-label is never available at any partner tier",
- "Yes — white-label is available once the customer completes the onboarding checklist"
+ "Yes, Tier 2 includes full white-label rights as standard",
+ "No, Tier 2 supports co-branded delivery, not white-label; white-label needs Tier 3 (Strategic Partner) and Schedule D. Offer co-branded \"Delivered by {MSP} · Powered by AI Safe@Work\", or escalate a genuine case to the head of partnerships",
+ "Yes, provided the customer signs a one-page waiver of AI Safe@Work branding",
+ "No, white-label is never available at any partner tier",
+ "Yes, white-label is available once the customer completes the onboarding checklist"
  ],
  "correct": 1,
  "why": "Body: <em>Tier 2 supports co-branded delivery, not white-label; white-label requires Tier 3 (Strategic Partner) status and Schedule D of the MSP partner agreement</em>. Offer co-branded \"Delivered by {MSP} · Powered by AI Safe@Work\", and escalate a genuine white-label case to the head of partnerships.",
- "cite": "Sub-module 9 — White-label vs co-branded posture"
+ "cite": "Sub-module 9, White-label vs co-branded posture"
  },
  {
  "q": "It's 16:55 on a Friday. A customer's service-desk ticket reads: \"I think I just pasted our pricing model into ChatGPT\". What are the first three actions you take, in order?",
@@ -636,11 +636,11 @@
  "Immediately notify the ICO, then tell the user, then log the ticket",
  "Delete the ChatGPT conversation yourself, then email the sponsor, then file a report next week",
  "Ask the user to screenshot the chat, forward it to you, and carry on as normal",
- "Acknowledge the ticket and ask the user to stop pasting (tag it AI-incident); page the incident lead without promising the user anything; call the customer's named sponsor and brief them — containment and the incident form follow next"
+ "Acknowledge the ticket and ask the user to stop pasting (tag it AI-incident); page the incident lead without promising the user anything; call the customer's named sponsor and brief them, containment and the incident form follow next"
  ],
  "correct": 4,
- "why": "Body: <em>acknowledge the ticket and ask the user to stop further pasting and tag it AI-incident; page the incident lead without promising the user anything or saying \"don't worry\"; call the customer's named sponsor and brief them</em> — containment and incident-form opening follow in the next few minutes. The clock has started.",
- "cite": "Sub-module 8 — Incident response (tabletop drill)"
+ "why": "Body: <em>acknowledge the ticket and ask the user to stop further pasting and tag it AI-incident; page the incident lead without promising the user anything or saying \"don't worry\"; call the customer's named sponsor and brief them</em>, containment and incident-form opening follow in the next few minutes. The clock has started.",
+ "cite": "Sub-module 8, Incident response (tabletop drill)"
  }
  ]
  }

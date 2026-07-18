@@ -1,5 +1,5 @@
 /* ────────────────────────────────────────────────────────────
-   cinema.js v7 — "drafting field" background + parallax + reveals
+   cinema.js v7, "drafting field" background + parallax + reveals
    Audit-dossier visual language: blueprint grid, ledger rules,
    giant watermarked clause numbers. Scroll parallax + pointer
    depth. No dependencies. Degrades to static layout on failure.
@@ -29,7 +29,7 @@
       '<div class="cinema-parallax" data-parallax-speed="0.12" data-pointer-depth="16">',
         '<div class="cinema-rules"></div>',
       '</div>',
-      // diagonal light bands — fastest scroll layer, deepest pointer response
+      // diagonal light bands, fastest scroll layer, deepest pointer response
       '<div class="cinema-parallax" data-parallax-speed="0.24" data-pointer-depth="34">',
         '<div class="cinema-shade"></div>',
       '</div>',
@@ -139,7 +139,7 @@
     var px = 0, py = 0, tx = 0, ty = 0;
     var pointerActive = false;
 
-    // Sheen chases the pointer in viewport px, eased separately (slower —
+    // Sheen chases the pointer in viewport px, eased separately (slower -
     // a light source should lag the hand, not stick to it).
     var sheen = document.querySelector('.cinema-sheen');
     var wash = document.querySelector('.cinema-wash');
@@ -154,7 +154,7 @@
         px += (tx - px) * 0.06;
         py += (ty - py) * 0.06;
         if (wash) {
-          // Ambient light shifts hue as you travel the document —
+          // Ambient light shifts hue as you travel the document -
           // ~3deg per 100px, full cycle over ~12k px. Paint cost is
           // limited to this one isolated, blurred layer.
           wash.style.filter = 'blur(34px) hue-rotate(' + ((y * 0.03) % 360).toFixed(1) + 'deg)';
@@ -247,7 +247,7 @@
   }
 
 
-  // ─── 5b. Theme toggle — pill switch in the topbar / gate header ──────
+  // ─── 5b. Theme toggle, pill switch in the topbar / gate header ──────
   function setupThemeToggle() {
     var host = document.querySelector('.topbar') || document.querySelector('.gate-header') || document.querySelector('.portal-top') || document.querySelector('.theme-toggle-host');
     if (!host || host.querySelector('.theme-toggle')) return;
@@ -340,7 +340,7 @@
     for (var j = start; j <= end; j++) { inner.appendChild(kids[j]); }
   }
 
-  // ─── 5d. Stat count-up — Palo-Alto-style number counters ────────────
+  // ─── 5d. Stat count-up, Palo-Alto-style number counters ────────────
   // Animates the number inside stat elements from 0 to its value when it
   // scrolls into view. Animates only the text node that holds the number,
   // so surrounding text and coloured spans survive. Skips JS-driven portal

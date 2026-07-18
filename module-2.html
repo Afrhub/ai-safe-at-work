@@ -170,7 +170,7 @@
  <h2>The four versions, weakest to safest</h2>
 
  <style>
-  /* interactive diagram — scoped */
+  /* interactive diagram, scoped */
   .risk-fig { margin: 1.6rem 0 2.4rem; }
   .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
   .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
@@ -187,7 +187,7 @@
   .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
   .rd-cap strong { color: var(--text); }
   .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
-  /* Module artwork faded into the banner — hero-art pattern (matches manager/consultancy). */
+  /* Module artwork faded into the banner, hero-art pattern (matches manager/consultancy). */
 .page-hero::after {
   content:''; position:absolute; top:0; right:0; bottom:0; z-index:0; pointer-events:none;
   width:min(44%, 560px);
@@ -239,7 +239,7 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
   (function(){
     var data = {
       free: {t:'Free version', d:'A public tool with no deal between your company and the AI company. Conversations may be used to improve future models unless you turn that off, and your company has no say over the data.', m:'Weakest. Pasting work here is the most common leak.'},
-      paid: {t:'Paid version (just you)', d:'Better answers and longer chats, but still a public tool with no company deal. Most paid versions do have a clear "do not train on my chats" switch — find it and turn it on.', m:'Still public. Paying does not change the rules.'},
+      paid: {t:'Paid version (just you)', d:'Better answers and longer chats, but still a public tool with no company deal. Most paid versions do have a clear "do not train on my chats" switch, find it and turn it on.', m:'Still public. Paying does not change the rules.'},
       team: {t:'Team or business version', d:'Your company has a proper deal (a Data Processing Agreement). Training on your data is usually off by default, you can set retention, and there is an admin panel.', m:'The rules change here. If your company has it, use it.'},
       ent:  {t:'Work (enterprise) version', d:'Everything the team version has, plus a choice of where data is kept (often EU-only), full audit logs, single sign-on, and security certificates the buying team can check.', m:'Safest. What the standards expect for anything private.'},
       rule: {t:'The rule of thumb', d:'"Is it OK to use AI for this?" depends on which version of which tool, with which settings, on which data.', m:'Remember: the version you use matters as much as what you type.'}

@@ -162,7 +162,7 @@
  <p>The legal position differs for each and differs by jurisdiction. Below is the practical headline for each.</p>
 
  <style>
-  /* interactive diagram — scoped */
+  /* interactive diagram, scoped */
   .risk-fig { margin: 1.6rem 0 2.4rem; }
   .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
   .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
@@ -179,7 +179,7 @@
   .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
   .rd-cap strong { color: var(--text); }
   .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
-  /* Module artwork faded into the banner — hero-art pattern (matches manager/consultancy). */
+  /* Module artwork faded into the banner, hero-art pattern (matches manager/consultancy). */
 .page-hero::after {
   content:''; position:absolute; top:0; right:0; bottom:0; z-index:0; pointer-events:none;
   width:min(44%, 560px);
@@ -219,8 +219,8 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
   (function(){
     var data = {
       in:  {t:'Input copyright', d:'When you (or the AI vendor) feed copyrighted material into an AI, does that need permission? Pasting a paywalled article, a "no AI training" page, or a client’s confidential document to summarise can breach the publisher’s terms or a confidentiality clause.', m:'Probably fine for your own or public-domain content; a problem behind a paywall.'},
-      out: {t:'Output copyright', d:'When the AI produces something, who owns it? Fully AI-generated material with no significant human creative input may not qualify for copyright protection in many jurisdictions — so others may be able to use the same output.', m:'“Significant human creative input” is the moving line.'},
-      do:  {t:'The practical rule', d:'Treat purely AI-generated content as public domain, and keep a short record of how each asset was made — prompts, edits, human contribution, brand check.', m:'The question is provenance, not permission.'}
+      out: {t:'Output copyright', d:'When the AI produces something, who owns it? Fully AI-generated material with no significant human creative input may not qualify for copyright protection in many jurisdictions, so others may be able to use the same output.', m:'“Significant human creative input” is the moving line.'},
+      do:  {t:'The practical rule', d:'Treat purely AI-generated content as public domain, and keep a short record of how each asset was made, prompts, edits, human contribution, brand check.', m:'The question is provenance, not permission.'}
     };
     var fig = document.getElementById('risk-fig-8'); if(!fig) return;
     var cap = fig.querySelector('.rd-cap');

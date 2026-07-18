@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════════
-   AI SAFE@WORK — Interactive widget engine
+   AI SAFE@WORK, Interactive widget engine
    Mounts into #widget-mount, reads `widget` key inside #quiz-data.
    Dispatches by cfg.widget.type:
      bucket | flowchart | multiselect | scenario | form | order | ticklist
@@ -39,7 +39,7 @@
   });
 
   /* ──────────────────────────────────────────────────────────
-     BUCKET — n-way classifier (M2 tier-classify)
+     BUCKET, n-way classifier (M2 tier-classify)
   ────────────────────────────────────────────────────────── */
   function mountBucket(mount, module, w) {
     const state = {
@@ -126,7 +126,7 @@
         right.appendChild(el('div', { class: 'wv-state' }, [`${correctCount} of ${total} correct`]));
         right.appendChild(el('p', { class: 'wv-why' }, [
           correctCount === total
-            ? 'Perfect — you can place each feature into the right tier. Take the knowledge check below.'
+            ? 'Perfect, you can place each feature into the right tier. Take the knowledge check below.'
             : 'Have another read above, then retry. The classifier is practice, not assessment.'
         ]));
         right.appendChild(pipBar(state.results, total));
@@ -134,7 +134,7 @@
         right.className = 'widget-verdict-card ' + (last.right ? 'right' : 'wrong');
         right.appendChild(el('span', { class: 'wv-label' }, [last.right ? '✓ Correct tier' : '✗ Wrong tier']));
         right.appendChild(el('div', { class: 'wv-state' },
-          [last.right ? `Yes — ${last.chose}.` : `You picked ${last.chose} · correct is ${last.correct}.`]));
+          [last.right ? `Yes, ${last.chose}.` : `You picked ${last.chose} · correct is ${last.correct}.`]));
         right.appendChild(el('p', { class: 'wv-why' }, [last.why]));
         if (last.cite) right.appendChild(el('span', { class: 'wv-cite' }, [`See: ${last.cite}`]));
         right.appendChild(pipBar(state.results, total));
@@ -150,7 +150,7 @@
   }
 
   /* ──────────────────────────────────────────────────────────
-     FLOWCHART — branching decision tree (M4)
+     FLOWCHART, branching decision tree (M4)
   ────────────────────────────────────────────────────────── */
   function mountFlowchart(mount, module, w) {
     const state = { current: w.start, path: [] };
@@ -216,7 +216,7 @@
   }
 
   /* ──────────────────────────────────────────────────────────
-     MULTISELECT — pick N of K (M5 two-source rule)
+     MULTISELECT, pick N of K (M5 two-source rule)
   ────────────────────────────────────────────────────────── */
   function mountMultiselect(mount, module, w) {
     const state = { picked: new Set(), submitted: false };
@@ -294,7 +294,7 @@
   }
 
   /* ──────────────────────────────────────────────────────────
-     SCENARIO — multi-step picker (M6 callback)
+     SCENARIO, multi-step picker (M6 callback)
   ────────────────────────────────────────────────────────── */
   function mountScenario(mount, module, w) {
     const state = { step: 0, answers: [], done: false };
@@ -370,7 +370,7 @@
   }
 
   /* ──────────────────────────────────────────────────────────
-     FORM — fillable log card (M9)
+     FORM, fillable log card (M9)
   ────────────────────────────────────────────────────────── */
   function mountForm(mount, module, w) {
     const state = { values: {}, submitted: false };
@@ -444,7 +444,7 @@
   }
 
   /* ──────────────────────────────────────────────────────────
-     ORDER — reorder list (M10 72-hr timeline)
+     ORDER, reorder list (M10 72-hr timeline)
   ────────────────────────────────────────────────────────── */
   function mountOrder(mount, module, w) {
     // events come in canonical order; shuffle for display
@@ -497,7 +497,7 @@
         const total = state.order.length;
         const verdict = el('div', { class: 'order-verdict ' + (correct === total ? 'right' : 'partial') });
         verdict.appendChild(el('span', { class: 'order-verdict-label' }, [correct === total ? '✓ Sequence correct' : `${correct} of ${total} in the right slot`]));
-        verdict.appendChild(el('p', {}, [correct === total ? 'You walked the 72-hour clock in the right order. Save the sequence.' : 'Items above show where each should sit. Try again — sequence matters for the breach clock.']));
+        verdict.appendChild(el('p', {}, [correct === total ? 'You walked the 72-hour clock in the right order. Save the sequence.' : 'Items above show where each should sit. Try again, sequence matters for the breach clock.']));
         controls.appendChild(verdict);
         const retry = el('button', { class: 'widget-btn ghost', type: 'button' }, ['↺ Reshuffle and retry']);
         retry.addEventListener('click', () => {
@@ -523,7 +523,7 @@
   }
 
   /* ──────────────────────────────────────────────────────────
-     TICKLIST — wallet-card style checks (M11)
+     TICKLIST, wallet-card style checks (M11)
   ────────────────────────────────────────────────────────── */
   function mountTicklist(mount, module, w) {
     const state = { ticked: new Set(), submitted: false };

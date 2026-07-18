@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════════
-   AI SAFE@WORK — Quiz + Classifier engine
+   AI SAFE@WORK, Quiz + Classifier engine
    - Reads inline <script type="application/json" id="quiz-data">
    - Renders MCQ flow with feedback + scoring
    - Optional classifier widget for interactive practice
@@ -209,13 +209,13 @@
     ]));
 
     wrap.appendChild(el('div', { class: 'verdict-line' }, [
-      pass ? '✓ Pass — Article 4 literacy evidenced.'
+      pass ? '✓ Pass, Article 4 literacy evidenced.'
            : `Below pass mark. You need ${state.cfg.passThreshold} of ${total} to pass.`
     ]));
 
     wrap.appendChild(el('p', { class: 'ev-note' }, htmlNodes(
       pass
-        ? `Your score is saved locally on this device only (<code>localStorage</code>) — nothing is sent anywhere.${typeof state.cfg.module === 'number' ? ' Generate a printable certificate to keep in your training file.' : ''}`
+        ? `Your score is saved locally on this device only (<code>localStorage</code>), nothing is sent anywhere.${typeof state.cfg.module === 'number' ? ' Generate a printable certificate to keep in your training file.' : ''}`
         : `Read the module sections you missed, then retake. Each attempt overwrites the previous one. No record leaves this device.`
     )));
 
@@ -260,7 +260,7 @@
 
       const stage = el('div', { class: 'classifier-stage' });
 
-      // Left card — current item
+      // Left card, current item
       const left = el('div', { class: 'clip-card' });
       left.appendChild(clipboardSvg());
       left.appendChild(el('div', { class: 'clip-counter' },
@@ -286,7 +286,7 @@
       }
       stage.appendChild(left);
 
-      // Right card — verdict / idle / done
+      // Right card, verdict / idle / done
       const right = el('div');
       const lastResult = state.results[state.results.length - 1];
       if (state.done) {
@@ -297,7 +297,7 @@
           [`${correct} of ${state.items.length} correct`]));
         right.appendChild(el('p', { class: 'v-why' }, [
           correct === state.items.length
-            ? 'Perfect classification — you can spot the categories at speed. Take the knowledge check below.'
+            ? 'Perfect classification, you can spot the categories at speed. Take the knowledge check below.'
             : 'Re-read the items you missed in the module above, then try the knowledge check below. You can retry the classifier any time.'
         ]));
         const bar = el('div', { class: 'clip-bar' });

@@ -163,7 +163,7 @@
  </div>
 
  <style>
-  /* interactive diagram — scoped */
+  /* interactive diagram, scoped */
   .risk-fig { margin: 1.6rem 0 2.4rem; }
   .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
   .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
@@ -180,7 +180,7 @@
   .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
   .rd-cap strong { color: var(--text); }
   .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
-  /* Module artwork faded into the banner — hero-art pattern (matches manager/consultancy). */
+  /* Module artwork faded into the banner, hero-art pattern (matches manager/consultancy). */
 .page-hero::after {
   content:''; position:absolute; top:0; right:0; bottom:0; z-index:0; pointer-events:none;
   width:min(44%, 560px);
@@ -226,8 +226,8 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
   (function(){
     var data = {
       q1: {t:'Is the data on the never-paste list?', d:'If yes, stop. Reformulate the task to use the shape of the data rather than the data itself, or escalate to the enterprise tool. Never-paste means never into a free or personal AI tool.', m:'Question 1.'},
-      q2: {t:'Does my business have a procured AI tool?', d:'Most businesses now have at least one — Copilot, ChatGPT Team, Claude for Work, Gemini. If your business has paid for one, use it: the contract, DPA and controls are already in place.', m:'Question 2.'},
-      q3: {t:'Is the data internal but low-sensitivity?', d:'Marketing copy, a presentation outline, a generic how-to question. A consumer-tier tool may be acceptable — subject to policy, with training opted off, and nothing from the never-paste list.', m:'Question 3.'},
+      q2: {t:'Does my business have a procured AI tool?', d:'Most businesses now have at least one, Copilot, ChatGPT Team, Claude for Work, Gemini. If your business has paid for one, use it: the contract, DPA and controls are already in place.', m:'Question 2.'},
+      q3: {t:'Is the data internal but low-sensitivity?', d:'Marketing copy, a presentation outline, a generic how-to question. A consumer-tier tool may be acceptable, subject to policy, with training opted off, and nothing from the never-paste list.', m:'Question 3.'},
       q4: {t:'Is there a regulated decision involved?', d:'Hiring, firing, pay, credit, insurance, health, criminal justice. That is EU AI Act territory: an enterprise tool with oversight and logging, or a human-only process.', m:'Question 4.'}
     };
     var fig = document.getElementById('risk-fig-4'); if(!fig) return;

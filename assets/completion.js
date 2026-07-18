@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════════
-   AI SAFE@WORK — course completion tracking (localStorage)
+   AI SAFE@WORK, course completion tracking (localStorage)
    The numbered modules use a "Mark complete" button (quizzes are
    static knowledge-checks, not scored). The 60-second check unlocks
    once every numbered module is marked complete.

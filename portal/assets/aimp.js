@@ -23,7 +23,7 @@ async function dbSet(key, value){
 }
 function uid(prefix){ return prefix + '-' + Math.random().toString(36).slice(2,7).toUpperCase(); }
 function todayISO(){ return new Date().toISOString().slice(0,10); }
-function fmtDate(d){ if(!d) return '—'; try{ return new Date(d).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}); }catch(e){ return d; } }
+function fmtDate(d){ if(!d) return '-'; try{ return new Date(d).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}); }catch(e){ return d; } }
 function toast(msg){
   const root = document.getElementById('toast-root');
   const el = document.createElement('div'); el.className='toast'; el.textContent = msg;
@@ -115,7 +115,7 @@ async function loadAll(){
 
 /* ============================= NAV ============================= */
 const TABS = [
-  {grp:'Overview', items:[ {id:'dashboard', label:'Dashboard', n:'—'} ]},
+  {grp:'Overview', items:[ {id:'dashboard', label:'Dashboard', n:'-'} ]},
   {grp:'Policy', items:[ {id:'aup', label:'Acceptable Use Policy', n:'01'} ]},
   {grp:'Registers', items:[
     {id:'usecases', label:'Use Case Register', n:'02'},
@@ -168,7 +168,7 @@ function pageDashboard(){
   main.innerHTML = `
     <div class="pagehead">
       <div><div class="eyebrow">Tier 2 · Governance Toolkit</div>
-      <h2>${esc(DB.org.companyName)} — AI Governance Dashboard</h2>
+      <h2>${esc(DB.org.companyName)}, AI Governance Dashboard</h2>
       <p>Live status across your AI Safe@Work documentation set. Ten governance documents, tracked in one place, ready to send to staff.</p></div>
       <div class="actions"><button class="btn gold" onclick="setTab('aup')">Open Acceptable Use Policy →</button></div>
     </div>
@@ -200,7 +200,7 @@ function pageDashboard(){
     </div>
 
     <div class="card">
-      <h3>Document pack — completion at a glance</h3>
+      <h3>Document pack, completion at a glance</h3>
       <div class="tbl-wrap"><table>
         <tr><th>#</th><th>Document</th><th>Status</th><th></th></tr>
         ${[
@@ -227,7 +227,7 @@ function pageAUP(){
   main.innerHTML = `
     <div class="pagehead">
       <div><div class="eyebrow">Document 01 · Tier 2</div><h2>AI Acceptable Use Policy</h2>
-      <p>Edit the fields below — they fill the policy automatically. Publish it, then send it to staff for sign-off from the Staff tab.</p></div>
+      <p>Edit the fields below, they fill the policy automatically. Publish it, then send it to staff for sign-off from the Staff tab.</p></div>
       <div class="actions">
         <button class="btn ghost" onclick="window.print()">Print / Save PDF</button>
         <button class="btn ${st.published?'ghost':'gold'}" id="publishBtn">${st.published?'Unpublish':'Publish to staff'}</button>
@@ -282,7 +282,7 @@ async function togglePublish(){
   }
   await dbSet('aup-status', DB.aupStatus);
   pageAUP();
-  toast(DB.aupStatus.published ? 'Policy published — staff can now acknowledge it' : 'Policy unpublished');
+  toast(DB.aupStatus.published ? 'Policy published, staff can now acknowledge it' : 'Policy unpublished');
 }
 function renderAupDoc(){
   const o = DB.org;
@@ -296,7 +296,7 @@ function renderAupDoc(){
     <h4>3. Approved tools</h4><ul>${tools || '<li class="fill">No approved tools listed yet</li>'}</ul>
     <p>Other tools require explicit approval from ${esc(o.owner)} before use. Free or personal-tier consumer AI tools are <b>not approved</b> for the data categories in Section 5.</p>
     <h4>4. Permitted uses</h4><p>Drafting and editing work with human review; summarising appropriate material; translation and rephrasing; brainstorming and structuring thinking; explaining concepts; technical assistance on appropriate data.</p>
-    <h4>5. Forbidden inputs</h4><p>Customer or contact personal data; special-category personal data; third-party contracts or legal drafts; source code we don't own or licence; non-public financial data; authentication secrets; documents classified Confidential or higher; HR records; anything held under a duty of confidence — must never be entered into a free or personal-tier AI tool.</p>
+    <h4>5. Forbidden inputs</h4><p>Customer or contact personal data; special-category personal data; third-party contracts or legal drafts; source code we don't own or licence; non-public financial data; authentication secrets; documents classified Confidential or higher; HR records; anything held under a duty of confidence, must never be entered into a free or personal-tier AI tool.</p>
     <h4>6. Output handling</h4><p>AI-generated content must be reviewed by a human before use. Claims affecting a decision must be independently verified. AI involvement in customer-facing material must be disclosed per EU AI Act Article 50. No decision affecting someone's livelihood or legal position may be made on AI output alone.</p>
     <h4>7. Logging</h4><p>Significant AI-assisted work is logged in: <b>${esc(o.logLocation)}</b>. "Significant" means the use affected another person, represented the company externally, touched sensitive data, or supported an irreversible/expensive decision.</p>
     <h4>8. Settings and configuration</h4><p>Training-data opt-out enabled wherever offered on a work account; retention follows the company's procurement contract; MFA is required on all work AI accounts.</p>
@@ -348,7 +348,7 @@ const REGISTER_SCHEMAS = {
     listCols:['description','category','likelihood','impact','rating','owner','status']
   }
 };
-function computeRiskRating(r){ return (RISK_MATRIX[r.likelihood]||{})[r.impact] || '—'; }
+function computeRiskRating(r){ return (RISK_MATRIX[r.likelihood]||{})[r.impact] || '-'; }
 
 function pageRegister(key){
   const schema = REGISTER_SCHEMAS[key];
@@ -395,7 +395,7 @@ function renderCell(c, r){
     const cls = String(v).toLowerCase().replace(/\s+/g,'');
     return `<span class="badge ${cls}">${esc(v)}</span>`;
   }
-  if(!v) return '<span style="color:var(--ink-soft);">—</span>';
+  if(!v) return '<span style="color:var(--ink-soft);">-</span>';
   return esc(String(v)).length>80 ? esc(String(v)).slice(0,80)+'…' : esc(v);
 }
 async function deleteRegisterRow(key, id){
@@ -469,9 +469,9 @@ function renderAssessList(){
       const top = Math.max(0, ...a.risks.map(r=>(+r.l||0)*(+r.i||0)));
       return `<tr>
         <td class="mono">${esc(a.id)}</td><td>${esc(a.useCase)}</td>
-        <td><span class="badge neutral">${esc(a.tier||'—')}</span></td>
-        <td>${top || '—'} ${top? `<span class="badge ${top>=15?'high':top>=8?'medium':'low'}">${top>=15?'High':top>=8?'Medium':'Low'}</span>`:''}</td>
-        <td>${a.decision?`<span class="badge ${a.decision.toLowerCase().includes('reject')?'reject':a.decision.toLowerCase().includes('condition')?'conditions':'approve'}">${esc(a.decision)}</span>`:'—'}</td>
+        <td><span class="badge neutral">${esc(a.tier||'-')}</span></td>
+        <td>${top || '-'} ${top? `<span class="badge ${top>=15?'high':top>=8?'medium':'low'}">${top>=15?'High':top>=8?'Medium':'Low'}</span>`:''}</td>
+        <td>${a.decision?`<span class="badge ${a.decision.toLowerCase().includes('reject')?'reject':a.decision.toLowerCase().includes('condition')?'conditions':'approve'}">${esc(a.decision)}</span>`:'-'}</td>
         <td style="white-space:nowrap;"><button class="iconbtn" onclick="openAssessmentModal('${a.id}')">Edit</button>
         <button class="iconbtn" onclick="deleteAssessment('${a.id}')">Delete</button></td>
       </tr>`;
@@ -507,7 +507,7 @@ function openAssessmentModal(id){
     <label>EU AI Act risk tier</label>
     <select id="ra_tier">${['Prohibited','High-risk','Limited (transparency)','Minimal'].map(o=>`<option ${o===data.tier?'selected':''}>${o}</option>`).join('')}</select>
 
-    <label style="margin-top:6px;">Score the risks — Likelihood × Impact (1–5 each)</label>
+    <label style="margin-top:6px;">Score the risks, Likelihood × Impact (1–5 each)</label>
     <div class="tbl-wrap"><table>
       <tr><th>Risk</th><th style="width:70px;">L (1-5)</th><th style="width:70px;">I (1-5)</th><th style="width:60px;">Score</th><th>Mitigation</th></tr>
       ${data.risks.map((r,idx)=>`<tr>
@@ -588,7 +588,7 @@ function openVendorModal(id){
       <div><label>Product / tool</label><input id="v_product" type="text" value="${esc(data.product)}"></div>
     </div>
     <label>Vendor contact (name / email)</label><input id="v_contact" type="text" value="${esc(data.contact)}">
-    <label>Diligence checklist — Must-answer questions</label>
+    <label>Diligence checklist, Must-answer questions</label>
     <div style="max-height:280px;overflow-y:auto;border:1px solid var(--line);border-radius:8px;padding:8px 12px;">
       ${VENDOR_MUST_QUESTIONS.map((q,idx)=>`<label style="display:flex;align-items:flex-start;gap:8px;text-transform:none;font-weight:400;font-size:13px;color:var(--ink);margin:7px 0;">
         <input type="checkbox" id="v_q_${idx}" ${data.checklist[idx]?'checked':''} style="width:auto;margin:2px 0 0;">
@@ -625,7 +625,7 @@ function renderSRAList(){
     ${DB.supplierRisk.map(s=>{
       const max = Math.max(0,...Object.values(s.scores||{}).map(Number));
       return `<tr><td>${esc(s.supplier)}</td>
-      <td><span class="badge ${max>=5?'high':max===4?'medium':'low'}">${max||'—'}/5</span></td>
+      <td><span class="badge ${max>=5?'high':max===4?'medium':'low'}">${max||'-'}/5</span></td>
       <td><span class="badge ${s.decision.toLowerCase().includes('reject')?'reject':s.decision.toLowerCase().includes('condition')?'conditions':'approve'}">${esc(s.decision)}</span></td>
       <td>${fmtDate(s.reassessBy)}</td>
       <td style="white-space:nowrap;"><button class="iconbtn" onclick="openSRAModal('${s.id}')">Edit</button>
@@ -791,7 +791,7 @@ function pageTOR(){
   const main = document.getElementById('main');
   main.innerHTML = `
     <div class="pagehead">
-      <div><div class="eyebrow">Document 07</div><h2>AI Steering Group — Terms of Reference</h2><p>Stand up the group that owns AI governance. Fill the fields, approve at the first meeting.</p></div>
+      <div><div class="eyebrow">Document 07</div><h2>AI Steering Group, Terms of Reference</h2><p>Stand up the group that owns AI governance. Fill the fields, approve at the first meeting.</p></div>
       <div class="actions"><button class="btn ghost" onclick="window.print()">Print / Export</button><button class="btn gold" id="saveTor">Save changes</button></div>
     </div>
     <div class="grid cols-2">
@@ -843,7 +843,7 @@ function renderTorDoc(){
   const t = DB.tor;
   document.getElementById('torDoc').innerHTML = `
   <div class="doc">
-    <h2>AI Steering Group — Terms of Reference</h2>
+    <h2>AI Steering Group, Terms of Reference</h2>
     <h4>1. Purpose</h4><p>The AI Steering Group is the body accountable for the safe, lawful and effective use of artificial intelligence across ${esc(t.org)}. It owns the AI governance framework, approves AI use cases, oversees risk, and reports to ${esc(t.reportTo)}.</p>
     <h4>2. Scope</h4><p>All AI and generative-AI tools used by staff; all use cases touching personal data, customers, employment decisions or regulated activity; the policies, registers and assessments this platform tracks. Out of scope: day-to-day IT helpdesk support and individual HR matters.</p>
     <h4>3. Membership</h4>
@@ -866,13 +866,13 @@ function pageStaff(){
   DB.acks.forEach(a=>{ ackByStaff[a.staffId] = a; });
   main.innerHTML = `
     <div class="pagehead">
-      <div><div class="eyebrow">Document 10 · Rollout</div><h2>Staff &amp; Policy Sign-off</h2><p>Maintain your staff roster, send the policy for acknowledgement, and track who has signed off — all in shared storage so this updates live for everyone using this platform link.</p></div>
+      <div><div class="eyebrow">Document 10 · Rollout</div><h2>Staff &amp; Policy Sign-off</h2><p>Maintain your staff roster, send the policy for acknowledgement, and track who has signed off, all in shared storage so this updates live for everyone using this platform link.</p></div>
       <div class="actions"><button class="btn ghost" id="copyMsg">Copy announcement message</button><button class="btn gold" id="addStaff">+ Add staff member</button></div>
     </div>
 
     <div class="card" style="background:var(--amber-bg);border-color:transparent;">
       <h3>How "send to staff" works here</h3>
-      <p style="margin:0;">Share this artifact's link with your team (use the share / publish option above the conversation). Everyone who opens it sees the same live data. Add people to the roster below, then use <b>Copy announcement message</b> or the per-person <b>Email</b> button to notify them — each person opens the link, finds their name under "Acknowledge the policy", and signs off. Their acknowledgement appears here instantly for everyone.</p>
+      <p style="margin:0;">Share this artifact's link with your team (use the share / publish option above the conversation). Everyone who opens it sees the same live data. Add people to the roster below, then use <b>Copy announcement message</b> or the per-person <b>Email</b> button to notify them, each person opens the link, finds their name under "Acknowledge the policy", and signs off. Their acknowledgement appears here instantly for everyone.</p>
     </div>
 
     <div class="grid cols-2">
@@ -882,10 +882,10 @@ function pageStaff(){
       </div>
       <div class="card">
         <h3>Acknowledge the policy</h3>
-        <p style="color:var(--ink-soft);font-size:12.5px;margin-top:-4px;">Current version: <b>${esc(DB.aupStatus.version)}</b> — ${DB.aupStatus.published?'published '+fmtDate(DB.aupStatus.publishedDate):'<span style="color:var(--rose)">not yet published</span>'}</p>
+        <p style="color:var(--ink-soft);font-size:12.5px;margin-top:-4px;">Current version: <b>${esc(DB.aupStatus.version)}</b>, ${DB.aupStatus.published?'published '+fmtDate(DB.aupStatus.publishedDate):'<span style="color:var(--rose)">not yet published</span>'}</p>
         <label>Your name</label>
         <select id="ackSelect">
-          <option value="">— select your name —</option>
+          <option value="">- select your name -</option>
           ${DB.staff.map(s=>`<option value="${esc(s.id)}">${esc(s.name)}</option>`).join('')}
         </select>
         <button class="btn" id="ackBtn" ${DB.aupStatus.published?'':'disabled'}>I have read &amp; accept the Acceptable Use Policy</button>
@@ -946,11 +946,11 @@ async function recordAck(){
   DB.acks.push({staffId:id, version:DB.aupStatus.version, date: todayISO()});
   await dbSet('acks', DB.acks);
   pageStaff(); renderNav();
-  toast('Acknowledged — thank you');
+  toast('Acknowledged, thank you');
 }
 function copyAnnouncement(){
   const text = `AI Acceptable Use Policy (v${DB.aupStatus.version}) is now ${DB.aupStatus.published?'published':'in draft'} for ${DB.org.companyName}.\n\nPlease open the compliance platform link, find your name under "Acknowledge the policy", and confirm you've read it.\n\nQuestions to ${DB.org.dpoName} (${DB.org.incidentContact}).`;
-  navigator.clipboard?.writeText(text).then(()=>toast('Announcement copied to clipboard')).catch(()=>toast('Could not copy — select and copy manually'));
+  navigator.clipboard?.writeText(text).then(()=>toast('Announcement copied to clipboard')).catch(()=>toast('Could not copy, select and copy manually'));
 }
 
 

@@ -130,7 +130,7 @@
  <hr class="section-divider" />
 
  <style>
-  /* interactive diagram — scoped */
+  /* interactive diagram, scoped */
   .risk-fig { margin: 1.6rem 0 2.4rem; }
   .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
   .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
@@ -160,9 +160,9 @@
  <script>
  (function(){
    var data = {
-     k1:{t:'Annex III high-risk', d:'The EU AI Act lists most public-services AI as high-risk by default — education scoring (§3), employment (§4), emergency triage and eligibility for public assistance benefits (§5), law enforcement (§6), migration and asylum (§7), administration of justice (§8).', m:'Classify before you build.'},
-     k2:{t:'Article 27 FRIA', d:'A Fundamental Rights Impact Assessment is mandatory for public-sector deployers before first use — six elements per Article 27(1), companion to the DPIA and the Equality Act s.149 PSED assessment, with Article 27(3) notification to the market-surveillance authority.', m:'Cross-reference DPIA &amp; PSED.'},
-     k3:{t:'ATRS &amp; UK AI Playbook', d:'The Algorithmic Transparency Recording Standard is the public-sector “show your working” — Tier 1 and Tier 2 records published before deployment; the UK AI Playbook (Cabinet Office / DSIT / GDS) sets the government-wide controls you apply.', m:'“Not yet published” is the worst answer.'},
+     k1:{t:'Annex III high-risk', d:'The EU AI Act lists most public-services AI as high-risk by default, education scoring (§3), employment (§4), emergency triage and eligibility for public assistance benefits (§5), law enforcement (§6), migration and asylum (§7), administration of justice (§8).', m:'Classify before you build.'},
+     k2:{t:'Article 27 FRIA', d:'A Fundamental Rights Impact Assessment is mandatory for public-sector deployers before first use, six elements per Article 27(1), companion to the DPIA and the Equality Act s.149 PSED assessment, with Article 27(3) notification to the market-surveillance authority.', m:'Cross-reference DPIA &amp; PSED.'},
+     k3:{t:'ATRS &amp; UK AI Playbook', d:'The Algorithmic Transparency Recording Standard is the public-sector “show your working”, Tier 1 and Tier 2 records published before deployment; the UK AI Playbook (Cabinet Office / DSIT / GDS) sets the government-wide controls you apply.', m:'“Not yet published” is the worst answer.'},
      k4:{t:'The public is the audience', d:'Citizens, ombudsmen, judicial review, FOI, the NAO and select committees are all venues the private sector never faces. Build the audit binder before the FOI request arrives.', m:'Map first; deploy second.'}
    };
    var fig = document.getElementById('risk-fig-ps'); if(!fig) return;

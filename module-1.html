@@ -182,7 +182,7 @@
  <p>AI risk comes in three main shapes. This course covers all three:</p>
 
  <style>
-  /* interactive diagram — scoped */
+  /* interactive diagram, scoped */
   .risk-fig { margin: 1.6rem 0 2.4rem; }
   .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
   .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
@@ -199,7 +199,7 @@
   .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
   .rd-cap strong { color: var(--text); }
   .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
-  /* Module artwork faded into the banner — hero-art pattern (matches manager/consultancy). */
+  /* Module artwork faded into the banner, hero-art pattern (matches manager/consultancy). */
 .page-hero::after {
   content:''; position:absolute; top:0; right:0; bottom:0; z-index:0; pointer-events:none;
   width:min(44%, 560px);
@@ -244,9 +244,9 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <script>
   (function(){
     var data = {
-      in:  {t:'What you put in', d:'You paste something private and it leaks — customer lists, contracts, code, money records, staff files.', m:'Covered in Modules 2 &amp; 3.'},
-      out: {t:'What it gives back', d:'The AI makes something up and you use it — fake cases, made-up facts, unfair choices.', m:'Covered in Modules 5, 7 &amp; 8.'},
-      at:  {t:'AI aimed at you', d:'Someone uses AI to copy or trick you — deepfakes, scam emails, fake bosses.', m:'Covered in Module 6.'},
+      in:  {t:'What you put in', d:'You paste something private and it leaks, customer lists, contracts, code, money records, staff files.', m:'Covered in Modules 2 &amp; 3.'},
+      out: {t:'What it gives back', d:'The AI makes something up and you use it, fake cases, made-up facts, unfair choices.', m:'Covered in Modules 5, 7 &amp; 8.'},
+      at:  {t:'AI aimed at you', d:'Someone uses AI to copy or trick you, deepfakes, scam emails, fake bosses.', m:'Covered in Module 6.'},
       do:  {t:'And what to do', d:'How to act when something goes wrong, and how to keep a record of the AI you use.', m:'Covered in Modules 9, 10 &amp; 12.'}
     };
     var fig = document.getElementById('risk-fig-1'); if(!fig) return;

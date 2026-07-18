@@ -5,7 +5,7 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 const cfg = window.AISW_CONFIG;
 if (!cfg || !cfg.url || cfg.url.includes("YOUR-PROJECT")) {
   document.body.innerHTML =
-    '<p style="font-family:monospace;color:#ff6b6b;padding:2rem">Portal not configured — copy portal/config.example.js to portal/config.js and add your Supabase URL + anon key.</p>';
+    '<p style="font-family:monospace;color:#ff6b6b;padding:2rem">Portal not configured, copy portal/config.example.js to portal/config.js and add your Supabase URL + anon key.</p>';
   throw new Error("AISW_CONFIG missing");
 }
 export const sb = createClient(cfg.url, cfg.anon);
@@ -17,10 +17,10 @@ export const DASH = { end_user: "end-user.html", manager: "manager.html", resell
 // this account, so no real user data is exposed. Restore real auth: set false + redeploy.
 //
 // ⚠️ SECURITY TRIPWIRE (security review 07 Jul 2026): this repo is PUBLIC, so the
-// demo password below is public knowledge — treat it as burned. This is safe ONLY
+// demo password below is public knowledge, treat it as burned. This is safe ONLY
 // while the Supabase project holds demo data. BEFORE any real client/user data
 // enters this Supabase project: (1) set AUTH_DISABLED = false, (2) delete or
-// rotate the demo account, (3) redeploy. Do not skip — RLS scoping to a
+// rotate the demo account, (3) redeploy. Do not skip, RLS scoping to a
 // publicly-known login is not protection once real data shares the project.
 export const AUTH_DISABLED = true;
 export const DEMO = { email: "demo@attest-ai.com", password: "attest-manager-demo-2026" };

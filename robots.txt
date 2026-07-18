@@ -1,10 +1,10 @@
-# AI Safe@Work — robots policy
+# AI Safe@Work, robots policy
 # Strategy: BLOCK training-only crawlers everywhere; ALLOW citation /
 # answer-engine crawlers on free core (it is the trust signal); BLOCK
 # everything on paid + audit paths. See doctrine § Anti-scraping for
 # rationale. Last reviewed: 2026-05-19. Re-walked quarterly.
 
-# ─── Training-only crawlers — BLOCK SITE-WIDE ─────────────────────────
+# ─── Training-only crawlers, BLOCK SITE-WIDE ─────────────────────────
 # These exist to ingest content for model training with no return path
 # to us (no citation, no traffic). Out of doctrine.
 
@@ -71,7 +71,7 @@ Disallow: /
 User-agent: Webzio-Extended
 Disallow: /
 
-# ─── Citation / answer-engine crawlers — ALLOW free core, BLOCK paid ──
+# ─── Citation / answer-engine crawlers, ALLOW free core, BLOCK paid ──
 # These exist to cite our content back to users with a link. They drive
 # traffic, so they are part of the wedge. Keep them out of paid surfaces.
 
@@ -129,7 +129,7 @@ Disallow: /admin/
 Disallow: /.audit/
 Allow: /
 
-# Mistral, DuckDuckGo Assist, etc. — add as they appear.
+# Mistral, DuckDuckGo Assist, etc., add as they appear.
 
 # ─── Default (search engines + social link-preview bots + everything else) ─
 # Block paid + audit; allow everything else.

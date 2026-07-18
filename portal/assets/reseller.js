@@ -14,7 +14,7 @@ if (profile) {
     document.getElementById("s-value").textContent = pipe ? "Â£" + pipe.toLocaleString() : "Â£0";
     document.getElementById("s-won").textContent = list.filter(d => d.stage === "won").length;
     document.querySelector("#deals-t tbody").innerHTML = list.map(d =>
-   `<tr><td>${esc(d.customer_name)}</td><td>${d.est_value ? "Â£"+Number(d.est_value).toLocaleString() : "—"}</td>
+   `<tr><td>${esc(d.customer_name)}</td><td>${d.est_value ? "Â£"+Number(d.est_value).toLocaleString() : "-"}</td>
        <td><span class="chip ${esc(d.stage)}">${esc(d.stage)}</span></td><td>${new Date(d.created_at).toLocaleDateString()}</td></tr>`
     ).join("") || `<tr><td colspan="4" style="color:var(--text3)">No deals registered yet.</td></tr>`;
   }
@@ -23,7 +23,7 @@ if (profile) {
   async function loadCustomers() {
     const { data: cust } = await sb.from("customers").select("*").order("renewal_date", { ascending: true });
     document.querySelector("#cust-t tbody").innerHTML = (cust || []).map(c =>
-   `<tr><td>${esc(c.name)}</td><td>${esc(c.seats)}</td><td>${esc(c.renewal_date || "—")}</td>
+   `<tr><td>${esc(c.name)}</td><td>${esc(c.seats)}</td><td>${esc(c.renewal_date || "-")}</td>
        <td><span class="chip ${c.status === "active" ? "won" : "lost"}">${esc(c.status)}</span></td></tr>`
     ).join("") || `<tr><td colspan="4" style="color:var(--text3)">No customers yet.</td></tr>`;
   }
@@ -37,7 +37,7 @@ if (profile) {
     document.getElementById("s-paid").textContent = "Â£" + paid.toLocaleString();
     document.getElementById("s-pending").textContent = "Â£" + pending.toLocaleString();
     document.querySelector("#comm-t tbody").innerHTML = list.map(c =>
-   `<tr><td>${esc(c.period || "—")}</td><td>Â£${Number(c.amount||0).toLocaleString()}</td>
+   `<tr><td>${esc(c.period || "-")}</td><td>Â£${Number(c.amount||0).toLocaleString()}</td>
        <td><span class="chip ${c.status === "paid" ? "won" : "registered"}">${esc(c.status)}</span></td><td>${esc(c.note || "")}</td></tr>`
     ).join("") || `<tr><td colspan="4" style="color:var(--text3)">No statements yet.</td></tr>`;
   }

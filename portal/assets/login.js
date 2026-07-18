@@ -53,7 +53,7 @@ sb.auth.onAuthStateChange((event) => {
 
 // Already signed in (incl. a demo session from inspecting AIMP) -> continue.
 (async () => {
-  // AIMP inspection: the login workflow is bypassed while AUTH_DISABLED — drop straight
+  // AIMP inspection: the login workflow is bypassed while AUTH_DISABLED, drop straight
   // into the platform as the demo account, no form. (Removed automatically when auth is armed.)
   if (AUTH_DISABLED) {
     ["step-login", "step-enrol", "step-mfa", "step-reset"].forEach(s => { const e = $(s); if (e) e.hidden = true; });

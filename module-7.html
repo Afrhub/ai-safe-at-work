@@ -162,7 +162,7 @@
  <p>You can't eliminate bias by switching to a different model. They all share the same internet. You can manage it by knowing where it shows up and putting checks in the right places.</p>
 
  <style>
-  /* interactive diagram — scoped */
+  /* interactive diagram, scoped */
   .risk-fig { margin: 1.6rem 0 2.4rem; }
   .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
   .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
@@ -179,7 +179,7 @@
   .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
   .rd-cap strong { color: var(--text); }
   .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
-  /* Module artwork faded into the banner — hero-art pattern (matches manager/consultancy). */
+  /* Module artwork faded into the banner, hero-art pattern (matches manager/consultancy). */
 .page-hero::after {
   content:''; position:absolute; top:0; right:0; bottom:0; z-index:0; pointer-events:none;
   width:min(44%, 560px);
@@ -227,7 +227,7 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
       data:   {t:'The training data', d:'Mostly the public web, books, and code. The internet over-represents some voices and under-represents others, and the model learns the over-representation as "normal".', m:'You can’t fix this by switching model.'},
       tune:   {t:'The fine-tuning', d:'Humans rate model outputs and the model learns to produce what gets good ratings. Those raters bring their own preferences, blind spots, and demographics.', m:'Bias layered on bias.'},
       prompt: {t:'Your prompt', d:'Change one word and watch the answer change. "A software engineer" produces a different person, statistically, than "a software engineering manager".', m:'The one layer you control directly.'},
-      manage: {t:'What you can do', d:'You can’t eliminate bias by switching to a different model — they all share the same internet. You manage it by knowing where it shows up.', m:'Put checks in the right places.'}
+      manage: {t:'What you can do', d:'You can’t eliminate bias by switching to a different model, they all share the same internet. You manage it by knowing where it shows up.', m:'Put checks in the right places.'}
     };
     var fig = document.getElementById('risk-fig-7'); if(!fig) return;
     var cap = fig.querySelector('.rd-cap');

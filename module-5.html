@@ -204,7 +204,7 @@
  </div>
 
  <style>
-  /* interactive diagram — scoped */
+  /* interactive diagram, scoped */
   .risk-fig { margin: 1.6rem 0 2.4rem; }
   .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
   .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
@@ -221,7 +221,7 @@
   .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
   .rd-cap strong { color: var(--text); }
   .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
-  /* Module artwork faded into the banner — hero-art pattern (matches manager/consultancy). */
+  /* Module artwork faded into the banner, hero-art pattern (matches manager/consultancy). */
 .page-hero::after {
   content:''; position:absolute; top:0; right:0; bottom:0; z-index:0; pointer-events:none;
   width:min(44%, 560px);
@@ -266,10 +266,10 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <script>
   (function(){
     var data = {
-      out:         {t:'The AI output', d:'Fluent and authoritative — but the confidence has no reliable link to whether it is correct.', m:'See "Confidence is not calibrated".'},
+      out:         {t:'The AI output', d:'Fluent and authoritative, but the confidence has no reliable link to whether it is correct.', m:'See "Confidence is not calibrated".'},
       independent: {t:'Independent source', d:'Check it against a different kind of evidence: a primary document, an official register, the real documentation, a person who would know. Another chatbot does not count.', m:'See "The two-source rule".'},
       mandatory:   {t:'Always verify', d:'Some output is non-negotiable: legal claims, medical and health information, financial figures, citations, statements about real people, and technical instructions.', m:'See "Where verification is mandatory".'},
-      oversight:   {t:'Then a human signs off', d:'A person reads it line by line before it is acted upon, ready to override or set it aside. Signing off has to be real work, not clicking "approve" on autopilot.', m:'EU AI Act Article 14 — human oversight.'}
+      oversight:   {t:'Then a human signs off', d:'A person reads it line by line before it is acted upon, ready to override or set it aside. Signing off has to be real work, not clicking "approve" on autopilot.', m:'EU AI Act Article 14, human oversight.'}
     };
     var fig = document.getElementById('risk-fig-5'); if(!fig) return;
     var cap = fig.querySelector('.rd-cap');

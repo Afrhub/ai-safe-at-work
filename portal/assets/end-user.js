@@ -8,7 +8,7 @@ if (profile) {
 
   // Bridge: quiz.js records passes to localStorage only. Module pages share this
   // origin, so read those passes here (where we have a session) and sync them to
-  // module_progress via the set_module_progress RPC — this is what makes the
+  // module_progress via the set_module_progress RPC, this is what makes the
   // manager's completion view and cross-device records actually populate.
   const localDone = new Set();
   const syncs = [];
@@ -30,7 +30,7 @@ if (profile) {
       <h2>${m.t}</h2>
       <span class="arrow">${done.has(m.n) ? "Review →" : "Start →"}</span>
     </a>`);
-  // Module 11 is the gated finale — not counted in the 11, but still reachable here.
+  // Module 11 is the gated finale, not counted in the 11, but still reachable here.
   tiles.push(`
     <a class="tile" href="/module-11.html">
       <span class="k">Finale ${done.has(11) ? "· ✓ done" : ""}</span>

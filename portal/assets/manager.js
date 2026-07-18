@@ -32,7 +32,7 @@ if (profile) {
     document.getElementById("credits").textContent = p.credits_balance ?? 0;
   }
 
-  // Export the team's completion table as CSV — the manager's audit evidence record.
+  // Export the team's completion table as CSV, the manager's audit evidence record.
   document.getElementById("export-csv")?.addEventListener("click", () => {
     const out = [["Team member", "Modules done", "Assigned"]];
     document.querySelectorAll("#seats tbody tr").forEach(tr => {

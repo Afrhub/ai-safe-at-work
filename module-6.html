@@ -176,7 +176,7 @@
  <p><strong>What to look for:</strong> any new contact that progresses toward a financial, credential, or access ask. The relationship being more than a few weeks old doesn't make it real. Long-form rapport is now cheap.</p>
 
  <style>
-  /* interactive diagram — scoped */
+  /* interactive diagram, scoped */
   .risk-fig { margin: 1.6rem 0 2.4rem; }
   .risk-svg { width: 100%; height: auto; display: block; font-family: var(--font-display); }
   .risk-svg .rcard { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; transition: fill .2s ease, stroke .2s ease; }
@@ -193,7 +193,7 @@
   .rd-cap { font-size: 1rem; color: var(--text2); margin: 1rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent); line-height: 1.55; }
   .rd-cap strong { color: var(--text); }
   .rd-cap .rd-m { color: var(--accent-d); font-weight: 700; }
-  /* Module artwork faded into the banner — hero-art pattern (matches manager/consultancy). */
+  /* Module artwork faded into the banner, hero-art pattern (matches manager/consultancy). */
 .page-hero::after {
   content:''; position:absolute; top:0; right:0; bottom:0; z-index:0; pointer-events:none;
   width:min(44%, 560px);
@@ -238,10 +238,10 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <script>
   (function(){
     var data = {
-      spear:    {t:'Spear-phishing 2.0', d:'A targeted email that references things only an insider would know — the substance of the request is the red flag, not the writing.', m:'Look at the request, not the typos.'},
+      spear:    {t:'Spear-phishing 2.0', d:'A targeted email that references things only an insider would know, the substance of the request is the red flag, not the writing.', m:'Look at the request, not the typos.'},
       voice:    {t:'Voice cloning', d:'A 30-second sample is enough to produce a convincing clone, paired with caller ID spoofing for a call from "your boss".', m:'Hang up. Call back on a known number.'},
-      video:    {t:'Video deepfakes', d:'Live deepfakes have moved from uncanny valley to hard to distinguish from real — as in the Arup case from Module 1.', m:'Never approve on the call alone.'},
-      callback: {t:'The callback', d:'For any unusual request, look up the sender in a different system, call them, and ask something only they would know.', m:'Slow on purpose — it breaks the attack.'}
+      video:    {t:'Video deepfakes', d:'Live deepfakes have moved from uncanny valley to hard to distinguish from real, as in the Arup case from Module 1.', m:'Never approve on the call alone.'},
+      callback: {t:'The callback', d:'For any unusual request, look up the sender in a different system, call them, and ask something only they would know.', m:'Slow on purpose, it breaks the attack.'}
     };
     var fig = document.getElementById('risk-fig-6'); if(!fig) return;
     var cap = fig.querySelector('.rd-cap');
