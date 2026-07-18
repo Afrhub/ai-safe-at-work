@@ -27,6 +27,8 @@ fixtures and gotchas each scenario needs. Keep it current as behaviour changes.
 - FT-GDPR-01 — Data protection (GDPR) section renders separately from the AI pack (`domain='gdpr'`); its status pills cycle; publishing a GDPR doc Live flows into staff acknowledgement + the nudge count (shares FT-GOV-ACK-01's mechanism)
 - FT-TRAIN-01 — module completion syncs to `module_progress` and the manager completion + AI-literacy tiles
 - FT-DEMO-01 — Book-a-Demo form submits and records to Netlify Forms
+- FT-AIMP-01 — manager dashboard structure: all 11 artifact sections + Manage group render with matching headings/actions (**implemented**: `tests/manager-dashboard.structure.mjs`, spec fixture `tests/manager-dashboard.spec.json`; run `node tests/manager-dashboard.structure.mjs <url>`)
+- FT-AIMP-02 — manager dashboard CRUD + persistence: use case / risk / incident / staff add, AUP publish, reload-persistence via `governance_state` (**implemented**: `tests/manager-dashboard.crud.mjs`; creates then deletes its own test data — run against a disposable manager)
 
 ---
 

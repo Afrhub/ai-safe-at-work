@@ -1,0 +1,590 @@
+[
+ {
+  "tab": "dashboard",
+  "label": "—Dashboard",
+  "h2": [
+   "[Company Name] — AI Governance Dashboard"
+  ],
+  "h3": [
+   "Use Case Register",
+   "Vendor diligence",
+   "Steering group",
+   "Document pack — completion at a glance"
+  ],
+  "eyebrow": "Tier 2 · Governance Toolkit",
+  "lede": "Live status across your AI Safe@Work documentation set. Ten governance documents, tracked in one place, ready to send to staff.",
+  "buttons": [
+   "Open Acceptable Use Policy →",
+   "Open register",
+   "Open vendors",
+   "Open RACI",
+   "Open",
+   "Open",
+   "Open",
+   "Open",
+   "Open",
+   "Open",
+   "Open",
+   "Open",
+   "Open"
+  ],
+  "inputs": [],
+  "tables": [
+   [
+    "#",
+    "Document",
+    "Status",
+    ""
+   ]
+  ],
+  "stats": [
+   "DraftPolicy status (v1.0)",
+   "0%0 of 0 staff acknowledged",
+   "0High / critical open risks",
+   "0Open incidents"
+  ],
+  "text": "TIER 2 · GOVERNANCE TOOLKIT\n[Company Name] — AI Governance Dashboard\n\nLive status across your AI Safe@Work documentation set. Ten governance documents, tracked in one place, ready to send to staff.\n\nOpen Acceptable Use Policy →\nDraft\nPOLICY STATUS (V1.0)\n0%\n0 OF 0 STAFF ACKNOWLEDGED\n0\nHIGH / CRITICAL OPEN RISKS\n0\nOPEN INCIDENTS\nUse Case Register\n\n0 use case(s) logged · 0 rated High risk\n\nOpen register\nVendor diligence\n\n0 vendor(s) tracked · 0 risk-scored\n\nOpen vendors\nSteering group\n\n5 roles defined · ToR not yet approved\n\nOpen RACI\nDocument pack — completion at a glance\n#\tDOCUMENT\tSTATUS\t\n01\tAcceptable Use Policy\tDraft\tOpen\n02\tAI Use Case Register\tEmpty\tOpen\n03\tAI Risk Assessments\tEmpty\tOpen\n04\tAI Risk Register\tEmpty\tOpen\n05\tIncident Forms\tNone logged\tOpen\n06\tGovernance Roles Matrix\tConfigured\tOpen\n07\tSteering Group ToR\tDraft\tOpen\n08\tVendor Due Diligence\tEmpty\tOpen\n09\tSupplier Risk Assessment\tEmpty\tOpen"
+ },
+ {
+  "tab": "aup",
+  "label": "01Acceptable Use Policy",
+  "h2": [
+   "AI Acceptable Use Policy",
+   "Acceptable Use of AI Tools at [Company Name]"
+  ],
+  "h3": [
+   "Policy fields",
+   "Status",
+   "1. Purpose",
+   "2. Scope",
+   "3. Approved tools",
+   "4. Permitted uses",
+   "5. Forbidden inputs",
+   "6. Output handling",
+   "7. Logging",
+   "8. Settings and configuration",
+   "9. Vendor changes",
+   "10. Incidents",
+   "11. Training",
+   "12. Roles and responsibilities",
+   "13. Consequences of non-compliance",
+   "14. Standards referenced"
+  ],
+  "eyebrow": "Document 01 · Tier 2",
+  "lede": "Edit the fields below — they fill the policy automatically. Publish it, then send it to staff for sign-off from the Staff tab.",
+  "buttons": [
+   "Print / Save PDF",
+   "Publish to staff",
+   "Save & regenerate"
+  ],
+  "inputs": [
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Company name"
+   },
+   {
+    "t": "input",
+    "type": "date",
+    "label": "Effective date"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Policy owner (role)"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "DPO / contact name"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Incident contact"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Training reference"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Company name"
+   },
+   {
+    "t": "textarea",
+    "type": "textarea",
+    "label": "Company name"
+   }
+  ],
+  "tables": [],
+  "stats": [],
+  "text": "DOCUMENT 01 · TIER 2\nAI Acceptable Use Policy\n\nEdit the fields below — they fill the policy automatically. Publish it, then send it to staff for sign-off from the Staff tab.\n\nPrint / Save PDF Publish to staff\nPolicy fields\nCOMPANY NAME\nEFFECTIVE DATE\nPOLICY OWNER (ROLE)\nDPO / CONTACT NAME\nINCIDENT CONTACT\nTRAINING REFERENCE\nAI USE LOG LOCATION\nAPPROVED TOOLS (ONE PER LINE)\n Save & regenerate\nStatus\n\nThis policy is still a draft and has not been sent to staff.\n\nPublishing locks in a version number. If you re-publish after edits, the version increments and prior acknowledgements no longer count, staff are asked to re-acknowledge.\n\nAcceptable Use of AI Tools at [Company Name]\nEffective: 18 Jul 2026 · Version: 1.0 · Owner: [Role, e.g. DPO / CISO / Head of IT] · Review cycle: Quarterly\n1. Purpose\n\nThis policy describes how staff at [Company Name] may use generative AI tools (such as ChatGPT, Microsoft Copilot, Claude, Gemini, Perplexity, or any other AI assistant) in the course of their work, setting out what is encouraged, what is permitted with conditions, and what is forbidden.\n\n2. Scope\n\nApplies to all employees, contractors, interns and consultants performing work for [Company Name], on company-owned and personal devices used for work, covering all AI tools whether procured by the company or used personally.\n\n3. Approved tools\nChatGPT Enterprise (EU region)\nMicrosoft 365 Copilot\n\nOther tools require explicit approval from [Role, e.g. DPO / CISO / Head of IT] before use. Free or personal-tier consumer AI tools are not approved for the data categories in Section 5.\n\n4. Permitted uses\n\nDrafting and editing work with human review; summarising appropriate material; translation and rephrasing; brainstorming and structuring thinking; explaining concepts; technical assistance on appropriate data.\n\n5. Forbidden inputs\n\nCustomer or contact personal data; special-category personal data; third-party contracts or legal drafts; source code we don't own or licence; non-public financial data; authentication secrets; documents classified Confidential or higher; HR records; anything held under a duty of confidence — must never be entered into a free or personal-tier AI tool.\n\n6. Output handling\n\nAI-generated content must be reviewed by a human before use. Claims affecting a decision must be independently verified. AI involvement in customer-facing material must be disclosed per EU AI Act Article 50. No decision affecting someone's livelihood or legal position may be made on AI output alone.\n\n7. Logging\n\nSignificant AI-assisted work is logged in: Shared AI Use Register (spreadsheet). \"Significant\" means the use affected another person, represented the company externally, touched sensitive data, or supported an irreversible/expensive decision.\n\n8. Settings and configuration\n\nTraining-data opt-out enabled wherever offered on a work account; retention follows the company's procurement contract; MFA is required on all work AI accounts.\n\n9. Vendor changes\n\nMaterial changes to an approved tool's terms, data handling, sub-processors or model must be reviewed by [DPO Name] before continued use.\n\n10. Incidents\n\nReport within the hour to security@example.com: data pasted into the wrong tool, harmful AI output, an AI-powered scam, or a vendor security incident. Do not delete the evidence.\n\n11. Training\n\nAll staff complete the AI Safe@Work course within thirty days of joining and refresh annually.\n\n12. Roles and responsibilities\n\nEvery member of staff complies with t"
+ },
+ {
+  "tab": "usecases",
+  "label": "02Use Case Register",
+  "h2": [
+   "AI Use Case Register"
+  ],
+  "h3": [],
+  "eyebrow": "Document 02 · Register",
+  "lede": "Every approved AI use case: owner, data touched, risk tier and impact-assessment status.",
+  "buttons": [
+   "Print / Export",
+   "+ Add entry"
+  ],
+  "inputs": [
+   {
+    "t": "input",
+    "type": "text"
+   }
+  ],
+  "tables": [],
+  "stats": [],
+  "text": "DOCUMENT 02 · REGISTER\nAI Use Case Register\n\nEvery approved AI use case: owner, data touched, risk tier and impact-assessment status.\n\nPrint / Export + Add entry\n0 entries\nNo entries yet\nAdd your first one to start the register."
+ },
+ {
+  "tab": "riskreg",
+  "label": "04AI Risk Register",
+  "h2": [
+   "AI Risk Register"
+  ],
+  "h3": [],
+  "eyebrow": "Document 04 · Register",
+  "lede": "AI-specific risks: data leakage, hallucination, bias, vendor and compliance risk, with owners and mitigation.",
+  "buttons": [
+   "Print / Export",
+   "+ Add entry"
+  ],
+  "inputs": [
+   {
+    "t": "input",
+    "type": "text"
+   }
+  ],
+  "tables": [],
+  "stats": [],
+  "text": "DOCUMENT 04 · REGISTER\nAI Risk Register\n\nAI-specific risks: data leakage, hallucination, bias, vendor and compliance risk, with owners and mitigation.\n\nPrint / Export + Add entry\n0 entries\nNo entries yet\nAdd your first one to start the register."
+ },
+ {
+  "tab": "assessments",
+  "label": "03Risk Assessments",
+  "h2": [
+   "AI Risk Assessments"
+  ],
+  "h3": [],
+  "eyebrow": "Document 03",
+  "lede": "One assessment per AI use case: tier, scored risks, mitigations, and a decision. File each against an entry in the Use Case Register.",
+  "buttons": [
+   "+ New assessment"
+  ],
+  "inputs": [],
+  "tables": [],
+  "stats": [],
+  "text": "DOCUMENT 03\nAI Risk Assessments\n\nOne assessment per AI use case: tier, scored risks, mitigations, and a decision. File each against an entry in the Use Case Register.\n\n+ New assessment\nNo assessments yet\nRun one for each use case before approving it."
+ },
+ {
+  "tab": "vendors",
+  "label": "08Vendor Due Diligence",
+  "h2": [
+   "Vendor Due Diligence"
+  ],
+  "h3": [],
+  "eyebrow": "Document 08",
+  "lede": "Track the must-answer questions for any AI vendor before procurement. 19 blocking questions, modelled on CSA CAIQ-AI.",
+  "buttons": [
+   "+ Add vendor"
+  ],
+  "inputs": [],
+  "tables": [],
+  "stats": [],
+  "text": "DOCUMENT 08\nVendor Due Diligence\n\nTrack the must-answer questions for any AI vendor before procurement. 19 blocking questions, modelled on CSA CAIQ-AI.\n\n+ Add vendor\nNo vendors tracked yet\nAdd a vendor to start the diligence checklist."
+ },
+ {
+  "tab": "supplierrisk",
+  "label": "09Supplier Risk Score",
+  "h2": [
+   "Supplier Risk Assessment"
+  ],
+  "h3": [],
+  "eyebrow": "Document 09",
+  "lede": "After diligence comes back, score the supplier across seven areas and record a go / no-go decision.",
+  "buttons": [
+   "+ New score"
+  ],
+  "inputs": [],
+  "tables": [],
+  "stats": [],
+  "text": "DOCUMENT 09\nSupplier Risk Assessment\n\nAfter diligence comes back, score the supplier across seven areas and record a go / no-go decision.\n\n+ New score\nNo supplier scores yet\nScore a vendor once their diligence questionnaire is back."
+ },
+ {
+  "tab": "incidents",
+  "label": "05Incident Reports",
+  "h2": [
+   "AI Incident Reports"
+  ],
+  "h3": [],
+  "eyebrow": "Document 05",
+  "lede": "For any incident where AI was involved. Start filling it the moment you confirm an incident, notifications then containment then narrative.",
+  "buttons": [
+   "+ Log incident"
+  ],
+  "inputs": [],
+  "tables": [],
+  "stats": [],
+  "text": "DOCUMENT 05\nAI Incident Reports\n\nFor any incident where AI was involved. Start filling it the moment you confirm an incident, notifications then containment then narrative.\n\n+ Log incident\nNo incidents on file\nThat's a good thing. Use this form the moment one occurs."
+ },
+ {
+  "tab": "raci",
+  "label": "06Roles Matrix (RACI)",
+  "h2": [
+   "AI Governance Roles Matrix (RACI)"
+  ],
+  "h3": [
+   "Role columns",
+   "Decision matrix"
+  ],
+  "eyebrow": "Document 06",
+  "lede": "Who is Responsible, Accountable, Consulted, Informed for each AI decision. Edit role names and cells, then publish for the steering group.",
+  "buttons": [
+   "Print / Export",
+   "Save changes"
+  ],
+  "inputs": [
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Column 1"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Column 2"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Column 3"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Column 4"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Column 5"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   },
+   {
+    "t": "input",
+    "type": "text"
+   }
+  ],
+  "tables": [
+   [
+    "Decision / Activity",
+    "DPO / Compliance",
+    "IT / Security",
+    "Procurement",
+    "Operations / Manager",
+    "CEO / Board"
+   ]
+  ],
+  "stats": [],
+  "text": "DOCUMENT 06\nAI Governance Roles Matrix (RACI)\n\nWho is Responsible, Accountable, Consulted, Informed for each AI decision. Edit role names and cells, then publish for the steering group.\n\nPrint / ExportSave changes\nRole columns\nCOLUMN 1\nCOLUMN 2\nCOLUMN 3\nCOLUMN 4\nCOLUMN 5\nDecision matrix\nDECISION / ACTIVITY\tDPO / COMPLIANCE\tIT / SECURITY\tPROCUREMENT\tOPERATIONS / MANAGER\tCEO / BOARD\nApprove new AI tool for use\t\t\t\t\t\nReview vendor DPA and contract terms\t\t\t\t\t\nConduct vendor security assessment\t\t\t\t\t\nAssess GDPR / EU AI Act compliance fit\t\t\t\t\t\nRun DPIA on new tool use case\t\t\t\t\t\nUpdate AI Acceptable Use Policy\t\t\t\t\t\nMaintain AI Tool Register\t\t\t\t\t\nMaintain AI Risk Register\t\t\t\t\t\nTrack AI training completion\t\t\t\t\t\nRespond to AI incident (investigation)\t\t\t\t\t\nNotify regulator of AI-related breach\t\t\t\t\t\nQuarterly governance review (steering committee)\t\t\t\t\t\nReport to CEO on governance maturity\t\t\t\t\t\n\nR = Responsible (does the work) · A = Accountable (final say) · C = Consulted (gives input) · I = Informed (told the outcome)."
+ },
+ {
+  "tab": "tor",
+  "label": "07Steering Group ToR",
+  "h2": [
+   "AI Steering Group — Terms of Reference",
+   "AI Steering Group — Terms of Reference"
+  ],
+  "h3": [
+   "Group details",
+   "Membership",
+   "1. Purpose",
+   "2. Scope",
+   "3. Membership",
+   "4. Responsibilities",
+   "5. Meetings, quorum and decisions",
+   "6. Reporting"
+  ],
+  "eyebrow": "Document 07",
+  "lede": "Stand up the group that owns AI governance. Fill the fields, approve at the first meeting.",
+  "buttons": [
+   "Print / Export",
+   "Save changes",
+   "+ Add member"
+  ],
+  "inputs": [
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Organisation"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Reports to"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Chair"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Meeting frequency"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Quorum (number of members)"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Minutes circulated within"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Approved by"
+   },
+   {
+    "t": "input",
+    "type": "date",
+    "label": "Date approved"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Role"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Held by"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Role"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Held by"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Role"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Held by"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Role"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Held by"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Role"
+   },
+   {
+    "t": "input",
+    "type": "text",
+    "label": "Held by"
+   }
+  ],
+  "tables": [
+   [
+    "Role",
+    "Held by"
+   ]
+  ],
+  "stats": [],
+  "text": "DOCUMENT 07\nAI Steering Group — Terms of Reference\n\nStand up the group that owns AI governance. Fill the fields, approve at the first meeting.\n\nPrint / ExportSave changes\nGroup details\nORGANISATION\nREPORTS TO\nCHAIR\nMEETING FREQUENCY\nQUORUM (NUMBER OF MEMBERS)\nMINUTES CIRCULATED WITHIN\nAPPROVED BY\nDATE APPROVED\nMembership\nROLE\nHELD BY\nROLE\nHELD BY\nROLE\nHELD BY\nROLE\nHELD BY\nROLE\nHELD BY\n+ Add member\nAI Steering Group — Terms of Reference\n1. Purpose\n\nThe AI Steering Group is the body accountable for the safe, lawful and effective use of artificial intelligence across [Organisation]. It owns the AI governance framework, approves AI use cases, oversees risk, and reports to the board.\n\n2. Scope\n\nAll AI and generative-AI tools used by staff; all use cases touching personal data, customers, employment decisions or regulated activity; the policies, registers and assessments this platform tracks. Out of scope: day-to-day IT helpdesk support and individual HR matters.\n\n3. Membership\nROLE\tHELD BY\nChair\t[Senior owner, e.g. COO / CISO]\nData protection / compliance\t[DPO name]\nIT / security\t[Name / role]\nProcurement / legal\t[Name / role]\nBusiness / operations\t[Name / role]\nExecutive sponsor\t[Name / role]\n4. Responsibilities\n\nOwn the AI governance framework and AUP; approve, reject or condition AI use cases; oversee the registers; set and monitor training; review incidents and notification decisions; track EU AI Act and ISO/IEC 42001 obligations; report governance maturity quarterly.\n\n5. Meetings, quorum and decisions\n\nFrequency: Quarterly, plus on demand for urgent approvals. Quorum: the Chair plus at least three members, including data protection. Decisions: by consensus where possible, otherwise majority with the Chair holding the casting vote. Minutes: circulated within five working days.\n\n6. Reporting\n\nThe Chair reports to the board each quarter on use cases approved/rejected, open high risks, training completion, incidents, and progress against EU AI Act and ISO/IEC 42001 obligations.\n\nApproved by\npending\nDate approved\npending"
+ },
+ {
+  "tab": "staff",
+  "label": "10Staff & Sign-off",
+  "h2": [
+   "Staff & Policy Sign-off"
+  ],
+  "h3": [
+   "How \"send to staff\" works here",
+   "Staff roster",
+   "Acknowledge the policy"
+  ],
+  "eyebrow": "Document 10 · Rollout",
+  "lede": "Maintain your staff roster, send the policy for acknowledgement, and track who has signed off — all in shared storage so this updates live for everyone using this platform link.",
+  "buttons": [
+   "Copy announcement message",
+   "+ Add staff member",
+   "I have read & accept the Acceptable Use Policy"
+  ],
+  "inputs": [
+   {
+    "t": "select",
+    "type": "select-one",
+    "label": "Your name"
+   }
+  ],
+  "tables": [],
+  "stats": [],
+  "text": "DOCUMENT 10 · ROLLOUT\nStaff & Policy Sign-off\n\nMaintain your staff roster, send the policy for acknowledgement, and track who has signed off — all in shared storage so this updates live for everyone using this platform link.\n\nCopy announcement message+ Add staff member\nHow \"send to staff\" works here\n\nShare this artifact's link with your team (use the share / publish option above the conversation). Everyone who opens it sees the same live data. Add people to the roster below, then use Copy announcement message or the per-person Email button to notify them — each person opens the link, finds their name under \"Acknowledge the policy\", and signs off. Their acknowledgement appears here instantly for everyone.\n\nStaff roster\nNo staff added yet\nAdd your team to start tracking sign-off.\nAcknowledge the policy\n\nCurrent version: 1.0 — not yet published\n\nYOUR NAME\n— select your name —\n I have read & accept the Acceptable Use Policy\n\nThe policy must be published before staff can acknowledge it."
+ }
+]
