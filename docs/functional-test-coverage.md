@@ -32,6 +32,44 @@ fixtures and gotchas each scenario needs. Keep it current as behaviour changes.
 
 ---
 
+## FT-AIMP-01 — Manager dashboard renders every artifact section (implemented)
+
+**Script:** `tests/manager-dashboard.structure.mjs` · **Fixture:** `tests/manager-dashboard.spec.json` (captured by a Playwright walk of the source artifact) · **Run:** `node tests/manager-dashboard.structure.mjs <url>` (defaults to `http://localhost:8765/portal/manager.html`).
+
+**What it proves:** `/portal/manager.html` is a faithful port of the compliance-platform artifact: same grouped sidebar (Overview / Policy / Registers / Assessments / Response / Governance / People + the portal's Manage group), same 11 numbered sections, matching eyebrows, headings, action buttons and stat cards per section, plus app-shell rules (no body scroll).
+
+**Steps (automated):**
+1. Load the dashboard; wait for guard + demo auto-sign-in + `loadAll()`.
+2. Enumerate `#navlist button.tab`; assert all 11 artifact tabs plus `m-team`/`m-course`/`m-templates`/`m-updates` exist.
+3. Click each tab; compare `#main`'s eyebrow, h2s, buttons and stat-card count against the fixture.
+4. Assert `body { overflow: hidden }` and zero console/page errors.
+
+**Expected:** zero gaps, zero errors. Any missing tab, renamed heading or lost action is reported as a named gap and fails the run (exit 1).
+
+---
+
+## FT-AIMP-02 — Manager dashboard CRUD + persistence (implemented)
+
+**Script:** `tests/manager-dashboard.crud.mjs` · **Run:** `node tests/manager-dashboard.crud.mjs <url>`. Creates then deletes its own records, but run it against a **disposable manager** (it also saves AUP org fields, e.g. company name "Playwright Ltd"); reset with `delete from governance_state where manager_id = ...` after a run against shared accounts.
+
+**What it proves:** the in-portal documents are genuinely interactive and state survives a reload via the `governance_state` Supabase table (per-manager KV, RLS `gs_owner_all`).
+
+**Steps (automated):**
+1. Use Case Register → + Add entry → modal save → row appears.
+2. AI Risk Register → + Add entry → row appears (matrix severity defaults applied).
+3. Incident Reports → + Log incident → row count +1 with an `INC-` id (table shows id/type/severity, not reporter).
+4. Staff & Sign-off → + Add staff member → roster row appears.
+5. AUP → edit company field → Save & regenerate → Publish to staff → dashboard KPI flips from Draft and shows the company name.
+6. Reload the page; assert all four records still present (Supabase round-trip, not DOM state).
+7. Manage group still works: invite form present, credits loaded from `profiles`, course grid renders 11 tiles.
+8. Cleanup: delete the four test records through the UI delete buttons.
+
+**Expected:** 13/13 PASS, zero page errors.
+
+**Gotchas:** modal buttons use inline `onclick` handlers exposed on `window` from the module (regression FT-AIMP-02 originally caught: `deleteRegisterRow is not defined`); keep `Object.assign(window, {...})` in `portal/assets/aimp.js` when adding new modals.
+
+---
+
 ## FT-INVITE-01 — Manager invites a seat; staff joins via the invite email
 
 **What it proves:** a manager can bring a staff member in, and that is the **only** email in the staff journey (one invite, at the start).
