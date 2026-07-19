@@ -162,3 +162,22 @@ tr:hover td { background: var(--bg-soft); }
 /* stash panes reuse portal tiles */
 .stash-pane { display: none; }
 .stash-pane .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; margin-top: 12px; }
+
+/* ── dark theme ── */
+html[data-theme="dark"] {
+  --teal-bg: rgba(52,211,153,0.14); --rose-bg: rgba(244,99,88,0.14); --amber-bg: rgba(250,88,45,0.16);
+  --navy2: #e2e6ef;
+}
+html[data-theme="dark"] .doc, html[data-theme="dark"] .modal, html[data-theme="dark"] .score-box,
+html[data-theme="dark"] input[type=text], html[data-theme="dark"] input[type=email],
+html[data-theme="dark"] input[type=date], html[data-theme="dark"] input[type=number],
+html[data-theme="dark"] select, html[data-theme="dark"] textarea {
+  background: var(--plate); color: var(--text); border-color: var(--border-bold);
+}
+html[data-theme="dark"] .badge.neutral { background: #2a3242; color: var(--text2); }
+html[data-theme="dark"] .fill { background: rgba(250,88,45,0.18); color: var(--accent); }
+html[data-theme="dark"] .btn:hover { background: var(--accent-d); }
+html[data-theme="dark"] .doc p, html[data-theme="dark"] .doc li { color: var(--text2); }
+html[data-theme="dark"] ::-webkit-scrollbar-thumb { background: #3a4152; }
+html[data-theme="dark"] .panel { background: rgba(250,88,45,0.06); }
+html[data-theme="dark"] .modal-bg { background: rgba(0,0,0,0.6); }
