@@ -181,3 +181,6 @@ html[data-theme="dark"] .doc p, html[data-theme="dark"] .doc li { color: var(--t
 html[data-theme="dark"] ::-webkit-scrollbar-thumb { background: #3a4152; }
 html[data-theme="dark"] .panel { background: rgba(250,88,45,0.06); }
 html[data-theme="dark"] .modal-bg { background: rgba(0,0,0,0.6); }
+
+/* keep the pagehead action button clear of the fixed theme toggle */
+.pagehead { padding-right: 64px; }
