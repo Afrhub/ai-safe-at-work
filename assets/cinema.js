@@ -422,3 +422,10 @@
     start();
   }
 })();
+
+/* csp-safe print: inline onclick="window.print()" is blocked by the site CSP;
+   delegate clicks on those buttons instead. */
+document.addEventListener('click', function (e) {
+  var b = e.target.closest('.print-btn, [onclick="window.print()"]');
+  if (b) window.print();
+});

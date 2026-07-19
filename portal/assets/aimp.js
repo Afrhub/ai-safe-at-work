@@ -170,7 +170,7 @@ function pageDashboard(){
       <div><div class="eyebrow">Tier 2 · Governance Toolkit</div>
       <h2>${esc(DB.org.companyName)}, AI Governance Dashboard</h2>
       <p>Live status across your AI Safe@Work documentation set. Ten governance documents, tracked in one place, ready to send to staff.</p></div>
-      <div class="actions"><button class="btn gold" onclick="setTab('aup')">Open Acceptable Use Policy →</button></div>
+      <div class="actions"><button class="btn gold" data-act="setTab" data-a1="aup">Open Acceptable Use Policy →</button></div>
     </div>
 
     <div class="grid cols-4" style="margin-bottom:20px;">
@@ -185,17 +185,17 @@ function pageDashboard(){
       <div class="card">
         <h3>Use Case Register</h3>
         <p style="color:var(--ink-soft);margin:0 0 10px;">${DB.usecases.length} use case(s) logged · ${ucHigh} rated High risk</p>
-        <button class="btn ghost sm" onclick="setTab('usecases')">Open register</button>
+        <button class="btn ghost sm" data-act="setTab" data-a1="usecases">Open register</button>
       </div>
       <div class="card">
         <h3>Vendor diligence</h3>
         <p style="color:var(--ink-soft);margin:0 0 10px;">${DB.vendors.length} vendor(s) tracked · ${vendorsAssessed} risk-scored</p>
-        <button class="btn ghost sm" onclick="setTab('vendors')">Open vendors</button>
+        <button class="btn ghost sm" data-act="setTab" data-a1="vendors">Open vendors</button>
       </div>
       <div class="card">
         <h3>Steering group</h3>
         <p style="color:var(--ink-soft);margin:0 0 10px;">${DB.raci.cols.length} roles defined · ToR ${DB.tor.approvedBy?'approved':'not yet approved'}</p>
-        <button class="btn ghost sm" onclick="setTab('raci')">Open RACI</button>
+        <button class="btn ghost sm" data-act="setTab" data-a1="raci">Open RACI</button>
       </div>
     </div>
 
@@ -213,7 +213,7 @@ function pageDashboard(){
           ['07','Steering Group ToR', DB.tor.approvedBy?'<span class="badge active">Approved</span>':'<span class="badge pending">Draft</span>', 'tor'],
           ['08','Vendor Due Diligence', DB.vendors.length?`<span class="badge active">${DB.vendors.length} vendors</span>`:'<span class="badge neutral">Empty</span>', 'vendors'],
           ['09','Supplier Risk Assessment', DB.supplierRisk.length?`<span class="badge active">${DB.supplierRisk.length} scored</span>`:'<span class="badge neutral">Empty</span>', 'supplierrisk'],
-        ].map(r=>`<tr><td class="mono">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td><button class="btn ghost sm" onclick="setTab('${r[3]}')">Open</button></td></tr>`).join('')}
+        ].map(r=>`<tr><td class="mono">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td><button class="btn ghost sm" data-act="setTab" data-a1="${r[3]}">Open</button></td></tr>`).join('')}
       </table></div>
     </div>
   `;
@@ -229,7 +229,7 @@ function pageAUP(){
       <div><div class="eyebrow">Document 01 · Tier 2</div><h2>AI Acceptable Use Policy</h2>
       <p>Edit the fields below, they fill the policy automatically. Publish it, then send it to staff for sign-off from the Staff tab.</p></div>
       <div class="actions">
-        <button class="btn ghost" onclick="window.print()">Print / Save PDF</button>
+        <button class="btn ghost" data-act="print">Print / Save PDF</button>
         <button class="btn ${st.published?'ghost':'gold'}" id="publishBtn">${st.published?'Unpublish':'Publish to staff'}</button>
       </div>
     </div>
@@ -356,7 +356,7 @@ function pageRegister(key){
   main.innerHTML = `
     <div class="pagehead">
       <div><div class="eyebrow">Document ${key==='usecases'?'02':'04'} · Register</div><h2>${schema.title}</h2><p>${schema.desc}</p></div>
-      <div class="actions"><button class="btn ghost" onclick="window.print()">Print / Export</button>
+      <div class="actions"><button class="btn ghost" data-act="print">Print / Export</button>
       <button class="btn gold" id="addBtn">+ Add entry</button></div>
     </div>
     <div class="card"><div class="toolbar">
@@ -381,8 +381,8 @@ function renderRegisterTable(key, q){
       <td class="mono">${esc(r.id)}</td>
       ${cols.map(c=>`<td>${renderCell(c, r)}</td>`).join('')}
       <td style="white-space:nowrap;">
-        <button class="iconbtn" onclick="openRegisterModal('${key}','${r.id}')">Edit</button>
-        <button class="iconbtn" onclick="deleteRegisterRow('${key}','${r.id}')">Delete</button>
+        <button class="iconbtn" data-act="openRegisterModal" data-a1="${key}" data-a2="${r.id}">Edit</button>
+        <button class="iconbtn" data-act="deleteRegisterRow" data-a1="${key}" data-a2="${r.id}">Delete</button>
       </td>
     </tr>`).join('')}
   </table></div>`;
@@ -472,8 +472,8 @@ function renderAssessList(){
         <td><span class="badge neutral">${esc(a.tier||'-')}</span></td>
         <td>${top || '-'} ${top? `<span class="badge ${top>=15?'high':top>=8?'medium':'low'}">${top>=15?'High':top>=8?'Medium':'Low'}</span>`:''}</td>
         <td>${a.decision?`<span class="badge ${a.decision.toLowerCase().includes('reject')?'reject':a.decision.toLowerCase().includes('condition')?'conditions':'approve'}">${esc(a.decision)}</span>`:'-'}</td>
-        <td style="white-space:nowrap;"><button class="iconbtn" onclick="openAssessmentModal('${a.id}')">Edit</button>
-        <button class="iconbtn" onclick="deleteAssessment('${a.id}')">Delete</button></td>
+        <td style="white-space:nowrap;"><button class="iconbtn" data-act="openAssessmentModal" data-a1="${a.id}">Edit</button>
+        <button class="iconbtn" data-act="deleteAssessment" data-a1="${a.id}">Delete</button></td>
       </tr>`;
     }).join('')}
   </table></div>`;
@@ -569,8 +569,8 @@ function renderVendorList(){
       return `<tr><td><b>${esc(v.name)}</b><br><span style="color:var(--ink-soft);font-size:12px;">${esc(v.product||'')}</span></td>
       <td style="min-width:160px;">${done}/${VENDOR_MUST_QUESTIONS.length}<div class="bar"><i style="width:${pct}%;background:${pct===100?'var(--teal)':'var(--amber)'};"></i></div></td>
       <td><span class="badge ${pct===100?'active':'pending'}">${pct===100?'Diligence complete':'In progress'}</span></td>
-      <td style="white-space:nowrap;"><button class="iconbtn" onclick="openVendorModal('${v.id}')">Edit</button>
-      <button class="iconbtn" onclick="deleteVendor('${v.id}')">Delete</button></td></tr>`;
+      <td style="white-space:nowrap;"><button class="iconbtn" data-act="openVendorModal" data-a1="${v.id}">Edit</button>
+      <button class="iconbtn" data-act="deleteVendor" data-a1="${v.id}">Delete</button></td></tr>`;
     }).join('')}
   </table></div>`;
 }
@@ -628,8 +628,8 @@ function renderSRAList(){
       <td><span class="badge ${max>=5?'high':max===4?'medium':'low'}">${max||'-'}/5</span></td>
       <td><span class="badge ${s.decision.toLowerCase().includes('reject')?'reject':s.decision.toLowerCase().includes('condition')?'conditions':'approve'}">${esc(s.decision)}</span></td>
       <td>${fmtDate(s.reassessBy)}</td>
-      <td style="white-space:nowrap;"><button class="iconbtn" onclick="openSRAModal('${s.id}')">Edit</button>
-      <button class="iconbtn" onclick="deleteSRA('${s.id}')">Delete</button></td></tr>`;
+      <td style="white-space:nowrap;"><button class="iconbtn" data-act="openSRAModal" data-a1="${s.id}">Edit</button>
+      <button class="iconbtn" data-act="deleteSRA" data-a1="${s.id}">Delete</button></td></tr>`;
     }).join('')}
   </table></div>`;
 }
@@ -697,8 +697,8 @@ function renderIncList(){
       <td><span class="badge ${(i.severity||'').toLowerCase()}">${esc(i.severity)}</span></td>
       <td>${fmtDate(i.discovered)}</td>
       <td><span class="badge ${i.status==='Closed'?'active':i.status==='Contained'?'medium':'open'}">${esc(i.status)}</span></td>
-      <td style="white-space:nowrap;"><button class="iconbtn" onclick="openIncidentModal('${i.id}')">Edit</button>
-      <button class="iconbtn" onclick="deleteIncident('${i.id}')">Delete</button></td></tr>`).join('')}
+      <td style="white-space:nowrap;"><button class="iconbtn" data-act="openIncidentModal" data-a1="${i.id}">Edit</button>
+      <button class="iconbtn" data-act="deleteIncident" data-a1="${i.id}">Delete</button></td></tr>`).join('')}
   </table></div>`;
 }
 async function deleteIncident(id){
@@ -756,7 +756,7 @@ function pageRACI(){
   main.innerHTML = `
     <div class="pagehead">
       <div><div class="eyebrow">Document 06</div><h2>AI Governance Roles Matrix (RACI)</h2><p>Who is Responsible, Accountable, Consulted, Informed for each AI decision. Edit role names and cells, then publish for the steering group.</p></div>
-      <div class="actions"><button class="btn ghost" onclick="window.print()">Print / Export</button><button class="btn gold" id="saveRaci">Save changes</button></div>
+      <div class="actions"><button class="btn ghost" data-act="print">Print / Export</button><button class="btn gold" id="saveRaci">Save changes</button></div>
     </div>
     <div class="card">
       <h3>Role columns</h3>
@@ -792,7 +792,7 @@ function pageTOR(){
   main.innerHTML = `
     <div class="pagehead">
       <div><div class="eyebrow">Document 07</div><h2>AI Steering Group, Terms of Reference</h2><p>Stand up the group that owns AI governance. Fill the fields, approve at the first meeting.</p></div>
-      <div class="actions"><button class="btn ghost" onclick="window.print()">Print / Export</button><button class="btn gold" id="saveTor">Save changes</button></div>
+      <div class="actions"><button class="btn ghost" data-act="print">Print / Export</button><button class="btn gold" id="saveTor">Save changes</button></div>
     </div>
     <div class="grid cols-2">
       <div class="card">
@@ -912,8 +912,8 @@ function renderStaffTable(ackByStaff){
       <td>${acked?`<span class="badge active">Acknowledged ${fmtDate(ack.date)}</span>`:'<span class="badge open">Not yet</span>'}</td>
       <td style="white-space:nowrap;">
         ${!acked?`<a class="iconbtn" href="mailto:${esc(s.email)}?subject=${subj}&body=${body}">Email reminder</a>`:''}
-        <button class="iconbtn" onclick="openStaffModal('${s.id}')">Edit</button>
-        <button class="iconbtn" onclick="deleteStaff('${s.id}')">Remove</button>
+        <button class="iconbtn" data-act="openStaffModal" data-a1="${s.id}">Edit</button>
+        <button class="iconbtn" data-act="deleteStaff" data-a1="${s.id}">Remove</button>
       </td></tr>`;
     }).join('')}
   </table></div>`;
@@ -965,9 +965,22 @@ function pageStash(id){
 }
 
 
-/* Inline onclick handlers in rendered HTML need these in global scope (ES module fix). */
-Object.assign(window, { setTab, openRegisterModal, deleteRegisterRow, openAssessmentModal, deleteAssessment,
-  openVendorModal, deleteVendor, openSRAModal, deleteSRA, openIncidentModal, deleteIncident, openStaffModal, deleteStaff });
+
+/* CSP-safe action dispatch: generated HTML uses data-act instead of inline onclick
+   (the site CSP has script-src 'self', which blocks inline handlers). */
+const ACTIONS = { setTab, openRegisterModal, deleteRegisterRow, openAssessmentModal, deleteAssessment,
+  openVendorModal, deleteVendor, openSRAModal, deleteSRA, openIncidentModal, deleteIncident,
+  openStaffModal, deleteStaff, print: () => window.print() };
+document.addEventListener("click", (e) => {
+  const el = e.target.closest("[data-act]");
+  if (!el) return;
+  const fn = ACTIONS[el.dataset.act];
+  if (!fn) return;
+  const args = [];
+  if (el.dataset.a1 !== undefined) args.push(el.dataset.a1);
+  if (el.dataset.a2 !== undefined) args.push(el.dataset.a2);
+  fn(...args);
+});
 
 /* ============================= INIT ============================= */
 (async function init(){
