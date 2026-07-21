@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#ffffff" />
 <meta name="color-scheme" content="dark light" />
 <script>try{if(localStorage.getItem("aisw-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
-<title>Checkout · Tier 1 · Attest AI</title>
+<title>Order Foundation · Attest AI</title>
 <link rel="canonical" href="https://attest-ai.com/checkout.html" />
 <meta name="geo.region" content="GB" />
 <meta name="geo.placename" content="United Kingdom" />
@@ -14,12 +14,12 @@
 <meta name="ICBM" content="54.0, -2.0" />
 <link rel="alternate" hreflang="en-GB" href="https://attest-ai.com/resources.html" />
 <link rel="alternate" hreflang="x-default" href="https://attest-ai.com/resources.html" />
-<meta name="description" content="Buy Tier 1: the AI Safe@Work course, all eleven modules, assessments, certificates, annual refreshers and the Plus Pack governance toolkit. £1,000 one-off." />
+<meta name="description" content="Order Foundation: the AI Safe@Work course, assessments, completion certificates, annual refreshers and the starter governance templates. £990 a year up to 25 staff, £1,750 up to 100. Prices exclude VAT." />
 <meta name="robots" content="noindex,nofollow" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Attest AI" />
-<meta property="og:title" content="Checkout · Tier 1 · Attest AI" />
-<meta property="og:description" content="Buy Tier 1: the AI Safe@Work course, all eleven modules, assessments, certificates, annual refreshers and the Plus Pack governance toolkit. £1,000 one-off." />
+<meta property="og:title" content="Order Foundation · Attest AI" />
+<meta property="og:description" content="Order Foundation: the AI Safe@Work course, assessments, completion certificates, annual refreshers and the starter governance templates. £990 a year up to 25 staff, £1,750 up to 100. Prices exclude VAT." />
 <meta property="og:url" content="https://attest-ai.com/checkout.html" />
 <meta property="og:locale" content="en_GB" />
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
@@ -45,40 +45,48 @@
 </header>
 
 <main id="main">
- <p class="eyebrow">Checkout · Tier 1</p>
- <h1 class="page-title">AI Safe@Work, <em>Tier 1</em>.</h1>
- <p class="lede">Everything your team needs to use AI safely, plus the full governance toolkit. One purchase, delivered through the AI Safe@Work portal.</p>
+ <p class="eyebrow">Order · Foundation</p>
+ <h1 class="page-title">Order <em>Foundation</em>.</h1>
+ <p class="lede">Train your people and get the core governance documents in place, priced by the size of your organisation and renewed annually. Delivered through the Attest AI portal.</p>
 
  <div class="module-grid" style="grid-template-columns:1fr 1fr;align-items:start">
  <div class="module-card" style="cursor:default">
  <div class="module-num">What you get</div>
- <h3>Tier 1 · £1,000 <span style="font-size:0.7em;color:var(--text3);font-weight:400">one-off</span></h3>
+ <h3>Foundation · £990 <span style="font-size:0.7em;color:var(--text3);font-weight:400">per year, up to 25 staff</span></h3>
+ <p style="margin:0.4rem 0 0;color:var(--text3);font-size:0.86rem">£1,750 per year for 26 to 100 staff. Over 100, we will quote on headcount. All prices exclude VAT.</p>
  <ul style="margin:1rem 0 0;padding-left:1.2rem;color:var(--text2);line-height:1.7">
  <li>The AI Safe@Work course, all eleven modules</li>
  <li>Knowledge assessment at the end of each module</li>
  <li>Completion certificates for every member of staff</li>
  <li>Annual refresher training</li>
- <li>The Plus Pack: the complete governance template library (Acceptable Use Policy, registers, risk assessments, DPIA, vendor due diligence and more)</li>
+ <li>Starter governance templates to fill in yourself (Acceptable Use Policy, core registers and risk assessment)</li>
+ <li>Training completion records you can hand to an auditor</li>
  <li>Team management through the AI Safe@Work portal</li>
  </ul>
  </div>
  <div class="module-card" style="cursor:default">
  <div class="module-num">Place your order</div>
- <h3>Order Tier 1</h3>
+ <h3>Place your order</h3>
  <p>Fill this in and we will confirm your order, send an invoice with payment details, and set up your portal access, usually the same working day.</p>
- <form name="tier1-order" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/checkout-thanks.html">
-  <input type="hidden" name="form-name" value="tier1-order" />
+ <form name="foundation-order" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/checkout-thanks.html">
+  <input type="hidden" name="form-name" value="foundation-order" />
   <p style="display:none"><label>Leave empty: <input name="bot-field" /></label></p>
   <p><label>Company<br /><input type="text" name="company" required style="width:100%;padding:0.6rem;border:1px solid var(--border-bold);border-radius:6px;background:var(--bg-soft);color:var(--text)" /></label></p>
   <p><label>Your name<br /><input type="text" name="name" required style="width:100%;padding:0.6rem;border:1px solid var(--border-bold);border-radius:6px;background:var(--bg-soft);color:var(--text)" /></label></p>
   <p><label>Work email<br /><input type="email" name="email" required style="width:100%;padding:0.6rem;border:1px solid var(--border-bold);border-radius:6px;background:var(--bg-soft);color:var(--text)" /></label></p>
-  <p><label>Team size (optional)<br /><input type="text" name="team-size" style="width:100%;padding:0.6rem;border:1px solid var(--border-bold);border-radius:6px;background:var(--bg-soft);color:var(--text)" /></label></p>
-  <button type="submit" class="hero-cta primary" style="margin-top:0.6rem">Order Tier 1 · £1,000 →</button>
+  <p><label>How many staff?<br /><select name="headcount" required style="width:100%;padding:0.6rem;border:1px solid var(--border-bold);border-radius:6px;background:var(--bg-soft);color:var(--text)">
+   <option value="">Please choose</option>
+   <option value="Up to 25 (£990/yr)">Up to 25 staff &mdash; £990 per year</option>
+   <option value="26-100 (£1,750/yr)">26 to 100 staff &mdash; £1,750 per year</option>
+   <option value="Over 100 (quote)">Over 100 staff &mdash; we will quote</option>
+  </select></label></p>
+  <p style="color:var(--text3);font-size:0.84rem;margin:0.2rem 0 0">Everyone employed by your organisation, including part-time staff, plus any contractors given access.</p>
+  <button type="submit" class="hero-cta primary" style="margin-top:0.6rem">Request your Foundation order →</button>
  </form>
  </div>
  </div>
 
- <p style="margin-top:2rem;color:var(--text3);font-size:0.9rem">Looking for continuous governance or hands-on help instead? <a href="solutions.html" class="accent">View our solutions</a>.</p>
+ <p style="margin-top:2rem;color:var(--text3);font-size:0.9rem">Looking for continuous governance or hands-on help instead? <a href="pricing.html" class="accent">Compare Foundation and Platform</a> or <a href="solutions.html" class="accent">view our solutions</a>.</p>
 </main>
 
 <nav class="module-bottom-nav">
