@@ -14,20 +14,20 @@
 <meta name="ICBM" content="54.0, -2.0" />
 <link rel="alternate" hreflang="en-GB" href="https://attest-ai.com/pricing.html" />
 <link rel="alternate" hreflang="x-default" href="https://attest-ai.com/pricing.html" />
-<meta name="description" content="Three simple tiers. Tier 1: AI Safe@Work training plus the Plus Pack governance toolkit (£1,000 one-off). Tier 2: the Attest AI Platform subscription. Tier 3: AI governance consultancy." />
+<meta name="description" content="Attest AI pricing. Foundation from £990/year: AI Safe@Work staff training plus core governance documents. Platform from £249/month: continuous AI governance, live registers and evidence. Consultancy quoted per engagement. Priced by organisation size, ex-VAT. We are not a certification body." />
 <meta name="robots" content="noindex, nofollow, noai, noimageai, nosnippet" />
 <meta name="googlebot" content="noindex, nofollow, nosnippet" />
 <meta name="bingbot" content="noindex, nofollow, nosnippet" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Attest AI" />
 <meta property="og:title" content="Pricing · Attest AI" />
-<meta property="og:description" content="Three tiers: Tier 1 training + Plus Pack; Tier 2 the Attest AI Platform; Tier 3 AI governance consultancy." />
+<meta property="og:description" content="Foundation from £990/yr (training + documents) · Platform from £249/mo (continuous governance) · Consultancy quoted. Priced by organisation size, ex-VAT." />
 <meta property="og:url" content="https://attest-ai.com/pricing.html" />
 <meta property="og:image" content="https://attest-ai.com/og-card.png?v=3" />
 <meta property="og:locale" content="en_GB" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Pricing · Attest AI" />
-<meta name="twitter:description" content="Three tiers: Tier 1 training + Plus Pack; Tier 2 the Attest AI Platform; Tier 3 AI governance consultancy." />
+<meta name="twitter:description" content="Foundation from £990/yr (training + documents) · Platform from £249/mo (continuous governance) · Consultancy quoted. Priced by organisation size, ex-VAT." />
 <meta name="twitter:image" content="https://attest-ai.com/og-card.png?v=3" />
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
@@ -51,6 +51,50 @@
   border: 1px solid rgba(224,62,62,0.42);
   font-weight: 800; letter-spacing: 0.16em; font-size: 0.66rem;
 }
+.price-table {
+  width: 100%; border-collapse: collapse;
+  margin: 1.4rem 0 0.9rem;
+  background: var(--plate);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+}
+.price-table th, .price-table td {
+  padding: 1rem 1.1rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left; vertical-align: top;
+}
+.price-table thead th {
+  font-family: var(--font-mono); font-size: 0.68rem;
+  font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--text3);
+}
+.price-table tbody tr:last-child td { border-bottom: none; }
+.price-table td:first-child { white-space: nowrap; }
+.pt-price {
+  display: block; font-size: 1.5rem; font-weight: 700;
+  line-height: 1.15; color: var(--text);
+}
+.pt-price.pt-quiet { font-size: 1.05rem; color: var(--text2); }
+.pt-sub {
+  display: block; margin-top: 0.25rem;
+  font-family: var(--font-mono); font-size: 0.72rem;
+  letter-spacing: 0.04em; color: var(--text3);
+}
+.price-foot {
+  font-family: var(--font-mono); font-size: 0.76rem;
+  letter-spacing: 0.04em; color: var(--text3);
+  margin: 0 0 1.6rem;
+}
+.price-note {
+  background: var(--plate);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--border-bold);
+  border-radius: 3px;
+  padding: 1.1rem 1.3rem;
+  margin: 1.6rem 0;
+  font-size: 0.92rem; line-height: 1.6; color: var(--text2);
+}
+.price-note p { margin: 0; }
 .tier-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.1rem; margin: 2rem 0;
@@ -192,10 +236,10 @@
     {
       "@type": "Article",
       "headline": "Pricing - AI Safe@Work",
-      "description": "Three tiers: Tier 1 training + Plus Pack; Tier 2 the Attest AI Platform; Tier 3 AI governance consultancy.",
+      "description": "Foundation from £990/yr (training + documents) · Platform from £249/mo (continuous governance) · Consultancy quoted. Priced by organisation size, ex-VAT.",
       "url": "https://attest-ai.com/pricing.html",
       "publisher": {"@id": "https://attest-ai.com/#organization"},
-      "dateModified": "2026-05-19",
+      "dateModified": "2026-07-21",
       "datePublished": "2026-05-19",
       "inLanguage": "en"
     },
@@ -225,84 +269,106 @@
 </header>
 
 <main id="main">
- <p class="eyebrow">Pricing · v2026.06 · private preview</p>
- <h1 class="page-title">Three tiers. <em>Train, tool up, or hand it over.</em></h1>
- <p class="lede">Train your people with the AI Safe@Work course. Add the Plus Pack for a ready-to-fill governance toolkit. Add consultancy when you want us to implement and manage AI governance for you. For MSPs it stays simple: Course, then Course + Plus Pack, then Course + Plus Pack + Consultancy.</p>
+ <p class="eyebrow">Pricing · Foundation &amp; Platform</p>
+ <h1 class="page-title">Get AI governance <em>ready.</em></h1>
+ <p class="lede">Two ways to buy, priced by the size of your organisation. Foundation gives you the training and the governance documents as a yearly package. Platform runs your governance continuously, with live registers, staff sign-off and the evidence trail behind them. Consultancy is there when you want us to do the work with you.</p>
 
- <div class="draft-banner">
- Private preview, commercial activation pending. Indications of interest welcome at <a href="mailto:hello@attest-ai.com">hello@attest-ai.com</a>. MSP partner enquiries via the <a href="msp.html">MSP page</a>. Final terms confirmed at activation.
+ <!-- POSITIONING PREFACE -->
+ <div class="price-note" style="margin:1.4rem 0 2rem">
+ <p style="margin:0"><strong style="color:var(--text)">A note on what we are.</strong> Attest AI is not a certification or accreditation body, and we do not certify organisations against any standard. We get you AI governance and compliance ready: the training, documents and evidence that support your journey, and that prepare you to work with an accredited body if you choose to pursue certification.</p>
  </div>
 
  <hr class="section-divider" />
 
+ <h2 id="plans">Plans</h2>
+ <div style="overflow-x:auto">
+ <table class="price-table">
+ <thead>
+ <tr><th>Organisation size</th><th>Foundation</th><th>Platform</th></tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td><strong>Up to 25 staff</strong></td>
+ <td><span class="pt-price">£990</span><span class="pt-sub">per year</span></td>
+ <td><span class="pt-price">£249</span><span class="pt-sub">per month · £2,490/yr billed annually</span></td>
+ </tr>
+ <tr>
+ <td><strong>26 to 100 staff</strong></td>
+ <td><span class="pt-price">£1,750</span><span class="pt-sub">per year</span></td>
+ <td><span class="pt-price">£499</span><span class="pt-sub">per month · £4,990/yr billed annually</span></td>
+ </tr>
+ <tr>
+ <td><strong>Over 100 staff</strong></td>
+ <td><span class="pt-price pt-quiet">Contact us</span><span class="pt-sub">priced on headcount</span></td>
+ <td><span class="pt-price pt-quiet">Contact us</span><span class="pt-sub">priced on headcount</span></td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+ <p class="price-foot">Platform content is reviewed and updated at least quarterly as the EU AI Act, ISO/IEC 42001 and related standards move.</p>
+
+ <div class="price-note" id="how-we-count">
+ <p><strong style="color:var(--text)">How we count staff.</strong> Everyone employed by your organisation, including part-time staff, plus any contractors given access. Counted once at the point of purchase, on an honour system, with a light annual true-up at renewal.</p>
+ <p style="margin-top:0.55rem">All prices exclude VAT. Your band price is held for 12 months from purchase, even if your headcount grows into the next band.</p>
+ </div>
+
+ <hr class="section-divider" />
+
+ <h2 id="whats-included">What you get</h2>
  <div class="tier-grid">
  <div class="tier">
- <span class="tier-tag">Tier 1 · Training + Plus Pack</span>
- <h3>AI Safe@Work Training</h3>
+ <span class="tier-tag">Foundation · from £990/yr</span>
+ <h3>Training and documents</h3>
  <p class="who">HR · IT Manager · Business Owner</p>
- <div class="price">£1,000</div>
- <div class="price-sub">one-off · course + Plus Pack</div>
+ <div class="price">£990<small>/yr</small></div>
+ <div class="price-sub">up to 25 staff · £1,750 up to 100</div>
  <ul>
- <li>AI Safe@Work online training course</li>
- <li>Knowledge assessment (quiz at the end of each module)</li>
- <li>Completion certificate</li>
+ <li>AI Safe@Work online training course for your staff</li>
+ <li>Knowledge assessment at the end of each module</li>
+ <li>Completion certificate for each member of staff</li>
  <li>Annual refresher training</li>
- <li>Plus Pack: the full governance template library</li>
+ <li>Starter governance templates to fill in yourself</li>
+ <li>Training completion records you can hand to an auditor</li>
  </ul>
- <a class="cta" href="checkout.html">Buy Tier 1 →</a>
+ <a class="cta" href="checkout.html">Enquire about Foundation →</a>
  </div>
 
  <div class="tier featured">
- <span class="tier-tag">Tier 2 · Platform</span>
+ <span class="tier-tag">Platform · from £249/mo</span>
  <h3>Attest AI Platform</h3>
  <p class="who">IT Manager · Compliance Lead · Operations Director</p>
- <div class="price">Monthly subscription</div>
- <div class="price-sub">continuous AI governance, delivered through AIMP</div>
+ <div class="price">£249<small>/mo</small></div>
+ <div class="price-sub">up to 25 staff · £499 up to 100 · billed annually</div>
  <ul>
- <li>Live governance documents and registers</li>
+ <li>Everything in Foundation, including staff training</li>
+ <li>Live governance documents and registers, kept current</li>
  <li>Governance dashboard with completion at a glance</li>
  <li>Staff policy acknowledgement tracking</li>
  <li>Risk, incident, use-case and vendor registers</li>
  <li>Team management, seats and invitations</li>
- <li>Audit-ready reporting and evidence</li>
- <li>Continuous regulatory updates</li>
+ <li>Reporting that organises your records the way an auditor asks for them</li>
+ <li>Content updated at least quarterly as the rules change</li>
  </ul>
  <a class="cta" href="portal/manager.html">Explore the platform →</a>
  </div>
 
  <div class="tier">
- <span class="tier-tag">Tier 3 · Consultancy</span>
- <h3>AI Governance Consultancy</h3>
+ <span class="tier-tag">Consultancy · quoted per engagement</span>
+ <h3>We do it with you</h3>
  <p class="who">Leadership · Compliance · Regulated orgs</p>
- <div class="price">We implement it</div>
- <div class="price-sub">training + platform + hands-on delivery</div>
+ <div class="price">Talk to us</div>
+ <div class="price-sub">scoped and quoted per engagement</div>
  <ul>
- <li>AI Health Check</li>
+ <li>AI Governance Health Check</li>
  <li>AI Governance Gap Analysis</li>
- <li>Policy Customisation</li>
- <li>AI Risk Workshops</li>
- <li>AI Governance Framework Implementation</li>
- <li>AI Supplier Reviews &amp; Assurance</li>
- <li>AI Governance Steering Group Facilitation</li>
- <li>AI Governance Roadmap Development</li>
- <li>Fractional AI Governance Officer Service</li>
- <li>AI Governance Reporting &amp; KPI Development</li>
- <li>AI Governance Audits &amp; Reviews</li>
- <li>ISO 42001 Readiness Assessment</li>
- <li>ISO 42001 Implementation Support</li>
- <li>AI Management System Manual</li>
- <li>AI Governance Charter</li>
- <li>AI Objectives Register</li>
- <li>AI Tool Register</li>
- <li>Training Register</li>
- <li>AI DPIA Template</li>
- <li>FRIA Template</li>
- <li>ATRS Template</li>
- <li>AI Internal Audit Programme</li>
- <li>AI Monitoring &amp; KPI Dashboard</li>
- <li>AI Governance Scorecard</li>
- <li>AI Awareness Poster</li>
- <li>AI Executive Brief</li>
+ <li>Policy customisation for your organisation</li>
+ <li>AI risk workshops</li>
+ <li>AI governance framework implementation</li>
+ <li>AI supplier reviews and assurance</li>
+ <li>Steering group facilitation and roadmap development</li>
+ <li>Fractional AI Governance Officer service</li>
+ <li>Reporting, KPIs and internal review programmes</li>
+ <li>ISO/IEC 42001 readiness support, preparing you to approach an accredited certification body</li>
  </ul>
  <a class="cta outline" href="consultancy.html">Talk to us →</a>
  </div>
@@ -311,18 +377,18 @@
  <div class="callout note">
  <span class="callout-icon">i</span>
  <div>
- <div class="callout-title">Simple positioning</div>
- <p><strong>Tier 1:</strong> train your people and get the Plus Pack toolkit. <strong>Tier 2:</strong> run continuous governance on the platform. <strong>Tier 3:</strong> let us implement and manage AI governance for you.</p>
- <p style="margin-top:0.6rem">For partners and MSPs it stays simple: <strong>Course</strong> → <strong>Course + Plus Pack</strong> → <strong>Course + Plus Pack + Consultancy</strong>.</p>
+ <div class="callout-title">Which one do I need?</div>
+ <p><strong>Foundation</strong> if you need your people trained and the core documents in place. <strong>Platform</strong> if you need to keep governance running and show evidence of it over time. <strong>Consultancy</strong> if you would rather we did the work alongside you.</p>
  </div>
  </div>
 
  <hr class="section-divider" />
 
  <h2 id="enterprise-contact">Get in touch</h2>
- <p>For a quote, a demo, or partner terms, email <a href="mailto:hello@attest-ai.com">hello@attest-ai.com</a> or see the <a href="msp.html">MSP partner programme</a>.</p>
- <p id="waitlist" class="muted" style="font-family: var(--font-mono); font-size: 0.82rem; margin-top: 1rem;">Pricing shown is the private-preview posture; final terms confirmed at activation.</p>
+ <p>Over 100 staff, or not sure which plan fits? Email <a href="mailto:hello@attest-ai.com">hello@attest-ai.com</a> and tell us roughly how many people you have.</p>
+ <p class="muted" style="font-family: var(--font-mono); font-size: 0.82rem; margin-top: 1rem;">Prices exclude VAT. Full terms apply at purchase, see <a href="terms.html">Terms</a>.</p>
 </main>
+
 
 <footer class="site-foot">
  <div class="foot-brand">
