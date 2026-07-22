@@ -38,6 +38,24 @@ await page.click(".modal .btn:not(.ghost)");
 await page.waitForTimeout(800);
 ok((await mainText()).includes("PW Test Risk"), "risk added");
 
+// 2b. Use case <-> assessment traceability
+// the register should say "Not assessed" until an assessment is filed against it
+await tab("usecases");
+ok((await mainText()).includes("Not assessed"), "new use case starts unassessed");
+
+await tab("assessments");
+await page.click("#main button:has-text('+ New assessment')");
+await page.waitForTimeout(400);
+await page.fill("#ra_useCase", "PW Test Use Case");
+await page.click(".modal .btn:not(.ghost)");
+await page.waitForTimeout(800);
+const assessText = await mainText();
+ok(assessText.includes("UC-") && !assessText.includes("Unlinked"),
+   "assessment linked to the use case by ID, not left unlinked");
+
+await tab("usecases");
+ok((await mainText()).includes("Assessed"), "use case register reflects the filed assessment");
+
 // 3. Incident (table shows INC id/type/severity, not reporter)
 await tab("incidents");
 const incBefore = await page.$$eval("#main tbody tr", r => r.length).catch(() => 0);

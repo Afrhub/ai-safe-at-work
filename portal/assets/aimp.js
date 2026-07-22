@@ -330,12 +330,13 @@ const REGISTER_SCHEMAS = {
       {key:'status',label:'Status',type:'select',options:['Active','Paused','Discontinued']},
       {key:'notes',label:'Notes',type:'textarea'}
     ],
-    listCols:['name','owner','dataCategories','dpia','fria','risk','status']
+    listCols:['name','owner','dataCategories','dpia','fria','risk','assessed','status']
   },
   risks: {
     title:'AI Risk Register', idPrefix:'R', desc:'AI-specific risks: data leakage, hallucination, bias, vendor and compliance risk, with owners and mitigation.',
     cols:[
       {key:'category',label:'Risk category',type:'select',options:['Data leakage','Hallucination','Bias','Vendor risk','Compliance gap','Shadow AI','Operational']},
+      {key:'relatedUseCase',label:'Related use case (optional)',type:'usecase'},
       {key:'description',label:'Risk description (be specific)',type:'textarea'},
       {key:'currentControls',label:'Current controls',type:'textarea'},
       {key:'likelihood',label:'Likelihood',type:'select',options:['Very low','Low','Medium','High']},
@@ -345,9 +346,28 @@ const REGISTER_SCHEMAS = {
       {key:'dueDate',label:'Mitigation due date',type:'date'},
       {key:'status',label:'Status',type:'select',options:['Open','In progress','Complete','Deferred']}
     ],
-    listCols:['description','category','likelihood','impact','rating','owner','status']
+    listCols:['description','category','relatedUseCase','likelihood','impact','rating','owner','status']
   }
 };
+/* Use-case linkage. Assessments and risks store the use case's ID, so the link
+   survives a rename. Records created before the ID existed fall back to matching
+   on the name they copied at the time. */
+function ucById(id){ return id ? DB.usecases.find(u=>u.id===id) : null; }
+function ucLabel(id, fallbackName){
+  const u = ucById(id);
+  return u ? u.name : (fallbackName || '');
+}
+function assessmentsFor(uc){
+  return DB.assessments.filter(a =>
+    a.useCaseId ? a.useCaseId === uc.id
+                : (a.useCase && uc.name && a.useCase.trim().toLowerCase() === uc.name.trim().toLowerCase()));
+}
+function resolveUseCaseId(name){
+  if(!name) return '';
+  const hit = DB.usecases.find(u => (u.name||'').trim().toLowerCase() === name.trim().toLowerCase());
+  return hit ? hit.id : '';
+}
+
 function computeRiskRating(r){ return (RISK_MATRIX[r.likelihood]||{})[r.impact] || '-'; }
 
 function pageRegister(key){
@@ -398,9 +418,21 @@ function renderRegisterTable(key, q){
     </tr>`).join('')}
   </table></div>`;
 }
-function labelFor(schema,key){ if(key==='rating') return 'Rating'; const c = schema.cols.find(c=>c.key===key); return c?c.label.split('(')[0].trim():key; }
+function labelFor(schema,key){ if(key==='rating') return 'Rating'; if(key==='assessed') return 'Assessment'; const c = schema.cols.find(c=>c.key===key); return c?c.label.split('(')[0].trim():key; }
 function renderCell(c, r){
   if(c==='rating'){ const rt = computeRiskRating(r); return `<span class="badge ${rt.toLowerCase()}">${rt}</span>`; }
+  if(c==='assessed'){
+    const list = assessmentsFor(r);
+    if(!list.length) return `<span class="badge neutral">Not assessed</span>`;
+    const latest = list[list.length-1];
+    return `<span class="badge active">Assessed</span> <span class="mono" style="font-size:11px;color:var(--ink-soft);">${esc(latest.id)}</span>`;
+  }
+  if(c==='relatedUseCase'){
+    if(!r.relatedUseCase) return '<span style="color:var(--ink-soft);">-</span>';
+    const u = ucById(r.relatedUseCase);
+    return u ? `${esc(u.name)} <span class="mono" style="font-size:11px;color:var(--ink-soft);">${esc(u.id)}</span>`
+             : `<span class="badge neutral">Deleted use case</span>`;
+  }
   const v = r[c];
   if(['risk','dpia','fria','status','likelihood','impact'].includes(c) && v){
     const cls = String(v).toLowerCase().replace(/\s+/g,'');
@@ -436,6 +468,11 @@ function openRegisterModal(key, id){
 }
 function fieldHTML(c, value){
   value = value==null?'':value;
+  if(c.type==='usecase'){
+    // stores the use case ID, not its name, so the link survives a rename
+    const opts = DB.usecases.map(u=>`<option value="${esc(u.id)}" ${u.id===value?'selected':''}>${esc(u.name||u.id)}</option>`).join('');
+    return `<label>${c.label}</label><select id="mf_${c.key}"><option value="">- none -</option>${opts}</select>`;
+  }
   if(c.type==='select'){
     return `<label>${c.label}</label><select id="mf_${c.key}">${c.options.map(o=>`<option ${o===value?'selected':''}>${esc(o)}</option>`).join('')}</select>`;
   }
@@ -479,7 +516,10 @@ function renderAssessList(){
     ${DB.assessments.map(a=>{
       const top = Math.max(0, ...a.risks.map(r=>(+r.l||0)*(+r.i||0)));
       return `<tr>
-        <td class="mono">${esc(a.id)}</td><td>${esc(a.useCase)}</td>
+        <td class="mono">${esc(a.id)}</td>
+        <td>${esc(ucLabel(a.useCaseId, a.useCase))}${a.useCaseId
+            ? ` <span class="mono" style="font-size:11px;color:var(--ink-soft);">${esc(a.useCaseId)}</span>`
+            : ` <span class="badge neutral" title="Not linked to an entry in the Use Case Register">Unlinked</span>`}</td>
         <td><span class="badge neutral">${esc(a.tier||'-')}</span></td>
         <td>${top || '-'} ${top? `<span class="badge ${top>=15?'high':top>=8?'medium':'low'}">${top>=15?'High':top>=8?'Medium':'Low'}</span>`:''}</td>
         <td>${a.decision?`<span class="badge ${a.decision.toLowerCase().includes('reject')?'reject':a.decision.toLowerCase().includes('condition')?'conditions':'approve'}">${esc(a.decision)}</span>`:'-'}</td>
@@ -497,7 +537,7 @@ async function deleteAssessment(id){
 function openAssessmentModal(id){
   const existing = id ? DB.assessments.find(a=>a.id===id) : null;
   const data = existing ? JSON.parse(JSON.stringify(existing)) : {
-    id: uid('RA'), useCase:'', owner:'', date: todayISO(), dataInvolved:'', whoAffected:'',
+    id: uid('RA'), useCase:'', useCaseId:'', owner:'', date: todayISO(), dataInvolved:'', whoAffected:'',
     tier:'Minimal', risks: ASSESSMENT_RISK_ROWS.map(name=>({name,l:'',i:'',mitigation:'',mowner:''})),
     decision:'Approve', conditions:'', decidedBy:'', reviewDate:''
   };
@@ -505,7 +545,8 @@ function openAssessmentModal(id){
   showModal(`${existing?'Edit':'New'} Risk Assessment`, `
     <div class="field-row">
       <div><label>Use case / tool</label>
-        <input id="ra_useCase" list="ucList" value="${esc(data.useCase)}" placeholder="e.g. Drafting customer emails in Copilot">
+        <input id="ra_useCase" list="ucList" value="${esc(ucLabel(data.useCaseId, data.useCase))}" placeholder="e.g. Drafting customer emails in Copilot">
+        <p style="font-size:11px;color:var(--ink-soft);margin:4px 0 0;">Pick a registered use case to link this assessment to it. Free text is allowed for anything not yet in the register, but it will show as unlinked.</p>
         <datalist id="ucList">${ucOptions.map(o=>`<option value="${esc(o)}">`).join('')}</datalist>
       </div>
       <div><label>Owner (name / role)</label><input id="ra_owner" type="text" value="${esc(data.owner)}"></div>
@@ -538,7 +579,11 @@ function openAssessmentModal(id){
     </div>
     <label>Conditions (if any)</label><textarea id="ra_conditions">${esc(data.conditions)}</textarea>
   `, async ()=>{
-    data.useCase = val('ra_useCase'); data.owner = val('ra_owner'); data.date = val('ra_date');
+    data.useCase = val('ra_useCase');
+    // resolve to the register entry so the link survives a later rename;
+    // stays blank when the assessment covers something not yet registered
+    data.useCaseId = resolveUseCaseId(data.useCase);
+    data.owner = val('ra_owner'); data.date = val('ra_date');
     data.dataInvolved = val('ra_dataInvolved'); data.whoAffected = val('ra_whoAffected'); data.tier = val('ra_tier');
     data.risks = data.risks.map((r,idx)=>({ name:r.name, l: document.getElementById('ra_l_'+idx).value, i: document.getElementById('ra_i_'+idx).value, mitigation: document.getElementById('ra_m_'+idx).value }));
     data.decision = val('ra_decision'); data.decidedBy = val('ra_decidedBy'); data.reviewDate = val('ra_reviewDate'); data.conditions = val('ra_conditions');
