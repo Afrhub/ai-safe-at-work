@@ -184,3 +184,16 @@ html[data-theme="dark"] .modal-bg { background: rgba(0,0,0,0.6); }
 
 /* keep the pagehead action button clear of the fixed theme toggle */
 .pagehead { padding-right: 64px; }
+
+/* Policy field groups: each block names the policy section it fills, so the
+   form on the left maps visibly onto the numbered document on the right. */
+.secgrp { border-top: 1px solid var(--line, #e6e6e6); padding: 14px 0 4px; }
+.secgrp:first-of-type { border-top: none; padding-top: 0; }
+.secnum {
+  display: inline-block; margin-bottom: 8px;
+  font-family: var(--mono, ui-monospace, monospace);
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-soft); background: rgba(0,0,0,0.04);
+  padding: 2px 7px; border-radius: 3px;
+}
+.sechint { font-size: 11.5px; color: var(--ink-soft); margin: 6px 0 0; }

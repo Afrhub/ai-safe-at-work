@@ -52,8 +52,21 @@ function docVal(v, prompt){ const x = fieldVal(v); return x || prompt; }
 const DEFAULT_ORG = {
   companyName:'', owner:'', dpoName:'',
   effectiveDate: todayISO(), incidentContact:'security@example.com', logLocation:'Shared AI Use Register (spreadsheet)',
-  trainingRef:'the AI Safe@Work course', approvedTools:'ChatGPT Enterprise (EU region)\nMicrosoft 365 Copilot'
+  trainingRef:'the AI Safe@Work course', approvedTools:'ChatGPT Enterprise (EU region)\nMicrosoft 365 Copilot',
+  // Sections 4, 5, 6, 8 and 13 were hardcoded prose. They are editable now, seeded
+  // with the wording they already had, so an existing policy reads identically
+  // until someone deliberately changes it.
+  permittedUses:'', forbiddenInputs:'', outputHandling:'', settingsConfig:'', consequences:''
 };
+const AUP_SECTION_DEFAULTS = {
+  permittedUses:'Drafting and editing work with human review; summarising appropriate material; translation and rephrasing; brainstorming and structuring thinking; explaining concepts; technical assistance on appropriate data.',
+  forbiddenInputs:"Customer or contact personal data; special-category personal data; third-party contracts or legal drafts; source code we don't own or licence; non-public financial data; authentication secrets; documents classified Confidential or higher; HR records; anything held under a duty of confidence, must never be entered into a free or personal-tier AI tool.",
+  outputHandling:'AI-generated content must be reviewed by a human before use. Claims affecting a decision must be independently verified. AI involvement in customer-facing material must be disclosed per EU AI Act Article 50. No decision affecting someone\'s livelihood or legal position may be made on AI output alone.',
+  settingsConfig:"Training-data opt-out enabled wherever offered on a work account; retention follows the company's procurement contract; MFA is required on all work AI accounts.",
+  consequences:'Breach may result in disciplinary action up to and including termination, with mandatory regulator notification where applicable.'
+};
+/* A section's text: what the customer wrote, else the wording it shipped with. */
+function sec(o, key){ return fieldVal(o[key]) || AUP_SECTION_DEFAULTS[key]; }
 const DEFAULT_TOR = {
   org:'', reportTo:'the board', chair:'',
   members:[{role:'Data protection / compliance', held:''},{role:'IT / security', held:''},
@@ -308,6 +321,9 @@ function pageAUP(){
     <div class="grid cols-2">
       <div class="card">
         <h3>Policy fields</h3>
+        <p style="color:var(--ink-soft);font-size:12.5px;margin:0 0 14px;">Each field below fills the numbered section it names in the policy on the right. Sections not listed here are standard wording that applies to every organisation.</p>
+
+        <div class="secgrp"><span class="secnum">Header</span>
         <div class="field-row">
           <div><label>Company name</label><input id="f_companyName" type="text" value="${esc(fieldVal(o.companyName))}" placeholder="Your company name"></div>
           <div><label>Effective date</label><input id="f_effectiveDate" type="date" value="${esc(o.effectiveDate)}"></div>
@@ -316,12 +332,35 @@ function pageAUP(){
           <div><label>Policy owner (role)</label><input id="f_owner" type="text" value="${esc(fieldVal(o.owner))}" placeholder="Role, e.g. DPO / CISO / Head of IT"></div>
           <div><label>DPO / contact name</label><input id="f_dpoName" type="text" value="${esc(fieldVal(o.dpoName))}" placeholder="Name of your DPO or data contact"></div>
         </div>
-        <div class="field-row">
-          <div><label>Incident contact</label><input id="f_incidentContact" type="text" value="${esc(o.incidentContact)}"></div>
-          <div><label>Training reference</label><input id="f_trainingRef" type="text" value="${esc(o.trainingRef)}"></div>
-        </div>
-        <label>AI use log location</label><input id="f_logLocation" type="text" value="${esc(o.logLocation)}">
-        <label>Approved tools (one per line)</label><textarea id="f_approvedTools" rows="4">${esc(o.approvedTools)}</textarea>
+        <p class="sechint">Fills sections 1, 2, 3, 9 and 12, and the policy title.</p></div>
+
+        <div class="secgrp"><span class="secnum">Section 3</span>
+        <label>Approved tools (one per line)</label><textarea id="f_approvedTools" rows="4">${esc(o.approvedTools)}</textarea></div>
+
+        <div class="secgrp"><span class="secnum">Section 4</span>
+        <label>Permitted uses</label><textarea id="f_permittedUses" rows="3">${esc(sec(o,'permittedUses'))}</textarea></div>
+
+        <div class="secgrp"><span class="secnum">Section 5</span>
+        <label>Forbidden inputs</label><textarea id="f_forbiddenInputs" rows="4">${esc(sec(o,'forbiddenInputs'))}</textarea></div>
+
+        <div class="secgrp"><span class="secnum">Section 6</span>
+        <label>Output handling</label><textarea id="f_outputHandling" rows="3">${esc(sec(o,'outputHandling'))}</textarea></div>
+
+        <div class="secgrp"><span class="secnum">Section 7</span>
+        <label>AI use log location</label><input id="f_logLocation" type="text" value="${esc(o.logLocation)}"></div>
+
+        <div class="secgrp"><span class="secnum">Section 8</span>
+        <label>Settings and configuration</label><textarea id="f_settingsConfig" rows="3">${esc(sec(o,'settingsConfig'))}</textarea></div>
+
+        <div class="secgrp"><span class="secnum">Section 10</span>
+        <label>Incident contact</label><input id="f_incidentContact" type="text" value="${esc(o.incidentContact)}"></div>
+
+        <div class="secgrp"><span class="secnum">Section 11</span>
+        <label>Training reference</label><input id="f_trainingRef" type="text" value="${esc(o.trainingRef)}"></div>
+
+        <div class="secgrp"><span class="secnum">Section 13</span>
+        <label>Consequences of non-compliance</label><textarea id="f_consequences" rows="3">${esc(sec(o,'consequences'))}</textarea></div>
+
         <button class="btn" id="saveOrgBtn">Save &amp; regenerate</button>
       </div>
       <div class="card" style="background:${st.published?'var(--teal-bg)':'var(--amber-bg)'};border-color:transparent;">
@@ -340,7 +379,10 @@ async function saveOrgFields(){
   DB.org = {
     companyName: val('f_companyName'), effectiveDate: val('f_effectiveDate'), owner: val('f_owner'),
     dpoName: val('f_dpoName'), incidentContact: val('f_incidentContact'), trainingRef: val('f_trainingRef'),
-    logLocation: val('f_logLocation'), approvedTools: val('f_approvedTools')
+    logLocation: val('f_logLocation'), approvedTools: val('f_approvedTools'),
+    permittedUses: val('f_permittedUses'), forbiddenInputs: val('f_forbiddenInputs'),
+    outputHandling: val('f_outputHandling'), settingsConfig: val('f_settingsConfig'),
+    consequences: val('f_consequences')
   };
   await dbSet('org-config', DB.org);
   renderAupDoc(); renderNav(); toast('Policy fields saved');
@@ -367,17 +409,17 @@ function renderAupDoc(){
     <h4>2. Scope</h4><p>Applies to all employees, contractors, interns and consultants performing work for ${esc(docVal(o.companyName,'[Company Name]'))}, on company-owned and personal devices used for work, covering all AI tools whether procured by the company or used personally.</p>
     <h4>3. Approved tools</h4><ul>${tools || '<li class="fill">No approved tools listed yet</li>'}</ul>
     <p>Other tools require explicit approval from ${esc(docVal(o.owner,'[Policy owner role]'))} before use. Free or personal-tier consumer AI tools are <b>not approved</b> for the data categories in Section 5.</p>
-    <h4>4. Permitted uses</h4><p>Drafting and editing work with human review; summarising appropriate material; translation and rephrasing; brainstorming and structuring thinking; explaining concepts; technical assistance on appropriate data.</p>
-    <h4>5. Forbidden inputs</h4><p>Customer or contact personal data; special-category personal data; third-party contracts or legal drafts; source code we don't own or licence; non-public financial data; authentication secrets; documents classified Confidential or higher; HR records; anything held under a duty of confidence, must never be entered into a free or personal-tier AI tool.</p>
-    <h4>6. Output handling</h4><p>AI-generated content must be reviewed by a human before use. Claims affecting a decision must be independently verified. AI involvement in customer-facing material must be disclosed per EU AI Act Article 50. No decision affecting someone's livelihood or legal position may be made on AI output alone.</p>
+    <h4>4. Permitted uses</h4><p>${esc(sec(o,'permittedUses'))}</p>
+    <h4>5. Forbidden inputs</h4><p>${esc(sec(o,'forbiddenInputs'))}</p>
+    <h4>6. Output handling</h4><p>${esc(sec(o,'outputHandling'))}</p>
     <h4>7. Logging</h4><p>Significant AI-assisted work is logged in: <b>${esc(o.logLocation)}</b>. "Significant" means the use affected another person, represented the company externally, touched sensitive data, or supported an irreversible/expensive decision.</p>
-    <h4>8. Settings and configuration</h4><p>Training-data opt-out enabled wherever offered on a work account; retention follows the company's procurement contract; MFA is required on all work AI accounts.</p>
+    <h4>8. Settings and configuration</h4><p>${esc(sec(o,'settingsConfig'))}</p>
     <h4>9. Vendor changes</h4><p>Material changes to an approved tool's terms, data handling, sub-processors or model must be reviewed by ${esc(docVal(o.dpoName,'[DPO name]'))} before continued use.</p>
     <h4>10. Incidents</h4><p>Report within the hour to <b>${esc(o.incidentContact)}</b>: data pasted into the wrong tool, harmful AI output, an AI-powered scam, or a vendor security incident. Do not delete the evidence.</p>
     <h4>11. Training</h4><p>All staff complete ${esc(o.trainingRef)} within thirty days of joining and refresh annually.</p>
     <h4>12. Roles and responsibilities</h4><p>Every member of staff complies with this policy. Managers apply oversight to AI-assisted work. ${esc(docVal(o.dpoName,'[DPO name]'))} maintains assessments and vendor diligence. IT/Security administers tools and incident response.</p>
-    <h4>13. Consequences of non-compliance</h4><p>Breach may result in disciplinary action up to and including termination, with mandatory regulator notification where applicable.</p>
-    <h4>14. Standards referenced</h4><p>EU AI Act 2024/1689 Art 4 &amp; 26 · GDPR Art 5, 6, 9, 22, 32–35 · ISO/IEC 42001:2023 Cl 5.2, 7.2–7.3, Annex A.2 · ISO/IEC 27001:2022 A.5.10, A.5.13, A.5.23, A.6.3.</p>
+    <h4>13. Consequences of non-compliance</h4><p>${esc(sec(o,'consequences'))}</p>
+    <h4>14. Standards referenced</h4><p>EU AI Act (Regulation (EU) 2024/1689) Art 4, 26 &amp; 50 · UK GDPR / EU GDPR Art 5, 6, 9, 22, 28, 32&ndash;35 (and the Data Protection Act 2018 in the UK) · ISO/IEC 42001:2023 Cl 5.2, 5.3, 7.2&ndash;7.3, Annex A.2 · ISO/IEC 27001:2022 A.5.10, A.5.13, A.5.19&ndash;A.5.21, A.5.23, A.5.34, A.6.3, A.8.12.</p>
     <div class="field-row" style="margin-top:24px;border-top:1px solid var(--line);padding-top:16px;">
       <div><b>Approved by</b><br>${esc(docVal(o.owner,'[Policy owner role]'))}</div>
       <div><b>Next review</b><br>${fmtDate(addMonths(o.effectiveDate,3))}</div>
