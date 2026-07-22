@@ -56,17 +56,27 @@ const DEFAULT_ORG = {
   // Sections 4, 5, 6, 8 and 13 were hardcoded prose. They are editable now, seeded
   // with the wording they already had, so an existing policy reads identically
   // until someone deliberately changes it.
-  permittedUses:'', forbiddenInputs:'', outputHandling:'', settingsConfig:'', consequences:''
+  permittedUses:'', forbiddenInputs:'', outputHandling:'', settingsConfig:'', consequences:'',
+  vendorChanges:'', rolesResponsibilities:''
 };
 const AUP_SECTION_DEFAULTS = {
   permittedUses:'Drafting and editing work with human review; summarising appropriate material; translation and rephrasing; brainstorming and structuring thinking; explaining concepts; technical assistance on appropriate data.',
   forbiddenInputs:"Customer or contact personal data; special-category personal data; third-party contracts or legal drafts; source code we don't own or licence; non-public financial data; authentication secrets; documents classified Confidential or higher; HR records; anything held under a duty of confidence, must never be entered into a free or personal-tier AI tool.",
   outputHandling:'AI-generated content must be reviewed by a human before use. Claims affecting a decision must be independently verified. AI involvement in customer-facing material must be disclosed per EU AI Act Article 50. No decision affecting someone\'s livelihood or legal position may be made on AI output alone.',
   settingsConfig:"Training-data opt-out enabled wherever offered on a work account; retention follows the company's procurement contract; MFA is required on all work AI accounts.",
-  consequences:'Breach may result in disciplinary action up to and including termination, with mandatory regulator notification where applicable.'
+  consequences:'Breach may result in disciplinary action up to and including termination, with mandatory regulator notification where applicable.',
+  vendorChanges:"Material changes to an approved tool's terms, data handling, sub-processors or model must be reviewed by {DPO} before continued use.",
+  rolesResponsibilities:'Every member of staff complies with this policy. Managers apply oversight to AI-assisted work. {DPO} maintains assessments and vendor diligence. IT/Security administers tools and incident response.'
 };
-/* A section's text: what the customer wrote, else the wording it shipped with. */
-function sec(o, key){ return fieldVal(o[key]) || AUP_SECTION_DEFAULTS[key]; }
+/* A section's text: what the customer wrote, else the wording it shipped with.
+   {DPO} and {COMPANY} resolve to the header fields, so those names stay in one
+   place even after someone rewrites the surrounding sentence. */
+function sec(o, key){
+  const raw = fieldVal(o[key]) || AUP_SECTION_DEFAULTS[key];
+  return String(raw)
+    .replace(/\{DPO\}/g, docVal(o.dpoName, '[DPO name]'))
+    .replace(/\{COMPANY\}/g, docVal(o.companyName, '[Company Name]'));
+}
 const DEFAULT_TOR = {
   org:'', reportTo:'the board', chair:'',
   members:[{role:'Data protection / compliance', held:''},{role:'IT / security', held:''},
@@ -332,7 +342,7 @@ function pageAUP(){
           <div><label>Policy owner (role)</label><input id="f_owner" type="text" value="${esc(fieldVal(o.owner))}" placeholder="Role, e.g. DPO / CISO / Head of IT"></div>
           <div><label>DPO / contact name</label><input id="f_dpoName" type="text" value="${esc(fieldVal(o.dpoName))}" placeholder="Name of your DPO or data contact"></div>
         </div>
-        <p class="sechint">Fills sections 1, 2, 3, 9 and 12, and the policy title.</p></div>
+        <p class="sechint">Fills sections 1 and 2, the policy title, and the names used in sections 3, 9 and 12.</p></div>
 
         <div class="secgrp"><span class="secnum">Section 3</span>
         <label>Approved tools (one per line)</label><textarea id="f_approvedTools" rows="4">${esc(o.approvedTools)}</textarea></div>
@@ -352,11 +362,19 @@ function pageAUP(){
         <div class="secgrp"><span class="secnum">Section 8</span>
         <label>Settings and configuration</label><textarea id="f_settingsConfig" rows="3">${esc(sec(o,'settingsConfig'))}</textarea></div>
 
+        <div class="secgrp"><span class="secnum">Section 9</span>
+        <label>Vendor changes</label><textarea id="f_vendorChanges" rows="3">${esc(fieldVal(o.vendorChanges) || AUP_SECTION_DEFAULTS.vendorChanges)}</textarea>
+        <p class="sechint">Write <code>{DPO}</code> to insert the DPO / contact name from the header.</p></div>
+
         <div class="secgrp"><span class="secnum">Section 10</span>
         <label>Incident contact</label><input id="f_incidentContact" type="text" value="${esc(o.incidentContact)}"></div>
 
         <div class="secgrp"><span class="secnum">Section 11</span>
         <label>Training reference</label><input id="f_trainingRef" type="text" value="${esc(o.trainingRef)}"></div>
+
+        <div class="secgrp"><span class="secnum">Section 12</span>
+        <label>Roles and responsibilities</label><textarea id="f_rolesResponsibilities" rows="3">${esc(fieldVal(o.rolesResponsibilities) || AUP_SECTION_DEFAULTS.rolesResponsibilities)}</textarea>
+        <p class="sechint">Write <code>{DPO}</code> to insert the DPO / contact name from the header.</p></div>
 
         <div class="secgrp"><span class="secnum">Section 13</span>
         <label>Consequences of non-compliance</label><textarea id="f_consequences" rows="3">${esc(sec(o,'consequences'))}</textarea></div>
@@ -382,7 +400,8 @@ async function saveOrgFields(){
     logLocation: val('f_logLocation'), approvedTools: val('f_approvedTools'),
     permittedUses: val('f_permittedUses'), forbiddenInputs: val('f_forbiddenInputs'),
     outputHandling: val('f_outputHandling'), settingsConfig: val('f_settingsConfig'),
-    consequences: val('f_consequences')
+    consequences: val('f_consequences'), vendorChanges: val('f_vendorChanges'),
+    rolesResponsibilities: val('f_rolesResponsibilities')
   };
   await dbSet('org-config', DB.org);
   renderAupDoc(); renderNav(); toast('Policy fields saved');
@@ -414,10 +433,10 @@ function renderAupDoc(){
     <h4>6. Output handling</h4><p>${esc(sec(o,'outputHandling'))}</p>
     <h4>7. Logging</h4><p>Significant AI-assisted work is logged in: <b>${esc(o.logLocation)}</b>. "Significant" means the use affected another person, represented the company externally, touched sensitive data, or supported an irreversible/expensive decision.</p>
     <h4>8. Settings and configuration</h4><p>${esc(sec(o,'settingsConfig'))}</p>
-    <h4>9. Vendor changes</h4><p>Material changes to an approved tool's terms, data handling, sub-processors or model must be reviewed by ${esc(docVal(o.dpoName,'[DPO name]'))} before continued use.</p>
+    <h4>9. Vendor changes</h4><p>${esc(sec(o,'vendorChanges'))}</p>
     <h4>10. Incidents</h4><p>Report within the hour to <b>${esc(o.incidentContact)}</b>: data pasted into the wrong tool, harmful AI output, an AI-powered scam, or a vendor security incident. Do not delete the evidence.</p>
     <h4>11. Training</h4><p>All staff complete ${esc(o.trainingRef)} within thirty days of joining and refresh annually.</p>
-    <h4>12. Roles and responsibilities</h4><p>Every member of staff complies with this policy. Managers apply oversight to AI-assisted work. ${esc(docVal(o.dpoName,'[DPO name]'))} maintains assessments and vendor diligence. IT/Security administers tools and incident response.</p>
+    <h4>12. Roles and responsibilities</h4><p>${esc(sec(o,'rolesResponsibilities'))}</p>
     <h4>13. Consequences of non-compliance</h4><p>${esc(sec(o,'consequences'))}</p>
     <h4>14. Standards referenced</h4><p>EU AI Act (Regulation (EU) 2024/1689) Art 4, 26 &amp; 50 · UK GDPR / EU GDPR Art 5, 6, 9, 22, 28, 32&ndash;35 (and the Data Protection Act 2018 in the UK) · ISO/IEC 42001:2023 Cl 5.2, 5.3, 7.2&ndash;7.3, Annex A.2 · ISO/IEC 27001:2022 A.5.10, A.5.13, A.5.19&ndash;A.5.21, A.5.23, A.5.34, A.6.3, A.8.12.</p>
     <div class="field-row" style="margin-top:24px;border-top:1px solid var(--line);padding-top:16px;">
