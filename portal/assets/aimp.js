@@ -115,21 +115,21 @@ async function loadAll(){
 
 /* ============================= NAV ============================= */
 const TABS = [
-  {grp:'Overview', items:[ {id:'dashboard', label:'Dashboard', n:'-'} ]},
-  {grp:'Policy', items:[ {id:'aup', label:'Acceptable Use Policy', n:'01'} ]},
+  {grp:'Overview', items:[ {id:'dashboard', label:'Dashboard'} ]},
+  {grp:'Policy', items:[ {id:'aup', label:'Acceptable Use Policy'} ]},
   {grp:'Registers', items:[
-    {id:'usecases', label:'Use Case Register', n:'02'},
-    {id:'riskreg', label:'AI Risk Register', n:'04'} ]},
+    {id:'usecases', label:'Use Case Register'},
+    {id:'riskreg', label:'AI Risk Register'} ]},
   {grp:'Assessments', items:[
-    {id:'assessments', label:'Risk Assessments', n:'03'},
-    {id:'vendors', label:'Vendor Due Diligence', n:'08'},
-    {id:'supplierrisk', label:'Vendor Risk Score', n:'09'} ]},
-  {grp:'Response', items:[ {id:'incidents', label:'Incident Reports', n:'05'} ]},
+    {id:'assessments', label:'Risk Assessments'},
+    {id:'vendors', label:'Vendor Due Diligence'},
+    {id:'supplierrisk', label:'Vendor Risk Score'} ]},
+  {grp:'Response', items:[ {id:'incidents', label:'Incident Reports'} ]},
   {grp:'Governance', items:[
-    {id:'raci', label:'Roles Matrix (RACI)', n:'06'},
-    {id:'tor', label:'Steering Group ToR', n:'07'} ]},
-  {grp:'People', items:[ {id:'staff', label:'Staff &amp; Sign-off', n:'10'} ]},
-  {grp:'Manage', items:[ {id:'m-team', label:'Team', n:'·'}, {id:'m-course', label:'Course', n:'·'}, {id:'m-templates', label:'Templates', n:'·'}, {id:'m-updates', label:'Updates', n:'·'} ]}
+    {id:'raci', label:'Roles Matrix (RACI)'},
+    {id:'tor', label:'Steering Group ToR'} ]},
+  {grp:'People', items:[ {id:'staff', label:'Staff &amp; Sign-off'} ]},
+  {grp:'Manage', items:[ {id:'m-team', label:'Team'}, {id:'m-course', label:'Course'}, {id:'m-templates', label:'Templates'}, {id:'m-updates', label:'Updates'} ]}
 ];
 let CURRENT = 'dashboard';
 
@@ -137,7 +137,7 @@ function renderNav(){
   const nav = document.getElementById('navlist');
   nav.innerHTML = TABS.map(g => `
     <div class="grp">${g.grp}</div>
-    ${g.items.map(it => `<button class="tab ${it.id===CURRENT?'active':''}" data-tab="${it.id}"><span class="n">${it.n}</span>${it.label}</button>`).join('')}
+    ${g.items.map(it => `<button class="tab ${it.id===CURRENT?'active':''}" data-tab="${it.id}">${it.label}</button>`).join('')}
   `).join('');
   nav.querySelectorAll('button.tab').forEach(b=>b.addEventListener('click', ()=>{ CURRENT=b.dataset.tab; renderNav(); renderMain(); }));
 }
@@ -167,9 +167,9 @@ function pageDashboard(){
 
   main.innerHTML = `
     <div class="pagehead">
-      <div><div class="eyebrow">Tier 2 · Governance Toolkit</div>
+      <div><div class="eyebrow">Attest AI Platform</div>
       <h2>${esc(DB.org.companyName)}, AI Governance Dashboard</h2>
-      <p>Live status across your AI Safe@Work documentation set. Ten governance documents, tracked in one place, ready to send to staff.</p></div>
+      <p>Live status across your governance documents, registers and staff sign-off, tracked in one place.</p></div>
       <div class="actions"><button class="btn gold" data-act="setTab" data-a1="aup">Open Acceptable Use Policy →</button></div>
     </div>
 
@@ -202,18 +202,18 @@ function pageDashboard(){
     <div class="card">
       <h3>Document pack, completion at a glance</h3>
       <div class="tbl-wrap"><table>
-        <tr><th>#</th><th>Document</th><th>Status</th><th></th></tr>
+        <tr><th>Document</th><th>Status</th><th></th></tr>
         ${[
-          ['01','Acceptable Use Policy', DB.aupStatus.published?'<span class="badge active">Published</span>':'<span class="badge pending">Draft</span>', 'aup'],
-          ['02','AI Use Case Register', DB.usecases.length?`<span class="badge active">${DB.usecases.length} entries</span>`:'<span class="badge neutral">Empty</span>', 'usecases'],
-          ['03','AI Risk Assessments', DB.assessments.length?`<span class="badge active">${DB.assessments.length} entries</span>`:'<span class="badge neutral">Empty</span>', 'assessments'],
-          ['04','AI Risk Register', DB.risks.length?`<span class="badge active">${DB.risks.length} entries</span>`:'<span class="badge neutral">Empty</span>', 'riskreg'],
-          ['05','Incident Forms', DB.incidents.length?`<span class="badge active">${DB.incidents.length} on file</span>`:'<span class="badge neutral">None logged</span>', 'incidents'],
-          ['06','Governance Roles Matrix', '<span class="badge active">Configured</span>', 'raci'],
-          ['07','Steering Group ToR', DB.tor.approvedBy?'<span class="badge active">Approved</span>':'<span class="badge pending">Draft</span>', 'tor'],
-          ['08','Vendor Due Diligence', DB.vendors.length?`<span class="badge active">${DB.vendors.length} vendors</span>`:'<span class="badge neutral">Empty</span>', 'vendors'],
-          ['09','Vendor Risk Score', DB.supplierRisk.length?`<span class="badge active">${DB.supplierRisk.length} scored</span>`:'<span class="badge neutral">Empty</span>', 'supplierrisk'],
-        ].map(r=>`<tr><td class="mono">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td><button class="btn ghost sm" data-act="setTab" data-a1="${r[3]}">Open</button></td></tr>`).join('')}
+          ['Acceptable Use Policy', DB.aupStatus.published?'<span class="badge active">Published</span>':'<span class="badge pending">Draft</span>', 'aup'],
+          ['AI Use Case Register', DB.usecases.length?`<span class="badge active">${DB.usecases.length} entr${DB.usecases.length===1?'y':'ies'}</span>`:'<span class="badge neutral">Empty</span>', 'usecases'],
+          ['AI Risk Assessments', DB.assessments.length?`<span class="badge active">${DB.assessments.length} entr${DB.assessments.length===1?'y':'ies'}</span>`:'<span class="badge neutral">Empty</span>', 'assessments'],
+          ['AI Risk Register', DB.risks.length?`<span class="badge active">${DB.risks.length} entr${DB.risks.length===1?'y':'ies'}</span>`:'<span class="badge neutral">Empty</span>', 'riskreg'],
+          ['Incident Forms', DB.incidents.length?`<span class="badge active">${DB.incidents.length} on file</span>`:'<span class="badge neutral">None logged</span>', 'incidents'],
+          ['Governance Roles Matrix', '<span class="badge active">Configured</span>', 'raci'],
+          ['Steering Group ToR', DB.tor.approvedBy?'<span class="badge active">Approved</span>':'<span class="badge pending">Draft</span>', 'tor'],
+          ['Vendor Due Diligence', DB.vendors.length?`<span class="badge active">${DB.vendors.length} vendor${DB.vendors.length===1?'':'s'}</span>`:'<span class="badge neutral">Empty</span>', 'vendors'],
+          ['Vendor Risk Score', DB.supplierRisk.length?`<span class="badge active">${DB.supplierRisk.length} scored</span>`:'<span class="badge neutral">Empty</span>', 'supplierrisk'],
+        ].map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td><button class="btn ghost sm" data-act="setTab" data-a1="${r[2]}">Open</button></td></tr>`).join('')}
       </table></div>
     </div>
   `;
@@ -226,7 +226,7 @@ function pageAUP(){
   const main = document.getElementById('main');
   main.innerHTML = `
     <div class="pagehead">
-      <div><div class="eyebrow">Document 01 · Tier 2</div><h2>AI Acceptable Use Policy</h2>
+      <div><div class="eyebrow">Policy</div><h2>AI Acceptable Use Policy</h2>
       <p>Edit the fields below, they fill the policy automatically. Publish it, then send it to staff for sign-off from the Staff tab.</p></div>
       <div class="actions">
         <button class="btn ghost" data-act="print">Print / Save PDF</button>
@@ -403,7 +403,7 @@ function pageRegister(key){
   const main = document.getElementById('main');
   main.innerHTML = `
     <div class="pagehead">
-      <div><div class="eyebrow">Document ${key==='usecases'?'02':'04'} · Register</div><h2>${schema.title}</h2><p>${schema.desc}</p></div>
+      <div><div class="eyebrow">Register</div><h2>${schema.title}</h2><p>${schema.desc}</p></div>
       <div class="actions"><button class="btn ghost" data-act="print">Print / Export</button>
       <button class="btn gold" id="addBtn">+ Add entry</button></div>
     </div>
@@ -528,7 +528,7 @@ function pageAssessments(){
   const main = document.getElementById('main');
   main.innerHTML = `
     <div class="pagehead">
-      <div><div class="eyebrow">Document 03</div><h2>AI Risk Assessments</h2><p>One assessment per AI use case: tier, scored risks, mitigations, and a decision. File each against an entry in the Use Case Register.</p></div>
+      <div><div class="eyebrow">Assessment</div><h2>AI Risk Assessments</h2><p>One assessment per AI use case: tier, scored risks, mitigations, and a decision. File each against an entry in the Use Case Register.</p></div>
       <div class="actions"><button class="btn gold" id="addAssess">+ New assessment</button></div>
     </div>
     <div class="card"><div id="assessList"></div></div>
@@ -638,7 +638,7 @@ function pageVendors(){
   const main = document.getElementById('main');
   main.innerHTML = `
     <div class="pagehead">
-      <div><div class="eyebrow">Document 08</div><h2>Vendor Due Diligence</h2><p>Track the must-answer questions for any AI vendor before procurement. 19 blocking questions, modelled on CSA CAIQ-AI.</p></div>
+      <div><div class="eyebrow">Vendor diligence · step 1</div><h2>Vendor Due Diligence</h2><p>Track the must-answer questions for any AI vendor before procurement. 19 blocking questions, modelled on CSA CAIQ-AI.</p></div>
       <div class="actions"><button class="btn gold" id="addVendor">+ Add vendor</button></div>
     </div>
     <div class="card"><div id="vendorList"></div></div>
@@ -702,7 +702,7 @@ function pageSupplierRisk(){
   const main = document.getElementById('main');
   main.innerHTML = `
     <div class="pagehead">
-      <div><div class="eyebrow">Document 09</div><h2>Vendor Risk Score</h2><p>Stage two of vendor diligence. Once the questionnaire in Vendor Due Diligence comes back, score the vendor across seven areas and record a go / no-go decision.</p></div>
+      <div><div class="eyebrow">Vendor diligence · step 2</div><h2>Vendor Risk Score</h2><p>Stage two of vendor diligence. Once the questionnaire in Vendor Due Diligence comes back, score the vendor across seven areas and record a go / no-go decision.</p></div>
       <div class="actions"><button class="btn gold" id="addSRA">+ New score</button></div>
     </div>
     <div class="card"><div id="sraList"></div></div>
@@ -779,7 +779,7 @@ function pageIncidents(){
   const main = document.getElementById('main');
   main.innerHTML = `
     <div class="pagehead">
-      <div><div class="eyebrow">Document 05</div><h2>AI Incident Reports</h2><p>For any incident where AI was involved. Start filling it the moment you confirm an incident, notifications then containment then narrative.</p></div>
+      <div><div class="eyebrow">Response</div><h2>AI Incident Reports</h2><p>For any incident where AI was involved. Start filling it the moment you confirm an incident, notifications then containment then narrative.</p></div>
       <div class="actions"><button class="btn gold" id="addInc">+ Log incident</button></div>
     </div>
     <div class="card"><div id="incList"></div></div>
@@ -854,7 +854,7 @@ function pageRACI(){
   const main = document.getElementById('main');
   main.innerHTML = `
     <div class="pagehead">
-      <div><div class="eyebrow">Document 06</div><h2>AI Governance Roles Matrix (RACI)</h2><p>Who is Responsible, Accountable, Consulted, Informed for each AI decision. Edit role names and cells, then publish for the steering group.</p></div>
+      <div><div class="eyebrow">Governance</div><h2>AI Governance Roles Matrix (RACI)</h2><p>Who is Responsible, Accountable, Consulted, Informed for each AI decision. Edit role names and cells, then publish for the steering group.</p></div>
       <div class="actions"><button class="btn ghost" data-act="print">Print / Export</button><button class="btn gold" id="saveRaci">Save changes</button></div>
     </div>
     <div class="card">
@@ -890,7 +890,7 @@ function pageTOR(){
   const main = document.getElementById('main');
   main.innerHTML = `
     <div class="pagehead">
-      <div><div class="eyebrow">Document 07</div><h2>AI Steering Group, Terms of Reference</h2><p>Stand up the group that owns AI governance. Fill the fields, approve at the first meeting.</p></div>
+      <div><div class="eyebrow">Governance</div><h2>AI Steering Group, Terms of Reference</h2><p>Stand up the group that owns AI governance. Fill the fields, approve at the first meeting.</p></div>
       <div class="actions"><button class="btn ghost" data-act="print">Print / Export</button><button class="btn gold" id="saveTor">Save changes</button></div>
     </div>
     <div class="grid cols-2">
@@ -965,7 +965,7 @@ function pageStaff(){
   DB.acks.forEach(a=>{ ackByStaff[a.staffId] = a; });
   main.innerHTML = `
     <div class="pagehead">
-      <div><div class="eyebrow">Document 10 · Rollout</div><h2>Staff &amp; Policy Sign-off</h2><p>Maintain your staff roster, send the policy for acknowledgement, and track who has signed off, all in shared storage so this updates live for everyone using this platform link.</p></div>
+      <div><div class="eyebrow">Rollout</div><h2>Staff &amp; Policy Sign-off</h2><p>Maintain your staff roster, send the policy for acknowledgement, and track who has signed off, all in shared storage so this updates live for everyone using this platform link.</p></div>
       <div class="actions"><button class="btn ghost" id="copyMsg">Copy announcement message</button><button class="btn gold" id="addStaff">+ Add staff member</button></div>
     </div>
 
