@@ -666,6 +666,12 @@ function showModal(title, bodyHTML, onSave, wide){
     <h3>${title}</h3>${bodyHTML}
     <div class="modal-actions"><button class="btn ghost" id="modalCancel">Cancel</button><button class="btn gold" id="modalSave">Save</button></div>
   </div></div>`;
+  /* A focused type=number input changes value when the wheel scrolls over it,
+     which on a trackpad means a stray two-finger scroll silently rewrites a
+     score. Numbers must only change when someone types or uses the arrow keys. */
+  root.querySelectorAll('input[type="number"]').forEach(el=>{
+    el.addEventListener('wheel', e=>{ if(document.activeElement===el) e.preventDefault(); }, {passive:false});
+  });
   document.getElementById('modalCancel').onclick = closeModal;
   document.getElementById('modalBg').addEventListener('click', e=>{ if(e.target.id==='modalBg') closeModal(); });
   document.getElementById('modalSave').onclick = onSave;

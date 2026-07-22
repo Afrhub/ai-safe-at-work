@@ -197,3 +197,10 @@ html[data-theme="dark"] .modal-bg { background: rgba(0,0,0,0.6); }
   padding: 2px 7px; border-radius: 3px;
 }
 .sechint { font-size: 11.5px; color: var(--ink-soft); margin: 6px 0 0; }
+
+/* Spinner arrows sit under the cursor on a narrow score box, so a click meant
+   for the field lands on the up/down control and changes the value. Scores are
+   typed, not nudged. */
+.modal input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+.modal input[type="number"]::-webkit-outer-spin-button,
+.modal input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
