@@ -123,7 +123,7 @@ const TABS = [
   {grp:'Assessments', items:[
     {id:'assessments', label:'Risk Assessments', n:'03'},
     {id:'vendors', label:'Vendor Due Diligence', n:'08'},
-    {id:'supplierrisk', label:'Supplier Risk Score', n:'09'} ]},
+    {id:'supplierrisk', label:'Vendor Risk Score', n:'09'} ]},
   {grp:'Response', items:[ {id:'incidents', label:'Incident Reports', n:'05'} ]},
   {grp:'Governance', items:[
     {id:'raci', label:'Roles Matrix (RACI)', n:'06'},
@@ -212,7 +212,7 @@ function pageDashboard(){
           ['06','Governance Roles Matrix', '<span class="badge active">Configured</span>', 'raci'],
           ['07','Steering Group ToR', DB.tor.approvedBy?'<span class="badge active">Approved</span>':'<span class="badge pending">Draft</span>', 'tor'],
           ['08','Vendor Due Diligence', DB.vendors.length?`<span class="badge active">${DB.vendors.length} vendors</span>`:'<span class="badge neutral">Empty</span>', 'vendors'],
-          ['09','Supplier Risk Assessment', DB.supplierRisk.length?`<span class="badge active">${DB.supplierRisk.length} scored</span>`:'<span class="badge neutral">Empty</span>', 'supplierrisk'],
+          ['09','Vendor Risk Score', DB.supplierRisk.length?`<span class="badge active">${DB.supplierRisk.length} scored</span>`:'<span class="badge neutral">Empty</span>', 'supplierrisk'],
         ].map(r=>`<tr><td class="mono">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td><button class="btn ghost sm" data-act="setTab" data-a1="${r[3]}">Open</button></td></tr>`).join('')}
       </table></div>
     </div>
@@ -352,6 +352,18 @@ const REGISTER_SCHEMAS = {
 /* Use-case linkage. Assessments and risks store the use case's ID, so the link
    survives a rename. Records created before the ID existed fall back to matching
    on the name they copied at the time. */
+function vendorById(id){ return id ? DB.vendors.find(v=>v.id===id) : null; }
+function vendorLabel(id, fallbackName){ const v = vendorById(id); return v ? v.name : (fallbackName || ''); }
+function resolveVendorId(name){
+  if(!name) return '';
+  const hit = DB.vendors.find(v => (v.name||'').trim().toLowerCase() === name.trim().toLowerCase());
+  return hit ? hit.id : '';
+}
+function scoresFor(vendor){
+  return DB.supplierRisk.filter(sr =>
+    sr.vendorId ? sr.vendorId === vendor.id
+                : (sr.supplier && vendor.name && sr.supplier.trim().toLowerCase() === vendor.name.trim().toLowerCase()));
+}
 function ucById(id){ return id ? DB.usecases.find(u=>u.id===id) : null; }
 function ucLabel(id, fallbackName){
   const u = ucById(id);
@@ -618,13 +630,18 @@ function renderVendorList(){
   const wrap = document.getElementById('vendorList');
   if(!DB.vendors.length){ wrap.innerHTML = `<div class="empty"><b>No vendors tracked yet</b>Add a vendor to start the diligence checklist.</div>`; return; }
   wrap.innerHTML = `<div class="tbl-wrap"><table>
-    <tr><th>Vendor / product</th><th>Checklist progress</th><th>Status</th><th></th></tr>
+    <tr><th>Vendor / product</th><th>Checklist progress</th><th>Status</th><th>Risk score</th><th></th></tr>
     ${DB.vendors.map(v=>{
       const done = (v.checklist||[]).filter(Boolean).length;
       const pct = Math.round(100*done/VENDOR_MUST_QUESTIONS.length);
       return `<tr><td><b>${esc(v.name)}</b><br><span style="color:var(--ink-soft);font-size:12px;">${esc(v.product||'')}</span></td>
       <td style="min-width:160px;">${done}/${VENDOR_MUST_QUESTIONS.length}<div class="bar"><i style="width:${pct}%;background:${pct===100?'var(--teal)':'var(--amber)'};"></i></div></td>
       <td><span class="badge ${pct===100?'active':'pending'}">${pct===100?'Diligence complete':'In progress'}</span></td>
+      <td>${(()=>{ const sc = scoresFor(v); if(!sc.length) return '<span class="badge neutral">Not scored</span>';
+        const latest = sc[sc.length-1];
+        const d = latest.decision||'';
+        const cls = d.toLowerCase().includes('reject')?'reject':d.toLowerCase().includes('condition')?'conditions':'approve';
+        return `<span class="badge ${cls}">${esc(d||'Scored')}</span>`; })()}</td>
       <td style="white-space:nowrap;"><button class="iconbtn" data-act="openVendorModal" data-a1="${v.id}">Edit</button>
       <button class="iconbtn" data-act="deleteVendor" data-a1="${v.id}">Delete</button></td></tr>`;
     }).join('')}
@@ -665,7 +682,7 @@ function pageSupplierRisk(){
   const main = document.getElementById('main');
   main.innerHTML = `
     <div class="pagehead">
-      <div><div class="eyebrow">Document 09</div><h2>Supplier Risk Assessment</h2><p>After diligence comes back, score the supplier across seven areas and record a go / no-go decision.</p></div>
+      <div><div class="eyebrow">Document 09</div><h2>Vendor Risk Score</h2><p>Stage two of vendor diligence. Once the questionnaire in Vendor Due Diligence comes back, score the vendor across seven areas and record a go / no-go decision.</p></div>
       <div class="actions"><button class="btn gold" id="addSRA">+ New score</button></div>
     </div>
     <div class="card"><div id="sraList"></div></div>
@@ -675,12 +692,14 @@ function pageSupplierRisk(){
 }
 function renderSRAList(){
   const wrap = document.getElementById('sraList');
-  if(!DB.supplierRisk.length){ wrap.innerHTML = `<div class="empty"><b>No supplier scores yet</b>Score a vendor once their diligence questionnaire is back.</div>`; return; }
+  if(!DB.supplierRisk.length){ wrap.innerHTML = `<div class="empty"><b>No vendor scores yet</b>Score a vendor once their diligence questionnaire in Vendor Due Diligence is back.</div>`; return; }
   wrap.innerHTML = `<div class="tbl-wrap"><table>
-    <tr><th>Supplier</th><th>Max score</th><th>Decision</th><th>Re-assess by</th><th></th></tr>
+    <tr><th>Vendor</th><th>Max score</th><th>Decision</th><th>Re-assess by</th><th></th></tr>
     ${DB.supplierRisk.map(s=>{
       const max = Math.max(0,...Object.values(s.scores||{}).map(Number));
-      return `<tr><td>${esc(s.supplier)}</td>
+      return `<tr><td>${esc(vendorLabel(s.vendorId, s.supplier))}${s.vendorId
+        ? ` <span class="mono" style="font-size:11px;color:var(--ink-soft);">${esc(s.vendorId)}</span>`
+        : ` <span class="badge neutral" title="Not linked to a vendor in Vendor Due Diligence">Unlinked</span>`}</td>
       <td><span class="badge ${max>=5?'high':max===4?'medium':'low'}">${max||'-'}/5</span></td>
       <td><span class="badge ${s.decision.toLowerCase().includes('reject')?'reject':s.decision.toLowerCase().includes('condition')?'conditions':'approve'}">${esc(s.decision)}</span></td>
       <td>${fmtDate(s.reassessBy)}</td>
@@ -690,18 +709,19 @@ function renderSRAList(){
   </table></div>`;
 }
 async function deleteSRA(id){
-  if(!confirm('Delete this supplier risk score?')) return;
+  if(!confirm('Delete this vendor risk score?')) return;
   DB.supplierRisk = DB.supplierRisk.filter(s=>s.id!==id);
   await dbSet('supplierRisk', DB.supplierRisk); renderSRAList(); renderNav(); toast('Deleted');
 }
 function openSRAModal(id){
   const existing = id ? DB.supplierRisk.find(s=>s.id===id) : null;
-  const data = existing ? JSON.parse(JSON.stringify(existing)) : {id: uid('SRA'), supplier:'', useCase:'', dataShared:'', aiActRole:'Not in scope', assessedBy:'', date:todayISO(), scores:{}, conditions:'', decision:'Approve', decidedBy:'', reassessBy:''};
+  const data = existing ? JSON.parse(JSON.stringify(existing)) : {id: uid('SRA'), supplier:'', vendorId:'', useCase:'', dataShared:'', aiActRole:'Not in scope', assessedBy:'', date:todayISO(), scores:{}, conditions:'', decision:'Approve', decidedBy:'', reassessBy:''};
   const vendorOptions = DB.vendors.map(v=>v.name);
-  showModal(`${existing?'Edit':'New'} Supplier Risk Score`, `
+  showModal(`${existing?'Edit':'New'} Vendor Risk Score`, `
     <div class="field-row">
-      <div><label>Supplier / product</label><input id="s_supplier" list="vList" value="${esc(data.supplier)}">
-      <datalist id="vList">${vendorOptions.map(o=>`<option value="${esc(o)}">`).join('')}</datalist></div>
+      <div><label>Vendor / product</label><input id="s_supplier" list="vList" value="${esc(vendorLabel(data.vendorId, data.supplier))}">
+      <datalist id="vList">${vendorOptions.map(o=>`<option value="${esc(o)}">`).join('')}</datalist>
+      <p style="font-size:11px;color:var(--ink-soft);margin:4px 0 0;">Pick a vendor from Vendor Due Diligence to link this score to their questionnaire.</p></div>
       <div><label>What we use it for</label><input id="s_useCase" type="text" value="${esc(data.useCase)}"></div>
     </div>
     <div class="field-row three">
@@ -721,7 +741,9 @@ function openSRAModal(id){
     </div>
     <label>Conditions to clear</label><textarea id="s_conditions">${esc(data.conditions)}</textarea>
   `, async ()=>{
-    data.supplier = val('s_supplier'); data.useCase = val('s_useCase'); data.dataShared = val('s_dataShared');
+    data.supplier = val('s_supplier');
+    data.vendorId = resolveVendorId(data.supplier);
+    data.useCase = val('s_useCase'); data.dataShared = val('s_dataShared');
     data.aiActRole = val('s_aiActRole'); data.assessedBy = val('s_assessedBy');
     data.scores = {}; SRA_AREAS.forEach(a=>{ const v = document.getElementById('s_score_'+a.replace(/[^a-zA-Z]/g,'')).value; if(v) data.scores[a]=v; });
     data.decision = val('s_decision'); data.decidedBy = val('s_decidedBy'); data.reassessBy = val('s_reassessBy'); data.conditions = val('s_conditions');
