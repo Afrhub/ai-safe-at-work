@@ -556,13 +556,14 @@ function openAssessmentModal(id){
   };
   const ucOptions = DB.usecases.map(u=>u.name);
   showModal(`${existing?'Edit':'New'} Risk Assessment`, `
-    <div class="field-row">
+    <div class="field-row three">
       <div><label>Use case / tool</label>
         <input id="ra_useCase" list="ucList" value="${esc(ucLabel(data.useCaseId, data.useCase))}" placeholder="e.g. Drafting customer emails in Copilot">
         <p style="font-size:11px;color:var(--ink-soft);margin:4px 0 0;">Pick a registered use case to link this assessment to it. Free text is allowed for anything not yet in the register, but it will show as unlinked.</p>
         <datalist id="ucList">${ucOptions.map(o=>`<option value="${esc(o)}">`).join('')}</datalist>
       </div>
       <div><label>Owner (name / role)</label><input id="ra_owner" type="text" value="${esc(data.owner)}"></div>
+      <div><label>Decision</label><select id="ra_decision">${['Approve','Approve with conditions','Reject'].map(o=>`<option ${o===data.decision?'selected':''}>${o}</option>`).join('')}</select></div>
     </div>
     <div class="field-row three">
       <div><label>Assessment date</label><input id="ra_date" type="date" value="${esc(data.date)}"></div>
@@ -585,8 +586,7 @@ function openAssessmentModal(id){
     </table></div>
     <p style="font-size:11.5px;color:var(--ink-soft);margin:6px 0 14px;">Rating guide: 1–6 low · 8–12 medium · 15–25 high.</p>
 
-    <div class="field-row three">
-      <div><label>Decision</label><select id="ra_decision">${['Approve','Approve with conditions','Reject'].map(o=>`<option ${o===data.decision?'selected':''}>${o}</option>`).join('')}</select></div>
+    <div class="field-row">
       <div><label>Decided by</label><input id="ra_decidedBy" type="text" value="${esc(data.decidedBy)}"></div>
       <div><label>Review date</label><input id="ra_reviewDate" type="date" value="${esc(data.reviewDate)}"></div>
     </div>
