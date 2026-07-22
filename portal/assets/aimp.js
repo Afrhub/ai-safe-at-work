@@ -121,6 +121,7 @@ async function loadAll(){
   DB.vendors = await dbGet('vendors', []);
   DB.supplierRisk = await dbGet('supplierRisk', []);
   DB.incidents = await dbGet('incidents', []);
+  await syncUseCaseRatings();   // catch up anything rated by hand before assessments drove it
 }
 
 /* ============================= NAV ============================= */
@@ -164,6 +165,52 @@ function renderMain(){
   (renderers[CURRENT] || pageDashboard)();
 }
 
+/* Exceptions, not counts. "1 use case logged" is a fact about the database;
+   "1 use case has no assessment" is a job. Everything here is derived from data
+   already stored, and each item links to the screen that clears it. */
+function overdue(dateStr){
+  if(!dateStr) return false;
+  return dateStr < todayISO();
+}
+function attentionItems(){
+  const out = [];
+  const push = (sev, text, tab) => out.push({sev, text, tab});
+
+  DB.usecases.filter(u=>!assessmentsFor(u).length).forEach(u=>
+    push('high', `<b>${esc(u.name||u.id)}</b> has no risk assessment`, 'assessments'));
+
+  DB.risks.filter(r=>r.status!=='Complete' && overdue(r.dueDate)).forEach(r=>
+    push('high', `Mitigation overdue since ${esc(r.dueDate)}: <b>${esc(r.description||r.id)}</b>`, 'riskreg'));
+
+  DB.assessments.filter(a=>overdue(a.reviewDate)).forEach(a=>
+    push('med', `Assessment <b>${esc(a.id)}</b> was due for review on ${esc(a.reviewDate)}`, 'assessments'));
+
+  DB.assessments.filter(a=>(a.decision||'').toLowerCase().includes('condition') && !(a.conditions||'').trim()).forEach(a=>
+    push('med', `Assessment <b>${esc(a.id)}</b> was approved with conditions, but none are recorded`, 'assessments'));
+
+  DB.supplierRisk.filter(sr=>overdue(sr.reassessBy)).forEach(sr=>
+    push('med', `Vendor <b>${esc(vendorLabel(sr.vendorId, sr.supplier))}</b> was due re-assessment on ${esc(sr.reassessBy)}`, 'supplierrisk'));
+
+  DB.vendors.filter(v=>!scoresFor(v).length && (v.checklist||[]).filter(Boolean).length === VENDOR_MUST_QUESTIONS.length).forEach(v=>
+    push('med', `<b>${esc(v.name||v.id)}</b> finished diligence but has no risk score`, 'supplierrisk'));
+
+  DB.incidents.filter(i=>i.status!=='Closed').forEach(i=>
+    push('high', `Incident <b>${esc(i.id)}</b> is still open`, 'incidents'));
+
+  if(DB.aupStatus.published){
+    const acked = new Set(DB.acks.filter(a=>a.version===DB.aupStatus.version).map(a=>a.staffId));
+    const waiting = DB.staff.filter(st=>!acked.has(st.id)).length;
+    if(waiting) push('med', `${waiting} member(s) of staff have not acknowledged policy v${esc(DB.aupStatus.version)}`, 'staff');
+  } else {
+    push('high', 'The Acceptable Use Policy has not been published to staff', 'aup');
+  }
+
+  if(!DB.tor.approvedBy) push('low', 'Steering Group terms of reference are not approved', 'tor');
+
+  const order = {high:0, med:1, low:2};
+  return out.sort((a,b)=>order[a.sev]-order[b.sev]);
+}
+
 /* ============================= DASHBOARD ============================= */
 function pageDashboard(){
   const main = document.getElementById('main');
@@ -182,6 +229,21 @@ function pageDashboard(){
       <p>Live status across your governance documents, registers and staff sign-off, tracked in one place.</p></div>
       <div class="actions"><button class="btn gold" data-act="setTab" data-a1="aup">Open Acceptable Use Policy →</button></div>
     </div>
+
+    ${(()=>{ const items = attentionItems();
+      if(!items.length) return `<div class="card" style="margin-bottom:20px;border-left:3px solid var(--teal);">
+        <h3 style="margin:0 0 4px;">Nothing outstanding</h3>
+        <p style="color:var(--ink-soft);margin:0;">Every use case is assessed, no mitigation or review is overdue, and staff sign-off is up to date.</p></div>`;
+      const dot = sev => sev==='high' ? 'var(--rose)' : sev==='med' ? 'var(--amber)' : 'var(--ink-soft)';
+      return `<div class="card" style="margin-bottom:20px;border-left:3px solid ${dot(items[0].sev)};">
+        <h3 style="margin:0 0 10px;">Needs attention <span class="badge neutral">${items.length}</span></h3>
+        <div class="tbl-wrap"><table>
+          ${items.map(i=>`<tr>
+            <td style="width:10px;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${dot(i.sev)};"></span></td>
+            <td>${i.text}</td>
+            <td style="width:1%;white-space:nowrap;"><button class="btn ghost sm" data-act="setTab" data-a1="${i.tab}">Open</button></td>
+          </tr>`).join('')}
+        </table></div></div>`; })()}
 
     <div class="grid cols-4" style="margin-bottom:20px;">
       <div class="stat"><div class="v">${DB.aupStatus.published?'Published':'Draft'}</div><div class="l">Policy status (v${esc(DB.aupStatus.version)})</div></div>
@@ -380,6 +442,33 @@ function ucLabel(id, fallbackName){
   const u = ucById(id);
   return u ? u.name : (fallbackName || '');
 }
+/* The assessment is the evidence, so it owns the rating. Bands follow the guide
+   printed on the assessment form: 1-6 low, 8-12 medium, 15-25 high. */
+function assessmentTopScore(a){
+  return Math.max(0, ...(a.risks||[]).map(r=>(+clampScore(r.l)||0)*(+clampScore(r.i)||0)));
+}
+function ratingFromScore(top){
+  if(!top) return '';
+  return top >= 15 ? 'High' : top >= 8 ? 'Medium' : 'Low';
+}
+/* The rating a use case's assessments justify, or '' when none scored yet.
+   Worst case wins: two assessments, one High, the use case is High. */
+function derivedRating(uc){
+  const tops = assessmentsFor(uc).map(assessmentTopScore).filter(Boolean);
+  return tops.length ? ratingFromScore(Math.max(...tops)) : '';
+}
+/* Push the derived rating onto any use case an assessment covers. Returns true
+   if something actually changed, so the caller only writes when it must. */
+async function syncUseCaseRatings(){
+  let changed = false;
+  DB.usecases.forEach(uc=>{
+    const d = derivedRating(uc);
+    if(d && uc.risk !== d){ uc.risk = d; changed = true; }
+  });
+  if(changed) await dbSet('usecases', DB.usecases);
+  return changed;
+}
+
 function assessmentsFor(uc){
   return DB.assessments.filter(a =>
     a.useCaseId ? a.useCaseId === uc.id
@@ -459,6 +548,11 @@ function renderRegisterTable(key, q){
 function labelFor(schema,key){ if(key==='rating') return 'Rating'; if(key==='assessed') return 'Assessment'; const c = schema.cols.find(c=>c.key===key); return c?c.label.split('(')[0].trim():key; }
 function renderCell(c, r){
   if(c==='rating'){ const rt = computeRiskRating(r); return `<span class="badge ${rt.toLowerCase()}">${rt}</span>`; }
+  if(c==='risk'){
+    const d = derivedRating(r);
+    if(!d) return `<span class="badge neutral" title="No assessment has scored this yet">${esc(r.risk||'Not rated')}</span>`;
+    return `<span class="badge ${d.toLowerCase()}">${esc(d)}</span> <span class="mono" style="font-size:11px;color:var(--ink-soft);" title="Set by the risk assessment, not entered by hand">from assessment</span>`;
+  }
   if(c==='assessed'){
     const list = assessmentsFor(r);
     if(!list.length) return `<span class="badge neutral">Not assessed</span>`;
@@ -491,18 +585,21 @@ function openRegisterModal(key, id){
   const schema = REGISTER_SCHEMAS[key];
   const existing = id ? DB[key].find(r=>r.id===id) : null;
   const data = existing || {id: uid(schema.idPrefix)};
+  const derived = key==='usecases' ? derivedRating(data) : '';
   showModal(`${existing?'Edit':'New'} ${schema.title} entry`, `
     <div id="modalFields">
       ${schema.cols.map(c=>fieldHTML(c, data[c.key])).join('')}
     </div>
+    ${derived ? `<p style="font-size:11.5px;color:var(--ink-soft);margin:8px 0 0;">Risk rating is set to <b>${esc(derived)}</b> by this use case's risk assessment and will be kept in step with it. Change the scores in the assessment to change the rating.</p>` : ''}
   `, async ()=>{
-    schema.cols.forEach(c=>{ data[c.key] = document.getElementById('mf_'+c.key).value; });
+    schema.cols.forEach(c=>{ const el = document.getElementById('mf_'+c.key); if(el && !el.disabled) data[c.key] = el.value; });
     if(!existing) DB[key].push(data);
     else Object.assign(existing, data);
     await dbSet(key, DB[key]);
     closeModal(); renderRegisterTable(key, ''); renderNav();
     toast('Saved');
   });
+  if(derived){ const el = document.getElementById('mf_risk'); if(el){ el.value = derived; el.disabled = true; } }
 }
 function fieldHTML(c, value){
   value = value==null?'':value;
@@ -555,9 +652,10 @@ function renderAssessList(){
       const top = Math.max(0, ...a.risks.map(r=>(+r.l||0)*(+r.i||0)));
       return `<tr>
         <td class="mono">${esc(a.id)}</td>
-        <td>${esc(ucLabel(a.useCaseId, a.useCase))}${a.useCaseId
-            ? ` <span class="mono" style="font-size:11px;color:var(--ink-soft);">${esc(a.useCaseId)}</span>`
-            : ` <span class="badge neutral" title="Not linked to an entry in the Use Case Register">Unlinked</span>`}</td>
+        <td>${esc(ucLabel(a.useCaseId, a.useCase))}${
+            !a.useCaseId ? ` <span class="badge neutral" title="Not linked to an entry in the Use Case Register">Unlinked</span>`
+          : !ucById(a.useCaseId) ? ` <span class="badge neutral" title="The use case this was filed against has been deleted">Deleted use case</span>`
+          : ` <span class="mono" style="font-size:11px;color:var(--ink-soft);">${esc(a.useCaseId)}</span>`}</td>
         <td><span class="badge neutral">${esc(a.tier||'-')}</span></td>
         <td>${top || '-'} ${top? `<span class="badge ${top>=15?'high':top>=8?'medium':'low'}">${top>=15?'High':top>=8?'Medium':'Low'}</span>`:''}</td>
         <td>${a.decision?`<span class="badge ${a.decision.toLowerCase().includes('reject')?'reject':a.decision.toLowerCase().includes('condition')?'conditions':'approve'}">${esc(a.decision)}</span>`:'-'}</td>
@@ -627,7 +725,9 @@ function openAssessmentModal(id){
     data.decision = val('ra_decision'); data.decidedBy = val('ra_decidedBy'); data.reviewDate = val('ra_reviewDate'); data.conditions = val('ra_conditions');
     if(!existing) DB.assessments.push(data); else Object.assign(existing, data);
     await dbSet('assessments', DB.assessments);
-    closeModal(); renderAssessList(); renderNav(); toast('Assessment saved');
+    const rated = await syncUseCaseRatings();
+    closeModal(); renderAssessList(); renderNav();
+    toast(rated ? 'Assessment saved, use case rating updated' : 'Assessment saved');
   }, true);
   data.risks.forEach((r,idx)=>{
     const paint = ()=>{
