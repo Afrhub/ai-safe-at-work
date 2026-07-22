@@ -361,7 +361,7 @@ function pageRegister(key){
     </div>
     <div class="card"><div class="toolbar">
         <div class="search"><input id="searchBox" type="text" placeholder="Search ${schema.title.toLowerCase()}…" style="margin:0;"></div>
-        <div style="color:var(--ink-soft);font-size:12.5px;">${DB[key].length} entr${DB[key].length===1?'y':'ies'}</div>
+        <div id="regCount" style="color:var(--ink-soft);font-size:12.5px;"></div>
       </div>
       <div id="regTableWrap"></div>
     </div>`;
@@ -373,7 +373,18 @@ function renderRegisterTable(key, q){
   const schema = REGISTER_SCHEMAS[key];
   const rows = DB[key].filter(r => !q || JSON.stringify(r).toLowerCase().includes(q.toLowerCase()));
   const wrap = document.getElementById('regTableWrap');
-  if(!rows.length){ wrap.innerHTML = `<div class="empty"><b>No entries yet</b>Add your first one to start the register.</div>`; return; }
+  // count lives here, not in the page shell: the shell renders once but this
+  // runs on every add/edit/delete/search, so the number stays true
+  const countEl = document.getElementById('regCount');
+  if(countEl){
+    const total = DB[key].length;
+    countEl.textContent = q
+      ? `${rows.length} of ${total} entr${total===1?'y':'ies'}`
+      : `${total} entr${total===1?'y':'ies'}`;
+  }
+  if(!rows.length){ wrap.innerHTML = q
+    ? `<div class="empty"><b>No matches</b>Nothing in this register matches "${esc(q)}".</div>`
+    : `<div class="empty"><b>No entries yet</b>Add your first one to start the register.</div>`; return; }
   const cols = schema.listCols;
   wrap.innerHTML = `<div class="tbl-wrap"><table>
     <tr><th class="mono">ID</th>${cols.map(c=>`<th>${labelFor(schema,c)}</th>`).join('')}<th></th></tr>

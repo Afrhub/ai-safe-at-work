@@ -24,6 +24,10 @@ await page.fill(".modal input", "PW Test Use Case").catch(() => {});
 await page.click(".modal .btn:not(.ghost)");
 await page.waitForTimeout(800);
 ok((await mainText()).includes("PW Test Use Case"), "use case added");
+// regression: the count used to render once with the page shell, so it stayed
+// at "0 entries" while rows were visible below it
+const ucCount = await page.evaluate(() => document.getElementById("regCount")?.textContent || "");
+ok(/^[1-9]\d* entr/.test(ucCount), `entry count reflects rows, got "${ucCount}"`);
 
 // 2. Risk with matrix rating
 await tab("riskreg");
