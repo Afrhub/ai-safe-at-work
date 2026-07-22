@@ -237,6 +237,51 @@ function attentionItems(){
   return out.sort((a,b)=>order[a.sev]-order[b.sev]);
 }
 
+/* Weekly digest. The attention list already knows what is outstanding; this
+   turns it into something that can leave the building. Composed client-side so
+   it works today with no mail infrastructure: the button opens a prefilled
+   email. When a mail provider exists, the same text is what the scheduled send
+   should post. See docs/weekly-digest.md. */
+function digestText(){
+  const items = attentionItems();
+  const org = fieldVal(DB.org.companyName) || 'your organisation';
+  const L = [];
+  L.push(`AI governance digest for ${org}`);
+  L.push('');
+  if(!items.length){
+    L.push('Nothing outstanding. Every use case is assessed, no mitigation or review is overdue, and staff sign-off is up to date.');
+  } else {
+    const bySev = {high:'Needs action', med:'Due soon', low:'Worth doing'};
+    ['high','med','low'].forEach(sev=>{
+      const group = items.filter(i=>i.sev===sev);
+      if(!group.length) return;
+      L.push(`${bySev[sev]} (${group.length})`);
+      group.forEach(i=>L.push('  - ' + stripTags(i.text)));
+      L.push('');
+    });
+  }
+  L.push('---');
+  L.push(`Policy: ${DB.aupStatus.published ? 'published v'+DB.aupStatus.version : 'draft v'+DB.aupStatus.draftVersion+', not published'}`);
+  const acked = new Set(DB.acks.filter(a=>a.version===DB.aupStatus.version).map(a=>a.staffId));
+  L.push(`Staff acknowledged: ${DB.staff.filter(st=>acked.has(st.id)).length} of ${DB.staff.length}`);
+  L.push(`Use cases: ${DB.usecases.length} · Risks: ${DB.risks.length} · Assessments: ${DB.assessments.length} · Vendors: ${DB.vendors.length}`);
+  L.push('');
+  L.push('Open the platform to clear these items.');
+  return L.join('\n');
+}
+function stripTags(html){
+  return String(html).replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&#39;/g,"'").replace(/&quot;/g,'"');
+}
+function emailDigest(){
+  const subject = encodeURIComponent(`AI governance digest, ${fieldVal(DB.org.companyName) || 'weekly'}`);
+  const body = encodeURIComponent(digestText());
+  window.location.href = `mailto:?subject=${subject}&body=${body}`;
+}
+async function copyDigest(){
+  try { await navigator.clipboard.writeText(digestText()); toast('Digest copied'); }
+  catch(e){ toast('Could not copy, use Email instead'); }
+}
+
 /* ============================= DASHBOARD ============================= */
 function pageDashboard(){
   const main = document.getElementById('main');
@@ -258,11 +303,19 @@ function pageDashboard(){
 
     ${(()=>{ const items = attentionItems();
       if(!items.length) return `<div class="card" style="margin-bottom:20px;border-left:3px solid var(--teal);">
-        <h3 style="margin:0 0 4px;">Nothing outstanding</h3>
+        <h3 style="margin:0 0 4px;display:flex;align-items:center;gap:10px;">Nothing outstanding
+          <span style="margin-left:auto;display:flex;gap:6px;">
+            <button class="btn ghost sm" data-act="copyDigest">Copy digest</button>
+            <button class="btn ghost sm" data-act="emailDigest">Email digest</button>
+          </span></h3>
         <p style="color:var(--ink-soft);margin:0;">Every use case is assessed, no mitigation or review is overdue, and staff sign-off is up to date.</p></div>`;
       const dot = sev => sev==='high' ? 'var(--rose)' : sev==='med' ? 'var(--amber)' : 'var(--ink-soft)';
       return `<div class="card" style="margin-bottom:20px;border-left:3px solid ${dot(items[0].sev)};">
-        <h3 style="margin:0 0 10px;">Needs attention <span class="badge neutral">${items.length}</span></h3>
+        <h3 style="margin:0 0 10px;display:flex;align-items:center;gap:10px;">Needs attention <span class="badge neutral">${items.length}</span>
+          <span style="margin-left:auto;display:flex;gap:6px;">
+            <button class="btn ghost sm" data-act="copyDigest">Copy digest</button>
+            <button class="btn ghost sm" data-act="emailDigest">Email digest</button>
+          </span></h3>
         <div class="tbl-wrap"><table>
           ${items.map(i=>`<tr>
             <td style="width:10px;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${dot(i.sev)};"></span></td>
@@ -1284,7 +1337,7 @@ function pageStash(id){
    (the site CSP has script-src 'self', which blocks inline handlers). */
 const ACTIONS = { setTab, openRegisterModal, deleteRegisterRow, openAssessmentModal, deleteAssessment,
   openVendorModal, deleteVendor, openSRAModal, deleteSRA, openIncidentModal, deleteIncident,
-  openStaffModal, deleteStaff, print: () => window.print() };
+  openStaffModal, deleteStaff, copyDigest, emailDigest, print: () => window.print() };
 document.addEventListener("click", (e) => {
   const el = e.target.closest("[data-act]");
   if (!el) return;

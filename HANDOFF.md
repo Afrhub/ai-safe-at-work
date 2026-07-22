@@ -63,6 +63,11 @@ decides to pay you today cannot, and you will not know they tried.
     an invoice, pay by transfer. At £990-£4,990 that is survivable for a while; it is
     not survivable as the only option. Decide: keep manual for the first 5-10
     customers (defensible, gives price-discovery conversations), or wire a processor.
+0d. **Weekly digest is built but cannot send.** The dashboard composes the
+    digest and offers Copy / Email (opens the mail client). Automatic weekly
+    send needs a provider, `MAIL_API_KEY`, `DIGEST_TO` and a Supabase
+    SERVICE key in Netlify env, then a scheduled function. Steps and the
+    do-not-reimplement-the-rules warning: `docs/weekly-digest.md`.
 0c. **Confirm the loop end-to-end** before promoting anything: submit the live form,
     confirm the email arrives, confirm an invoice can be raised and portal access
     granted. Never assume the form works because the page renders.
