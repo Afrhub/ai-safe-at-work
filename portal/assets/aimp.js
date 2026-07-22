@@ -39,16 +39,26 @@ const DB = {
   vendors: [], supplierRisk: [], incidents: []
 };
 
+/* Prompt text belongs in the placeholder attribute, not the value. It used to be
+   seeded as the value, so every field arrived pre-filled with "[DPO Name]" and had
+   to be selected and deleted before typing. fieldVal() hides any bracketed prompt
+   left in stored data, so records saved before this fix behave the same way.
+   docVal() puts the bracket back when rendering the policy document itself, where
+   a visible [Company Name] is the intended fill-me-in marker. */
+const PLACEHOLDER_RE = /^\s*\[.*\]\s*$/;
+function fieldVal(v){ return (v==null || PLACEHOLDER_RE.test(v)) ? '' : v; }
+function docVal(v, prompt){ const x = fieldVal(v); return x || prompt; }
+
 const DEFAULT_ORG = {
-  companyName:'[Company Name]', owner:'[Role, e.g. DPO / CISO / Head of IT]', dpoName:'[DPO Name]',
+  companyName:'', owner:'', dpoName:'',
   effectiveDate: todayISO(), incidentContact:'security@example.com', logLocation:'Shared AI Use Register (spreadsheet)',
   trainingRef:'the AI Safe@Work course', approvedTools:'ChatGPT Enterprise (EU region)\nMicrosoft 365 Copilot'
 };
 const DEFAULT_TOR = {
-  org:'[Organisation]', reportTo:'the board', chair:'[Senior owner, e.g. COO / CISO]',
-  members:[{role:'Data protection / compliance', held:'[DPO name]'},{role:'IT / security', held:'[Name / role]'},
-           {role:'Procurement / legal', held:'[Name / role]'},{role:'Business / operations', held:'[Name / role]'},
-           {role:'Executive sponsor', held:'[Name / role]'}],
+  org:'', reportTo:'the board', chair:'',
+  members:[{role:'Data protection / compliance', held:''},{role:'IT / security', held:''},
+           {role:'Procurement / legal', held:''},{role:'Business / operations', held:''},
+           {role:'Executive sponsor', held:''}],
   frequency:'Quarterly, plus on demand for urgent approvals', quorumN:'three',
   minutesDays:'five working days', approvedBy:'', approvedDate:''
 };
@@ -237,12 +247,12 @@ function pageAUP(){
       <div class="card">
         <h3>Policy fields</h3>
         <div class="field-row">
-          <div><label>Company name</label><input id="f_companyName" type="text" value="${esc(o.companyName)}"></div>
+          <div><label>Company name</label><input id="f_companyName" type="text" value="${esc(fieldVal(o.companyName))}" placeholder="Your company name"></div>
           <div><label>Effective date</label><input id="f_effectiveDate" type="date" value="${esc(o.effectiveDate)}"></div>
         </div>
         <div class="field-row">
-          <div><label>Policy owner (role)</label><input id="f_owner" type="text" value="${esc(o.owner)}"></div>
-          <div><label>DPO / contact name</label><input id="f_dpoName" type="text" value="${esc(o.dpoName)}"></div>
+          <div><label>Policy owner (role)</label><input id="f_owner" type="text" value="${esc(fieldVal(o.owner))}" placeholder="Role, e.g. DPO / CISO / Head of IT"></div>
+          <div><label>DPO / contact name</label><input id="f_dpoName" type="text" value="${esc(fieldVal(o.dpoName))}" placeholder="Name of your DPO or data contact"></div>
         </div>
         <div class="field-row">
           <div><label>Incident contact</label><input id="f_incidentContact" type="text" value="${esc(o.incidentContact)}"></div>
@@ -289,25 +299,25 @@ function renderAupDoc(){
   const tools = o.approvedTools.split('\n').filter(Boolean).map(t=>`<li>${esc(t)}</li>`).join('');
   document.getElementById('aupDoc').innerHTML = `
   <div class="doc">
-    <h2>Acceptable Use of AI Tools at ${esc(o.companyName)}</h2>
-    <div class="meta"><b>Effective:</b> ${fmtDate(o.effectiveDate)} · <b>Version:</b> ${esc(DB.aupStatus.version)} · <b>Owner:</b> ${esc(o.owner)} · <b>Review cycle:</b> Quarterly</div>
-    <h4>1. Purpose</h4><p>This policy describes how staff at ${esc(o.companyName)} may use generative AI tools (such as ChatGPT, Microsoft Copilot, Claude, Gemini, Perplexity, or any other AI assistant) in the course of their work, setting out what is encouraged, what is permitted with conditions, and what is forbidden.</p>
-    <h4>2. Scope</h4><p>Applies to all employees, contractors, interns and consultants performing work for ${esc(o.companyName)}, on company-owned and personal devices used for work, covering all AI tools whether procured by the company or used personally.</p>
+    <h2>Acceptable Use of AI Tools at ${esc(docVal(o.companyName,'[Company Name]'))}</h2>
+    <div class="meta"><b>Effective:</b> ${fmtDate(o.effectiveDate)} · <b>Version:</b> ${esc(DB.aupStatus.version)} · <b>Owner:</b> ${esc(docVal(o.owner,'[Policy owner role]'))} · <b>Review cycle:</b> Quarterly</div>
+    <h4>1. Purpose</h4><p>This policy describes how staff at ${esc(docVal(o.companyName,'[Company Name]'))} may use generative AI tools (such as ChatGPT, Microsoft Copilot, Claude, Gemini, Perplexity, or any other AI assistant) in the course of their work, setting out what is encouraged, what is permitted with conditions, and what is forbidden.</p>
+    <h4>2. Scope</h4><p>Applies to all employees, contractors, interns and consultants performing work for ${esc(docVal(o.companyName,'[Company Name]'))}, on company-owned and personal devices used for work, covering all AI tools whether procured by the company or used personally.</p>
     <h4>3. Approved tools</h4><ul>${tools || '<li class="fill">No approved tools listed yet</li>'}</ul>
-    <p>Other tools require explicit approval from ${esc(o.owner)} before use. Free or personal-tier consumer AI tools are <b>not approved</b> for the data categories in Section 5.</p>
+    <p>Other tools require explicit approval from ${esc(docVal(o.owner,'[Policy owner role]'))} before use. Free or personal-tier consumer AI tools are <b>not approved</b> for the data categories in Section 5.</p>
     <h4>4. Permitted uses</h4><p>Drafting and editing work with human review; summarising appropriate material; translation and rephrasing; brainstorming and structuring thinking; explaining concepts; technical assistance on appropriate data.</p>
     <h4>5. Forbidden inputs</h4><p>Customer or contact personal data; special-category personal data; third-party contracts or legal drafts; source code we don't own or licence; non-public financial data; authentication secrets; documents classified Confidential or higher; HR records; anything held under a duty of confidence, must never be entered into a free or personal-tier AI tool.</p>
     <h4>6. Output handling</h4><p>AI-generated content must be reviewed by a human before use. Claims affecting a decision must be independently verified. AI involvement in customer-facing material must be disclosed per EU AI Act Article 50. No decision affecting someone's livelihood or legal position may be made on AI output alone.</p>
     <h4>7. Logging</h4><p>Significant AI-assisted work is logged in: <b>${esc(o.logLocation)}</b>. "Significant" means the use affected another person, represented the company externally, touched sensitive data, or supported an irreversible/expensive decision.</p>
     <h4>8. Settings and configuration</h4><p>Training-data opt-out enabled wherever offered on a work account; retention follows the company's procurement contract; MFA is required on all work AI accounts.</p>
-    <h4>9. Vendor changes</h4><p>Material changes to an approved tool's terms, data handling, sub-processors or model must be reviewed by ${esc(o.dpoName)} before continued use.</p>
+    <h4>9. Vendor changes</h4><p>Material changes to an approved tool's terms, data handling, sub-processors or model must be reviewed by ${esc(docVal(o.dpoName,'[DPO name]'))} before continued use.</p>
     <h4>10. Incidents</h4><p>Report within the hour to <b>${esc(o.incidentContact)}</b>: data pasted into the wrong tool, harmful AI output, an AI-powered scam, or a vendor security incident. Do not delete the evidence.</p>
     <h4>11. Training</h4><p>All staff complete ${esc(o.trainingRef)} within thirty days of joining and refresh annually.</p>
-    <h4>12. Roles and responsibilities</h4><p>Every member of staff complies with this policy. Managers apply oversight to AI-assisted work. ${esc(o.dpoName)} maintains assessments and vendor diligence. IT/Security administers tools and incident response.</p>
+    <h4>12. Roles and responsibilities</h4><p>Every member of staff complies with this policy. Managers apply oversight to AI-assisted work. ${esc(docVal(o.dpoName,'[DPO name]'))} maintains assessments and vendor diligence. IT/Security administers tools and incident response.</p>
     <h4>13. Consequences of non-compliance</h4><p>Breach may result in disciplinary action up to and including termination, with mandatory regulator notification where applicable.</p>
     <h4>14. Standards referenced</h4><p>EU AI Act 2024/1689 Art 4 &amp; 26 · GDPR Art 5, 6, 9, 22, 32–35 · ISO/IEC 42001:2023 Cl 5.2, 7.2–7.3, Annex A.2 · ISO/IEC 27001:2022 A.5.10, A.5.13, A.5.23, A.6.3.</p>
     <div class="field-row" style="margin-top:24px;border-top:1px solid var(--line);padding-top:16px;">
-      <div><b>Approved by</b><br>${esc(o.owner)}</div>
+      <div><b>Approved by</b><br>${esc(docVal(o.owner,'[Policy owner role]'))}</div>
       <div><b>Next review</b><br>${fmtDate(addMonths(o.effectiveDate,3))}</div>
     </div>
   </div>`;
@@ -897,11 +907,11 @@ function pageTOR(){
       <div class="card">
         <h3>Group details</h3>
         <div class="field-row">
-          <div><label>Organisation</label><input id="t_org" type="text" value="${esc(t.org)}"></div>
+          <div><label>Organisation</label><input id="t_org" type="text" value="${esc(fieldVal(t.org))}" placeholder="Your organisation name"></div>
           <div><label>Reports to</label><input id="t_reportTo" type="text" value="${esc(t.reportTo)}"></div>
         </div>
         <div class="field-row">
-          <div><label>Chair</label><input id="t_chair" type="text" value="${esc(t.chair)}"></div>
+          <div><label>Chair</label><input id="t_chair" type="text" value="${esc(fieldVal(t.chair))}" placeholder="Senior owner, e.g. COO / CISO"></div>
           <div><label>Meeting frequency</label><input id="t_frequency" type="text" value="${esc(t.frequency)}"></div>
         </div>
         <div class="field-row">
@@ -918,7 +928,7 @@ function pageTOR(){
         <div id="memberRows">
           ${t.members.map((m,idx)=>`<div class="field-row" style="align-items:end;">
             <div><label>Role</label><input id="m_role_${idx}" type="text" value="${esc(m.role)}"></div>
-            <div><label>Held by</label><input id="m_held_${idx}" type="text" value="${esc(m.held)}"></div>
+            <div><label>Held by</label><input id="m_held_${idx}" type="text" value="${esc(fieldVal(m.held))}" placeholder="Name / role"></div>
           </div>`).join('')}
         </div>
         <button class="btn ghost sm" id="addMember">+ Add member</button>
@@ -943,11 +953,11 @@ function renderTorDoc(){
   document.getElementById('torDoc').innerHTML = `
   <div class="doc">
     <h2>AI Steering Group, Terms of Reference</h2>
-    <h4>1. Purpose</h4><p>The AI Steering Group is the body accountable for the safe, lawful and effective use of artificial intelligence across ${esc(t.org)}. It owns the AI governance framework, approves AI use cases, oversees risk, and reports to ${esc(t.reportTo)}.</p>
+    <h4>1. Purpose</h4><p>The AI Steering Group is the body accountable for the safe, lawful and effective use of artificial intelligence across ${esc(docVal(t.org,'[Organisation]'))}. It owns the AI governance framework, approves AI use cases, oversees risk, and reports to ${esc(t.reportTo)}.</p>
     <h4>2. Scope</h4><p>All AI and generative-AI tools used by staff; all use cases touching personal data, customers, employment decisions or regulated activity; the policies, registers and assessments this platform tracks. Out of scope: day-to-day IT helpdesk support and individual HR matters.</p>
     <h4>3. Membership</h4>
-    <table><tr><th>Role</th><th>Held by</th></tr><tr><td>Chair</td><td>${esc(t.chair)}</td></tr>
-    ${t.members.map(m=>`<tr><td>${esc(m.role)}</td><td>${esc(m.held)||'<span class="fill">unassigned</span>'}</td></tr>`).join('')}</table>
+    <table><tr><th>Role</th><th>Held by</th></tr><tr><td>Chair</td><td>${esc(docVal(t.chair,'[Chair]'))}</td></tr>
+    ${t.members.map(m=>`<tr><td>${esc(m.role)}</td><td>${esc(docVal(m.held,'[Name / role]'))||'<span class="fill">unassigned</span>'}</td></tr>`).join('')}</table>
     <h4>4. Responsibilities</h4><p>Own the AI governance framework and AUP; approve, reject or condition AI use cases; oversee the registers; set and monitor training; review incidents and notification decisions; track EU AI Act and ISO/IEC 42001 obligations; report governance maturity quarterly.</p>
     <h4>5. Meetings, quorum and decisions</h4><p><b>Frequency:</b> ${esc(t.frequency)}. <b>Quorum:</b> the Chair plus at least ${esc(t.quorumN)} members, including data protection. <b>Decisions:</b> by consensus where possible, otherwise majority with the Chair holding the casting vote. <b>Minutes:</b> circulated within ${esc(t.minutesDays)}.</p>
     <h4>6. Reporting</h4><p>The Chair reports to ${esc(t.reportTo)} each quarter on use cases approved/rejected, open high risks, training completion, incidents, and progress against EU AI Act and ISO/IEC 42001 obligations.</p>
@@ -1006,7 +1016,7 @@ function renderStaffTable(ackByStaff){
       const ack = ackByStaff[s.id];
       const acked = ack && ack.version===DB.aupStatus.version;
       const subj = encodeURIComponent(`Action needed: acknowledge the AI Acceptable Use Policy`);
-      const body = encodeURIComponent(`Hi ${s.name},\n\nPlease open the AI Safe@Work compliance platform and acknowledge the AI Acceptable Use Policy (v${DB.aupStatus.version}).\n\nThanks,\n${DB.org.owner}`);
+      const body = encodeURIComponent(`Hi ${s.name},\n\nPlease open the Attest AI platform and acknowledge the AI Acceptable Use Policy (v${DB.aupStatus.version}).\n\nThanks,\n${DB.org.owner}`);
       return `<tr><td>${esc(s.name)}</td><td>${esc(s.email)}</td><td>${esc(s.role)}</td>
       <td>${acked?`<span class="badge active">Acknowledged ${fmtDate(ack.date)}</span>`:'<span class="badge open">Not yet</span>'}</td>
       <td style="white-space:nowrap;">
