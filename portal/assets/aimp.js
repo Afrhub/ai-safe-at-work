@@ -331,10 +331,24 @@ function pageAUP(){
         <button class="btn ${st.published?'ghost':'gold'}" id="publishBtn">${st.published?'Unpublish':'Publish to staff'}</button>
       </div>
     </div>
-    <div class="grid cols-2">
+    <div class="statusbar ${st.published && !hasUnpublishedChanges() ? 'ok' : 'draft'}">
+      <div class="sb-main">
+        <b>${st.published
+          ? `Published as version ${esc(st.version)}`
+          : `Draft, version ${esc(st.draftVersion)}`}</b>
+        <span>${st.published
+          ? `on ${fmtDate(st.publishedDate)}${hasUnpublishedChanges()?`, staff are still on v${esc(st.version)}`:', staff can acknowledge it'}`
+          : 'not yet sent to staff'}</span>
+      </div>
+      ${hasUnpublishedChanges()
+        ? `<div class="sb-note"><b>Unpublished changes.</b> Publishing makes v${esc(st.draftVersion)} live and asks everyone to acknowledge again.</div>`
+        : `<div class="sb-note">Every save increments the draft version. Publishing makes it live and asks staff to acknowledge.</div>`}
+    </div>
+
+    <div class="aup-layout">
       <div class="card">
         <h3>Policy fields</h3>
-        <p style="color:var(--ink-soft);font-size:12.5px;margin:0 0 14px;">Each field below fills the numbered section it names in the policy on the right. Sections not listed here are standard wording that applies to every organisation.</p>
+        <p style="color:var(--ink-soft);font-size:12.5px;margin:0 0 14px;">Each field fills the numbered section it names in the policy below. Sections not listed here are standard wording that applies to every organisation.</p>
 
         <div class="secgrp"><span class="secnum">Header</span>
         <div class="field-row">
@@ -383,14 +397,6 @@ function pageAUP(){
         <label>Consequences of non-compliance</label><textarea id="f_consequences" rows="3">${esc(sec(o,'consequences'))}</textarea></div>
 
         <button class="btn" id="saveOrgBtn">Save &amp; regenerate</button>
-      </div>
-      <div class="card" style="background:${st.published?'var(--teal-bg)':'var(--amber-bg)'};border-color:transparent;">
-        <h3>Status</h3>
-        <p style="margin:0 0 8px;">${st.published
-          ? `Published as version <b>${esc(st.version)}</b> on ${fmtDate(st.publishedDate)}.`
-          : `This policy is a draft at version <b>${esc(st.draftVersion)}</b> and has not been sent to staff.`}</p>
-        ${hasUnpublishedChanges()?`<p style="margin:0 0 8px;color:var(--amber);"><b>Unpublished changes.</b> Staff are still on v${esc(st.version)}. Publishing will make v${esc(st.draftVersion)} live and ask everyone to acknowledge it again.</p>`:''}
-        <p style="color:var(--ink-soft);font-size:12.5px;">Every save increments the draft version. Publishing makes that draft the live version; acknowledgements are recorded against the version they were given for, so re-publishing asks staff to acknowledge again.</p>
       </div>
     </div>
     <div id="aupDoc"></div>

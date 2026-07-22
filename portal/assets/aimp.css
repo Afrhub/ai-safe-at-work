@@ -204,3 +204,27 @@ html[data-theme="dark"] .modal-bg { background: rgba(0,0,0,0.6); }
 .modal input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
 .modal input[type="number"]::-webkit-outer-spin-button,
 .modal input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* Policy status: a horizontal banner, not a column. The old right-hand card
+   spent half the screen on three sentences and squeezed the fields you
+   actually type into. */
+.statusbar {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px;
+  padding: 12px 16px; margin: 0 0 16px;
+  border-radius: 6px; border: 1px solid transparent;
+  font-size: 13.5px;
+}
+.statusbar.ok    { background: var(--teal-bg, #e8f5f0);  border-color: rgba(0,0,0,0.06); }
+.statusbar.draft { background: var(--amber-bg, #fdf3e3); border-color: rgba(0,0,0,0.06); }
+.statusbar .sb-main { display: flex; flex-wrap: wrap; gap: 6px; align-items: baseline; }
+.statusbar .sb-main span { color: var(--ink-soft); }
+.statusbar .sb-note { margin-left: auto; color: var(--ink-soft); font-size: 12.5px; max-width: 46ch; }
+
+/* Policy fields get the full width: long prose sections are unreadable in a
+   half-width column. */
+.aup-layout > .card { max-width: none; }
+.aup-layout textarea { min-height: 72px; line-height: 1.55; }
+@media (min-width: 1100px) {
+  /* two columns of fields side by side reads better than one very long run */
+  .aup-layout .secgrp { break-inside: avoid; }
+}
