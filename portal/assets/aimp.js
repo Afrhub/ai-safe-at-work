@@ -335,6 +335,8 @@ const REGISTER_SCHEMAS = {
   risks: {
     title:'AI Risk Register', idPrefix:'R', desc:'AI-specific risks: data leakage, hallucination, bias, vendor and compliance risk, with owners and mitigation.',
     cols:[
+      // status first: it is the field you come back to change most often
+      {key:'status',label:'Status',type:'select',options:['Open','In progress','Complete','Deferred']},
       {key:'category',label:'Risk category',type:'select',options:['Data leakage','Hallucination','Bias','Vendor risk','Compliance gap','Shadow AI','Operational']},
       {key:'relatedUseCase',label:'Related use case (optional)',type:'usecase'},
       {key:'description',label:'Risk description (be specific)',type:'textarea'},
@@ -343,8 +345,7 @@ const REGISTER_SCHEMAS = {
       {key:'impact',label:'Impact',type:'select',options:['Low','Medium','High','Critical']},
       {key:'owner',label:'Risk owner (named person)',type:'text'},
       {key:'mitigation',label:'Mitigation action',type:'textarea'},
-      {key:'dueDate',label:'Mitigation due date',type:'date'},
-      {key:'status',label:'Status',type:'select',options:['Open','In progress','Complete','Deferred']}
+      {key:'dueDate',label:'Mitigation due date',type:'date'}
     ],
     listCols:['description','category','relatedUseCase','likelihood','impact','rating','owner','status']
   }
