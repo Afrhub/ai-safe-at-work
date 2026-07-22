@@ -134,6 +134,9 @@ const SRA_AREAS = ['Data handling','Security','Sub-processors','Compliance','Tra
 async function loadAll(){
   DB.org = await dbGet('org-config', DEFAULT_ORG);
   DB.aupStatus = await dbGet('aup-status', {published:false, version:'1.0', publishedDate:null});
+  // draftVersion is what you are editing; version is what staff acknowledged.
+  // Records written before the split get a draft equal to their version.
+  if(!DB.aupStatus.draftVersion) DB.aupStatus.draftVersion = DB.aupStatus.version || '1.0';
   DB.tor = await dbGet('tor-config', DEFAULT_TOR);
   DB.raci = await dbGet('raci-matrix', {cols:RACI_COLS_DEFAULT, cells:RACI_DEFAULT_CELLS});
   DB.staff = await dbGet('staff', []);
@@ -383,8 +386,11 @@ function pageAUP(){
       </div>
       <div class="card" style="background:${st.published?'var(--teal-bg)':'var(--amber-bg)'};border-color:transparent;">
         <h3>Status</h3>
-        <p style="margin:0 0 8px;">${st.published?`Published as version <b>${esc(st.version)}</b> on ${fmtDate(st.publishedDate)}.`:'This policy is still a draft and has not been sent to staff.'}</p>
-        <p style="color:var(--ink-soft);font-size:12.5px;">Publishing locks in a version number. If you re-publish after edits, the version increments and prior acknowledgements no longer count, staff are asked to re-acknowledge.</p>
+        <p style="margin:0 0 8px;">${st.published
+          ? `Published as version <b>${esc(st.version)}</b> on ${fmtDate(st.publishedDate)}.`
+          : `This policy is a draft at version <b>${esc(st.draftVersion)}</b> and has not been sent to staff.`}</p>
+        ${hasUnpublishedChanges()?`<p style="margin:0 0 8px;color:var(--amber);"><b>Unpublished changes.</b> Staff are still on v${esc(st.version)}. Publishing will make v${esc(st.draftVersion)} live and ask everyone to acknowledge it again.</p>`:''}
+        <p style="color:var(--ink-soft);font-size:12.5px;">Every save increments the draft version. Publishing makes that draft the live version; acknowledgements are recorded against the version they were given for, so re-publishing asks staff to acknowledge again.</p>
       </div>
     </div>
     <div id="aupDoc"></div>
@@ -404,18 +410,44 @@ async function saveOrgFields(){
     rolesResponsibilities: val('f_rolesResponsibilities')
   };
   await dbSet('org-config', DB.org);
-  renderAupDoc(); renderNav(); toast('Policy fields saved');
+  DB.aupStatus.draftVersion = bumpVersion(DB.aupStatus.draftVersion);
+  await dbSet('aup-status', DB.aupStatus);
+  pageAUP();
+  toast(DB.aupStatus.published
+    ? `Saved as draft v${DB.aupStatus.draftVersion}, publish to send it to staff`
+    : `Saved as v${DB.aupStatus.draftVersion}`);
 }
+/* Editing bumps the DRAFT version, never the published one: a typo fix must not
+   silently invalidate every staff acknowledgement. Publishing promotes the draft,
+   and because acknowledgements are keyed to the version they were given against,
+   that is what makes staff re-acknowledge. */
+function bumpVersion(v){
+  const m = String(v||'1.0').match(/^(\d+)\.(\d+)$/);
+  if(!m) return '1.1';
+  return `${m[1]}.${+m[2]+1}`;
+}
+function hasUnpublishedChanges(){
+  const st = DB.aupStatus;
+  return !!st.published && st.draftVersion !== st.version;
+}
+/* What the document header should show. */
+function displayVersion(){
+  const st = DB.aupStatus;
+  return (!st.published || hasUnpublishedChanges()) ? st.draftVersion : st.version;
+}
+
 function val(id){ return document.getElementById(id).value; }
 async function togglePublish(){
   if(DB.aupStatus.published){
     DB.aupStatus.published=false;
   } else {
-    DB.aupStatus.published=true; DB.aupStatus.publishedDate = todayISO();
+    DB.aupStatus.published=true;
+    DB.aupStatus.version = DB.aupStatus.draftVersion;   // promote; older acks stop counting
+    DB.aupStatus.publishedDate = todayISO();
   }
   await dbSet('aup-status', DB.aupStatus);
   pageAUP();
-  toast(DB.aupStatus.published ? 'Policy published, staff can now acknowledge it' : 'Policy unpublished');
+  toast(DB.aupStatus.published ? `Published as v${DB.aupStatus.version}, staff can now acknowledge it` : 'Policy unpublished');
 }
 function renderAupDoc(){
   const o = DB.org;
@@ -423,7 +455,7 @@ function renderAupDoc(){
   document.getElementById('aupDoc').innerHTML = `
   <div class="doc">
     <h2>Acceptable Use of AI Tools at ${esc(docVal(o.companyName,'[Company Name]'))}</h2>
-    <div class="meta"><b>Effective:</b> ${fmtDate(o.effectiveDate)} · <b>Version:</b> ${esc(DB.aupStatus.version)} · <b>Owner:</b> ${esc(docVal(o.owner,'[Policy owner role]'))} · <b>Review cycle:</b> Quarterly</div>
+    <div class="meta"><b>Effective:</b> ${fmtDate(o.effectiveDate)} · <b>Version:</b> ${esc(displayVersion())}${hasUnpublishedChanges()||!DB.aupStatus.published?' (draft)':''} · <b>Owner:</b> ${esc(docVal(o.owner,'[Policy owner role]'))} · <b>Review cycle:</b> Quarterly</div>
     <h4>1. Purpose</h4><p>This policy describes how staff at ${esc(docVal(o.companyName,'[Company Name]'))} may use generative AI tools (such as ChatGPT, Microsoft Copilot, Claude, Gemini, Perplexity, or any other AI assistant) in the course of their work, setting out what is encouraged, what is permitted with conditions, and what is forbidden.</p>
     <h4>2. Scope</h4><p>Applies to all employees, contractors, interns and consultants performing work for ${esc(docVal(o.companyName,'[Company Name]'))}, on company-owned and personal devices used for work, covering all AI tools whether procured by the company or used personally.</p>
     <h4>3. Approved tools</h4><ul>${tools || '<li class="fill">No approved tools listed yet</li>'}</ul>
