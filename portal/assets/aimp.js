@@ -381,6 +381,21 @@ function resolveUseCaseId(name){
   return hit ? hit.id : '';
 }
 
+/* HTML min/max only constrain the spinner arrows, not typing, so a 1-5 score
+   field will happily accept 12 and multiply it. Every score entry point clamps
+   through here, on commit and again on save. Blank stays blank: unscored is a
+   real state and must not silently become 1. */
+function clampScore(v){
+  if(v===''||v==null) return '';
+  const n = Math.round(Number(v));
+  if(!Number.isFinite(n)) return '';
+  return String(Math.min(5, Math.max(1, n)));
+}
+function bindScoreClamp(el, after){
+  if(!el) return;
+  el.addEventListener('change', ()=>{ el.value = clampScore(el.value); if(after) after(); });
+}
+
 function computeRiskRating(r){ return (RISK_MATRIX[r.likelihood]||{})[r.impact] || '-'; }
 
 function pageRegister(key){
@@ -578,9 +593,9 @@ function openAssessmentModal(id){
       <tr><th>Risk</th><th style="width:70px;">L (1-5)</th><th style="width:70px;">I (1-5)</th><th style="width:60px;">Score</th><th>Mitigation</th></tr>
       ${data.risks.map((r,idx)=>`<tr>
         <td style="font-size:12.5px;">${esc(r.name)}</td>
-        <td><input id="ra_l_${idx}" type="number" min="0" max="5" value="${esc(r.l)}" style="margin:0;"></td>
-        <td><input id="ra_i_${idx}" type="number" min="0" max="5" value="${esc(r.i)}" style="margin:0;"></td>
-        <td class="mono" id="ra_score_${idx}">${(r.l&&r.i)?r.l*r.i:'–'}</td>
+        <td><input id="ra_l_${idx}" type="number" min="1" max="5" step="1" inputmode="numeric" value="${esc(clampScore(r.l))}" style="margin:0;"></td>
+        <td><input id="ra_i_${idx}" type="number" min="1" max="5" step="1" inputmode="numeric" value="${esc(clampScore(r.i))}" style="margin:0;"></td>
+        <td class="mono" id="ra_score_${idx}">${(clampScore(r.l)&&clampScore(r.i))?clampScore(r.l)*clampScore(r.i):'–'}</td>
         <td><input id="ra_m_${idx}" type="text" value="${esc(r.mitigation)}" style="margin:0;" placeholder="What will you do about it"></td>
       </tr>`).join('')}
     </table></div>
@@ -598,18 +613,22 @@ function openAssessmentModal(id){
     data.useCaseId = resolveUseCaseId(data.useCase);
     data.owner = val('ra_owner'); data.date = val('ra_date');
     data.dataInvolved = val('ra_dataInvolved'); data.whoAffected = val('ra_whoAffected'); data.tier = val('ra_tier');
-    data.risks = data.risks.map((r,idx)=>({ name:r.name, l: document.getElementById('ra_l_'+idx).value, i: document.getElementById('ra_i_'+idx).value, mitigation: document.getElementById('ra_m_'+idx).value }));
+    data.risks = data.risks.map((r,idx)=>({ name:r.name, l: clampScore(document.getElementById('ra_l_'+idx).value), i: clampScore(document.getElementById('ra_i_'+idx).value), mitigation: document.getElementById('ra_m_'+idx).value }));
     data.decision = val('ra_decision'); data.decidedBy = val('ra_decidedBy'); data.reviewDate = val('ra_reviewDate'); data.conditions = val('ra_conditions');
     if(!existing) DB.assessments.push(data); else Object.assign(existing, data);
     await dbSet('assessments', DB.assessments);
     closeModal(); renderAssessList(); renderNav(); toast('Assessment saved');
   }, true);
   data.risks.forEach((r,idx)=>{
+    const paint = ()=>{
+      const l = +clampScore(document.getElementById('ra_l_'+idx).value) || 0;
+      const i = +clampScore(document.getElementById('ra_i_'+idx).value) || 0;
+      document.getElementById('ra_score_'+idx).textContent = (l&&i) ? l*i : '–';
+    };
     ['ra_l_'+idx,'ra_i_'+idx].forEach(id=>{
-      document.getElementById(id).addEventListener('input', ()=>{
-        const l = +document.getElementById('ra_l_'+idx).value || 0, i = +document.getElementById('ra_i_'+idx).value || 0;
-        document.getElementById('ra_score_'+idx).textContent = (l&&i) ? l*i : '–';
-      });
+      const el = document.getElementById(id);
+      el.addEventListener('input', paint);   // preview as you type, from clamped values
+      bindScoreClamp(el, paint);             // correct the field itself on commit
     });
   });
 }
@@ -732,7 +751,7 @@ function openSRAModal(id){
     </div>
     <label>Score each area (1 low – 5 high)</label>
     <div class="score-grid">
-      ${SRA_AREAS.map(a=>`<div class="score-box"><div class="lab">${a}</div><input id="s_score_${a.replace(/[^a-zA-Z]/g,'')}" type="number" min="1" max="5" value="${esc(data.scores[a]||'')}" style="margin:0;text-align:center;"></div>`).join('')}
+      ${SRA_AREAS.map(a=>`<div class="score-box"><div class="lab">${a}</div><input id="s_score_${a.replace(/[^a-zA-Z]/g,'')}" type="number" min="1" max="5" step="1" inputmode="numeric" value="${esc(clampScore(data.scores[a]||''))}" style="margin:0;text-align:center;"></div>`).join('')}
     </div>
     <p style="font-size:11.5px;color:var(--ink-soft);margin:8px 0 14px;">Any single 5 is a red flag. A spread of 4s means conditions before proceeding.</p>
     <div class="field-row three">
@@ -746,12 +765,13 @@ function openSRAModal(id){
     data.vendorId = resolveVendorId(data.supplier);
     data.useCase = val('s_useCase'); data.dataShared = val('s_dataShared');
     data.aiActRole = val('s_aiActRole'); data.assessedBy = val('s_assessedBy');
-    data.scores = {}; SRA_AREAS.forEach(a=>{ const v = document.getElementById('s_score_'+a.replace(/[^a-zA-Z]/g,'')).value; if(v) data.scores[a]=v; });
+    data.scores = {}; SRA_AREAS.forEach(a=>{ const v = clampScore(document.getElementById('s_score_'+a.replace(/[^a-zA-Z]/g,'')).value); if(v) data.scores[a]=v; });
     data.decision = val('s_decision'); data.decidedBy = val('s_decidedBy'); data.reassessBy = val('s_reassessBy'); data.conditions = val('s_conditions');
     if(!existing) DB.supplierRisk.push(data); else Object.assign(existing, data);
     await dbSet('supplierRisk', DB.supplierRisk);
     closeModal(); renderSRAList(); renderNav(); toast('Score saved');
   }, true);
+  SRA_AREAS.forEach(a=>bindScoreClamp(document.getElementById('s_score_'+a.replace(/[^a-zA-Z]/g,''))));
 }
 
 /* ============================= INCIDENTS ============================= */
