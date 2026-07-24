@@ -76,6 +76,11 @@ Everything below is secondary. Optimising price, copy or funnel volume ahead of 
 is optimising a bucket with no bottom.
 
 ### Then
+0e. **Product roadmap (founder-stated, 24 Jul):** finish reviewing the platform
+    screens; re-review the 12 training modules for staleness; plot the three
+    user flows (Reseller, Client Manager, Client User); user guides as pop-ups
+    in each course/platform section; confirm + automate the onboarding flow;
+    support model (AI bot first, then ticket).
 1. **RORtech call** — ask what their clients pay for their Cyber Essentials line; treat as design
    partner, not first sale; reconcile MSP 70/30 maths before honouring the founding promise.
    This is also the highest-value unknown in the revenue model: until the 70/30 reconciles,

@@ -1,9 +1,17 @@
 /* ============ STORAGE LAYER: Supabase per-manager KV (was window.storage) ============ */
 import { guard, sb, signOut } from "./portal.js";
-const PROFILE = await guard(["manager"]);
+/* Demo mode: portal/demo.html runs the real platform against sessionStorage —
+   no auth, no Supabase writes, sample data seeded, everything resets when the
+   tab closes. Path-detected because the CSP (script-src 'self') forbids an
+   inline flag. */
+const DEMO = /demo(\.html)?$/.test(location.pathname);
+const PROFILE = DEMO ? { full_name: 'Demo' } : await guard(["manager"]);
 if (!PROFILE) throw new Error("unauthorised");
-const CURRENT_UID = (await sb.auth.getUser()).data.user.id;
+const CURRENT_UID = DEMO ? 'demo' : (await sb.auth.getUser()).data.user.id;
 async function dbGet(key, fallback){
+  if (DEMO){
+    try{ const r = sessionStorage.getItem("aimp-demo-" + key); return r ? JSON.parse(r) : fallback; }catch(_){ return fallback; }
+  }
   try{
     const { data, error } = await sb.from("governance_state").select("value").eq("key", key).maybeSingle();
     if (error) throw error;
@@ -13,6 +21,10 @@ async function dbGet(key, fallback){
   }
 }
 async function dbSet(key, value){
+  if (DEMO){
+    try{ sessionStorage.setItem("aimp-demo-" + key, JSON.stringify(value)); }catch(_){}
+    return value;
+  }
   try{
     const { error } = await sb.from("governance_state").upsert({ manager_id: CURRENT_UID, key, value });
     if (error) throw error;
@@ -172,7 +184,8 @@ let CURRENT = 'dashboard';
 
 function renderNav(){
   const nav = document.getElementById('navlist');
-  nav.innerHTML = TABS.map(g => `
+  const tabs = DEMO ? TABS.filter(g=>g.grp!=='Manage') : TABS;
+  nav.innerHTML = tabs.map(g => `
     <div class="grp">${g.grp}</div>
     ${g.items.map(it => `<button class="tab ${it.id===CURRENT?'active':''}" data-tab="${it.id}">${it.label}</button>`).join('')}
   `).join('');
@@ -1350,9 +1363,31 @@ document.addEventListener("click", (e) => {
 });
 
 /* ============================= INIT ============================= */
+async function seedDemo(){
+  if (sessionStorage.getItem('aimp-demo-seeded')) return;
+  const uc1 = {id:'UC-DEMO1', name:'Customer email drafting in Copilot', purpose:'Draft and polish customer replies with human review.', tool:'Microsoft 365 Copilot', dataCategories:'Personal data (general)', owner:'Operations Director', dpia:'Yes', fria:'No', risk:'Medium', status:'Active', notes:''};
+  const uc2 = {id:'UC-DEMO2', name:'Meeting transcription and summaries', purpose:'Transcribe internal calls and produce action lists.', tool:'Teams Premium', dataCategories:'Internal non-sensitive', owner:'IT Manager', dpia:'Pending', fria:'No', risk:'Low', status:'Active', notes:''};
+  const ra = {id:'RA-DEMO1', useCase:uc1.name, useCaseId:uc1.id, owner:'Operations Director', date:todayISO(), dataInvolved:'Customer names and correspondence', whoAffected:'Customers', tier:'Limited (transparency)',
+    risks:[{name:'Wrong or made-up output used as fact',l:'3',i:'3',mitigation:'Human review before send'},{name:'Confidential / personal data exposed to the tool',l:'2',i:'4',mitigation:'Enterprise tenancy, no free-tier tools'},{name:'Bias or unfair outcome for an affected group',l:'2',i:'2',mitigation:''},{name:'No human check before the output is acted on',l:'2',i:'3',mitigation:'Send blocked until reviewed'},{name:'Vendor / supply-chain or availability failure',l:'2',i:'2',mitigation:''}],
+    decision:'Approve with conditions', conditions:'Quarterly spot-check of 20 sent replies.', decidedBy:'Steering group', reviewDate:''};
+  const risk = {id:'R-DEMO1', category:'Data leakage', relatedUseCase:uc1.id, description:'Staff paste customer correspondence into personal AI accounts when Copilot is slow.', currentControls:'AUP forbids it; no technical block yet.', likelihood:'Medium', impact:'High', owner:'IT Manager', mitigation:'Deploy DLP rule for known AI domains.', dueDate:todayISO(), status:'In progress'};
+  const vendor = {id:'V-DEMO1', name:'Microsoft', product:'365 Copilot', contact:'account team', checklist:Array.from({length:19},(_,i)=>i<15), notes:''};
+  const staff = [{id:'S-DEMO1',name:'Asha Patel',email:'asha@example.com',role:'Ops'},{id:'S-DEMO2',name:'Marcus Webb',email:'marcus@example.com',role:'Sales'}];
+  await dbSet('usecases',[uc1,uc2]); await dbSet('assessments',[ra]); await dbSet('risks',[risk]);
+  await dbSet('vendors',[vendor]); await dbSet('staff',staff);
+  sessionStorage.setItem('aimp-demo-seeded','1');
+}
 (async function init(){
-  document.getElementById('who').textContent = (PROFILE.full_name || '') + ' · Manager';
-  document.getElementById('out').addEventListener('click', signOut);
+  if (DEMO){
+    await seedDemo();
+    document.getElementById('who').textContent = 'Demo environment · sample data';
+    const out = document.getElementById('out');
+    out.textContent = 'Exit demo';
+    out.addEventListener('click', ()=>{ location.href = '../pricing.html'; });
+  } else {
+    document.getElementById('who').textContent = (PROFILE.full_name || '') + ' · Manager';
+    document.getElementById('out').addEventListener('click', signOut);
+  }
   await loadAll();
   renderNav();
   renderMain();
