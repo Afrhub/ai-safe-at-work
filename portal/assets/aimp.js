@@ -192,6 +192,46 @@ function renderNav(){
   nav.querySelectorAll('button.tab').forEach(b=>b.addEventListener('click', ()=>{ CURRENT=b.dataset.tab; renderNav(); renderMain(); }));
 }
 
+/* In-product guides. One dismissible hint per screen, inserted after the page
+   header. Says what the screen is for, where its input comes from and what it
+   feeds — the sequence is the thing the UI cannot show on its own. Dismissal is
+   per-screen and kept in localStorage, so it survives a reload but never
+   follows the user to another device or blocks anything. Deliberately not a
+   guided tour: nobody finishes those. */
+const GUIDES = {
+  dashboard: "This list is generated from your registers, not typed. An item clears itself when the underlying record is fixed, so work top down and check back here.",
+  aup: "Each field fills the numbered section it names in the policy below. Saving increments the draft version; publishing makes it live and asks every member of staff to acknowledge it again.",
+  vendors: "<b>Step 1 of vendor onboarding.</b> Send these 19 questions to the supplier before you buy. When the answers come back, score them in Vendor Risk Score.",
+  supplierrisk: "<b>Step 2 of vendor onboarding.</b> Score the vendor once diligence is back and record a go/no-go. Approve one and it becomes a use case in the Use Case Register.",
+  usecases: "Every approved AI tool in use, one row each. The risk rating is set by the tool's risk assessment, not typed here. A use case with no assessment shows on the dashboard until you run one.",
+  assessments: "One assessment per use case. Score likelihood times impact, decide, and the worst score sets that use case's rating automatically. Anything you cannot mitigate belongs in the AI Risk Register.",
+  riskreg: "Risks you are actively managing, each with a named owner and a due date. Link one to a use case to show where it came from. Overdue mitigations appear on the dashboard.",
+  incidents: "Start one the moment an incident is confirmed, not after it is resolved. An incident is evidence a risk was real, so check whether the risk register already predicted it.",
+  raci: "Names who is Responsible, Accountable, Consulted and Informed for each AI decision. An auditor asks who owns this before they ask what your policy says.",
+  tor: "Stands up the group that owns AI governance. Approving it is what turns a document set into a management system.",
+  staff: "Invite your people, then track who has acknowledged the current policy version. Re-publishing the policy resets this, which is the point."
+};
+function guideHTML(key){
+  const text = GUIDES[key];
+  if(!text) return '';
+  let dismissed = false;
+  try{ dismissed = localStorage.getItem('aimp-guide-'+key)==='1'; }catch(e){}
+  if(dismissed) return '';
+  return `<div class="guide" data-guide="${key}"><span class="guide-i" aria-hidden="true">i</span><div>${text}</div>` +
+         `<button class="guide-x" data-act="dismissGuide" data-a1="${key}" aria-label="Dismiss this tip">Got it</button></div>`;
+}
+function injectGuide(key){
+  const head = document.querySelector('#main .pagehead');
+  if(!head) return;
+  const html = guideHTML(key);
+  if(html) head.insertAdjacentHTML('afterend', html);
+}
+function dismissGuide(key){
+  try{ localStorage.setItem('aimp-guide-'+key,'1'); }catch(e){}
+  const el = document.querySelector(`.guide[data-guide="${key}"]`);
+  if(el) el.remove();
+}
+
 function renderMain(){
   const main = document.getElementById('main');
   const renderers = {
@@ -202,6 +242,7 @@ function renderMain(){
   };
   main.innerHTML = '';
   (renderers[CURRENT] || pageDashboard)();
+  injectGuide(CURRENT);
 }
 
 /* Exceptions, not counts. "1 use case logged" is a fact about the database;
@@ -1350,7 +1391,7 @@ function pageStash(id){
    (the site CSP has script-src 'self', which blocks inline handlers). */
 const ACTIONS = { setTab, openRegisterModal, deleteRegisterRow, openAssessmentModal, deleteAssessment,
   openVendorModal, deleteVendor, openSRAModal, deleteSRA, openIncidentModal, deleteIncident,
-  openStaffModal, deleteStaff, copyDigest, emailDigest, print: () => window.print() };
+  openStaffModal, deleteStaff, copyDigest, emailDigest, dismissGuide, print: () => window.print() };
 document.addEventListener("click", (e) => {
   const el = e.target.closest("[data-act]");
   if (!el) return;

@@ -84,7 +84,7 @@
  <li>Run a single AI governance baseline across your customer base without losing per-customer specificity</li>
  <li>Maintain an approved-tool inventory that survives Copilot version bumps, ChatGPT model swaps, and vendor terms changes</li>
  <li>Onboard a new customer's AI posture in 30 days without inventing it from scratch</li>
- <li>Hand over an audit binder a customer's regulator would accept</li>
+ <li>Hand over an audit binder organised the way a customer's regulator asks for it</li>
  <li>Run the first ten minutes of a customer-side AI incident without panic</li>
  <li>Decide whether white-label is right for any given partner deal</li>
  <li>Pass a 10-question final assessment that exercises every sub-module</li>
@@ -160,7 +160,7 @@
       k1: {t:'Your own staff', d:'You are a deployer of AI before you are anyone&rsquo;s supplier. Technicians run Copilot, account managers draft in ChatGPT. Article 4 asks you to ensure a sufficient level of AI literacy, evidenced by a signed AUP and a training register.', m:'Sub-modules 1 &amp; 10.'},
       k2: {t:'Your customers&rsquo; AI', d:'When you configure or operate AI on a customer&rsquo;s behalf, their Article 26 duties, human oversight, log retention, incident reporting, become your operational task. Their regulator looks at your operations as much as their policy.', m:'Sub-module 2.'},
       k3: {t:'The tool register', d:'The approved-tool inventory is the most-asked-about artefact when you sit a customer down. Build it once, refresh it monthly, and survive Copilot version bumps, model swaps, and vendor terms changes without losing your specificity.', m:'Sub-modules 4 &amp; 6.'},
-      k4: {t:'One baseline, handed over', d:'Run a single governance baseline across the customer base, vary at the edges, then hand over an audit pack a regulator would accept, and be ready to run the first ten minutes of a customer-side incident without panic.', m:'Sub-modules 3, 5, 7 &amp; 8.'}
+      k4: {t:'One baseline, handed over', d:'Run a single governance baseline across the customer base, vary at the edges, then hand over an audit pack organised the way a regulator asks for it, and be ready to run the first ten minutes of a customer-side incident without panic.', m:'Sub-modules 3, 5, 7 &amp; 8.'}
     };
     var fig = document.getElementById('risk-fig-msp'); if(!fig) return;
     var cap = fig.querySelector('.rd-cap'); var nodes = fig.querySelectorAll('.rnode');
@@ -221,7 +221,7 @@
  <span class="callout-icon">!</span>
  <div>
  <div class="callout-title">Contracts catch this poorly</div>
- <p>Standard MSP service agreements pre-date the EU AI Act and don't address Article 26 splitting between MSP and customer. Get your standard contract reviewed. Add an AI services schedule. <a href="templates/vendor-questionnaire.html" class="accent">Vendor questionnaire</a> + <a href=".audit/legal/partners/README.md" class="accent">partner agreement</a> patterns help.</p>
+ <p>Standard MSP service agreements pre-date the EU AI Act and don't address Article 26 splitting between MSP and customer. Get your standard contract reviewed. Add an AI services schedule. <a href="templates/vendor-questionnaire.html" class="accent">Vendor questionnaire</a> patterns help. Partner agreement templates are provided to approved partners in the <a href="portal/login.html" class="accent">partner portal</a>.</p>
  </div>
  </div>
 
@@ -454,23 +454,23 @@
  <hr class="section-divider" />
 
  <span class="sub-tag" id="sub-9">Sub-module 9 of 10</span>
- <h2>White-label deployment posture (Strategic-tier consideration)</h2>
- <p>The Strategic-tier MSP partnership permits white-label deployment: customer-facing surfaces show the MSP's brand, not "AI Safe@Work". White-label looks straightforward; it isn't. Get it wrong and you create contract, liability, and trust gaps.</p>
+ <h2>Co-branded and white-label deployment posture</h2>
+ <p>The partner programme includes co-branding as standard: customer-facing material carries your brand alongside Attest AI's. Full white-label, where the customer never sees Attest AI at all, is not a standard entitlement and is agreed case by case. Either way the operational consequences below apply, and they look more straightforward than they are. Get them wrong and you create contract, liability, and trust gaps.</p>
 
- <h3>Contract, Schedule D</h3>
- <p>White-label is enabled by Schedule D of the MSP partner agreement. Don't operate white-label without Schedule D signed. Schedule D names: the white-label brand; the customer-facing surfaces it appears on; the indemnification carve-outs; what reverts if the partnership ends; the duration of customer-side support after termination.</p>
+ <h3>Contract</h3>
+ <p>Co-branding needs nothing beyond your partner agreement. White-label must be agreed in writing before you operate it, and that agreement names: the white-label brand; the customer-facing surfaces it appears on; the indemnification carve-outs; what reverts if the partnership ends; the duration of customer-side support after termination.</p>
 
  <h3>What white-label changes operationally</h3>
  <ul>
- <li><strong>Audit binder</strong>, Customer-facing artefacts show the MSP's brand. Internal artefacts (DPA, sub-processor list, vendor questionnaires you used to vet AI Safe@Work) still show AI Safe@Work.</li>
- <li><strong>Incident reporting upstream</strong>, When AI Safe@Work needs to be notified (regulatory issue with content; security issue with delivery infra), the MSP routes through the Strategic-tier slack channel; customer is not exposed to the upstream relationship unless required.</li>
- <li><strong>Content changes</strong>, Quarterly content refresh from AI Safe@Work is rebadged. Material changes notified via the partner channel; MSP decides timing of customer-facing rollout.</li>
- <li><strong>Customer dispute on content</strong>, Customer disputes a claim or a citation. MSP is the first responder. AI Safe@Work supports L3. Customer never sees the AI Safe@Work brand unless MSP chooses to surface it.</li>
+ <li><strong>Audit binder</strong>, Customer-facing artefacts show the MSP's brand. Internal artefacts (DPA, sub-processor list, vendor questionnaires you used to vet Attest AI) still show Attest AI.</li>
+ <li><strong>Incident reporting upstream</strong>, When Attest AI needs to be notified (regulatory issue with content; security issue with delivery infra), the partner routes through the partegic-tier slack channel; customer is not exposed to the upstream relationship unless required.</li>
+ <li><strong>Content changes</strong>, Quarterly content refresh from Attest AI is rebadged. Material changes notified via the partner channel; MSP decides timing of customer-facing rollout.</li>
+ <li><strong>Customer dispute on content</strong>, Customer disputes a claim or a citation. MSP is the first responder. Attest AI supports L3. Customer never sees the Attest AI brand unless MSP chooses to surface it.</li>
  </ul>
 
  <h3>When white-label is the wrong choice</h3>
  <ul>
- <li>The customer is regulated (financial services, healthcare) and would derive credibility from the AI Safe@Work + auditor-grade content position. Co-branded reads stronger than white-label here.</li>
+ <li>The customer is regulated (financial services, healthcare) and would derive credibility from the Attest AI standards-mapped content position. Co-branded reads stronger than white-label here.</li>
  <li>The MSP is small (&lt; 10 staff). The overhead of running white-label is not worth the brand premium below a certain scale.</li>
  <li>The MSP has not yet built sufficient AI-governance internal capacity. White-label transfers full L1/L2 responsibility; the MSP needs to be able to discharge it.</li>
  </ul>
@@ -479,13 +479,13 @@
  <span class="callout-icon">§</span>
  <div>
  <div class="callout-title">Co-branded is the right default</div>
- <p>For most Tier 2 (Growth) partners, co-branded, "Delivered by {MSP} · Powered by AI Safe@Work", is the right posture. Customer benefits from both brands; MSP retains primary relationship; AI Safe@Work backs the content credibility. Only step to white-label when the partnership and customer base genuinely warrant it.</p>
+ <p>For most partners, co-branded, "Delivered by {Partner} · Powered by Attest AI", is the right posture. Customer benefits from both brands; MSP retains primary relationship; Attest AI backs the content credibility. Only step to white-label when the partnership and customer base genuinely warrant it.</p>
  </div>
  </div>
 
  <div class="signature">
  <div class="label">Sub-module 9 takeaway</div>
- <div class="quote">White-label is a contractual choice, not a marketing one. If Schedule D isn't signed, you're not white-label, you're a brand violation waiting to be discovered.</div>
+ <div class="quote">White-label is a contractual choice, not a marketing one. If it isn't agreed in writing, you're not white-label, you're a brand violation waiting to be discovered.</div>
  </div>
 
  <hr class="section-divider" />
@@ -616,17 +616,17 @@
  "cite": "Sub-module 8, Refreshing the audit binder"
  },
  {
- "q": "A Tier 2 Growth-tier customer asks whether you can white-label the AI Safe@Work materials. What's your answer?",
+ "q": "A customer asks whether you can put your own brand on the Attest AI materials and drop the Attest AI name entirely. What's your answer?",
  "options": [
- "Yes, Tier 2 includes full white-label rights as standard",
- "No, Tier 2 supports co-branded delivery, not white-label; white-label needs Tier 3 (Strategic Partner) and Schedule D. Offer co-branded \"Delivered by {MSP} · Powered by AI Safe@Work\", or escalate a genuine case to the head of partnerships",
- "Yes, provided the customer signs a one-page waiver of AI Safe@Work branding",
- "No, white-label is never available at any partner tier",
- "Yes, white-label is available once the customer completes the onboarding checklist"
+ "Yes, full white-label is included in the partner programme as standard",
+ "Co-branding is standard, so offer \"Delivered by {Partner} · Powered by Attest AI\" now. Full white-label is not a standard entitlement: agree it in writing before operating it, and escalate a genuine case to the head of partnerships",
+ "Yes, provided the customer signs a one-page waiver of Attest AI branding",
+ "No, the Attest AI brand must appear on every customer-facing surface without exception",
+ "Yes, once the customer completes the onboarding checklist"
  ],
  "correct": 1,
- "why": "Body: <em>Tier 2 supports co-branded delivery, not white-label; white-label requires Tier 3 (Strategic Partner) status and Schedule D of the MSP partner agreement</em>. Offer co-branded \"Delivered by {MSP} · Powered by AI Safe@Work\", and escalate a genuine white-label case to the head of partnerships.",
- "cite": "Sub-module 9, White-label vs co-branded posture"
+ "why": "Body: <em>Co-branding is included as standard; full white-label is agreed case by case and must be in writing before you operate it</em>. Offer co-branded delivery immediately, and escalate a genuine white-label case rather than assuming the entitlement. Operating white-label without that agreement is a brand violation waiting to be discovered.",
+ "cite": "Sub-module 9, Co-branded and white-label posture"
  },
  {
  "q": "It's 16:55 on a Friday. A customer's service-desk ticket reads: \"I think I just pasted our pricing model into ChatGPT\". What are the first three actions you take, in order?",

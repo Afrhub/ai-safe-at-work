@@ -73,3 +73,6 @@ dist/
 # ── Private security artefacts (repo is public; do NOT publish vuln detail) ──
 .audit/security/owasp-security-review-*.md
 .audit/security/owasp-test-coverage-*.xlsx
+
+# Founder working docs, never deploy (pre-push hook blocks these)
+docs/subscription-model.pdf

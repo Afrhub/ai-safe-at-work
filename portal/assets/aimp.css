@@ -228,3 +228,25 @@ html[data-theme="dark"] .modal-bg { background: rgba(0,0,0,0.6); }
   /* two columns of fields side by side reads better than one very long run */
   .aup-layout .secgrp { break-inside: avoid; }
 }
+
+/* In-product guide: one dismissible hint per screen, sits under the page head. */
+.guide {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 11px 14px; margin: 0 0 16px;
+  border-radius: 6px; border: 1px solid rgba(0,0,0,0.07);
+  background: var(--plate, #fafafa);
+  font-size: 13px; line-height: 1.55; color: var(--ink-soft);
+}
+.guide b { color: var(--ink); }
+.guide-i {
+  flex: none; width: 18px; height: 18px; margin-top: 1px;
+  border-radius: 50%; background: rgba(0,0,0,0.06); color: var(--ink-soft);
+  font-size: 11px; font-weight: 700; font-style: italic;
+  display: flex; align-items: center; justify-content: center;
+}
+.guide-x {
+  flex: none; margin-left: auto; align-self: center;
+  background: none; border: 1px solid rgba(0,0,0,0.12); border-radius: 4px;
+  padding: 3px 10px; font-size: 11.5px; color: var(--ink-soft); cursor: pointer;
+}
+.guide-x:hover { background: rgba(0,0,0,0.04); color: var(--ink); }
