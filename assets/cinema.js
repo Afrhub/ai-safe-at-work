@@ -511,9 +511,24 @@ document.addEventListener('click', function (e) {
 
    CSP-safe: no inline handlers. */
 (function () {
-  var SKIP = 'aisw-demo-skip';
-  var SRC = '/assets/video/platform-demo.mp4?v=1';
-  var POSTER = '/assets/video/platform-demo-poster.jpg?v=1';
+  /* Two previews, same modal. Keyed by what the link points at, so adding a
+     third is a table entry rather than new code. */
+  var PREVIEWS = {
+    demo: {
+      skipKey: 'aisw-demo-skip',
+      src: '/assets/video/platform-demo.mp4?v=1',
+      poster: '/assets/video/platform-demo-poster.jpg?v=1',
+      note: 'A minute inside the platform, then it is yours to try.',
+      go: 'Open the demo &rarr;'
+    },
+    course: {
+      skipKey: 'aisw-course-skip',
+      src: '/assets/video/course-module-1.mp4?v=1',
+      poster: '/assets/video/course-module-1-poster.jpg?v=1',
+      note: 'A look at module 1, which is free to read in full.',
+      go: 'Read module 1 &rarr;'
+    }
+  };
 
   /* Where "Buy now" goes when the walkthrough ends.
      GoCardless is the intended destination, but no GoCardless account exists
@@ -523,37 +538,42 @@ document.addEventListener('click', function (e) {
      payment / billing-request URL. Nothing else needs to change. */
   var BUY_URL = '/checkout.html';
 
-  function isDemoLink(a) {
-    if (!a || !a.getAttribute) return false;
-    var h = a.getAttribute('href') || '';
-    return /(^|\/)portal\/demo(\.html)?$/.test(h.split('?')[0].split('#')[0]);
+  /** Which preview, if any, a link should show first. */
+  function previewFor(a) {
+    if (!a || !a.getAttribute) return null;
+    var path = (a.getAttribute('href') || '').split('?')[0].split('#')[0];
+    if (/(^|\/)portal\/demo(\.html)?$/.test(path)) return 'demo';
+    if (a.hasAttribute('data-course-preview')) return 'course';
+    return null;
   }
-  function skipped() {
-    try { return sessionStorage.getItem(SKIP) === '1'; } catch (e) { return false; }
+  function skipped(key) {
+    try { return sessionStorage.getItem(key) === '1'; } catch (e) { return false; }
   }
 
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a');
-    if (!isDemoLink(a)) return;
-    if (skipped()) return;                       // already chose to go straight in
+    var kind = previewFor(a);
+    if (!kind) return;
+    if (skipped(PREVIEWS[kind].skipKey)) return;   // already chose to go straight in
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;  // new tab etc.
     e.preventDefault();
-    open(a.getAttribute('href'));
+    open(a.getAttribute('href'), kind);
   });
 
-  function open(demoHref) {
+  function open(destHref, kind) {
+    var cfg = PREVIEWS[kind];
     var prev = document.activeElement;
     var bg = document.createElement('div');
     bg.className = 'dmodal-bg';
     bg.innerHTML =
       '<div class="dmodal" role="dialog" aria-modal="true" aria-label="Platform walkthrough">' +
         '<button class="dmodal-x" type="button" aria-label="Close">&times;</button>' +
-        '<video class="dmodal-v" controls playsinline preload="auto" poster="' + POSTER + '">' +
-          '<source src="' + SRC + '" type="video/mp4" />' +
+        '<video class="dmodal-v" controls playsinline preload="auto" poster="' + cfg.poster + '">' +
+          '<source src="' + cfg.src + '" type="video/mp4" />' +
         '</video>' +
         '<div class="dmodal-bar">' +
-          '<span class="dmodal-note">A minute inside the platform, then it is yours to try.</span>' +
-          '<a class="dmodal-go" href="' + demoHref + '">Open the demo &rarr;</a>' +
+          '<span class="dmodal-note">' + cfg.note + '</span>' +
+          '<a class="dmodal-go" href="' + destHref + '">' + cfg.go + '</a>' +
         '</div>' +
       '</div>';
     document.body.appendChild(bg);
@@ -566,8 +586,8 @@ document.addEventListener('click', function (e) {
       p.catch(function () { v.muted = true; v.play().catch(function () {}); });
     }
 
-    function close(goingToDemo) {
-      if (!goingToDemo) { try { sessionStorage.setItem(SKIP, '1'); } catch (e) {} }
+    function close(goingOn) {
+      if (!goingOn) { try { sessionStorage.setItem(cfg.skipKey, '1'); } catch (e) {} }
       v.pause();
       bg.classList.remove('is-in');
       document.removeEventListener('keydown', onKey);

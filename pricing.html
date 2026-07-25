@@ -33,7 +33,7 @@
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
 <link rel="stylesheet" href="assets/style.css?v=24" />
-<script defer src="assets/cinema.js?v=17"></script>
+<script defer src="assets/cinema.js?v=18"></script>
 <style>
 .draft-banner {
   display: flex; align-items: center; gap: 0.8rem;
@@ -204,6 +204,13 @@
 .tier ul { margin-bottom: 1.2rem; }
 .tier .cta:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(250,88,45,0.55), 0 12px 32px rgba(250,88,45,0.3); }
 .tier .cta:active { transform: translateY(-1px) scale(0.97); }
+.tier .cta-row {
+  /* pushes the pair to the bottom so all three cards line up, whatever the
+     feature list above does; wraps to stacked on narrow cards */
+  display: flex; gap: 0.5rem; margin-top: auto; width: 100%;
+}
+.tier .cta-row .cta { margin-top: 0; flex: 1 1 0; min-width: 0; }
+@media (max-width: 1100px) { .tier .cta-row { flex-wrap: wrap; } .tier .cta-row .cta { flex: 1 1 100%; } }
 .tier .cta.outline {
   background: transparent; color: var(--accent);
   border: 1px solid rgba(250,88,45,0.42);
@@ -294,17 +301,17 @@
  </thead>
  <tbody>
  <tr>
- <td><strong>Up to 25 staff</strong></td>
+ <td><strong>1 to 25 staff</strong></td>
  <td><span class="pt-price">£990</span><span class="pt-sub">per year</span></td>
  <td><span class="pt-price">£249</span><span class="pt-sub">per month · £2,490/yr billed annually</span></td>
  </tr>
  <tr>
- <td><strong>26 to 100 staff</strong></td>
+ <td><strong>26 to 50 staff</strong></td>
  <td><span class="pt-price">£1,750</span><span class="pt-sub">per year</span></td>
  <td><span class="pt-price">£499</span><span class="pt-sub">per month · £4,990/yr billed annually</span></td>
  </tr>
  <tr>
- <td><strong>Over 100 staff</strong></td>
+ <td><strong>More than 50 staff</strong></td>
  <td><span class="pt-price pt-quiet">Contact us</span><span class="pt-sub">priced on headcount</span></td>
  <td><span class="pt-price pt-quiet">Contact us</span><span class="pt-sub">priced on headcount</span></td>
  </tr>
@@ -327,7 +334,7 @@
  <h3>Training and documents</h3>
  <p class="who">HR · IT Manager · Business Owner</p>
  <div class="price">£990<small>/yr</small></div>
- <div class="price-sub">up to 25 staff · £1,750 up to 100</div>
+ <div class="price-sub">1 to 25 staff · £1,750 for 26 to 50</div>
  <ul>
  <li>AI Safe@Work online training course for your staff</li>
  <li>Knowledge assessment at the end of each module</li>
@@ -336,7 +343,10 @@
  <li>Starter governance templates to fill in yourself</li>
  <li>Training completion records you can hand to an auditor</li>
  </ul>
- <a class="cta" href="checkout.html">Order Foundation →</a>
+ <div class="cta-row">
+ <a class="cta outline" href="module-1.html" data-course-preview>Try the course</a>
+ <a class="cta" href="checkout.html">Order Foundation</a>
+ </div>
  </div>
 
  <div class="tier featured">
@@ -344,7 +354,7 @@
  <h3>Attest AI Platform</h3>
  <p class="who">IT Manager · Compliance Lead · Operations Director</p>
  <div class="price">£249<small>/mo</small></div>
- <div class="price-sub">up to 25 staff · £499 up to 100 · billed annually</div>
+ <div class="price-sub">1 to 25 staff · £499 for 26 to 50 · billed annually</div>
  <ul>
  <li>Everything in Foundation, including staff training</li>
  <li>Live governance documents and registers, kept current</li>
@@ -355,7 +365,11 @@
  <li>Reporting that organises your records the way an auditor asks for them</li>
  <li>Content updated at least quarterly as the rules change</li>
  </ul>
- <a class="cta" href="portal/demo.html">Try the demo →</a>
+ <div class="cta-row">
+ <a class="cta outline" href="module-1.html" data-course-preview>Try the course</a>
+ <a class="cta" href="checkout.html?plan=platform">Order Attest AI Platform</a>
+ </div>
+ <p style="margin:0.6rem 0 0;text-align:center;font-size:0.82rem"><a href="portal/demo.html" class="accent">or try the platform demo &rarr;</a></p>
  </div>
 
  <div class="tier">
@@ -391,7 +405,7 @@
  <hr class="section-divider" />
 
  <h2 id="enterprise-contact">Get in touch</h2>
- <p>Over 100 staff, or not sure which plan fits? Email <a href="mailto:hello@attest-ai.com">hello@attest-ai.com</a> and tell us roughly how many people you have.</p>
+ <p>More than 50 staff, or not sure which plan fits? Email <a href="mailto:hello@attest-ai.com">hello@attest-ai.com</a> and tell us roughly how many people you have.</p>
  <p class="muted" style="font-family: var(--font-mono); font-size: 0.82rem; margin-top: 1rem;">Prices exclude VAT. Full terms apply at purchase, see <a href="terms.html">Terms</a>.</p>
 </main>
 
