@@ -568,12 +568,14 @@ document.addEventListener('click', function (e) {
     if (!kind) return;
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;  // new tab etc.
     e.preventDefault();
-    open(a.getAttribute('href'), kind);   // always: the video is the point
+    // a link may name its own onward label; the demo/course defaults suit most
+    open(a.getAttribute('href'), kind, a.getAttribute('data-preview-go'));
   });
 
-  function open(destHref, kind) {
+  function open(destHref, kind, goLabel) {
     var cfg = PREVIEWS[kind];
     var prev = document.activeElement;
+    var onward = goLabel || cfg.go;
     var bg = document.createElement('div');
     bg.className = 'dmodal-bg';
     bg.innerHTML =
@@ -587,7 +589,7 @@ document.addEventListener('click', function (e) {
         : '') +
       '<div class="dmodal-bar">' +
           '<span class="dmodal-note">' + cfg.note + '</span>' +
-          '<a class="dmodal-go" href="' + destHref + '">' + cfg.go + '</a>' +
+          '<a class="dmodal-go" href="' + destHref + '">' + onward + '</a>' +
         '</div>' +
       '</div>';
     document.body.appendChild(bg);
