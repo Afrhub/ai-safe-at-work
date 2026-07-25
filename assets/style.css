@@ -802,3 +802,20 @@ html[data-theme="dark"] .theme-toggle .tt-sun  { display: none; }
   .dmodal-bg, .dmodal { transition: none; }
   .dmodal { transform: none; }
 }
+
+/* Skip, shown only once someone has watched the preview through. Sits over the
+   video like a broadcast skip-ad control, so a returning visitor sees it
+   immediately rather than hunting the bar underneath. */
+.dmodal-skip {
+  position: absolute; top: 0.7rem; right: 3.6rem; z-index: 3;
+  display: inline-flex; align-items: center;
+  padding: 0.42rem 0.95rem;
+  background: rgba(11, 13, 18, 0.72);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.28); border-radius: 999px;
+  color: #fff; font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; text-decoration: none;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+.dmodal-skip:hover { background: var(--accent, #fa582d); border-color: transparent; }

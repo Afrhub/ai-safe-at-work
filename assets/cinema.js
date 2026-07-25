@@ -515,14 +515,14 @@ document.addEventListener('click', function (e) {
      third is a table entry rather than new code. */
   var PREVIEWS = {
     demo: {
-      skipKey: 'aisw-demo-skip',
+      watchedKey: 'aisw-demo-watched',
       src: '/assets/video/platform-demo.mp4?v=1',
       poster: '/assets/video/platform-demo-poster.jpg?v=1',
       note: 'A minute inside the platform, then it is yours to try.',
       go: 'Open the demo &rarr;'
     },
     course: {
-      skipKey: 'aisw-course-skip',
+      watchedKey: 'aisw-course-watched',
       src: '/assets/video/course-module-1.mp4?v=1',
       poster: '/assets/video/course-module-1-poster.jpg?v=1',
       note: 'A look at module 1, which is free to read in full.',
@@ -546,18 +546,22 @@ document.addEventListener('click', function (e) {
     if (a.hasAttribute('data-course-preview')) return 'course';
     return null;
   }
-  function skipped(key) {
-    try { return sessionStorage.getItem(key) === '1'; } catch (e) { return false; }
+  /* Watched at least once, on this device. localStorage rather than session
+     storage: someone who watched it last week has still watched it. */
+  function watched(key) {
+    try { return localStorage.getItem(key) === '1'; } catch (e) { return false; }
+  }
+  function markWatched(key) {
+    try { localStorage.setItem(key, '1'); } catch (e) {}
   }
 
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a');
     var kind = previewFor(a);
     if (!kind) return;
-    if (skipped(PREVIEWS[kind].skipKey)) return;   // already chose to go straight in
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;  // new tab etc.
     e.preventDefault();
-    open(a.getAttribute('href'), kind);
+    open(a.getAttribute('href'), kind);   // always: the video is the point
   });
 
   function open(destHref, kind) {
@@ -571,7 +575,10 @@ document.addEventListener('click', function (e) {
         '<video class="dmodal-v" controls playsinline preload="auto" poster="' + cfg.poster + '">' +
           '<source src="' + cfg.src + '" type="video/mp4" />' +
         '</video>' +
-        '<div class="dmodal-bar">' +
+        (watched(cfg.watchedKey)
+        ? '<a class="dmodal-skip" href="' + destHref + '">Skip &rarr;</a>'
+        : '') +
+      '<div class="dmodal-bar">' +
           '<span class="dmodal-note">' + cfg.note + '</span>' +
           '<a class="dmodal-go" href="' + destHref + '">' + cfg.go + '</a>' +
         '</div>' +
@@ -586,8 +593,7 @@ document.addEventListener('click', function (e) {
       p.catch(function () { v.muted = true; v.play().catch(function () {}); });
     }
 
-    function close(goingOn) {
-      if (!goingOn) { try { sessionStorage.setItem(cfg.skipKey, '1'); } catch (e) {} }
+    function close() {
       v.pause();
       bg.classList.remove('is-in');
       document.removeEventListener('keydown', onKey);
@@ -597,15 +603,18 @@ document.addEventListener('click', function (e) {
         if (prev && prev.focus) prev.focus();
       }, 200);
     }
-    function onKey(ev) { if (ev.key === 'Escape') close(false); }
+    function onKey(ev) { if (ev.key === 'Escape') close(); }
 
-    bg.querySelector('.dmodal-x').addEventListener('click', function () { close(false); });
-    bg.addEventListener('click', function (ev) { if (ev.target === bg) close(false); });
-    bg.querySelector('.dmodal-go').addEventListener('click', function () { close(true); });
+    bg.querySelector('.dmodal-x').addEventListener('click', function () { close(); });
+    bg.addEventListener('click', function (ev) { if (ev.target === bg) close(); });
+    bg.querySelector('.dmodal-go').addEventListener('click', function () { close(); });
+    var skip = bg.querySelector('.dmodal-skip');
+    if (skip) skip.addEventListener('click', function () { close(); });
     document.addEventListener('keydown', onKey);
     // when it finishes, offer the next step over the last frame rather than
     // leaving a dead still
     v.addEventListener('ended', function () {
+      markWatched(cfg.watchedKey);   // earns them the skip button next time
       if (bg.querySelector('.dmodal-end')) return;
       var end = document.createElement('div');
       end.className = 'dmodal-end';
