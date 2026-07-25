@@ -68,9 +68,11 @@ Netlify dashboard until someone thinks to look, then a manual invoice. A buyer w
 decides to pay you today cannot, and you will not know they tried.
 
 0a. **Netlify form email notifications** (dashboard-only setting, no code):
-    route `foundation-order`, `partner-enquiry` and `demo` to James@attest-ai.com.
-    Note `tier1-order` is now orphaned — `checkout.html` posts to `foundation-order`
-    as of 2026-07-21. Nothing on the site emails anyone until this is set.
+    route **`order`**, `partner-enquiry` and `demo` to James@attest-ai.com.
+    `checkout.html` posts to `order` as of 25 Jul — one form for both plans, with
+    the plan carried in a hidden field, so this only needs setting once.
+    `tier1-order` and `foundation-order` are orphaned earlier names; ignore them.
+    Nothing on the site emails anyone until this is set.
 0b. **Payment path.** Manual invoicing was a deliberate seam, not an accident, but it
     caps conversion at whatever a stranger will do on trust: fill in a form, wait for
     an invoice, pay by transfer. At £990-£4,990 that is survivable for a while; it is
