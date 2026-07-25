@@ -76,3 +76,6 @@ dist/
 
 # Founder working docs, never deploy (pre-push hook blocks these)
 docs/subscription-model.pdf
+
+# Remotion source for the platform demo. Only the rendered mp4 in assets/video/ ships.
+video-project/

@@ -429,3 +429,149 @@ document.addEventListener('click', function (e) {
   var b = e.target.closest('.print-btn, [onclick="window.print()"]');
   if (b) window.print();
 });
+
+/* ─── Video end CTA ───────────────────────────────────────────────────────
+   When a module video finishes on a page anyone can reach, offer the next
+   step. Free-to-read pages only: a customer part-way through the paid course
+   has already bought, and prompting them to get in touch is noise. Detected
+   by the gate script's presence rather than a hardcoded page list, so the
+   prompt follows whatever is public.
+
+   CSP-safe: no inline handlers, built in JS and bound here.
+   Shown once per session, dismissible by button, Escape or backdrop click. */
+(function () {
+  var KEY = 'aisw-video-cta-shown';
+  if (document.querySelector('script[src*="course-gate"]')) return;  // paid page
+  function alreadyShown() {
+    try { return sessionStorage.getItem(KEY) === '1'; } catch (e) { return false; }
+  }
+  if (alreadyShown()) return;
+
+  function build() {
+    var wrap = document.createElement('div');
+    wrap.className = 'vcta-bg';
+    wrap.innerHTML =
+      '<div class="vcta" role="dialog" aria-modal="true" aria-labelledby="vcta-h">' +
+        '<button class="vcta-x" type="button" aria-label="Close">&times;</button>' +
+        '<p class="vcta-eyebrow">That was one module of eleven</p>' +
+        '<h2 id="vcta-h">Contact us now</h2>' +
+        '<p class="vcta-sub">See the full course, the governance platform and what it would take to get your organisation AI compliance ready. A 20-minute walkthrough, no obligation.</p>' +
+        '<div class="vcta-actions">' +
+          '<a class="vcta-go" href="about.html#contact">Contact us now &rarr;</a>' +
+          '<a class="vcta-alt" href="pricing.html">See plans &amp; pricing</a>' +
+        '</div>' +
+      '</div>';
+    return wrap;
+  }
+
+  function open() {
+    try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+    var prev = document.activeElement;
+    var bg = build();
+    document.body.appendChild(bg);
+    requestAnimationFrame(function () { bg.classList.add('is-in'); });
+
+    function close() {
+      bg.classList.remove('is-in');
+      document.removeEventListener('keydown', onKey);
+      setTimeout(function () {
+        bg.remove();
+        if (prev && prev.focus) prev.focus();
+      }, 220);
+    }
+    function onKey(e) { if (e.key === 'Escape') close(); }
+
+    bg.querySelector('.vcta-x').addEventListener('click', close);
+    bg.addEventListener('click', function (e) { if (e.target === bg) close(); });
+    document.addEventListener('keydown', onKey);
+    var go = bg.querySelector('.vcta-go');
+    if (go) go.focus();
+  }
+
+  document.addEventListener('ended', function (e) {
+    // re-check on every fire: the load-time guard cannot see a popup that was
+    // already shown and dismissed during this same page view
+    if (e.target && e.target.tagName === 'VIDEO' && !alreadyShown()) open();
+  }, true);   // capture: 'ended' does not bubble
+})();
+
+/* ─── Demo preview modal ──────────────────────────────────────────────────
+   Any link to the demo opens the 60-second walkthrough first, then hands off
+   to the live demo. Intercepted here rather than by changing every link, so
+   there is one behaviour to maintain and no page can be missed.
+
+   The click is a user gesture, so unmuted playback is normally permitted; if a
+   browser refuses, it falls back to muted rather than silently failing.
+   "Skip" is remembered for the session, so anyone who wants the product and
+   not the film only says so once.
+
+   CSP-safe: no inline handlers. */
+(function () {
+  var SKIP = 'aisw-demo-skip';
+  var SRC = '/assets/video/platform-demo.mp4?v=1';
+  var POSTER = '/assets/video/platform-demo-poster.jpg?v=1';
+
+  function isDemoLink(a) {
+    if (!a || !a.getAttribute) return false;
+    var h = a.getAttribute('href') || '';
+    return /(^|\/)portal\/demo(\.html)?$/.test(h.split('?')[0].split('#')[0]);
+  }
+  function skipped() {
+    try { return sessionStorage.getItem(SKIP) === '1'; } catch (e) { return false; }
+  }
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a');
+    if (!isDemoLink(a)) return;
+    if (skipped()) return;                       // already chose to go straight in
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;  // new tab etc.
+    e.preventDefault();
+    open(a.getAttribute('href'));
+  });
+
+  function open(demoHref) {
+    var prev = document.activeElement;
+    var bg = document.createElement('div');
+    bg.className = 'dmodal-bg';
+    bg.innerHTML =
+      '<div class="dmodal" role="dialog" aria-modal="true" aria-label="Platform walkthrough">' +
+        '<button class="dmodal-x" type="button" aria-label="Close">&times;</button>' +
+        '<video class="dmodal-v" controls playsinline preload="auto" poster="' + POSTER + '">' +
+          '<source src="' + SRC + '" type="video/mp4" />' +
+        '</video>' +
+        '<div class="dmodal-bar">' +
+          '<span class="dmodal-note">A minute inside the platform, then it is yours to try.</span>' +
+          '<a class="dmodal-go" href="' + demoHref + '">Open the demo &rarr;</a>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(bg);
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(function () { bg.classList.add('is-in'); });
+
+    var v = bg.querySelector('.dmodal-v');
+    var p = v.play();
+    if (p && p.catch) {
+      p.catch(function () { v.muted = true; v.play().catch(function () {}); });
+    }
+
+    function close(goingToDemo) {
+      if (!goingToDemo) { try { sessionStorage.setItem(SKIP, '1'); } catch (e) {} }
+      v.pause();
+      bg.classList.remove('is-in');
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+      setTimeout(function () {
+        bg.remove();
+        if (prev && prev.focus) prev.focus();
+      }, 200);
+    }
+    function onKey(ev) { if (ev.key === 'Escape') close(false); }
+
+    bg.querySelector('.dmodal-x').addEventListener('click', function () { close(false); });
+    bg.addEventListener('click', function (ev) { if (ev.target === bg) close(false); });
+    bg.querySelector('.dmodal-go').addEventListener('click', function () { close(true); });
+    document.addEventListener('keydown', onKey);
+    // when it finishes, push them onward rather than leaving a dead frame
+    v.addEventListener('ended', function () { bg.querySelector('.dmodal-go').focus(); });
+  }
+})();
