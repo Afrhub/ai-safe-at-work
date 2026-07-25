@@ -20,6 +20,11 @@ JSON/JSON-LD and blocks secrets + forbidden files (`docs/subscription-model.pdf`
 - **Certification copy rule**: "audit-ready" may only mean *records organised the way an auditor asks
   for them*, never "you will pass". Attest AI never presents as a certification/accreditation body.
   The "A note on what we are" preface is on index.html and pricing.html; course + portal still to do.
+- **Content posture (24 Jul)**: gate the doing, not the knowing. Public + indexable: homepage,
+  pricing, course, plus-pack (= the Platform page), consultancy, solutions, faq, glossary,
+  standards-map, module-1 (free sample), resources, templates index, about, legal. Gated pages all
+  carry `noindex` so crawlers are not sent to a checkout redirect; `sitemap.xml` lists only the 21
+  genuinely public URLs. `msp.html` stays noindex by choice — see `docs/parked-content.md`.
 - **Paywall**: `assets/course-gate.js?v=2` (client-side; demo account excluded) gates modules 1–12,
   cert, all templates, glossary, standards-map, role tracks, sector overlays, resources.html.
   Redirect targets: course.html (modules) / checkout.html (everything else).
@@ -86,8 +91,8 @@ is optimising a bucket with no bottom.
    This is also the highest-value unknown in the revenue model: until the 70/30 reconciles,
    the partner channel (the only path past the solo delivery ceiling) is unproven.
 2. **Trust fixes before conversion**: real founder bio + UK address (about.html still says
-   "Founder name / Short bio goes here"), un-gate glossary + standards map + one sample module,
-   PI insurance + liability terms before first invoice.
+   "Founder name / Short bio goes here"), PI insurance + liability terms before first invoice.
+   *(Un-gating done 24 Jul: glossary, standards map, module 1 and the resources hub are public.)*
 3. **Carry the certification preface** ("A note on what we are") to course.html and the portal —
    done on index.html and pricing.html; the standing copy rule applies everywhere.
 4. **"Become a Partner" nav pill + footer "Partner Programme"** are still site-wide. Pulling them
