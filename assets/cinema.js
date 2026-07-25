@@ -489,9 +489,13 @@ document.addEventListener('click', function (e) {
   }
 
   document.addEventListener('ended', function (e) {
+    if (!e.target || e.target.tagName !== 'VIDEO') return;
+    // the demo modal has its own end-of-video CTA; two competing prompts at
+    // once is worse than either alone
+    if (e.target.closest && e.target.closest('.dmodal')) return;
     // re-check on every fire: the load-time guard cannot see a popup that was
     // already shown and dismissed during this same page view
-    if (e.target && e.target.tagName === 'VIDEO' && !alreadyShown()) open();
+    if (!alreadyShown()) open();
   }, true);   // capture: 'ended' does not bubble
 })();
 
@@ -510,6 +514,14 @@ document.addEventListener('click', function (e) {
   var SKIP = 'aisw-demo-skip';
   var SRC = '/assets/video/platform-demo.mp4?v=1';
   var POSTER = '/assets/video/platform-demo-poster.jpg?v=1';
+
+  /* Where "Buy now" goes when the walkthrough ends.
+     GoCardless is the intended destination, but no GoCardless account exists
+     yet (HANDOFF blocker 0b: no card path, orders are invoiced by hand), so
+     this points at the working order form rather than shipping a dead link.
+     When the account is live, replace this one line with the GoCardless
+     payment / billing-request URL. Nothing else needs to change. */
+  var BUY_URL = '/checkout.html';
 
   function isDemoLink(a) {
     if (!a || !a.getAttribute) return false;
@@ -571,7 +583,27 @@ document.addEventListener('click', function (e) {
     bg.addEventListener('click', function (ev) { if (ev.target === bg) close(false); });
     bg.querySelector('.dmodal-go').addEventListener('click', function () { close(true); });
     document.addEventListener('keydown', onKey);
-    // when it finishes, push them onward rather than leaving a dead frame
-    v.addEventListener('ended', function () { bg.querySelector('.dmodal-go').focus(); });
+    // when it finishes, offer the next step over the last frame rather than
+    // leaving a dead still
+    v.addEventListener('ended', function () {
+      if (bg.querySelector('.dmodal-end')) return;
+      var end = document.createElement('div');
+      end.className = 'dmodal-end';
+      end.innerHTML =
+        '<div class="dmodal-end-in">' +
+          '<p class="dmodal-end-h">Ready to get started?</p>' +
+          '<a class="dmodal-buy" href="' + BUY_URL + '">Buy now</a>' +
+          '<button class="dmodal-replay" type="button">Watch again</button>' +
+        '</div>';
+      v.parentNode.insertBefore(end, v.nextSibling);
+      requestAnimationFrame(function () { end.classList.add('is-in'); });
+      var buy = end.querySelector('.dmodal-buy');
+      if (buy) buy.focus();
+      end.querySelector('.dmodal-replay').addEventListener('click', function () {
+        end.remove();
+        v.currentTime = 0;
+        v.play().catch(function () {});
+      });
+    });
   }
 })();

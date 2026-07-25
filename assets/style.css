@@ -744,6 +744,38 @@ html[data-theme="dark"] .theme-toggle .tt-sun  { display: none; }
 }
 .dmodal-bg.is-in .dmodal { transform: none; }
 .dmodal-v { display: block; width: 100%; height: auto; background: #000; }
+
+/* End-of-video overlay, sits over the last frame inside the video pane. */
+.dmodal-end {
+  position: absolute; left: 0; right: 0; top: 0;
+  aspect-ratio: 16 / 9;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(11, 13, 18, 0.82);
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  opacity: 0; transition: opacity 0.28s ease;
+}
+.dmodal-end.is-in { opacity: 1; }
+.dmodal-end-in { text-align: center; padding: 1rem; }
+.dmodal-end-h {
+  margin: 0 0 1.1rem; color: #fff;
+  font-family: var(--font-display, inherit); font-weight: 700; font-size: 1.6rem;
+}
+.dmodal-buy {
+  display: inline-block; padding: 0.85rem 2.1rem;
+  background: var(--accent, #fa582d); color: #fff;
+  font-family: var(--font-display, inherit); font-weight: 800; font-size: 1.1rem;
+  border-radius: var(--r-sm, 8px); text-decoration: none;
+  box-shadow: 0 10px 30px rgba(250, 88, 45, 0.35);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.dmodal-buy:hover { transform: translateY(-2px); box-shadow: 0 14px 38px rgba(250, 88, 45, 0.45); }
+.dmodal-replay {
+  display: block; margin: 1rem auto 0;
+  background: none; border: none; cursor: pointer;
+  color: #b6bdcc; font-size: 0.88rem; text-decoration: underline; text-underline-offset: 3px;
+}
+.dmodal-replay:hover { color: #fff; }
+@media (prefers-reduced-motion: reduce) { .dmodal-end { transition: none; } }
 .dmodal-bar {
   display: flex; flex-wrap: wrap; gap: 0.8rem 1rem;
   align-items: center; justify-content: space-between;
