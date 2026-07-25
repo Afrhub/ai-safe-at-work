@@ -12,13 +12,14 @@ async function route() {
   location.replace((p && DASH[p.role]) || "end-user.html");
 }
 
-// After any sign-in: managers/resellers must satisfy TOTP MFA (skipped during demo inspection);
-// end-users are passwordless and low-privilege, so no MFA.
+// After any sign-in: every role must satisfy TOTP MFA. Staff included — they
+// reach acknowledged policy and completion records, which are audit evidence.
+// (Trade-off recorded in docs/user-flows.md: this asks every member of staff to
+// set up an authenticator app before they can take a 90-minute course.)
 async function afterAuth() {
   if (AUTH_DISABLED) return route();               // inspection mode: no MFA friction
   const prof = await getRole();
-  const privileged = prof && (prof.role === "manager" || prof.role === "reseller");
-  if (!privileged) return route();
+  if (!prof) return route();
   const { data: aal } = await sb.auth.mfa.getAuthenticatorAssuranceLevel();
   if (aal.currentLevel === "aal2") return route();                 // already satisfied this session
   if (aal.nextLevel === "aal2") { say(""); return show("step-mfa"); } // factor exists -> challenge

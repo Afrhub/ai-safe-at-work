@@ -10,7 +10,10 @@ if (!cfg || !cfg.url || cfg.url.includes("YOUR-PROJECT")) {
 }
 export const sb = createClient(cfg.url, cfg.anon);
 
-export const DASH = { end_user: "end-user.html", manager: "manager.html", reseller: "reseller.html" };
+// Where each role lands after sign-in. Staff go straight into the course, which
+// is what they signed in to do; their own progress, certificate and policy
+// sign-off live on end-user.html, linked from the course page.
+export const DASH = { end_user: "../course.html", manager: "manager.html", reseller: "reseller.html" };
 
 // ponytail: AUTH OFF for prod until further notice. Portal pages auto-sign-in as the
 // demo account so they render populated with no login. RLS still scopes every query to

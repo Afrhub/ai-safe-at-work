@@ -350,7 +350,7 @@ function pageDashboard(){
   main.innerHTML = `
     <div class="pagehead">
       <div><div class="eyebrow">Attest AI Platform</div>
-      <h2>${esc(DB.org.companyName)}, AI Governance Dashboard</h2>
+      <h2>${fieldVal(DB.org.companyName) ? esc(DB.org.companyName)+', ' : ''}AI Governance Dashboard</h2>
       <p>Live status across your governance documents, registers and staff sign-off, tracked in one place.</p></div>
       <div class="actions"><button class="btn gold" data-act="setTab" data-a1="aup">Open Acceptable Use Policy →</button></div>
     </div>
@@ -1416,6 +1416,8 @@ async function seedDemo(){
   const staff = [{id:'S-DEMO1',name:'Asha Patel',email:'asha@example.com',role:'Ops'},{id:'S-DEMO2',name:'Marcus Webb',email:'marcus@example.com',role:'Sales'}];
   await dbSet('usecases',[uc1,uc2]); await dbSet('assessments',[ra]); await dbSet('risks',[risk]);
   await dbSet('vendors',[vendor]); await dbSet('staff',staff);
+  const org = await dbGet('org-config', null);
+  await dbSet('org-config', Object.assign({}, org || DEFAULT_ORG, {companyName:'Northgate Legal'}));
   sessionStorage.setItem('aimp-demo-seeded','1');
 }
 (async function init(){
