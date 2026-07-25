@@ -86,6 +86,17 @@ decides to pay you today cannot, and you will not know they tried.
 0c. **Confirm the loop end-to-end** before promoting anything: submit the live form,
     confirm the email arrives, confirm an invoice can be raised and portal access
     granted. Never assume the form works because the page renders.
+    *Verified 25 Jul, the half that does not need an inbox:* Netlify accepts POSTs
+    to `order`, `partner-enquiry` and `demo` (200), and rejects an unregistered
+    name (404) — so form detection is live and discriminating, and submissions are
+    reaching the dashboard. **The plumbing is not the blocker; only the
+    notification setting is.** Test submissions were made against every form and
+    should be deleted.
+0f. **Delete two orphaned Netlify forms**: `tier1-order` and `foundation-order`
+    still accept submissions (200) even though no page posts to them any more —
+    Netlify keeps previously-detected forms registered. A cached page or an old
+    link would drop an order into a form nobody watches. Remove them in the
+    Netlify dashboard.
 
 Everything below is secondary. Optimising price, copy or funnel volume ahead of this
 is optimising a bucket with no bottom.
