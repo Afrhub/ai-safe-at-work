@@ -519,24 +519,31 @@ document.addEventListener('click', function (e) {
       src: '/assets/video/platform-demo.mp4?v=1',
       poster: '/assets/video/platform-demo-poster.jpg?v=1',
       note: 'A minute inside the platform, then it is yours to try.',
-      go: 'Open the demo &rarr;'
+      go: 'Open the demo &rarr;',
+      buy: '/checkout.html?plan=platform',
+      buyLabel: 'Buy the Platform'
     },
     course: {
       watchedKey: 'aisw-course-watched',
       src: '/assets/video/course-module-1.mp4?v=1',
       poster: '/assets/video/course-module-1-poster.jpg?v=1',
       note: 'A look at module 1, which is free to read in full.',
-      go: 'Read module 1 &rarr;'
+      go: 'Read module 1 &rarr;',
+      buy: '/checkout.html',
+      buyLabel: 'Buy Foundation'
     }
   };
 
-  /* Where "Buy now" goes when the walkthrough ends.
-     GoCardless is the intended destination, but no GoCardless account exists
-     yet (HANDOFF blocker 0b: no card path, orders are invoiced by hand), so
-     this points at the working order form rather than shipping a dead link.
-     When the account is live, replace this one line with the GoCardless
-     payment / billing-request URL. Nothing else needs to change. */
-  var BUY_URL = '/checkout.html';
+  /* Where the end-of-video buy button goes, per preview: the platform
+     walkthrough sells the platform, the course walkthrough sells Foundation.
+     A single shared destination sent every viewer to Foundation regardless of
+     what they had just watched.
+
+     GoCardless is the intended destination but no account exists yet (HANDOFF
+     blocker 0b: no card path, orders are invoiced by hand), so these point at
+     the working order form rather than shipping dead links. Swap the two `buy`
+     values above for the matching GoCardless payment links when that account
+     is live. */
 
   /** Which preview, if any, a link should show first. */
   function previewFor(a) {
@@ -621,7 +628,7 @@ document.addEventListener('click', function (e) {
       end.innerHTML =
         '<div class="dmodal-end-in">' +
           '<p class="dmodal-end-h">Ready to get started?</p>' +
-          '<a class="dmodal-buy" href="' + BUY_URL + '">Buy now</a>' +
+          '<a class="dmodal-buy" href="' + cfg.buy + '">' + (cfg.buyLabel || 'Buy now') + '</a>' +
           '<button class="dmodal-replay" type="button">Watch again</button>' +
         '</div>';
       v.parentNode.insertBefore(end, v.nextSibling);
