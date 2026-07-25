@@ -20,6 +20,14 @@ JSON/JSON-LD and blocks secrets + forbidden files (`docs/subscription-model.pdf`
 - **Certification copy rule**: "audit-ready" may only mean *records organised the way an auditor asks
   for them*, never "you will pass". Attest AI never presents as a certification/accreditation body.
   The "A note on what we are" preface is on index.html and pricing.html; course + portal still to do.
+- **Plans (bands changed 25 Jul)**: Foundation £990/yr **1-25 staff**, £1,750 **26-50**; Platform £249/mo
+  1-25, £499 26-50 (billed annually £2,490/£4,990); **more than 50 = contact us** for both. Ex-VAT.
+  Supersedes the 26-100 band locked 19 Jul — see DOCTRINE 2026-07-25.
+- **Product videos**: platform demo (60s) + course module 1 (43s), narrated, behind the demo/course
+  buttons on pricing, plus-pack and solutions. Play every time; SKIP appears once watched through.
+  Source in `video-project/` (gitignored); regenerate narration with the ElevenLabs key. A "Buy now"
+  overlay on the last frame points at `BUY_URL` in `assets/cinema.js` — **one line to swap for the
+  GoCardless link** once that account exists.
 - **Content posture (24 Jul)**: gate the doing, not the knowing. Public + indexable: homepage,
   pricing, course, plus-pack (= the Platform page), consultancy, solutions, faq, glossary,
   standards-map, module-1 (free sample), resources, templates index, about, legal. Gated pages all
@@ -81,11 +89,13 @@ Everything below is secondary. Optimising price, copy or funnel volume ahead of 
 is optimising a bucket with no bottom.
 
 ### Then
-0e. **Product roadmap (founder-stated, 24 Jul):** finish reviewing the platform
-    screens; re-review the 12 training modules for staleness; plot the three
-    user flows (Reseller, Client Manager, Client User); user guides as pop-ups
-    in each course/platform section; confirm + automate the onboarding flow;
-    support model (AI bot first, then ticket).
+0e. **Product roadmap (founder-stated, 24 Jul).** Done: platform screens reviewed
+    (all 15 render clean), modules audited for staleness, three user flows plotted
+    (`docs/user-flows.md`), in-product guides live on all 11 platform screens.
+    Remaining: **onboarding automation** — blocked, there is nothing to automate
+    until mail and payment exist (0a/0b) — and the **support model** (AI bot first,
+    then ticket), whose most common question would today be "how do I get my staff
+    in?", which has no working answer while SMTP is unconfigured.
 1. **RORtech call** — ask what their clients pay for their Cyber Essentials line; treat as design
    partner, not first sale; reconcile MSP 70/30 maths before honouring the founding promise.
    This is also the highest-value unknown in the revenue model: until the 70/30 reconciles,
