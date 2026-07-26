@@ -48,7 +48,7 @@ const DB = {
   org: null, aup: null, tor: null, raci: null,
   staff: [], acks: [],
   usecases: [], risks: [], assessments: [],
-  vendors: [], supplierRisk: [], incidents: [], objectives: []
+  vendors: [], supplierRisk: [], incidents: [], objectives: [], tools: []
 };
 
 /* Prompt text belongs in the placeholder attribute, not the value. It used to be
@@ -160,6 +160,7 @@ async function loadAll(){
   DB.supplierRisk = await dbGet('supplierRisk', []);
   DB.incidents = await dbGet('incidents', []);
   DB.objectives = await dbGet('objectives', []);
+  DB.tools = await dbGet('tools', []);
   await syncUseCaseRatings();   // catch up anything rated by hand before assessments drove it
 }
 
@@ -168,6 +169,7 @@ const TABS = [
   {grp:'Overview', items:[ {id:'dashboard', label:'Governance Centre'} ]},
   {grp:'Policy', items:[ {id:'aup', label:'Acceptable Use Policy'} ]},
   {grp:'Registers', items:[
+    {id:'tools', label:'AI Tool Register'},
     {id:'usecases', label:'Use Case Register'},
     {id:'riskreg', label:'AI Risk Register'} ]},
   {grp:'Assessments', items:[
@@ -204,6 +206,7 @@ const GUIDES = {
   aup: "Each field fills the numbered section it names in the policy below. Saving increments the draft version; publishing makes it live and asks every member of staff to acknowledge it again.",
   vendors: "<b>Step 1 of vendor onboarding.</b> Structured AI supplier due diligence based on recognised industry frameworks, including 19 mandatory checks. Send it to the supplier before you buy. When the answers come back, score them in Vendor Risk Score.",
   supplierrisk: "<b>Step 2 of vendor onboarding.</b> Score the vendor once diligence is back and record a go/no-go. Approve one and it becomes a use case in the Use Case Register.",
+  tools: "Every AI tool your people can reach, including the ones you never bought. A personal ChatGPT account has no supplier to send diligence to, so it can never arrive through Vendor Due Diligence — it starts here instead. Record the account type: the same tool on an enterprise account and on a personal one are two different answers. What you set as the most sensitive data permitted is what Section 3 of the policy will tell staff.",
   usecases: "Every approved AI use case, one row each: the tool being used, its business owner, the data involved, the purpose and its current governance status. One tool can carry several use cases. The risk rating is set by the use case's risk assessment, not typed here. A use case with no assessment shows in the Governance Centre until you run one.",
   assessments: "One assessment per use case. Score likelihood times impact, decide, and the worst score sets that use case's rating automatically. Anything you cannot mitigate belongs in the AI Risk Register.",
   riskreg: "Risks you are actively managing, each with a named owner and a due date. Link one to a use case to show where it came from. Record the residual score once mitigation is planned: it is the first thing an auditor asks for. Overdue mitigations appear in the Governance Centre.",
@@ -237,7 +240,7 @@ function renderMain(){
   const main = document.getElementById('main');
   const renderers = {
     dashboard: pageDashboard, aup: pageAUP, usecases: ()=>pageRegister('usecases'),
-    riskreg: ()=>pageRegister('risks'), assessments: pageAssessments, vendors: pageVendors,
+    tools: ()=>pageRegister('tools'), riskreg: ()=>pageRegister('risks'), assessments: pageAssessments, vendors: pageVendors,
     supplierrisk: pageSupplierRisk, incidents: pageIncidents, raci: pageRACI, tor: pageTOR, staff: pageStaff,
     'm-team': ()=>pageStash('pane-team'), 'm-course': ()=>pageStash('pane-course'), 'm-templates': ()=>pageStash('pane-templates'), 'm-updates': ()=>pageStash('pane-updates')
   };
@@ -277,6 +280,27 @@ function attentionItems(){
 
   DB.incidents.filter(i=>i.status!=='Closed').forEach(i=>
     push('high', `Incident <b>${esc(i.id)}</b> is still open`, 'incidents'));
+
+  /* Shadow AI, as far as governance can honestly see it. The platform cannot
+     know who signed into ChatGPT with a personal address — that needs an
+     endpoint agent, and it is a different product. What it can say is which
+     recorded use cases point at a tool nobody has cleared, and which point at
+     one that has been ruled out. Every number here comes from a row someone
+     wrote, so it can be defended. */
+  DB.usecases.filter(u=>u.status!=='Discontinued' && u.tool && !DB.tools.some(t=>t.id===u.tool)).forEach(u=>
+    push('high', `<b>${esc(u.name||u.id)}</b> uses a tool that is not on the AI Tool Register`, 'tools'));
+
+  DB.usecases.filter(u=>u.status!=='Discontinued' && u.tool).forEach(u=>{
+    const t = DB.tools.find(x=>x.id===u.tool);
+    if(t && (t.status==='Restricted' || t.status==='Not approved'))
+      push('high', `<b>${esc(u.name||u.id)}</b> runs on <b>${esc(t.name)}</b>, which is ${esc(t.status.toLowerCase())}`, 'usecases');
+  });
+
+  DB.tools.filter(t=>t.status==='Awaiting assessment').forEach(t=>
+    push('med', `<b>${esc(t.name||t.id)}</b> is on the register but has no decision yet`, 'tools'));
+
+  DB.tools.filter(t=>overdue(t.reviewDate)).forEach(t=>
+    push('med', `<b>${esc(t.name||t.id)}</b> was due review on ${esc(t.reviewDate)}`, 'tools'));
 
   if(DB.aupStatus.published){
     const acked = new Set(DB.acks.filter(a=>a.version===DB.aupStatus.version).map(a=>a.staffId));
@@ -413,6 +437,7 @@ function pageDashboard(){
         <tr><th>Document</th><th>Status</th><th></th></tr>
         ${[
           ['Acceptable Use Policy', DB.aupStatus.published?'<span class="badge active">Published</span>':'<span class="badge pending">Draft</span>', 'aup'],
+          ['AI Tool Register', DB.tools.length?`<span class="badge active">${DB.tools.length} tool${DB.tools.length===1?'':'s'}</span>`:'<span class="badge neutral">Empty</span>', 'tools'],
           ['AI Use Case Register', DB.usecases.length?`<span class="badge active">${DB.usecases.length} entr${DB.usecases.length===1?'y':'ies'}</span>`:'<span class="badge neutral">Empty</span>', 'usecases'],
           ['AI Risk Assessments', DB.assessments.length?`<span class="badge active">${DB.assessments.length} entr${DB.assessments.length===1?'y':'ies'}</span>`:'<span class="badge neutral">Empty</span>', 'assessments'],
           ['AI Risk Register', DB.risks.length?`<span class="badge active">${DB.risks.length} entr${DB.risks.length===1?'y':'ies'}</span>`:'<span class="badge neutral">Empty</span>', 'riskreg'],
@@ -483,6 +508,21 @@ async function objDelete(idx){
   DB.objectives.splice(+idx, 1);
   await dbSet('objectives', DB.objectives);
   renderMain(); toast('Objective deleted');
+}
+
+/* Section 3 of the policy, generated from the AI Tool Register so the rule
+   staff read and the decision the business recorded cannot drift apart. Falls
+   back to the typed list when the register is empty, so a policy written
+   before the register existed still renders exactly as it did. */
+function toolTableHTML(){
+  if(!DB.tools.length) return '';
+  const rows = DB.tools.map(t=>`<tr>
+    <td>${esc(t.name||t.id)}</td>
+    <td>${esc(t.edition||'Unknown')}</td>
+    <td>${esc(t.status||'Awaiting assessment')}</td>
+    <td>${esc(t.maxData || 'Not stated')}${(t.conditions||'').trim()?' &mdash; '+esc(t.conditions):''}</td>
+  </tr>`).join('');
+  return `<table class="tbl"><tr><th>Tool</th><th>Account type</th><th>Status</th><th>Most sensitive data permitted</th></tr>${rows}</table>`;
 }
 
 function setTab(t){ CURRENT=t; renderNav(); renderMain(); }
@@ -633,8 +673,8 @@ function renderAupDoc(){
     <div class="meta"><b>Effective:</b> ${fmtDate(o.effectiveDate)} · <b>Version:</b> ${esc(displayVersion())}${hasUnpublishedChanges()||!DB.aupStatus.published?' (draft)':''} · <b>Owner:</b> ${esc(docVal(o.owner,'[Policy owner role]'))} · <b>Review cycle:</b> Quarterly</div>
     <h4>1. Purpose</h4><p>This policy describes how staff at ${esc(docVal(o.companyName,'[Company Name]'))} may use generative AI tools (such as ChatGPT, Microsoft Copilot, Claude, Gemini, Perplexity, or any other AI assistant) in the course of their work, setting out what is encouraged, what is permitted with conditions, and what is forbidden.</p>
     <h4>2. Scope</h4><p>Applies to all employees, contractors, interns and consultants performing work for ${esc(docVal(o.companyName,'[Company Name]'))}, on company-owned and personal devices used for work, covering all AI tools whether procured by the company or used personally.</p>
-    <h4>3. Approved tools</h4><ul>${tools || '<li class="fill">No approved tools listed yet</li>'}</ul>
-    <p>Other tools require explicit approval from ${esc(docVal(o.owner,'[Policy owner role]'))} before use. Free or personal-tier consumer AI tools are <b>not approved</b> for the data categories in Section 5.</p>
+    <h4>3. Approved tools</h4>${toolTableHTML() || `<ul>${tools || '<li class="fill">No approved tools listed yet</li>'}</ul>`}
+    <p>Other tools require explicit approval from ${esc(docVal(o.owner,'[Policy owner role]'))} before use. A personal or consumer account is a different tool from the same product on a company account, and is governed separately above. Where a tool is listed as restricted, it may be used only within the stated limit and never for the data categories in Section 5.</p>
     <h4>4. Permitted uses</h4><p>${esc(sec(o,'permittedUses'))}</p>
     <h4>5. Forbidden inputs</h4><p>${esc(sec(o,'forbiddenInputs'))}</p>
     <h4>6. Output handling</h4><p>${esc(sec(o,'outputHandling'))}</p>
@@ -661,7 +701,7 @@ const REGISTER_SCHEMAS = {
     cols:[
       {key:'name',label:'Use case name',type:'text'},
       {key:'purpose',label:'Purpose (one sentence)',type:'textarea'},
-      {key:'tool',label:'AI tool(s) used',type:'text'},
+      {key:'tool',label:'AI tool used',type:'tool'},
       {key:'dataCategories',label:'Input data categories',type:'select',options:['Public data','Internal non-sensitive','Confidential business','Personal data (general)','Special-category data']},
       {key:'owner',label:'Use case owner',type:'text'},
       {key:'dpia',label:'DPIA required',type:'select',options:['Yes','No','Pending']},
@@ -671,6 +711,23 @@ const REGISTER_SCHEMAS = {
       {key:'notes',label:'Notes',type:'textarea'}
     ],
     listCols:['name','owner','dataCategories','dpia','fria','risk','assessed','status']
+  },
+  tools: {
+    title:'AI Tool Register', idPrefix:'T',
+    desc:'Every AI tool people can reach, and what each one is allowed to touch. A tool with no supplier to send diligence to still belongs here.',
+    cols:[
+      // status first: it is the field that changes, and the one staff read
+      {key:'status',label:'Status',type:'select',options:['Awaiting assessment','Approved','Approved with conditions','Restricted','Not approved']},
+      {key:'name',label:'Tool name',type:'text'},
+      // the whole point: same tool, different account, different answer
+      {key:'edition',label:'Account type',type:'select',options:['Enterprise / business account','Team account','Personal / consumer account','Unknown']},
+      {key:'vendorId',label:'Supplier (if we have a contract)',type:'vendor'},
+      {key:'maxData',label:'Most sensitive data permitted',type:'select',options:['None — do not use with company data','Public data','Internal non-sensitive','Confidential business','Personal data (general)','Special-category data']},
+      {key:'conditions',label:'Conditions or restrictions',type:'textarea'},
+      {key:'owner',label:'Decision owner (named person)',type:'text'},
+      {key:'reviewDate',label:'Review by',type:'date'}
+    ],
+    listCols:['name','edition','status','maxData','owner','reviewDate']
   },
   risks: {
     title:'AI Risk Register', idPrefix:'R', desc:'AI-specific risks: data leakage, hallucination, bias, vendor and compliance risk, with owners and mitigation.',
@@ -838,6 +895,14 @@ function renderCell(c, r){
     const latest = list[list.length-1];
     return `<span class="badge active">Assessed</span> <span class="mono" style="font-size:11px;color:var(--ink-soft);">${esc(latest.id)}</span>`;
   }
+  if(c==='tool'){
+    const t = DB.tools.find(x=>x.id===r.tool);
+    if(!r.tool) return '<span style="color:var(--ink-soft);">-</span>';
+    if(!t) return `${esc(r.tool)} <span class="badge high">Not on register</span>`;
+    const cls = {'Approved':'active','Approved with conditions':'pending','Restricted':'high','Not approved':'high','Awaiting assessment':'neutral'}[t.status] || 'neutral';
+    return `${esc(t.name)} <span class="badge ${cls}">${esc(t.status||'')}</span>`;
+  }
+  if(c==='maxData'){ return r.maxData ? esc(r.maxData) : '<span style="color:var(--ink-soft);">-</span>'; }
   if(c==='relatedUseCase'){
     if(!r.relatedUseCase) return '<span style="color:var(--ink-soft);">-</span>';
     const u = ucById(r.relatedUseCase);
@@ -882,6 +947,20 @@ function openRegisterModal(key, id){
 }
 function fieldHTML(c, value){
   value = value==null?'':value;
+  if(c.type==='vendor'){
+    const opts = DB.vendors.map(v=>`<option value="${esc(v.id)}" ${v.id===value?'selected':''}>${esc(v.name||v.id)}</option>`).join('');
+    return `<label>${c.label}</label><select id="mf_${c.key}"><option value="">- none, or no contract -</option>${opts}</select>`;
+  }
+  if(c.type==='tool'){
+    // stores the tool ID. Anything already typed as free text is kept and
+    // offered as-is, so records written before the register existed still say
+    // what they said — flagged, not silently dropped.
+    const known = DB.tools.some(t=>t.id===value);
+    const legacy = value && !known
+      ? `<option value="${esc(value)}" selected>${esc(value)} — not on the register</option>` : '';
+    const opts = DB.tools.map(t=>`<option value="${esc(t.id)}" ${t.id===value?'selected':''}>${esc(t.name||t.id)}${t.edition&&t.edition!=='Unknown'?' · '+esc(t.edition.split(' ')[0]):''}</option>`).join('');
+    return `<label>${c.label}</label><select id="mf_${c.key}"><option value="">- not on the register -</option>${legacy}${opts}</select>`;
+  }
   if(c.type==='usecase'){
     // stores the use case ID, not its name, so the link survives a rename
     const opts = DB.usecases.map(u=>`<option value="${esc(u.id)}" ${u.id===value?'selected':''}>${esc(u.name||u.id)}</option>`).join('');
