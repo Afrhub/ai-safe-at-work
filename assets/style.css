@@ -145,7 +145,9 @@ a:focus:not(:focus-visible), button:focus:not(:focus-visible), summary:focus:not
 .brand::before { content: none; }
 .topbar-nav {
   display: flex; align-items: center; gap: 1.8rem;
-  flex-wrap: wrap; justify-content: flex-end;
+  /* auto side margins centre the nav in whatever space the brand leaves, and
+     keep it centred on its own row when a narrow viewport wraps the bar */
+  flex-wrap: wrap; justify-content: center; margin-inline: auto;
   font-family: var(--font-body);
   font-size: 0.95rem; font-weight: 600; letter-spacing: 0;
   text-transform: none;
@@ -171,6 +173,15 @@ html[data-theme="dark"] .topbar-nav a.pill-outline:hover { border-color: #fff; }
 /* Pills no longer shrink, so they need slightly less room around them before
    the bar would rather wrap. Recovered from the gap, not from the pills. */
 @media (max-width: 1100px) { .topbar-nav { gap: 1.2rem; } }
+
+/* Above the wrap point the bar is a three-column grid so the nav is centred on
+   the viewport rather than on the space the brand happens to leave; the third
+   column is empty and exists only to balance the brand. Below it the bar goes
+   back to flex, where wrapping matters more than symmetry. */
+@media (min-width: 901px) {
+  .topbar { display: grid; grid-template-columns: 1fr auto 1fr; }
+  .topbar-nav { grid-column: 2; margin-inline: 0; }
+}
 
 /* A 101px logo (inline height:6em) in a 40px bar is most of what makes the
    header wrap on anything narrow, so it comes down well before phone width.
