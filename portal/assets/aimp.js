@@ -48,7 +48,7 @@ const DB = {
   org: null, aup: null, tor: null, raci: null,
   staff: [], acks: [],
   usecases: [], risks: [], assessments: [],
-  vendors: [], supplierRisk: [], incidents: []
+  vendors: [], supplierRisk: [], incidents: [], objectives: []
 };
 
 /* Prompt text belongs in the placeholder attribute, not the value. It used to be
@@ -159,12 +159,13 @@ async function loadAll(){
   DB.vendors = await dbGet('vendors', []);
   DB.supplierRisk = await dbGet('supplierRisk', []);
   DB.incidents = await dbGet('incidents', []);
+  DB.objectives = await dbGet('objectives', []);
   await syncUseCaseRatings();   // catch up anything rated by hand before assessments drove it
 }
 
 /* ============================= NAV ============================= */
 const TABS = [
-  {grp:'Overview', items:[ {id:'dashboard', label:'Dashboard'} ]},
+  {grp:'Overview', items:[ {id:'dashboard', label:'Governance Centre'} ]},
   {grp:'Policy', items:[ {id:'aup', label:'Acceptable Use Policy'} ]},
   {grp:'Registers', items:[
     {id:'usecases', label:'Use Case Register'},
@@ -201,11 +202,11 @@ function renderNav(){
 const GUIDES = {
   dashboard: "This list is generated from your registers, not typed. An item clears itself when the underlying record is fixed, so work top down and check back here.",
   aup: "Each field fills the numbered section it names in the policy below. Saving increments the draft version; publishing makes it live and asks every member of staff to acknowledge it again.",
-  vendors: "<b>Step 1 of vendor onboarding.</b> Send these 19 questions to the supplier before you buy. When the answers come back, score them in Vendor Risk Score.",
+  vendors: "<b>Step 1 of vendor onboarding.</b> Structured AI supplier due diligence based on recognised industry frameworks, including 19 mandatory checks. Send it to the supplier before you buy. When the answers come back, score them in Vendor Risk Score.",
   supplierrisk: "<b>Step 2 of vendor onboarding.</b> Score the vendor once diligence is back and record a go/no-go. Approve one and it becomes a use case in the Use Case Register.",
-  usecases: "Every approved AI tool in use, one row each. The risk rating is set by the tool's risk assessment, not typed here. A use case with no assessment shows on the dashboard until you run one.",
+  usecases: "Every approved AI use case, one row each: the tool being used, its business owner, the data involved, the purpose and its current governance status. One tool can carry several use cases. The risk rating is set by the use case's risk assessment, not typed here. A use case with no assessment shows in the Governance Centre until you run one.",
   assessments: "One assessment per use case. Score likelihood times impact, decide, and the worst score sets that use case's rating automatically. Anything you cannot mitigate belongs in the AI Risk Register.",
-  riskreg: "Risks you are actively managing, each with a named owner and a due date. Link one to a use case to show where it came from. Overdue mitigations appear on the dashboard.",
+  riskreg: "Risks you are actively managing, each with a named owner and a due date. Link one to a use case to show where it came from. Record the residual score once mitigation is planned: it is the first thing an auditor asks for. Overdue mitigations appear in the Governance Centre.",
   incidents: "Start one the moment an incident is confirmed, not after it is resolved. An incident is evidence a risk was real, so check whether the risk register already predicted it.",
   raci: "Names who is Responsible, Accountable, Consulted and Informed for each AI decision. An auditor asks who owns this before they ask what your policy says.",
   tor: "Stands up the group that owns AI governance. Approving it is what turns a document set into a management system.",
@@ -350,10 +351,12 @@ function pageDashboard(){
   main.innerHTML = `
     <div class="pagehead">
       <div><div class="eyebrow">Attest AI Platform</div>
-      <h2>${fieldVal(DB.org.companyName) ? esc(DB.org.companyName)+', ' : ''}AI Governance Dashboard</h2>
+      <h2>${fieldVal(DB.org.companyName) ? esc(DB.org.companyName)+', ' : ''}AI Governance Centre</h2>
       <p>Live status across your governance documents, registers and staff sign-off, tracked in one place.</p></div>
       <div class="actions"><button class="btn gold" data-act="setTab" data-a1="aup">Open Acceptable Use Policy →</button></div>
     </div>
+
+    ${objectivesCard()}
 
     ${(()=>{ const items = attentionItems();
       if(!items.length) return `<div class="card" style="margin-bottom:20px;border-left:3px solid var(--teal);">
@@ -423,6 +426,65 @@ function pageDashboard(){
     </div>
   `;
 }
+/* Business objectives. Not ISO 42001 objectives, the ones a board actually
+   sets: "Marketing using AI safely by Q4". Everything else in the platform is
+   how you get there, so this sits at the top of the Governance Centre rather
+   than becoming another screen nobody opens. Overdue is computed, not stored,
+   so it cannot go stale. */
+function objectiveOverdue(o){
+  return o.status !== 'Achieved' && o.target && new Date(o.target) < new Date(new Date().toDateString());
+}
+function objectivesCard(){
+  const list = DB.objectives || [];
+  const rows = list.map((o,i) => {
+    const late = objectiveOverdue(o);
+    const badge = o.status === 'Achieved' ? '<span class="badge active">Achieved</span>'
+      : late ? '<span class="badge high">Overdue</span>'
+      : `<span class="badge ${o.status === 'On track' ? 'active' : 'pending'}">${esc(o.status || 'Not started')}</span>`;
+    return `<tr>
+      <td>${esc(o.text || '')}</td>
+      <td>${esc(o.owner || '')}</td>
+      <td>${o.target ? esc(o.target) : '<span style="color:var(--ink-soft)">No date</span>'}</td>
+      <td>${badge}</td>
+      <td><button class="btn ghost sm" data-act="objEdit" data-a1="${i}">Edit</button>
+      <button class="btn ghost sm" data-act="objDelete" data-a1="${i}">Delete</button></td>
+    </tr>`;
+  }).join('');
+  return `<div class="card" style="margin-bottom:20px;">
+    <h3 style="margin:0 0 4px;display:flex;align-items:center;gap:10px;">Business objectives
+      <span class="badge neutral">${list.length}</span>
+      <span style="margin-left:auto;"><button class="btn ghost sm" data-act="objEdit" data-a1="new">+ Add objective</button></span></h3>
+    <p style="color:var(--ink-soft);font-size:12.5px;margin:0 0 12px;">What the business wants AI to achieve, and by when. Everything below is how you get there.</p>
+    ${list.length ? `<table class="tbl"><tr><th>Objective</th><th>Owner</th><th>Target</th><th>Status</th><th></th></tr>${rows}</table>`
+      : '<p style="color:var(--ink-soft);margin:0;">None set yet. An objective is the thing your board asked for, for example &ldquo;Marketing using AI safely by Q4&rdquo;.</p>'}
+  </div>`;
+}
+async function objEdit(idx){
+  const isNew = idx === 'new';
+  const o = isNew ? {text:'',owner:'',target:'',status:'Not started'} : (DB.objectives[+idx] || {});
+  showModal(isNew ? 'Add objective' : 'Edit objective', `
+    <label>Objective</label><input id="ob_text" value="${esc(o.text||'')}" placeholder="Marketing using AI safely by Q4" />
+    <label>Owner</label><input id="ob_owner" value="${esc(o.owner||'')}" placeholder="Named person" />
+    <label>Target date</label><input id="ob_target" type="date" value="${esc(o.target||'')}" />
+    <label>Status</label><select id="ob_status">${['Not started','On track','At risk','Achieved'].map(x=>`<option ${x===(o.status||'Not started')?'selected':''}>${x}</option>`).join('')}</select>
+  `, async () => {
+    const text = document.getElementById('ob_text').value.trim();
+    if(!text){ alert('Give the objective a description.'); return; }
+    const rec = { text, owner: document.getElementById('ob_owner').value.trim(),
+      target: document.getElementById('ob_target').value,
+      status: document.getElementById('ob_status').value };
+    if(isNew) DB.objectives.push(rec); else DB.objectives[+idx] = rec;
+    await dbSet('objectives', DB.objectives);
+    closeModal(); renderMain(); toast(isNew ? 'Objective added' : 'Objective saved');
+  });
+}
+async function objDelete(idx){
+  if(!confirm('Delete this objective? This cannot be undone.')) return;
+  DB.objectives.splice(+idx, 1);
+  await dbSet('objectives', DB.objectives);
+  renderMain(); toast('Objective deleted');
+}
+
 function setTab(t){ CURRENT=t; renderNav(); renderMain(); }
 
 /* ============================= AUP ============================= */
@@ -623,9 +685,11 @@ const REGISTER_SCHEMAS = {
       {key:'impact',label:'Impact',type:'select',options:['Low','Medium','High','Critical']},
       {key:'owner',label:'Risk owner (named person)',type:'text'},
       {key:'mitigation',label:'Mitigation action',type:'textarea'},
-      {key:'dueDate',label:'Mitigation due date',type:'date'}
+      {key:'dueDate',label:'Mitigation due date',type:'date'},
+      {key:'residualLikelihood',label:'Residual likelihood (once mitigated)',type:'select',options:['','Very low','Low','Medium','High']},
+      {key:'residualImpact',label:'Residual impact (once mitigated)',type:'select',options:['','Low','Medium','High','Critical']}
     ],
-    listCols:['description','category','relatedUseCase','likelihood','impact','rating','owner','status']
+    listCols:['description','category','relatedUseCase','likelihood','impact','rating','residual','owner','status']
   }
 };
 /* Use-case linkage. Assessments and risks store the use case's ID, so the link
@@ -702,6 +766,13 @@ function bindScoreClamp(el, after){
 }
 
 function computeRiskRating(r){ return (RISK_MATRIX[r.likelihood]||{})[r.impact] || '-'; }
+/* The score left once the mitigation has landed, scored on the same matrix as
+   the inherent risk. Blank rather than assumed: an unscored residual is a
+   question outstanding, not a low risk. */
+function computeResidualRating(r){
+  if(!r.residualLikelihood || !r.residualImpact) return '-';
+  return (RISK_MATRIX[r.residualLikelihood]||{})[r.residualImpact] || '-';
+}
 
 function pageRegister(key){
   const schema = REGISTER_SCHEMAS[key];
@@ -751,9 +822,11 @@ function renderRegisterTable(key, q){
     </tr>`).join('')}
   </table></div>`;
 }
-function labelFor(schema,key){ if(key==='rating') return 'Rating'; if(key==='assessed') return 'Assessment'; const c = schema.cols.find(c=>c.key===key); return c?c.label.split('(')[0].trim():key; }
+function labelFor(schema,key){ if(key==='rating') return 'Inherent'; if(key==='residual') return 'Residual'; if(key==='assessed') return 'Assessment'; const c = schema.cols.find(c=>c.key===key); return c?c.label.split('(')[0].trim():key; }
 function renderCell(c, r){
   if(c==='rating'){ const rt = computeRiskRating(r); return `<span class="badge ${rt.toLowerCase()}">${rt}</span>`; }
+  if(c==='residual'){ const rt = computeResidualRating(r);
+    return rt==='-' ? '<span class="badge neutral">Not scored</span>' : `<span class="badge ${rt.toLowerCase()}">${rt}</span>`; }
   if(c==='risk'){
     const d = derivedRating(r);
     if(!d) return `<span class="badge neutral" title="No assessment has scored this yet">${esc(r.risk||'Not rated')}</span>`;
@@ -1391,7 +1464,7 @@ function pageStash(id){
    (the site CSP has script-src 'self', which blocks inline handlers). */
 const ACTIONS = { setTab, openRegisterModal, deleteRegisterRow, openAssessmentModal, deleteAssessment,
   openVendorModal, deleteVendor, openSRAModal, deleteSRA, openIncidentModal, deleteIncident,
-  openStaffModal, deleteStaff, copyDigest, emailDigest, dismissGuide, print: () => window.print() };
+  openStaffModal, deleteStaff, objEdit, objDelete, copyDigest, emailDigest, dismissGuide, print: () => window.print() };
 document.addEventListener("click", (e) => {
   const el = e.target.closest("[data-act]");
   if (!el) return;

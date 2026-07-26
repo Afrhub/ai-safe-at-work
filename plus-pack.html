@@ -33,6 +33,33 @@
 <link rel="stylesheet" href="assets/module-video.css?v=3" />
 <script defer src="assets/cinema.js?v=22"></script>
 <style>
+/* ── the chain ──────────────────────────────────────────────────────
+   The sequence is the product, so it is drawn rather than described. Kept as
+   an <ol>: without the CSS it is still a correctly ordered list, and a screen
+   reader gets the steps in order rather than a pile of decorative divs. */
+.chain { list-style: none; margin: 1.8rem 0 0; padding: 0 0 0 1.9rem; position: relative; }
+.chain::before {
+  content: ''; position: absolute; left: 7px; top: 10px; bottom: 10px; width: 2px;
+  background: linear-gradient(var(--accent), rgba(250,88,45,0.18));
+  border-radius: 2px;
+}
+.chain > li { position: relative; margin: 0 0 0.55rem; padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: var(--r); background: var(--plate); }
+.chain > li::before {
+  content: ''; position: absolute; left: -1.9rem; top: 1.15rem;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--bg); border: 2px solid var(--accent);
+}
+.chain > li.is-io::before { background: var(--accent); }
+.chain > li.is-io { border-style: dashed; background: transparent; }
+.chain-name { font-weight: 700; display: block; }
+.chain-note { color: var(--text2); font-size: 0.9rem; }
+.chain-tag {
+  float: right; margin-left: 1rem;
+  font-family: var(--font-mono); font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--text3);
+  border: 1px solid var(--border); border-radius: 999px; padding: 0.2rem 0.55rem;
+}
+@media (max-width: 560px) { .chain-tag { float: none; display: inline-block; margin: 0 0 0.4rem; } }
 .pack-q { --cl: rgba(250,88,45,0.12); margin: 1.4rem 0 0; padding: 1.1rem 1.3rem; background: var(--wash), var(--plate); border: 1px solid var(--border); border-radius: var(--r); }
 .pack-q strong { color: var(--accent); }
 .benefit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 1rem; margin: 1.5rem 0; }
@@ -98,10 +125,10 @@
 
  <section id="whats-inside">
  <h2 style="margin-top:2.4rem">What's inside</h2>
- <p class="lede">Eleven working sections, not eleven documents.</p>
+ <p class="lede">Eleven working modules, not eleven documents.</p>
  <div class="module-grid">
  <div class="module-card"><div class="module-num">Policy</div><h3>Acceptable Use Policy</h3><p>Fill the fields, publish, and staff acknowledge it. Every save increments the draft version; publishing asks everyone to sign again.</p></div>
- <div class="module-card"><div class="module-num">Registers</div><h3>Use Case Register</h3><p>Every approved AI tool in use, with its owner, the data it touches and whether it has been assessed.</p></div>
+ <div class="module-card"><div class="module-num">Registers</div><h3>Use Case Register</h3><p>Every approved AI use case, with the tool it uses, its business owner, the data it touches and whether it has been assessed.</p></div>
  <div class="module-card"><div class="module-num">Registers</div><h3>AI Risk Register</h3><p>Risks you are actively managing, each with a named owner, a mitigation and a due date.</p></div>
  <div class="module-card"><div class="module-num">Assess</div><h3>Risk Assessments</h3><p>Score likelihood against impact, record a decision, and the use case&rsquo;s rating updates itself from the result.</p></div>
  <div class="module-card"><div class="module-num">Assess</div><h3>Vendor Due Diligence</h3><p>Nineteen must-answer questions for any AI vendor, modelled on CSA CAIQ-AI, before you buy.</p></div>
@@ -116,16 +143,20 @@
 
  <section id="how-it-fits">
  <h2 style="margin-top:2.6rem">How it fits together</h2>
- <p class="lede">The sections are not separate documents. They are one chain, and the platform keeps the links.</p>
- <ol style="line-height:1.9">
- <li><strong>Vendor Due Diligence</strong> &mdash; send the questionnaire before you buy.</li>
- <li><strong>Vendor Risk Score</strong> &mdash; score the answers, record go / no-go.</li>
- <li><strong>Use Case Register</strong> &mdash; the approved tool becomes a logged use case.</li>
- <li><strong>Risk Assessment</strong> &mdash; assess it, and <strong>the use case&rsquo;s risk rating updates automatically</strong> from the worst score.</li>
- <li><strong>AI Risk Register</strong> &mdash; anything you cannot mitigate gets an owner and a due date.</li>
- <li><strong>Dashboard</strong> &mdash; anything overdue or unassessed surfaces on its own.</li>
- </ol>
- <div class="pack-q" style="margin-top:1.4rem">
+ <p class="lede">The modules are not separate documents. They are one chain, and the platform keeps the links.</p>
+ <ol class="chain">
+ <li class="is-io"><span class="chain-tag">Input</span><span class="chain-name">Supplier</span><span class="chain-note">Someone wants to buy an AI tool, or one has appeared in a tool you already own.</span></li>
+ <li class=""><span class="chain-tag">Module</span><span class="chain-name">Vendor Due Diligence</span><span class="chain-note">Structured supplier diligence goes out before you buy, not after.</span></li>
+ <li class=""><span class="chain-tag">Module</span><span class="chain-name">Vendor Risk Score</span><span class="chain-note">The answers come back and get scored against recognised framework areas.</span></li>
+ <li class="is-io"><span class="chain-tag">Decision</span><span class="chain-name">Approve, or do not</span><span class="chain-note">A recorded go / no-go with a named decision-maker. Rejections are evidence too.</span></li>
+ <li class=""><span class="chain-tag">Module</span><span class="chain-name">Use Case Register</span><span class="chain-note">An approved tool becomes one or more logged use cases, each with an owner and the data it touches.</span></li>
+ <li class=""><span class="chain-tag">Module</span><span class="chain-name">Risk Assessments</span><span class="chain-note">Score likelihood against impact. The worst score sets the use case&rsquo;s rating automatically.</span></li>
+ <li class=""><span class="chain-tag">Module</span><span class="chain-name">AI Risk Register</span><span class="chain-note">Anything you cannot mitigate gets an owner, a due date and a residual score.</span></li>
+ <li class=""><span class="chain-tag">Module</span><span class="chain-name">Acceptable Use Policy</span><span class="chain-note">What the assessments concluded becomes the rule staff actually read.</span></li>
+ <li class=""><span class="chain-tag">Module</span><span class="chain-name">Staff &amp; Sign-off</span><span class="chain-note">Everyone acknowledges the current version. Re-publishing resets it, which is the point.</span></li>
+ <li class="is-io"><span class="chain-tag">Output</span><span class="chain-name">Evidence</span><span class="chain-note">A dated trail from supplier to signature. This is what an auditor is really asking for.</span></li>
+ <li class=""><span class="chain-tag">Module</span><span class="chain-name">Governance Centre</span><span class="chain-note">Anything overdue, unassessed or unsigned surfaces here on its own.</span></li>
+ </ol> <div class="pack-q" style="margin-top:1.4rem">
  <p style="margin:0">That chain is the difference between a document set and a management system. It is also what an auditor is really asking for when they ask to see your AI governance: not the policy, but the evidence you followed it.</p>
  </div>
  </section>
