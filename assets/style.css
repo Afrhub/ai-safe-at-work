@@ -131,6 +131,7 @@ a:focus:not(:focus-visible), button:focus:not(:focus-visible), summary:focus:not
   display: flex; align-items: center; justify-content: space-between;
   gap: 1rem;
   padding: 0.7rem 2rem;
+  flex-wrap: wrap; row-gap: 0.55rem;
   background: rgba(255,255,255,0.88);
   backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
@@ -144,6 +145,7 @@ a:focus:not(:focus-visible), button:focus:not(:focus-visible), summary:focus:not
 .brand::before { content: none; }
 .topbar-nav {
   display: flex; align-items: center; gap: 1.8rem;
+  flex-wrap: wrap; justify-content: flex-end;
   font-family: var(--font-body);
   font-size: 0.95rem; font-weight: 600; letter-spacing: 0;
   text-transform: none;
@@ -157,7 +159,7 @@ a:focus:not(:focus-visible), button:focus:not(:focus-visible), summary:focus:not
 /* primary CTA button in the nav */
 .topbar-nav a.nav-cta { background: var(--accent); color: #fff; padding: 0.5rem 1.05rem; border-radius: var(--r-btn); font-weight: 700; transition: background 160ms ease; }
 .topbar-nav a.nav-cta:hover { background: var(--accent-d); color: #fff; }
-.topbar-nav a.nav-pill { padding: 0.5rem 1.15rem; border-radius: 999px; font-weight: 700; transition: background 160ms ease, border-color 160ms ease, color 160ms ease; }
+.topbar-nav a.nav-pill { padding: 0.5rem 1.15rem; border-radius: 999px; font-weight: 700; white-space: nowrap; flex-shrink: 0; transition: background 160ms ease, border-color 160ms ease, color 160ms ease; }
 .topbar-nav a.pill-solid { background: var(--accent); color: #fff; }
 .topbar-nav a.pill-solid:hover { background: var(--accent-d); color: #fff; }
 .topbar-nav a.pill-outline { border: 1.5px solid var(--border-bold); color: var(--text); }
@@ -166,10 +168,23 @@ a:focus:not(:focus-visible), button:focus:not(:focus-visible), summary:focus:not
 .topbar-nav a.pill-green:hover { background: #0a6339; color: #fff; }
 html[data-theme="dark"] .topbar-nav a.pill-outline { border-color: rgba(255,255,255,0.35); color: #fff; }
 html[data-theme="dark"] .topbar-nav a.pill-outline:hover { border-color: #fff; }
-@media (max-width: 700px) {
+/* Pills no longer shrink, so they need slightly less room around them before
+   the bar would rather wrap. Recovered from the gap, not from the pills. */
+@media (max-width: 1100px) { .topbar-nav { gap: 1.2rem; } }
+
+/* A 101px logo (inline height:6em) in a 40px bar is most of what makes the
+   header wrap on anything narrow, so it comes down well before phone width.
+   The inline style means this has to win with !important. */
+@media (max-width: 900px) {
   .topbar { padding: 0.6rem 1rem; }
-  .topbar-nav { gap: 1rem; font-size: 0.85rem; }
+  .topbar-nav { gap: 1rem; }
+  .brand-logo { height: 2.6em !important; vertical-align: -0.72em !important; margin-right: 0.3em !important; }
+}
+@media (max-width: 700px) {
+  .topbar-nav { gap: 0.6rem; font-size: 0.85rem; }
   .topbar-nav a:not(.always-show) { display: none; }
+  .brand { font-size: 0.95rem; }
+  .topbar-nav a.nav-pill { padding: 0.45rem 0.8rem; }
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -458,7 +473,9 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
    MODULE / FEATURE CARDS — soft, lift on hover
    ════════════════════════════════════════════════════════════ */
 .module-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  /* min() so a 300px track cannot exceed a narrower viewport; at 320px the
+     fixed floor was pushing 8px of horizontal scroll onto the page */
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
   gap: 1.2rem; margin: 2rem 0;
 }
 .module-card {

@@ -282,7 +282,10 @@
     });
 
     syncA11y();
-    host.appendChild(btn);
+    // Sit inside the nav where one exists, so that when a narrow viewport wraps
+    // the bar the toggle wraps with the pills and stays right-aligned, rather
+    // than dropping onto a row of its own at the far left.
+    (host.querySelector('.topbar-nav') || host).appendChild(btn);
 
     // Re-apply the stored theme whenever this page is shown again.
     // Covers bfcache restores (back/forward navigation restores the old
