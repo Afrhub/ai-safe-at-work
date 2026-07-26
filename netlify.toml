@@ -31,6 +31,31 @@
   status = 404
   force = true
 
+# Everything else internal. DOCTRINE and README were blocked by name in
+# 2026-05-19, but the rule was never generalised, so SCOPE.md (the full
+# consultancy ladder AND the MSP tiers), HANDOFF.md, docs/ (including the
+# ownership-and-exit plan and the security one-pager) and specs/ were all
+# being served 200 to anyone who guessed the path. Found 2026-07-26.
+# Blocked by shape rather than by name so the next internal doc is covered
+# without anyone having to remember this file exists.
+[[redirects]]
+  from = "/*.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/docs/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/specs/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # Headers below in _headers (separate file for clarity + per-path scoping).
 # netlify.toml [[headers]] supports glob patterns but per-path detail in
 # _headers reads better and matches Netlify-native pattern.
