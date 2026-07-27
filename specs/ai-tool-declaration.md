@@ -1,6 +1,6 @@
 # Spec — AI Tool Declaration
 
-> **Status:** DRAFT · 2026-07-26 · not started
+> **Status:** DRAFT · 2026-07-26 · not started · founder questions answered same day
 > Scoped after the AI Tool Register shipped (`88be557`). Read that first: this
 > feature exists to feed it.
 
@@ -135,15 +135,74 @@ New key `declarations` in the same key/value store as the other registers
 
 ---
 
-## Open questions for the founder
+## Founder decisions (answered 2026-07-26)
 
-1. **Who decides?** The AUP owner, the Steering Group, or a named role per
-   declaration? Currently the Tool Register has a free-text *Decision owner*
-   with no routing behind it.
-2. **Can staff see the register?** If someone can read that ChatGPT Personal is
-   restricted before they ask, some declarations never get submitted — which is
-   a good outcome, but it means publishing part of the register to the
-   end-user portal.
-3. **Auto-approve the trivial case?** A declaration for an already-approved
-   tool, for public data only, is arguably a use case entry and not a decision.
-   Routing it anyway is more defensible; skipping it is faster.
+### 1. Who decides — resolved: a real person, not a typed name
+
+> *"Should link to the manager or a user when their details are entered."*
+
+**Done already, ahead of this build.** `Decision owner` on the AI Tool Register,
+plus `Use case owner` and `Risk owner`, are now references to staff records
+rather than free text. A name typed before that person was invited is kept and
+shown as *"not a team member"* — flagged, not discarded. An approved tool with
+no owner now raises an item in the Governance Centre, because a decision nobody
+holds is a governance gap.
+
+The declaration workflow inherits this: `decidedBy` is a staff reference, and
+the same picker is reused.
+
+### 2. Staff can see the register — resolved yes, but it is not a front-end job
+
+> *"Yes — it's good for the register to be visible to users of the company."*
+
+Agreed, and it should shorten the queue: someone who can see that ChatGPT
+Personal is restricted may never need to declare it. **Two things block a
+simple implementation, both found while scoping this and neither previously
+recorded:**
+
+- **`governance_state` is not in any migration.** The whole manager portal —
+  every register, the policy, the acknowledgements — lives in a table whose
+  schema and RLS exist only in the running Supabase project. Nothing in the
+  repo reproduces it. Before staff can read a manager's row, there has to be a
+  policy allowing it, and there is nowhere to write that policy today.
+- **`dbGet` falls back to `localStorage` on any error, including a permission
+  denial.** A blocked read is indistinguishable from an empty register, so an
+  RLS mistake would not surface as a failure — it would silently move a
+  customer's governance data into their own browser. This wants fixing on its
+  own merits, ahead of any staff-read feature.
+
+There is also a **second, parallel document system**: the end-user portal reads
+`governance_docs` and writes `governance_acks`, while the manager portal's
+policy tracks its own acknowledgements inside `governance_state`. Two stores,
+two acknowledgement trails, no link. Deciding which is authoritative is a
+prerequisite, not a detail.
+
+**Sequenced accordingly:** make the storage layer honest → put
+`governance_state` under migration with an explicit read policy → then a
+read-only register view in `portal/end-user.html`.
+
+### 3. Auto-approve the trivial case — resolved yes, but still write the record
+
+> *"Sounds reasonable."*
+
+Auto-approve where the tool is **already on the register as Approved** and the
+declared data category is **Public data**. It still writes a full declaration
+record with `status: Approved`, `decidedBy: system`, and a reason of
+*"auto-approved: already-approved tool, public data only"*, plus the Use Case
+Register entry.
+
+Speed without losing the evidence, which is the whole product. Any other
+combination routes to a person.
+
+---
+
+## Build order
+
+1. Storage honesty: stop `dbGet`/`dbSet` swallowing errors into localStorage.
+2. `governance_state` into a migration with an explicit read policy for staff.
+3. Read-only register view in the end-user portal.
+4. The declaration workflow itself, per the flow above.
+
+1 and 2 are prerequisites for 3. 4 can be built before 3 if needed — it does
+not depend on staff being able to read the register, only on the register
+existing, which it does.

@@ -296,6 +296,9 @@ function attentionItems(){
       push('high', `<b>${esc(u.name||u.id)}</b> runs on <b>${esc(t.name)}</b>, which is ${esc(t.status.toLowerCase())}`, 'usecases');
   });
 
+  DB.tools.filter(t=>t.status && t.status!=='Awaiting assessment' && !t.owner).forEach(t=>
+    push('med', `<b>${esc(t.name||t.id)}</b> has a decision but no named owner`, 'tools'));
+
   DB.tools.filter(t=>t.status==='Awaiting assessment').forEach(t=>
     push('med', `<b>${esc(t.name||t.id)}</b> is on the register but has no decision yet`, 'tools'));
 
@@ -703,7 +706,7 @@ const REGISTER_SCHEMAS = {
       {key:'purpose',label:'Purpose (one sentence)',type:'textarea'},
       {key:'tool',label:'AI tool used',type:'tool'},
       {key:'dataCategories',label:'Input data categories',type:'select',options:['Public data','Internal non-sensitive','Confidential business','Personal data (general)','Special-category data']},
-      {key:'owner',label:'Use case owner',type:'text'},
+      {key:'owner',label:'Use case owner',type:'staff'},
       {key:'dpia',label:'DPIA required',type:'select',options:['Yes','No','Pending']},
       {key:'fria',label:'FRIA required',type:'select',options:['Yes','No','Pending']},
       {key:'risk',label:'Risk rating',type:'select',options:['Low','Medium','High']},
@@ -724,7 +727,7 @@ const REGISTER_SCHEMAS = {
       {key:'vendorId',label:'Supplier (if we have a contract)',type:'vendor'},
       {key:'maxData',label:'Most sensitive data permitted',type:'select',options:['None — do not use with company data','Public data','Internal non-sensitive','Confidential business','Personal data (general)','Special-category data']},
       {key:'conditions',label:'Conditions or restrictions',type:'textarea'},
-      {key:'owner',label:'Decision owner (named person)',type:'text'},
+      {key:'owner',label:'Decision owner',type:'staff'},
       {key:'reviewDate',label:'Review by',type:'date'}
     ],
     listCols:['name','edition','status','maxData','owner','reviewDate']
@@ -740,7 +743,7 @@ const REGISTER_SCHEMAS = {
       {key:'currentControls',label:'Current controls',type:'textarea'},
       {key:'likelihood',label:'Likelihood',type:'select',options:['Very low','Low','Medium','High']},
       {key:'impact',label:'Impact',type:'select',options:['Low','Medium','High','Critical']},
-      {key:'owner',label:'Risk owner (named person)',type:'text'},
+      {key:'owner',label:'Risk owner',type:'staff'},
       {key:'mitigation',label:'Mitigation action',type:'textarea'},
       {key:'dueDate',label:'Mitigation due date',type:'date'},
       {key:'residualLikelihood',label:'Residual likelihood (once mitigated)',type:'select',options:['','Very low','Low','Medium','High']},
@@ -895,6 +898,12 @@ function renderCell(c, r){
     const latest = list[list.length-1];
     return `<span class="badge active">Assessed</span> <span class="mono" style="font-size:11px;color:var(--ink-soft);">${esc(latest.id)}</span>`;
   }
+  if(c==='owner'){
+    if(!r.owner) return '<span class="badge neutral">Unassigned</span>';
+    const st = DB.staff.find(x=>x.id===r.owner);
+    return st ? esc(st.name||st.email||st.id)
+              : `${esc(r.owner)} <span class="badge neutral">not a team member</span>`;
+  }
   if(c==='tool'){
     const t = DB.tools.find(x=>x.id===r.tool);
     if(!r.tool) return '<span style="color:var(--ink-soft);">-</span>';
@@ -947,6 +956,15 @@ function openRegisterModal(key, id){
 }
 function fieldHTML(c, value){
   value = value==null?'':value;
+  if(c.type==='staff'){
+    // stores the staff ID so the link survives a rename. A name typed before
+    // that person was invited is kept and shown as-is rather than discarded.
+    const known = DB.staff.some(st=>st.id===value);
+    const legacy = value && !known
+      ? `<option value="${esc(value)}" selected>${esc(value)} — not a team member</option>` : '';
+    const opts = DB.staff.map(st=>`<option value="${esc(st.id)}" ${st.id===value?'selected':''}>${esc(st.name||st.email||st.id)}</option>`).join('');
+    return `<label>${c.label}</label><select id="mf_${c.key}"><option value="">- unassigned -</option>${legacy}${opts}</select>`;
+  }
   if(c.type==='vendor'){
     const opts = DB.vendors.map(v=>`<option value="${esc(v.id)}" ${v.id===value?'selected':''}>${esc(v.name||v.id)}</option>`).join('');
     return `<label>${c.label}</label><select id="mf_${c.key}"><option value="">- none, or no contract -</option>${opts}</select>`;
