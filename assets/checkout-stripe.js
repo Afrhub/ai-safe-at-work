@@ -31,6 +31,13 @@
 
   form.addEventListener("submit", function (e) {
     var headcount = (form.elements.headcount && form.elements.headcount.value) || "";
+    var plan = (form.elements.plan && form.elements.plan.value) || "Foundation";
+
+    // Only Foundation is bought online. checkout.js reuses the SAME band keys for
+    // the Platform plan at different prices ("1-25 (£249/mo, £2,490/yr)"), so
+    // matching on the band alone would send a Platform buyer to Stripe at the
+    // Foundation price. Platform is a subscription and has no Stripe path yet.
+    if (plan !== "Foundation") return;
 
     // Over 50 is a quote, not a sale. Let the Netlify form submit as it always has.
     if (!/^(1-25|26-50)/.test(headcount)) return;
@@ -55,6 +62,7 @@
         name: form.elements.name.value,
         email: form.elements.email.value,
         headcount: headcount,
+        plan: plan,
       }),
     })
       .then(function (r) {

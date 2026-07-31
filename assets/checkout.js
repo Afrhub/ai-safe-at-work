@@ -25,7 +25,7 @@
         ['26-50 (£1,750/yr)', '26 to 50 staff — £1,750 per year'],
         ['Over 50 (quote)', 'More than 50 staff — we will quote']
       ],
-      submit: 'Request your Foundation order →',
+      submit: 'Buy Foundation →',
       features: [
         'The AI Safe@Work course, all eleven modules',
         'Knowledge assessment at the end of each module',

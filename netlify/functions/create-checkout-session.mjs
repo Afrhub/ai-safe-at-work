@@ -27,10 +27,19 @@ const json = (body, status) =>
     headers: { "Content-Type": "application/json" },
   });
 
-// Match on the leading band key, not the whole option label. The labels carry prices
-// ("1-25 (£990/yr)") and will be edited; the keys will not.
-const bandFor = (headcount) =>
-  BANDS.find((b) => String(headcount || "").trim().startsWith(b.key));
+// Resolve an order to a price, or to null if it is not sold online.
+//
+// BOTH arguments matter. The band keys are NOT unique across plans: checkout.js
+// reuses "1-25" and "26-50" for the Platform plan at different prices
+// ("1-25 (£249/mo, £2,490/yr)"), so matching on the band alone would charge a
+// Platform buyer the Foundation price. Only Foundation is sold online today.
+//
+// Matches on the leading band key rather than the whole option label, because the
+// labels carry prices and will be edited; the keys will not.
+export function resolveBand(plan, headcount) {
+  if (String(plan || "").trim() !== "Foundation") return null;
+  return BANDS.find((b) => String(headcount || "").trim().startsWith(b.key)) || null;
+}
 
 const clean = (v) => String(v || "").trim().slice(0, 400); // Stripe metadata caps at 500
 
@@ -47,8 +56,8 @@ export default async (req) => {
     return json({ error: "Could not read that request." }, 400);
   }
 
-  const band = bandFor(body.headcount);
-  if (!band) return json({ error: "That headcount is quoted rather than bought online." }, 400);
+  const band = resolveBand(body.plan, body.headcount);
+  if (!band) return json({ error: "That plan and headcount is not sold online yet." }, 400);
 
   const email = clean(body.email);
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
