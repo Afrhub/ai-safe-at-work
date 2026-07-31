@@ -5,7 +5,7 @@
 // Adding the npm package would add a build to a deliberately static site.
 //
 // Netlify env needed:
-//   STRIPE_SECRET_KEY  (required — until it is set this returns 503 and the page
+//   STRIPE_SECRET_KEY  (required, until it is set this returns 503 and the page
 //                       falls back to the old invoice-me form)
 //   VAT_RATE           (optional, e.g. "0.20". Unset = 0, i.e. charge the advertised
 //                       ex-VAT price. See the note in HANDOFF before going live.)
