@@ -1457,13 +1457,13 @@ function pageStaff(){
   DB.acks.forEach(a=>{ ackByStaff[a.staffId] = a; });
   main.innerHTML = `
     <div class="pagehead">
-      <div><div class="eyebrow">Rollout</div><h2>Staff &amp; Policy Sign-off</h2><p>Maintain your staff roster, send the policy for acknowledgement, and track who has signed off, all in shared storage so this updates live for everyone using this platform link.</p></div>
+      <div><div class="eyebrow">Rollout</div><h2>Staff &amp; Policy Sign-off</h2><p>Maintain your staff roster, send the policy out for acknowledgement, and track who has signed off.</p></div>
       <div class="actions"><button class="btn ghost" id="copyMsg">Copy announcement message</button><button class="btn gold" id="addStaff">+ Add staff member</button></div>
     </div>
 
     <div class="card" style="background:var(--amber-bg);border-color:transparent;">
-      <h3>How "send to staff" works here</h3>
-      <p style="margin:0;">Share this artifact's link with your team (use the share / publish option above the conversation). Everyone who opens it sees the same live data. Add people to the roster below, then use <b>Copy announcement message</b> or the per-person <b>Email</b> button to notify them, each person opens the link, finds their name under "Acknowledge the policy", and signs off. Their acknowledgement appears here instantly for everyone.</p>
+      <h3>How to send the policy to your staff</h3>
+      <p style="margin:0;">Publish the policy, then add your people to the roster below. Use <b>Copy announcement message</b> to post one note to everyone at once, in email, Slack or Teams, or <b>Email reminder</b> to chase an individual. Both include your portal sign-in link. Each person signs in, opens the Acceptable Use Policy and confirms they have read it.</p>
     </div>
 
     <div class="grid cols-2">
@@ -1498,7 +1498,7 @@ function renderStaffTable(ackByStaff){
       const ack = ackByStaff[s.id];
       const acked = ack && ack.version===DB.aupStatus.version;
       const subj = encodeURIComponent(`Action needed: acknowledge the AI Acceptable Use Policy`);
-      const body = encodeURIComponent(`Hi ${s.name},\n\nPlease open the Attest AI platform and acknowledge the AI Acceptable Use Policy (v${DB.aupStatus.version}).\n\nThanks,\n${DB.org.owner}`);
+      const body = encodeURIComponent(`Hi ${s.name},\n\nPlease sign in to the Attest AI portal and acknowledge the AI Acceptable Use Policy (v${DB.aupStatus.version}):\n${PORTAL_LINK()}\n\nThanks,\n${DB.org.owner}`);
       return `<tr><td>${esc(s.name)}</td><td>${esc(s.email)}</td><td>${esc(s.role)}</td>
       <td>${acked?`<span class="badge active">Acknowledged ${fmtDate(ack.date)}</span>`:'<span class="badge open">Not yet</span>'}</td>
       <td style="white-space:nowrap;">
@@ -1539,8 +1539,17 @@ async function recordAck(){
   pageStaff(); renderNav();
   toast('Acknowledged, thank you');
 }
+// Absolute, because this text gets pasted into Slack, Teams and email clients where
+// a relative path means nothing.
+// Declaration, not a const arrow: renderStaffTable() uses this above the point it is
+// defined, and a function declaration hoists where a const would sit in the TDZ.
+function PORTAL_LINK(){ return location.origin + '/portal/login.html'; }
+
 function copyAnnouncement(){
-  const text = `AI Acceptable Use Policy (v${DB.aupStatus.version}) is now ${DB.aupStatus.published?'published':'in draft'} for ${DB.org.companyName}.\n\nPlease open the compliance platform link, find your name under "Acknowledge the policy", and confirm you've read it.\n\nQuestions to ${DB.org.dpoName} (${DB.org.incidentContact}).`;
+  // The link is the point: without it a manager pastes this into Slack and every
+  // reader has to ask which link. Sign-in, not this page, because staff hold the
+  // end_user role and guard(["manager"]) would bounce them straight back out.
+  const text = `AI Acceptable Use Policy (v${DB.aupStatus.version}) is now ${DB.aupStatus.published?'published':'in draft'} for ${DB.org.companyName}.\n\nPlease sign in to the Attest AI portal and confirm you have read it:\n${PORTAL_LINK()}\n\nQuestions to ${DB.org.dpoName} (${DB.org.incidentContact}).`;
   navigator.clipboard?.writeText(text).then(()=>toast('Announcement copied to clipboard')).catch(()=>toast('Could not copy, select and copy manually'));
 }
 
