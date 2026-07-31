@@ -1,0 +1,597 @@
+<meta charset="utf-8">
+<title>Attest AI, Test Plan and Coverage</title>
+<style>
+  @page { size: A4; margin: 16mm 14mm 18mm 14mm; }
+  * { box-sizing: border-box; }
+  body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 9.3pt; line-height: 1.45; color: #14161a; margin: 0; }
+  h1 { font-size: 25pt; margin: 0 0 4px; letter-spacing: -0.5px; }
+  h2 { font-size: 14pt; margin: 0 0 10px; padding: 7px 10px; background: #14161a; color: #fff; border-radius: 3px; page-break-after: avoid; }
+  h3 { font-size: 10.6pt; margin: 16px 0 5px; color: #b8320a; page-break-after: avoid; }
+  h4 { font-size: 9.6pt; margin: 12px 0 4px; page-break-after: avoid; }
+  p { margin: 0 0 7px; }
+  .sub { color: #5d646e; }
+  section { page-break-before: always; }
+  section.first { page-break-before: avoid; }
+  table { width: 100%; border-collapse: collapse; margin: 6px 0 12px; font-size: 8.2pt; }
+  th { background: #eef0f3; text-align: left; padding: 4px 5px; border: 1px solid #c8ccd2; font-weight: 700; }
+  td { padding: 4px 5px; border: 1px solid #d5d9de; vertical-align: top; }
+  tr { page-break-inside: avoid; }
+  td.id { font-family: "SF Mono", Menlo, monospace; font-size: 7.6pt; white-space: nowrap; font-weight: 700; }
+  td.pri { text-align: center; white-space: nowrap; font-weight: 700; }
+  .P1 { color: #b8320a; } .P2 { color: #9a6b00; } .P3 { color: #5d646e; }
+  code { font-family: "SF Mono", Menlo, monospace; font-size: 7.8pt; background: #f0f2f4; padding: 0 2px; border-radius: 2px; }
+  .cover { padding-top: 55mm; text-align: left; }
+  .cover .rule { height: 4px; background: #ff5a1f; width: 90px; margin: 14px 0 20px; }
+  .box { border: 1px solid #d5d9de; border-left: 3px solid #ff5a1f; padding: 8px 11px; margin: 10px 0; background: #fafbfc; }
+  .warn { border-left-color: #b8320a; background: #fdf5f3; }
+  ul, ol { margin: 0 0 8px; padding-left: 17px; }
+  li { margin-bottom: 2px; }
+  .flow th:nth-child(1), .flow td:nth-child(1) { width: 26px; text-align: center; }
+  .meta td { border: none; padding: 2px 0; }
+  .meta td:first-child { width: 110px; color: #5d646e; }
+</style>
+
+<div class="cover">
+  <h1>Attest AI</h1>
+  <div class="rule"></div>
+  <p style="font-size:14pt;margin:0 0 26px">Test Plan and Coverage Specification</p>
+  <table class="meta" style="width:340px">
+    <tr><td>Product</td><td>Attest AI, AI Safe@Work</td></tr>
+    <tr><td>Environment</td><td>aisafework.netlify.app</td></tr>
+    <tr><td>Backend</td><td>Supabase <code>hanjrsslhnuauaysbhun</code></td></tr>
+    <tr><td>Version</td><td>1.0</td></tr>
+    <tr><td>Date</td><td>31 Jul 2026</td></tr>
+    <tr><td>Coverage</td><td>8 end to end flows, 204 test cases</td></tr>
+  </table>
+  <div class="box warn" style="margin-top:26px">
+    <b>Internal document.</b> This plan names security weaknesses, test credentials and unreleased
+    behaviour. It lives in <code>docs/</code>, which <code>netlify.toml</code> already returns 404 for,
+    so it is not served publicly. Keep it that way.
+  </div>
+</div>
+
+<section>
+<h2>1. Scope, environment and conventions</h2>
+
+<h3>1.1 In scope</h3>
+<ul>
+  <li><b>Public marketing site</b>, 50 root pages plus 29 templates, and every top navigation section.</li>
+  <li><b>Course</b>, 11 core modules plus role tracks and sector overlays, quizzes, certificates.</li>
+  <li><b>Manager portal and Governance Centre</b>, all 16 sections.</li>
+  <li><b>End user portal</b>, progress, certificate, policy acknowledgement.</li>
+  <li><b>Reseller portal</b>, deal registration, customers, commissions, marketing materials.</li>
+  <li><b>Authentication and authorisation</b>, password, TOTP MFA, magic link, reset, RLS enforcement.</li>
+  <li><b>Payments</b>, Stripe Bacs Direct Debit checkout and the fulfilment webhook.</li>
+  <li><b>Cross cutting</b>, CSP, caching, SEO and robots posture, accessibility, responsive layout.</li>
+</ul>
+
+<h3>1.2 Out of scope</h3>
+<ul>
+  <li>Supabase, Netlify and Stripe platform internals. We test our use of them, not the vendors.</li>
+  <li>Video rendering pipeline in <code>video-project/</code>, which is not deployed.</li>
+  <li>Internal slide decks, which are known to be broken live by CSP and are parked deliberately.</li>
+</ul>
+
+<h3>1.3 Test roles and accounts</h3>
+<table>
+  <tr><th style="width:90px">Role</th><th style="width:150px">Account</th><th>Lands on</th><th>Notes</th></tr>
+  <tr><td>Anonymous</td><td>none</td><td>Public pages only</td><td>Must never reach gated content</td></tr>
+  <tr><td>End user</td><td>to be created</td><td><code>course.html</code></td><td>Seated by a manager, consumes one credit</td></tr>
+  <tr><td>Manager</td><td><code>jcmckenny@gmail.com</code></td><td><code>portal/manager.html</code></td><td>Provisioned 30 Jul 2026, 0 credits</td></tr>
+  <tr><td>Reseller</td><td>to be created</td><td><code>portal/reseller.html</code></td><td>No reseller exists in the project yet</td></tr>
+  <tr><td>Demo</td><td><code>demo@attest-ai.com</code></td><td><code>portal/manager.html</code></td><td>Password is public in a public repo, treat as burned</td></tr>
+</table>
+
+<h3>1.4 Conventions</h3>
+<p>Every case carries an ID, the steps, and an <b>expected result</b> stated in observable terms. A case
+passes only when the expected result is observed in full. Partial matches fail.</p>
+<table>
+  <tr><th style="width:60px">Priority</th><th>Meaning</th></tr>
+  <tr><td class="pri P1">P1</td><td>Blocks release. Money, access control, data loss, or a broken primary journey.</td></tr>
+  <tr><td class="pri P2">P2</td><td>Significant defect. A journey works but is degraded, or a secondary feature is broken.</td></tr>
+  <tr><td class="pri P3">P3</td><td>Cosmetic, copy, or nice to have. Log it, do not block on it.</td></tr>
+</table>
+
+<div class="box warn">
+  <b>Read section 11 before running anything.</b> Four known platform states will make large parts of
+  this plan fail for reasons that are not defects in the code under test. Sections F, G and the manager
+  and end user flows are all affected. Record those as <i>Blocked</i>, not <i>Failed</i>.
+</div>
+</section>
+
+<section>
+<h2>2. Section A, end to end user flow scenarios</h2>
+<p class="sub">Each flow is a single continuous journey. A flow fails at the first step whose expected
+result is not met. Run flows before the functional sections, they surface integration defects that
+per screen testing hides.</p>
+
+<h3>A1, Prospect discovers, evaluates and buys Foundation</h3>
+<p><b>Persona</b> Operations manager at a 40 person UK firm. <b>Entry</b> Organic search or direct.
+<b>Goal</b> Understand the product, confirm it is credible, and pay.</p>
+<table class="flow">
+  <tr><th>#</th><th style="width:210px">Action</th><th>Expected result</th></tr>
+  <tr><td>1</td><td>Land on <code>index.html</code></td><td>Hero, the "note on what we are" certification preface, and the Products, Who We Help, Plans nav are visible. No console errors. No CSP violations.</td></tr>
+  <tr><td>2</td><td>Open Who We Help</td><td>Seven audience types render, each pairing arrival challenges with the response. The starting point table shows Foundation, Platform and Consultancy. Prices match <code>pricing.html</code> exactly.</td></tr>
+  <tr><td>3</td><td>Open Plans</td><td>Foundation £990 (1 to 25) and £1,750 (26 to 50). Platform £249 and £499 per month, billed annually £2,490 and £4,990. Over 50 shows "contact us" for both. Every price says it excludes VAT.</td></tr>
+  <tr><td>4</td><td>Click the course demo video</td><td>Video plays from the start. SKIP is absent on first view. On completion the "Buy now" overlay appears on the final frame and points at <code>BUY_URL</code>.</td></tr>
+  <tr><td>5</td><td>Open the free sample, module 1</td><td>Module 1 loads without a sign in prompt. It is the only module that does so.</td></tr>
+  <tr><td>6</td><td>Attempt module 2</td><td>Redirected to <code>course.html?locked=1</code>. A lock message explains access comes with a plan.</td></tr>
+  <tr><td>7</td><td>Click Order Foundation from the course page</td><td>The CTA sits at the end of the Module Breakdown section. It opens <code>checkout.html</code>.</td></tr>
+  <tr><td>8</td><td>Inspect the checkout page</td><td>Heading reads "Order Foundation". The what you get card lists seven inclusions. Submit button reads <b>Buy Foundation</b>. A hidden <code>plan</code> field carries "Foundation".</td></tr>
+  <tr><td>9</td><td>Complete the form, band 1 to 25, and submit</td><td>With a Stripe key present, the browser navigates to <code>checkout.stripe.com</code> showing £990 and Bacs Direct Debit. Without a key, the page falls back to the Netlify order form and shows the not switched on message.</td></tr>
+  <tr><td>10</td><td>Complete the Bacs mandate on Stripe</td><td>Stripe displays the Direct Debit Guarantee. On submit the browser returns to <code>checkout-thanks.html?dd=1</code>.</td></tr>
+  <tr><td>11</td><td>Read the thank you page</td><td>The Direct Debit variant shows, stating Bacs takes three to five working days and the payment will show as pending. The invoice wording is hidden.</td></tr>
+  <tr><td>12</td><td>Wait for Bacs settlement</td><td>Stripe fires <code>checkout.session.async_payment_succeeded</code>. The webhook creates the buyer, grants 25 credits and promotes them to manager. A row appears in <code>stripe_events</code>.</td></tr>
+  <tr><td>13</td><td>Buyer attempts to sign in</td><td><b>Currently fails.</b> No SMTP means no credential is ever delivered. Record as Blocked against AUTH-1, see section 11.</td></tr>
+</table>
+
+<h3>A2, Manager onboards the organisation and stands up governance</h3>
+<p><b>Persona</b> Newly provisioned manager. <b>Goal</b> Reach a defensible governance position from empty.</p>
+<table class="flow">
+  <tr><th>#</th><th style="width:210px">Action</th><th>Expected result</th></tr>
+  <tr><td>1</td><td>Sign in at <code>portal/login.html</code></td><td>Password accepted, TOTP enrolment is offered because no factor exists. After enrolment the manager lands on <code>manager.html</code>.</td></tr>
+  <tr><td>2</td><td>Open the Governance Centre</td><td>Heading reads "Governance Centre". Objectives widget renders at the top. All registers show empty states, not errors.</td></tr>
+  <tr><td>3</td><td>Add a business objective with a past target date</td><td>The objective saves and is flagged overdue. Overdue is computed from the date, never stored, so changing the system date changes the flag.</td></tr>
+  <tr><td>4</td><td>Add two AI tools, ChatGPT Enterprise and ChatGPT Personal</td><td>Both save as separate rows with different account types. The account type field is the point of the register and must be independently settable.</td></tr>
+  <tr><td>5</td><td>Generate the Acceptable Use Policy</td><td>Section 3 is generated from the AI Tool Register and lists both tools with their account types. With an empty register it falls back to the typed list.</td></tr>
+  <tr><td>6</td><td>Publish the policy at v1.0</td><td>Status flips to published with today's date. Staff acknowledgement controls become enabled.</td></tr>
+  <tr><td>7</td><td>Add a use case against an unregistered tool</td><td>The Governance Centre raises a flag naming the unregistered tool.</td></tr>
+  <tr><td>8</td><td>Add a risk, score likelihood and impact</td><td>The matrix places it correctly. Residual risk reads "Not scored" until mitigation is planned, it does not assume the inherent score.</td></tr>
+  <tr><td>9</td><td>Assign an owner from staff records</td><td>The owner picker lists staff records. A legacy typed name is retained and displayed as "not a team member".</td></tr>
+  <tr><td>10</td><td>Add staff and publish the announcement</td><td>Copy announcement message places text on the clipboard containing the absolute portal sign in URL.</td></tr>
+  <tr><td>11</td><td>Invite a team member</td><td><b>Currently fails.</b> Requires SMTP and a non zero credit balance. Record as Blocked.</td></tr>
+  <tr><td>12</td><td>Reload the browser</td><td>Every register, the policy and the objectives persist, having been read back from Supabase and not from <code>localStorage</code>. See NEG-DB-01.</td></tr>
+</table>
+
+<h3>A3, End user completes the course and earns a certificate</h3>
+<table class="flow">
+  <tr><th>#</th><th style="width:210px">Action</th><th>Expected result</th></tr>
+  <tr><td>1</td><td>Open the invite link and set a credential</td><td>Magic link authenticates and routes to <code>course.html</code>, the staff landing page.</td></tr>
+  <tr><td>2</td><td>Open module 1 and read to the end</td><td>Content renders, the quiz appears at the end of the module.</td></tr>
+  <tr><td>3</td><td>Answer the quiz scoring below 80 per cent</td><td>Result shows as not passed. <b>No row is written to <code>module_progress</code>.</b> The user may retry.</td></tr>
+  <tr><td>4</td><td>Retake and score 80 per cent or above</td><td>Pass. A row is inserted in <code>module_progress</code> with the score and an <code>module_completed</code> audit entry is written.</td></tr>
+  <tr><td>5</td><td>Retake again and score lower</td><td>The stored score does not decrease. <code>record_quiz_result</code> keeps the greatest score.</td></tr>
+  <tr><td>6</td><td>Complete all 11 core modules</td><td>The printable checklist unlocks. Progress shows 11 of 11 on the end user portal.</td></tr>
+  <tr><td>7</td><td>Generate the certificate</td><td><code>cert.html</code> renders with the learner name, module and score, and prints cleanly to one page.</td></tr>
+  <tr><td>8</td><td>Manager checks completion</td><td>The manager sees this user's completion in the Team pane and in the completion CSV export.</td></tr>
+</table>
+
+<h3>A4, Reseller registers and converts a deal</h3>
+<table class="flow">
+  <tr><th>#</th><th style="width:210px">Action</th><th>Expected result</th></tr>
+  <tr><td>1</td><td>Sign in as reseller</td><td>Password plus TOTP, then lands on <code>reseller.html</code>. A manager or end user URL redirects back to their own dashboard.</td></tr>
+  <tr><td>2</td><td>Open the dashboard</td><td>Deals, customers and commissions render, scoped to this reseller only.</td></tr>
+  <tr><td>3</td><td>Register a deal</td><td>Row is created at stage <code>registered</code> with the reseller as owner. It appears immediately.</td></tr>
+  <tr><td>4</td><td>Move the deal to qualified, then won</td><td>Stage transitions persist. Only the four permitted stages are accepted.</td></tr>
+  <tr><td>5</td><td>Check commissions</td><td>Commissions are read only. The reseller cannot create or edit a commission, statements are issued by admin.</td></tr>
+  <tr><td>6</td><td>Open partner commercials</td><td>Rebate tiers, wholesale per seat and margins render inside the portal. They must not appear on any public page.</td></tr>
+  <tr><td>7</td><td>Download marketing materials</td><td>Share card, pitch deck and standards map all download or open without a 404.</td></tr>
+</table>
+
+<h3>A5, Staff policy acknowledgement rollout</h3>
+<table class="flow">
+  <tr><th>#</th><th style="width:210px">Action</th><th>Expected result</th></tr>
+  <tr><td>1</td><td>Manager publishes the AUP at v1.0</td><td>Version and published date shown. Acknowledgement control enabled.</td></tr>
+  <tr><td>2</td><td>Manager copies the announcement</td><td>Clipboard text names the version, the company, the DPO and incident contact, and contains the absolute sign in URL.</td></tr>
+  <tr><td>3</td><td>Manager sends a per person reminder</td><td>The mail client opens with a subject, a greeting using the staff name, the policy version and the sign in URL in the body.</td></tr>
+  <tr><td>4</td><td>Staff member opens the link and signs in</td><td>Routed to the end user surface, not the manager portal.</td></tr>
+  <tr><td>5</td><td>Staff member acknowledges the policy</td><td>The acknowledgement is recorded against the current version.</td></tr>
+  <tr><td>6</td><td>Manager checks the roster</td><td><b>Known gap.</b> The roster reads acknowledgements from <code>governance_state</code> while the end user portal writes <code>governance_acks</code>. The two are not linked, so the roster may still read "Not yet". Record against the open decision in section 11.</td></tr>
+  <tr><td>7</td><td>Manager republishes at v1.1</td><td>Prior acknowledgements no longer satisfy the current version. Staff show as outstanding again.</td></tr>
+</table>
+
+<h3>A6, MSP partner enquiry</h3>
+<table class="flow">
+  <tr><th>#</th><th style="width:210px">Action</th><th>Expected result</th></tr>
+  <tr><td>1</td><td>Click Become a Partner</td><td><code>msp.html</code> loads. It carries <code>noindex</code> by choice and is absent from <code>sitemap.xml</code>.</td></tr>
+  <tr><td>2</td><td>Submit the partner enquiry form</td><td>POST to the <code>partner-enquiry</code> Netlify form returns 200 and lands on the thank you page.</td></tr>
+  <tr><td>3</td><td>Check for notification</td><td><b>Currently fails.</b> No form notification is configured, so nobody is told. Record as Blocked against 0a.</td></tr>
+</table>
+
+<h3>A7, Demo and evaluation without an account</h3>
+<table class="flow">
+  <tr><th>#</th><th style="width:210px">Action</th><th>Expected result</th></tr>
+  <tr><td>1</td><td>Open <code>portal/demo.html</code> from pricing</td><td>The full platform renders with sample data and no sign in. Path detection puts it in demo mode.</td></tr>
+  <tr><td>2</td><td>Add a register row and reload</td><td>Data is held in <code>sessionStorage</code>, nothing is written to Supabase.</td></tr>
+  <tr><td>3</td><td>Close the tab and reopen</td><td>All demo edits are gone. Sample data is reseeded.</td></tr>
+  <tr><td>4</td><td>Attempt to reach real data from demo</td><td>No request carries a real user session. No row in any Supabase table is created or modified.</td></tr>
+</table>
+
+<h3>A8, Book a demo</h3>
+<table class="flow">
+  <tr><th>#</th><th style="width:210px">Action</th><th>Expected result</th></tr>
+  <tr><td>1</td><td>Click Book a Demo</td><td>Navigates to <code>about.html#contact</code> and scrolls to the contact section.</td></tr>
+  <tr><td>2</td><td>Submit the demo form</td><td>POST to the <code>demo</code> form returns 200, redirects to <code>demo-thanks.html</code>.</td></tr>
+  <tr><td>3</td><td>Submit with a honeypot value filled</td><td>Netlify silently discards it. No submission appears in the dashboard.</td></tr>
+</table>
+</section>
+
+<section>
+<h2>3. Section B, public site by navigation area</h2>
+
+<h3>B1, Global navigation and shell</h3>
+<table>
+  <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
+  <tr><td class="id">NAV-01</td><td>Nav present site wide</td><td>Load each of the 50 root pages. <b>Expected</b> Products, Who We Help, Plans, Sign in, Book a Demo and Become a Partner appear on every one.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">NAV-02</td><td>Centring above 901px</td><td>Set viewport 1280px. <b>Expected</b> Nav is centred using the three column grid, on one row.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">NAV-03</td><td>Wrap below 901px</td><td>Set viewport 900px. <b>Expected</b> Nav wraps to a second row. No pill is clipped or crushed to a disc.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">NAV-04</td><td>Narrow viewport overflow</td><td>Set viewport 390px. <b>Expected</b> Top bar fits without horizontal scroll. The theme toggle remains on screen. This regressed once at 457px required width.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">NAV-05</td><td>Tablet width</td><td>Set viewport 768px. <b>Expected</b> No horizontal overflow, all pills reachable.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">NAV-06</td><td>Every nav target resolves</td><td>Click each nav item. <b>Expected</b> HTTP 200 on all six, no redirect chain, no 404.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">NAV-07</td><td>Products anchor</td><td>Click Products. <b>Expected</b> Lands on <code>index.html#how-we-help</code> and scrolls to that section.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">NAV-08</td><td>Skip link</td><td>Tab once from page load. <b>Expected</b> "Skip to main content" receives focus, is visible, and jumps to <code>#main</code>.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">NAV-09</td><td>Theme toggle persists</td><td>Switch to dark, reload. <b>Expected</b> Dark persists via <code>localStorage</code> key <code>aisw-theme</code>, with no flash of light theme.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">NAV-10</td><td>Footer integrity</td><td>Check footer on ten pages. <b>Expected</b> Plans, Services, Resources and Company columns present, every link 200.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">NAV-11</td><td>Module bottom nav</td><td>On course and checkout pages. <b>Expected</b> Back and next controls resolve to real pages.</td><td class="pri P3">P3</td></tr>
+</table>
+
+<h3>B2, Home</h3>
+<table>
+  <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
+  <tr><td class="id">HOME-01</td><td>Certification preface</td><td>Read the "note on what we are". <b>Expected</b> Present, and states Attest AI is not a certification or accreditation body.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">HOME-02</td><td>Audit ready wording</td><td>Search the page for "audit ready". <b>Expected</b> Every use means records organised the way an auditor asks. No instance implies a guaranteed pass.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">HOME-03</td><td>JSON-LD parses</td><td>Extract every <code>application/ld+json</code> block. <b>Expected</b> All parse. The pre-push guard enforces this, so a failure here means the guard was bypassed.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">HOME-04</td><td>No em dashes</td><td>Grep rendered text for the em dash character. <b>Expected</b> None. House style is comma when spaced, hyphen when not.</td><td class="pri P3">P3</td></tr>
+</table>
+
+<h3>B3, Who We Help</h3>
+<table>
+  <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
+  <tr><td class="id">WWH-01</td><td>Seven audiences</td><td>Count audience blocks. <b>Expected</b> Seven, each pairing arrival challenges with the response.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">WWH-02</td><td>Starting point table</td><td>Read the table. <b>Expected</b> Foundation, Platform and Consultancy each have a starting point.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">WWH-03</td><td>Price parity</td><td>Compare every price against <code>pricing.html</code>. <b>Expected</b> Identical. Prices are pulled, not restated.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">WWH-04</td><td>Sector overlays reachable</td><td>Click the three regulated sector links. <b>Expected</b> Healthcare, financial services and public sector all load. They are otherwise orphaned.</td><td class="pri P2">P2</td></tr>
+</table>
+
+<h3>B4, Plans and pricing</h3>
+<table>
+  <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
+  <tr><td class="id">PRC-01</td><td>Foundation bands</td><td><b>Expected</b> £990 for 1 to 25, £1,750 for 26 to 50, contact us above 50.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">PRC-02</td><td>Platform bands</td><td><b>Expected</b> £249 and £499 per month, billed annually £2,490 and £4,990, contact us above 50.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">PRC-03</td><td>VAT statement</td><td><b>Expected</b> Every price is marked as excluding VAT.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">PRC-04</td><td>Band price held</td><td><b>Expected</b> The twelve month price hold is stated.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">PRC-05</td><td>Offer schema matches</td><td>Parse the <code>Offer</code> JSON-LD. <b>Expected</b> Values equal the visible prices. A mismatch misprices the product in search results.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">PRC-06</td><td>Retired tier numbers</td><td>Search for "Tier 1", "Tier 2", "Tier 3". <b>Expected</b> None. Tier numbering was retired site wide.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">PRC-07</td><td>Robots contradiction</td><td>Compare the page meta, <code>sitemap.xml</code> and the <code>X-Robots-Tag</code> header. <b>Expected once resolved</b> All three agree. <b>Today</b> They do not, see section 11.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">PRC-08</td><td>Platform demo link</td><td>Click the demo button. <b>Expected</b> Opens the platform demo, which renders without a sign in.</td><td class="pri P2">P2</td></tr>
+</table>
+
+<h3>B5, Course and learning content</h3>
+<table>
+  <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
+  <tr><td class="id">CRS-01</td><td>Section navigation</td><td>Click Overview, Learning Outcomes, Module Breakdown. <b>Expected</b> Each scrolls to its section.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">CRS-02</td><td>Order CTA placement</td><td><b>Expected</b> The Order Foundation CTA sits inside the Module Breakdown section, after the final module card.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">CRS-03</td><td>Eleven modules listed</td><td>Count module cards. <b>Expected</b> Eleven plus the standards reference card. Copy says "eleven working modules", never "sections".</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">CRS-04</td><td>Module 1 is public</td><td>Open module 1 signed out. <b>Expected</b> Loads. It is the free sample.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">CRS-05</td><td>Modules 2 to 12 gated</td><td>Open each signed out. <b>Expected</b> All redirect to <code>course.html?locked=1</code>.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">CRS-06</td><td>Role tracks gated</td><td>Open the manager, DPO, procurement, MSP admin, Copilot and shadow AI modules signed out. <b>Expected</b> All redirect.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">CRS-07</td><td>Sector overlays gated</td><td>Open the three sector pages signed out. <b>Expected</b> Redirect to <code>checkout.html</code>.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">CRS-08</td><td>Public reference pages</td><td>Open glossary, standards map and resources signed out. <b>Expected</b> All load. These were deliberately ungated.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">CRS-09</td><td>Preview overlay</td><td>Click the CTA carrying <code>data-course-preview</code>. <b>Expected</b> The preview opens by delegated event, not an inline handler, and survives the production CSP.</td><td class="pri P1">P1</td></tr>
+</table>
+
+<h3>B6, Quizzes and certificates</h3>
+<table>
+  <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
+  <tr><td class="id">QUIZ-01</td><td>Pass mark is 80</td><td>Score exactly 79 per cent, then exactly 80. <b>Expected</b> 79 fails, 80 passes. The threshold is enforced in <code>record_quiz_result</code>, not the browser.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">QUIZ-02</td><td>Answers never sent</td><td>Inspect the network response for the quiz. <b>Expected</b> The correct answers are not present in any payload. Scoring happens against <code>quiz_keys</code> server side.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">QUIZ-03</td><td>Fail writes nothing</td><td>Fail a quiz, query <code>module_progress</code>. <b>Expected</b> No row for that module.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">QUIZ-04</td><td>Best score retained</td><td>Pass at 100, retake at 80. <b>Expected</b> Stored score stays 100.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">QUIZ-05</td><td>Audit entry written</td><td>Pass a module, query <code>audit_log</code>. <b>Expected</b> A <code>module_completed</code> entry with module, score and total.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">QUIZ-06</td><td>Certificate renders</td><td>Open <code>cert.html</code> after passing. <b>Expected</b> Name, module and score render and print to a single page.</td><td class="pri P2">P2</td></tr>
+</table>
+
+<h3>B7, Forms</h3>
+<table>
+  <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
+  <tr><td class="id">FRM-01</td><td>Three forms registered</td><td>POST to <code>order</code>, <code>demo</code>, <code>partner-enquiry</code>. <b>Expected</b> All return 200.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">FRM-02</td><td>Unknown form rejected</td><td>POST to a name that does not exist. <b>Expected</b> 404, proving detection is discriminating.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">FRM-03</td><td>Orphaned forms removed</td><td>POST to <code>tier1-order</code> and <code>foundation-order</code>. <b>Expected once cleaned</b> 404. <b>Today</b> 200, which drops orders into a form nobody watches.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">FRM-04</td><td>Required fields</td><td>Submit each form empty. <b>Expected</b> Native validation blocks submission and focuses the first invalid field.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">FRM-05</td><td>Email format</td><td>Enter <code>notanemail</code>. <b>Expected</b> Rejected before submission.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">FRM-06</td><td>Headcount required</td><td>Submit the order form with no band. <b>Expected</b> Blocked, the select is required.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">FRM-07</td><td>Notification delivered</td><td>Submit a live order. <b>Expected once configured</b> An email reaches James@attest-ai.com. <b>Today</b> Nothing is sent.</td><td class="pri P1">P1</td></tr>
+</table>
+</section>
+
+<section>
+<h2>4. Section C, manager portal and Governance Centre</h2>
+<p class="sub">Sixteen sections. Unless stated, every case runs as an authenticated manager with a
+populated organisation, and every persistence check requires a full page reload.</p>
+
+<h3>C1, Governance Centre, the dashboard</h3>
+<table>
+  <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
+  <tr><td class="id">GOV-01</td><td>Naming</td><td><b>Expected</b> Nav item, heading and every in product guide say "Governance Centre", never "Dashboard".</td><td class="pri P3">P3</td></tr>
+  <tr><td class="id">GOV-02</td><td>Objectives widget</td><td><b>Expected</b> Renders at the top of the Governance Centre.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">GOV-03</td><td>Overdue is computed</td><td>Set a target date in the past. <b>Expected</b> Flagged overdue. Change the date to the future, the flag clears without any stored field changing.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">GOV-04</td><td>Flag, unregistered tool</td><td>Create a use case naming a tool absent from the register. <b>Expected</b> Flag raised naming the tool.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">GOV-05</td><td>Flag, restricted tool</td><td>Create a use case on a tool marked restricted or not approved. <b>Expected</b> Flag raised.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">GOV-06</td><td>Flag, awaiting decision</td><td>Leave a tool undecided. <b>Expected</b> Flag raised.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">GOV-07</td><td>Flag, past review</td><td>Set a review date in the past. <b>Expected</b> Flag raised.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">GOV-08</td><td>Flag, approved with no owner</td><td>Approve a tool, leave the owner empty. <b>Expected</b> Flag raised.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">GOV-09</td><td>No unapproved AI count</td><td>Inspect the Centre. <b>Expected</b> No "N users using unapproved AI" metric anywhere. The platform cannot source it and must not imply it can.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">GOV-10</td><td>Empty organisation</td><td>Sign in as a manager with nothing configured. <b>Expected</b> Empty states everywhere, no errors, no NaN, no "undefined".</td><td class="pri P1">P1</td></tr>
+</table>
+
+<h3>C2 to C12, the registers</h3>
+<table>
+  <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
+  <tr><td class="id">AUP-01</td><td>Generate policy</td><td><b>Expected</b> A complete policy is produced from current data.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">AUP-02</td><td>Section 3 from register</td><td>Populate the AI Tool Register, regenerate. <b>Expected</b> Section 3 lists the registered tools with account types.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">AUP-03</td><td>Section 3 fallback</td><td>Empty the register, regenerate. <b>Expected</b> Falls back to the typed list rather than producing an empty section.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">AUP-04</td><td>Publish and version</td><td>Publish. <b>Expected</b> Version and published date shown, acknowledgement enabled.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">AUP-05</td><td>Unpublished blocks ack</td><td>Leave in draft. <b>Expected</b> The acknowledge button is disabled and a message says the policy must be published first.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">AUP-06</td><td>Version supersedes acks</td><td>Publish v1.1 after acknowledgements at v1.0. <b>Expected</b> Prior acks no longer count as current.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">TOOL-01</td><td>Account type independent</td><td>Add the same product twice with different account types. <b>Expected</b> Two distinct rows, independently decidable.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">TOOL-02</td><td>Decision lifecycle</td><td>Move a tool through undecided, approved, restricted. <b>Expected</b> Each state persists and drives the correct Centre flag.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">TOOL-03</td><td>Owner from staff</td><td>Set the decision owner. <b>Expected</b> The picker offers staff records. A legacy typed name is preserved and shown as "not a team member".</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">UC-01</td><td>Create use case</td><td><b>Expected</b> Saves, appears in the register, and links to its tool.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">UC-02</td><td>Owner references staff</td><td><b>Expected</b> Owner picker lists staff records.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">RISK-01</td><td>Matrix placement</td><td>Set likelihood and impact. <b>Expected</b> The risk lands in the correct matrix cell.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">RISK-02</td><td>Residual not assumed</td><td>Leave mitigation unplanned. <b>Expected</b> Residual risk reads "Not scored". It must not default to the inherent score.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">RISK-03</td><td>Residual after mitigation</td><td>Plan mitigation and score residual. <b>Expected</b> Same matrix, new position.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">RISK-04</td><td>Risk owner</td><td><b>Expected</b> Owner references staff records.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">ASS-01</td><td>Assessment sets rating</td><td>Complete an assessment. <b>Expected</b> The use case rating is set automatically from the answers.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">VEN-01</td><td>Due diligence record</td><td>Create a vendor record. <b>Expected</b> Saves and appears.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">VEN-02</td><td>Two front doors</td><td>Compare Vendor Due Diligence with the AI Tool Register. <b>Expected</b> Both exist. The tool register serves tools with no supplier to send diligence to.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">VRS-01</td><td>Vendor risk score</td><td><b>Expected</b> Score derives from the diligence answers and updates when they change.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">INC-01</td><td>Incident lifecycle</td><td>Raise, update and close an incident. <b>Expected</b> Each state persists.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">RACI-01</td><td>Roles matrix</td><td>Assign R, A, C and I. <b>Expected</b> Assignments persist and render.</td><td class="pri P3">P3</td></tr>
+  <tr><td class="id">TOR-01</td><td>Steering group ToR</td><td>Complete and save. <b>Expected</b> Persists and exports.</td><td class="pri P3">P3</td></tr>
+  <tr><td class="id">STF-01</td><td>Roster CRUD</td><td>Add, edit and remove staff. <b>Expected</b> All persist.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">STF-02</td><td>Announcement carries link</td><td>Click Copy announcement message. <b>Expected</b> Clipboard text contains the absolute portal sign in URL, the version, the company, the DPO and the incident contact.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">STF-03</td><td>Reminder carries link</td><td>Click Email reminder. <b>Expected</b> Mail client opens with the staff name, the version and the sign in URL.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">STF-04</td><td>No artifact language</td><td>Read all copy on the screen. <b>Expected</b> No reference to "this artifact", "share / publish above the conversation", or acknowledgements appearing "instantly for everyone".</td><td class="pri P2">P2</td></tr>
+</table>
+
+<h3>C13 to C16, the Manage group</h3>
+<table>
+  <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
+  <tr><td class="id">TEAM-01</td><td>Invite a seat</td><td>Invite with credits available. <b>Expected</b> One credit is spent, the account is created and seated, and the invitee is emailed.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">TEAM-02</td><td>Invite with zero credits</td><td>Invite at balance 0. <b>Expected</b> Refused with "no credits remaining". No account is created, no credit goes negative.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">TEAM-03</td><td>Duplicate seat</td><td>Invite the same person twice. <b>Expected</b> Second attempt fails with "seat already assigned" and does <b>not</b> spend a credit.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">TEAM-04</td><td>Cross tenant seat</td><td>Invite someone already managed by another manager. <b>Expected</b> Refused with "user is managed by another account".</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">TEAM-05</td><td>Remove a seat</td><td>Remove a seated user. <b>Expected</b> The seat is removed and the roster updates.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">TEAM-06</td><td>Demo blocked from invite</td><td>Invite while signed in as the demo account. <b>Expected</b> Blocked as anti spam.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">CRS-M-01</td><td>Completion visibility</td><td><b>Expected</b> The manager sees completion only for their own seated users.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">CRS-M-02</td><td>Completion CSV</td><td>Export. <b>Expected</b> CSV downloads, contains only seated users, and opens cleanly in a spreadsheet.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">TPL-01</td><td>Templates available</td><td><b>Expected</b> All 27 templates open or download without a 404.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">UPD-01</td><td>Updates pane</td><td><b>Expected</b> Renders the changelog without error.</td><td class="pri P3">P3</td></tr>
+</table>
+</section>
+
+<section>
+<h2>5. Section D and E, end user and reseller portals</h2>
+
+<h3>D, End user portal</h3>
+<table>
+  <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
+  <tr><td class="id">EU-01</td><td>Landing</td><td>Sign in as end user. <b>Expected</b> Routed to <code>course.html</code>, which is what they signed in to do.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">EU-02</td><td>Own progress only</td><td>Open the progress view. <b>Expected</b> Only this user's modules appear.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">EU-03</td><td>Certificate access</td><td><b>Expected</b> Reachable once the core is complete.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">EU-04</td><td>Governance documents</td><td><b>Expected</b> Reads <code>governance_docs</code> for the current published policy.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">EU-05</td><td>Acknowledge policy</td><td>Acknowledge. <b>Expected</b> A row is written to <code>governance_acks</code> against the current version.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">EU-06</td><td>Manager pages refused</td><td>Navigate directly to <code>manager.html</code>. <b>Expected</b> Redirected to the end user destination, no manager data renders even briefly.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">EU-07</td><td>Reseller pages refused</td><td>Navigate to <code>reseller.html</code>. <b>Expected</b> Redirected.</td><td class="pri P1">P1</td></tr>
+</table>
+
+<h3>E, Reseller portal</h3>
+<table>
+  <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
+  <tr><td class="id">RS-01</td><td>Landing</td><td><b>Expected</b> Routed to <code>reseller.html</code>.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">RS-02</td><td>Deal registration</td><td>Register a deal. <b>Expected</b> Created at stage <code>registered</code>, owned by this reseller.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">RS-03</td><td>Stage constraint</td><td>Attempt a stage outside registered, qualified, won, lost. <b>Expected</b> Rejected by the check constraint.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">RS-04</td><td>Own deals only</td><td>Query <code>deal_registrations</code> as this reseller. <b>Expected</b> Only their own rows return.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">RS-05</td><td>Commissions read only</td><td>Attempt to insert or update a commission. <b>Expected</b> Refused. Statements are issued by admin.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">RS-06</td><td>Commercials stay private</td><td>Search the public site for rebate tiers, wholesale per seat and margins. <b>Expected</b> Absent from every public page, present only behind the portal login.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">RS-07</td><td>Marketing materials</td><td>Open share card, pitch deck and standards map. <b>Expected</b> All resolve.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">RS-08</td><td>Manager pages refused</td><td>Navigate to <code>manager.html</code>. <b>Expected</b> Redirected.</td><td class="pri P1">P1</td></tr>
+</table>
+</section>
+
+<section>
+<h2>6. Section F, authentication and authorisation</h2>
+<table>
+  <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
+  <tr><td class="id">AUTH-01</td><td>Password sign in</td><td>Correct credentials. <b>Expected</b> Session established, routed by role.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">AUTH-02</td><td>Wrong password</td><td><b>Expected</b> Refused, with a message that does not reveal whether the address exists.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">AUTH-03</td><td>TOTP enrolment</td><td>First sign in as manager with no factor. <b>Expected</b> Enrolment is offered and completes.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">AUTH-04</td><td>TOTP challenge</td><td>Sign in with a factor enrolled. <b>Expected</b> Challenged. Access is refused until it is satisfied.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">AUTH-05</td><td>AAL2 enforced</td><td>Enrol a factor, then reach a portal page without completing the challenge. <b>Expected</b> Treated as not authenticated.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">AUTH-06</td><td>Wrong TOTP code</td><td><b>Expected</b> Refused, no session upgrade.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">AUTH-07</td><td>Magic link for staff</td><td>Request a link as an end user. <b>Expected</b> Email arrives, the link authenticates and routes to the course.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">AUTH-08</td><td>Reset lands on reset</td><td>Follow a recovery link. <b>Expected</b> The set new password form is shown and stays shown. Both the implicit <code>#type=recovery</code> and PKCE <code>?code=</code> callbacks must be classified correctly.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">AUTH-09</td><td>Reset completes</td><td>Set a new password. <b>Expected</b> Sign in with the new password succeeds, the old one fails.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">AUTH-10</td><td>Open redirect refused</td><td>Sign in with <code>?next=//evil.example</code>. <b>Expected</b> Ignored. Only same origin paths beginning with a single slash are honoured.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">AUTH-11</td><td>Sign out clears</td><td>Sign out, then press back. <b>Expected</b> No portal data renders, the session is gone.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">AUTH-12</td><td>Sign up is closed</td><td>Attempt self service registration. <b>Expected</b> No path exists. Accounts come from purchase or invitation.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">RLS-01</td><td>Read own profile only</td><td>Query <code>profiles</code> as an authenticated user. <b>Expected</b> Only their own row, plus seated end users if a manager.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">RLS-02</td><td>Self escalation refused</td><td>PATCH your own <code>role</code> to manager. <b>Expected</b> 403. Column grants allow <code>full_name</code> only.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">RLS-03</td><td>Self credit grant refused</td><td>PATCH your own <code>credits_balance</code>. <b>Expected</b> 403.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">RLS-04</td><td>Mass assign refused</td><td>PATCH several columns at once including <code>full_name</code>. <b>Expected</b> 403, not a partial write.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">RLS-05</td><td>IDOR refused</td><td>PATCH another user's profile by id. <b>Expected</b> Zero rows affected.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">RLS-06</td><td>Direct seat insert refused</td><td>INSERT into <code>seats</code> directly. <b>Expected</b> Refused. Seats come only from <code>assign_seat</code>, which checks credits.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">RLS-07</td><td>Non manager cannot seat</td><td>Call <code>assign_seat</code> as an end user. <b>Expected</b> "only managers can assign seats".</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">RLS-08</td><td>Cross tenant progress</td><td>Read <code>module_progress</code> for a user seated elsewhere. <b>Expected</b> No rows.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">RLS-09</td><td>grant_credits is privileged</td><td>Call <code>grant_credits</code> as an authenticated manager. <b>Expected</b> Refused. Only the service role and admin may call it.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">RLS-10</td><td>Negative credit refused</td><td>Call <code>grant_credits</code> with a negative or zero amount. <b>Expected</b> "amount must be positive".</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">RLS-11</td><td>Reseller not demoted</td><td><code>grant_credits</code> against a reseller. <b>Expected</b> Credits added, role stays <code>reseller</code>.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">RLS-12</td><td>Privilege change audited</td><td>Change a role or credit balance. <b>Expected</b> An <code>audit_log</code> entry records old and new values.</td><td class="pri P2">P2</td></tr>
+</table>
+</section>
+
+<section>
+<h2>7. Section G, payments</h2>
+<table>
+  <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
+  <tr><td class="id">PAY-01</td><td>Foundation 1 to 25</td><td>Submit the band. <b>Expected</b> Stripe session for £990 by Bacs, GBP.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">PAY-02</td><td>Foundation 26 to 50</td><td><b>Expected</b> Stripe session for £1,750.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">PAY-03</td><td>Over 50 falls through</td><td>Select the quote band. <b>Expected</b> No Stripe session. The Netlify order form submits as before.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">PAY-04</td><td>Platform must not price as Foundation</td><td>Open <code>checkout.html?plan=platform</code>, select 1 to 25, submit. <b>Expected</b> No Stripe session at the Foundation price. This is the regression that shipped once and was caught before any key existed.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">PAY-05</td><td>Server owns the price</td><td>POST a forged <code>unit_amount</code> or an unknown band to the function. <b>Expected</b> Ignored or refused. The browser never supplies an amount.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">PAY-06</td><td>Missing plan refused</td><td>POST with no <code>plan</code>. <b>Expected</b> Refused.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">PAY-07</td><td>Plan match is exact</td><td>POST <code>plan=foundation</code> in lower case. <b>Expected</b> Refused. The match is exact by design.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">PAY-08</td><td>Invalid email refused</td><td>POST a malformed address. <b>Expected</b> 400 before any Stripe call.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">PAY-09</td><td>VAT applied</td><td>Set <code>VAT_RATE=0.20</code>. <b>Expected</b> £990 becomes £1,188 at Stripe. Unset charges £990.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">PAY-10</td><td>No key falls back</td><td>Unset <code>STRIPE_SECRET_KEY</code>. <b>Expected</b> Function returns 503, the page submits the order form and explains payment is not switched on. The button is never dead.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">PAY-11</td><td>Network failure falls back</td><td>Block the function in devtools. <b>Expected</b> Same graceful fallback.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">PAY-12</td><td>Cancel returns</td><td>Cancel at Stripe. <b>Expected</b> Returns to <code>checkout.html</code> with nothing charged.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">PAY-13</td><td>Method is GET refused</td><td>GET the function. <b>Expected</b> 405.</td><td class="pri P3">P3</td></tr>
+  <tr><td class="id">HOOK-01</td><td>Valid signature accepted</td><td>Send a correctly signed event. <b>Expected</b> Processed, 200.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">HOOK-02</td><td>Forged payload refused</td><td>Send unsigned or wrongly signed JSON. <b>Expected</b> 400, nothing provisioned. This is the attack that would otherwise grant free credits.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">HOOK-03</td><td>Replay refused</td><td>Replay a genuine delivery older than five minutes. <b>Expected</b> 400.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">HOOK-04</td><td>Secret rotation</td><td>Send a delivery carrying two <code>v1</code> signatures, one current. <b>Expected</b> Accepted.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">HOOK-05</td><td>Bacs waits for settlement</td><td>Send <code>checkout.session.completed</code> with <code>payment_status</code> not paid. <b>Expected</b> Ignored, nothing provisioned. Access must not precede cleared funds.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">HOOK-06</td><td>Settlement provisions</td><td>Send <code>async_payment_succeeded</code>. <b>Expected</b> Buyer created, promoted to manager, credits granted to match the band.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">HOOK-07</td><td>Duplicate delivery</td><td>Send the same event id twice. <b>Expected</b> Provisioned once. Credits are not doubled.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">HOOK-08</td><td>Retry after failure</td><td>Force a mid provision failure, then let Stripe retry. <b>Expected</b> The retry provisions successfully. The claimed event id was released on failure.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">HOOK-09</td><td>Existing buyer</td><td>Send a settlement for an address that already has an account. <b>Expected</b> No duplicate account, credits added to the existing one.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">HOOK-10</td><td>Unconfigured</td><td>Unset the keys. <b>Expected</b> 503, nothing attempted.</td><td class="pri P2">P2</td></tr>
+</table>
+</section>
+
+<section>
+<h2>8. Section H, cross cutting</h2>
+
+<h3>H1, Content security policy</h3>
+<table>
+  <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
+  <tr><td class="id">CSP-01</td><td>No violations on live</td><td>Load every page on the deployed site with the console open. <b>Expected</b> Zero CSP violations. Local testing will not catch these, production sends <code>script-src 'self'</code>.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">CSP-02</td><td>No inline handlers</td><td>Grep the deployed HTML for <code>onclick=</code>. <b>Expected</b> None in shipped pages. Actions go through the <code>data-act</code> dispatcher.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">CSP-03</td><td>Portal connect-src</td><td>Load the portal. <b>Expected</b> Supabase calls succeed, permitted by the portal specific CSP.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">CSP-04</td><td>No external scripts on marketing pages</td><td><b>Expected</b> No CDN script loads outside the portal.</td><td class="pri P1">P1</td></tr>
+</table>
+
+<h3>H2, Headers, caching and exposure</h3>
+<table>
+  <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
+  <tr><td class="id">HDR-01</td><td>Portal not cached</td><td>Request a portal page. <b>Expected</b> <code>Cache-Control: private, no-store</code>.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">HDR-02</td><td>Portal not indexed</td><td><b>Expected</b> <code>X-Robots-Tag</code> includes noindex and nofollow.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">EXP-01</td><td>Internal paths blocked</td><td>Request <code>/docs/</code>, <code>/specs/</code>, <code>/supabase/</code>, <code>/tests/</code>, <code>/scripts/</code>, <code>/netlify/</code>, <code>/.audit/</code>. <b>Expected</b> 404 on every one. Netlify publishes the whole repo, so anything not blocked ships.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">EXP-02</td><td>Named files blocked</td><td>Request <code>HANDOFF.md</code>, <code>SCOPE.md</code>, <code>DOCTRINE.md</code>, <code>README.md</code>, <code>skills-lock.json</code>, the MSP deck and the course Word file. <b>Expected</b> 404 on every one.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">EXP-03</td><td>Function source blocked</td><td>Request the <code>.mjs</code> source of both functions. <b>Expected</b> 404, while <code>/.netlify/functions/*</code> still responds.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">EXP-04</td><td>New internal files</td><td>Add a file to an internal directory and deploy. <b>Expected</b> It 404s. If it serves, the rule was never added.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">EXP-05</td><td>Deliberately public</td><td>Request <code>LICENSE*</code>, <code>changelog.json</code> and <code>assets/video/*</code>. <b>Expected</b> 200. These are public by decision.</td><td class="pri P2">P2</td></tr>
+</table>
+
+<h3>H3, SEO and robots</h3>
+<table>
+  <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
+  <tr><td class="id">SEO-01</td><td>Sitemap accuracy</td><td>Fetch every URL in <code>sitemap.xml</code>. <b>Expected</b> All 200, all genuinely public, none carrying noindex.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">SEO-02</td><td>Gated pages noindex</td><td><b>Expected</b> Every gated page carries noindex, so crawlers are never sent to a checkout redirect.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">SEO-03</td><td>Header and meta agree</td><td>For each page compare meta robots with the <code>X-Robots-Tag</code>. <b>Expected</b> No page is told to index by one and noindex by the other.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">SEO-04</td><td>Canonicals</td><td><b>Expected</b> Each page has one canonical, pointing at the intended host.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">SEO-05</td><td>Cite friendly paths</td><td><b>Expected</b> Public free core paths carry no <code>noai</code> header.</td><td class="pri P3">P3</td></tr>
+</table>
+
+<h3>H4, Accessibility and responsive</h3>
+<table>
+  <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
+  <tr><td class="id">A11Y-01</td><td>Keyboard only</td><td>Complete flows A1 and A3 without a mouse. <b>Expected</b> Every control reachable and operable, focus always visible.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">A11Y-02</td><td>Form labels</td><td><b>Expected</b> Every input has a programmatic label.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">A11Y-03</td><td>Status announcements</td><td>Trigger the checkout status line. <b>Expected</b> Announced by a screen reader via the live region.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">A11Y-04</td><td>Heading order</td><td><b>Expected</b> One h1 per page, no skipped levels.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">A11Y-05</td><td>Contrast</td><td><b>Expected</b> Text meets WCAG AA in both themes.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">A11Y-06</td><td>The chain degrades</td><td>Disable CSS on the Platform page. <b>Expected</b> The eleven step chain still reads in order, it is an ordered list.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">RSP-01</td><td>No horizontal scroll</td><td>At 320, 390, 768, 1024 and 1440px on ten pages. <b>Expected</b> None.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">RSP-02</td><td>Module grid</td><td>Narrow the viewport. <b>Expected</b> The grid reflows, its 300px floor does not force overflow.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">RSP-03</td><td>Tables on mobile</td><td><b>Expected</b> Portal tables scroll inside their own container, the page body does not.</td><td class="pri P2">P2</td></tr>
+</table>
+</section>
+
+<section>
+<h2>9. Section I, negative and edge cases</h2>
+<p class="sub">Consolidated adversarial cases. Several encode defects already known to exist.</p>
+<table>
+  <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
+  <tr><td class="id">NEG-DB-01</td><td>Permission denial must not look empty</td><td>Break an RLS policy deliberately, then load the Governance Centre. <b>Expected</b> A visible error. <b>Known defect</b> <code>dbGet</code> swallows the error and falls back to <code>localStorage</code>, so a denial is indistinguishable from an empty register and a customer's governance data quietly moves into their own browser. Fix before any feature depends on who can read what.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">NEG-CERT-01</td><td>Certificate forgery</td><td>Open <code>cert.html?m=1&amp;s=99&amp;n=100</code> without ever taking the quiz. <b>Expected</b> Refused or clearly marked unverified. <b>Risk</b> The certificate is driven by query parameters, so a learner can mint evidence of a pass they never earned. This matters because the certificate is sold as EU AI Act Article 4 literacy evidence.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">NEG-GATE-01</td><td>Gate is client side</td><td>Disable JavaScript, or delete the gate script, then request a paid module. <b>Expected today</b> The content loads, because the gate is client side only and a static site cannot enforce otherwise. Confirms the documented ceiling. Move content behind an edge function before this protects real revenue.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">NEG-GATE-02</td><td>Forged session token</td><td>Write an arbitrary value into the Supabase auth key in <code>localStorage</code>, then open a gated page. <b>Expected</b> The gate must not accept a token it has not validated.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">NEG-GATE-03</td><td>Demo cannot read paid content</td><td>Sign in as the demo account and open a paid module. <b>Expected</b> Redirected. The demo account is excluded by design.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">NEG-AUTH-01</td><td>Public demo password</td><td>Sign in with the demo credentials taken from the public repository. <b>Expected once armed</b> Refused, the account is rotated or deleted. <b>Today</b> It succeeds, and anyone in the world can reach a manager portal.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">NEG-AUTH-02</td><td>Real user lands in demo</td><td>With no session, open <code>portal/manager.html</code> as a real customer. <b>Expected once armed</b> Bounced to sign in. <b>Today</b> Silently signed in as the demo account, so anything typed becomes world readable.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">NEG-XSS-01</td><td>Script injection in registers</td><td>Enter <code>&lt;img src=x onerror=alert(1)&gt;</code> as a tool name, risk title, staff name and company name. <b>Expected</b> Rendered as text, never executed, in the screen, the generated policy and the CSV export.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">NEG-XSS-02</td><td>Injection via Stripe metadata</td><td>Submit a company name containing HTML at checkout. <b>Expected</b> Escaped wherever it is later displayed.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">NEG-CSV-01</td><td>CSV formula injection</td><td>Set a staff name to <code>=cmd|'/c calc'!A1</code> and export. <b>Expected</b> Neutralised so a spreadsheet does not execute it.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">NEG-IN-01</td><td>Oversized input</td><td>Paste 100,000 characters into a register field. <b>Expected</b> Rejected or truncated with a message. No hang, no unbounded write.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">NEG-IN-02</td><td>Unicode and emoji</td><td>Enter emoji, right to left text and combining characters. <b>Expected</b> Stored and rendered correctly, no mojibake in the PDF or CSV export.</td><td class="pri P3">P3</td></tr>
+  <tr><td class="id">NEG-IN-03</td><td>Whitespace only</td><td>Submit fields containing only spaces. <b>Expected</b> Treated as empty and rejected where required.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">NEG-IN-04</td><td>Date boundaries</td><td>Enter a target date far in the past and far in the future. <b>Expected</b> Handled without breaking the overdue calculation.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">NEG-NET-01</td><td>Offline mid edit</td><td>Drop the network while saving a register row. <b>Expected</b> A clear failure message. The user is never told data is saved when it is not.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">NEG-NET-02</td><td>Session expiry mid edit</td><td>Let the session expire, then save. <b>Expected</b> Prompted to sign in again, the edit is not silently lost.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">NEG-CON-01</td><td>Concurrent managers</td><td>Two sessions edit the same register simultaneously. <b>Expected</b> Defined behaviour, last write wins or a conflict message, never a merged corruption.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">NEG-CON-02</td><td>Double submit</td><td>Double click Buy Foundation. <b>Expected</b> One session created. The button disables on first click.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">NEG-BR-01</td><td>Back button after payment</td><td>Press back from the thank you page. <b>Expected</b> No second charge, no duplicate order.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">NEG-BR-02</td><td>Deep link while signed out</td><td>Open a deep portal URL with no session. <b>Expected</b> Sign in, then return to the requested page, with no flash of portal data.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">NEG-SCH-01</td><td>Schema reproducibility</td><td>Restore the database from <code>supabase/migrations/</code> alone. <b>Expected</b> A working system. <b>Known defect</b> <code>governance_state</code> is in no migration, so the entire manager portal lives in a table the repository cannot reproduce.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">NEG-SCH-02</td><td>Edge function reproducibility</td><td>Redeploy from the repository alone. <b>Expected</b> <code>invite-seat</code> exists. <b>Known defect</b> Its source is not in the repository.</td><td class="pri P1">P1</td></tr>
+</table>
+</section>
+
+<section>
+<h2>10. Execution and automation</h2>
+
+<h3>10.1 What already runs</h3>
+<table>
+  <tr><th style="width:230px">Command</th><th>Covers</th></tr>
+  <tr><td><code>node tests/checkout-pricing.mjs</code></td><td>PAY-01 to PAY-07, 12 assertions including the Platform band regression</td></tr>
+  <tr><td><code>node tests/stripe-webhook.sig.mjs</code></td><td>HOOK-01 to HOOK-04, 9 assertions including a forged payload and a replay</td></tr>
+  <tr><td><code>node tests/manager-dashboard.structure.mjs &lt;url&gt;</code></td><td>Governance Centre structure</td></tr>
+  <tr><td><code>node tests/manager-dashboard.crud.mjs &lt;url&gt;</code></td><td>Register create, read, update and delete</td></tr>
+  <tr><td>Pre-push guard</td><td>HOME-03 JSON-LD parsing, secret sweep, forbidden files</td></tr>
+</table>
+<p>Playwright is not installed in this repository by design. The dashboard tests borrow it from a
+sibling project via <code>createRequire</code>, which has broken once already. Reinstall it in a
+scratch directory or expect those two to fail for environmental reasons.</p>
+
+<h3>10.2 Recommended automation order</h3>
+<ol>
+  <li><b>Section G and the RLS block.</b> Money and access control, cheap to assert, catastrophic to get wrong. Mostly automatable without a browser.</li>
+  <li><b>EXP-01 to EXP-05.</b> A handful of <code>curl</code> calls checking status codes. Should run on every deploy, because Netlify publishes the whole repository.</li>
+  <li><b>Flows A1 and A3.</b> The two journeys that earn and deliver.</li>
+  <li><b>Section C.</b> Highest surface area, slowest to automate, best value from the existing Playwright suite.</li>
+</ol>
+
+<h3>10.3 Entry and exit</h3>
+<p><b>Entry</b> A deploy is green, the four blockers in section 11 are either resolved or explicitly
+accepted as Blocked, and test accounts exist for all three roles.</p>
+<p><b>Exit</b> Every P1 passes or has a written, accepted waiver. No P1 defect is open. Every P2 is
+triaged. Flows A1 to A5 complete end to end without a workaround.</p>
+</section>
+
+<section>
+<h2>11. Known blockers, expected failures today</h2>
+<p>These are platform states, not defects in the code under test. Record affected cases as
+<b>Blocked</b>. Running the plan without reading this will produce a long list of misleading failures.</p>
+
+<table>
+  <tr><th style="width:74px">Ref</th><th style="width:170px">State</th><th>Effect on this plan</th></tr>
+  <tr><td class="id">A2</td><td><code>AUTH_DISABLED = true</code></td><td>The portal auto signs in as the demo account, and the sign in form is bypassed entirely. <b>Blocks</b> all of section F, flows A2 to A5, and every manager and end user case needing a real identity. Also blocks NEG-AUTH-01 and 02, which describe the risk it creates.</td></tr>
+  <tr><td class="id">AUTH-1</td><td>No custom SMTP</td><td>No invite, magic link or reset email is delivered. <b>Blocks</b> AUTH-07 to AUTH-09, TEAM-01, and steps 11 to 13 of flows A1 and A2.</td></tr>
+  <tr><td class="id">B1</td><td>No Stripe account or keys</td><td>Both functions return 503 by design. <b>Blocks</b> the live half of section G. The unit tests still cover the logic.</td></tr>
+  <tr><td class="id">0a</td><td>No form notifications</td><td>Submissions reach the dashboard but nobody is told. <b>Blocks</b> FRM-07 and step 3 of flow A6.</td></tr>
+</table>
+
+<h3>11.1 Open decisions that change expected results</h3>
+<table>
+  <tr><th style="width:170px">Decision</th><th>Why the expected result cannot be fixed yet</th></tr>
+  <tr><td>Which acknowledgement store is authoritative</td><td>The manager roster reads <code>governance_state</code>, the end user portal writes <code>governance_acks</code>, and nothing links them. Step 6 of flow A5 has no correct expected result until this is decided.</td></tr>
+  <tr><td>Staff cannot open the sign off page</td><td>The acknowledgement panel expects staff on a page that <code>guard(["manager"])</code> refuses them. Inherited from the artifact this screen was ported from.</td></tr>
+  <tr><td><code>pricing.html</code> robots contradiction</td><td>Meta says index, the sitemap lists it, the header says noindex. PRC-07 and SEO-03 cannot both pass until one of the three changes.</td></tr>
+  <tr><td>VAT registration status</td><td>PAY-09 cannot assert a figure until it is known whether VAT is charged. <code>VAT_RATE</code> is currently unset, so the advertised ex VAT price is taken as is.</td></tr>
+  <tr><td>Platform has no online payment path</td><td>PAY-04 asserts it must not price as Foundation. If Platform is later sold online it needs subscription mode and its own cases.</td></tr>
+</table>
+
+<div class="box">
+  <b>Coverage summary.</b> 8 end to end flows and 204 test cases, of which 126 are P1, 69 P2 and 9 P3.
+  Seven cases encode defects already known and logged rather than hypothetical ones: NEG-DB-01,
+  NEG-CERT-01, NEG-GATE-01, NEG-AUTH-01, NEG-AUTH-02, NEG-SCH-01 and NEG-SCH-02.
+  <br><br>
+  The two states that block the most ground are <b>A2</b> and <b>AUTH-1</b>. Between them they hold
+  down the whole of section F, four of the eight flows, and every case that needs a real identity
+  rather than the shared demo account. Clearing those two is the single highest leverage action
+  available before this plan can be run in full.
+</div>
+</section>

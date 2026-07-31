@@ -15,18 +15,25 @@ export const sb = createClient(cfg.url, cfg.anon);
 // sign-off live on end-user.html, linked from the course page.
 export const DASH = { end_user: "../course.html", manager: "manager.html", reseller: "reseller.html" };
 
-// ponytail: AUTH OFF for prod until further notice. Portal pages auto-sign-in as the
-// demo account so they render populated with no login. RLS still scopes every query to
-// this account, so no real user data is exposed. Restore real auth: set false + redeploy.
+// AUTH IS ARMED. The A2 tripwire fired on 30 Jul 2026 when the first real user was
+// provisioned into this Supabase project, and was actioned on 31 Jul 2026:
+//   (1) AUTH_DISABLED set to false, (2) the demo password rotated, (3) redeployed.
 //
-// ⚠️ SECURITY TRIPWIRE (security review 07 Jul 2026): this repo is PUBLIC, so the
-// demo password below is public knowledge, treat it as burned. This is safe ONLY
-// while the Supabase project holds demo data. BEFORE any real client/user data
-// enters this Supabase project: (1) set AUTH_DISABLED = false, (2) delete or
-// rotate the demo account, (3) redeploy. Do not skip, RLS scoping to a
-// publicly-known login is not protection once real data shares the project.
-export const AUTH_DISABLED = true;
-export const DEMO = { email: "demo@attest-ai.com", password: "attest-manager-demo-2026" };
+// Do NOT set this back to true. While it was true, every portal page silently signed
+// itself in as the demo account, whose password sat in this file in a PUBLIC repo. That
+// was acceptable only while the project held nothing but demo data. It now holds real
+// accounts, so auto-signin would hand a customer's governance data to a world readable
+// login, and would drop a real buyer into someone else's registers.
+//
+// The public product demo does not depend on any of this: portal/demo.html detects its
+// own path and runs against sessionStorage with no account at all.
+export const AUTH_DISABLED = false;
+
+// Kept because login.js imports it, but deliberately unusable. The real demo password
+// lives in the password manager, never in this repo. An empty secret here means that if
+// anyone ever flips the flag above back to true, auto-signin FAILS rather than silently
+// exposing an account.
+export const DEMO = { email: "demo@attest-ai.com", password: "" };
 
 // Signed in, and (for accounts with a TOTP factor) MFA satisfied. When AUTH_DISABLED,
 // guard() auto-demos before this is reached, so the live MFA rule doesn't gate inspection.
