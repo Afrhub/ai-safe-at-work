@@ -6,6 +6,12 @@
   publish = "."
   command = ""
 
+# Explicit rather than relying on auto-detection: a misdetected directory here is a
+# silent 404 on the payment endpoint. Functions are served from /.netlify/functions/*
+# (leading dot), which is separate from the /netlify/* source block further down.
+[functions]
+  directory = "netlify/functions"
+
 # Don't deploy audit-pack via Netlify even if path is requested
 [[redirects]]
   from = "/.audit/*"
@@ -70,6 +76,15 @@
 
 [[redirects]]
   from = "/scripts/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# Function SOURCE. publish = "." would otherwise serve
+# /netlify/functions/create-checkout-session.mjs as a static file. This does not
+# affect the live endpoint, which is /.netlify/functions/* with a leading dot.
+[[redirects]]
+  from = "/netlify/*"
   to = "/404.html"
   status = 404
   force = true

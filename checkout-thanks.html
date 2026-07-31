@@ -28,6 +28,7 @@
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
 <link rel="stylesheet" href="assets/style.css?v=27" />
 <script defer src="assets/cinema.js?v=23"></script>
+<script defer src="assets/checkout-stripe.js?v=1"></script>
 </head>
 <body>
 <!-- a11y:skip-link v1 -->
@@ -48,7 +49,8 @@
 <main id="main">
  <p class="eyebrow">Order received</p>
  <h1 class="page-title">Thank you, <em>order received</em>.</h1>
- <p class="lede">We will confirm your Foundation order and email your invoice with payment details, then set up your Attest AI portal access, usually the same working day.</p>
+ <p class="lede" id="invoice-note">We will confirm your Foundation order and email your invoice with payment details, then set up your Attest AI portal access, usually the same working day.</p>
+ <p class="lede" id="dd-note" hidden>Your Direct Debit is set up. Bacs takes three to five working days to clear a first collection, so the payment will show as pending until then. We will set up your Attest AI portal access and email the details, usually the same working day.</p>
  <p><a class="hero-cta secondary" href="index.html">Back to the homepage</a></p>
 </main>
 
