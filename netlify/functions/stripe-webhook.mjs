@@ -13,8 +13,8 @@
 // ⚠️ TWO THINGS STILL BLOCK THE CUSTOMER ACTUALLY GETTING IN, both outside this file:
 //   1. AUTH-1: no custom SMTP, so the account created here cannot be emailed a
 //      sign-in link. Until that is configured, delivery of credentials is manual.
-//   2. A2: AUTH_DISABLED is still true in portal/assets/portal.js, so the portal
-//      auto-signs-in as the demo account regardless of who the buyer is.
+// (A2 was actioned on 31 Jul 2026: AUTH_DISABLED is now false and the demo credential
+// is rotated, so a buyer is no longer dropped into the demo account. AUTH-1 remains.)
 // This function provisions correctly; it does not make the buyer reachable.
 
 import { createHmac, timingSafeEqual } from "node:crypto";
@@ -76,7 +76,17 @@ async function claimEvent(id, type) {
 // Stripe retry would see a duplicate and skip the work permanently.
 async function releaseEvent(id) {
   try {
-    await sb(`/rest/v1/stripe_events?id=eq.${encodeURIComponent(id)}`, { method: "DELETE" });
+    const r = await sb(`/rest/v1/stripe_events?id=eq.${encodeURIComponent(id)}`, { method: "DELETE" });
+    // fetch RESOLVES on 4xx and 5xx, so the catch below only ever sees network errors.
+    // Without this check a failed release is completely silent: the id stays claimed,
+    // Stripe's retry sees a duplicate and skips, and a paying customer is never
+    // provisioned with nothing logged anywhere.
+    if (!r.ok) {
+      console.error(
+        `RELEASE FAILED for ${id}: ${r.status} ${await r.text()}. Stripe will retry and ` +
+          `skip this event as a duplicate. Provision this customer by hand.`
+      );
+    }
   } catch (err) {
     console.error(`could not release event ${id}, retries will skip it:`, err.message);
   }
@@ -84,10 +94,14 @@ async function releaseEvent(id) {
 
 async function findOrCreateUser(email) {
   const found = await sb(`/rest/v1/profiles?email=eq.${encodeURIComponent(email)}&select=id`);
-  if (found.ok) {
-    const rows = await found.json();
-    if (rows.length) return rows[0].id;
+  // Do NOT fall through on a failed lookup. A transient 500 reads as "no such user" and
+  // would create a second account for someone who already has one, splitting their
+  // credits across two profiles.
+  if (!found.ok) {
+    throw new Error(`profile lookup failed: ${found.status} ${await found.text()}`);
   }
+  const rows = await found.json();
+  if (rows.length) return rows[0].id;
   // handle_new_user() creates the matching profiles row via trigger.
   const made = await sb("/auth/v1/admin/users", {
     method: "POST",

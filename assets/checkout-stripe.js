@@ -31,7 +31,11 @@
 
   form.addEventListener("submit", function (e) {
     var headcount = (form.elements.headcount && form.elements.headcount.value) || "";
-    var plan = (form.elements.plan && form.elements.plan.value) || "Foundation";
+    // No default. checkout.js writes this hidden field, and if it failed to load we must
+    // not guess: guessing "Foundation" would put a Platform buyer on the Foundation
+    // price. Empty falls through the check below to the invoice form, which is the safe
+    // direction to fail.
+    var plan = (form.elements.plan && form.elements.plan.value) || "";
 
     // Only Foundation is bought online. checkout.js reuses the SAME band keys for
     // the Platform plan at different prices ("1-25 (£249/mo, £2,490/yr)"), so
