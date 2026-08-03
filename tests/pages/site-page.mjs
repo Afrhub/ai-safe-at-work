@@ -73,6 +73,15 @@ export class SitePage {
       // one row of pills, or several: compare the nav box to its tallest child
       const kids = [...nav.children].map((c) => c.getBoundingClientRect());
       const tallest = kids.reduce((m, k) => Math.max(m, k.height), 0);
+      // "Clipped or crushed to a disc" is about the pills. A pill is broken when
+      // its label no longer fits inside it, or when it has collapsed to roughly
+      // as wide as it is tall.
+      const crushed = [...nav.querySelectorAll(".nav-pill")]
+        .filter((p) => {
+          const r = p.getBoundingClientRect();
+          return r.height > 0 && (p.scrollWidth > p.clientWidth + 1 || r.width < r.height * 1.5);
+        })
+        .map((p) => p.textContent.trim());
       return {
         display: cs.display,
         columns: cs.gridTemplateColumns,
@@ -83,7 +92,7 @@ export class SitePage {
         navTop: nr.top,
         barTop: br.top,
         rows: tallest ? Math.round(nr.height / tallest) : 0,
-        clipped: kids.some((k) => k.width < 40 && k.height > 0),
+        crushed,
       };
     });
   }
@@ -126,8 +135,10 @@ export class SitePage {
   }
 
   // NAV-08. Tab once from a fresh load and describe whatever lands.
+  // Focus must start where a real page load leaves it. Clicking anywhere first
+  // would move it, and the skip link sits at the top left, so a click there lands
+  // on the very control under test.
   async tabToSkipLink() {
-    await this.page.locator("body").click({ position: { x: 2, y: 2 } }).catch(() => {});
     await this.page.evaluate(() => document.activeElement && document.activeElement.blur());
     await this.page.keyboard.press("Tab");
     await settle(this.page);

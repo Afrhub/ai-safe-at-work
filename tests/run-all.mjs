@@ -19,6 +19,8 @@ const SUITES = [
   ["exposure and headers", "tests/suites/exposure.mjs"],
   ["public site", "tests/suites/public-site.mjs"],
   ["authorisation", "tests/suites/rls.mjs"],
+  // Needs Playwright, resolved from a sibling project. Skipped automatically if absent.
+  ["browser", "tests/suites/browser-site.mjs"],
 ];
 
 let failed = 0;

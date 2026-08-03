@@ -68,12 +68,24 @@ export async function newPage(browser, opts = {}) {
     // deliberately never fulfilled, see header note
   });
 
+  // The console message truncates and never says WHICH script was blocked. The
+  // securitypolicyviolation event carries the file, the line and a sample of the
+  // offending source, which is the difference between "CSP is angry" and "the
+  // theme bootstrap on line 8 is dead".
+  await context.exposeFunction("__cspViolation", (v) => record.csp.push(v));
+  await context.addInitScript(() => {
+    document.addEventListener("securitypolicyviolation", (e) => {
+      const where = e.sourceFile ? `${e.sourceFile.split("/").pop()}:${e.lineNumber}` : "(inline)";
+      window.__cspViolation(
+        `${e.violatedDirective} blocked ${e.blockedURI || "inline"} at ${where} — ${(e.sample || "").slice(0, 90)}`
+      );
+    });
+  });
+
   const page = await context.newPage();
   page.on("console", (m) => {
     if (m.type() !== "error" && m.type() !== "warning") return;
-    const text = m.text();
-    record.console.push(`${m.type()}: ${text}`);
-    if (/Content Security Policy/i.test(text)) record.csp.push(text);
+    record.console.push(`${m.type()}: ${m.text()}`);
   });
   page.on("pageerror", (e) => record.pageErrors.push(e.message));
   page.on("response", (r) => {

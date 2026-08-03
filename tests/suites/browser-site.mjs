@@ -112,7 +112,7 @@ export async function run() {
       await p.resize(900);
       const l = await p.navLayout();
       ok(await p.navIsOnItsOwnRow(), "nav is still beside the brand at 900px, it should have wrapped");
-      ok(!l.clipped, "a nav pill has been crushed below 40px wide");
+      ok(l.crushed.length === 0, `nav pill(s) clipped or crushed: ${l.crushed.join(", ")}`);
       const { scrollWidth, clientWidth } = await p.overflow();
       ok(scrollWidth <= clientWidth, `900px viewport needs ${scrollWidth}px`);
     });
@@ -174,7 +174,7 @@ export async function run() {
         await p.open(path);
         ok(
           record.csp.length === 0,
-          `${record.csp.length} violation(s): ${record.csp.map((c) => c.slice(0, 140)).join(" | ")}`
+          `${record.csp.length} violation(s): ${record.csp.join(" | ")}`
         );
       });
     });
