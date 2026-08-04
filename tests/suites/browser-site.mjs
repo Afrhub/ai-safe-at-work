@@ -248,12 +248,16 @@ export async function run() {
     });
   }
 
-  await check("NEG-GATE-03", "the demo account cannot read paid content", async () => {
+  // Inverted on 31 Jul 2026. The demo account was excluded from paid content while
+  // AUTH_DISABLED made every visitor the demo account. Auth is now armed and the demo
+  // credential is private, so demo is a normal signed-in session and SHOULD reach the
+  // course. Sales needs to show it.
+  await check("NEG-GATE-03", "the demo account can read paid content", async () => {
     await withPage(
       async ({ page, record }) => {
         const p = new SitePage(page, record);
         await p.open("/module-2.html");
-        eq(page.url(), `${BASE}/course.html?locked=1`, `demo account reached ${page.url()}`);
+        eq(page.url(), `${BASE}/module-2.html`, `demo account was bounced to ${page.url()}`);
       },
       { context: signedInContext("demo@attest-ai.com") }
     );
