@@ -127,7 +127,15 @@ const VENDOR_MUST_QUESTIONS = [
  'Controls against sensitive-information disclosure (cross-tenant isolation) described',
  'Contractual SLA for personal-data breach notification (≤72h) confirmed',
  'Process for EU AI Act Art 73 serious-incident notification confirmed',
- 'Advance-notice period before material model / ToS / sub-processor changes confirmed'
+ 'Advance-notice period before material model / ToS / sub-processor changes confirmed',
+ // Cyber Resilience Act, Regulation (EU) 2024/2847. These bite the SUPPLIER, not you,
+ // and only where they place a product with digital elements on the EU market. Pure
+ // SaaS is out of scope. Ask anyway: the answer tells you which kind of supplier you
+ // are dealing with. Reporting duties start 11 Sep 2026, the rest 11 Dec 2027.
+ 'CRA: confirmed whether the product is in scope (product with digital elements, or excluded as pure SaaS)',
+ 'CRA: coordinated vulnerability disclosure policy and Article 14 reporting contact confirmed (applies 11 Sep 2026)',
+ 'CRA: EU declaration of conformity and CE marking position stated (applies 11 Dec 2027)',
+ 'CRA: software bill of materials (SBOM) and the declared security-update support period provided'
 ];
 
 const RISK_MATRIX = { // likelihood -> impact -> rating
@@ -204,7 +212,8 @@ function renderNav(){
 const GUIDES = {
   dashboard: "This list is generated from your registers, not typed. An item clears itself when the underlying record is fixed, so work top down and check back here.",
   aup: "Each field fills the numbered section it names in the policy below. Saving increments the draft version; publishing makes it live and asks every member of staff to acknowledge it again.",
-  vendors: "<b>Step 1 of vendor onboarding.</b> Structured AI supplier due diligence based on recognised industry frameworks, including 19 mandatory checks. Send it to the supplier before you buy. When the answers come back, score them in Vendor Risk Score.",
+  // Count is derived, not typed. It said 19 while the list grew underneath it.
+  vendors: `<b>Step 1 of vendor onboarding.</b> Structured AI supplier due diligence based on recognised industry frameworks, including ${VENDOR_MUST_QUESTIONS.length} mandatory checks. Send it to the supplier before you buy. When the answers come back, score them in Vendor Risk Score.`,
   supplierrisk: "<b>Step 2 of vendor onboarding.</b> Score the vendor once diligence is back and record a go/no-go. Approve one and it becomes a use case in the Use Case Register.",
   tools: "Every AI tool your people can reach, including the ones you never bought. A personal ChatGPT account has no supplier to send diligence to, so it can never arrive through Vendor Due Diligence — it starts here instead. Record the account type: the same tool on an enterprise account and on a personal one are two different answers. What you set as the most sensitive data permitted is what Section 3 of the policy will tell staff.",
   usecases: "Every approved AI use case, one row each: the tool being used, its business owner, the data involved, the purpose and its current governance status. One tool can carry several use cases. The risk rating is set by the use case's risk assessment, not typed here. A use case with no assessment shows in the Governance Centre until you run one.",
