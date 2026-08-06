@@ -205,10 +205,9 @@ html[data-theme="dark"] .inc-card .ico { border-color: rgba(255,255,255,0.22); b
      assembles itself the same way in reverse — same orange, same easing —
      so the two sites read as one movement rather than a navigation.
 
-     Nothing here runs on an ordinary visit: it is gated on the referrer,
-     off under reduced motion, and the class removes itself after three
-     seconds no matter what, so a failure shows the page rather than hides
-     it. -->
+     The gate and the choreography live in assets/flyin.js — script-src is
+     'self', so an inline block here would be blocked in production while
+     passing in local preview. Styles may stay inline; style-src allows it. -->
 <style>
   /* The hero already arrives hidden and fades up on its own [data-reveal]
      transition. Under a flight that transition has to go, or it and the
@@ -225,17 +224,7 @@ html[data-theme="dark"] .inc-card .ico { border-color: rgba(255,255,255,0.22); b
   }
   @keyframes fly-veil { from { opacity: 1 } to { opacity: 0 } }
 </style>
-<script>
-(function () {
-  try {
-    var from = document.referrer ? new URL(document.referrer).hostname : '';
-    if (!/(^|\.)jardesigns/.test(from) && location.search.indexOf('flyin') < 0) return;
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    document.documentElement.classList.add('flyin');
-    setTimeout(function () { document.documentElement.classList.remove('flyin'); }, 3000);
-  } catch (e) {}
-})();
-</script>
+<script src="/assets/flyin.js?v=1"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -372,51 +361,6 @@ html[data-theme="dark"] .inc-card .ico { border-color: rgba(255,255,255,0.22); b
  <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
-
-<script>
-/* The hero comes back together out of the flight: each line starts where
-   the card's matching line was thrown — out to one side and up close to
-   the eye — and settles into place, top down. The whole thing is cancelled
-   the moment it lands, because a finished animation left filling forwards
-   would keep a transform on the sticky topbar for the rest of the visit. */
-(function () {
-  var html = document.documentElement;
-  if (!html.classList.contains('flyin')) return;
-
-  var PARTS = [                    /* selector, sideways, vertical */
-    ['.topbar',             -0.55, -0.85],
-    ['.gate-eyebrow',       -0.80, -0.45],
-    ['.gate-stage h1',       0.62, -0.15],
-    ['.gate-stage .lede',   -0.75,  0.20],
-    ['.hero-ctas',           0.70,  0.55]
-  ];
-
-  var anims = [], els = [], last = null;
-  PARTS.forEach(function (p, i) {
-    var el = document.querySelector(p[0]);
-    if (!el) return;
-    els.push(el);
-    var a = el.animate([
-      { transform: 'perspective(900px) translate3d(' + (p[1] * 280).toFixed(0) + 'px,' +
-                   (p[2] * 220).toFixed(0) + 'px,460px) rotate(' + (p[1] * 6).toFixed(1) + 'deg)',
-        opacity: 0 },
-      { transform: 'none', opacity: 1 }
-    ], { duration: 820, delay: 60 + i * 85, easing: 'cubic-bezier(0.23,1,0.32,1)', fill: 'both' });
-    anims.push(a);
-    last = a;
-  });
-
-  if (!last) { html.classList.remove('flyin'); return; }
-  var land = function () {
-    html.classList.remove('flyin');            /* first, or the parts blink out */
-    /* mark them revealed before letting go: a [data-reveal] element the
-       site's own observer hasn't reached yet would drop back to opacity 0 */
-    els.forEach(function (el) { el.classList.add('is-revealed'); });
-    anims.forEach(function (a) { a.cancel(); });
-  };
-  last.finished.then(land).catch(land);
-})();
-</script>
 
 </body>
 </html>
