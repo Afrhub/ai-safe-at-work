@@ -31,6 +31,7 @@
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
 <link rel="stylesheet" href="assets/style.css?v=29" />
+<link rel="stylesheet" href="assets/module-video.css?v=3" />
 <link rel="stylesheet" href="assets/completion.css?v=3" /><!-- completion v1 -->
 <script defer src="assets/completion.js?v=1"></script><!-- completion v1 -->
 <script defer src="assets/cinema.js?v=23"></script>
@@ -60,6 +61,17 @@
  <p class="lede">Eleven plain-English modules for people who use AI at work but do not build it. A short knowledge check at the end of each module, a completion certificate when you finish, and annual refresher training to stay current as the rules move. Around ninety minutes for the core, delivered through the Attest AI portal.</p>
 
  <nav class="section-nav" aria-label="On this page"><a href="#overview">Overview</a><a href="#outcomes">Learning Outcomes</a><a href="#modules">Module Breakdown</a></nav>
+
+ <!-- Public on purpose. Same file cinema.js uses for the click-triggered course
+      preview, embedded here so a signed-out visitor sees the course before deciding
+      whether to sign in or buy. -->
+ <figure class="module-video">
+ <video class="module-video-el" controls preload="metadata" poster="assets/video/course-module-1-poster.jpg?v=1" playsinline>
+ <source src="assets/video/course-module-1.mp4?v=1" type="video/mp4" />
+ Your browser can't play this video. <a href="assets/video/course-module-1.mp4">Download it instead</a>.
+ </video>
+ <figcaption class="module-video-cap">Watch: a look at Module 1, which is free to read in full. No sign in needed.</figcaption>
+ </figure>
 
  <h2>Course Overview</h2>
  <p>Eleven plain-English modules, read in order, in about ninety minutes. Each module ends with a short quiz; finish the core to unlock the printable checklist and generate your completion certificate, then refresh annually as the rules move. The course is part of Foundation, renewed annually and delivered to your team through the Attest AI portal.</p>

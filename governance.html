@@ -30,6 +30,7 @@
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
 <link rel="stylesheet" href="assets/style.css?v=29" />
+<link rel="stylesheet" href="assets/module-video.css?v=3" />
 <script defer src="assets/cinema.js?v=23"></script>
 </head>
 <body>
@@ -50,6 +51,17 @@
  <p class="eyebrow">Governance Centre</p>
  <h1 class="page-title">Your AI governance, <em>in one place</em>.</h1>
  <p class="lede">Registers, risk assessments, vendor due diligence and staff sign-off, kept current and organised the way an auditor asks for them. Part of the Attest AI Platform, reached by signing in to your portal.</p>
+
+ <!-- Public on purpose. Same file cinema.js uses for the click-triggered platform
+      preview, embedded here so a signed-out visitor sees the Governance Centre working
+      before deciding whether to sign in. -->
+ <figure class="module-video">
+ <video class="module-video-el" controls preload="metadata" poster="assets/video/platform-demo-poster.jpg?v=1" playsinline>
+ <source src="assets/video/platform-demo.mp4?v=1" type="video/mp4" />
+ Your browser can't play this video. <a href="assets/video/platform-demo.mp4">Download it instead</a>.
+ </video>
+ <figcaption class="module-video-cap">Watch: a minute inside the platform. No sign in needed.</figcaption>
+ </figure>
 
  <div class="hero-ctas" style="margin-top:1.6rem">
   <a class="hero-cta primary" href="portal/demo.html">Try it now, no sign in &rarr;</a>
