@@ -563,9 +563,11 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
   max-width: 1100px; margin: 5rem auto 0; padding: 3rem 1.75rem 3.5rem;
   border-top: 1px solid var(--border);
   font-family: var(--font-body); color: var(--text3);
-  /* brand + 2 columns. Plans and Services were removed on 31 Jul 2026: both duplicated
-     the top nav, and every destination they held is still reachable without them. */
-  display: grid; grid-template-columns: 1.6fr repeat(2, 1fr); gap: 2.2rem 2.5rem;
+  /* brand + 3 columns. Plans and Services went on 31 Jul 2026 as nav duplicates. Explore
+     came back when the top nav was cut to three items: Who We Help, Plans, Book a Demo
+     and Become a Partner lost their nav slot and need somewhere to live. One column
+     replacing two, so still leaner than before. */
+  display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 2.2rem 2.5rem;
 }
 @media (max-width: 860px) { .site-foot { grid-template-columns: 1fr 1fr; gap: 2rem; } }
 @media (max-width: 520px) { .site-foot { grid-template-columns: 1fr; } }

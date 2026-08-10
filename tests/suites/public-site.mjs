@@ -16,12 +16,21 @@ async function page(path) {
   return cache.get(path);
 }
 
+// Cut to three sections plus Sign in on 3 Aug 2026. Who We Help, Plans, Book a Demo and
+// Become a Partner moved to the footer Explore column, checked separately below.
 const NAV_ITEMS = [
   ["Products", "index.html#how-we-help"],
+  ["Course", "course.html"],
+  ["Governance", "governance.html"],
+  ["Sign in", "portal/login.html"],
+];
+
+// Displaced from the nav. If these ever stop being reachable, the streamline silently
+// buried the pricing page and both revenue CTAs.
+const FOOTER_EXPLORE = [
   ["Who We Help", "who-we-help.html"],
   ["Plans", "pricing.html"],
-  ["Sign in", "portal/login.html"],
-  ["Book a Demo", "about.html#contact"],
+  ["Book a Demo", "demo.html"],
   ["Become a Partner", "msp.html"],
 ];
 
@@ -65,6 +74,16 @@ export async function run() {
     await check("NAV-06", `${label} resolves`, async () => {
       const p = await page("/" + target.split("#")[0]);
       eq(p.status, 200, `${label} points at a ${p.status}`);
+    });
+  }
+
+  group("NAV-12, links displaced from the nav are still reachable");
+  for (const [label, target] of FOOTER_EXPLORE) {
+    await check("NAV-12", `${label} in the footer`, async () => {
+      const p = await page("/index.html");
+      includes(p.body, `>${label}</a>`, `${label} lost its nav slot and is not in the footer either`);
+      const t = await page("/" + target);
+      eq(t.status, 200, `${label} points at a ${t.status}`);
     });
   }
 
