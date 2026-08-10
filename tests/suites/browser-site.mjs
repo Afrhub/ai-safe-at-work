@@ -105,13 +105,16 @@ export async function run() {
     });
   });
 
-  await check("NAV-03", "nav wraps to a second row at 900px, nothing clipped", async () => {
+  // Was "nav wraps to a second row at 900px". That encoded a six-item nav: it had to drop
+  // below the brand to fit. The nav is four items since 3 Aug 2026 and fits beside the
+  // brand at every width tested, so requiring the wrap would fail a nav that is working.
+  // What actually matters is unchanged: nothing clipped, and no horizontal overflow.
+  await check("NAV-03", "900px fits with nothing clipped", async () => {
     await withPage(async ({ page, record }) => {
       const p = new SitePage(page, record);
       await p.open("/index.html");
       await p.resize(900);
       const l = await p.navLayout();
-      ok(await p.navIsOnItsOwnRow(), "nav is still beside the brand at 900px, it should have wrapped");
       ok(l.crushed.length === 0, `nav pill(s) clipped or crushed: ${l.crushed.join(", ")}`);
       const { scrollWidth, clientWidth } = await p.overflow();
       ok(scrollWidth <= clientWidth, `900px viewport needs ${scrollWidth}px`);
