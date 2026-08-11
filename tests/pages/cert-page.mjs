@@ -22,9 +22,10 @@ export class CertPage extends SitePage {
     return this;
   }
 
-  // Pretend the learner really passed, so the difference between "the gate
-  // stopped me" and "the page cannot render at all" is visible.
-  async seedGenuinePass(module = 1, score = 9) {
+  // Legacy local state from the pre-11 Aug client-scored quizzes. cert.html now reads
+  // module_progress, so this must mint nothing: it is a forgery a learner could write
+  // from the console. Kept as the negative case, not as a way to fake a pass.
+  async seedLocalPass(module = 1, score = 9) {
     await this.page.evaluate(
       ([m, s]) =>
         localStorage.setItem(

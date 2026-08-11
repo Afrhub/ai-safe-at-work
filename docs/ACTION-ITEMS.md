@@ -41,10 +41,16 @@ build, not three fixes, and they should ship together.
       carries `"correct": N` in the `quiz-data` JSON. View Source gives a learner every
       answer. Strip it once scoring is server-side; `why` and `cite` can stay, they are
       the post-answer explanation.
-- [ ] 🤖 **Consequence to fix with the above:** "Training completion records you can hand
+- [x] 🤖 **Consequence to fix with the above:** "Training completion records you can hand
       to an auditor" is on the Foundation bullet list and the checkout page, and has no
       server-side source. Certificates are generated from client-side state, which the
       learner can edit. This is the claim most exposed to a customer's auditor.
+      **Done 11 Aug:** `cert.html` reads `module_progress`. Score, date and reference come
+      from the row `record_quiz_result` wrote; the query string and `localStorage` mint
+      nothing. The name comes from `profiles.full_name`, the same one the manager roster
+      shows, and saving it PATCHes that column rather than the browser. Module 1 issues no
+      certificate: it is the free ungated sample, still client-scored, so there is no
+      record behind it. New test NEG-CERT-01c covers the `localStorage` forgery.
 - [ ] 🤖 **Correct the test plan.** QUIZ-01 to QUIZ-05 in `docs/test-plan.html` describe
       the 80% pass mark as enforced in `record_quiz_result`. True of the function,
       false of the shipped course. Rewrite once the fix lands.

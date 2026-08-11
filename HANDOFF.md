@@ -1,6 +1,6 @@
 # HANDOFF — Attest AI / ai-safe-at-work
 
-Updated: 11 Aug 2026 · Last commit `b3581b6` · Everything committed, pushed and live.
+Updated: 11 Aug 2026 · Everything committed, pushed and live. `git log -1` for the head.
 Supersedes the 26 Jul version. Full decision history in DOCTRINE.md; this file is the cold resume.
 
 ## What this is
@@ -61,12 +61,11 @@ Currently 2 known failures, both the `pricing.html` robots contradiction.
    migration: that change rewrites every policy that matters, and a mistake would present as
    an empty register rather than an error.
 5. **`governance_state` is in no migration**, and **`invite-seat` source is not in the repo**.
-6. **Certificates still render from client state.** Quiz results now reach the database, but
-   `cert.html` has not been repointed at `module_progress`. Until it is, the certificate is
-   not backed by the record behind it.
-7. **9 quizzes are still client-scored** with their answer key in the page: the six role
+6. **9 quizzes are still client-scored** with their answer key in the page: the six role
    tracks and three sector overlays use string module ids (`copilot`, `fs` ...) that
    `quiz_keys.module` cannot hold. Modules 2 to 12 are done.
+7. **`docs/test-plan.html` QUIZ-01 to QUIZ-05 describe the old client scoring.** True of
+   `record_quiz_result`, false of what the pages did before 11 Aug. Rewrite.
 
 ## Next steps, ordered, first one startable cold
 
@@ -75,10 +74,19 @@ Currently 2 known failures, both the `pricing.html` robots contradiction.
    nothing has been missed yet, but the new `demo.html` depends on this.
 2. **Point `attest-ai.com` at Netlify.** Add the domain in Netlify FIRST, let the certificate
    provision, then add the records at 123-Reg, then set it primary. Then Resend SMTP.
-3. **Repoint `cert.html` at `module_progress`** so the certificate is backed by the record
-   that now exists. Small, and it closes the audit-evidence claim properly.
-4. **`docs/SPEC-organisations-auditor-reseller.md`**, in the order the spec gives. Do its two
+3. **`docs/SPEC-organisations-auditor-reseller.md`**, in the order the spec gives. Do its two
    prerequisites first: fix `dbGet`, capture `governance_state` in a migration.
+
+## Certificates read the database (11 Aug)
+
+`cert.html` no longer mints anything from the query string or `localStorage`. `assets/cert.js`
+reads `module_progress` and `profiles.full_name` with the learner's own token, so the score,
+the date and the reference are the row `record_quiz_result` wrote and the manager roster reads
+the same row. Saving the name PATCHes `profiles.full_name`, the only column `authenticated`
+may update. Module 1 issues no certificate, it is the free ungated sample and still
+client-scored, and `quiz.js` no longer offers it a certificate link. `?m=` alone now carries
+the module; `&s=`/`&n=` are ignored. New check NEG-CERT-01c: a `localStorage` record written
+from the console mints nothing.
 
 ## GOTCHAS (discovered the hard way)
 

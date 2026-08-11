@@ -318,11 +318,16 @@
            : `Below pass mark. You need ${state.cfg.passThreshold} of ${total} to pass.`
     ]));
 
-    wrap.appendChild(el('p', { class: 'ev-note' }, htmlNodes(
-      pass
-        ? `Your score is saved locally on this device only (<code>localStorage</code>), nothing is sent anywhere.${typeof state.cfg.module === 'number' ? ' Generate a printable certificate to keep in your training file.' : ''}`
-        : `Read the module sections you missed, then retake. Each attempt overwrites the previous one. No record leaves this device.`
-    )));
+    // Two different truths since 11 Aug 2026: a server-scored module writes a record your
+    // manager can see, a client-scored one still never leaves the browser. Say which.
+    const note = serverScored(state)
+      ? (pass
+          ? `Recorded against your account, so it counts as training evidence and your manager sees it. Generate a printable certificate for your file.`
+          : `Read the module sections you missed, then retake. Only a pass is recorded; your best score stands.`)
+      : (pass
+          ? `Your score is saved locally on this device only (<code>localStorage</code>), nothing is sent anywhere.`
+          : `Read the module sections you missed, then retake. Each attempt overwrites the previous one. No record leaves this device.`);
+    wrap.appendChild(el('p', { class: 'ev-note' }, htmlNodes(note)));
 
     const controls = el('div', { class: 'quiz-controls' });
     const retry = el('button', { class: 'quiz-btn ghost', type: 'button' }, ['Retake the quiz']);
@@ -332,10 +337,12 @@
       scrollIntoView(document.getElementById('quiz-mount'));
     });
     controls.appendChild(retry);
-    if (pass && typeof state.cfg.module === 'number') {
+    // Only server-scored modules have a record behind them, so only they get the link.
+    // Module 1 used to link here and would now land on "no verified pass".
+    if (pass && serverScored(state)) {
       const cert = el('a', {
         class: 'quiz-btn',
-        href: `cert.html?m=${state.cfg.module}&s=${score}&n=${total}`
+        href: `cert.html?m=${state.cfg.module}`
       }, ['Print my certificate →']);
       controls.appendChild(cert);
     }

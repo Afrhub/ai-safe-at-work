@@ -461,18 +461,36 @@ export async function run() {
     );
   });
 
-  // The interesting half: does the page work at all for someone who really passed?
-  await check("CERT-RENDER", "cert.html renders for a genuine stored pass", async () => {
+  await check("NEG-CERT-01c", "localStorage alone mints nothing since the module_progress cutover", async () => {
     await withPage(
       async ({ page, record }) => {
         const cert = new CertPage(page, record);
-        await cert.openForged(1, 9, 10);
-        await cert.seedGenuinePass(1, 9);
-        await cert.openForged(1, 9, 10);
+        await cert.openForged(2, 9, 10);
+        await cert.seedLocalPass(2, 9);
+        await cert.openForged(2, 9, 10);
         const o = await cert.observe();
         ok(
-          o.hasCertCard,
-          `a learner with a stored pass sees nothing: #cert-root is ${o.rootHtmlLength} chars, ` +
+          !o.hasCertCard,
+          `a console-written localStorage record still mints a certificate: ${o.mainText.slice(0, 300)}`
+        );
+      },
+      { context: signedInContext() }
+    );
+  });
+
+  // The original bug: the page rendered nothing at all under the live CSP. It must always
+  // say something. A real pass cannot be seeded from here (record_quiz_result is the only
+  // write path and needs a real session), so this asserts the refusal renders, which is the
+  // same code path proving the script ran.
+  await check("CERT-RENDER", "cert.html always renders a verdict, never an empty page", async () => {
+    await withPage(
+      async ({ page, record }) => {
+        const cert = new CertPage(page, record);
+        await cert.openForged(2, 9, 10);
+        const o = await cert.observe();
+        ok(
+          o.hasErrorBox && o.rootHtmlLength > 0,
+          `cert.html rendered nothing: #cert-root is ${o.rootHtmlLength} chars, ` +
             `main text ${JSON.stringify(o.mainText.slice(0, 160))}, CSP violations ${record.csp.length}`
         );
       },

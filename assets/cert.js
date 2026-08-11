@@ -6,6 +6,12 @@
 // CERT-RENDER in tests/suites/browser-site.mjs.
 //
 // Keep this external. Anything inline here is dead on arrival in production.
+//
+// Repointed at module_progress on 11 Aug 2026. Every value on the certificate, the
+// score, the date and the reference, now comes from the row record_quiz_result wrote
+// under the learner's own identity. Nothing is minted from the query string or from
+// localStorage, so the certificate is the same record the manager roster reads and
+// "training completion records you can hand to an auditor" is finally true.
 
 (function () {
   'use strict';
@@ -25,174 +31,263 @@
     12: 'The standards behind this course'
   };
 
-  function qs(name) {
-    const m = new URLSearchParams(window.location.search).get(name);
-    return m == null ? null : m;
+  // Certificated modules. Module 1 is the free ungated sample: it is scored in the
+  // browser because a signed-out visitor has no session to score against, so it earns
+  // no verified record and no certificate.
+  const REGISTER = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+  // ponytail: every module quiz is ten questions in quiz_keys and record_quiz_result
+  // only writes a row at 80%, so a row means a pass at 8 or better. Read them from the
+  // database if the shape ever varies by module.
+  const TOTAL = 10;
+  const PASS = 8;
+
+  // Publishable key, public by design and already served in portal/config.js and
+  // assets/quiz.js. RLS and the learner's own bearer token do the work.
+  const SB_URL = 'https://hanjrsslhnuauaysbhun.supabase.co';
+  const SB_ANON = 'sb_publishable_wtK-KC8ibXtA0EvVIJZGqA_oY8wx_6E';
+
+  const root = document.getElementById('cert-root');
+  const moduleNum = parseInt(qs('m') || '0', 10);
+
+  const sess = session();
+  if (!sess) {
+    showError('Sign in to see your training record.',
+      'Certificates are issued from the pass recorded against your account, so this page ' +
+      'needs a signed-in session. <a href="portal/login.html">Sign in</a>, then come back.');
+    return;
   }
 
-  const moduleNum = parseInt(qs('m') || '0', 10);
-  const score = parseInt(qs('s') || '0', 10);
-  const total = parseInt(qs('n') || '10', 10);
-  const root = document.getElementById('cert-root');
+  Promise.all([
+    api('module_progress?select=module,score,updated_at'),
+    api('profiles?select=full_name&id=eq.' + encodeURIComponent(sess.uid))
+  ]).then(([rows, profile]) => {
+    const name = ((profile && profile[0]) || {}).full_name || '';
+    if (!moduleNum || moduleNum < 1 || moduleNum > 12) renderRegister(rows);
+    else renderCertificate(moduleNum, rows.find(r => r.module === moduleNum), name);
+  }).catch(() => {
+    showError('Could not load your training record.',
+      'Your record could not be read just now, so nothing is shown rather than something ' +
+      'unverified. Try again in a moment, or <a href="portal/login.html">sign in again</a> ' +
+      'if you have been away a while.');
+  });
 
-  if (!moduleNum || moduleNum < 1 || moduleNum > 12) {
-    // Certificate register: show pass status for all 11 modules on this device.
-    // Module 11 (the 60-second checklist) is the gated finale and is not counted.
-    const REGISTER = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12];
-    let rows = '';
-    let passedCount = 0;
+  // ── Views ─────────────────────────────────────────────────
+
+  function renderRegister(rows) {
+    const passed = new Map(rows.map(r => [r.module, r]));
+    // quiz_keys holds module 1 too, so a learner who calls record_quiz_result directly can
+    // hold a row for a module that issues no certificate. Count the register, not the rows.
+    let earned = 0;
+    let html = '';
     for (const m of REGISTER) {
-      let rec = null;
-      try { rec = JSON.parse(localStorage.getItem('aisw-quiz-m' + m) || 'null'); } catch (e) { rec = null; }
-      const passed = rec && rec.score >= rec.threshold;
-      if (passed) passedCount++;
-      const num = String(m).padStart(2, '0');
-      const status = passed
-        ? `<span style="color:var(--green);font-weight:700;">Passed · ${rec.score}/${rec.total || 10}</span>`
+      const rec = passed.get(m);
+      if (rec) earned++;
+      const status = rec
+        ? `<span style="color:var(--green);font-weight:700;">Passed · ${rec.score}/${TOTAL}</span>`
         : `<span style="color:var(--text3);">Not yet earned</span>`;
-      const action = passed
+      const action = rec
         ? `<a href="cert.html?m=${m}" style="color:var(--accent);font-weight:700;">Open certificate →</a>`
         : `<a href="module-${m}.html" style="color:var(--text2);">Take the module →</a>`;
-      rows += `
-        <div style="display:grid;grid-template-columns:3rem 1fr auto auto;gap:1rem;align-items:baseline;
-                    padding:0.75rem 0.4rem;border-bottom:1px dashed rgba(255,255,255,0.09);font-size:0.95rem;">
-          <span style="font-family:var(--font-mono);color:var(--accent);font-size:0.78rem;letter-spacing:0.1em;">M${num}</span>
-          <span style="color:var(--text);">${MODULE_TITLES[m]}</span>
-          ${status}
-          ${action}
-        </div>`;
+      html += row(m, status, action);
     }
+    // Module 1 is listed so its absence does not read as a missing record.
+    html += row(1,
+      `<span style="color:var(--text3);">Free sample</span>`,
+      `<a href="module-1.html" style="color:var(--text2);">Open the module →</a>`);
+
     root.innerHTML = `
       <div class="cert-intro">
         <h1>Certificate <em>register</em>.</h1>
         <p>Each module issues a printable certificate when you pass its knowledge check.
-      Results live in this browser only, nothing is sent anywhere. ${passedCount} of 11 earned on this device.</p>
+      Results are held against your account and your manager sees the same record.
+      ${earned} of ${REGISTER.length} earned.</p>
       </div>
       <div style="max-width:860px;margin:2rem auto 0;background:var(--plate);border:1px solid var(--border);
                   border-radius:3px;padding:1.2rem 1.4rem;box-shadow:var(--shadow-card);">
         <div style="font-family:var(--font-mono);font-size:0.78rem;font-weight:700;letter-spacing:0.14em;
-                    text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem;">The 11 modules</div>
-        ${rows}
+                    text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem;">The ${REGISTER.length} certificated modules</div>
+        ${html}
         <p style="margin:1.1rem 0 0.2rem;font-size:0.9rem;color:var(--text3);">
-     Pass mark is 8 of 10 on each knowledge check. Retake any quiz at any time, the certificate reissues with the new score.
+     Pass mark is ${PASS} of ${TOTAL} on each knowledge check. Retake any quiz at any time; your best score stands.
+     Module 1 is the free sample, scored in your browser, so it carries no certificate.
           <a href="course.html" style="color:var(--accent);">Browse all modules →</a>
         </p>
       </div>`;
-    return;
   }
 
-  const lsKey = 'aisw-quiz-m' + moduleNum;
-  let stored = null;
-  try { stored = JSON.parse(localStorage.getItem(lsKey) || 'null'); } catch (e) { stored = null; }
-
-  if (!stored || stored.score < stored.threshold) {
-    root.innerHTML = `
-      <div class="cert-error">
-        <strong>No passing score recorded yet for Module ${moduleNum}.</strong>
-        <p style="margin-top:0.5rem;">Pass the quiz at the bottom of <a href="module-${moduleNum}.html">Module ${moduleNum}</a> first. The result is stored on this device only.</p>
+  function row(m, status, action) {
+    return `
+      <div style="display:grid;grid-template-columns:3rem 1fr auto auto;gap:1rem;align-items:baseline;
+                  padding:0.75rem 0.4rem;border-bottom:1px dashed rgba(255,255,255,0.09);font-size:0.95rem;">
+        <span style="font-family:var(--font-mono);color:var(--accent);font-size:0.78rem;letter-spacing:0.1em;">M${pad2(m)}</span>
+        <span style="color:var(--text);">${escapeHtml(MODULE_TITLES[m])}</span>
+        ${status}
+        ${action}
       </div>`;
-    return;
   }
 
-  let name = '';
-  try { name = localStorage.getItem('aisw-username') || ''; } catch (e) {}
+  function renderCertificate(m, rec, name) {
+    if (m === 1) {
+      showError('Module 1 does not issue a certificate.',
+        'It is the free sample and it is scored in your browser, so there is no verified ' +
+        'record behind it. Modules 2 to 12 are scored on our side and do issue one. ' +
+        '<a href="cert.html">See your register</a>.');
+      return;
+    }
+    if (!rec) {
+      showError(`No verified pass recorded for Module ${m}.`,
+        `Pass the quiz at the bottom of <a href="module-${m}.html">Module ${m}</a> first. ` +
+        `It is marked on our side, so the result appears here as soon as you pass.`);
+      return;
+    }
 
-  const issueDate = new Date(stored.t || Date.now());
-  const dateStr = issueDate.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
-  const certId  = makeCertId(moduleNum, stored.score, stored.t);
+    const issued = new Date(rec.updated_at);
+    const dateStr = issued.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+    const certId = makeCertId(m, rec.score, rec.updated_at);
 
-  root.innerHTML = `
-    <div class="cert-intro">
-      <h1>Your <em>certificate</em>.</h1>
-   <p>Personal training record. Saved on this device only, printable for your file. Type your name below, then print or save as PDF.</p>
-      <div class="cert-name-row">
-        <label for="who">Your full name</label>
-        <input id="who" type="text" placeholder="Your full name" autocomplete="name" value="${escapeHtml(name)}">
-        <button type="button" id="save-name">Save name</button>
+    root.innerHTML = `
+      <div class="cert-intro">
+        <h1>Your <em>certificate</em>.</h1>
+   <p>Issued from the pass recorded against your account. Check the name below matches your
+      training file, then print or save as PDF.</p>
+        <div class="cert-name-row">
+          <label for="who">Your full name</label>
+          <input id="who" type="text" placeholder="Your full name" autocomplete="name" value="${escapeHtml(name)}">
+          <button type="button" id="save-name">Save name</button>
+        </div>
       </div>
-    </div>
 
-    <article class="cert-card" id="card">
-      <div class="cert-brand">AI Safe@Work</div>
+      <article class="cert-card" id="card">
+        <div class="cert-brand">AI Safe@Work</div>
 
-      <div>
-        <div class="cert-eyebrow">Certificate of Module Completion</div>
-        <h2 class="cert-h">AI literacy at <em>work</em>.</h2>
-        <p class="cert-sub">This certificate evidences that the named individual has completed and passed the knowledge check for the following module. It is one of the records an employer may keep to demonstrate <strong>EU AI Act Article 4 AI literacy</strong> for staff using AI tools.</p>
-      </div>
+        <div>
+          <div class="cert-eyebrow">Certificate of Module Completion</div>
+          <h2 class="cert-h">AI literacy at <em>work</em>.</h2>
+          <p class="cert-sub">This certificate evidences that the named individual has completed and passed the knowledge check for the following module. It is one of the records an employer may keep to demonstrate <strong>EU AI Act Article 4 AI literacy</strong> for staff using AI tools.</p>
+        </div>
 
-      <div class="cert-recipient" id="who-display">${escapeHtml(name) || 'Your name here'}</div>
+        <div class="cert-recipient" id="who-display">${escapeHtml(name) || 'Your name here'}</div>
 
-      <p class="cert-module">
-    Has completed <strong>Module ${pad2(moduleNum)}, ${escapeHtml(MODULE_TITLES[moduleNum] || '')}</strong>
-        with a score of <strong>${stored.score} of ${total}</strong>
-        (pass mark ${stored.threshold || 8}).
+        <p class="cert-module">
+      Has completed <strong>Module ${pad2(m)}, ${escapeHtml(MODULE_TITLES[m] || '')}</strong>
+          with a score of <strong>${rec.score} of ${TOTAL}</strong>
+          (pass mark ${PASS}).
+        </p>
+
+        <div class="cert-meta">
+          <div class="cert-meta-block">
+            <span class="cert-meta-label">Issued</span>
+            <span class="cert-meta-value">${dateStr}</span>
+          </div>
+          <div class="cert-meta-block">
+            <span class="cert-meta-label">Reference</span>
+            <span class="cert-meta-value">${certId}</span>
+          </div>
+          <div class="cert-meta-block">
+            <span class="cert-meta-label">Standards</span>
+            <span class="cert-meta-value">EU AI Act Art 4 · ISO 42001 · GDPR</span>
+          </div>
+        </div>
+
+        <svg class="cert-watermark" viewBox="0 0 200 200" aria-hidden="true">
+          <g fill="none" stroke="#46505e" stroke-width="2">
+            <circle cx="100" cy="100" r="80"/>
+            <circle cx="100" cy="100" r="55"/>
+            <circle cx="100" cy="100" r="30"/>
+            <path d="M100 20 L100 180 M20 100 L180 100"/>
+          </g>
+        </svg>
+      </article>
+
+      <p class="cert-fineprint">
+        Issued from your training record, not from this browser. The score, the date and the
+        reference are read back from the pass Attest AI recorded when you sat the quiz, and your
+        manager's roster reads the same row. Reissue any time by retaking the quiz.
       </p>
 
-      <div class="cert-meta">
-        <div class="cert-meta-block">
-          <span class="cert-meta-label">Issued</span>
-          <span class="cert-meta-value">${dateStr}</span>
-        </div>
-        <div class="cert-meta-block">
-          <span class="cert-meta-label">Reference</span>
-          <span class="cert-meta-value">${certId}</span>
-        </div>
-        <div class="cert-meta-block">
-          <span class="cert-meta-label">Standards</span>
-          <span class="cert-meta-value">EU AI Act Art 4 · ISO 42001 · GDPR</span>
-        </div>
+      <div class="cert-actions">
+        <a class="ghost" href="module-${m}.html">← Back to module</a>
+        <button class="primary" type="button" id="print">Print or save as PDF →</button>
       </div>
+    `;
 
-      <svg class="cert-watermark" viewBox="0 0 200 200" aria-hidden="true">
-        <g fill="none" stroke="#46505e" stroke-width="2">
-          <circle cx="100" cy="100" r="80"/>
-          <circle cx="100" cy="100" r="55"/>
-          <circle cx="100" cy="100" r="30"/>
-          <path d="M100 20 L100 180 M20 100 L180 100"/>
-        </g>
-      </svg>
-    </article>
+    const input = document.getElementById('who');
+    const display = document.getElementById('who-display');
+    const saveBtn = document.getElementById('save-name');
+    const printBtn = document.getElementById('print');
 
-    <p class="cert-fineprint">
-      Self-issued personal record. AI Safe@Work does not validate, sign or store this certificate; the score lives in your browser's
-      <code style="background:rgba(201,212,227,0.1); padding:0 0.3rem; border-radius:3px;">localStorage</code>.
-      Hand it to your manager, HR, or training file as one piece of literacy evidence. Reissue any time by retaking the quiz.
-    </p>
+    input.addEventListener('input', () => {
+      display.textContent = input.value.trim() || 'Your name here';
+    });
+    saveBtn.addEventListener('click', () => saveName(saveBtn, input.value.trim()));
+    printBtn.addEventListener('click', async () => {
+      const v = input.value.trim();
+      if (!v) { input.focus(); return; }
+      // The printed name has to be the name on the record, so save before printing.
+      if (v !== name) { const saved = await saveName(saveBtn, v); if (!saved) return; }
+      window.print();
+    });
+  }
 
-    <div class="cert-actions">
-      <a class="ghost" href="module-${moduleNum}.html">← Back to module</a>
-      <button class="primary" type="button" id="print">Print or save as PDF →</button>
-    </div>
-  `;
+  // The name goes to profiles.full_name, the one the manager roster shows, so the
+  // certificate and the roster cannot disagree. profiles grants UPDATE on that column
+  // only, and RLS restricts the row to the learner.
+  async function saveName(btn, value) {
+    if (!value) return false;
+    btn.textContent = 'Saving…';
+    try {
+      await api('profiles?id=eq.' + encodeURIComponent(sess.uid), {
+        method: 'PATCH',
+        body: JSON.stringify({ full_name: value })
+      });
+      btn.textContent = 'Saved ✓';
+      setTimeout(() => { btn.textContent = 'Save name'; }, 1800);
+      return true;
+    } catch (e) {
+      btn.textContent = 'Could not save';
+      setTimeout(() => { btn.textContent = 'Save name'; }, 2600);
+      return false;
+    }
+  }
 
-  const input = document.getElementById('who');
-  const display = document.getElementById('who-display');
-  const saveBtn = document.getElementById('save-name');
-  const printBtn = document.getElementById('print');
+  // ── Plumbing ──────────────────────────────────────────────
 
-  input.addEventListener('input', () => {
-    display.textContent = input.value.trim() || 'Your name here';
-  });
-  saveBtn.addEventListener('click', () => {
-    const v = input.value.trim();
-    if (!v) { input.focus(); return; }
-    try { localStorage.setItem('aisw-username', v); } catch (e) {}
-    saveBtn.textContent = 'Saved ✓';
-    setTimeout(() => { saveBtn.textContent = 'Save name'; }, 1800);
-  });
-  printBtn.addEventListener('click', () => {
-    const v = input.value.trim();
-    if (!v) { input.focus(); return; }
-    try { localStorage.setItem('aisw-username', v); } catch (e) {}
-    window.print();
-  });
+  function session() {
+    try {
+      const s = JSON.parse(localStorage.getItem('sb-hanjrsslhnuauaysbhun-auth-token') || 'null');
+      const uid = s && s.user && s.user.id;
+      return s && s.access_token && uid ? { token: s.access_token, uid } : null;
+    } catch (e) { return null; }
+  }
 
+  async function api(path, opts) {
+    const res = await fetch(SB_URL + '/rest/v1/' + path, Object.assign({
+      headers: {
+        apikey: SB_ANON,
+        Authorization: 'Bearer ' + sess.token,
+        'Content-Type': 'application/json'
+      }
+    }, opts || {}));
+    if (!res.ok) throw new Error(path + ' returned ' + res.status);
+    return res.status === 204 ? null : res.json();
+  }
+
+  function showError(title, bodyHtml) {
+    root.innerHTML = `
+      <div class="cert-error">
+        <strong>${title}</strong>
+        <p style="margin-top:0.5rem;">${bodyHtml}</p>
+      </div>`;
+  }
+
+  function qs(name) {
+    const m = new URLSearchParams(window.location.search).get(name);
+    return m == null ? null : m;
+  }
   function makeCertId(m, s, iso) {
-    const d = new Date(iso || Date.now());
-    const stamp = d.getFullYear().toString().slice(-2)
-      + pad2(d.getMonth() + 1)
-      + pad2(d.getDate());
+    const d = new Date(iso);
+    const stamp = d.getFullYear().toString().slice(-2) + pad2(d.getMonth() + 1) + pad2(d.getDate());
     const rand = Math.abs(hash(String(iso) + ':' + m + ':' + s)).toString(36).slice(0, 4).toUpperCase();
     return `AISW-M${pad2(m)}-${stamp}-${rand}`;
   }
@@ -202,6 +297,6 @@
   }
   function pad2(n) { return n < 10 ? '0' + n : String(n); }
   function escapeHtml(s) {
-    return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+    return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
   }
 })();
