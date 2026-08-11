@@ -30,14 +30,14 @@ Lives in `docs/`, which `netlify.toml` 404s, because it names security defects.
 Found 3 Aug 2026 while proving the modules have videos and quizzes. All three are one
 build, not three fixes, and they should ship together.
 
-- [ ] 🤖 **`quiz_keys` is empty, 0 rows.** `record_quiz_result` raises
+- [x] 🤖 **`quiz_keys` is empty, 0 rows.** `record_quiz_result` raises
       `no answer key for module %` for every module, so the server-side scorer cannot
       score anything. Populate it from the `correct` values currently sitting in the
       page JSON.
-- [ ] 🤖 **`quiz.js` never calls the scorer.** It writes to `localStorage` and nothing
+- [x] 🤖 **`quiz.js` never calls the scorer.** It writes to `localStorage` and nothing
       else. `audit_log` holds 0 `module_completed` entries. Point it at
       `record_quiz_result` so a pass reaches the database.
-- [ ] 🤖 **The answer key ships to the browser.** Every question on all 18 module pages
+- [x] 🤖 **The answer key ships to the browser.** Every question on all 18 module pages
       carries `"correct": N` in the `quiz-data` JSON. View Source gives a learner every
       answer. Strip it once scoring is server-side; `why` and `cite` can stay, they are
       the post-answer explanation.
@@ -75,6 +75,19 @@ wrong for about two weeks on a product that sells being current.
 - [ ] 🧑 **Decide the standing process.** The product promises "annual refresher training
       to stay current as the rules move". The rules moved and nothing flagged it. A
       quarterly legal-currency review belongs in the audit pack cadence.
+
+## Built 11 Aug, awaiting only your dashboard actions
+
+- [ ] 🧑 **Netlify env vars are completely empty.** Verified via the API: zero variables set.
+      Nothing needs them today (the quiz scores through the publishable key), but Stripe and
+      the webhook both do.
+- [ ] 🧑 **Netlify form notifications.** Checked the submissions while I was in there: all
+      seven across the five forms are tests, including one titled "TEST SUBMISSION - please
+      delete" and one from your own Safari on 31 Jul. **No real enquiry has been missed.**
+      I cannot delete submissions or configure notifications; both are dashboard only.
+- [ ] 🧑 **Orphaned forms `tier1-order` and `foundation-order` both have 0 submissions.** The
+      API can only enable or disable forms site-wide, so deleting them individually is
+      dashboard only.
 
 ## P1, revenue is leaking today
 
