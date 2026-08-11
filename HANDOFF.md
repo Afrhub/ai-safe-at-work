@@ -42,7 +42,11 @@ written because it did not pass.
 **Test suites, ~120 checks.** `node tests/run-all.mjs`. Suites: pricing logic, webhook signature,
 manager nomination, exposure/headers, public site, authorisation (RLS), browser (Playwright).
 Browser suite resolves Playwright from `~/projects/mlr` via `createRequire`.
-Currently 2 known failures, both the `pricing.html` robots contradiction.
+Measured against live on 11 Aug: 6 failing checks, all pre-existing and all in ACTION-ITEMS.
+SEO-01 and SEO-03 (`pricing.html` robots), CSP-01 on `module-1.html` and `standards-map.html`
+(the dead inline risk figure and coverage matrix), NAV-08 (skip link), A11Y-04 (heading skip).
+Run it against a local server and the exposure, header and redirect checks fail too: those
+rules live in `netlify.toml`, not in the files.
 
 **Docs worth reading before touching anything:** `docs/ACTION-ITEMS.md` (34 items, P0→P4),
 `docs/USER-JOURNEYS.md` (three roles + the roles that have no row), `docs/Attest-AI-Test-Plan.pdf`,
