@@ -178,6 +178,31 @@ export async function run() {
     excludes(m1.body, "course-gate.js", "module 1 is gated, but the course page calls it free to read");
   });
 
+  group("LAW, content currency against the Digital Omnibus");
+  // The Omnibus entered into force 27 Jul 2026 and deferred the high-risk regime. These
+  // pages taught the superseded dates for about two weeks. Fails if they come back.
+  await check("LAW-01", "no page still dates Article 26 or 86 to August 2026", async () => {
+    const bad = [];
+    for (const path of ["/sector-financial-services.html", "/sector-healthcare.html", "/sector-public-sector.html"]) {
+      const p2 = await page(path);
+      if (/Article (26|86)[^.]{0,80}August 2026/.test(p2.body)) bad.push(path);
+      if (/in force August 2026/.test(p2.body)) bad.push(path + " (in force August 2026)");
+    }
+    ok(bad.length === 0, `superseded high-risk dates on: ${bad.join(", ")}`);
+  });
+  await check("LAW-02", "Article 4 is not quoted with the pre-Omnibus wording", async () => {
+    const bad = [];
+    for (const path of ["/module-1.html", "/rollout-guide.html", "/index.html", "/course.html"]) {
+      const p2 = await page(path);
+      if (/sufficient AI literacy/.test(p2.body)) bad.push(path);
+    }
+    ok(bad.length === 0, `pre-Omnibus Article 4 wording on: ${bad.join(", ")}`);
+  });
+  await check("EXP-06", "the sales deck is not publicly reachable", async () => {
+    const r = await fetch(`${BASE}/sales-deck.html`, { redirect: "manual" });
+    ok(r.status === 404 || r.status === 301, `sales-deck.html returned ${r.status}`);
+  });
+
   group("SEO, sitemap and robots posture");
   await check("SEO-01", "every sitemap URL is 200 and indexable", async () => {
     const sm = await page("/sitemap.xml");
