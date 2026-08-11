@@ -1,6 +1,11 @@
 // Generate narration MP3s + word-level caption JSON for ONE module via
 // ElevenLabs with-timestamps. Run:
-//   node --strip-types scripts/gen-module-audio.ts Module3
+//   npx tsx scripts/gen-module-audio.mts Module3
+//
+// .mts, not .ts, on purpose: this package.json has no "type": "module", so tsx compiles
+// a plain .ts as CJS and the top-level await below fails to transform. The extension
+// forces ESM regardless of package type. The old note here said `node --strip-types`,
+// which needs Node 22; this repo runs Node 20.
 import { writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { MODULES } from "../src/modules.ts";
 import { VOICE_ID } from "../src/script.ts";
@@ -9,7 +14,7 @@ const KEY = process.env.ELEVENLABS_API_KEY;
 if (!KEY) { console.error("ELEVENLABS_API_KEY missing"); process.exit(1); }
 
 const target = process.argv[2];
-if (!target) { console.error("usage: gen-module-audio.ts <ModuleId>  (e.g. Module3)"); process.exit(1); }
+if (!target) { console.error("usage: gen-module-audio.mts <ModuleId>  (e.g. Module3)"); process.exit(1); }
 const spec = MODULES.find((m) => m.id === target || m.dir === target);
 if (!spec) { console.error(`unknown module: ${target}`); process.exit(1); }
 
