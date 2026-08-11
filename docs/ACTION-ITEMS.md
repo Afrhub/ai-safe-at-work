@@ -56,20 +56,20 @@ deadlines. Article 50 transparency and the full penalty regime started 2 Aug 202
 Article 4 was retained but softened. Found 11 Aug 2026, so the content below has been
 wrong for about two weeks on a product that sells being current.
 
-- [ ] 🤖 **`sector-financial-services.html`**: "Article 26 deployer obligations from
+- [x] 🤖 **`sector-financial-services.html`**: "Article 26 deployer obligations from
       August 2026". Article 26 is the high-risk regime, deferred to 2 Dec 2027
       (Annex III) and 2 Aug 2028 (Annex I).
-- [ ] 🤖 **`sector-healthcare.html`**: same claim, same problem.
-- [ ] 🤖 **`sector-public-sector.html`**: "Article 86 right to explanation (in force
+- [x] 🤖 **`sector-healthcare.html`**: same claim, same problem.
+- [x] 🤖 **`sector-public-sector.html`**: "Article 86 right to explanation (in force
       August 2026)", stated three times, **including as the correct answer to a graded
       quiz question**. A learner is being marked right for a date that moved.
-- [ ] 🤖 **`sales-deck.html`, public, returns 200**: "staff must have 'sufficient AI
+- [x] 🤖 **`sales-deck.html`, public, returns 200**: "staff must have 'sufficient AI
       literacy'". That is the pre-Omnibus wording. Article 4 now reads support the
       development of AI literacy, and explicitly does not require guaranteeing any
       level of literacy in any individual.
-- [ ] 🤖 **`module-1.html`**: teaches Article 4 as "staff who use AI need enough know-how
+- [x] 🤖 **`module-1.html`**: teaches Article 4 as "staff who use AI need enough know-how
       to use it safely", and grades a quiz question on it. Same softening applies.
-- [ ] 🤖 **`rollout-guide.html`, public**: Article 4 described as a literacy obligation
+- [x] 🤖 **`rollout-guide.html`, public**: Article 4 described as a literacy obligation
       evidenced by a training register. Still broadly right, but check the wording
       against the amended text.
 - [ ] 🧑 **Decide the standing process.** The product promises "annual refresher training
