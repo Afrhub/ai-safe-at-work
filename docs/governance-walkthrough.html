@@ -1,0 +1,461 @@
+<meta charset="utf-8">
+<title>Governance Centre, full walkthrough</title>
+<style>
+  @page { size: A4; margin: 15mm 14mm 17mm 14mm; }
+  * { box-sizing: border-box; }
+  body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 9.4pt; line-height: 1.45; color: #14161a; margin: 0; }
+  h1 { font-size: 25pt; margin: 0 0 4px; letter-spacing: -0.5px; }
+  h2 { font-size: 13.5pt; margin: 0 0 9px; padding: 7px 10px; background: #14161a; color: #fff; border-radius: 3px; page-break-after: avoid; }
+  h3 { font-size: 10.4pt; margin: 15px 0 5px; color: #b8320a; page-break-after: avoid; }
+  p { margin: 0 0 7px; }
+  .sub { color: #5d646e; }
+  section { page-break-before: always; }
+  section.first { page-break-before: avoid; }
+  table { width: 100%; border-collapse: collapse; margin: 6px 0 11px; font-size: 8.4pt; }
+  th { background: #eef0f3; text-align: left; padding: 4px 6px; border: 1px solid #c8ccd2; font-weight: 700; }
+  td { padding: 4px 6px; border: 1px solid #d5d9de; vertical-align: top; }
+  tr { page-break-inside: avoid; }
+  td.n { width: 24px; text-align: center; font-weight: 700; color: #5d646e; }
+  td.f { width: 33%; font-weight: 600; }
+  code { font-family: "SF Mono", Menlo, monospace; font-size: 8pt; background: #f0f2f4; padding: 0 2px; border-radius: 2px; }
+  .cover { padding-top: 52mm; }
+  .cover .rule { height: 4px; background: #ff5a1f; width: 90px; margin: 14px 0 20px; }
+  .box { border: 1px solid #d5d9de; border-left: 3px solid #ff5a1f; padding: 8px 11px; margin: 10px 0; background: #fafbfc; }
+  .warn { border-left-color: #b8320a; background: #fdf5f3; }
+  .meta td { border: none; padding: 2px 0; }
+  .meta td:first-child { width: 105px; color: #5d646e; }
+  ul { margin: 0 0 8px; padding-left: 17px; }
+  li { margin-bottom: 2px; }
+</style>
+
+<div class="cover">
+  <h1>Governance Centre</h1>
+  <div class="rule"></div>
+  <p style="font-size:14pt;margin:0 0 26px">Full walkthrough, all sixteen sections</p>
+  <table class="meta" style="width:340px">
+    <tr><td>Product</td><td>Attest AI Platform</td></tr>
+    <tr><td>Worked example</td><td>Northgate Legal</td></tr>
+    <tr><td>Follow along at</td><td><code>/portal/demo.html</code></td></tr>
+    <tr><td>Date</td><td>11 Aug 2026</td></tr>
+    <tr><td>Sections</td><td>12 governance + 4 manage</td></tr>
+  </table>
+  <div class="box" style="margin-top:26px">
+    <b>Follow along with no account.</b> Open <code>/portal/demo.html</code>. It runs the real
+    Governance Centre against sample data held in <code>sessionStorage</code>, seeded as
+    Northgate Legal, the same firm used throughout this document. Nothing you type there
+    reaches the database, and closing the tab resets it.
+  </div>
+  <div class="box warn">
+    <b>Field names and dropdown options in this document are taken from the shipped code,
+    not from a design.</b> Where a section's behaviour is not yet functional, the step says
+    so rather than pretending. See section 18.
+  </div>
+</div>
+
+<section>
+<h2>1. Before you start</h2>
+
+<h3>The order matters</h3>
+<p>The registers reference each other. Build them in this order and nothing ever asks you
+to pick a record that does not exist yet:</p>
+<table>
+  <tr><th style="width:26px">#</th><th style="width:150px">Section</th><th>Why it comes here</th></tr>
+  <tr><td class="n">1</td><td>Staff &amp; Sign-off</td><td>Owner pickers on every other register read from staff records. Add people first and every later dropdown is populated.</td></tr>
+  <tr><td class="n">2</td><td>Vendor Due Diligence</td><td>The AI Tool Register's supplier field points at vendors.</td></tr>
+  <tr><td class="n">3</td><td>Vendor Risk Score</td><td>Scores the diligence answers once they come back.</td></tr>
+  <tr><td class="n">4</td><td>AI Tool Register</td><td>Use cases point at tools, and Section 3 of the policy is generated from this register.</td></tr>
+  <tr><td class="n">5</td><td>Use Case Register</td><td>Risks and assessments both reference use cases.</td></tr>
+  <tr><td class="n">6</td><td>Risk Assessments</td><td>Sets the use case's risk rating automatically.</td></tr>
+  <tr><td class="n">7</td><td>AI Risk Register</td><td>Optionally links to a use case.</td></tr>
+  <tr><td class="n">8</td><td>Acceptable Use Policy</td><td>Generated from the registers. Do it last or Section 3 is thin.</td></tr>
+  <tr><td class="n">9</td><td>Incidents, RACI, ToR</td><td>Independent, do them whenever.</td></tr>
+</table>
+
+<h3>Northgate Legal, the worked example</h3>
+<p>A 42-person law firm. Two partners, a practice manager, a small IT contractor. They
+have Copilot on business licences, several people using personal ChatGPT accounts, and a
+contract-review tool a partner signed up for without telling anyone. That last one is the
+reason the AI Tool Register exists.</p>
+
+<div class="box">
+  <b>One habit worth forming.</b> The Governance Centre list is generated from your
+  registers, never typed. An item disappears when the underlying record is fixed. So work
+  top down, fix the record, and check back rather than trying to clear the list directly.
+</div>
+</section>
+
+<section>
+<h2>2. Staff &amp; Sign-off, do this first</h2>
+<p class="sub">Nav: <b>Staff &amp; Sign-off</b>. Populates the owner picker on every other register.</p>
+
+<h3>Add your first person</h3>
+<table>
+  <tr><th class="n">#</th><th class="f">Do this</th><th>Northgate Legal example</th></tr>
+  <tr><td class="n">1</td><td>Click <b>+ Add staff member</b></td><td>Top right of the page</td></tr>
+  <tr><td class="n">2</td><td><b>Name</b></td><td><code>Priya Raman</code></td></tr>
+  <tr><td class="n">3</td><td><b>Email</b></td><td><code>p.raman@northgatelegal.co.uk</code></td></tr>
+  <tr><td class="n">4</td><td><b>Role / department</b></td><td><code>Practice Manager</code></td></tr>
+  <tr><td class="n">5</td><td>Save</td><td>She now appears in every owner dropdown</td></tr>
+</table>
+
+<p>Repeat for the people who will own things. For Northgate, add at least:</p>
+<table>
+  <tr><th class="f">Name</th><th style="width:34%">Email</th><th>Role / department</th></tr>
+  <tr><td>Priya Raman</td><td><code>p.raman@northgatelegal.co.uk</code></td><td>Practice Manager</td></tr>
+  <tr><td>David Okonjo</td><td><code>d.okonjo@northgatelegal.co.uk</code></td><td>Partner, Commercial</td></tr>
+  <tr><td>Sarah Whitfield</td><td><code>s.whitfield@northgatelegal.co.uk</code></td><td>Partner, Litigation</td></tr>
+  <tr><td>Tom Bewley</td><td><code>tom@bewleyIT.co.uk</code></td><td>IT (contractor)</td></tr>
+</table>
+
+<h3>Announce the policy, once it is published</h3>
+<table>
+  <tr><th class="n">#</th><th class="f">Do this</th><th>What happens</th></tr>
+  <tr><td class="n">6</td><td>Click <b>Copy announcement message</b></td><td>Clipboard gets the policy version, the company name, your DPO and incident contact, and the absolute portal sign-in URL. Paste it into email, Slack or Teams.</td></tr>
+  <tr><td class="n">7</td><td>Click <b>Email reminder</b> on one person's row</td><td>Opens your mail client, addressed to them, with the policy version and the sign-in link in the body.</td></tr>
+  <tr><td class="n">8</td><td>Read the <b>Policy ack</b> column</td><td><i>Acknowledged</i> with a date, or <i>Not yet</i>. Acknowledgements are tied to a policy version, so publishing a new version resets everyone to outstanding.</td></tr>
+</table>
+
+<div class="box warn">
+  <b>Known limitation.</b> This roster reads acknowledgements from one store, and the staff
+  portal writes them to another. They are not linked yet, so a sign-off made by a member of
+  staff may not appear in this column. Decision pending, see section 18.
+</div>
+</section>
+
+<section>
+<h2>3. Vendor Due Diligence</h2>
+<p class="sub">Nav: <b>Vendor Due Diligence</b>. Step 1 of vendor onboarding. Send it before you buy.</p>
+
+<table>
+  <tr><th class="n">#</th><th class="f">Field</th><th>Northgate Legal example</th></tr>
+  <tr><td class="n">1</td><td>Click <b>+ Add vendor</b></td><td></td></tr>
+  <tr><td class="n">2</td><td><b>Vendor name</b></td><td><code>Lexvia Ltd</code></td></tr>
+  <tr><td class="n">3</td><td><b>Product / tool</b></td><td><code>Lexvia Contract Review, Professional tier</code></td></tr>
+  <tr><td class="n">4</td><td><b>Vendor contact (name / email)</b></td><td><code>Ana Bright / ana.bright@lexvia.example</code></td></tr>
+  <tr><td class="n">5</td><td><b>Diligence checklist</b></td><td>Tick each question as the supplier answers it. There are 23 must-answer questions.</td></tr>
+  <tr><td class="n">6</td><td><b>Notes</b></td><td><code>Answers received 14 Aug. Sub-processor list incomplete, chased.</code></td></tr>
+</table>
+
+<h3>What the 23 questions cover</h3>
+<p>Legal entity and group structure; the tool and tier; underlying foundation models;
+countries of processing and storage; an EU-only processing option; retention of prompts,
+responses, metadata and embeddings; a contractual commitment that your data is not used
+for training; deletion on request including backups and sub-processors; the full
+sub-processor list and change notification; a DPA with SCCs; EU AI Act Article 26
+deployer-facing instructions; a current ISO 27001 certificate and Statement of
+Applicability; SSO, SCIM, MFA and RBAC; per-model provider, version and limitations;
+whether any model is high-risk under Annex III; cross-tenant isolation controls; a
+contractual 72-hour breach notification SLA; the Article 73 serious-incident process;
+advance notice of material changes; and four Cyber Resilience Act questions covering
+scope, the Article 14 disclosure contact, declaration of conformity and CE marking, and
+an SBOM with the declared security-update support period.</p>
+
+<div class="box">
+  <b>Why ask a SaaS vendor about the CRA.</b> Pure software as a service is usually outside
+  CRA scope. The answer still tells you which kind of supplier you are dealing with, and a
+  vendor who cannot answer it is telling you something.
+</div>
+</section>
+
+<section>
+<h2>4. Vendor Risk Score</h2>
+<p class="sub">Nav: <b>Vendor Risk Score</b>. Step 2. Score the answers and record a decision.</p>
+
+<table>
+  <tr><th class="n">#</th><th class="f">Field</th><th>Northgate Legal example</th></tr>
+  <tr><td class="n">1</td><td>Click <b>+ Score a vendor</b></td><td></td></tr>
+  <tr><td class="n">2</td><td><b>Vendor / product</b></td><td>Pick <code>Lexvia Ltd</code> from the list</td></tr>
+  <tr><td class="n">3</td><td><b>What we use it for</b></td><td><code>First-pass review of commercial contracts before a partner reads them</code></td></tr>
+  <tr><td class="n">4</td><td><b>Data shared with them</b></td><td><code>Client contract text, counterparty names. No special-category data.</code></td></tr>
+  <tr><td class="n">5</td><td><b>Their AI Act role</b></td><td><code>Provider</code></td></tr>
+  <tr><td class="n">6</td><td><b>Assessed by / date</b></td><td><code>Priya Raman / 18 Aug 2026</code></td></tr>
+  <tr><td class="n">7</td><td><b>Score each area (1 low – 5 high)</b></td><td>Score from the diligence answers, not from impressions</td></tr>
+  <tr><td class="n">8</td><td><b>Decision</b></td><td><code>Approved with conditions</code></td></tr>
+  <tr><td class="n">9</td><td><b>Decided by</b></td><td><code>David Okonjo</code></td></tr>
+  <tr><td class="n">10</td><td><b>Re-assess by</b></td><td><code>18 Aug 2027</code></td></tr>
+  <tr><td class="n">11</td><td><b>Conditions to clear</b></td><td><code>Full sub-processor list before go-live. EU-only processing enabled.</code></td></tr>
+</table>
+<p>Approving here is what lets the tool become a use case later. A vendor with no score is
+a flag on the Governance Centre.</p>
+</section>
+
+<section>
+<h2>5. AI Tool Register</h2>
+<p class="sub">Nav: <b>AI Tool Register</b>. Every AI tool people can reach, including the ones you never bought.</p>
+
+<h3>The field that does the work</h3>
+<p><b>Account type</b> is the point of this register. The same product on a business
+licence and on someone's personal login are two different answers, so they are two rows.
+Record them separately or the policy will tell staff the wrong thing.</p>
+
+<table>
+  <tr><th class="n">#</th><th class="f">Field</th><th>Example: the approved one</th></tr>
+  <tr><td class="n">1</td><td><b>Status</b></td><td><code>Approved</code> &nbsp;<span class="sub">(Awaiting assessment · Approved · Approved with conditions · Restricted · Not approved)</span></td></tr>
+  <tr><td class="n">2</td><td><b>Tool name</b></td><td><code>Microsoft 365 Copilot</code></td></tr>
+  <tr><td class="n">3</td><td><b>Account type</b></td><td><code>Enterprise / business account</code> &nbsp;<span class="sub">(Enterprise / business · Team · Personal / consumer · Unknown)</span></td></tr>
+  <tr><td class="n">4</td><td><b>Supplier (if we have a contract)</b></td><td><code>Microsoft</code></td></tr>
+  <tr><td class="n">5</td><td><b>Most sensitive data permitted</b></td><td><code>Confidential business</code> &nbsp;<span class="sub">(None — do not use with company data · Public · Internal non-sensitive · Confidential business · Personal data (general) · Special-category)</span></td></tr>
+  <tr><td class="n">6</td><td><b>Conditions or restrictions</b></td><td><code>No client-identifying matter detail. Never for advice that goes out unreviewed.</code></td></tr>
+  <tr><td class="n">7</td><td><b>Decision owner</b></td><td><code>Priya Raman</code></td></tr>
+  <tr><td class="n">8</td><td><b>Review by</b></td><td><code>01 Jun 2027</code></td></tr>
+</table>
+
+<h3>Now add the same product on a personal account</h3>
+<table>
+  <tr><th class="f">Field</th><th>Example: the shadow one</th></tr>
+  <tr><td>Status</td><td><code>Restricted</code></td></tr>
+  <tr><td>Tool name</td><td><code>ChatGPT</code></td></tr>
+  <tr><td>Account type</td><td><code>Personal / consumer account</code></td></tr>
+  <tr><td>Supplier</td><td>Leave empty. There is no contract, which is exactly why it belongs here.</td></tr>
+  <tr><td>Most sensitive data permitted</td><td><code>None — do not use with company data</code></td></tr>
+  <tr><td>Conditions or restrictions</td><td><code>Public information only. Nothing from a matter file, ever.</code></td></tr>
+  <tr><td>Decision owner</td><td><code>Priya Raman</code></td></tr>
+  <tr><td>Review by</td><td><code>01 Dec 2026</code></td></tr>
+</table>
+
+<div class="box">
+  <b>A tool with no supplier still belongs here.</b> A personal ChatGPT account has nobody
+  to send diligence to, so it can never arrive through Vendor Due Diligence. This register
+  is the only place it will ever be recorded.
+</div>
+</section>
+
+<section>
+<h2>6. Use Case Register</h2>
+<p class="sub">Nav: <b>Use Case Register</b>. What each tool is actually used for.</p>
+
+<table>
+  <tr><th class="n">#</th><th class="f">Field</th><th>Northgate Legal example</th></tr>
+  <tr><td class="n">1</td><td><b>Use case name</b></td><td><code>First-pass commercial contract review</code></td></tr>
+  <tr><td class="n">2</td><td><b>Purpose (one sentence)</b></td><td><code>Summarise and flag unusual clauses in inbound commercial contracts before a partner reads them.</code></td></tr>
+  <tr><td class="n">3</td><td><b>AI tool used</b></td><td>Pick <code>Lexvia Contract Review</code> from the tool list</td></tr>
+  <tr><td class="n">4</td><td><b>Input data categories</b></td><td><code>Confidential business</code> &nbsp;<span class="sub">(Public · Internal non-sensitive · Confidential business · Personal data (general) · Special-category)</span></td></tr>
+  <tr><td class="n">5</td><td><b>Use case owner</b></td><td><code>David Okonjo</code></td></tr>
+  <tr><td class="n">6</td><td><b>DPIA required</b></td><td><code>Yes</code> &nbsp;<span class="sub">(Yes · No · Pending)</span></td></tr>
+  <tr><td class="n">7</td><td><b>FRIA required</b></td><td><code>No</code> &nbsp;<span class="sub">(Yes · No · Pending)</span></td></tr>
+  <tr><td class="n">8</td><td><b>Risk rating</b></td><td>Leave it. The risk assessment sets this and keeps it in step.</td></tr>
+  <tr><td class="n">9</td><td><b>Status</b></td><td><code>Active</code> &nbsp;<span class="sub">(Active · Paused · Discontinued)</span></td></tr>
+  <tr><td class="n">10</td><td><b>Notes</b></td><td><code>Partner review is mandatory before anything leaves the firm.</code></td></tr>
+</table>
+
+<div class="box warn">
+  <b>Deliberate trap.</b> Name a tool here that is not in the AI Tool Register and the
+  Governance Centre raises a flag naming it. That is the feature, not a bug: it is how
+  shadow AI surfaces.
+</div>
+</section>
+
+<section>
+<h2>7. Risk Assessments</h2>
+<p class="sub">Nav: <b>Risk Assessments</b>. Sets the use case's risk rating automatically.</p>
+
+<table>
+  <tr><th class="n">#</th><th class="f">Field</th><th>Northgate Legal example</th></tr>
+  <tr><td class="n">1</td><td><b>Use case / tool</b></td><td>Pick <code>First-pass commercial contract review</code></td></tr>
+  <tr><td class="n">2</td><td><b>Owner (name / role)</b></td><td><code>David Okonjo / Partner, Commercial</code></td></tr>
+  <tr><td class="n">3</td><td><b>Assessment date</b></td><td><code>20 Aug 2026</code></td></tr>
+  <tr><td class="n">4</td><td><b>Data involved</b></td><td><code>Contract text, counterparty names, commercial terms. No special-category data.</code></td></tr>
+  <tr><td class="n">5</td><td><b>Who is affected</b></td><td><code>Clients, counterparties, and the fee earners relying on the summary.</code></td></tr>
+  <tr><td class="n">6</td><td><b>EU AI Act risk tier</b></td><td><code>Limited risk</code></td></tr>
+  <tr><td class="n">7</td><td><b>Score the risks, Likelihood × Impact (1–5 each)</b></td><td>Five rows: wrong or made-up output used as fact; confidential or personal data exposed to the tool; bias or unfair outcome; no human check before acting; vendor, supply-chain or availability failure.</td></tr>
+  <tr><td class="n">8</td><td><b>Decision</b></td><td><code>Approved with conditions</code></td></tr>
+  <tr><td class="n">9</td><td><b>Decided by</b></td><td><code>Sarah Whitfield</code></td></tr>
+  <tr><td class="n">10</td><td><b>Review date</b></td><td><code>20 Aug 2027</code></td></tr>
+  <tr><td class="n">11</td><td><b>Conditions (if any)</b></td><td><code>Partner sign-off before any output is sent to a client. Quarterly sample check of ten reviews.</code></td></tr>
+</table>
+<p>Save, then reopen the use case. Its <b>Risk rating</b> now reflects this assessment, and
+stays in step if you change the scores.</p>
+</section>
+
+<section>
+<h2>8. AI Risk Register</h2>
+<p class="sub">Nav: <b>AI Risk Register</b>. Risks that outlive any single use case.</p>
+
+<table>
+  <tr><th class="n">#</th><th class="f">Field</th><th>Northgate Legal example</th></tr>
+  <tr><td class="n">1</td><td><b>Status</b></td><td><code>Open</code> &nbsp;<span class="sub">(Open · In progress · Complete · Deferred)</span></td></tr>
+  <tr><td class="n">2</td><td><b>Risk category</b></td><td><code>Shadow AI</code> &nbsp;<span class="sub">(Data leakage · Hallucination · Bias · Vendor risk · Compliance gap · Shadow AI · Operational)</span></td></tr>
+  <tr><td class="n">3</td><td><b>Related use case (optional)</b></td><td>Leave empty, this one is firm-wide</td></tr>
+  <tr><td class="n">4</td><td><b>Risk description (be specific)</b></td><td><code>Fee earners pasting matter detail into personal ChatGPT accounts we do not control or monitor.</code></td></tr>
+  <tr><td class="n">5</td><td><b>Current controls</b></td><td><code>AUP published. Induction covers it. No technical block in place.</code></td></tr>
+  <tr><td class="n">6</td><td><b>Likelihood</b></td><td><code>High</code> &nbsp;<span class="sub">(Very low · Low · Medium · High)</span></td></tr>
+  <tr><td class="n">7</td><td><b>Impact</b></td><td><code>Critical</code> &nbsp;<span class="sub">(Low · Medium · High · Critical)</span></td></tr>
+  <tr><td class="n">8</td><td><b>Risk owner</b></td><td><code>Priya Raman</code></td></tr>
+  <tr><td class="n">9</td><td><b>Mitigation action</b></td><td><code>Provide Copilot licences to all fee earners, then block consumer AI domains on the firm network.</code></td></tr>
+  <tr><td class="n">10</td><td><b>Mitigation due date</b></td><td><code>31 Oct 2026</code></td></tr>
+  <tr><td class="n">11</td><td><b>Residual scores</b></td><td>Leave blank until the mitigation is planned and real.</td></tr>
+</table>
+
+<div class="box">
+  <b>Residual risk reads "Not scored" until you score it.</b> It does not quietly inherit
+  the inherent score. An auditor can tell the difference between a residual risk you
+  assessed and one the software assumed.
+</div>
+</section>
+
+<section>
+<h2>9. Acceptable Use Policy</h2>
+<p class="sub">Nav: <b>Acceptable Use Policy</b>. Do this after the registers, not before.</p>
+
+<table>
+  <tr><th class="n">#</th><th class="f">Field</th><th>Northgate Legal example</th></tr>
+  <tr><td class="n">1</td><td><b>Company name</b></td><td><code>Northgate Legal LLP</code></td></tr>
+  <tr><td class="n">2</td><td><b>Effective date</b></td><td><code>01 Sep 2026</code></td></tr>
+  <tr><td class="n">3</td><td><b>Policy owner (role)</b></td><td><code>Practice Manager</code></td></tr>
+  <tr><td class="n">4</td><td><b>DPO / contact name</b></td><td><code>Priya Raman</code></td></tr>
+  <tr><td class="n">5</td><td>Fill the remaining numbered fields</td><td>Each one fills the section of the policy it names.</td></tr>
+  <tr><td class="n">6</td><td>Read Section 3 in the preview</td><td>It is generated from your AI Tool Register, with each tool's account type and permitted data. Both Copilot rows and the restricted ChatGPT row should appear.</td></tr>
+  <tr><td class="n">7</td><td><b>Save</b></td><td>Increments the draft version. Nothing is live yet.</td></tr>
+  <tr><td class="n">8</td><td><b>Publish</b></td><td>Makes it live, stamps the date, and asks every member of staff to acknowledge it again.</td></tr>
+</table>
+
+<div class="box">
+  <b>Test it properly.</b> Empty the Tool Register and regenerate: Section 3 falls back to a
+  typed list rather than producing an empty section. Then refill it and regenerate. That
+  round trip is the difference between a generated policy and a template.
+</div>
+</section>
+
+<section>
+<h2>10. Incident Reports</h2>
+<p class="sub">Nav: <b>Incident Reports</b>. Fill it in on the worst day, so write it now.</p>
+
+<table>
+  <tr><th class="n">#</th><th class="f">Field</th><th>Northgate Legal example</th></tr>
+  <tr><td class="n">1</td><td><b>Reporter (name + role)</b></td><td><code>Tom Bewley, IT contractor</code></td></tr>
+  <tr><td class="n">2</td><td><b>Discovered</b></td><td><code>03 Sep 2026</code></td></tr>
+  <tr><td class="n">3</td><td><b>Status</b></td><td><code>Open</code></td></tr>
+  <tr><td class="n">4</td><td><b>Type</b></td><td><code>Data exposure</code></td></tr>
+  <tr><td class="n">5</td><td><b>Severity</b></td><td><code>High</code></td></tr>
+  <tr><td class="n">6</td><td><b>Personal data involved</b></td><td><code>Yes</code></td></tr>
+  <tr><td class="n">7</td><td><b>AI tool + version/tenant</b></td><td><code>ChatGPT, personal account, free tier</code></td></tr>
+  <tr><td class="n">8</td><td><b>Channel</b></td><td><code>Reported by the fee earner to the Practice Manager</code></td></tr>
+  <tr><td class="n">9</td><td><b>Factual summary</b></td><td><code>A paralegal pasted two paragraphs of a witness statement, including the witness's name and address, into a personal ChatGPT account to shorten it.</code> Facts only, no speculation.</td></tr>
+  <tr><td class="n">10</td><td><b>Detection (how / by whom)</b></td><td><code>Self-reported the same afternoon after the AUP induction.</code></td></tr>
+  <tr><td class="n">11</td><td><b>Containment actions taken</b></td><td><code>Chat deleted, account history disabled, matter partner informed, client not yet notified pending assessment.</code></td></tr>
+  <tr><td class="n">12</td><td><b>Root cause</b></td><td><code>No Copilot licence for paralegals, so the approved route did not exist for them.</code></td></tr>
+  <tr><td class="n">13</td><td><b>Lessons and changes required</b></td><td><code>Extend Copilot licences to paralegals. Raise risk R-002 to In progress.</code></td></tr>
+  <tr><td class="n">14</td><td><b>Closed date</b></td><td>Leave empty until it genuinely is</td></tr>
+</table>
+<p>The 72-hour GDPR clock starts at awareness, not at closure. Record <b>Discovered</b>
+accurately even when it is inconvenient.</p>
+</section>
+
+<section>
+<h2>11. Roles Matrix (RACI) and 12. Steering Group ToR</h2>
+
+<h3>RACI</h3>
+<p class="sub">Nav: <b>Roles Matrix (RACI)</b>. Who is Responsible, Accountable, Consulted, Informed.</p>
+<table>
+  <tr><th class="f">Activity</th><th>Northgate Legal example</th></tr>
+  <tr><td>Approving a new AI tool</td><td>R: Priya Raman · A: David Okonjo · C: Tom Bewley · I: All staff</td></tr>
+  <tr><td>Publishing the AUP</td><td>R: Priya Raman · A: Sarah Whitfield · C: David Okonjo · I: All staff</td></tr>
+  <tr><td>Handling an AI incident</td><td>R: Tom Bewley · A: Priya Raman · C: matter partner · I: Steering group</td></tr>
+  <tr><td>Annual refresher training</td><td>R: Priya Raman · A: Priya Raman · C: none · I: All staff</td></tr>
+</table>
+<p>One Accountable per row. If two people are accountable, nobody is.</p>
+
+<h3>Steering Group ToR</h3>
+<p class="sub">Nav: <b>Steering Group ToR</b>. Complete, save, export.</p>
+<table>
+  <tr><th class="f">Field</th><th>Northgate Legal example</th></tr>
+  <tr><td>Purpose</td><td><code>Oversee safe and lawful AI adoption across the firm.</code></td></tr>
+  <tr><td>Membership</td><td><code>Managing Partner (chair), Practice Manager, one fee-earning partner, IT contractor.</code></td></tr>
+  <tr><td>Frequency</td><td><code>Quarterly, and within five working days of any High or Critical incident.</code></td></tr>
+  <tr><td>Standing agenda</td><td><code>New tool requests, open risks, incidents since last meeting, training completion, policy version.</code></td></tr>
+  <tr><td>Decision rights</td><td><code>Approve or restrict tools. Accept residual risk up to High. Critical goes to the full partnership.</code></td></tr>
+</table>
+</section>
+
+<section>
+<h2>13. Governance Centre, reading the flags</h2>
+<p class="sub">Nav: <b>Governance Centre</b>. Generated from your registers, never typed.</p>
+
+<h3>Deliberately trigger each flag</h3>
+<p>The fastest way to trust the list is to make it fire, then clear it.</p>
+<table>
+  <tr><th class="n">#</th><th class="f">Do this</th><th>Flag it raises, and how to clear it</th></tr>
+  <tr><td class="n">1</td><td>Add a use case naming a tool not in the register</td><td>Raises a flag naming the unregistered tool. Clear it by adding the tool.</td></tr>
+  <tr><td class="n">2</td><td>Set a tool to <code>Restricted</code>, then build a use case on it</td><td>Raises a restricted-tool flag. Clear it by approving the tool or discontinuing the use case.</td></tr>
+  <tr><td class="n">3</td><td>Leave a tool at <code>Awaiting assessment</code></td><td>Raises an awaiting-decision flag. Clear it by deciding.</td></tr>
+  <tr><td class="n">4</td><td>Set a tool's <b>Review by</b> to yesterday</td><td>Raises a past-review flag. Clear it by reviewing and moving the date.</td></tr>
+  <tr><td class="n">5</td><td>Set a tool to <code>Approved</code> with no <b>Decision owner</b></td><td>Raises an unowned-approval flag. Clear it by naming an owner.</td></tr>
+</table>
+
+<h3>Objectives</h3>
+<table>
+  <tr><th class="n">#</th><th class="f">Do this</th><th>Northgate Legal example</th></tr>
+  <tr><td class="n">6</td><td>Click <b>+ Add objective</b></td><td><code>Every fee earner trained and signed off by 31 Oct 2026</code></td></tr>
+  <tr><td class="n">7</td><td>Set a target date in the past</td><td>Flagged overdue immediately</td></tr>
+  <tr><td class="n">8</td><td>Change it to a future date</td><td>The flag clears with no stored field changing. Overdue is computed, never saved.</td></tr>
+</table>
+
+<div class="box">
+  <b>What you will not find here, on purpose.</b> There is no "N users are using unapproved
+  AI" figure. The platform cannot see your network, so it does not pretend to. Every number
+  on this page traces to a record you entered.
+</div>
+</section>
+
+<section>
+<h2>14 to 17. The Manage group</h2>
+<p class="sub">Nav: <b>Team</b>, <b>Course</b>, <b>Templates</b>, <b>Updates</b>.</p>
+
+<h3>14. Team</h3>
+<table>
+  <tr><th class="n">#</th><th class="f">Do this</th><th>What happens</th></tr>
+  <tr><td class="n">1</td><td>Check your credit balance</td><td>One credit per seat. Bought with your plan.</td></tr>
+  <tr><td class="n">2</td><td>Invite a colleague by email</td><td>Spends one credit, creates the account, seats them under you, emails them a link.</td></tr>
+  <tr><td class="n">3</td><td>Try inviting the same person twice</td><td>Refused as already seated, and it does <b>not</b> spend a second credit.</td></tr>
+  <tr><td class="n">4</td><td>Try inviting someone another firm manages</td><td>Refused. Nobody is silently moved between organisations.</td></tr>
+  <tr><td class="n">5</td><td>Try inviting at zero balance</td><td>Refused with no credits remaining. The balance never goes negative.</td></tr>
+</table>
+<div class="box warn"><b>Not functional yet.</b> Invitations need custom SMTP, which is not
+configured. The credit accounting is correct; the email does not arrive. See section 18.</div>
+
+<h3>15. Course</h3>
+<table>
+  <tr><th class="f">Do this</th><th>What happens</th></tr>
+  <tr><td>Read the completion table</td><td>Modules completed per seated person. You see only your own people.</td></tr>
+  <tr><td>Export the completion CSV</td><td>Downloads, opens in a spreadsheet, contains only your seated users.</td></tr>
+</table>
+<div class="box warn"><b>Not trustworthy yet.</b> Quiz results are held in the learner's own
+browser and never reach the database, so this table and the CSV have no server-side source.
+Do not hand the export to an auditor until that is fixed. See section 18.</div>
+
+<h3>16. Templates</h3>
+<p>27 fill-in governance documents. Open any one, complete it offline, keep it with your
+audit pack. They complement the generated policy rather than replacing it.</p>
+
+<h3>17. Updates</h3>
+<p>The product changelog. Worth a glance each quarter, because a content update usually
+means a regulation moved. The Digital Omnibus on AI, in force 27 July 2026, is the current
+example: it deferred the EU AI Act's high-risk regime to December 2027 and August 2028,
+and softened the Article 4 literacy duty to an obligation of effort.</p>
+</section>
+
+<section>
+<h2>18. Honest limits at the time of writing</h2>
+<p>Everything above is walkable today except where marked. These four are real and known.</p>
+<table>
+  <tr><th style="width:150px">Limit</th><th>Effect on this walkthrough</th></tr>
+  <tr><td>No custom SMTP</td><td>Section 14 invitations do not arrive. Credits are spent and the account is created correctly; nobody is emailed.</td></tr>
+  <tr><td>Quiz results are local only</td><td>Section 15 completion tracking has no server-side source. Clearing a browser erases a learner's record.</td></tr>
+  <tr><td>Two acknowledgement stores</td><td>Section 2's Policy ack column may not show a sign-off made in the staff portal. Which store is authoritative is undecided.</td></tr>
+  <tr><td>Staff cannot open the sign-off page</td><td>The acknowledgement panel sits on a manager-only page, so staff are bounced. Inherited from the artifact this screen was ported from.</td></tr>
+</table>
+
+<div class="box">
+  <b>Using this as a test script.</b> Follow sections 2 to 13 in order against
+  <code>/portal/demo.html</code>. Every step has one observable outcome, so a step that does
+  not produce it is a defect. Sections 14 and 15 will fail for the reasons above; record
+  those as blocked, not failed.
+</div>
+
+<div class="box">
+  <b>Using this as the guided-tour script.</b> Each numbered row is one tour step: a target
+  section, an instruction, and an expected result. The order in section 1 is the tour order,
+  because it is the only sequence in which no step references a record that does not exist
+  yet.
+</div>
+</section>
