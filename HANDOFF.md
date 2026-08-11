@@ -1,6 +1,6 @@
 # HANDOFF — Attest AI / ai-safe-at-work
 
-Updated: 11 Aug 2026 · Last commit `b5e4b9c` · **Uncommitted work in tree, see bottom of this section.**
+Updated: 11 Aug 2026 · Last commit `e1124f3` · Everything committed, pushed and live.
 Supersedes the 26 Jul version. Full decision history in DOCTRINE.md; this file is the cold resume.
 
 ## What this is
@@ -60,12 +60,12 @@ Currently 2 known failures, both the `pricing.html` robots contradiction.
 
 1. **Netlify form notifications** (dashboard, free, minutes). Nothing tells anyone a form was
    submitted, including the new `demo.html`. Highest value per minute in the whole list.
-3. **Point `attest-ai.com` at Netlify.** Add domain in Netlify FIRST, let the cert provision, then add
+2. **Point `attest-ai.com` at Netlify.** Add domain in Netlify FIRST, let the cert provision, then add
    records at 123-Reg, then set primary. Then SMTP via Resend.
-4. **The quiz rebuild** (ACTION-ITEMS P0b): populate `quiz_keys`, point `quiz.js` at
+3. **The quiz rebuild** (ACTION-ITEMS P0b): populate `quiz_keys`, point `quiz.js` at
    `record_quiz_result`, strip `correct` from the client JSON, then correct the test plan's QUIZ section.
-5. **One spec covering organisation entity + auditor role + reseller provisioning.** Alastair approved
-   all three; they are the same migration and must not be built separately. Do not start before 5 above.
+4. **One spec covering organisation entity + auditor role + reseller provisioning.** Alastair approved
+   all three; they are the same migration and must not be built separately. Do not start before 3 above.
 
 ## GOTCHAS (discovered the hard way)
 
