@@ -8,10 +8,9 @@ Static site + Supabase (`hanjrsslhnuauaysbhun`) selling AI governance to UK/EU S
 Live at **aisafework.netlify.app**. **git push = deploy** (Netlify site `89ac5015-…`).
 Pre-push hook validates JSON-LD and blocks secrets + forbidden files.
 
-⚠️ **Uncommitted right now:** `assets/video/module-12.mp4` (a Remotion render was IN FLIGHT when the
-session ended — check it finished before trusting the file) plus two untracked audio files
-`video-m2/public/voiceover/m12/04-literacy.{mp3,json}`. Those two are correct and should be committed.
-The mp4 needs verifying first: see "Finish the Module 12 render" below.
+Module 12's video was re-rendered on 11 Aug and deployed: it narrated the pre-Omnibus
+Article 4 wording. Duration went 80.2s to 88.5s because the corrected line is longer and the
+composition sizes itself from the audio.
 
 ## Current state
 
@@ -59,12 +58,7 @@ Currently 2 known failures, both the `pricing.html` robots contradiction.
 
 ## Next steps, ordered, first one startable cold
 
-1. **Finish the Module 12 render.** A Remotion render was running at session end:
-   `cd video-m2 && npx remotion render src/index.ts Module12 ../assets/video/module-12.mp4`.
-   Verify it completed (no `remotion`/`chrome-headless-shell` process, file size stable, plays), then
-   bump `module-12.mp4?v=2` → `v=3` in `module-12.html`, commit with the two audio files, push.
-   Why: the deployed video still narrates the pre-Omnibus Article 4 wording. The page text is fixed.
-2. **Netlify form notifications** (dashboard, free, minutes). Nothing tells anyone a form was
+1. **Netlify form notifications** (dashboard, free, minutes). Nothing tells anyone a form was
    submitted, including the new `demo.html`. Highest value per minute in the whole list.
 3. **Point `attest-ai.com` at Netlify.** Add domain in Netlify FIRST, let the cert provision, then add
    records at 123-Reg, then set primary. Then SMTP via Resend.
