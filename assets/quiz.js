@@ -21,6 +21,7 @@
     try { cfg = JSON.parse(dataEl.textContent); }
     catch (e) { console.error('quiz-data JSON parse error', e); return; }
     if (!cfg || !cfg.module) return;
+    purgeLegacyLocalResult(cfg);
 
     const classifierMount = document.getElementById('classifier-mount');
     if (classifierMount && cfg.classifier) {
@@ -57,6 +58,21 @@
 
     if (state.phase === 'start') {
       block.appendChild(renderStart(state));
+    } else if (state.phase === 'scoring') {
+      block.appendChild(el('p', { class: 'quiz-lede', role: 'status', 'aria-live': 'polite' },
+        ['Marking your answers…']));
+    } else if (state.phase === 'scoreError') {
+      // Deliberately does NOT fall back to a local mark. This module's answers live on the
+      // server, so an unscored attempt must read as unscored rather than as a pass or a fail.
+      const box = el('div', { class: 'quiz-feedback show wrong-fb', role: 'status' }, [
+        el('span', { class: 'verdict' }, ['Could not mark this attempt']),
+        el('div', {}, ['Your answers were not scored, so nothing has been recorded. This is a ' +
+          'problem at our end, not with your answers. Please try again in a moment.'])
+      ]);
+      const retry = el('button', { class: 'quiz-btn', type: 'button' }, ['Try marking again →']);
+      retry.addEventListener('click', () => finishQuiz(state, mount));
+      block.appendChild(box);
+      block.appendChild(el('div', { class: 'quiz-controls' }, [retry]));
     } else if (state.phase === 'end') {
       block.appendChild(renderEnd(state));
     } else {
@@ -138,7 +154,11 @@
       ]);
       if (answered) {
         btn.disabled = true;
-        if (i === q.correct) btn.classList.add('correct');
+        // Only the legacy client-scored path knows q.correct. On a server-scored module the
+        // chosen option is simply marked as chosen; right and wrong land at the end.
+        if (serverScored(state)) {
+          if (answered.chosen === i) btn.classList.add('chosen');
+        } else if (i === q.correct) btn.classList.add('correct');
         else if (answered.chosen === i) btn.classList.add('wrong');
       } else {
         btn.addEventListener('click', () => pickAnswer(state, mount, i));
@@ -148,7 +168,7 @@
     });
     wrap.appendChild(list);
 
-    if (answered) {
+    if (answered && !serverScored(state)) {
       const isRight = answered.correct;
       const fb = el('div', {
         class: 'quiz-feedback show ' + (isRight ? 'right' : 'wrong-fb'),
@@ -177,13 +197,98 @@
     return wrap;
   }
 
-  function pickAnswer(state, mount, chosen) {
-    const q = state.questions[state.idx];
-    state.answers[state.idx] = { chosen, correct: chosen === q.correct };
-    render(mount, state);
+  // Modules 1-12 carry an integer id and are scored on the server, so this file never
+  // sees the answer key. The six role tracks and three sector overlays still use string ids
+  // ('copilot', 'fs' ...) that quiz_keys cannot hold, so they keep the old client scoring
+  // until that is migrated. One check, used everywhere the two paths differ.
+  // Modules 2-12 are scored by the database, so this file never sees their answer key.
+  //
+  // Module 1 is deliberately excluded: it is the free sample, it carries no course gate, and
+  // a signed-out visitor has no session to score against. Its answers staying client-side
+  // costs nothing, because the whole module is public anyway.
+  //
+  // The six role tracks and three sector overlays use string ids ('copilot', 'fs' ...) that
+  // quiz_keys.module cannot hold, so they stay client-scored until that is migrated.
+  const serverScored = (state) => typeof state.cfg.module === 'number' && state.cfg.module >= 2;
+
+  // Publishable key, public by design and already served in portal/config.js. RLS and the
+  // learner's own bearer token do the work; nothing secret is needed to score a quiz.
+  const SB_URL = 'https://hanjrsslhnuauaysbhun.supabase.co';
+  const SB_ANON = 'sb_publishable_wtK-KC8ibXtA0EvVIJZGqA_oY8wx_6E';
+
+  // "Reset, everyone retakes" (decision 11 Aug 2026). Results stored before server scoring
+  // were self-marked against a public answer key, so they are not evidence of anything and
+  // must not be carried into a record sold as audit evidence. Dropped on first load of a
+  // server-scored module; nothing writes them there any more.
+  function purgeLegacyLocalResult(cfg) {
+    if (typeof cfg.module !== 'number') return;
+    try { localStorage.removeItem(LS_PREFIX + cfg.module); } catch (e) {}
   }
 
-  function finishQuiz(state, mount) {
+  async function submitForScoring(state) {
+    let token = '';
+    try {
+      const raw = localStorage.getItem('sb-hanjrsslhnuauaysbhun-auth-token');
+      if (raw) token = (JSON.parse(raw) || {}).access_token || '';
+    } catch (e) {}
+    if (!token) throw new Error('no session');
+    // record_quiz_result marks the answers, keeps the greatest score, and writes
+    // module_progress plus an audit row under the learner's own identity.
+    const res = await fetch(SB_URL + '/rest/v1/rpc/record_quiz_result', {
+      method: 'POST',
+      headers: {
+        apikey: SB_ANON,
+        Authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        p_module: state.cfg.module,
+        p_answers: state.answers.map((a) => (a ? a.chosen : -1))
+      })
+    });
+    if (!res.ok) throw new Error('record_quiz_result returned ' + res.status);
+    return res.json();
+  }
+
+  function pickAnswer(state, mount, chosen) {
+    const q = state.questions[state.idx];
+    if (serverScored(state)) {
+      // No verdict to show, so do not stop on the question. Record and move on.
+      state.answers[state.idx] = { chosen };
+      const last = state.idx === state.questions.length - 1;
+      if (last) return finishQuiz(state, mount);
+      state.idx += 1;
+    } else {
+      state.answers[state.idx] = { chosen, correct: chosen === q.correct };
+    }
+    render(mount, state);
+    scrollIntoView(mount);
+  }
+
+  async function finishQuiz(state, mount) {
+    if (serverScored(state)) {
+      state.phase = 'scoring';
+      render(mount, state);
+      scrollIntoView(mount);
+      try {
+        const r = await submitForScoring(state);
+        state.serverResult = r;
+        (r.results || []).forEach((x) => {
+          if (state.answers[x.q - 1]) state.answers[x.q - 1].correct = x.correct;
+        });
+        state.score = r.score;
+      } catch (e) {
+        // The client cannot score this itself, so say so rather than invent a mark.
+        state.phase = 'scoreError';
+        render(mount, state);
+        scrollIntoView(mount);
+        return;
+      }
+      state.phase = 'end';
+      render(mount, state);
+      scrollIntoView(mount);
+      return;
+    }
     const score = state.answers.filter(a => a.correct).length;
     saveResult(state.cfg.module, {
       score,

@@ -38,7 +38,7 @@
 <link rel="stylesheet" href="assets/quiz.css?v=3" />
 <link rel="stylesheet" href="assets/widgets.css?v=3" />
 <script defer src="assets/cinema.js?v=23"></script>
-<script defer src="assets/quiz.js?v=2"></script>
+<script defer src="assets/quiz.js?v=3"></script>
 <script defer src="assets/widgets.js?v=1"></script>
 <script type="application/ld+json">
 {
@@ -350,145 +350,135 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
 
  <div id="quiz-mount"></div>
  <script type="application/json" id="quiz-data">
- {
+{
  "module": 4,
  "passThreshold": 8,
  "quizTitle": "Test your <em>understanding</em>.",
  "quizLede": "Ten questions drawn only from this module. Pass mark 8 out of 10. Retake as many times as you like.",
  "questions": [
- {
- "q": "Module 4 says \"Which AI should I use?\" has how many possible answers?",
- "options": [
- "One answer: always use the enterprise tool",
- "Two answers: free or paid",
- "Three answers: this one is fine, this needs a different tier, or this task does not belong in AI at all",
- "Four answers, one per data class",
- "It depends entirely on the vendor"
- ],
- "correct": 2,
- "why": "Body: <em>\"Which AI should I use?\" has three possible answers: this one is fine, this needs a different tier, or this task does not belong in AI at all.</em>",
- "cite": "Picking the right tool for the job (lede)"
- },
- {
- "q": "What is the step most people skip before running the four questions?",
- "options": [
- "Reading the vendor's pricing page",
- "Classifying the data first, Public, Internal, Confidential or Restricted",
- "Asking a colleague which tool they use",
- "Checking the AI's training cut-off date",
- "Logging in to the enterprise tool"
- ],
- "correct": 1,
- "why": "Body: <em>classify the data first. Public, Internal, Confidential or Restricted (Module 3). The class sets the bar.</em>",
- "cite": "Start from the data class"
- },
- {
- "q": "According to the module, does \"never-paste\" rule out an approved enterprise AI platform?",
- "options": [
- "Yes, never-paste data can never go into any AI tool",
- "Only if the data is Public",
- "Only if the laptop has disk encryption",
- "No, never-paste means never into a free or personal tool; an approved enterprise platform with a contract and controls is often exactly where the work should go",
- "Yes, unless your manager approves it verbally"
- ],
- "correct": 3,
- "why": "Body: <em>\"never-paste\" means never into a free or personal AI tool. It does not necessarily rule out an approved enterprise AI platform your company has set up with a contract and the right controls.</em>",
- "cite": "Question 1, Is the data on the never-paste list?"
- },
- {
- "q": "Question 2 asks whether your business already has a procured AI tool. Why does the module say to use it if so?",
- "options": [
- "It is always the cheapest option",
- "Free tools are blocked on the company network",
- "It runs entirely on your own laptop",
- "The contract, the DPA, the retention controls and the training opt-out are all already in place for you",
- "It guarantees the AI never makes mistakes"
- ],
- "correct": 3,
- "why": "Body: <em>If your business has paid for one, use it. The contract, the DPA, the retention controls, the training opt-out, they're all already in place for you.</em>",
- "cite": "Question 2, Does my business have a procured AI tool for this?"
- },
- {
- "q": "For internal, low-sensitivity work, what condition does the module attach to using a consumer-tier tool?",
- "options": [
- "Nothing, low-sensitivity data is always fine",
- "You must first email the vendor",
- "It may be acceptable, subject to company policy and data classification, with training opted off and nothing from the never-paste list",
- "Only if you are working from the office",
- "Only if the tool is made in the EU"
- ],
- "correct": 2,
- "why": "Body: <em>a consumer-tier AI tool may be acceptable, subject to company policy and data classification, provided training is opted off (Module 2), and you're not pasting anything that falls into the never-paste list.</em>",
- "cite": "Question 3, Is the data internal but low-sensitivity?"
- },
- {
- "q": "Which of these counts as a \"regulated decision\" in Question 4?",
- "options": [
- "Drafting a blog post outline",
- "Anything affecting someone's hiring, firing, pay, promotion, benefits, credit, insurance, education, immigration, health, criminal justice, or access to essential services",
- "Summarising a public news article",
- "Translating marketing copy",
- "Asking how to use a spreadsheet formula"
- ],
- "correct": 1,
- "why": "Body: <em>anything affecting someone's hiring, firing, pay, promotion, benefits, credit, insurance, education, immigration, health, criminal justice, or access to essential services.</em>",
- "cite": "Question 4, Is there a regulated decision involved?"
- },
- {
- "q": "What does the module call the biggest AI risk in most small businesses?",
- "options": [
- "Malicious insiders",
- "Viruses in AI software",
- "Spending too much on enterprise licences",
- "Shadow adoption, useful tools spreading through a team outside IT's view, with no contract, DPA or audit trail",
- "Employees refusing to use AI at all"
- ],
- "correct": 3,
- "why": "Body: <em>The biggest AI risk in most small businesses is not malicious use. It is shadow adoption.</em>",
- "cite": "\"Shadow AI\", when teams adopt tools outside IT's view"
- },
- {
- "q": "Under the \"clean-introduction rule\", what is the right move when you find a useful free AI tool?",
- "options": [
- "Start using it quietly and tell colleagues",
- "A five-minute conversation with your manager or IT lead",
- "Buy the enterprise tier yourself",
- "Wait three months to see if anyone notices",
- "Email the vendor for a discount"
- ],
- "correct": 1,
- "why": "Body: <em>the right move isn't \"start using it quietly\". It's a five-minute conversation with your manager or IT lead.</em>",
- "cite": "The clean-introduction rule"
- },
- {
- "q": "The module warns about the \"AI wrapper\" risk. What does it mean?",
- "options": [
- "AI tools wrapped in too much marketing",
- "Many \"AI tools\" are thin wrappers around a major model provider's API, so your data flows through two companies, the wrapper and the underlying model provider",
- "AI that wraps your text in formatting you didn't ask for",
- "Tools that only work inside a web browser",
- "AI that cannot be cancelled once subscribed"
- ],
- "correct": 1,
- "why": "Body: <em>Many \"AI tools\" advertised to SMBs are thin wrappers around a major model provider's API … your data flows through two companies: the wrapper, and the underlying model provider.</em>",
- "cite": "The \"AI wrapper\" risk"
- },
- {
- "q": "What does the module say local / offline AI does NOT remove?",
- "options": [
- "The need for an internet connection",
- "The cost of the hardware",
- "The never-paste list entirely",
- "The need to opt out of training",
- "Governance, it still needs an acceptable-use policy, a record of use, logging where the work matters, and human oversight of its output"
- ],
- "correct": 4,
- "why": "Body: <em>One thing local AI does not remove: governance. A model running on your laptop still needs an acceptable-use policy, a record of what it's used for, logging where the work matters, and human oversight of its output.</em>",
- "cite": "A note on local / offline AI"
- }
+  {
+   "q": "Module 4 says \"Which AI should I use?\" has how many possible answers?",
+   "options": [
+    "One answer: always use the enterprise tool",
+    "Two answers: free or paid",
+    "Three answers: this one is fine, this needs a different tier, or this task does not belong in AI at all",
+    "Four answers, one per data class",
+    "It depends entirely on the vendor"
+   ],
+   "why": "Body: <em>\"Which AI should I use?\" has three possible answers: this one is fine, this needs a different tier, or this task does not belong in AI at all.</em>",
+   "cite": "Picking the right tool for the job (lede)"
+  },
+  {
+   "q": "What is the step most people skip before running the four questions?",
+   "options": [
+    "Reading the vendor's pricing page",
+    "Classifying the data first, Public, Internal, Confidential or Restricted",
+    "Asking a colleague which tool they use",
+    "Checking the AI's training cut-off date",
+    "Logging in to the enterprise tool"
+   ],
+   "why": "Body: <em>classify the data first. Public, Internal, Confidential or Restricted (Module 3). The class sets the bar.</em>",
+   "cite": "Start from the data class"
+  },
+  {
+   "q": "According to the module, does \"never-paste\" rule out an approved enterprise AI platform?",
+   "options": [
+    "Yes, never-paste data can never go into any AI tool",
+    "Only if the data is Public",
+    "Only if the laptop has disk encryption",
+    "No, never-paste means never into a free or personal tool; an approved enterprise platform with a contract and controls is often exactly where the work should go",
+    "Yes, unless your manager approves it verbally"
+   ],
+   "why": "Body: <em>\"never-paste\" means never into a free or personal AI tool. It does not necessarily rule out an approved enterprise AI platform your company has set up with a contract and the right controls.</em>",
+   "cite": "Question 1, Is the data on the never-paste list?"
+  },
+  {
+   "q": "Question 2 asks whether your business already has a procured AI tool. Why does the module say to use it if so?",
+   "options": [
+    "It is always the cheapest option",
+    "Free tools are blocked on the company network",
+    "It runs entirely on your own laptop",
+    "The contract, the DPA, the retention controls and the training opt-out are all already in place for you",
+    "It guarantees the AI never makes mistakes"
+   ],
+   "why": "Body: <em>If your business has paid for one, use it. The contract, the DPA, the retention controls, the training opt-out, they're all already in place for you.</em>",
+   "cite": "Question 2, Does my business have a procured AI tool for this?"
+  },
+  {
+   "q": "For internal, low-sensitivity work, what condition does the module attach to using a consumer-tier tool?",
+   "options": [
+    "Nothing, low-sensitivity data is always fine",
+    "You must first email the vendor",
+    "It may be acceptable, subject to company policy and data classification, with training opted off and nothing from the never-paste list",
+    "Only if you are working from the office",
+    "Only if the tool is made in the EU"
+   ],
+   "why": "Body: <em>a consumer-tier AI tool may be acceptable, subject to company policy and data classification, provided training is opted off (Module 2), and you're not pasting anything that falls into the never-paste list.</em>",
+   "cite": "Question 3, Is the data internal but low-sensitivity?"
+  },
+  {
+   "q": "Which of these counts as a \"regulated decision\" in Question 4?",
+   "options": [
+    "Drafting a blog post outline",
+    "Anything affecting someone's hiring, firing, pay, promotion, benefits, credit, insurance, education, immigration, health, criminal justice, or access to essential services",
+    "Summarising a public news article",
+    "Translating marketing copy",
+    "Asking how to use a spreadsheet formula"
+   ],
+   "why": "Body: <em>anything affecting someone's hiring, firing, pay, promotion, benefits, credit, insurance, education, immigration, health, criminal justice, or access to essential services.</em>",
+   "cite": "Question 4, Is there a regulated decision involved?"
+  },
+  {
+   "q": "What does the module call the biggest AI risk in most small businesses?",
+   "options": [
+    "Malicious insiders",
+    "Viruses in AI software",
+    "Spending too much on enterprise licences",
+    "Shadow adoption, useful tools spreading through a team outside IT's view, with no contract, DPA or audit trail",
+    "Employees refusing to use AI at all"
+   ],
+   "why": "Body: <em>The biggest AI risk in most small businesses is not malicious use. It is shadow adoption.</em>",
+   "cite": "\"Shadow AI\", when teams adopt tools outside IT's view"
+  },
+  {
+   "q": "Under the \"clean-introduction rule\", what is the right move when you find a useful free AI tool?",
+   "options": [
+    "Start using it quietly and tell colleagues",
+    "A five-minute conversation with your manager or IT lead",
+    "Buy the enterprise tier yourself",
+    "Wait three months to see if anyone notices",
+    "Email the vendor for a discount"
+   ],
+   "why": "Body: <em>the right move isn't \"start using it quietly\". It's a five-minute conversation with your manager or IT lead.</em>",
+   "cite": "The clean-introduction rule"
+  },
+  {
+   "q": "The module warns about the \"AI wrapper\" risk. What does it mean?",
+   "options": [
+    "AI tools wrapped in too much marketing",
+    "Many \"AI tools\" are thin wrappers around a major model provider's API, so your data flows through two companies, the wrapper and the underlying model provider",
+    "AI that wraps your text in formatting you didn't ask for",
+    "Tools that only work inside a web browser",
+    "AI that cannot be cancelled once subscribed"
+   ],
+   "why": "Body: <em>Many \"AI tools\" advertised to SMBs are thin wrappers around a major model provider's API … your data flows through two companies: the wrapper, and the underlying model provider.</em>",
+   "cite": "The \"AI wrapper\" risk"
+  },
+  {
+   "q": "What does the module say local / offline AI does NOT remove?",
+   "options": [
+    "The need for an internet connection",
+    "The cost of the hardware",
+    "The never-paste list entirely",
+    "The need to opt out of training",
+    "Governance, it still needs an acceptable-use policy, a record of use, logging where the work matters, and human oversight of its output"
+   ],
+   "why": "Body: <em>One thing local AI does not remove: governance. A model running on your laptop still needs an acceptable-use policy, a record of what it's used for, logging where the work matters, and human oversight of its output.</em>",
+   "cite": "A note on local / offline AI"
+  }
  ]
- }
- </script>
+}
+</script>
 </main>
 
 <!-- completion-bar v1 -->

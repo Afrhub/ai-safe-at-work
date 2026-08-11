@@ -38,7 +38,7 @@
 <link rel="stylesheet" href="assets/quiz.css?v=3" />
 <link rel="stylesheet" href="assets/widgets.css?v=3" />
 <script defer src="assets/cinema.js?v=23"></script>
-<script defer src="assets/quiz.js?v=2"></script>
+<script defer src="assets/quiz.js?v=3"></script>
 <script defer src="assets/widgets.js?v=1"></script>
 <style>
 .print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0; align-items: center; flex-wrap: wrap; }
@@ -442,145 +442,135 @@
 
  <div id="quiz-mount" class="no-print"></div>
  <script type="application/json" id="quiz-data">
- {
+{
  "module": 11,
  "passThreshold": 8,
  "quizTitle": "Test your <em>understanding</em>.",
  "quizLede": "Questions drawn only from this module. Retake as many times as you like.",
  "questions": [
- {
- "q": "On the never-paste list, which of these is named as special-category data?",
- "options": [
- "Marketing copy you wrote yourself",
- "Health, ethnicity, religion and biometrics",
- "A public blog post",
- "Your own meeting notes with no names in them",
- "A press release scheduled for tomorrow"
- ],
- "correct": 1,
- "why": "Body: <em>special-category data (health, ethnicity, religion, biometrics)</em>",
- "cite": "Section 1 · The data"
- },
- {
- "q": "Instead of pasting the data, what does the checklist suggest you do, and how often does it work?",
- "options": [
- "Encrypt the rows first; works for 100% of tasks",
- "Email it to IT first; works for half of tasks",
- "Describe the shape of the problem instead of pasting the data; works for 80% of real tasks",
- "Split the file into two halves; works for 60% of tasks",
- "Wait until the data is older; works for 20% of tasks"
- ],
- "correct": 2,
- "why": "Body: <em>\"I have a CSV with three columns: X, Y, Z, give me the Excel formula\" rather than pasting the rows. Works for 80% of real tasks.</em>",
- "cite": "Section 1 · The data"
- },
- {
- "q": "The checklist asks you to picture a leak tomorrow. What is the decision rule it gives?",
- "options": [
- "If you could blame someone else, paste it",
- "If the answer makes you wince, don't paste",
- "If it's after 5pm, paste it",
- "If your boss approves, always paste",
- "If it's only one row, paste it"
- ],
- "correct": 1,
- "why": "Body: <em>If the answer makes you wince, don't paste.</em>",
- "cite": "Section 1 · The data"
- },
- {
- "q": "How does the module describe the free / paid-individual tier of an AI tool?",
- "options": [
- "Enterprise territory with a full contract",
- "Consumer territory, with no DPA with your employer",
- "Banned by GDPR for all use",
- "Safe for any data because it is paid",
- "Identical to the Business tier in every way"
- ],
- "correct": 1,
- "why": "Body: <em>Free / paid-individual is consumer territory, no DPA with your employer.</em>",
- "cite": "Section 2 · The tool"
- },
- {
- "q": "When checking facts or citations in an AI output, what does the checklist tell you to do?",
- "options": [
- "Trust them if the formatting looks professional",
- "Click every reference; if it doesn't open, the source isn't real, and use two independent sources for anything high-stakes",
- "Ask the AI whether it is sure",
- "Only check the first and last citation",
- "Assume citations are correct unless a colleague objects"
- ],
- "correct": 1,
- "why": "Body: <em>Click every reference. If it doesn't open, the source isn't real. Two independent sources for anything high-stakes.</em>",
- "cite": "Section 3 · The output"
- },
- {
- "q": "For decisions that affect a person (hiring, firing, pricing), what standard does the module set for sign-off?",
- "options": [
- "The human must do the work of signing off, not click \"approve\"",
- "The AI's decision is final once generated",
- "Two AIs must agree before acting",
- "Any team member may approve without reading",
- "Sign-off can be skipped if the AI sounds confident"
- ],
- "correct": 0,
- "why": "Body: <em>the human signing off has to do the work of signing off, not click \"approve\". The AI's suggestion is the start of the thinking, not the end.</em>",
- "cite": "Section 3 · The output"
- },
- {
- "q": "The log for a significant AI use has eight fields. Which set matches the module?",
- "options": [
- "Name · email · password · IP · device · browser · time zone · country",
- "Date · who · tool/tier · task · inputs · output · what I did with it · who else reviewed",
- "Title · author · summary · keywords · cost · vendor · licence · expiry",
- "Project · client · invoice · deadline · status · owner · notes · tags",
- "Risk · likelihood · impact · owner · mitigation · review date · status · cost"
- ],
- "correct": 1,
- "why": "Body: <em>Eight fields: date · who · tool/tier · task · inputs · output · what I did with it · who else reviewed.</em>",
- "cite": "Section 4 · The trail"
- },
- {
- "q": "With a perfectly written message asking you to do something unusual, where is the red flag?",
- "options": [
- "In the spelling mistakes",
- "In the request, not the writing",
- "In the time it was sent",
- "In the length of the message",
- "In the font used"
- ],
- "correct": 1,
- "why": "Body: <em>Perfectly-written phishing is the current baseline. The red flag is the request, not the writing.</em>",
- "cite": "Section 5 · When you're suspicious"
- },
- {
- "q": "If something goes wrong, what is the module's first instruction?",
- "options": [
- "Delete the chat history quickly",
- "Quietly fix it yourself before anyone notices",
- "Stop; don't delete the evidence; don't try to \"fix\" it alone",
- "Wait a day to see if it resolves",
- "Forward the chat to a customer"
- ],
- "correct": 2,
- "why": "Body: <em>Stop. Don't delete the evidence. Don't try to \"fix\" it alone … The reflex to delete is the wrong instinct.</em>",
- "cite": "Section 6 · If something goes wrong"
- },
- {
- "q": "If personal data leaked, when does the 72-hour GDPR breach clock start?",
- "options": [
- "When the regulator sends a letter",
- "When the data is first pasted",
- "When the business becomes aware",
- "Exactly 72 hours after the incident, regardless",
- "When a customer complains"
- ],
- "correct": 2,
- "why": "Body: <em>the 72-hour GDPR breach clock starts when the business becomes aware. Speed of escalation is what saves it.</em>",
- "cite": "Section 6 · If something goes wrong"
- }
+  {
+   "q": "On the never-paste list, which of these is named as special-category data?",
+   "options": [
+    "Marketing copy you wrote yourself",
+    "Health, ethnicity, religion and biometrics",
+    "A public blog post",
+    "Your own meeting notes with no names in them",
+    "A press release scheduled for tomorrow"
+   ],
+   "why": "Body: <em>special-category data (health, ethnicity, religion, biometrics)</em>",
+   "cite": "Section 1 · The data"
+  },
+  {
+   "q": "Instead of pasting the data, what does the checklist suggest you do, and how often does it work?",
+   "options": [
+    "Encrypt the rows first; works for 100% of tasks",
+    "Email it to IT first; works for half of tasks",
+    "Describe the shape of the problem instead of pasting the data; works for 80% of real tasks",
+    "Split the file into two halves; works for 60% of tasks",
+    "Wait until the data is older; works for 20% of tasks"
+   ],
+   "why": "Body: <em>\"I have a CSV with three columns: X, Y, Z, give me the Excel formula\" rather than pasting the rows. Works for 80% of real tasks.</em>",
+   "cite": "Section 1 · The data"
+  },
+  {
+   "q": "The checklist asks you to picture a leak tomorrow. What is the decision rule it gives?",
+   "options": [
+    "If you could blame someone else, paste it",
+    "If the answer makes you wince, don't paste",
+    "If it's after 5pm, paste it",
+    "If your boss approves, always paste",
+    "If it's only one row, paste it"
+   ],
+   "why": "Body: <em>If the answer makes you wince, don't paste.</em>",
+   "cite": "Section 1 · The data"
+  },
+  {
+   "q": "How does the module describe the free / paid-individual tier of an AI tool?",
+   "options": [
+    "Enterprise territory with a full contract",
+    "Consumer territory, with no DPA with your employer",
+    "Banned by GDPR for all use",
+    "Safe for any data because it is paid",
+    "Identical to the Business tier in every way"
+   ],
+   "why": "Body: <em>Free / paid-individual is consumer territory, no DPA with your employer.</em>",
+   "cite": "Section 2 · The tool"
+  },
+  {
+   "q": "When checking facts or citations in an AI output, what does the checklist tell you to do?",
+   "options": [
+    "Trust them if the formatting looks professional",
+    "Click every reference; if it doesn't open, the source isn't real, and use two independent sources for anything high-stakes",
+    "Ask the AI whether it is sure",
+    "Only check the first and last citation",
+    "Assume citations are correct unless a colleague objects"
+   ],
+   "why": "Body: <em>Click every reference. If it doesn't open, the source isn't real. Two independent sources for anything high-stakes.</em>",
+   "cite": "Section 3 · The output"
+  },
+  {
+   "q": "For decisions that affect a person (hiring, firing, pricing), what standard does the module set for sign-off?",
+   "options": [
+    "The human must do the work of signing off, not click \"approve\"",
+    "The AI's decision is final once generated",
+    "Two AIs must agree before acting",
+    "Any team member may approve without reading",
+    "Sign-off can be skipped if the AI sounds confident"
+   ],
+   "why": "Body: <em>the human signing off has to do the work of signing off, not click \"approve\". The AI's suggestion is the start of the thinking, not the end.</em>",
+   "cite": "Section 3 · The output"
+  },
+  {
+   "q": "The log for a significant AI use has eight fields. Which set matches the module?",
+   "options": [
+    "Name · email · password · IP · device · browser · time zone · country",
+    "Date · who · tool/tier · task · inputs · output · what I did with it · who else reviewed",
+    "Title · author · summary · keywords · cost · vendor · licence · expiry",
+    "Project · client · invoice · deadline · status · owner · notes · tags",
+    "Risk · likelihood · impact · owner · mitigation · review date · status · cost"
+   ],
+   "why": "Body: <em>Eight fields: date · who · tool/tier · task · inputs · output · what I did with it · who else reviewed.</em>",
+   "cite": "Section 4 · The trail"
+  },
+  {
+   "q": "With a perfectly written message asking you to do something unusual, where is the red flag?",
+   "options": [
+    "In the spelling mistakes",
+    "In the request, not the writing",
+    "In the time it was sent",
+    "In the length of the message",
+    "In the font used"
+   ],
+   "why": "Body: <em>Perfectly-written phishing is the current baseline. The red flag is the request, not the writing.</em>",
+   "cite": "Section 5 · When you're suspicious"
+  },
+  {
+   "q": "If something goes wrong, what is the module's first instruction?",
+   "options": [
+    "Delete the chat history quickly",
+    "Quietly fix it yourself before anyone notices",
+    "Stop; don't delete the evidence; don't try to \"fix\" it alone",
+    "Wait a day to see if it resolves",
+    "Forward the chat to a customer"
+   ],
+   "why": "Body: <em>Stop. Don't delete the evidence. Don't try to \"fix\" it alone … The reflex to delete is the wrong instinct.</em>",
+   "cite": "Section 6 · If something goes wrong"
+  },
+  {
+   "q": "If personal data leaked, when does the 72-hour GDPR breach clock start?",
+   "options": [
+    "When the regulator sends a letter",
+    "When the data is first pasted",
+    "When the business becomes aware",
+    "Exactly 72 hours after the incident, regardless",
+    "When a customer complains"
+   ],
+   "why": "Body: <em>the 72-hour GDPR breach clock starts when the business becomes aware. Speed of escalation is what saves it.</em>",
+   "cite": "Section 6 · If something goes wrong"
+  }
  ]
- }
- </script>
+}
+</script>
 
  <div id="widget-mount" class="no-print"></div>
  </div><!-- /data-checklist-gate -->

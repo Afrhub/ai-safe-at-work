@@ -38,7 +38,7 @@
 <link rel="stylesheet" href="assets/quiz.css?v=3" />
 <link rel="stylesheet" href="assets/widgets.css?v=3" />
 <script defer src="assets/cinema.js?v=23"></script>
-<script defer src="assets/quiz.js?v=2"></script>
+<script defer src="assets/quiz.js?v=3"></script>
 <script defer src="assets/widgets.js?v=1"></script>
 <script type="application/ld+json">
 {
@@ -383,145 +383,135 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
 
  <div id="quiz-mount"></div>
  <script type="application/json" id="quiz-data">
- {
+{
  "module": 10,
  "passThreshold": 8,
  "quizTitle": "Test your <em>understanding</em>.",
  "quizLede": "Ten questions drawn only from this module. Pass mark 8 out of 10. Retake as many times as you like.",
  "questions": [
- {
- "q": "How many categories of \"something went wrong\" does this module split AI incidents into?",
- "options": [
- "Four",
- "Two",
- "Three",
- "Five",
- "Six"
- ],
- "correct": 0,
- "why": "Body: <em>Different incidents need different responses. Categorising it correctly in the first ten minutes will save days of confusion later.</em> The module names four: data leak, bad output acted upon, successful attack, and vendor incident.",
- "cite": "The four categories"
- },
- {
- "q": "Which scenario does the module classify as Category 3, a successful attack?",
- "options": [
- "Customer records pasted into an unapproved AI tool",
- "A hallucinated legal citation filed with a court",
- "An AI-powered scam landed: money transferred, credentials given up, software installed, or a deepfake call acted on",
- "Your AI vendor changed their terms without notice",
- "A biased screening tool rejected a candidate"
- ],
- "correct": 2,
- "why": "Body: <em>An AI-powered scam landed. Money was transferred. Credentials were given up. Software was installed. A deepfake call was acted on.</em>",
- "cite": "The four categories"
- },
- {
- "q": "In the first ten minutes of any incident, what does the module say to do about the chat, email or file involved?",
- "options": [
- "Delete it immediately to limit exposure",
- "Don't delete the evidence, investigators will need it",
- "Forward it to the whole team",
- "Edit it to remove the sensitive parts",
- "Archive it and forget about it"
- ],
- "correct": 1,
- "why": "Body: <em>Don't delete the evidence. The reflex to delete the chat, the email, the file is understandable. Don't. Investigators will need it.</em>",
- "cite": "The first ten minutes (any category)"
- },
- {
- "q": "When you tell someone about an incident in the first ten minutes, how does the module frame what you are doing?",
- "options": [
- "Asking for permission to proceed",
- "Confessing to a mistake",
- "Flagging, you're not asking for permission and not confessing",
- "Requesting a formal investigation",
- "Filing a complaint against the vendor"
- ],
- "correct": 2,
- "why": "Body: <em>You're not asking for permission. You're not confessing. You're flagging.</em>",
- "cite": "The first ten minutes (any category)"
- },
- {
- "q": "Under GDPR Article 33, within how long must the controller notify the supervisory authority of a personal data breach likely to risk people's rights?",
- "options": [
- "24 hours of becoming aware",
- "48 hours of becoming aware",
- "72 hours of becoming aware",
- "7 days of becoming aware",
- "30 days of becoming aware"
- ],
- "correct": 2,
- "why": "Body: <em>Article 33 requires the controller … to notify the supervisory authority … within 72 hours of becoming aware, where the breach is likely to result in a risk to the rights and freedoms of natural persons.</em>",
- "cite": "Category 1, data leak"
- },
- {
- "q": "When does the 72-hour breach-notification clock start, according to the module?",
- "options": [
- "When the regulator contacts the business",
- "When the business is fully certain a breach occurred",
- "On the next working day after the incident",
- "From the moment the business has a reasonable degree of certainty that a breach has occurred",
- "Only once customers have been told"
- ],
- "correct": 3,
- "why": "Body: <em>\"Becoming aware\" is from the moment the business, not the regulator, has a reasonable degree of certainty that a breach has occurred. The clock starts then.</em>",
- "cite": "Category 1, data leak"
- },
- {
- "q": "In a Category 2 incident, if bad AI output has only been sent to one person, what does the module advise?",
- "options": [
- "Blame the AI tool clearly so the recipient understands",
- "Wait to see if they notice before acting",
- "Write a clear correction and own it, rather than blaming the AI",
- "Delete the original message and say nothing",
- "Escalate straight to the regulator"
- ],
- "correct": 2,
- "why": "Body: <em>If it's been sent to one person: write a clear correction. Don't blame the AI; own it.</em>",
- "cite": "Category 2, bad output acted upon"
- },
- {
- "q": "If money moved in a Category 3 attack, what does the module say to do?",
- "options": [
- "Email the bank's general inbox the next morning",
- "Call the bank within minutes, not hours, Faster Payments and SEPA Instant can sometimes be recalled in the first hour",
- "Wait 24 hours to confirm the loss before contacting anyone",
- "Report only to the police and let them handle the bank",
- "Change your account password first, then deal with the money"
- ],
- "correct": 1,
- "why": "Body: <em>If money moved: call the bank within minutes, not hours. UK Faster Payments and SEPA Instant transfers can sometimes be recalled in the first hour. After that, recovery rates drop sharply.</em>",
- "cite": "Category 3, successful attack"
- },
- {
- "q": "When an AI vendor suffers an incident and personal data was involved, how does the module describe it?",
- "options": [
- "A purely technical problem for the vendor to fix",
- "A Category 1 problem in disguise, your business may itself have a notification obligation to its own customers",
- "Something only the vendor must report",
- "A reason to immediately switch vendors with no further action",
- "Not your concern unless the vendor admits fault"
- ],
- "correct": 1,
- "why": "Body: <em>If personal data was involved, this is now a Category 1 problem in disguise: your business may itself have a notification obligation to its own customers.</em>",
- "cite": "Category 4, vendor incident"
- },
- {
- "q": "What does the module say is the goal of incident response, in the 'response, not blame' insight?",
- "options": [
- "Identifying and punishing the person responsible",
- "Recovering the maximum amount of lost money",
- "Producing a report for the regulator as fast as possible",
- "Proving the incident was the vendor's fault",
- "Containment, evidence preservation, assessment and learning, not assigning blame"
- ],
- "correct": 4,
- "why": "Body: <em>The goal of incident response is containment, evidence preservation, assessment and learning, not assigning blame.</em>",
- "cite": "Governance insight: response, not blame"
- }
+  {
+   "q": "How many categories of \"something went wrong\" does this module split AI incidents into?",
+   "options": [
+    "Four",
+    "Two",
+    "Three",
+    "Five",
+    "Six"
+   ],
+   "why": "Body: <em>Different incidents need different responses. Categorising it correctly in the first ten minutes will save days of confusion later.</em> The module names four: data leak, bad output acted upon, successful attack, and vendor incident.",
+   "cite": "The four categories"
+  },
+  {
+   "q": "Which scenario does the module classify as Category 3, a successful attack?",
+   "options": [
+    "Customer records pasted into an unapproved AI tool",
+    "A hallucinated legal citation filed with a court",
+    "An AI-powered scam landed: money transferred, credentials given up, software installed, or a deepfake call acted on",
+    "Your AI vendor changed their terms without notice",
+    "A biased screening tool rejected a candidate"
+   ],
+   "why": "Body: <em>An AI-powered scam landed. Money was transferred. Credentials were given up. Software was installed. A deepfake call was acted on.</em>",
+   "cite": "The four categories"
+  },
+  {
+   "q": "In the first ten minutes of any incident, what does the module say to do about the chat, email or file involved?",
+   "options": [
+    "Delete it immediately to limit exposure",
+    "Don't delete the evidence, investigators will need it",
+    "Forward it to the whole team",
+    "Edit it to remove the sensitive parts",
+    "Archive it and forget about it"
+   ],
+   "why": "Body: <em>Don't delete the evidence. The reflex to delete the chat, the email, the file is understandable. Don't. Investigators will need it.</em>",
+   "cite": "The first ten minutes (any category)"
+  },
+  {
+   "q": "When you tell someone about an incident in the first ten minutes, how does the module frame what you are doing?",
+   "options": [
+    "Asking for permission to proceed",
+    "Confessing to a mistake",
+    "Flagging, you're not asking for permission and not confessing",
+    "Requesting a formal investigation",
+    "Filing a complaint against the vendor"
+   ],
+   "why": "Body: <em>You're not asking for permission. You're not confessing. You're flagging.</em>",
+   "cite": "The first ten minutes (any category)"
+  },
+  {
+   "q": "Under GDPR Article 33, within how long must the controller notify the supervisory authority of a personal data breach likely to risk people's rights?",
+   "options": [
+    "24 hours of becoming aware",
+    "48 hours of becoming aware",
+    "72 hours of becoming aware",
+    "7 days of becoming aware",
+    "30 days of becoming aware"
+   ],
+   "why": "Body: <em>Article 33 requires the controller … to notify the supervisory authority … within 72 hours of becoming aware, where the breach is likely to result in a risk to the rights and freedoms of natural persons.</em>",
+   "cite": "Category 1, data leak"
+  },
+  {
+   "q": "When does the 72-hour breach-notification clock start, according to the module?",
+   "options": [
+    "When the regulator contacts the business",
+    "When the business is fully certain a breach occurred",
+    "On the next working day after the incident",
+    "From the moment the business has a reasonable degree of certainty that a breach has occurred",
+    "Only once customers have been told"
+   ],
+   "why": "Body: <em>\"Becoming aware\" is from the moment the business, not the regulator, has a reasonable degree of certainty that a breach has occurred. The clock starts then.</em>",
+   "cite": "Category 1, data leak"
+  },
+  {
+   "q": "In a Category 2 incident, if bad AI output has only been sent to one person, what does the module advise?",
+   "options": [
+    "Blame the AI tool clearly so the recipient understands",
+    "Wait to see if they notice before acting",
+    "Write a clear correction and own it, rather than blaming the AI",
+    "Delete the original message and say nothing",
+    "Escalate straight to the regulator"
+   ],
+   "why": "Body: <em>If it's been sent to one person: write a clear correction. Don't blame the AI; own it.</em>",
+   "cite": "Category 2, bad output acted upon"
+  },
+  {
+   "q": "If money moved in a Category 3 attack, what does the module say to do?",
+   "options": [
+    "Email the bank's general inbox the next morning",
+    "Call the bank within minutes, not hours, Faster Payments and SEPA Instant can sometimes be recalled in the first hour",
+    "Wait 24 hours to confirm the loss before contacting anyone",
+    "Report only to the police and let them handle the bank",
+    "Change your account password first, then deal with the money"
+   ],
+   "why": "Body: <em>If money moved: call the bank within minutes, not hours. UK Faster Payments and SEPA Instant transfers can sometimes be recalled in the first hour. After that, recovery rates drop sharply.</em>",
+   "cite": "Category 3, successful attack"
+  },
+  {
+   "q": "When an AI vendor suffers an incident and personal data was involved, how does the module describe it?",
+   "options": [
+    "A purely technical problem for the vendor to fix",
+    "A Category 1 problem in disguise, your business may itself have a notification obligation to its own customers",
+    "Something only the vendor must report",
+    "A reason to immediately switch vendors with no further action",
+    "Not your concern unless the vendor admits fault"
+   ],
+   "why": "Body: <em>If personal data was involved, this is now a Category 1 problem in disguise: your business may itself have a notification obligation to its own customers.</em>",
+   "cite": "Category 4, vendor incident"
+  },
+  {
+   "q": "What does the module say is the goal of incident response, in the 'response, not blame' insight?",
+   "options": [
+    "Identifying and punishing the person responsible",
+    "Recovering the maximum amount of lost money",
+    "Producing a report for the regulator as fast as possible",
+    "Proving the incident was the vendor's fault",
+    "Containment, evidence preservation, assessment and learning, not assigning blame"
+   ],
+   "why": "Body: <em>The goal of incident response is containment, evidence preservation, assessment and learning, not assigning blame.</em>",
+   "cite": "Governance insight: response, not blame"
+  }
  ]
- }
- </script>
+}
+</script>
 
  <div id="widget-mount"></div>
 </main>

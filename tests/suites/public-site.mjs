@@ -212,6 +212,24 @@ export async function run() {
     ok(r.status === 404 || r.status === 301, `sales-deck.html returned ${r.status}`);
   });
 
+  group("QUIZ, the answer key must not ship to the browser");
+  await check("QUIZ-06", "modules 2 to 12 carry no answer key", async () => {
+    const leaked = [];
+    for (let n = 2; n <= 12; n++) {
+      const p2 = await page(`/module-${n}.html`);
+      if (/"correct"\s*:/.test(p2.body)) leaked.push(`module-${n}.html`);
+    }
+    ok(leaked.length === 0, `answer key is readable in page source on: ${leaked.join(", ")}`);
+  });
+  await check("QUIZ-07", "module 1 keeps its key on purpose", async () => {
+    // Free sample, no course gate, no session to score against. Its answers being public
+    // costs nothing because the whole module is public. If this ever starts failing,
+    // module 1 has been gated and the decision needs revisiting.
+    const p2 = await page("/module-1.html");
+    ok(/"correct"\s*:/.test(p2.body), "module 1 lost its client answer key and can no longer be scored signed out");
+    excludes(p2.body, "course-gate.js", "module 1 has been gated, so it should now be server-scored");
+  });
+
   group("SEO, sitemap and robots posture");
   await check("SEO-01", "every sitemap URL is 200 and indexable", async () => {
     const sm = await page("/sitemap.xml");

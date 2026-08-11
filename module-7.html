@@ -37,7 +37,7 @@
 <script defer src="assets/completion.js?v=1"></script><!-- completion v1 -->
 <link rel="stylesheet" href="assets/quiz.css?v=3" />
 <script defer src="assets/cinema.js?v=23"></script>
-<script defer src="assets/quiz.js?v=2"></script>
+<script defer src="assets/quiz.js?v=3"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -324,145 +324,135 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
 
  <div id="quiz-mount"></div>
  <script type="application/json" id="quiz-data">
- {
+{
  "module": 7,
  "passThreshold": 8,
  "quizTitle": "Test your <em>understanding</em>.",
  "quizLede": "Ten questions drawn only from this module. Pass mark 8 out of 10. Retake as many times as you like.",
  "questions": [
- {
- "q": "According to the module, an AI model's outputs reflect three things layered on top of each other. What are they?",
- "options": [
- "The hardware, the software, and the network",
- "The training data, the fine-tuning, and your prompt",
- "The vendor, the price, and the country",
- "The user, the manager, and the regulator",
- "The model size, the temperature, and the speed"
- ],
- "correct": 1,
- "why": "Body: <em>An AI model's outputs reflect three things layered on top of each other: The training data … The fine-tuning … Your prompt.</em>",
- "cite": "Where bias comes from"
- },
- {
- "q": "What does the module say about switching to a different model to remove bias?",
- "options": [
- "It removes most bias if the model is newer",
- "It works only for image models",
- "You can't eliminate bias by switching, they all share the same internet",
- "It removes bias but adds cost",
- "It works only for translation tasks"
- ],
- "correct": 2,
- "why": "Body: <em>You can't eliminate bias by switching to a different model. They all share the same internet.</em>",
- "cite": "Where bias comes from"
- },
- {
- "q": "Under the EU AI Act, which Annex III point covers AI used in decisions about people such as hiring and promotion?",
- "options": [
- "Annex III, point 4 (employment-related)",
- "Annex III, point 1 (biometrics)",
- "Annex III, point 9 (elections)",
- "Annex III, point 2 (infrastructure)",
- "Annex III, point 7 (law enforcement)"
- ],
- "correct": 0,
- "why": "Body: <em>certain AI systems used in these categories may be classified as high-risk under the EU AI Act (Annex III, point 4), depending on how they are used.</em>",
- "cite": "The three categories that matter, Decisions about people"
- },
- {
- "q": "Why does the module say \"I only use AI to draft the feedback, a human writes the final version\" is a weak mitigation?",
- "options": [
- "Because drafting with AI is never allowed",
- "Because the human is too busy to edit",
- "Because in practice the final version is usually 80% the draft with minor edits, so a biased draft stays biased",
- "Because AI cannot write feedback at all",
- "Because the regulator bans all drafts"
- ],
- "correct": 2,
- "why": "Body: <em>in practice the final version is usually 80% the draft with minor edits. If the draft was biased in tone or substance, the final version is biased in tone or substance.</em>",
- "cite": "\"It's just a draft\" isn't a defence"
- },
- {
- "q": "How does the module describe the main risk from public-facing or customer-facing AI content?",
- "options": [
- "It is mainly a regulatory fine",
- "It is reputational rather than regulatory, but it lands faster",
- "It is purely an internal quality issue",
- "It is only a translation problem",
- "It carries no real risk"
- ],
- "correct": 1,
- "why": "Body: <em>The risk here is reputational rather than regulatory, but it lands faster.</em>",
- "cite": "Public-facing or customer-facing content"
- },
- {
- "q": "What does the module say about masculine-coded language in AI-generated job descriptions?",
- "options": [
- "It has no measurable effect",
- "It improves application rates overall",
- "It is well-evidenced to reduce female application rates",
- "It only affects senior roles",
- "It is required by the EU AI Act"
- ],
- "correct": 2,
- "why": "Body: <em>AI-generated job descriptions sometimes default to masculine-coded language (\"dominant\", \"competitive\", \"rockstar\", \"ninja\") which is well-evidenced to reduce female application rates.</em>",
- "cite": "Gendered language and assumptions"
- },
- {
- "q": "When using AI-generated imagery in public-facing material, what does the module say you must do?",
- "options": [
- "Take the first plausible image to save time",
- "Actively curate the output, not just take the first plausible image",
- "Avoid all AI imagery entirely",
- "Use only stock photography instead",
- "Let the vendor pick the image"
- ],
- "correct": 1,
- "why": "Body: <em>If you use AI-generated imagery in any public-facing material, you have to actively curate the output, not just take the first plausible image.</em>",
- "cite": "Stereotyped imagery"
- },
- {
- "q": "In the practical checks, which four words does the module tell you to search the text for?",
- "options": [
- "\"the\", \"and\", \"of\", \"to\"",
- "\"he\", \"she\", \"guys\", and \"young\"",
- "\"man\", \"woman\", \"boy\", \"girl\"",
- "\"fair\", \"unbiased\", \"neutral\", \"safe\"",
- "\"please\", \"thanks\", \"sorry\", \"sure\""
- ],
- "correct": 1,
- "why": "Body: <em>Search the text for the four words \"he\", \"she\", \"guys\", and \"young\".</em>",
- "cite": "Practical checks"
- },
- {
- "q": "The module says some vendors market their models as \"fair\" or \"unbiased\". How does it describe such claims?",
- "options": [
- "Verified by the regulator",
- "Generally accurate for newer models",
- "That is marketing, every model carries biases",
- "True only for paid models",
- "A legal requirement under GDPR"
- ],
- "correct": 2,
- "why": "Body: <em>Some vendors market their models as \"fair\" or \"unbiased\". That is marketing. Every model carries biases.</em>",
- "cite": "\"Bias-free AI\" doesn't exist"
- },
- {
- "q": "What is the single sentence the module tells you to take with you?",
- "options": [
- "\"The AI's first draft is its laziest draft.\"",
- "\"Bias-free AI is just around the corner.\"",
- "\"If it sounds fluent, it's fine.\"",
- "\"Always trust the model's first answer.\"",
- "\"Compliance is someone else's job.\""
- ],
- "correct": 0,
- "why": "Body: <em>\"The AI's first draft is its laziest draft.\" Treat it that way. Edit harder than you would your own writing.</em>",
- "cite": "One sentence to take with you"
- }
+  {
+   "q": "According to the module, an AI model's outputs reflect three things layered on top of each other. What are they?",
+   "options": [
+    "The hardware, the software, and the network",
+    "The training data, the fine-tuning, and your prompt",
+    "The vendor, the price, and the country",
+    "The user, the manager, and the regulator",
+    "The model size, the temperature, and the speed"
+   ],
+   "why": "Body: <em>An AI model's outputs reflect three things layered on top of each other: The training data … The fine-tuning … Your prompt.</em>",
+   "cite": "Where bias comes from"
+  },
+  {
+   "q": "What does the module say about switching to a different model to remove bias?",
+   "options": [
+    "It removes most bias if the model is newer",
+    "It works only for image models",
+    "You can't eliminate bias by switching, they all share the same internet",
+    "It removes bias but adds cost",
+    "It works only for translation tasks"
+   ],
+   "why": "Body: <em>You can't eliminate bias by switching to a different model. They all share the same internet.</em>",
+   "cite": "Where bias comes from"
+  },
+  {
+   "q": "Under the EU AI Act, which Annex III point covers AI used in decisions about people such as hiring and promotion?",
+   "options": [
+    "Annex III, point 4 (employment-related)",
+    "Annex III, point 1 (biometrics)",
+    "Annex III, point 9 (elections)",
+    "Annex III, point 2 (infrastructure)",
+    "Annex III, point 7 (law enforcement)"
+   ],
+   "why": "Body: <em>certain AI systems used in these categories may be classified as high-risk under the EU AI Act (Annex III, point 4), depending on how they are used.</em>",
+   "cite": "The three categories that matter, Decisions about people"
+  },
+  {
+   "q": "Why does the module say \"I only use AI to draft the feedback, a human writes the final version\" is a weak mitigation?",
+   "options": [
+    "Because drafting with AI is never allowed",
+    "Because the human is too busy to edit",
+    "Because in practice the final version is usually 80% the draft with minor edits, so a biased draft stays biased",
+    "Because AI cannot write feedback at all",
+    "Because the regulator bans all drafts"
+   ],
+   "why": "Body: <em>in practice the final version is usually 80% the draft with minor edits. If the draft was biased in tone or substance, the final version is biased in tone or substance.</em>",
+   "cite": "\"It's just a draft\" isn't a defence"
+  },
+  {
+   "q": "How does the module describe the main risk from public-facing or customer-facing AI content?",
+   "options": [
+    "It is mainly a regulatory fine",
+    "It is reputational rather than regulatory, but it lands faster",
+    "It is purely an internal quality issue",
+    "It is only a translation problem",
+    "It carries no real risk"
+   ],
+   "why": "Body: <em>The risk here is reputational rather than regulatory, but it lands faster.</em>",
+   "cite": "Public-facing or customer-facing content"
+  },
+  {
+   "q": "What does the module say about masculine-coded language in AI-generated job descriptions?",
+   "options": [
+    "It has no measurable effect",
+    "It improves application rates overall",
+    "It is well-evidenced to reduce female application rates",
+    "It only affects senior roles",
+    "It is required by the EU AI Act"
+   ],
+   "why": "Body: <em>AI-generated job descriptions sometimes default to masculine-coded language (\"dominant\", \"competitive\", \"rockstar\", \"ninja\") which is well-evidenced to reduce female application rates.</em>",
+   "cite": "Gendered language and assumptions"
+  },
+  {
+   "q": "When using AI-generated imagery in public-facing material, what does the module say you must do?",
+   "options": [
+    "Take the first plausible image to save time",
+    "Actively curate the output, not just take the first plausible image",
+    "Avoid all AI imagery entirely",
+    "Use only stock photography instead",
+    "Let the vendor pick the image"
+   ],
+   "why": "Body: <em>If you use AI-generated imagery in any public-facing material, you have to actively curate the output, not just take the first plausible image.</em>",
+   "cite": "Stereotyped imagery"
+  },
+  {
+   "q": "In the practical checks, which four words does the module tell you to search the text for?",
+   "options": [
+    "\"the\", \"and\", \"of\", \"to\"",
+    "\"he\", \"she\", \"guys\", and \"young\"",
+    "\"man\", \"woman\", \"boy\", \"girl\"",
+    "\"fair\", \"unbiased\", \"neutral\", \"safe\"",
+    "\"please\", \"thanks\", \"sorry\", \"sure\""
+   ],
+   "why": "Body: <em>Search the text for the four words \"he\", \"she\", \"guys\", and \"young\".</em>",
+   "cite": "Practical checks"
+  },
+  {
+   "q": "The module says some vendors market their models as \"fair\" or \"unbiased\". How does it describe such claims?",
+   "options": [
+    "Verified by the regulator",
+    "Generally accurate for newer models",
+    "That is marketing, every model carries biases",
+    "True only for paid models",
+    "A legal requirement under GDPR"
+   ],
+   "why": "Body: <em>Some vendors market their models as \"fair\" or \"unbiased\". That is marketing. Every model carries biases.</em>",
+   "cite": "\"Bias-free AI\" doesn't exist"
+  },
+  {
+   "q": "What is the single sentence the module tells you to take with you?",
+   "options": [
+    "\"The AI's first draft is its laziest draft.\"",
+    "\"Bias-free AI is just around the corner.\"",
+    "\"If it sounds fluent, it's fine.\"",
+    "\"Always trust the model's first answer.\"",
+    "\"Compliance is someone else's job.\""
+   ],
+   "why": "Body: <em>\"The AI's first draft is its laziest draft.\" Treat it that way. Edit harder than you would your own writing.</em>",
+   "cite": "One sentence to take with you"
+  }
  ]
- }
- </script>
+}
+</script>
 
 </main>
 

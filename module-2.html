@@ -38,7 +38,7 @@
 <link rel="stylesheet" href="assets/quiz.css?v=3" />
 <link rel="stylesheet" href="assets/widgets.css?v=3" />
 <script defer src="assets/cinema.js?v=23"></script>
-<script defer src="assets/quiz.js?v=2"></script>
+<script defer src="assets/quiz.js?v=3"></script>
 <script defer src="assets/widgets.js?v=1"></script>
 <script type="application/ld+json">
 {
@@ -360,145 +360,135 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
 
  <div id="quiz-mount"></div>
  <script type="application/json" id="quiz-data">
- {
+{
  "module": 2,
  "passThreshold": 8,
  "quizTitle": "Test your <em>understanding</em>.",
  "quizLede": "Ten questions drawn only from this module. Pass mark 8 out of 10. Retake as many times as you like.",
  "questions": [
- {
- "q": "In the five-question test, which question does the module call the real decision point in most organisations?",
- "options": [
- "What type of data am I about to paste?",
- "Where is my data kept?",
- "How long is it kept?",
- "Is it used to train the next AI?",
- "Who at the company can read it?"
- ],
- "correct": 0,
- "why": "Body: <em>The first one is the real decision point in most organisations … What type of data am I about to paste?</em>",
- "cite": "The five-question test"
- },
- {
- "q": "If you are not sure how sensitive a piece of data is, what does the module say to do?",
- "options": [
- "Paste it and check later",
- "Treat it as public until proven otherwise",
- "Treat it as the most sensitive class until you know",
- "Ask the AI tool to classify it for you",
- "Only paste it into a free tool"
- ],
- "correct": 2,
- "why": "Body: <em>If you are not sure, treat it as the most sensitive class until you know.</em>",
- "cite": "The five-question test"
- },
- {
- "q": "How often does the module say you should check the answers a big AI company publishes about its tools?",
- "options": [
- "Once, when you first sign up",
- "Every day",
- "Twice a year, not once and never again",
- "Only after a data breach",
- "Never, they never change"
- ],
- "correct": 2,
- "why": "Body: <em>Check them twice a year, not once and never again.</em>",
- "cite": "The five-question test"
- },
- {
- "q": "What is the big catch with a paid version for just yourself (like ChatGPT Plus or Claude Pro)?",
- "options": [
- "It gives worse answers than the free version",
- "It is still a public tool with no deal between your company and the AI company",
- "It trains on your data more than the free version",
- "It cannot be used at work at all",
- "It deletes your chats automatically"
- ],
- "correct": 1,
- "why": "Body: <em>it is still a public tool. Still no deal between your company and the AI company. Paying for it yourself does not change the rules.</em>",
- "cite": "Paid version (just you)"
- },
- {
- "q": "On a team or business version (like ChatGPT Team or Claude for Work), what does the company have with the AI company?",
- "options": [
- "Nothing different from the free tier",
- "A proper deal, a Data Processing Agreement",
- "A verbal agreement only",
- "A refund guarantee",
- "A licence to resell the AI"
- ],
- "correct": 1,
- "why": "Body: <em>Your company has a proper deal (a Data Processing Agreement) with the AI company.</em>",
- "cite": "Team or business version"
- },
- {
- "q": "On the team or business version, what is the usual default for training on your data?",
- "options": [
- "On by default, and you cannot change it",
- "On by default, but you can switch it off",
- "Off by default",
- "It depends entirely on the weather of the day",
- "There is no training setting"
- ],
- "correct": 2,
- "why": "Body: <em>Training on your data is usually off by default.</em>",
- "cite": "Team or business version"
- },
- {
- "q": "What does the module say is the real risk of your chats being used to train future AI?",
- "options": [
- "The next AI will repeat your client list word for word",
- "Your client list becomes one of millions of tiny pieces inside it, and a clever person with the right question can pull small bits back out",
- "The AI will refuse to answer you in future",
- "Your account will be suspended",
- "Nothing, trained data is always safe"
- ],
- "correct": 1,
- "why": "Body: <em>your client list becomes one of millions of tiny pieces inside it, and a clever person with the right question can pull small bits back out.</em>",
- "cite": "\"Trained on\", what it really means"
- },
- {
- "q": "According to the module, how do you actually fix the training risk?",
- "options": [
- "By deleting the chat afterwards",
- "By turning off training before you paste",
- "By using a longer password",
- "By pasting smaller amounts at a time",
- "By emailing the AI company to forget it"
- ],
- "correct": 1,
- "why": "Body: <em>You cannot fix this by deleting the chat later. You fix it by turning off training before you paste.</em>",
- "cite": "\"Trained on\", what it really means"
- },
- {
- "q": "Which court case made GDPR rules on sending personal data outside Europe stricter, after 2020?",
- "options": [
- "Mata v. Avianca",
- "Schrems II",
- "Carpenter v. United States",
- "Donoghue v. Stevenson",
- "Roe v. Wade"
- ],
- "correct": 1,
- "why": "Body: <em>the rules got stricter after a big court case in 2020 (Schrems II).</em>",
- "cite": "Where the data actually sits"
- },
- {
- "q": "When employees use AI tools outside approved company processes, what is this often called?",
- "options": [
- "Open AI",
- "Grey-market AI",
- "Shadow AI",
- "Rogue AI",
- "Free-tier AI"
- ],
- "correct": 2,
- "why": "Body: <em>When employees use AI tools outside approved company processes like this, it is often called Shadow AI.</em>",
- "cite": "The \"free for work\" mistake"
- }
+  {
+   "q": "In the five-question test, which question does the module call the real decision point in most organisations?",
+   "options": [
+    "What type of data am I about to paste?",
+    "Where is my data kept?",
+    "How long is it kept?",
+    "Is it used to train the next AI?",
+    "Who at the company can read it?"
+   ],
+   "why": "Body: <em>The first one is the real decision point in most organisations … What type of data am I about to paste?</em>",
+   "cite": "The five-question test"
+  },
+  {
+   "q": "If you are not sure how sensitive a piece of data is, what does the module say to do?",
+   "options": [
+    "Paste it and check later",
+    "Treat it as public until proven otherwise",
+    "Treat it as the most sensitive class until you know",
+    "Ask the AI tool to classify it for you",
+    "Only paste it into a free tool"
+   ],
+   "why": "Body: <em>If you are not sure, treat it as the most sensitive class until you know.</em>",
+   "cite": "The five-question test"
+  },
+  {
+   "q": "How often does the module say you should check the answers a big AI company publishes about its tools?",
+   "options": [
+    "Once, when you first sign up",
+    "Every day",
+    "Twice a year, not once and never again",
+    "Only after a data breach",
+    "Never, they never change"
+   ],
+   "why": "Body: <em>Check them twice a year, not once and never again.</em>",
+   "cite": "The five-question test"
+  },
+  {
+   "q": "What is the big catch with a paid version for just yourself (like ChatGPT Plus or Claude Pro)?",
+   "options": [
+    "It gives worse answers than the free version",
+    "It is still a public tool with no deal between your company and the AI company",
+    "It trains on your data more than the free version",
+    "It cannot be used at work at all",
+    "It deletes your chats automatically"
+   ],
+   "why": "Body: <em>it is still a public tool. Still no deal between your company and the AI company. Paying for it yourself does not change the rules.</em>",
+   "cite": "Paid version (just you)"
+  },
+  {
+   "q": "On a team or business version (like ChatGPT Team or Claude for Work), what does the company have with the AI company?",
+   "options": [
+    "Nothing different from the free tier",
+    "A proper deal, a Data Processing Agreement",
+    "A verbal agreement only",
+    "A refund guarantee",
+    "A licence to resell the AI"
+   ],
+   "why": "Body: <em>Your company has a proper deal (a Data Processing Agreement) with the AI company.</em>",
+   "cite": "Team or business version"
+  },
+  {
+   "q": "On the team or business version, what is the usual default for training on your data?",
+   "options": [
+    "On by default, and you cannot change it",
+    "On by default, but you can switch it off",
+    "Off by default",
+    "It depends entirely on the weather of the day",
+    "There is no training setting"
+   ],
+   "why": "Body: <em>Training on your data is usually off by default.</em>",
+   "cite": "Team or business version"
+  },
+  {
+   "q": "What does the module say is the real risk of your chats being used to train future AI?",
+   "options": [
+    "The next AI will repeat your client list word for word",
+    "Your client list becomes one of millions of tiny pieces inside it, and a clever person with the right question can pull small bits back out",
+    "The AI will refuse to answer you in future",
+    "Your account will be suspended",
+    "Nothing, trained data is always safe"
+   ],
+   "why": "Body: <em>your client list becomes one of millions of tiny pieces inside it, and a clever person with the right question can pull small bits back out.</em>",
+   "cite": "\"Trained on\", what it really means"
+  },
+  {
+   "q": "According to the module, how do you actually fix the training risk?",
+   "options": [
+    "By deleting the chat afterwards",
+    "By turning off training before you paste",
+    "By using a longer password",
+    "By pasting smaller amounts at a time",
+    "By emailing the AI company to forget it"
+   ],
+   "why": "Body: <em>You cannot fix this by deleting the chat later. You fix it by turning off training before you paste.</em>",
+   "cite": "\"Trained on\", what it really means"
+  },
+  {
+   "q": "Which court case made GDPR rules on sending personal data outside Europe stricter, after 2020?",
+   "options": [
+    "Mata v. Avianca",
+    "Schrems II",
+    "Carpenter v. United States",
+    "Donoghue v. Stevenson",
+    "Roe v. Wade"
+   ],
+   "why": "Body: <em>the rules got stricter after a big court case in 2020 (Schrems II).</em>",
+   "cite": "Where the data actually sits"
+  },
+  {
+   "q": "When employees use AI tools outside approved company processes, what is this often called?",
+   "options": [
+    "Open AI",
+    "Grey-market AI",
+    "Shadow AI",
+    "Rogue AI",
+    "Free-tier AI"
+   ],
+   "why": "Body: <em>When employees use AI tools outside approved company processes like this, it is often called Shadow AI.</em>",
+   "cite": "The \"free for work\" mistake"
+  }
  ]
- }
- </script>
+}
+</script>
 
  <div id="widget-mount"></div>
 </main>
