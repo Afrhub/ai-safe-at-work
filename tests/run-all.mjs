@@ -16,6 +16,7 @@ const run = promisify(execFile);
 const SUITES = [
   ["pricing logic", "tests/checkout-pricing.mjs"],
   ["webhook signature", "tests/stripe-webhook.sig.mjs"],
+  ["manager nomination", "tests/checkout-nomination.mjs"],
   ["exposure and headers", "tests/suites/exposure.mjs"],
   ["public site", "tests/suites/public-site.mjs"],
   ["authorisation", "tests/suites/rls.mjs"],

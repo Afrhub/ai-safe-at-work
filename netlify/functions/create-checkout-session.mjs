@@ -43,6 +43,9 @@ export function resolveBand(plan, headcount) {
 
 const clean = (v) => String(v || "").trim().slice(0, 400); // Stripe metadata caps at 500
 
+// One definition, used for the payer and the nominated manager. Two copies would drift.
+const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
 export default async (req) => {
   if (req.method !== "POST") return json({ error: "Method not allowed." }, 405);
 
@@ -60,7 +63,7 @@ export default async (req) => {
   if (!band) return json({ error: "That plan and headcount is not sold online yet." }, 400);
 
   const email = clean(body.email);
-  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+  if (!EMAIL.test(email)) {
     return json({ error: "A valid work email is required." }, 400);
   }
 
@@ -84,6 +87,19 @@ export default async (req) => {
   p.set("metadata[contact]", clean(body.name));
   p.set("metadata[headcount_band]", band.key);
   p.set("metadata[vat_rate]", String(vatRate));
+
+  // Who runs the account, which is often not who pays. Validated here rather than
+  // trusted from the browser, and only written when it is genuinely a different
+  // address, so the webhook can tell "nominated someone else" from "nominated
+  // themselves" without comparing strings again.
+  const nominated = clean(body.managerEmail).toLowerCase();
+  if (nominated && nominated !== email.toLowerCase()) {
+    if (!EMAIL.test(nominated)) {
+      return json({ error: "That manager email does not look valid." }, 400);
+    }
+    p.set("metadata[manager_email]", nominated);
+  }
+  p.set("metadata[payer_email]", email);
 
   const r = await fetch("https://api.stripe.com/v1/checkout/sessions", {
     method: "POST",

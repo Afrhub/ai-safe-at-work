@@ -67,9 +67,17 @@ server-side source.
 
 ### The gap worth naming
 
-`stripe-webhook` makes the **buyer's email** the manager. In most organisations the person
-who pays is in finance and the person who runs governance is not. There is no step where
-the buyer nominates a different manager, and no way to hand the role over afterwards.
+**Half closed, 11 Aug 2026.** The order form now has an optional "who will manage the
+account?" field. `create-checkout-session` validates it, and only writes
+`metadata.manager_email` when it is a valid address that differs from the payer, so its
+presence is already a deliberate nomination. `managerEmailFor()` in `stripe-webhook`
+prefers it over the payer, lowercased so a capitalised nomination cannot create a second
+profile. Blank means the payer manages the account, which is the old behaviour and still
+the common case. Covered by `tests/checkout-nomination.mjs`.
+
+**Still open:** there is no way to hand the role over afterwards. Nomination fixes the
+purchase; it does not fix someone leaving, or a reorganisation. That wants a transfer
+function and a privileged RPC, and is not built.
 
 ---
 

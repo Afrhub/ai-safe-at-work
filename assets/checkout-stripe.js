@@ -67,6 +67,9 @@
         email: form.elements.email.value,
         headcount: headcount,
         plan: plan,
+        // Optional. Blank means the payer manages the account, which is the old
+        // behaviour and still the common case for a small buyer.
+        managerEmail: (form.elements.manager_email && form.elements.manager_email.value) || "",
       }),
     })
       .then(function (r) {

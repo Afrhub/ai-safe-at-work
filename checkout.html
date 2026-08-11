@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
 <link rel="stylesheet" href="assets/style.css?v=29" />
 <script defer src="assets/cinema.js?v=23"></script>
-<script defer src="assets/checkout-stripe.js?v=3"></script>
+<script defer src="assets/checkout-stripe.js?v=4"></script>
 <script defer src="assets/checkout.js?v=2"></script>
 </head>
 <body>
@@ -74,6 +74,8 @@
   <p><label>Company<br /><input type="text" name="company" required style="width:100%;padding:0.6rem;border:1px solid var(--border-bold);border-radius:6px;background:var(--bg-soft);color:var(--text)" /></label></p>
   <p><label>Your name<br /><input type="text" name="name" required style="width:100%;padding:0.6rem;border:1px solid var(--border-bold);border-radius:6px;background:var(--bg-soft);color:var(--text)" /></label></p>
   <p><label>Work email<br /><input type="email" name="email" required style="width:100%;padding:0.6rem;border:1px solid var(--border-bold);border-radius:6px;background:var(--bg-soft);color:var(--text)" /></label></p>
+  <p><label>Who will manage the account?<br /><input type="email" name="manager_email" placeholder="Leave blank if that is you" style="width:100%;padding:0.6rem;border:1px solid var(--border-bold);border-radius:6px;background:var(--bg-soft);color:var(--text)" /></label>
+   <span style="display:block;color:var(--text3);font-size:0.84rem;margin-top:0.3rem">This is who receives the portal login and runs governance day to day. It is often not the person paying, so name them here and we will set the account up in their name.</span></p>
   <p><label>How many staff?<br /><select name="headcount" required style="width:100%;padding:0.6rem;border:1px solid var(--border-bold);border-radius:6px;background:var(--bg-soft);color:var(--text)">
    <option value="">Please choose</option>
    <option value="1-25 (£990/yr)">1 to 25 staff &mdash; £990 per year</option>

@@ -111,8 +111,20 @@ async function findOrCreateUser(email) {
   return (await made.json()).id;
 }
 
+// Who gets the manager account, which is often not who paid. create-checkout-session
+// only writes manager_email when it is a valid address AND different from the payer, so
+// its presence is already a deliberate nomination and needs no second-guessing here.
+// Lowercased because Supabase stores auth emails lowercase, and findOrCreateUser matches
+// on equality: a capitalised nomination would otherwise create a second account.
+export function managerEmailFor(session) {
+  const nominated = (session?.metadata?.manager_email || "").trim().toLowerCase();
+  if (nominated) return nominated;
+  return (session?.customer_email || session?.customer_details?.email || "").trim().toLowerCase();
+}
+
 async function provision(session) {
-  const email = (session.customer_email || session.customer_details?.email || "").trim();
+  const email = managerEmailFor(session);
+  const payer = (session.metadata?.payer_email || session.customer_email || "").trim().toLowerCase();
   const band = session.metadata?.headcount_band;
   const seats = SEATS[band];
   if (!email || !seats) throw new Error(`cannot provision: email=${!!email} band=${band}`);
@@ -135,7 +147,10 @@ async function provision(session) {
     });
   }
 
-  console.log(`provisioned ${email} as manager with ${seats} credits (band ${band})`);
+  console.log(
+    `provisioned ${email} as manager with ${seats} credits (band ${band})` +
+      (payer && payer !== email ? `, nominated by payer ${payer}` : "")
+  );
   console.warn(
     `ACTION NEEDED: ${email} has no way to sign in yet. No SMTP (AUTH-1) means no ` +
       `invite email, and AUTH_DISABLED (A2) still auto-demos the portal. Contact them manually.`
