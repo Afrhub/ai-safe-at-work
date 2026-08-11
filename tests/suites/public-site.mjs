@@ -160,6 +160,17 @@ export async function run() {
     });
   }
 
+  group("CRS-03, the course page offers exactly one free module");
+  await check("CRS-03", "only Module 1 is listed, and it links to the free page", async () => {
+    const p = await page("/course.html");
+    const cards = (p.body.match(/class="module-card"/g) || []).length;
+    eq(cards, 1, `expected one module card, found ${cards}`);
+    includes(p.body, 'class="module-card" href="module-1.html"', "the Module 1 card is not a link");
+    const m1 = await page("/module-1.html");
+    eq(m1.status, 200);
+    excludes(m1.body, "course-gate.js", "module 1 is gated, but the course page calls it free to read");
+  });
+
   group("SEO, sitemap and robots posture");
   await check("SEO-01", "every sitemap URL is 200 and indexable", async () => {
     const sm = await page("/sitemap.xml");
