@@ -25,6 +25,57 @@ Lives in `docs/`, which `netlify.toml` 404s, because it names security defects.
 - [ ] 🧑 **Decide VAT.** `VAT_RATE` is unset, so the advertised ex-VAT price is charged
       as-is. If VAT registered and this ships unset, you absorb the VAT on every sale.
 
+## P0b, the assessment does not do what the product sells
+
+Found 3 Aug 2026 while proving the modules have videos and quizzes. All three are one
+build, not three fixes, and they should ship together.
+
+- [ ] 🤖 **`quiz_keys` is empty, 0 rows.** `record_quiz_result` raises
+      `no answer key for module %` for every module, so the server-side scorer cannot
+      score anything. Populate it from the `correct` values currently sitting in the
+      page JSON.
+- [ ] 🤖 **`quiz.js` never calls the scorer.** It writes to `localStorage` and nothing
+      else. `audit_log` holds 0 `module_completed` entries. Point it at
+      `record_quiz_result` so a pass reaches the database.
+- [ ] 🤖 **The answer key ships to the browser.** Every question on all 18 module pages
+      carries `"correct": N` in the `quiz-data` JSON. View Source gives a learner every
+      answer. Strip it once scoring is server-side; `why` and `cite` can stay, they are
+      the post-answer explanation.
+- [ ] 🤖 **Consequence to fix with the above:** "Training completion records you can hand
+      to an auditor" is on the Foundation bullet list and the checkout page, and has no
+      server-side source. Certificates are generated from client-side state, which the
+      learner can edit. This is the claim most exposed to a customer's auditor.
+- [ ] 🤖 **Correct the test plan.** QUIZ-01 to QUIZ-05 in `docs/test-plan.html` describe
+      the 80% pass mark as enforced in `record_quiz_result`. True of the function,
+      false of the shipped course. Rewrite once the fix lands.
+
+## P0c, paid content teaches superseded law
+
+The Digital Omnibus on AI entered into force 27 Jul 2026 and moved the high-risk
+deadlines. Article 50 transparency and the full penalty regime started 2 Aug 2026.
+Article 4 was retained but softened. Found 11 Aug 2026, so the content below has been
+wrong for about two weeks on a product that sells being current.
+
+- [ ] 🤖 **`sector-financial-services.html`**: "Article 26 deployer obligations from
+      August 2026". Article 26 is the high-risk regime, deferred to 2 Dec 2027
+      (Annex III) and 2 Aug 2028 (Annex I).
+- [ ] 🤖 **`sector-healthcare.html`**: same claim, same problem.
+- [ ] 🤖 **`sector-public-sector.html`**: "Article 86 right to explanation (in force
+      August 2026)", stated three times, **including as the correct answer to a graded
+      quiz question**. A learner is being marked right for a date that moved.
+- [ ] 🤖 **`sales-deck.html`, public, returns 200**: "staff must have 'sufficient AI
+      literacy'". That is the pre-Omnibus wording. Article 4 now reads support the
+      development of AI literacy, and explicitly does not require guaranteeing any
+      level of literacy in any individual.
+- [ ] 🤖 **`module-1.html`**: teaches Article 4 as "staff who use AI need enough know-how
+      to use it safely", and grades a quiz question on it. Same softening applies.
+- [ ] 🤖 **`rollout-guide.html`, public**: Article 4 described as a literacy obligation
+      evidenced by a training register. Still broadly right, but check the wording
+      against the amended text.
+- [ ] 🧑 **Decide the standing process.** The product promises "annual refresher training
+      to stay current as the rules move". The rules moved and nothing flagged it. A
+      quarterly legal-currency review belongs in the audit pack cadence.
+
 ## P1, revenue is leaking today
 
 - [ ] 🧑 **Turn on Netlify form notifications.** Free, dashboard only, minutes. Nothing on
@@ -72,6 +123,10 @@ Lives in `docs/`, which `netlify.toml` 404s, because it names security defects.
 - [ ] 🤖 **Widen the CSP test to every page.** It samples 12, so 17 of the 18 broken
       module pages fail outside coverage. This is exactly how the certificate bug
       survived to production.
+- [ ] 🧑 **Six role-track modules have no video**: Copilot, DPO, Manager, MSP Admin,
+      Procurement, Shadow AI. No `<video>`, no `<iframe>`, nothing. Modules 1 to 12 all
+      have one and all serve. Decide whether the role tracks need videos or whether the
+      copy should stop implying every module has one.
 
 ## P4, code review leftovers, not urgent
 
