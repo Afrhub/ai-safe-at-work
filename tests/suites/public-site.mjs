@@ -163,9 +163,16 @@ export async function run() {
   group("CRS-03, the course page offers exactly one free module");
   await check("CRS-03", "only Module 1 is listed, and it links to the free page", async () => {
     const p = await page("/course.html");
-    const cards = (p.body.match(/class="module-card"/g) || []).length;
+    // Quoting and .html are both unreliable here: Netlify's post-processing re-serialises
+    // attributes with single quotes and rewrites hrefs to pretty URLs, so the deployed
+    // markup is <a class='module-card' href='/module-1'>. Match the shape, not the string.
+    const cards = (p.body.match(/class=['"]module-card['"]/g) || []).length;
     eq(cards, 1, `expected one module card, found ${cards}`);
-    includes(p.body, 'class="module-card" href="module-1.html"', "the Module 1 card is not a link");
+    ok(
+      /<a[^>]*class=['"]module-card['"][^>]*href=['"][^'"]*module-1(\.html)?['"]/.test(p.body) ||
+        /<a[^>]*href=['"][^'"]*module-1(\.html)?['"][^>]*class=['"]module-card['"]/.test(p.body),
+      "the Module 1 card is not a link to module 1"
+    );
     const m1 = await page("/module-1.html");
     eq(m1.status, 200);
     excludes(m1.body, "course-gate.js", "module 1 is gated, but the course page calls it free to read");
