@@ -227,7 +227,7 @@ export const MODULES: ModuleSpec[] = [
         ],
         text: "A regulation is a law. If it applies to you, you must comply, and non-compliance brings regulatory penalties and enforcement. A standard is voluntary — good practice, increasingly asked for by customers and insurers, that you can choose to demonstrate." },
       { id: "04-literacy", kicker: "EU AI Act Article 4", title: "This course is the literacy measure",
-        text: "Article four of the E.U. A.I. Act, in force since February twenty twenty-five, says every deployer must ensure staff have a sufficient level of A.I. literacy. This course is one such measure." },
+        text: "Article four of the E.U. A.I. Act, in force since February twenty twenty-five, says providers and deployers must take measures to support their staff developing A.I. literacy. Since July twenty twenty-six it is an obligation of effort, not of result: it does not require any individual to reach a set standard. This course is one such measure." },
       { id: "05-governance", kicker: "Governance insight", title: "One framework, four surfaces",
         text: "These are not four separate compliance exercises. Together they cover data, security, risk, accountability and A.I. governance — one connected framework. U.K. teams may also know Cyber Essentials and N.C.S.C. guidance as a familiar baseline.",
         takeaway: "Follow the habits; the standards follow." },

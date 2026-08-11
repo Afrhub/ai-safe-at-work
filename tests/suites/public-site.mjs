@@ -191,10 +191,19 @@ export async function run() {
     ok(bad.length === 0, `superseded high-risk dates on: ${bad.join(", ")}`);
   });
   await check("LAW-02", "Article 4 is not quoted with the pre-Omnibus wording", async () => {
+    // Widened 11 Aug 2026. The first version only matched the exact phrase "sufficient
+    // AI literacy" and so missed module-12.html, which said "must ensure their staff have
+    // an appropriate level". Match the obligation-of-result SHAPE, not one phrasing.
+    const OBLIGATION_OF_RESULT =
+      /(sufficient|appropriate|adequate)\s+level\s+of\s+AI\s+literacy|sufficient AI literacy|must ensure[^.]{0,70}AI literacy/i;
     const bad = [];
-    for (const path of ["/module-1.html", "/rollout-guide.html", "/index.html", "/course.html"]) {
+    for (const path of [
+      "/module-1.html", "/module-12.html", "/rollout-guide.html", "/index.html",
+      "/course.html", "/governance.html", "/sector-healthcare.html",
+      "/sector-financial-services.html", "/sector-public-sector.html",
+    ]) {
       const p2 = await page(path);
-      if (/sufficient AI literacy/.test(p2.body)) bad.push(path);
+      if (OBLIGATION_OF_RESULT.test(p2.body)) bad.push(path);
     }
     ok(bad.length === 0, `pre-Omnibus Article 4 wording on: ${bad.join(", ")}`);
   });
