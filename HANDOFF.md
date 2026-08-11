@@ -1,6 +1,6 @@
 # HANDOFF — Attest AI / ai-safe-at-work
 
-Updated: 11 Aug 2026 · Last commit `e1124f3` · Everything committed, pushed and live.
+Updated: 11 Aug 2026 · Last commit `b3581b6` · Everything committed, pushed and live.
 Supersedes the 26 Jul version. Full decision history in DOCTRINE.md; this file is the cold resume.
 
 ## What this is
@@ -8,9 +8,9 @@ Static site + Supabase (`hanjrsslhnuauaysbhun`) selling AI governance to UK/EU S
 Live at **aisafework.netlify.app**. **git push = deploy** (Netlify site `89ac5015-…`).
 Pre-push hook validates JSON-LD and blocks secrets + forbidden files.
 
-Module 12's video was re-rendered on 11 Aug and deployed: it narrated the pre-Omnibus
-Article 4 wording. Duration went 80.2s to 88.5s because the corrected line is longer and the
-composition sizes itself from the audio.
+Module 12's video was re-rendered and deployed: it narrated the pre-Omnibus Article 4
+wording. 80.2s to 88.5s, because the corrected line is longer and the composition sizes
+itself from the audio.
 
 ## Current state
 
@@ -31,6 +31,14 @@ Plans, Book a Demo and Become a Partner moved to a footer **Explore** column. Ne
 
 **Course page lists only Module 1**, as a clickable card to the free ungated page.
 
+**Quizzes for modules 2 to 12 are scored by the database (11 Aug).** `quiz_keys` seeded with
+120 rows by migration 0008; `record_quiz_result` extended to return per-question results;
+`quiz.js` submits once at the end straight to the RPC with the learner's own token, so
+`module_progress` and `audit_log` are finally written. The answer key is gone from those 11
+pages. Deliberately excluded: module 1 (free, ungated, no session to score against) and the
+9 string-id quizzes. Verified live as a signed-in user, 1/10 on wrong answers, nothing
+written because it did not pass.
+
 **Test suites, ~120 checks.** `node tests/run-all.mjs`. Suites: pricing logic, webhook signature,
 manager nomination, exposure/headers, public site, authorisation (RLS), browser (Playwright).
 Browser suite resolves Playwright from `~/projects/mlr` via `createRequire`.
@@ -42,30 +50,35 @@ Currently 2 known failures, both the `pricing.html` robots contradiction.
 
 ## Broken or untrue, in priority order
 
-1. **The assessment does not do what the product sells.** `quiz_keys` has **0 rows**, `quiz.js` never
-   calls `record_quiz_result`, and it writes scores to `localStorage` only. `audit_log` has 0
-   `module_completed` entries. So "Training completion records you can hand to an auditor" has **no
-   server-side source**, and the answer key ships to the browser (`"correct": N` in each page's
-   `quiz-data` JSON). One build, not three fixes. See ACTION-ITEMS P0b.
-2. **No custom SMTP.** Blocks manager credentials, staff invitations and every password reset. It is
-   the single item that appears in all three user journeys. Needs the domain move first (SPF/DKIM/DMARC).
-3. **`attest-ai.com` serves a 123-Reg parking page** while every canonical, the sitemap, robots.txt and
-   llms.txt all point at it. The codebase already migrated; only DNS has not.
-4. **`pricing.html` robots contradiction.** Meta says index, sitemap lists it, header sends noindex and
-   wins. Two failing tests.
-5. **`dbGet` swallows permission errors into `localStorage`**, and **`governance_state` is in no
-   migration**, and **`invite-seat` source is not in the repo**. Fix 1 and 2 before reshaping schema.
+1. **No custom SMTP.** Blocks manager credentials, staff invitations and every password
+   reset. The single item that appears in all three user journeys. Needs the domain move
+   first, because SPF, DKIM and DMARC need a domain you control.
+2. **`attest-ai.com` serves a 123-Reg parking page** while every canonical, the sitemap,
+   robots.txt and llms.txt point at it. The codebase already migrated; only DNS has not.
+3. **`pricing.html` robots contradiction.** Meta says index, sitemap lists it, header sends
+   noindex and wins. Two failing tests, SEO-01 and SEO-03.
+4. **`dbGet` swallows permission errors into `localStorage`.** Fix before the organisations
+   migration: that change rewrites every policy that matters, and a mistake would present as
+   an empty register rather than an error.
+5. **`governance_state` is in no migration**, and **`invite-seat` source is not in the repo**.
+6. **Certificates still render from client state.** Quiz results now reach the database, but
+   `cert.html` has not been repointed at `module_progress`. Until it is, the certificate is
+   not backed by the record behind it.
+7. **9 quizzes are still client-scored** with their answer key in the page: the six role
+   tracks and three sector overlays use string module ids (`copilot`, `fs` ...) that
+   `quiz_keys.module` cannot hold. Modules 2 to 12 are done.
 
 ## Next steps, ordered, first one startable cold
 
 1. **Netlify form notifications** (dashboard, free, minutes). Nothing tells anyone a form was
-   submitted, including the new `demo.html`. Highest value per minute in the whole list.
-2. **Point `attest-ai.com` at Netlify.** Add domain in Netlify FIRST, let the cert provision, then add
-   records at 123-Reg, then set primary. Then SMTP via Resend.
-3. **The quiz rebuild** (ACTION-ITEMS P0b): populate `quiz_keys`, point `quiz.js` at
-   `record_quiz_result`, strip `correct` from the client JSON, then correct the test plan's QUIZ section.
-4. **One spec covering organisation entity + auditor role + reseller provisioning.** Alastair approved
-   all three; they are the same migration and must not be built separately. Do not start before 3 above.
+   submitted. I audited the submissions on 11 Aug: all seven across five forms are tests, so
+   nothing has been missed yet, but the new `demo.html` depends on this.
+2. **Point `attest-ai.com` at Netlify.** Add the domain in Netlify FIRST, let the certificate
+   provision, then add the records at 123-Reg, then set it primary. Then Resend SMTP.
+3. **Repoint `cert.html` at `module_progress`** so the certificate is backed by the record
+   that now exists. Small, and it closes the audit-evidence claim properly.
+4. **`docs/SPEC-organisations-auditor-reseller.md`**, in the order the spec gives. Do its two
+   prerequisites first: fix `dbGet`, capture `governance_state` in a migration.
 
 ## GOTCHAS (discovered the hard way)
 
