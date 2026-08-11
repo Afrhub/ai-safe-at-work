@@ -1,192 +1,108 @@
 # HANDOFF — Attest AI / ai-safe-at-work
 
-Updated: 26 Jul 2026 · Last commit `f061b2f` · Everything committed, pushed and live.
-Read DOCTRINE.md decision log (rows 2026-07-14 → 2026-07-26) for full detail; this file is the quick resume.
+Updated: 11 Aug 2026 · Last commit `b5e4b9c` · **Uncommitted work in tree, see bottom of this section.**
+Supersedes the 26 Jul version. Full decision history in DOCTRINE.md; this file is the cold resume.
 
 ## What this is
-Attest AI (aisafework.netlify.app, canonical attest-ai.com when DNS pointed): static site + Supabase
-(`hanjrsslhnuauaysbhun`) selling AI governance to UK/EU SMEs and MSPs.
-**git push = deploy** (Netlify site `89ac5015-5b19-4568-b337-d3fe38e9e805`). Pre-push hook validates
-JSON/JSON-LD and blocks secrets + forbidden files (`docs/subscription-model.pdf` stays untracked).
+Static site + Supabase (`hanjrsslhnuauaysbhun`) selling AI governance to UK/EU SMEs and MSPs.
+Live at **aisafework.netlify.app**. **git push = deploy** (Netlify site `89ac5015-…`).
+Pre-push hook validates JSON-LD and blocks secrets + forbidden files.
 
-## Current state (all live)
-- **Plans** (published 2026-07-21; tier numbers retired site-wide): **Foundation** £990/yr up to 25
-  staff, £1,750 up to 100 (training + starter templates). **Attest AI Platform** £249/mo up to 25,
-  £499 up to 100, billed annually £2,490/£4,990 (includes the training). Over 100 staff = Contact us
-  for both. **Consultancy** quoted per engagement. All ex-VAT; band price held 12 months.
-  checkout.html = Netlify order form `foundation-order` with a required headcount band selector,
-  invoiced manually — no card processing (deliberate seam, see BLOCKER below).
-  Grid + rationale: DOCTRINE 2026-07-19 / 2026-07-21 rows.
-- **Certification copy rule**: "audit-ready" may only mean *records organised the way an auditor asks
-  for them*, never "you will pass". Attest AI never presents as a certification/accreditation body.
-  The "A note on what we are" preface is on index.html and pricing.html; course + portal still to do.
-- **Plans (bands changed 25 Jul)**: Foundation £990/yr **1-25 staff**, £1,750 **26-50**; Platform £249/mo
-  1-25, £499 26-50 (billed annually £2,490/£4,990); **more than 50 = contact us** for both. Ex-VAT.
-  Supersedes the 26-100 band locked 19 Jul — see DOCTRINE 2026-07-25.
-- **Product videos**: platform demo (60s) + course module 1 (43s), narrated, behind the demo/course
-  buttons on pricing, plus-pack and solutions. Play every time; SKIP appears once watched through.
-  Source in `video-project/` (gitignored); regenerate narration with the ElevenLabs key. A "Buy now"
-  overlay on the last frame points at `BUY_URL` in `assets/cinema.js` — **one line to swap for the
-  GoCardless link** once that account exists.
-- **Content posture (24 Jul)**: gate the doing, not the knowing. Public + indexable: homepage,
-  pricing, course, plus-pack (= the Platform page), consultancy, solutions, faq, glossary,
-  standards-map, module-1 (free sample), resources, templates index, about, legal. Gated pages all
-  carry `noindex` so crawlers are not sent to a checkout redirect; `sitemap.xml` lists only the 21
-  genuinely public URLs. `msp.html` stays noindex by choice — see `docs/parked-content.md`.
-- **Paywall**: `assets/course-gate.js?v=2` (client-side; demo account excluded) gates modules 1–12,
-  cert, all templates, glossary, standards-map, role tracks, sector overlays, resources.html.
-  Redirect targets: course.html (modules) / checkout.html (everything else).
-- **Manager portal** (`/portal/manager.html`): full in-portal compliance platform ported from the
-  claude.ai artifact — 11 interactive sections (AUP publish + acks, registers, risk matrix, vendor DD,
-  RACI, ToR, staff sign-off) + Manage group (team invites/credits/completion CSV). Data in Supabase
-  `governance_state` (per-manager KV JSONB, RLS). Files: `portal/assets/aimp.js|aimp.css`.
-  Spec: `specs/manager-dashboard.md`. Tests: `tests/manager-dashboard.{structure,crud}.mjs`
-  (run: `node tests/... <url>`; needs `npm i playwright` — set up in scratchpad, not repo).
-- **Nav**: Products / **Who We Help** / Plans + Sign in / Book a Demo / Become a Partner pills, on all
-  77 pages. Nav is **centred** above 901px (three-column grid); it wraps to a second row below that.
-  "Business Types" was renamed and repointed 26 Jul — it used to lead to a six-tick homepage section. Frameworks + Resources parked out of the nav 2026-07-21 (pages still live) —
-  `docs/nav-parked-links.md` holds the markup and the open placement decision.
-- **Forms**: `demo`, `foundation-order` (replaced `tier1-order`), `partner-enquiry` registered with
-  Netlify. **None of them email anyone** — see BLOCKER below.
-- **Who We Help** (`/who-we-help.html`, new 26 Jul): seven audience types, each as challenges-they-arrive-with
-  beside what we do about it, plus a starting-point table (Foundation / Platform / Consultancy).
-  Prices and the not-a-certification wording are pulled from pricing.html rather than restated.
-  Regulated section links out to the three sector overlays, which were otherwise orphaned.
-- **Portal additions (26 Jul)**, all in `portal/assets/aimp.js`:
-  - **Dashboard → Governance Centre** (nav, heading, every guide).
-  - **AI Tool Register** — a second front door beside Vendor Due Diligence, for tools with no supplier
-    to send diligence to. The account-type field is the point: ChatGPT Enterprise and ChatGPT Personal
-    are two rows with two different answers. **Policy Section 3 generates from it**, falling back to the
-    typed list when empty.
-  - **Residual risk** on the Risk Register (likelihood × impact once mitigated, same matrix, blank until
-    planned, renders "Not scored" rather than assuming).
-  - **Business objectives** widget at the top of the Governance Centre. Overdue computed from the target
-    date, never stored.
-  - **Owner fields reference staff records** (tool decision owner, use case owner, risk owner). Legacy
-    typed names kept and shown "not a team member".
-  - Governance Centre now flags: use case on an unregistered tool, use case on a restricted/not-approved
-    tool, tool awaiting decision, tool past review, approved tool with no owner.
-  - **Deliberately not built**: any "N users using unapproved AI" count. The platform cannot source it.
-- **The chain is drawn** on plus-pack.html (11 steps, supplier → Governance Centre), still an `<ol>` so it
-  degrades and reads in order to a screen reader. "Eleven working modules", not sections.
-- **Partner commercials** (rebate tiers, wholesale per seat, margins) live only in
-  `portal/reseller.html` behind the portal login. Never on a public page.
+⚠️ **Uncommitted right now:** `assets/video/module-12.mp4` (a Remotion render was IN FLIGHT when the
+session ended — check it finished before trusting the file) plus two untracked audio files
+`video-m2/public/voiceover/m12/04-literacy.{mp3,json}`. Those two are correct and should be committed.
+The mp4 needs verifying first: see "Finish the Module 12 render" below.
 
-## Hard-won rules (do not relearn)
-- **CSP**: production sends `script-src 'self'` — inline `onclick=`/inline `<script>` work locally but
-  DIE on live. Use delegated events (`data-act` dispatcher in aimp.js; `.print-btn` delegation in
-  cinema.js v13). Internal slide decks (sales/workshop/msp-client) still use inline scripts = broken live.
-- **CSS/JS changes**: bump BOTH `style.css?v=` and `cinema.js?v=` site-wide (**currently v27/v23**, 84
-  refs each). Portal JS is separate: `aimp.js?v=` (**currently v23**, 2 refs in `portal/*.html`).
-- **Em dashes**: banned site-wide (spaced→comma, unspaced→hyphen). Swept 19 Jul.
-- **AUTH_DISABLED tripwire** (`portal/assets/portal.js` = true): portal auto-signs-in demo manager.
-  Before real buyers: set false, rotate/delete demo@attest-ai.com, redeploy.
+## Current state
+
+**Auth is ARMED (changed 31 Jul).** `AUTH_DISABLED = false` in `portal/assets/portal.js`. The demo
+password was rotated out of the repo; `DEMO.password` is now `""` so flipping the flag back fails
+closed. `/portal/manager.html` bounces a signed-out visitor to sign-in. Do not set it back to true.
+
+**Payments built, inert.** Stripe Bacs Direct Debit via `netlify/functions/create-checkout-session.mjs`
+and `stripe-webhook.mjs`, no SDK (REST over fetch, no package.json). Both return 503 until
+`STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET` exist, and the checkout page falls back to the Netlify
+order form, so the button is never dead. Price is resolved server-side by `resolveBand(plan, headcount)`
+— **plan AND band**, because `checkout.js` reuses the band keys `1-25`/`26-50` for Platform at
+different prices. Buyer can nominate a different manager at checkout (`manager_email`).
+
+**Nav is three sections + Sign in** (3 Aug): Products · Course · Governance · [Sign in]. Who We Help,
+Plans, Book a Demo and Become a Partner moved to a footer **Explore** column. New pages: `governance.html`
+(public Governance Centre overview) and `demo.html` (dedicated Book a Demo page).
+
+**Course page lists only Module 1**, as a clickable card to the free ungated page.
+
+**Test suites, ~120 checks.** `node tests/run-all.mjs`. Suites: pricing logic, webhook signature,
+manager nomination, exposure/headers, public site, authorisation (RLS), browser (Playwright).
+Browser suite resolves Playwright from `~/projects/mlr` via `createRequire`.
+Currently 2 known failures, both the `pricing.html` robots contradiction.
+
+**Docs worth reading before touching anything:** `docs/ACTION-ITEMS.md` (34 items, P0→P4),
+`docs/USER-JOURNEYS.md` (three roles + the roles that have no row), `docs/Attest-AI-Test-Plan.pdf`,
+`docs/Attest-AI-Governance-Walkthrough.pdf`. All in `docs/`, which 404s publicly.
+
+## Broken or untrue, in priority order
+
+1. **The assessment does not do what the product sells.** `quiz_keys` has **0 rows**, `quiz.js` never
+   calls `record_quiz_result`, and it writes scores to `localStorage` only. `audit_log` has 0
+   `module_completed` entries. So "Training completion records you can hand to an auditor" has **no
+   server-side source**, and the answer key ships to the browser (`"correct": N` in each page's
+   `quiz-data` JSON). One build, not three fixes. See ACTION-ITEMS P0b.
+2. **No custom SMTP.** Blocks manager credentials, staff invitations and every password reset. It is
+   the single item that appears in all three user journeys. Needs the domain move first (SPF/DKIM/DMARC).
+3. **`attest-ai.com` serves a 123-Reg parking page** while every canonical, the sitemap, robots.txt and
+   llms.txt all point at it. The codebase already migrated; only DNS has not.
+4. **`pricing.html` robots contradiction.** Meta says index, sitemap lists it, header sends noindex and
+   wins. Two failing tests.
+5. **`dbGet` swallows permission errors into `localStorage`**, and **`governance_state` is in no
+   migration**, and **`invite-seat` source is not in the repo**. Fix 1 and 2 before reshaping schema.
+
+## Next steps, ordered, first one startable cold
+
+1. **Finish the Module 12 render.** A Remotion render was running at session end:
+   `cd video-m2 && npx remotion render src/index.ts Module12 ../assets/video/module-12.mp4`.
+   Verify it completed (no `remotion`/`chrome-headless-shell` process, file size stable, plays), then
+   bump `module-12.mp4?v=2` → `v=3` in `module-12.html`, commit with the two audio files, push.
+   Why: the deployed video still narrates the pre-Omnibus Article 4 wording. The page text is fixed.
+2. **Netlify form notifications** (dashboard, free, minutes). Nothing tells anyone a form was
+   submitted, including the new `demo.html`. Highest value per minute in the whole list.
+3. **Point `attest-ai.com` at Netlify.** Add domain in Netlify FIRST, let the cert provision, then add
+   records at 123-Reg, then set primary. Then SMTP via Resend.
+4. **The quiz rebuild** (ACTION-ITEMS P0b): populate `quiz_keys`, point `quiz.js` at
+   `record_quiz_result`, strip `correct` from the client JSON, then correct the test plan's QUIZ section.
+5. **One spec covering organisation entity + auditor role + reseller provisioning.** Alastair approved
+   all three; they are the same migration and must not be built separately. Do not start before 5 above.
 
 ## GOTCHAS (discovered the hard way)
-- **Netlify publishes the WHOLE repo.** Found 26 Jul: SCOPE.md (consultancy + MSP pricing), HANDOFF.md,
-  docs/ (incl. ownership-and-exit-plan), specs/, supabase/migrations/*.sql, tests/, scripts/, both
-  Remotion projects incl. paid module narration MP3s, the MSP deck .pptx and a .docx of course content
-  were all returning 200. Now blocked in `netlify.toml`. **`from = "/*.md"` does NOT work** — a Netlify
-  splat only matches a trailing path and cannot carry an extension suffix. Use `/dir/*` or name the file.
-  Anything new and internal must be added there or it ships.
-- **`governance_state` is in no migration.** Every register, the policy and the acks live in a table whose
-  schema and RLS exist only in the running Supabase project. Nothing in the repo reproduces it.
-- **`dbGet` swallows errors into localStorage.** A permission denial is indistinguishable from an empty
-  register — an RLS mistake would quietly move a customer's governance data into their own browser.
-  Fix this before any feature that depends on who can read what.
-- **Two parallel document systems.** The end-user portal reads `governance_docs` / writes
-  `governance_acks`; the manager policy tracks its own acks inside `governance_state`. No link between
-  them. Which is authoritative is undecided.
-- **Scratchpad Playwright broke mid-session** (lost `playwright-core`). Tests were repointed at
-  `~/projects/mlr/node_modules/playwright` via `createRequire`. Reinstall or keep borrowing.
 
-## Open decisions / next actions (founder)
-
-### OPEN DECISION — pricing.html is invisible to search (found 26 Jul, unanswered)
-`pricing.html` contradicts itself three ways: its own `<meta robots>` says **index, follow**; it is
-**listed in sitemap.xml**; and `_headers` sends **`X-Robots-Tag: noindex, nofollow`**. The header wins,
-so Google is told to drop a URL the sitemap keeps submitting. The `_headers` comment explains why —
-*"Pricing page is a draft today"*, written 19 May. It stopped being a draft on 21 Jul.
-Three ways to resolve, none chosen:
-  (a) drop `noindex, nofollow` from the `_headers` block, keep `noai, noimageai, nosnippet` — matches
-      what the page and sitemap already claim, makes the rebuilt grid findable, puts prices in search;
-  (b) keep it out of search but remove it from sitemap.xml and set the meta to noindex, so all three agree;
-  (c) leave it — the only option where the site keeps arguing with itself.
-`msp.html` carries the same header block but its meta is also noindex, so that one is consistent and
-deliberate — leave it alone.
-
-### BLOCKER — the funnel does not work. Fix before anything else.
-Pricing is now published, correct and live, and it earns £0 until this is fixed.
-**Nothing on the site emails anyone.** An order is a form submission sitting in the
-Netlify dashboard until someone thinks to look, then a manual invoice. A buyer who
-decides to pay you today cannot, and you will not know they tried.
-
-0a. **Netlify form email notifications** (dashboard-only setting, no code):
-    route **`order`**, `partner-enquiry` and `demo` to James@attest-ai.com.
-    `checkout.html` posts to `order` as of 25 Jul — one form for both plans, with
-    the plan carried in a hidden field, so this only needs setting once.
-    `tier1-order` and `foundation-order` are orphaned earlier names; ignore them.
-    Nothing on the site emails anyone until this is set.
-0b. **Payment path.** Manual invoicing was a deliberate seam, not an accident, but it
-    caps conversion at whatever a stranger will do on trust: fill in a form, wait for
-    an invoice, pay by transfer. At £990-£4,990 that is survivable for a while; it is
-    not survivable as the only option. Decide: keep manual for the first 5-10
-    customers (defensible, gives price-discovery conversations), or wire a processor.
-0d. **Weekly digest is built but cannot send.** The dashboard composes the
-    digest and offers Copy / Email (opens the mail client). Automatic weekly
-    send needs a provider, `MAIL_API_KEY`, `DIGEST_TO` and a Supabase
-    SERVICE key in Netlify env, then a scheduled function. Steps and the
-    do-not-reimplement-the-rules warning: `docs/weekly-digest.md`.
-0c. **Confirm the loop end-to-end** before promoting anything: submit the live form,
-    confirm the email arrives, confirm an invoice can be raised and portal access
-    granted. Never assume the form works because the page renders.
-    *Verified 25 Jul, the half that does not need an inbox:* Netlify accepts POSTs
-    to `order`, `partner-enquiry` and `demo` (200), and rejects an unregistered
-    name (404) — so form detection is live and discriminating, and submissions are
-    reaching the dashboard. **The plumbing is not the blocker; only the
-    notification setting is.** Test submissions were made against every form and
-    should be deleted.
-0f. **Delete two orphaned Netlify forms**: `tier1-order` and `foundation-order`
-    still accept submissions (200) even though no page posts to them any more —
-    Netlify keeps previously-detected forms registered. A cached page or an old
-    link would drop an order into a form nobody watches. Remove them in the
-    Netlify dashboard.
-
-Everything below is secondary. Optimising price, copy or funnel volume ahead of this
-is optimising a bucket with no bottom.
-
-### Then
-0e. **Product roadmap (founder-stated, 24 Jul).** Done: platform screens reviewed
-    (all 15 render clean), modules audited for staleness, three user flows plotted
-    (`docs/user-flows.md`), in-product guides live on all 11 platform screens.
-    Remaining: **onboarding automation** — blocked, there is nothing to automate
-    until mail and payment exist (0a/0b) — and the **support model** (AI bot first,
-    then ticket), whose most common question would today be "how do I get my staff
-    in?", which has no working answer while SMTP is unconfigured.
-1. **RORtech call** — ask what their clients pay for their Cyber Essentials line; treat as design
-   partner, not first sale; reconcile MSP 70/30 maths before honouring the founding promise.
-   This is also the highest-value unknown in the revenue model: until the 70/30 reconciles,
-   the partner channel (the only path past the solo delivery ceiling) is unproven.
-2. **Trust fixes before conversion**: real founder bio + UK address (about.html still says
-   "Founder name / Short bio goes here"), PI insurance + liability terms before first invoice.
-   *(Un-gating done 24 Jul: glossary, standards map, module 1 and the resources hub are public.)*
-3. **Carry the certification preface** ("A note on what we are") to course.html and the portal —
-   done on index.html and pricing.html; the standing copy rule applies everywhere.
-4. **"Become a Partner" nav pill + footer "Partner Programme"** are still site-wide. Pulling them
-   is a commercial call, not a copy fix.
-5. SMTP (AUTH-1) still unconfigured — invites/magic links rate-limited.
-6. **Banked, post-validation**: £599/mo for the 26-100 Platform band after the first 5-10
-   customers (~£24k/yr at 20 customers in that band, no new delivery work).
-
-**Done 2026-07-26**: Who We Help page + nav rename (77 pages); top-bar overflow fixed (it needed 457px at
-390px wide and 823px at 768px, so it never fitted — pills were crushed to discs and the theme toggle was
-pushed off-screen; also `.module-grid`'s 300px floor); nav centred; AI Tool Register + residual risk +
-objectives + staff-referenced owners; the chain drawn; **the whole-repo exposure closed**. Commits
-`cdd00f1` → `f061b2f`.
-
-**Done 2026-07-21**: pricing locked, published and swept site-wide (Foundation £990/£1,750,
-Platform £249/£499, 100+ Contact us) — see DOCTRINE 2026-07-21 rows.
+- **Netlify rewrites the served HTML.** Post-processing re-serialises attributes with single quotes and
+  strips `.html` into pretty URLs. Any assertion against *served* markup must match the shape, not a
+  literal string. This broke two tests that were correct about the repo.
+- **Netlify publishes the whole repo.** Anything not blocked in `netlify.toml` ships. `from = "/*.md"`
+  does NOT work; splats cannot carry an extension suffix. Blocked: `docs/ specs/ supabase/ tests/
+  scripts/ netlify/ video-m1/ video-m2/ .audit/` + named files incl. `sales-deck.html`.
+- **Production CSP is `script-src 'self'` with no unsafe-inline, nonce or hash.** Every inline
+  `<script>` is dead on the live site and silently so. It broke the certificate page for months and the
+  theme flash-preventer on 77 pages. Local testing sends no CSP, so it never shows up until deployed.
+- **`video-m2` scripts need `.mts` + `npx tsx --env-file=.env`.** package.json has no `"type": "module"`,
+  so a `.ts` compiles to CJS and top-level await fails. Node here is 20.11, so the `--strip-types` in the
+  old header never worked. The ElevenLabs key is already in `video-m2/.env`.
+- **`gen-module-audio.mts` skips any scene whose mp3 already exists.** To regenerate one line you must
+  delete that scene's `.mp3` and `.json` first, or you render new captions over old audio.
+- **The shell is zsh.** `read -p` is bash; zsh wants `read -rs "VAR?prompt: "`.
+- **`git add -A` will sweep up a background agent's half-written files.** It happened: an agent's
+  in-progress Playwright files landed in an unrelated commit.
+- **`portal/assets/theme.js` and `assets/theme-boot.js` are inverted on purpose.** The portal is dark by
+  default and stores an opt-in to light; the marketing site is light by default and stores an opt-in to
+  dark. Do not merge them.
+- **`module-1.html` has no `course-gate.js`** and must not get one. It is the free sample and the intro
+  video says so. A dead inline gate that would have paywalled it was removed on 31 Jul.
+- Portal pages are `Cache-Control: private, no-store`; marketing pages are `max-age=300`, so a change
+  can look undeployed for five minutes. Verify with a cache-busting query, not a hard refresh.
 
 ## Where things live
-DOCTRINE.md (strategy + decision log) · specs/ · tests/ · docs/functional-test-coverage.md
-(FT-AIMP-01/02 implemented) · .audit/council/ (untracked pricing council) · llms.txt (AI-crawler facts).
+`assets/` site JS+CSS · `portal/` the app (`aimp.js` = Governance Centre, 16 sections) ·
+`netlify/functions/` Stripe · `supabase/migrations/` schema (0007 = `stripe_events`) ·
+`tests/` suites + `tests/pages/` POM · `docs/` internal, 404s publicly ·
+`video-m1/` Module 1 · `video-m2/` Modules 3–12 · `video-project/` platform demo.
+**No source in repo for `module-2.mp4`.**
