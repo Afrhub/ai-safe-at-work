@@ -42,11 +42,11 @@ written because it did not pass.
 **Test suites, ~120 checks.** `node tests/run-all.mjs`. Suites: pricing logic, webhook signature,
 manager nomination, exposure/headers, public site, authorisation (RLS), browser (Playwright).
 Browser suite resolves Playwright from `~/projects/mlr` via `createRequire`.
-Measured against live on 11 Aug: 6 failing checks, all pre-existing and all in ACTION-ITEMS.
-SEO-01 and SEO-03 (`pricing.html` robots), CSP-01 on `module-1.html` and `standards-map.html`
-(the dead inline risk figure and coverage matrix), NAV-08 (skip link), A11Y-04 (heading skip).
-Run it against a local server and the exposure, header and redirect checks fail too: those
-rules live in `netlify.toml`, not in the files.
+**All suites green against live, 11 Aug evening: 226 passed, 0 failed.** The 13 skips are
+by design (destructive form posts, RLS checks needing credentials). CSP-01 now covers every
+module and sector page signed in, not a 12-page sample. Run against a local server and the
+exposure, header and redirect checks fail: those rules live in `netlify.toml`/`_headers`,
+not in the files.
 
 **Docs worth reading before touching anything:** `docs/ACTION-ITEMS.md` (34 items, P0→P4),
 `docs/USER-JOURNEYS.md` (three roles + the roles that have no row), `docs/Attest-AI-Test-Plan.pdf`,
@@ -59,18 +59,21 @@ rules live in `netlify.toml`, not in the files.
    first, because SPF, DKIM and DMARC need a domain you control.
 2. **`attest-ai.com` serves a 123-Reg parking page** while every canonical, the sitemap,
    robots.txt and llms.txt point at it. The codebase already migrated; only DNS has not.
-3. **`pricing.html` robots contradiction.** Meta says index, sitemap lists it, header sends
-   noindex and wins. Two failing tests, SEO-01 and SEO-03.
-4. **`dbGet` swallows permission errors into `localStorage`.** Fix before the organisations
-   migration: that change rewrites every policy that matters, and a mistake would present as
-   an empty register rather than an error.
-5. **`invite-seat` edge function source is not in the repo.** (`governance_state` and the
+3. **`invite-seat` edge function source is not in the repo.** (`governance_state` and the
    rest of the governance schema are captured in migration 0009.)
-6. **9 quizzes are still client-scored** with their answer key in the page: the six role
+4. **9 quizzes are still client-scored** with their answer key in the page: the six role
    tracks and three sector overlays use string module ids (`copilot`, `fs` ...) that
-   `quiz_keys.module` cannot hold. Modules 2 to 12 are done.
-7. **`docs/test-plan.html` QUIZ-01 to QUIZ-05 describe the old client scoring.** True of
+   `quiz_keys.module` cannot hold. Modules 1 to 12 are done.
+5. **`docs/test-plan.html` QUIZ-01 to QUIZ-05 describe the old client scoring.** True of
    `record_quiz_result`, false of what the pages did before 11 Aug. Rewrite.
+
+Fixed 11 Aug evening: the `pricing.html` robots contradiction (draft-era noindex header
+removed); `dbGet`/`dbSet` diverting silently into `localStorage` (visible alert banner now,
+no pretend-persistence); the dead inline risk figures on all 21 module/role/sector pages and
+the standards-map matrix (external `assets/risk-figure.js` + JSON data blocks,
+`assets/standards-map.js`); module-11's print button (inline onclick, never worked live);
+skip link (NAV-08), footer heading skips (A11Y-04); webhook NaN replay window;
+checkout-thanks duplicate robots meta and wrong hreflang.
 
 ## Next steps, ordered, first one startable cold
 

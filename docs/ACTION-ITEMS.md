@@ -137,7 +137,7 @@ wrong for about two weeks on a product that sells being current.
       certificate provision, then add the records at 123-Reg, then set it primary.
       Until this happens every canonical, the sitemap, `robots.txt` and `llms.txt` all
       tell Google the real site lives on a parking page.
-- [ ] 🤖 **Fix the `pricing.html` robots contradiction.** Meta says `index`, sitemap
+- [x] 🤖 **Fix the `pricing.html` robots contradiction.** Meta says `index`, sitemap
       lists it, the header sends `noindex` and wins. The priced page cannot be found.
       Two tests fail on this (SEO-01, SEO-03). Needs a decision on which of the three
       changes.
@@ -162,14 +162,14 @@ wrong for about two weeks on a product that sells being current.
 
 ## P3, defects found by the test suite
 
-- [ ] 🤖 **The interactive risk figure is dead on all 18 module pages.** Inline script,
+- [x] 🤖 **The interactive risk figure is dead on all 18 module pages.** Inline script,
       blocked by `script-src 'self'`. Same root cause as the certificate bug. A teaching
       element in a paid course that has never worked.
-- [ ] 🤖 **The standards-map coverage matrix is dead**, same cause.
-- [ ] 🤖 **Skip link renders at `top: -85px` when focused** (NAV-08). It takes keyboard
+- [x] 🤖 **The standards-map coverage matrix is dead**, same cause.
+- [x] 🤖 **Skip link renders at `top: -85px` when focused** (NAV-08). It takes keyboard
       focus but is invisible, on a site selling accessibility compliance.
-- [ ] 🤖 **Heading levels skip `h2 → h4`** in the footer on most pages (A11Y-04).
-- [ ] 🤖 **Widen the CSP test to every page.** It samples 12, so 17 of the 18 broken
+- [x] 🤖 **Heading levels skip `h2 → h4`** in the footer on most pages (A11Y-04).
+- [x] 🤖 **Widen the CSP test to every page.** It samples 12, so 17 of the 18 broken
       module pages fail outside coverage. This is exactly how the certificate bug
       survived to production.
 - [ ] 🧑 **Six role-track modules have no video**: Copilot, DPO, Manager, MSP Admin,
@@ -179,7 +179,7 @@ wrong for about two weeks on a product that sells being current.
 
 ## P4, code review leftovers, not urgent
 
-- [ ] 🤖 `stripe-webhook.mjs:41` non-numeric `t` makes the replay window `NaN`, which
+- [x] 🤖 `stripe-webhook.mjs:41` non-numeric `t` makes the replay window `NaN`, which
       silently skips the check. HMAC still saves it. Add `Number.isFinite`.
 - [x] 🤖 `stripe-webhook.mjs:16` comment still says `AUTH_DISABLED is still true`. It was
       flipped to false the same day.
@@ -192,12 +192,12 @@ wrong for about two weeks on a product that sells being current.
 - [ ] 🤖 `stripe-webhook.mjs:120` `full_name` PATCH result unchecked.
 - [ ] 🤖 `checkout.html` button says "Buy Foundation", copy above promises an invoice.
       Pick one story. The Over-50 band also says "Buy" but receives a quote.
-- [ ] 🤖 `checkout-thanks.html` has two `<meta name="robots">` tags with different values.
-- [ ] 🤖 CTA casing drift, "Book a Demo" vs "Book a demo".
+- [x] 🤖 `checkout-thanks.html` has two `<meta name="robots">` tags with different values.
+- [x] 🤖 CTA casing drift, "Book a Demo" vs "Book a demo".
 
 ## Known structural gaps, decisions not yet made
 
-- [ ] 🤖 **`dbGet` swallows permission errors into `localStorage`.** An RLS mistake would
+- [x] 🤖 **`dbGet` swallows permission errors into `localStorage`.** An RLS mistake would
       quietly move a customer's governance data into their own browser and look like an
       empty register. Fix before anything depends on who can read what.
 - [ ] 🤖 **`governance_state` is in no migration.** The entire manager portal lives in a
