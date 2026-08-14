@@ -31,7 +31,7 @@
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
-<link rel="stylesheet" href="assets/style.css?v=29" />
+<link rel="stylesheet" href="assets/style.css?v=30" />
 <link rel="stylesheet" href="assets/quiz.css?v=3" />
 <script defer src="assets/quiz.js?v=5"></script>
 <script defer src="assets/cinema.js?v=23"></script>
@@ -154,20 +154,8 @@
  </svg>
  <p class="rd-cap" id="risk-fig-hc-cap" aria-live="polite"><strong>The healthcare governance layer.</strong> Select a card above to see what each part means.</p>
  </figure>
-<script>
- (function(){
-   var data = {
-     k1:{t:'GDPR Article 9', d:'Patient data is special-category by default. Article 9(1) prohibits processing unless a 9(2) condition applies, of which 9(2)(h) preventive or occupational medicine is the workhorse for clinical use; national derogations add local conditions.', m:'Sub-modules 1 &amp; 2.'},
-     k2:{t:'AI as a medical device', d:'If an AI tool informs diagnosis, prognosis, monitoring or treatment, EU MDR Rule 11 makes it at least Class IIa and the MHRA AI as a Medical Device programme applies. CE / UKCA-marked or it does not get deployed.', m:'Sub-modules 3 &amp; 5.'},
-     k3:{t:'NHS DSPT · DCB0129/0160', d:'NHS-connected organisations must complete the DSP Toolkit self-assessment and hold clinical-safety case files, DCB0129 for the manufacturer and DCB0160 for you the deployer, each with a named clinical-safety officer.', m:'Sub-modules 1 &amp; 4.'},
-     k4:{t:'Name a CSO, then file each clock', d:'Stabilise the patient first, preserve the evidence, then work the reporting matrix, Yellow Card, MDR Article 87, AI Act Article 73 and the rest, filing each on its own template within its own window.', m:'Sub-modules 7 &amp; 8.'}
-   };
-   var fig = document.getElementById('risk-fig-hc'); if(!fig) return;
-   var cap = fig.querySelector('.rd-cap'); var nodes = fig.querySelectorAll('.rnode');
-   function sel(k){ nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k')===k); }); var x=data[k]; if(!x) return; cap.innerHTML='<strong>'+x.t+'.</strong> '+x.d+' <span class="rd-m">'+x.m+'</span>'; }
-   nodes.forEach(function(n){ var k=n.getAttribute('data-k'); n.addEventListener('click',function(){sel(k);}); n.addEventListener('mouseenter',function(){sel(k);}); n.addEventListener('focus',function(){sel(k);}); n.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(k);} }); });
- })();
- </script>
+<script type="application/json" class="risk-fig-data">{"fig":"risk-fig-hc","dot":true,"data":{"k1":{"t":"GDPR Article 9","d":"Patient data is special-category by default. Article 9(1) prohibits processing unless a 9(2) condition applies, of which 9(2)(h) preventive or occupational medicine is the workhorse for clinical use; national derogations add local conditions.","m":"Sub-modules 1 &amp; 2."},"k2":{"t":"AI as a medical device","d":"If an AI tool informs diagnosis, prognosis, monitoring or treatment, EU MDR Rule 11 makes it at least Class IIa and the MHRA AI as a Medical Device programme applies. CE / UKCA-marked or it does not get deployed.","m":"Sub-modules 3 &amp; 5."},"k3":{"t":"NHS DSPT · DCB0129/0160","d":"NHS-connected organisations must complete the DSP Toolkit self-assessment and hold clinical-safety case files, DCB0129 for the manufacturer and DCB0160 for you the deployer, each with a named clinical-safety officer.","m":"Sub-modules 1 &amp; 4."},"k4":{"t":"Name a CSO, then file each clock","d":"Stabilise the patient first, preserve the evidence, then work the reporting matrix, Yellow Card, MDR Article 87, AI Act Article 73 and the rest, filing each on its own template within its own window.","m":"Sub-modules 7 &amp; 8."}}}</script>
+<script defer src="/assets/risk-figure.js?v=1"></script>
 
  <h2>The healthcare governance layer, how GDPR Art 9 + EU MDR + EU AI Act + DCB0129 combine</h2>
  <p>Healthcare AI sits at the intersection of three regulatory frameworks that were written by three different communities, in three different decades, with three different definitions of "device" and "data". They don't always align. They all apply.</p>
@@ -539,9 +527,9 @@
  <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
  <p>The AI Governance Platform, adopt AI safely, securely and responsibly.</p>
  </div>
- <div class="foot-col"><h4>Explore</h4><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
- <div class="foot-col"><h4>Resources</h4><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
- <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+ <div class="foot-col"><div class="foot-h">Explore</div><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
+ <div class="foot-col"><div class="foot-h">Resources</div><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
+ <div class="foot-col"><div class="foot-h">Company</div><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 

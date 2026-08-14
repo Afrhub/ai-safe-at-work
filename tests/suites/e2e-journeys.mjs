@@ -31,24 +31,13 @@ const SUPABASE_POSTS = { allowPosts: ["supabase.co"] };
 const SEVERITY = { risk: "high", use_case: "medium", vendor: "amber" };
 const STATUS = { risk: "open", incident: "open", use_case: "proposed", vendor: "pending" };
 
-// The interactive risk figure on every module page is an inline <script>, dead under
-// script-src 'self' since the day it shipped. It is a known open defect (ACTION-ITEMS P3,
-// "the interactive risk figure is dead on all 18 module pages") and it does not touch these
-// journeys, so it is named and excluded here rather than allowed to fail every run. Anything
-// else CSP blocks is a new defect and fails the check.
-const KNOWN_INLINE_FIGURE = /script-src-elem blocked inline at module-\d+\.html/;
-const KNOWN_INLINE_CONSOLE = /Executing inline script violates/;
-
 const noiseFrom = (record) => {
   const noise = [];
-  const csp = record.csp.filter((v) => !KNOWN_INLINE_FIGURE.test(v));
-  if (csp.length) noise.push(`CSP: ${csp.join(" | ")}`);
+  if (record.csp.length) noise.push(`CSP: ${record.csp.join(" | ")}`);
   if (record.pageErrors.length) noise.push(`page errors: ${record.pageErrors.join(" | ")}`);
   // supabase-js logs a 406 as a console error on an empty .single(), which is noise the
   // application handles. Anything else is a real error.
-  const consoleErrors = record.console.filter(
-    (c) => c.startsWith("error:") && !c.includes("406") && !KNOWN_INLINE_CONSOLE.test(c)
-  );
+  const consoleErrors = record.console.filter((c) => c.startsWith("error:") && !c.includes("406"));
   if (consoleErrors.length) noise.push(`console: ${consoleErrors.join(" | ")}`);
   return noise;
 };

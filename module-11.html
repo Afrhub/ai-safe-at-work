@@ -31,7 +31,7 @@
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
-<link rel="stylesheet" href="assets/style.css?v=29" />
+<link rel="stylesheet" href="assets/style.css?v=30" />
 <link rel="stylesheet" href="assets/module-video.css?v=3" />
 <link rel="stylesheet" href="assets/completion.css?v=3" /><!-- completion v1 -->
 <script defer src="assets/completion.js?v=1"></script><!-- completion v1 -->
@@ -238,33 +238,8 @@
  </svg>
  <p class="rd-cap" id="risk-fig-cap" aria-live="polite"><strong>The 60-second check, section by section.</strong> Select a step above, each one maps to a part of the printable list below.</p>
  </figure>
- <script>
-  (function(){
-    var data = {
-      data:   {t:'The data', d:'Before you paste, ask: is it on the never-paste list, could you describe the shape of the problem instead, and who would you be apologising to if it leaked?', m:'Section 1.'},
-      tool:   {t:'The tool', d:'Before you choose the AI: are you on the right tier, is training-on-your-conversations turned off, and do you know where the data physically goes?', m:'Section 2.'},
-      output: {t:'The output', d:'Before you act on it: read the whole thing line by line, verify every fact and citation, and make sure a human actually thought about decisions that affect a person.', m:'Section 3.'},
-      trail:  {t:'The trail', d:'Before you close the tab: if it is a significant use, log it across eight fields, and make sure you could honestly explain how you used the AI in six months.', m:'Section 4.'},
-      at:     {t:'Aimed at you', d:'Before you act on an unusual request: perfectly-written phishing is the baseline, so verify the sender on a different channel you initiated, and slow down on urgency.', m:'Section 5.'},
-      wrong:  {t:'If it goes wrong', d:'The first ten minutes: stop and keep the evidence, tell your manager / IT / DPO within the hour, and act immediately if money was sent or credentials shared.', m:'Section 6.'}
-    };
-    var fig = document.getElementById('risk-fig-11'); if(!fig) return;
-    var cap = fig.querySelector('.rd-cap');
-    var nodes = fig.querySelectorAll('.rnode');
-    function sel(k){
-      nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k') === k); });
-      var x = data[k]; if(!x) return;
-      cap.innerHTML = '<strong>' + x.t + '.</strong> ' + x.d + ' <span class="rd-m">' + x.m + '</span>';
-    }
-    nodes.forEach(function(n){
-      var k = n.getAttribute('data-k');
-      n.addEventListener('click', function(){ sel(k); });
-      n.addEventListener('mouseenter', function(){ sel(k); });
-      n.addEventListener('focus', function(){ sel(k); });
-      n.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sel(k); } });
-    });
-  })();
-  </script>
+ <script type="application/json" class="risk-fig-data">{"fig":"risk-fig-11","dot":true,"data":{"data":{"t":"The data","d":"Before you paste, ask: is it on the never-paste list, could you describe the shape of the problem instead, and who would you be apologising to if it leaked?","m":"Section 1."},"tool":{"t":"The tool","d":"Before you choose the AI: are you on the right tier, is training-on-your-conversations turned off, and do you know where the data physically goes?","m":"Section 2."},"output":{"t":"The output","d":"Before you act on it: read the whole thing line by line, verify every fact and citation, and make sure a human actually thought about decisions that affect a person.","m":"Section 3."},"trail":{"t":"The trail","d":"Before you close the tab: if it is a significant use, log it across eight fields, and make sure you could honestly explain how you used the AI in six months.","m":"Section 4."},"at":{"t":"Aimed at you","d":"Before you act on an unusual request: perfectly-written phishing is the baseline, so verify the sender on a different channel you initiated, and slow down on urgency.","m":"Section 5."},"wrong":{"t":"If it goes wrong","d":"The first ten minutes: stop and keep the evidence, tell your manager / IT / DPO within the hour, and act immediately if money was sent or credentials shared.","m":"Section 6."}}}</script>
+ <script defer src="/assets/risk-figure.js?v=1"></script>
 
  <div class="section-num">Section 1 · The data</div>
  <h2 style="margin-top:0">Before you paste, ask</h2>
@@ -592,9 +567,9 @@
  <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
  <p>The AI Governance Platform, adopt AI safely, securely and responsibly.</p>
  </div>
- <div class="foot-col"><h4>Explore</h4><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
- <div class="foot-col"><h4>Resources</h4><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
- <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+ <div class="foot-col"><div class="foot-h">Explore</div><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
+ <div class="foot-col"><div class="foot-h">Resources</div><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
+ <div class="foot-col"><div class="foot-h">Company</div><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 

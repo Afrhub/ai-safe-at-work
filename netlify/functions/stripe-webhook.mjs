@@ -38,6 +38,9 @@ export function verifySignature(raw, header, secret) {
     else if (k === "v1") signatures.push(v); // a delivery can carry more than one
   }
   if (!timestamp || !signatures.length) return false;
+  // A non-numeric t made the window NaN, and NaN > x is false, which silently skipped
+  // the replay check. The HMAC still failed such a header, but fail here, explicitly.
+  if (!Number.isFinite(Number(timestamp))) return false;
   if (Math.abs(Date.now() / 1000 - Number(timestamp)) > TOLERANCE_SECONDS) return false;
 
   const expected = createHmac("sha256", secret).update(`${timestamp}.${raw}`).digest("hex");

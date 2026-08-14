@@ -31,7 +31,7 @@
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
-<link rel="stylesheet" href="assets/style.css?v=29" />
+<link rel="stylesheet" href="assets/style.css?v=30" />
 <link rel="stylesheet" href="assets/quiz.css?v=3" />
 <script defer src="assets/cinema.js?v=23"></script>
 <script defer src="assets/quiz.js?v=5"></script>
@@ -152,20 +152,8 @@
  </svg>
  <p class="rd-cap" id="risk-fig-fs-cap" aria-live="polite"><strong>The financial-services governance layer.</strong> Select a card above to see what each part means.</p>
  </figure>
- <script>
- (function(){
-   var data = {
-     k1:{t:'DORA Article 13, AI vendors as ICT third-party risk',d:'DORA (Regulation 2022/2554) came into force 17 January 2025. AI vendors are ICT third parties, so vendor selection is board-reportable: pre-contract due diligence, contractual provisions, concentration-risk assessment (Art 28), exit strategy, and a register of contracts.',m:'Not optional, not delegable to procurement.'},
-     k2:{t:'SR 11-7 / SS1/23 model risk management',d:'SR 11-7 (US Fed / OCC) and PRA SS1/23 (UK) require firms to identify, measure, monitor and control model risk, and "model" now includes AI / ML. Every AI tool in a regulated decision maps to a model-inventory entry with an independent validator.',m:'Document compensating controls where vendor opacity blocks standard practice.'},
-     k3:{t:'FCA Consumer Duty + MiFID II algorithmic trading',d:'Consumer Duty (Principle 12, PRIN 2A) makes AI customer-impact a firm-level reportable across the four outcome areas. MiFID II Article 17 governs algorithmic trading, demanding effective systems, risk controls and a kill switch, with EU AI Act high-risk duties stacking on top.',m:'Conduct and market-integrity levers land on top of the AI Act.'},
-     k4:{t:'Map the firm to the stack first',d:'Universal AI Act + GDPR + ISO is the floor; DORA + FCA Consumer Duty + SR 11-7 + EBA + MiFID II is the ceiling for FS firms. Extend the never-paste list to the FS categories (MNPI, AML / KYC records, credit-model internals, customer financial PII) where the edge is criminal, not just regulatory.',m:'Map your firm to the stack before you map your AI tools.'}
-   };
-   var fig = document.getElementById('risk-fig-fs'); if(!fig) return;
-   var cap = fig.querySelector('.rd-cap'); var nodes = fig.querySelectorAll('.rnode');
-   function sel(k){ nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k')===k); }); var x=data[k]; if(!x) return; cap.innerHTML='<strong>'+x.t+'.</strong> '+x.d+' <span class="rd-m">'+x.m+'</span>'; }
-   nodes.forEach(function(n){ var k=n.getAttribute('data-k'); n.addEventListener('click',function(){sel(k);}); n.addEventListener('mouseenter',function(){sel(k);}); n.addEventListener('focus',function(){sel(k);}); n.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(k);} }); });
- })();
- </script>
+ <script type="application/json" class="risk-fig-data">{"fig":"risk-fig-fs","dot":true,"data":{"k1":{"t":"DORA Article 13, AI vendors as ICT third-party risk","d":"DORA (Regulation 2022/2554) came into force 17 January 2025. AI vendors are ICT third parties, so vendor selection is board-reportable: pre-contract due diligence, contractual provisions, concentration-risk assessment (Art 28), exit strategy, and a register of contracts.","m":"Not optional, not delegable to procurement."},"k2":{"t":"SR 11-7 / SS1/23 model risk management","d":"SR 11-7 (US Fed / OCC) and PRA SS1/23 (UK) require firms to identify, measure, monitor and control model risk, and \"model\" now includes AI / ML. Every AI tool in a regulated decision maps to a model-inventory entry with an independent validator.","m":"Document compensating controls where vendor opacity blocks standard practice."},"k3":{"t":"FCA Consumer Duty + MiFID II algorithmic trading","d":"Consumer Duty (Principle 12, PRIN 2A) makes AI customer-impact a firm-level reportable across the four outcome areas. MiFID II Article 17 governs algorithmic trading, demanding effective systems, risk controls and a kill switch, with EU AI Act high-risk duties stacking on top.","m":"Conduct and market-integrity levers land on top of the AI Act."},"k4":{"t":"Map the firm to the stack first","d":"Universal AI Act + GDPR + ISO is the floor; DORA + FCA Consumer Duty + SR 11-7 + EBA + MiFID II is the ceiling for FS firms. Extend the never-paste list to the FS categories (MNPI, AML / KYC records, credit-model internals, customer financial PII) where the edge is criminal, not just regulatory.","m":"Map your firm to the stack before you map your AI tools."}}}</script>
+ <script defer src="/assets/risk-figure.js?v=1"></script>
 
  <h2>The financial-services governance layer, how DORA + EU AI Act + sector guidance combine</h2>
  <p>The universal AI Act + GDPR baseline is necessary but not sufficient for financial services. Three additional bodies of regulation interact, and they each pull a different lever.</p>
@@ -613,9 +601,9 @@
  <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
  <p>The AI Governance Platform, adopt AI safely, securely and responsibly.</p>
  </div>
- <div class="foot-col"><h4>Explore</h4><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
- <div class="foot-col"><h4>Resources</h4><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
- <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+ <div class="foot-col"><div class="foot-h">Explore</div><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
+ <div class="foot-col"><div class="foot-h">Resources</div><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
+ <div class="foot-col"><div class="foot-h">Company</div><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 

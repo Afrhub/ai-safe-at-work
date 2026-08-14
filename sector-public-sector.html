@@ -31,7 +31,7 @@
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
-<link rel="stylesheet" href="assets/style.css?v=29" />
+<link rel="stylesheet" href="assets/style.css?v=30" />
 <link rel="stylesheet" href="assets/quiz.css?v=3" />
 <script defer src="assets/cinema.js?v=23"></script>
 <script defer src="assets/quiz.js?v=5"></script>
@@ -155,20 +155,8 @@
  </svg>
  <p class="rd-cap" id="risk-fig-ps-cap" aria-live="polite"><strong>The public-sector governance stack.</strong> Select a card above to see what each part means.</p>
  </figure>
- <script>
- (function(){
-   var data = {
-     k1:{t:'Annex III high-risk', d:'The EU AI Act lists most public-services AI as high-risk by default, education scoring (§3), employment (§4), emergency triage and eligibility for public assistance benefits (§5), law enforcement (§6), migration and asylum (§7), administration of justice (§8).', m:'Classify before you build.'},
-     k2:{t:'Article 27 FRIA', d:'A Fundamental Rights Impact Assessment is mandatory for public-sector deployers before first use, six elements per Article 27(1), companion to the DPIA and the Equality Act s.149 PSED assessment, with Article 27(3) notification to the market-surveillance authority.', m:'Cross-reference DPIA &amp; PSED.'},
-     k3:{t:'ATRS &amp; UK AI Playbook', d:'The Algorithmic Transparency Recording Standard is the public-sector “show your working”, Tier 1 and Tier 2 records published before deployment; the UK AI Playbook (Cabinet Office / DSIT / GDS) sets the government-wide controls you apply.', m:'“Not yet published” is the worst answer.'},
-     k4:{t:'The public is the audience', d:'Citizens, ombudsmen, judicial review, FOI, the NAO and select committees are all venues the private sector never faces. Build the audit binder before the FOI request arrives.', m:'Map first; deploy second.'}
-   };
-   var fig = document.getElementById('risk-fig-ps'); if(!fig) return;
-   var cap = fig.querySelector('.rd-cap'); var nodes = fig.querySelectorAll('.rnode');
-   function sel(k){ nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k')===k); }); var x=data[k]; if(!x) return; cap.innerHTML='<strong>'+x.t+'.</strong> '+x.d+' <span class="rd-m">'+x.m+'</span>'; }
-   nodes.forEach(function(n){ var k=n.getAttribute('data-k'); n.addEventListener('click',function(){sel(k);}); n.addEventListener('mouseenter',function(){sel(k);}); n.addEventListener('focus',function(){sel(k);}); n.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(k);} }); });
- })();
- </script>
+ <script type="application/json" class="risk-fig-data">{"fig":"risk-fig-ps","dot":true,"data":{"k1":{"t":"Annex III high-risk","d":"The EU AI Act lists most public-services AI as high-risk by default, education scoring (§3), employment (§4), emergency triage and eligibility for public assistance benefits (§5), law enforcement (§6), migration and asylum (§7), administration of justice (§8).","m":"Classify before you build."},"k2":{"t":"Article 27 FRIA","d":"A Fundamental Rights Impact Assessment is mandatory for public-sector deployers before first use, six elements per Article 27(1), companion to the DPIA and the Equality Act s.149 PSED assessment, with Article 27(3) notification to the market-surveillance authority.","m":"Cross-reference DPIA &amp; PSED."},"k3":{"t":"ATRS &amp; UK AI Playbook","d":"The Algorithmic Transparency Recording Standard is the public-sector “show your working”, Tier 1 and Tier 2 records published before deployment; the UK AI Playbook (Cabinet Office / DSIT / GDS) sets the government-wide controls you apply.","m":"“Not yet published” is the worst answer."},"k4":{"t":"The public is the audience","d":"Citizens, ombudsmen, judicial review, FOI, the NAO and select committees are all venues the private sector never faces. Build the audit binder before the FOI request arrives.","m":"Map first; deploy second."}}}</script>
+ <script defer src="/assets/risk-figure.js?v=1"></script>
 
  <span class="sub-tag" id="sub-1">Sub-module 1 of 9</span>
  <h2>The public-sector governance layer, Annex III + UK AI Playbook + national-regulator overlays</h2>
@@ -669,9 +657,9 @@
  <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
  <p>The AI Governance Platform, adopt AI safely, securely and responsibly.</p>
  </div>
- <div class="foot-col"><h4>Explore</h4><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
- <div class="foot-col"><h4>Resources</h4><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
- <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+ <div class="foot-col"><div class="foot-h">Explore</div><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
+ <div class="foot-col"><div class="foot-h">Resources</div><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
+ <div class="foot-col"><div class="foot-h">Company</div><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 

@@ -8,6 +8,20 @@ const DEMO = /demo(\.html)?$/.test(location.pathname);
 const PROFILE = DEMO ? { full_name: 'Demo' } : await guard(["manager"]);
 if (!PROFILE) throw new Error("unauthorised");
 const CURRENT_UID = DEMO ? 'demo' : (await sb.auth.getUser()).data.user.id;
+// A database failure used to divert silently into localStorage, both ways. That made an
+// RLS mistake look like an empty register, and made "saved" mean "saved into this one
+// browser" with nobody told — the worst possible failure for a product selling audit
+// evidence. Now a failure says so, on screen, and nothing pretends to persist.
+function dbTrouble(message){
+  let b = document.getElementById('db-trouble');
+  if (!b){
+    b = document.createElement('div');
+    b.id = 'db-trouble'; b.setAttribute('role', 'alert');
+    b.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:#b91c1c;color:#fff;font:700 14px/1.4 system-ui;padding:10px 16px;text-align:center';
+    document.body.prepend(b);
+  }
+  b.textContent = message;
+}
 async function dbGet(key, fallback){
   if (DEMO){
     try{ const r = sessionStorage.getItem("aimp-demo-" + key); return r ? JSON.parse(r) : fallback; }catch(_){ return fallback; }
@@ -17,7 +31,8 @@ async function dbGet(key, fallback){
     if (error) throw error;
     return data ? data.value : fallback;
   }catch(e){
-    try{ const r = localStorage.getItem("aimp-" + key); return r ? JSON.parse(r) : fallback; }catch(_){ return fallback; }
+    dbTrouble('Your governance records could not be loaded, so screens may look empty. This is a fault, not your data — reload, and contact support if it persists.');
+    return fallback;
   }
 }
 async function dbSet(key, value){
@@ -29,7 +44,7 @@ async function dbSet(key, value){
     const { error } = await sb.from("governance_state").upsert({ manager_id: CURRENT_UID, key, value });
     if (error) throw error;
   }catch(e){
-    try{ localStorage.setItem("aimp-" + key, JSON.stringify(value)); }catch(_){}
+    dbTrouble('Your last change could not be saved. Changes made while this message shows are not being recorded — reload before continuing.');
   }
   return value;
 }

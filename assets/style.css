@@ -105,7 +105,9 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--font-mono); font-size: 0.82rem; font-weight: 700;
   letter-spacing: 0.06em; text-decoration: underline;
   border: 2px solid transparent; border-radius: 0 0 var(--r-sm) 0;
-  transition: top 120ms ease;
+  /* No transition: a keyboard user's first Tab must land on a visible control at once
+     (WCAG 2.4.7); a 120ms slide left it half off-screen whenever focus is measured or
+     seen mid-animation (NAV-08). */
 }
 .skip-link:focus, .skip-link:focus-visible { top: 0; outline: 2px solid #fff; outline-offset: -4px; }
 
@@ -241,7 +243,8 @@ h2 {
   font-weight: 800; letter-spacing: -0.018em; line-height: 1.12;
   margin: 3rem 0 1.1rem; color: var(--text);
 }
-h3 {
+h3,
+.h3-style {
   font-family: var(--font-display);
   font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em;
   margin: 2.2rem 0 0.7rem; color: var(--text);
@@ -577,7 +580,10 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
 .foot-brand .fb-name { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--text); }
 .foot-brand .fb-name img { height: 2.6em; width: auto; }
 .foot-brand p { font-size: 0.86rem; color: var(--text3); margin: 0; max-width: 32ch; line-height: 1.55; }
-.foot-col h4 { font-family: var(--font-body); font-size: 0.74rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text2); margin: 0 0 0.9rem; }
+/* Footer column titles are navigation labels, not document structure: as <h4> they
+   skipped the outline from h2 on most pages (A11Y-04). Styled divs now; the h4 rule
+   stays for any page not yet swept. */
+.foot-col h4, .foot-col .foot-h { font-family: var(--font-body); font-size: 0.74rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text2); margin: 0 0 0.9rem; }
 .foot-col a { display: block; font-size: 0.93rem; color: var(--text3); padding: 0.28rem 0; }
 .foot-col a:hover { color: var(--accent); }
 .site-foot .foot-bottom { grid-column: 1 / -1; border-top: 1px solid var(--border); margin-top: 0.8rem; padding-top: 1.5rem; font-size: 0.85rem; color: var(--text3); }

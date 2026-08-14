@@ -31,7 +31,7 @@
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
-<link rel="stylesheet" href="assets/style.css?v=29" />
+<link rel="stylesheet" href="assets/style.css?v=30" />
 <link rel="stylesheet" href="assets/quiz.css?v=3" />
 <script defer src="assets/cinema.js?v=23"></script>
 <script defer src="assets/quiz.js?v=5"></script>
@@ -214,21 +214,8 @@
  </svg>
  <p class="rd-cap" id="risk-fig-mgr-cap" aria-live="polite"><strong>The approver's loop.</strong> Select a card above to see what each step means.</p>
  </figure>
- <script>
- (function(){
-   var data = {
-     k1:{t:'The four-question review',d:'Before approving anything an AI helped produce, run four checks in under two minutes: could I produce this myself, have I read the whole thing, did I check the claims that matter, and if I&#39;m wrong, who pays the cost?',m:'Calibrate scrutiny to consequence.'},
-     k2:{t:'Meaningful human oversight',d:'Article 14 wants a named person with the competence to interpret the output and the time and authority to set it aside. Reading a summary the system produced, under time pressure, without the power to override, is not oversight.',m:'If you couldn&#39;t have said no, you didn&#39;t really say yes.'},
-     k3:{t:'Documenting the approval',d:'Approve in the system, not in conversation. Say what changed, not what stayed. If you disagreed with the AI, write the disagreement down &mdash; that sentence proves the decision wasn&#39;t solely automated under GDPR Article 22.',m:'A record that survives an audit twelve months later.'},
-     k4:{t:'Know when to refuse or escalate',d:'You always retain the right to say &quot;I won&#39;t approve this on the basis of what I&#39;ve been shown.&quot; Ask for the underlying data, a second pair of eyes, or a redo in the procured tool. If something feels off, stop.',m:'A refusal is the system working as designed.'}
-   };
-   var fig = document.getElementById('risk-fig-mgr'); if(!fig) return;
-   var cap = fig.querySelector('.rd-cap');
-   var nodes = fig.querySelectorAll('.rnode');
-   function sel(k){ nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k')===k); }); var x=data[k]; if(!x) return; cap.innerHTML='<strong>'+x.t+'.</strong> '+x.d+' <span class="rd-m">'+x.m+'</span>'; }
-   nodes.forEach(function(n){ var k=n.getAttribute('data-k'); n.addEventListener('click',function(){sel(k);}); n.addEventListener('mouseenter',function(){sel(k);}); n.addEventListener('focus',function(){sel(k);}); n.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(k);} }); });
- })();
- </script>
+ <script type="application/json" class="risk-fig-data">{"fig":"risk-fig-mgr","dot":true,"data":{"k1":{"t":"The four-question review","d":"Before approving anything an AI helped produce, run four checks in under two minutes: could I produce this myself, have I read the whole thing, did I check the claims that matter, and if I&#39;m wrong, who pays the cost?","m":"Calibrate scrutiny to consequence."},"k2":{"t":"Meaningful human oversight","d":"Article 14 wants a named person with the competence to interpret the output and the time and authority to set it aside. Reading a summary the system produced, under time pressure, without the power to override, is not oversight.","m":"If you couldn&#39;t have said no, you didn&#39;t really say yes."},"k3":{"t":"Documenting the approval","d":"Approve in the system, not in conversation. Say what changed, not what stayed. If you disagreed with the AI, write the disagreement down &mdash; that sentence proves the decision wasn&#39;t solely automated under GDPR Article 22.","m":"A record that survives an audit twelve months later."},"k4":{"t":"Know when to refuse or escalate","d":"You always retain the right to say &quot;I won&#39;t approve this on the basis of what I&#39;ve been shown.&quot; Ask for the underlying data, a second pair of eyes, or a redo in the procured tool. If something feels off, stop.","m":"A refusal is the system working as designed."}}}</script>
+ <script defer src="/assets/risk-figure.js?v=1"></script>
 
  <h2>Why this module exists for you</h2>
  <p>The hard job in any organisation deploying AI is deciding which AI-assisted outputs go forward and which do not. The standards landing in 2025 and 2026 (EU AI Act Articles 14 and 26, GDPR Article 22, ISO 42001 Annex A.9) converge on a single point: a human, named, with the authority to refuse, must do something between the AI's output and the world.</p>
@@ -525,9 +512,9 @@
  <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
  <p>The AI Governance Platform, adopt AI safely, securely and responsibly.</p>
  </div>
- <div class="foot-col"><h4>Explore</h4><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
- <div class="foot-col"><h4>Resources</h4><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
- <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+ <div class="foot-col"><div class="foot-h">Explore</div><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
+ <div class="foot-col"><div class="foot-h">Resources</div><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
+ <div class="foot-col"><div class="foot-h">Company</div><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 

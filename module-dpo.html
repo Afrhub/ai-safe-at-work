@@ -31,7 +31,7 @@
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
-<link rel="stylesheet" href="assets/style.css?v=29" />
+<link rel="stylesheet" href="assets/style.css?v=30" />
 <link rel="stylesheet" href="assets/quiz.css?v=3" />
 <script defer src="assets/cinema.js?v=23"></script>
 <script defer src="assets/quiz.js?v=5"></script>
@@ -228,21 +228,8 @@
  </svg>
  <p class="rd-cap" id="risk-fig-dpo-cap" aria-live="polite"><strong>The DPO's three cross-cutting tasks.</strong> Select a card above to see what each step means.</p>
  </figure>
-<script>
- (function(){
-   var data = {
-     k1:{t:'DPIA, FRIA, or both?',d:'A DPIA (GDPR Art 35) is triggered where processing is likely to result in high risk to rights and freedoms &mdash; AI use almost always meets this. A FRIA (EU AI Act Art 27) is triggered for deployers of high-risk AI in public services or credit / insurance pricing. Six scoping questions from a fifteen-minute conversation shape the depth of the work.',m:'For most EU SMBs deploying AI in HR or customer-facing decisions: both. Run them together, one combined document.'},
-     k2:{t:'The 72-hour breach clock',d:'Article 33 starts the clock at reasonable awareness, not certainty. The common AI cases &mdash; data pasted into a free-tier tool, a vendor security incident, a model disclosing data it shouldn\'t &mdash; are the hardest to time.',m:'If your gut says breach, the clock is running. If unsure at 60 hours, notify. Always notify in writing.'},
-     k3:{t:'The RoPA AI entry',d:'Each AI use case needs an Art 30 record covering five things many entries skip: the model behind the product (with sub-processors), the data flow and retention, the specific legal basis, the decision boundary between AI output and human choice, and the vendor incident contact &mdash; plus a review cadence.',m:'Default cadence quarterly; finance and health monthly.'},
-     k4:{t:'Be the first call, not the last',d:'Most AI incidents at an SMB start with a tool procurement bought before the DPO got involved. The 90-day plan &mdash; inventory, gap, triage, policy, DPIAs, then train and log &mdash; turns the standards from background reading into a weekly calendar.',m:'The cheapest insurance is to be the first call when a new AI tool is proposed.'}
-   };
-   var fig = document.getElementById('risk-fig-dpo'); if(!fig) return;
-   var cap = fig.querySelector('.rd-cap');
-   var nodes = fig.querySelectorAll('.rnode');
-   function sel(k){ nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k')===k); }); var x=data[k]; if(!x) return; cap.innerHTML='<strong>'+x.t+'.</strong> '+x.d+' <span class="rd-m">'+x.m+'</span>'; }
-   nodes.forEach(function(n){ var k=n.getAttribute('data-k'); n.addEventListener('click',function(){sel(k);}); n.addEventListener('mouseenter',function(){sel(k);}); n.addEventListener('focus',function(){sel(k);}); n.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(k);} }); });
- })();
- </script>
+<script type="application/json" class="risk-fig-data">{"fig":"risk-fig-dpo","dot":true,"data":{"k1":{"t":"DPIA, FRIA, or both?","d":"A DPIA (GDPR Art 35) is triggered where processing is likely to result in high risk to rights and freedoms &mdash; AI use almost always meets this. A FRIA (EU AI Act Art 27) is triggered for deployers of high-risk AI in public services or credit / insurance pricing. Six scoping questions from a fifteen-minute conversation shape the depth of the work.","m":"For most EU SMBs deploying AI in HR or customer-facing decisions: both. Run them together, one combined document."},"k2":{"t":"The 72-hour breach clock","d":"Article 33 starts the clock at reasonable awareness, not certainty. The common AI cases &mdash; data pasted into a free-tier tool, a vendor security incident, a model disclosing data it shouldn't &mdash; are the hardest to time.","m":"If your gut says breach, the clock is running. If unsure at 60 hours, notify. Always notify in writing."},"k3":{"t":"The RoPA AI entry","d":"Each AI use case needs an Art 30 record covering five things many entries skip: the model behind the product (with sub-processors), the data flow and retention, the specific legal basis, the decision boundary between AI output and human choice, and the vendor incident contact &mdash; plus a review cadence.","m":"Default cadence quarterly; finance and health monthly."},"k4":{"t":"Be the first call, not the last","d":"Most AI incidents at an SMB start with a tool procurement bought before the DPO got involved. The 90-day plan &mdash; inventory, gap, triage, policy, DPIAs, then train and log &mdash; turns the standards from background reading into a weekly calendar.","m":"The cheapest insurance is to be the first call when a new AI tool is proposed."}}}</script>
+<script defer src="/assets/risk-figure.js?v=1"></script>
  <h2>What's actually changed for you</h2>
  <p>The substantive shift since 2024 is small and large at once. GDPR was not rewritten. ISO 27001 was not rewritten. The EU AI Act layered on top of both. The change for you: <strong>every existing obligation now has an AI-specific edge case</strong>, and the business expects you to recognise it before it commits.</p>
 
@@ -547,9 +534,9 @@
  <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
  <p>The AI Governance Platform, adopt AI safely, securely and responsibly.</p>
  </div>
- <div class="foot-col"><h4>Explore</h4><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
- <div class="foot-col"><h4>Resources</h4><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
- <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+ <div class="foot-col"><div class="foot-h">Explore</div><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
+ <div class="foot-col"><div class="foot-h">Resources</div><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
+ <div class="foot-col"><div class="foot-h">Company</div><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 

@@ -31,7 +31,7 @@
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
-<link rel="stylesheet" href="assets/style.css?v=29" />
+<link rel="stylesheet" href="assets/style.css?v=30" />
 <link rel="stylesheet" href="assets/completion.css?v=3" />
 <link rel="stylesheet" href="assets/module-video.css?v=3" /><!-- completion v1 -->
 <script defer src="assets/completion.js?v=1"></script><!-- completion v1 -->
@@ -231,32 +231,8 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  </svg>
  <p class="rd-cap" id="risk-fig-2-cap" aria-live="polite"><strong>The four versions, weakest to safest.</strong> Select a version above, each one treats your data differently.</p>
  </figure>
- <script>
-  (function(){
-    var data = {
-      free: {t:'Free version', d:'A public tool with no deal between your company and the AI company. Conversations may be used to improve future models unless you turn that off, and your company has no say over the data.', m:'Weakest. Pasting work here is the most common leak.'},
-      paid: {t:'Paid version (just you)', d:'Better answers and longer chats, but still a public tool with no company deal. Most paid versions do have a clear "do not train on my chats" switch, find it and turn it on.', m:'Still public. Paying does not change the rules.'},
-      team: {t:'Team or business version', d:'Your company has a proper deal (a Data Processing Agreement). Training on your data is usually off by default, you can set retention, and there is an admin panel.', m:'The rules change here. If your company has it, use it.'},
-      ent:  {t:'Work (enterprise) version', d:'Everything the team version has, plus a choice of where data is kept (often EU-only), full audit logs, single sign-on, and security certificates the buying team can check.', m:'Safest. What the standards expect for anything private.'},
-      rule: {t:'The rule of thumb', d:'"Is it OK to use AI for this?" depends on which version of which tool, with which settings, on which data.', m:'Remember: the version you use matters as much as what you type.'}
-    };
-    var fig = document.getElementById('risk-fig-2'); if(!fig) return;
-    var cap = fig.querySelector('.rd-cap');
-    var nodes = fig.querySelectorAll('.rnode');
-    function sel(k){
-      nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k') === k); });
-      var x = data[k]; if(!x) return;
-      cap.innerHTML = '<strong>' + x.t + '.</strong> ' + x.d + ' <span class="rd-m">' + x.m + '</span>';
-    }
-    nodes.forEach(function(n){
-      var k = n.getAttribute('data-k');
-      n.addEventListener('click', function(){ sel(k); });
-      n.addEventListener('mouseenter', function(){ sel(k); });
-      n.addEventListener('focus', function(){ sel(k); });
-      n.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sel(k); } });
-    });
-  })();
-  </script>
+ <script type="application/json" class="risk-fig-data">{"fig":"risk-fig-2","dot":true,"data":{"free":{"t":"Free version","d":"A public tool with no deal between your company and the AI company. Conversations may be used to improve future models unless you turn that off, and your company has no say over the data.","m":"Weakest. Pasting work here is the most common leak."},"paid":{"t":"Paid version (just you)","d":"Better answers and longer chats, but still a public tool with no company deal. Most paid versions do have a clear \"do not train on my chats\" switch, find it and turn it on.","m":"Still public. Paying does not change the rules."},"team":{"t":"Team or business version","d":"Your company has a proper deal (a Data Processing Agreement). Training on your data is usually off by default, you can set retention, and there is an admin panel.","m":"The rules change here. If your company has it, use it."},"ent":{"t":"Work (enterprise) version","d":"Everything the team version has, plus a choice of where data is kept (often EU-only), full audit logs, single sign-on, and security certificates the buying team can check.","m":"Safest. What the standards expect for anything private."},"rule":{"t":"The rule of thumb","d":"\"Is it OK to use AI for this?\" depends on which version of which tool, with which settings, on which data.","m":"Remember: the version you use matters as much as what you type."}}}</script>
+ <script defer src="/assets/risk-figure.js?v=1"></script>
 
  <h3>1. Free version</h3>
  <p>Like ChatGPT, Claude, Gemini or Copilot when you have not paid.</p>
@@ -515,9 +491,9 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
  <p>The AI Governance Platform, adopt AI safely, securely and responsibly.</p>
  </div>
- <div class="foot-col"><h4>Explore</h4><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
- <div class="foot-col"><h4>Resources</h4><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
- <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+ <div class="foot-col"><div class="foot-h">Explore</div><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
+ <div class="foot-col"><div class="foot-h">Resources</div><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
+ <div class="foot-col"><div class="foot-h">Company</div><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 

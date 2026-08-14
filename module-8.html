@@ -31,7 +31,7 @@
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
-<link rel="stylesheet" href="assets/style.css?v=29" />
+<link rel="stylesheet" href="assets/style.css?v=30" />
 <link rel="stylesheet" href="assets/module-video.css?v=3" />
 <link rel="stylesheet" href="assets/completion.css?v=3" /><!-- completion v1 -->
 <script defer src="assets/completion.js?v=1"></script><!-- completion v1 -->
@@ -211,30 +211,8 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  </svg>
  <p class="rd-cap" id="risk-fig-8-cap" aria-live="polite"><strong>Two copyright questions, not one.</strong> Select a question above, input and output are separate problems with separate answers.</p>
  </figure>
- <script>
-  (function(){
-    var data = {
-      in:  {t:'Input copyright', d:'When you (or the AI vendor) feed copyrighted material into an AI, does that need permission? Pasting a paywalled article, a "no AI training" page, or a client’s confidential document to summarise can breach the publisher’s terms or a confidentiality clause.', m:'Probably fine for your own or public-domain content; a problem behind a paywall.'},
-      out: {t:'Output copyright', d:'When the AI produces something, who owns it? Fully AI-generated material with no significant human creative input may not qualify for copyright protection in many jurisdictions, so others may be able to use the same output.', m:'“Significant human creative input” is the moving line.'},
-      do:  {t:'The practical rule', d:'Treat purely AI-generated content as public domain, and keep a short record of how each asset was made, prompts, edits, human contribution, brand check.', m:'The question is provenance, not permission.'}
-    };
-    var fig = document.getElementById('risk-fig-8'); if(!fig) return;
-    var cap = fig.querySelector('.rd-cap');
-    var nodes = fig.querySelectorAll('.rnode');
-    function sel(k){
-      nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k') === k); });
-      var x = data[k]; if(!x) return;
-      cap.innerHTML = '<strong>' + x.t + '.</strong> ' + x.d + ' <span class="rd-m">' + x.m + '</span>';
-    }
-    nodes.forEach(function(n){
-      var k = n.getAttribute('data-k');
-      n.addEventListener('click', function(){ sel(k); });
-      n.addEventListener('mouseenter', function(){ sel(k); });
-      n.addEventListener('focus', function(){ sel(k); });
-      n.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sel(k); } });
-    });
-  })();
-  </script>
+ <script type="application/json" class="risk-fig-data">{"fig":"risk-fig-8","dot":true,"data":{"in":{"t":"Input copyright","d":"When you (or the AI vendor) feed copyrighted material into an AI, does that need permission? Pasting a paywalled article, a \"no AI training\" page, or a client’s confidential document to summarise can breach the publisher’s terms or a confidentiality clause.","m":"Probably fine for your own or public-domain content; a problem behind a paywall."},"out":{"t":"Output copyright","d":"When the AI produces something, who owns it? Fully AI-generated material with no significant human creative input may not qualify for copyright protection in many jurisdictions, so others may be able to use the same output.","m":"“Significant human creative input” is the moving line."},"do":{"t":"The practical rule","d":"Treat purely AI-generated content as public domain, and keep a short record of how each asset was made, prompts, edits, human contribution, brand check.","m":"The question is provenance, not permission."}}}</script>
+ <script defer src="/assets/risk-figure.js?v=1"></script>
 
  <h2>Input, feeding copyrighted material to AI</h2>
  <p>When you paste a copyrighted article, book chapter, image, song lyric, or company document into an AI tool to ask it to summarise or transform, you're making a copy of that material and sending it to a third party. Depending on what you do next, that may be:</p>
@@ -492,9 +470,9 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
  <p>The AI Governance Platform, adopt AI safely, securely and responsibly.</p>
  </div>
- <div class="foot-col"><h4>Explore</h4><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
- <div class="foot-col"><h4>Resources</h4><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
- <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+ <div class="foot-col"><div class="foot-h">Explore</div><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
+ <div class="foot-col"><div class="foot-h">Resources</div><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
+ <div class="foot-col"><div class="foot-h">Company</div><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 

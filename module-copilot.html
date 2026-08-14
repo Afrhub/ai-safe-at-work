@@ -31,7 +31,7 @@
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
-<link rel="stylesheet" href="assets/style.css?v=29" />
+<link rel="stylesheet" href="assets/style.css?v=30" />
 <link rel="stylesheet" href="assets/quiz.css?v=3" />
 <script defer src="assets/cinema.js?v=23"></script>
 <script defer src="assets/quiz.js?v=5"></script>
@@ -136,15 +136,8 @@
  </svg>
  <p class="rd-cap" id="risk-fig-copilot-cap" aria-live="polite"><strong>Governing Copilot, the levers that matter.</strong> Select a card above to see what each part means.</p>
  </figure>
-<script>
- (function(){
-   var data = { k1:{t:'Which Copilot?',d:'Five materially-different products share the Copilot brand, from consumer Copilot in Edge to Microsoft 365 Copilot, Copilot Studio, and Copilot for Sales &amp; Service. Each has a different data-residency posture and a different owner.',m:'Govern the variant you actually have, Sub-module 1.'}, k2:{t:'Permissions inheritance',d:'Copilot never breaks permissions, it surfaces what a user could already see but forgot they could, salary sheets, board minutes, files over-shared reorgs ago. Most Copilot incidents trace back here.',m:'Clean SharePoint over-sharing first, Sub-modules 2 &amp; 6.'}, k3:{t:'Data residency',d:'Five levers combine to decide where prompts and responses live, tenant region, Multi-Geo, the M365 service boundary, Bing grounding, and Copilot Studio calls to external endpoints. A DPO deserves a five-line answer, not a wave at &ldquo;the tenant&rdquo;.',m:'Confirm the EU Data Boundary, don&rsquo;t assume, Sub-module 3.'}, k4:{t:'Make it enforceable',d:'Purview sensitivity labels with encryption are the strongest preventive control, Copilot won&rsquo;t surface a labelled file a user can&rsquo;t decrypt, and the unified audit log records who asked what when. Together they turn policy into something you can evidence.',m:'Three labels with protection, plus retention that outlasts an investigation, Sub-modules 4 &amp; 8.'} };
-   var fig = document.getElementById('risk-fig-copilot'); if(!fig) return;
-   var cap = fig.querySelector('.rd-cap'); var nodes = fig.querySelectorAll('.rnode');
-   function sel(k){ nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k')===k); }); var x=data[k]; if(!x) return; cap.innerHTML='<strong>'+x.t+'.</strong> '+x.d+' <span class="rd-m">'+x.m+'</span>'; }
-   nodes.forEach(function(n){ var k=n.getAttribute('data-k'); n.addEventListener('click',function(){sel(k);}); n.addEventListener('mouseenter',function(){sel(k);}); n.addEventListener('focus',function(){sel(k);}); n.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(k);} }); });
- })();
- </script>
+<script type="application/json" class="risk-fig-data">{"fig":"risk-fig-copilot","dot":true,"data":{"k1":{"t":"Which Copilot?","d":"Five materially-different products share the Copilot brand, from consumer Copilot in Edge to Microsoft 365 Copilot, Copilot Studio, and Copilot for Sales &amp; Service. Each has a different data-residency posture and a different owner.","m":"Govern the variant you actually have, Sub-module 1."},"k2":{"t":"Permissions inheritance","d":"Copilot never breaks permissions, it surfaces what a user could already see but forgot they could, salary sheets, board minutes, files over-shared reorgs ago. Most Copilot incidents trace back here.","m":"Clean SharePoint over-sharing first, Sub-modules 2 &amp; 6."},"k3":{"t":"Data residency","d":"Five levers combine to decide where prompts and responses live, tenant region, Multi-Geo, the M365 service boundary, Bing grounding, and Copilot Studio calls to external endpoints. A DPO deserves a five-line answer, not a wave at &ldquo;the tenant&rdquo;.","m":"Confirm the EU Data Boundary, don&rsquo;t assume, Sub-module 3."},"k4":{"t":"Make it enforceable","d":"Purview sensitivity labels with encryption are the strongest preventive control, Copilot won&rsquo;t surface a labelled file a user can&rsquo;t decrypt, and the unified audit log records who asked what when. Together they turn policy into something you can evidence.","m":"Three labels with protection, plus retention that outlasts an investigation, Sub-modules 4 &amp; 8."}}}</script>
+<script defer src="/assets/risk-figure.js?v=1"></script>
  <h2>What Microsoft Copilot is, exactly</h2>
  <p>"Copilot" is now a brand, not a product. Five materially-different things share the name. The governance posture differs at every one. Get the naming right or you'll govern the wrong surface.</p>
 
@@ -661,9 +654,9 @@
  <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
  <p>The AI Governance Platform, adopt AI safely, securely and responsibly.</p>
  </div>
- <div class="foot-col"><h4>Explore</h4><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
- <div class="foot-col"><h4>Resources</h4><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
- <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+ <div class="foot-col"><div class="foot-h">Explore</div><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
+ <div class="foot-col"><div class="foot-h">Resources</div><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
+ <div class="foot-col"><div class="foot-h">Company</div><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 

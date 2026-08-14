@@ -25,13 +25,18 @@ const RESPONSIVE_PAGES = [
 
 const WIDTHS = [320, 390, 768, 900, 1280, 1440];
 
-// CSP-01 says "every page". Twelve is the spread that covers every script bundle
-// the site ships: marketing, course, checkout, module, portal shell and demo.
+// CSP-01 says "every page", and it means it now. Sampling 12 let 17 broken module pages
+// sit outside coverage — exactly how the certificate bug and the dead risk figures
+// survived to production. Every module and sector page is listed.
 const CSP_PAGES = [
   "/index.html", "/pricing.html", "/course.html", "/checkout.html",
-  "/checkout.html?plan=platform", "/who-we-help.html", "/module-1.html",
+  "/checkout.html?plan=platform", "/who-we-help.html",
   "/glossary.html", "/standards-map.html", "/resources.html",
   "/portal/login.html", "/portal/demo.html",
+  ...Array.from({ length: 12 }, (_, i) => `/module-${i + 1}.html`),
+  "/module-copilot.html", "/module-dpo.html", "/module-manager.html",
+  "/module-msp-admin.html", "/module-procurement.html", "/module-shadow-ai.html",
+  "/sector-financial-services.html", "/sector-healthcare.html", "/sector-public-sector.html",
 ];
 
 const GATED_TO_COURSE = ["/module-2.html", "/module-6.html", "/module-12.html", "/cert.html"];
@@ -172,14 +177,19 @@ export async function run() {
   group("CSP-01, zero violations on the deployed site");
   for (const path of CSP_PAGES) {
     await check("CSP-01", `no CSP violation on ${path}`, async () => {
-      await withPage(async ({ page, record }) => {
-        const p = new SitePage(page, record);
-        await p.open(path);
-        ok(
-          record.csp.length === 0,
-          `${record.csp.length} violation(s): ${record.csp.join(" | ")}`
-        );
-      });
+      // Signed-in context so the gated pages render instead of bouncing to
+      // course.html before their scripts have run. course-gate.js reads one key.
+      await withPage(
+        async ({ page, record }) => {
+          const p = new SitePage(page, record);
+          await p.open(path);
+          ok(
+            record.csp.length === 0,
+            `${record.csp.length} violation(s): ${record.csp.join(" | ")}`
+          );
+        },
+        { context: signedInContext() }
+      );
     });
   }
 

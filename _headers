@@ -50,9 +50,12 @@
   X-Robots-Tag: noai, noimageai, nosnippet, noindex, nofollow
   Cache-Control: private, no-store
 
-# Pricing page is a draft today — treat as paid-adjacent (noai + noindex)
+# Pricing was noindexed as a draft, which contradicted its meta (index) and its sitemap
+# entry — the header won, so the priced page was invisible to search while the sitemap
+# kept submitting it (SEO-01/SEO-03). It is no longer a draft: it is the page checkout
+# links to. noai stays; index/nofollow flags go.
 /pricing.html
-  X-Robots-Tag: noai, noimageai, nosnippet, noindex, nofollow
+  X-Robots-Tag: noai, noimageai
 
 # MSP draft page — same posture
 /msp.html

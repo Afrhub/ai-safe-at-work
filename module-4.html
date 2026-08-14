@@ -31,7 +31,7 @@
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
-<link rel="stylesheet" href="assets/style.css?v=29" />
+<link rel="stylesheet" href="assets/style.css?v=30" />
 <link rel="stylesheet" href="assets/module-video.css?v=3" />
 <link rel="stylesheet" href="assets/completion.css?v=3" /><!-- completion v1 -->
 <script defer src="assets/completion.js?v=1"></script><!-- completion v1 -->
@@ -218,31 +218,8 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  </svg>
  <p class="rd-cap" id="risk-fig-cap" aria-live="polite"><strong>The four-question decision flow.</strong> Select a question above, run any task through them in order before opening an AI tool.</p>
  </figure>
- <script>
-  (function(){
-    var data = {
-      q1: {t:'Is the data on the never-paste list?', d:'If yes, stop. Reformulate the task to use the shape of the data rather than the data itself, or escalate to the enterprise tool. Never-paste means never into a free or personal AI tool.', m:'Question 1.'},
-      q2: {t:'Does my business have a procured AI tool?', d:'Most businesses now have at least one, Copilot, ChatGPT Team, Claude for Work, Gemini. If your business has paid for one, use it: the contract, DPA and controls are already in place.', m:'Question 2.'},
-      q3: {t:'Is the data internal but low-sensitivity?', d:'Marketing copy, a presentation outline, a generic how-to question. A consumer-tier tool may be acceptable, subject to policy, with training opted off, and nothing from the never-paste list.', m:'Question 3.'},
-      q4: {t:'Is there a regulated decision involved?', d:'Hiring, firing, pay, credit, insurance, health, criminal justice. That is EU AI Act territory: an enterprise tool with oversight and logging, or a human-only process.', m:'Question 4.'}
-    };
-    var fig = document.getElementById('risk-fig-4'); if(!fig) return;
-    var cap = fig.querySelector('.rd-cap');
-    var nodes = fig.querySelectorAll('.rnode');
-    function sel(k){
-      nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k') === k); });
-      var x = data[k]; if(!x) return;
-      cap.innerHTML = '<strong>' + x.t + '</strong> ' + x.d + ' <span class="rd-m">' + x.m + '</span>';
-    }
-    nodes.forEach(function(n){
-      var k = n.getAttribute('data-k');
-      n.addEventListener('click', function(){ sel(k); });
-      n.addEventListener('mouseenter', function(){ sel(k); });
-      n.addEventListener('focus', function(){ sel(k); });
-      n.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sel(k); } });
-    });
-  })();
-  </script>
+ <script type="application/json" class="risk-fig-data">{"fig":"risk-fig-4","dot":false,"data":{"q1":{"t":"Is the data on the never-paste list?","d":"If yes, stop. Reformulate the task to use the shape of the data rather than the data itself, or escalate to the enterprise tool. Never-paste means never into a free or personal AI tool.","m":"Question 1."},"q2":{"t":"Does my business have a procured AI tool?","d":"Most businesses now have at least one, Copilot, ChatGPT Team, Claude for Work, Gemini. If your business has paid for one, use it: the contract, DPA and controls are already in place.","m":"Question 2."},"q3":{"t":"Is the data internal but low-sensitivity?","d":"Marketing copy, a presentation outline, a generic how-to question. A consumer-tier tool may be acceptable, subject to policy, with training opted off, and nothing from the never-paste list.","m":"Question 3."},"q4":{"t":"Is there a regulated decision involved?","d":"Hiring, firing, pay, credit, insurance, health, criminal justice. That is EU AI Act territory: an enterprise tool with oversight and logging, or a human-only process.","m":"Question 4."}}}</script>
+ <script defer src="/assets/risk-figure.js?v=1"></script>
 
  <h3>Question 1, Is the data on the never-paste list?</h3>
  <p>(Module 3.) If yes, you're already in the right place: either reformulate the task to use the "shape" of the data rather than the data itself, or escalate to the enterprise tool. Don't continue down the flow with sensitive data in hand.</p>
@@ -503,9 +480,9 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
  <p>The AI Governance Platform, adopt AI safely, securely and responsibly.</p>
  </div>
- <div class="foot-col"><h4>Explore</h4><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
- <div class="foot-col"><h4>Resources</h4><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
- <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+ <div class="foot-col"><div class="foot-h">Explore</div><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
+ <div class="foot-col"><div class="foot-h">Resources</div><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
+ <div class="foot-col"><div class="foot-h">Company</div><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 

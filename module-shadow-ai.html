@@ -31,7 +31,7 @@
 <link rel="preload" href="assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
-<link rel="stylesheet" href="assets/style.css?v=29" />
+<link rel="stylesheet" href="assets/style.css?v=30" />
 <link rel="stylesheet" href="assets/quiz.css?v=3" />
 <script defer src="assets/cinema.js?v=23"></script>
 <script defer src="assets/quiz.js?v=5"></script>
@@ -151,20 +151,8 @@
  </svg>
  <p class="rd-cap" id="risk-fig-shadow-cap" aria-live="polite"><strong>The four shapes of Shadow AI.</strong> Three shapes, plus the good-practice response, personal AI accounts used for work are the fourth, hardest-to-detect shape. Select a card above to see what each part means.</p>
  </figure>
- <script>
-  (function(){
-    var data = {
-      k1:{t:'Consumer chatbots', d:'Free or paid-individual ChatGPT, Claude, Gemini, Perplexity, and the dozens of clones. The user opens a browser tab and types.', m:'Detection: proxy logs, DNS, network analytics. Highest data-exposure risk per use; easiest to contain.'},
-      k2:{t:'Browser extensions', d:'Grammarly AI, Compose AI, sidebar assistants, AI summarisers and note-takers, often installed casually because they are free, many transmit page content to a third party.', m:'Detection: Edge or Chrome enterprise extension inventory, Defender for Cloud Apps. Fix: browser policy plus an allowlist.'},
-      k3:{t:'AI-in-SaaS', d:'AI features bolted onto tools you already use, Notion AI, Slack AI, Zoom AI Companion, Otter.ai, HubSpot AI. The SaaS was approved; the AI feature arrived in an update.', m:'Detection: SaaS Management Platforms, your inventory plus vendor release notes. Fix: vendor questionnaire plus selective feature disable.'},
-      k4:{t:'Contain &amp; replace', d:'A ban only changes visibility, not behaviour. What works is blocking the risky route while giving staff an approved alternative for every job that needs AI, plus a clear forbidden-data list.', m:'The fourth shape, personal AI accounts used for work, is contained by culture, education, and acceptable-use clarity, not a control surface.'}
-    };
-    var fig = document.getElementById('risk-fig-shadow'); if(!fig) return;
-    var cap = fig.querySelector('.rd-cap'); var nodes = fig.querySelectorAll('.rnode');
-    function sel(k){ nodes.forEach(function(n){ n.classList.toggle('is-active', n.getAttribute('data-k')===k); }); var x=data[k]; if(!x) return; cap.innerHTML='<strong>'+x.t+'.</strong> '+x.d+' <span class="rd-m">'+x.m+'</span>'; }
-    nodes.forEach(function(n){ var k=n.getAttribute('data-k'); n.addEventListener('click',function(){sel(k);}); n.addEventListener('mouseenter',function(){sel(k);}); n.addEventListener('focus',function(){sel(k);}); n.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(k);} }); });
-  })();
-  </script>
+ <script type="application/json" class="risk-fig-data">{"fig":"risk-fig-shadow","dot":true,"data":{"k1":{"t":"Consumer chatbots","d":"Free or paid-individual ChatGPT, Claude, Gemini, Perplexity, and the dozens of clones. The user opens a browser tab and types.","m":"Detection: proxy logs, DNS, network analytics. Highest data-exposure risk per use; easiest to contain."},"k2":{"t":"Browser extensions","d":"Grammarly AI, Compose AI, sidebar assistants, AI summarisers and note-takers, often installed casually because they are free, many transmit page content to a third party.","m":"Detection: Edge or Chrome enterprise extension inventory, Defender for Cloud Apps. Fix: browser policy plus an allowlist."},"k3":{"t":"AI-in-SaaS","d":"AI features bolted onto tools you already use, Notion AI, Slack AI, Zoom AI Companion, Otter.ai, HubSpot AI. The SaaS was approved; the AI feature arrived in an update.","m":"Detection: SaaS Management Platforms, your inventory plus vendor release notes. Fix: vendor questionnaire plus selective feature disable."},"k4":{"t":"Contain &amp; replace","d":"A ban only changes visibility, not behaviour. What works is blocking the risky route while giving staff an approved alternative for every job that needs AI, plus a clear forbidden-data list.","m":"The fourth shape, personal AI accounts used for work, is contained by culture, education, and acceptable-use clarity, not a control surface."}}}</script>
+ <script defer src="/assets/risk-figure.js?v=1"></script>
 
  <span class="sub-tag" id="sub-1">Sub-module 1 of 10</span>
  <h2>What Shadow AI is, and why it spreads faster than any internal control</h2>
@@ -630,9 +618,9 @@
  <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
  <p>The AI Governance Platform, adopt AI safely, securely and responsibly.</p>
  </div>
- <div class="foot-col"><h4>Explore</h4><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
- <div class="foot-col"><h4>Resources</h4><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
- <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+ <div class="foot-col"><div class="foot-h">Explore</div><a href="who-we-help.html">Who We Help</a><a href="pricing.html">Plans</a><a href="demo.html">Book a Demo</a><a href="msp.html">Become a Partner</a></div>
+ <div class="foot-col"><div class="foot-h">Resources</div><a href="resources.html">Resources</a><a href="templates/">Templates</a><a href="faq.html">FAQs</a><a href="about.html#contact">Support</a></div>
+ <div class="foot-col"><div class="foot-h">Company</div><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 
