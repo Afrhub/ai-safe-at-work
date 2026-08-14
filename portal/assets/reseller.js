@@ -1,9 +1,9 @@
-import { guard, sb, signOut } from "./portal.js";
+import { guard, sb, wireSignOut } from "./portal.js";
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const profile = await guard(["reseller"]);
 if (profile) {
   document.getElementById("who").textContent = (profile.full_name || "") + " Â· Reseller";
-  document.getElementById("out").addEventListener("click", signOut);
+  wireSignOut(document.getElementById("out"));
 
   async function loadDeals() {
     const { data: deals } = await sb.from("deal_registrations").select("*").order("created_at", { ascending: false });

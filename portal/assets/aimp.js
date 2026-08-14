@@ -1,5 +1,5 @@
 /* ============ STORAGE LAYER: Supabase per-manager KV (was window.storage) ============ */
-import { guard, sb, signOut } from "./portal.js";
+import { guard, sb, signOut, wireSignOut } from "./portal.js";
 /* Demo mode: portal/demo.html runs the real platform against sessionStorage —
    no auth, no Supabase writes, sample data seeded, everything resets when the
    tab closes. Path-detected because the CSP (script-src 'self') forbids an
@@ -1629,10 +1629,10 @@ async function seedDemo(){
     document.getElementById('who').textContent = 'Demo environment · sample data';
     const out = document.getElementById('out');
     out.textContent = 'Exit demo';
-    out.addEventListener('click', ()=>{ location.href = '../pricing.html'; });
+    wireSignOut(out, ()=>{ location.href = '../pricing.html'; });
   } else {
     document.getElementById('who').textContent = (PROFILE.full_name || '') + ' · Manager';
-    document.getElementById('out').addEventListener('click', signOut);
+    wireSignOut(document.getElementById('out'), signOut);
   }
   await loadAll();
   renderNav();

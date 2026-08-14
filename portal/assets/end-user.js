@@ -1,9 +1,9 @@
-import { guard, sb, signOut } from "./portal.js";
+import { guard, sb, wireSignOut } from "./portal.js";
 import { MODULES } from "./modules.js";
 const profile = await guard(["end_user"]);
 if (profile) {
   document.getElementById("who").textContent = (profile.full_name || "") + " · Team";
-  document.getElementById("out").addEventListener("click", signOut);
+  wireSignOut(document.getElementById("out"));
   const { data: { user } } = await sb.auth.getUser();
 
   // There used to be a bridge here: read each module's localStorage pass and push it to

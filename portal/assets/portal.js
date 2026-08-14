@@ -69,6 +69,17 @@ export async function guard(allowedRoles) {
 }
 
 export async function signOut() {
-  await sb.auth.signOut();
+  // Never strand a signed-in user on a dead button: end up at sign-in even if the
+  // server call fails, the local session is cleared either way.
+  try { await sb.auth.signOut(); } catch (e) {}
   location.replace("login.html");
+}
+
+// The Sign out button is static HTML, so it is shipped disabled and comes alive only
+// when a page module attaches its handler. Before this, a click in the first moments
+// after paint was silently lost — found by the onboarding journey test.
+export function wireSignOut(btn, handler = signOut) {
+  if (!btn) return;
+  btn.addEventListener("click", handler);
+  btn.disabled = false;
 }

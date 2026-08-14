@@ -1,4 +1,4 @@
-import { guard, sb, signOut } from "./portal.js";
+import { guard, sb, wireSignOut } from "./portal.js";
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -15,7 +15,7 @@ const KINDS = {
 const profile = await guard(["manager"]);
 if (profile) {
   $("who").textContent = (profile.full_name || "") + " · Manager";
-  $("out").addEventListener("click", signOut);
+  wireSignOut($("out"));
 
   const { data: { user } } = await sb.auth.getUser();
   const myId = user.id;

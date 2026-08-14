@@ -24,6 +24,8 @@ Lives in `docs/`, which `netlify.toml` 404s, because it names security defects.
       Default to `""` and let the guard refuse. Fail closed, not to the cheaper plan.
 - [ ] 🧑 **Decide VAT.** `VAT_RATE` is unset, so the advertised ex-VAT price is charged
       as-is. If VAT registered and this ships unset, you absorb the VAT on every sale.
+      **Deferred 14 Aug** until the Stripe account exists; recorded as blocking the
+      first real charge in docs/LAUNCH-RUNBOOK.md Phase 3.
 
 ## P0d, the course could not be completed, and completion was forgeable
 
@@ -172,10 +174,9 @@ wrong for about two weeks on a product that sells being current.
 - [x] 🤖 **Widen the CSP test to every page.** It samples 12, so 17 of the 18 broken
       module pages fail outside coverage. This is exactly how the certificate bug
       survived to production.
-- [ ] 🧑 **Six role-track modules have no video**: Copilot, DPO, Manager, MSP Admin,
-      Procurement, Shadow AI. No `<video>`, no `<iframe>`, nothing. Modules 1 to 12 all
-      have one and all serve. Decide whether the role tracks need videos or whether the
-      copy should stop implying every module has one.
+- [x] 🧑 **Six role-track modules have no video**: Copilot, DPO, Manager, MSP Admin,
+      Procurement, Shadow AI. **Decided 14 Aug: videos later, copy stays.** Accepted
+      risk that a buyer notices during a demo; listed in the runbook's standing risks.
 
 ## P4, code review leftovers, not urgent
 
