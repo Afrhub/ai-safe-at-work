@@ -1077,10 +1077,73 @@ Money/domain/DNS actions remain **human-only** (per operating principles): I pre
 
 ---
 
+## § Engineering rules — earned the hard way (added 2026-08-14)
+
+Each rule below exists because its absence shipped a broken paid surface. Breaking one
+again is a doctrine violation, not a style choice.
+
+1. **No inline script, ever, and no new outbound origin without a CSP check.** Production
+   sends `script-src 'self'` with no unsafe-inline; local testing sends no CSP at all, so
+   inline code works everywhere except where it counts. This killed, silently, in
+   production only: the certificate page (months), the theme flash-preventer (77 pages),
+   the risk figure (21 pages, since launch), the standards-map matrix, module-11's print
+   button, and quiz scoring itself (`connect-src` missed the Supabase origin at site
+   root). Six instances of one trap. External files + JSON data blocks only; any new
+   `fetch` origin goes into `_headers` the same commit. CSP-01 covers every page signed-in
+   — keep it that way.
+2. **Every database object lives in a migration.** `set_module_progress` existed only in
+   the live project: SECURITY DEFINER, executable by `anon`, forging course completions
+   with one REST call — invisible to every repo review because the repo had never heard
+   of it. Schema drift is how the next one hides. If it is not in `supabase/migrations/`,
+   it does not exist; anything found live-only gets transcribed or dropped that day.
+3. **The client never states a score, a status, or a completion.** `record_quiz_result`
+   is the single write path to `module_progress`; RLS revokes the rest. Any new
+   "progress"-shaped feature inherits this: server grades, client renders.
+4. **"The eleven modules" has one definition: `portal/assets/modules.js`** (1–10 + 12;
+   module 11 is the gated finale, module 1 the free sample that still counts when
+   signed in). Roster, certificate register and tests all read it. A literal `11`
+   anywhere is a bug — it produced an unreachable 11/11 once already.
+5. **A journey test is the done-gate for any user-facing claim.** Unit suites were green
+   for weeks while no learner on earth could complete the course. The three journeys
+   (`e2e-journeys`, `e2e-onboarding`) run against production and must pass before "done"
+   is said about anything touching auth, course, portal or payments.
+6. **Interactive controls ship disabled until their handler is wired.** Static button +
+   module-script listener = a dead-click window that loses real clicks silently
+   (Sign out, found by ONB-03). `wireSignOut()` is the pattern: enable at attach.
+7. **Test accounts are dedicated, DB-provisioned, secrets in `.env.e2e` (gitignored),
+   never in the repo.** `e2e-manager@` / `e2e-staff@` / `e2e-newstarter@` — the last one
+   self-resets its TOTP factor every run so enrolment stays first-time. Never enrol MFA on
+   an account a human uses; whoever completes enrolment holds the authenticator.
+8. **GoTrue quirk:** factors are listed on `GET /auth/v1/user` (`user.factors`), not
+   `GET /auth/v1/factors` — the latter answers empty and once stranded a factor.
+
+## § Launch — future action points (as of 2026-08-14)
+
+The ordered path to revenue is **`docs/LAUNCH-RUNBOOK.md`** — five phases, all 🧑
+dashboard/DNS work, each with a pass check. Do not re-derive it; execute it.
+
+- **Phase 0 first, today**: create the Stripe account and start Bacs verification — the
+  only step whose *waiting* time is on the critical path (days).
+- **VAT is deferred, not decided** (2026-08-14): `VAT_RATE` unset means ex-VAT prices
+  charged as-is. Blocks the first real charge; decide during runbook Phase 3.
+- **Role-track videos deferred, copy stands** (2026-08-14): six role tracks have no
+  video while copy implies all modules do. Accepted risk, owner: sales calls. Revisit
+  when the video-m2 pipeline has slack.
+- **Invite-seat Edge Function source is still not in the repo** — transcribe it (rule 2).
+- **Quarterly legal-currency review cadence still undecided** (P0c): the Omnibus caught
+  the content out once; the product promises staying current.
+- **Test plan QUIZ-01–05 rewrite** still open in ACTION-ITEMS.
+- The invite→email→first-sign-in journey and one real £990 charge-and-refund are the two
+  untested wires; both become testable only as the runbook lands (Phases 2 and 3).
+
 ## Decision log
 
 | Date | Decision | Why |
 |---|---|---|
+| 2026-08-14 | **Launch target set: paying customers.** Path codified as `docs/LAUNCH-RUNBOOK.md` (Stripe first — Bacs verification is days of waiting — then domain, SMTP, webhook, forms, JC). VAT **deferred** until the Stripe account exists, flagged as blocking the first real charge. Role-track videos **deferred, copy stands** — accepted demo risk. Sign-out dead-click fixed (`wireSignOut`, buttons ship disabled). First-time onboarding journey (`e2e-onboarding`, 10 checks) proves enrol → MFA re-entry → course → roster against production, self-resetting its own account. | Demo-ready ≠ revenue-ready; the gap is entirely dashboard work, so write it as an executable runbook rather than a wishlist |
+| 2026-08-11 | **Production sweep on the back of the journey tests.** Revived six CSP-dead surfaces (risk figures ×21, standards map, print button); pricing.html un-noindexed; skip link instant; footer headings demoted; `dbGet`/`dbSet` now alert instead of silently diverting to localStorage; CSP-01 widened to every page. Board went 226→green, 0 failures. § Engineering rules added to this file. | The suite that found the breakage is the only thing that proved the fixes |
+| 2026-08-11 | **End-to-end journeys built and made the done-gate.** Three P0s found the day they first ran: site-root CSP blocked all quiz scoring in production (course uncompletable by anyone); `set_module_progress` (live-only, anon-executable) forged completions; "the eleven modules" had three conflicting definitions making 11/11 unreachable. All fixed same day; migration 0009 drops the forgery RPC and captures the governance schema. Dedicated e2e accounts provisioned, secrets in `.env.e2e`. | Weeks of green unit suites coexisted with a course no learner could finish; only a journey through the real UI against production tells the truth |
+| 2026-08-11 | **Certificates issue from `module_progress`, not the browser.** `cert.html` reads the row `record_quiz_result` wrote (score, date, reference) with the learner's own token; query string and localStorage mint nothing; name PATCHes `profiles.full_name` so cert and roster cannot disagree. NEG-CERT-01c guards the localStorage forgery. | "Training records you can hand to an auditor" was backed by client-editable state — the claim most exposed to a customer's auditor |
 | 2026-07-08 | **Pricing simplified to three tiers**: Tier 1 AI Safe@Work Training · Tier 2 Plus Pack (governance toolkit) · Tier 3 Consultancy. MSP framing: Course → Course + Plus Pack → Course + Plus Pack + Consultancy. **AIMP repositioned** as the delivery platform (the portal customers log in to), NOT a separately-sold subscription tier. Reconciled site-wide: pricing.html, homepage copy + FAQ + FAQPage JSON-LD, llms.txt, plus-pack.html, terms.html. Tier contents locked; only prices + payment model remain (B2). | Simple, MSP-legible packaging; kills the "is AIMP a tier or the platform?" ambiguity that made the offer hard to explain |
 | 2026-07-08 | **Password-reset flow fixed + email infra decided.** The reset link established a session and the login load-race routed past the set-new-password form (and only detected the implicit `#type=recovery`, not PKCE `?code=`); now any auth callback is event-classified so recovery always lands on (and stays on) the reset form. Separately, hit **"email rate limit exceeded"** on Supabase's built-in dev sender → decision: **custom SMTP (Resend) is a hard launch prerequisite**, folded into AUTH-1 with the rate-limit raise + redirect allowlist. Test accounts to be DB-provisioned meanwhile to spare the cap. | Reset was a dead end for real users; built-in email can't carry production auth (deliverability + throughput) |
 | 2026-07-08 | **Credit model + access control hardened.** Closed the `profiles` self-update hole (any logged-in manager could self-grant credits / self-escalate role from the browser): column-grant lockdown + INSERT/DELETE revoke, verified by black-box exploitation tests (self-grant/mass-assign/insert/IDOR all 403/blocked). `grant_credits()` service-role function added as the seam the Stripe purchase webhook will call. Front-door auth built behind `AUTH_DISABLED` (password+TOTP for managers/resellers, magic-link for team, self-serve reset, `invite-seat` Edge Function). Open security gaps logged: SEC-A09 (audit logging), SEC-A08 (script SRI). | Money/privilege integrity before real accounts exist; auth ready to arm (A2) at launch |
