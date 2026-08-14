@@ -23,7 +23,8 @@ export class CheckoutPage extends SitePage {
     this.headcount = page.getByLabel("How many staff?");
     this.submit = this.form.locator('button[type="submit"]');
     this.planField = this.form.locator('input[name="plan"]');
-    this.priceHeading = page.locator(".module-card h3").first();
+    // An h2 styled as h3 since the A11Y-04 fix; match either shape.
+    this.priceHeading = page.locator(".module-card .h3-style, .module-card h3").first();
     this.priceNote = page.locator(".module-card p").first();
     this.payMessage = page.locator("#pay-msg");
   }
