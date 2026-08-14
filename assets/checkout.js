@@ -83,7 +83,8 @@
 
     var card = main.querySelector('.module-card');
     if (card) {
-      var h3 = card.querySelector('h3');
+      // The plan heading is an h2 styled as h3 since the A11Y-04 fix; match either.
+      var h3 = card.querySelector('.h3-style, h3');
       if (h3) h3.innerHTML = cfg.priceHead;
       var note = card.querySelector('p');
       if (note) note.innerHTML = cfg.priceNote;

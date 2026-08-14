@@ -67,6 +67,12 @@
       if (lockedMsg) lockedMsg.style.display = ok ? 'none' : '';
     }
 
+    // Print buttons: [data-print]. Was an inline onclick, dead under the production CSP
+    // like every other inline script, so the checklist's print button never worked live.
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('[data-print]')) window.print();
+    });
+
     applyUnlock();
   });
 })();
