@@ -16,8 +16,15 @@
 
 # Content Security Policy — static-HTML friendly. Allows Google Fonts only.
 # Tightened later when paid surfaces introduce real third-party scripts.
+#
+# connect-src includes the Supabase project because two paid surfaces live at the site
+# root, not under /portal/: the module pages send quiz answers to record_quiz_result, and
+# cert.html reads module_progress. With connect-src 'self' both were blocked in production
+# and nowhere else — the same trap that killed the certificate page and the theme script.
+# Caught by E2E-02 on 11 Aug 2026, which is the first test to complete the course on the
+# live site. Scoped to the one origin the application owns; nothing else is added.
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://hanjrsslhnuauaysbhun.supabase.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests
 
 # ────────────────────────────────────────────────────────────────────
 # Paid + auth'd surfaces — explicit AI-bot opt-out signals
