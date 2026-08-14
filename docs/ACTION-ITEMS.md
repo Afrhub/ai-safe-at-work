@@ -25,19 +25,32 @@ Lives in `docs/`, which `netlify.toml` 404s, because it names security defects.
 - [ ] 🧑 **Decide VAT.** `VAT_RATE` is unset, so the advertised ex-VAT price is charged
       as-is. If VAT registered and this ships unset, you absorb the VAT on every sale.
 
-## P0d, completion is forgeable again
+## P0d, the course could not be completed, and completion was forgeable
 
-Found 11 Aug 2026 while specifying the end-to-end journeys.
+Found 11 Aug 2026 by the end-to-end journeys. All three fixed and deployed the same day.
 
-- [ ] 🤖 **`set_module_progress(p_module, p_score)` defeats migration 0006.** SECURITY
+- [x] 🤖 **`connect-src 'self'` blocked every quiz from being scored in production.** The
+      module pages and `cert.html` are at the site root, so the site-wide CSP applied, not
+      the `/portal/*` one that already allows Supabase. Every learner on the live site saw
+      "Could not mark this attempt", and the certificate page could not read a record
+      either. Local testing sends no CSP, so it looked fine everywhere except production —
+      the third time this trap has cost a paid surface. Fixed in `_headers`.
+- [x] 🤖 **The eleven modules meant three different things.** `modules.js` sells 1 to 10
+      and 12; the manager's roster counted every `module_progress` row against a literal
+      11, so it counted the finale and could never count module 1, which `quiz.js` refused
+      to score server-side. 11/11 was unreachable. Module 1 is now server-graded when there
+      is a session, the roster and the certificate register both read their eleven from
+      `modules.js`, and passing a quiz marks the module complete so the module 11 finale
+      unlocks without hunting for the button.
+- [x] 🤖 **`set_module_progress(p_module, p_score)` defeats migration 0006.** SECURITY
       DEFINER, `execute` granted to **`anon` and `authenticated`**, and it writes
       `module_progress` straight from a client-supplied score with no answer checking.
       One REST call forges a completed course, which is the row `cert.html` now prints
       and the manager's roster reads. It is in no migration, so nothing in the repo
       showed it. Fix written as `supabase/migrations/0009_*.sql` (drops it, and captures
       the four undocumented governance tables at the same time); the caller in
-      `portal/assets/end-user.js` is already removed. **Not yet applied to the live
-      project** — that write needs your approval.
+      `portal/assets/end-user.js` is already removed. Applied to the live project on
+      11 Aug; `set_module_progress` no longer exists.
 - [x] 🤖 **`governance_state` is in no migration** — captured in 0009, along with
       `governance_docs`, `governance_items`, `governance_acks` and
       `ensure_governance_docs()`.

@@ -90,6 +90,15 @@ certificated module, then the manager reads 11/11 on the roster; and a manager p
 both document packs and works all four registers on the governance dashboard. Spec in
 `specs/e2e-scenarios.md`.
 
+Running it found the two defects that mattered most today. **The site-wide CSP sent
+`connect-src 'self'`**, so no module page could reach `record_quiz_result`: the course was
+uncompletable on the live site, and `cert.html` could not read a record either, because both
+sit at the root rather than under `/portal/`. And **the eleven modules meant three different
+things** — `modules.js` sells 1 to 10 and 12, the roster counted every row against a literal
+11, and module 1 was never server-graded, so 11/11 was unreachable. Both fixed: the Supabase
+origin is in the site-wide `connect-src`, module 1 is server-graded when there is a session,
+and the roster and certificate register both read their eleven from `modules.js`.
+
 Specifying it found **`set_module_progress`**, a SECURITY DEFINER function in no migration,
 executable by `anon`, that wrote `module_progress` from a client-supplied score. It made a
 completed course a single REST call, which is the record `cert.html` prints. Migration 0009
