@@ -25,6 +25,9 @@ const SUITES = [
   // The two journeys. Writes to the live project as the dedicated .env.e2e accounts,
   // and skips entirely without that file, so it is safe to leave in the default run.
   ["end to end journeys", "tests/suites/e2e-journeys.mjs"],
+  // First-time onboarding: enrolment, MFA re-entry, course, roster. Resets its own
+  // account's authenticator at the end so every run is first-time. Skips without .env.e2e.
+  ["onboarding journey", "tests/suites/e2e-onboarding.mjs"],
 ];
 
 let failed = 0;
