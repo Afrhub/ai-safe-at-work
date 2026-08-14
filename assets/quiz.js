@@ -197,19 +197,18 @@
     return wrap;
   }
 
-  // Modules 1-12 carry an integer id and are scored on the server, so this file never
-  // sees the answer key. The six role tracks and three sector overlays still use string ids
-  // ('copilot', 'fs' ...) that quiz_keys cannot hold, so they keep the old client scoring
-  // until that is migrated. One check, used everywhere the two paths differ.
-  // Modules 2-12 are scored by the database, so this file never sees their answer key.
+  // Modules 1 to 12 carry an integer id and are graded by record_quiz_result, so this file
+  // never decides a score for them. The six role tracks and three sector overlays use string
+  // ids ('copilot', 'fs' ...) that quiz_keys.module cannot hold, so they keep the old client
+  // scoring until that is migrated. One check, used everywhere the two paths differ.
   //
-  // Module 1 is deliberately excluded: it is the free sample, it carries no course gate, and
-  // a signed-out visitor has no session to score against. Its answers staying client-side
-  // costs nothing, because the whole module is public anyway.
-  //
-  // The six role tracks and three sector overlays use string ids ('copilot', 'fs' ...) that
-  // quiz_keys.module cannot hold, so they stay client-scored until that is migrated.
-  const serverScored = (state) => typeof state.cfg.module === 'number' && state.cfg.module >= 2;
+  // Module 1 is the exception that has to bend both ways. It is the free ungated sample, so a
+  // signed-out visitor must still be able to take it, and there is no session to grade
+  // against. It is also one of the eleven modules the manager's completion record counts, so
+  // for a signed-in learner it has to reach module_progress like the rest. Session present:
+  // server-graded. No session: graded here, recorded nowhere, which is what a free sample is.
+  const serverScored = (state) =>
+    typeof state.cfg.module === 'number' && (state.cfg.module >= 2 || Boolean(sessionToken()));
 
   // Publishable key, public by design and already served in portal/config.js. RLS and the
   // learner's own bearer token do the work; nothing secret is needed to score a quiz.
@@ -225,12 +224,15 @@
     try { localStorage.removeItem(LS_PREFIX + cfg.module); } catch (e) {}
   }
 
-  async function submitForScoring(state) {
-    let token = '';
+  function sessionToken() {
     try {
       const raw = localStorage.getItem('sb-hanjrsslhnuauaysbhun-auth-token');
-      if (raw) token = (JSON.parse(raw) || {}).access_token || '';
-    } catch (e) {}
+      return (raw && (JSON.parse(raw) || {}).access_token) || '';
+    } catch (e) { return ''; }
+  }
+
+  async function submitForScoring(state) {
+    const token = sessionToken();
     if (!token) throw new Error('no session');
     // record_quiz_result marks the answers, keeps the greatest score, and writes
     // module_progress plus an audit row under the learner's own identity.
@@ -248,6 +250,16 @@
     });
     if (!res.ok) throw new Error('record_quiz_result returned ' + res.status);
     return res.json();
+  }
+
+  // completion.js gates the module 11 finale behind every numbered module being marked
+  // complete, and that flag only moved when the learner found the "Mark this module
+  // complete" button. Passing the knowledge check is the stronger signal, so a pass sets it
+  // too, and someone who works through the course reaches the finale without hunting for a
+  // button. Still localStorage and still per device: it unlocks a page, it is not a record.
+  function markComplete(module) {
+    if (typeof module !== 'number') return;
+    try { if (window.AISW && window.AISW.setDone) window.AISW.setDone(module, true); } catch (e) {}
   }
 
   function pickAnswer(state, mount, chosen) {
@@ -284,12 +296,14 @@
         scrollIntoView(mount);
         return;
       }
+      if (state.score >= state.cfg.passThreshold) markComplete(state.cfg.module);
       state.phase = 'end';
       render(mount, state);
       scrollIntoView(mount);
       return;
     }
     const score = state.answers.filter(a => a.correct).length;
+    if (score >= state.cfg.passThreshold) markComplete(state.cfg.module);
     saveResult(state.cfg.module, {
       score,
       total: state.questions.length,

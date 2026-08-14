@@ -25,6 +25,23 @@ Lives in `docs/`, which `netlify.toml` 404s, because it names security defects.
 - [ ] 🧑 **Decide VAT.** `VAT_RATE` is unset, so the advertised ex-VAT price is charged
       as-is. If VAT registered and this ships unset, you absorb the VAT on every sale.
 
+## P0d, completion is forgeable again
+
+Found 11 Aug 2026 while specifying the end-to-end journeys.
+
+- [ ] 🤖 **`set_module_progress(p_module, p_score)` defeats migration 0006.** SECURITY
+      DEFINER, `execute` granted to **`anon` and `authenticated`**, and it writes
+      `module_progress` straight from a client-supplied score with no answer checking.
+      One REST call forges a completed course, which is the row `cert.html` now prints
+      and the manager's roster reads. It is in no migration, so nothing in the repo
+      showed it. Fix written as `supabase/migrations/0009_*.sql` (drops it, and captures
+      the four undocumented governance tables at the same time); the caller in
+      `portal/assets/end-user.js` is already removed. **Not yet applied to the live
+      project** — that write needs your approval.
+- [x] 🤖 **`governance_state` is in no migration** — captured in 0009, along with
+      `governance_docs`, `governance_items`, `governance_acks` and
+      `ensure_governance_docs()`.
+
 ## P0b, the assessment does not do what the product sells
 
 Found 3 Aug 2026 while proving the modules have videos and quizzes. All three are one

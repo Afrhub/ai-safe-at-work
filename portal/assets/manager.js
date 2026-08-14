@@ -14,14 +14,22 @@ if (profile) {
   document.getElementById("grid").innerHTML = MODULES.map(m =>
     `<a class="tile" href="/module-${m.n}.html"><span class="k">Module ${String(m.n).padStart(2,"0")}</span>${ico(m)}<h2>${m.t}</h2><span class="arrow">Open →</span></a>`).join("");
 
+  // The eleven modules the course sells, from modules.js: 1 to 10 and 12. Module 11 is the
+  // finale and is not one of them, so a pass on it must not push someone to 12 / 11. The
+  // count used to be every done row against a hardcoded 11, which counted the finale and
+  // could never include module 1.
+  const COURSE = new Set(MODULES.map(m => m.n));
+
   async function loadSeats() {
     const { data: seats } = await sb.from("seats").select("end_user_id, created_at, profiles!seats_end_user_id_fkey(email)");
-    const { data: prog } = await sb.from("module_progress").select("user_id, status");
+    const { data: prog } = await sb.from("module_progress").select("user_id, module, status");
     const counts = {};
-    (prog || []).forEach(p => { if (p.status === "done") counts[p.user_id] = (counts[p.user_id]||0)+1; });
+    (prog || []).forEach(p => {
+      if (p.status === "done" && COURSE.has(p.module)) counts[p.user_id] = (counts[p.user_id] || 0) + 1;
+    });
     document.getElementById("seated").textContent = (seats || []).length;
     document.querySelector("#seats tbody").innerHTML = (seats || []).map(s =>
-      `<tr><td>${esc(s.profiles?.email || s.end_user_id)}</td><td>${counts[s.end_user_id]||0} / 11</td><td>${new Date(s.created_at).toLocaleDateString()}</td>`+
+      `<tr><td>${esc(s.profiles?.email || s.end_user_id)}</td><td>${counts[s.end_user_id]||0} / ${COURSE.size}</td><td>${new Date(s.created_at).toLocaleDateString()}</td>`+
       `<td><button type="button" class="seat-remove" data-eu="${esc(s.end_user_id)}" data-email="${esc(s.profiles?.email || "this user")}">Remove</button></td></tr>`
     ).join("") || `<tr><td colspan="4" style="color:var(--text3)">No seats yet.</td></tr>`;
   }

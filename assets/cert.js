@@ -31,10 +31,13 @@
     12: 'The standards behind this course'
   };
 
-  // Certificated modules. Module 1 is the free ungated sample: it is scored in the
-  // browser because a signed-out visitor has no session to score against, so it earns
-  // no verified record and no certificate.
-  const REGISTER = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  // The eleven modules the course sells, the same set modules.js lists and the manager's
+  // roster counts: 1 to 10 and 12. Module 11 is the finale and is not one of them.
+  //
+  // Module 1 is here because a signed-in learner's attempt at it is graded server-side like
+  // any other (quiz.js). A signed-out visitor takes the same module with no session, so
+  // nothing is recorded and no certificate is owed — which is what a free sample is.
+  const REGISTER = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12];
 
   // ponytail: every module quiz is ten questions in quiz_keys and record_quiz_result
   // only writes a row at 80%, so a row means a pass at 8 or better. Read them from the
@@ -91,11 +94,6 @@
         : `<a href="module-${m}.html" style="color:var(--text2);">Take the module →</a>`;
       html += row(m, status, action);
     }
-    // Module 1 is listed so its absence does not read as a missing record.
-    html += row(1,
-      `<span style="color:var(--text3);">Free sample</span>`,
-      `<a href="module-1.html" style="color:var(--text2);">Open the module →</a>`);
-
     root.innerHTML = `
       <div class="cert-intro">
         <h1>Certificate <em>register</em>.</h1>
@@ -110,7 +108,7 @@
         ${html}
         <p style="margin:1.1rem 0 0.2rem;font-size:0.9rem;color:var(--text3);">
      Pass mark is ${PASS} of ${TOTAL} on each knowledge check. Retake any quiz at any time; your best score stands.
-     Module 1 is the free sample, scored in your browser, so it carries no certificate.
+     Module 11, the 60-second checklist, is the finale and is not one of the eleven.
           <a href="course.html" style="color:var(--accent);">Browse all modules →</a>
         </p>
       </div>`;
@@ -128,13 +126,6 @@
   }
 
   function renderCertificate(m, rec, name) {
-    if (m === 1) {
-      showError('Module 1 does not issue a certificate.',
-        'It is the free sample and it is scored in your browser, so there is no verified ' +
-        'record behind it. Modules 2 to 12 are scored on our side and do issue one. ' +
-        '<a href="cert.html">See your register</a>.');
-      return;
-    }
     if (!rec) {
       showError(`No verified pass recorded for Module ${m}.`,
         `Pass the quiz at the bottom of <a href="module-${m}.html">Module ${m}</a> first. ` +

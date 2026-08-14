@@ -22,6 +22,9 @@ const SUITES = [
   ["authorisation", "tests/suites/rls.mjs"],
   // Needs Playwright, resolved from a sibling project. Skipped automatically if absent.
   ["browser", "tests/suites/browser-site.mjs"],
+  // The two journeys. Writes to the live project as the dedicated .env.e2e accounts,
+  // and skips entirely without that file, so it is safe to leave in the default run.
+  ["end to end journeys", "tests/suites/e2e-journeys.mjs"],
 ];
 
 let failed = 0;

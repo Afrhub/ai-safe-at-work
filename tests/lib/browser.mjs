@@ -54,10 +54,19 @@ export async function newPage(browser, opts = {}) {
 
   // Non-destructive guard. Runs before the Stripe route below because Playwright
   // matches the most recently added handler first, so the Stripe one still wins.
+  //
+  // opts.allowPosts is a list of URL fragments whose POSTs may proceed. The journey
+  // suite passes the Supabase origin, because signing in, scoring a quiz and inserting
+  // a register row are all POSTs and the whole point is to exercise them. The Netlify
+  // forms stay blocked either way: nothing in that list matches this origin.
+  const allowPosts = opts.allowPosts || [];
   await context.route("**/*", (route) => {
     const req = route.request();
-    if (req.method() === "POST" && !req.url().includes("create-checkout-session")) {
-      record.blockedWrites.push({ url: req.url(), body: req.postData() });
+    const url = req.url();
+    const allowed =
+      url.includes("create-checkout-session") || allowPosts.some((frag) => url.includes(frag));
+    if (req.method() === "POST" && !allowed) {
+      record.blockedWrites.push({ url, body: req.postData() });
       return route.abort();
     }
     return route.fallback();

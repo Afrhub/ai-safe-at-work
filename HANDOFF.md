@@ -64,7 +64,8 @@ rules live in `netlify.toml`, not in the files.
 4. **`dbGet` swallows permission errors into `localStorage`.** Fix before the organisations
    migration: that change rewrites every policy that matters, and a mistake would present as
    an empty register rather than an error.
-5. **`governance_state` is in no migration**, and **`invite-seat` source is not in the repo**.
+5. **`invite-seat` edge function source is not in the repo.** (`governance_state` and the
+   rest of the governance schema are captured in migration 0009.)
 6. **9 quizzes are still client-scored** with their answer key in the page: the six role
    tracks and three sector overlays use string module ids (`copilot`, `fs` ...) that
    `quiz_keys.module` cannot hold. Modules 2 to 12 are done.
@@ -80,6 +81,26 @@ rules live in `netlify.toml`, not in the files.
    provision, then add the records at 123-Reg, then set it primary. Then Resend SMTP.
 3. **`docs/SPEC-organisations-auditor-reseller.md`**, in the order the spec gives. Do its two
    prerequisites first: fix `dbGet`, capture `governance_state` in a migration.
+
+## End-to-end journeys, and the hole they found (11 Aug)
+
+`tests/suites/e2e-journeys.mjs` drives the two journeys the product is sold on, through
+the real UI against the real project: staff sign in (password + TOTP) and complete every
+certificated module, then the manager reads 11/11 on the roster; and a manager publishes
+both document packs and works all four registers on the governance dashboard. Spec in
+`specs/e2e-scenarios.md`.
+
+Specifying it found **`set_module_progress`**, a SECURITY DEFINER function in no migration,
+executable by `anon`, that wrote `module_progress` from a client-supplied score. It made a
+completed course a single REST call, which is the record `cert.html` prints. Migration 0009
+drops it, captures the four undocumented governance tables and `ensure_governance_docs`,
+and is **applied to the live project**. The caller in `portal/assets/end-user.js` is gone.
+
+Two dedicated accounts do this work: `e2e-manager@attest-ai.com` and
+`e2e-staff@attest-ai.com`, the staff seated to the manager, both TOTP enrolled. Credentials
+and secrets live in `.env.e2e`, gitignored, never in the repo. Without that file the suite
+skips. `scripts/e2e-enrol-totp.mjs` enrols a factor for an account using only its own
+password, and prints the lines to paste.
 
 ## Certificates read the database (11 Aug)
 
