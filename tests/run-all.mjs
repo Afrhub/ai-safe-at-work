@@ -28,6 +28,9 @@ const SUITES = [
   // First-time onboarding: enrolment, MFA re-entry, course, roster. Resets its own
   // account's authenticator at the end so every run is first-time. Skips without .env.e2e.
   ["onboarding journey", "tests/suites/e2e-onboarding.mjs"],
+  // Phase 2 proof: forgot-password email → link → new password. Skips until a mailbox
+  // (E2E_IMAP_*) exists in .env.e2e and Supabase SMTP can send.
+  ["password reset", "tests/suites/e2e-password-reset.mjs"],
 ];
 
 let failed = 0;

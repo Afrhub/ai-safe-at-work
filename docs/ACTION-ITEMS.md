@@ -136,7 +136,7 @@ wrong for about two weeks on a product that sells being current.
       accept submissions nobody watches.
 - [ ] 🧑 **Delete the test form submissions** made 25 Jul.
 - [ ] 🧑 **Point `attest-ai.com` at Netlify.** Add the domain in Netlify FIRST, let the
-      certificate provision, then add the records at 123-Reg, then set it primary.
+      certificate provision, then add the records at GoDaddy, then set it primary.
       Until this happens every canonical, the sitemap, `robots.txt` and `llms.txt` all
       tell Google the real site lives on a parking page.
 - [x] 🤖 **Fix the `pricing.html` robots contradiction.** Meta says `index`, sitemap

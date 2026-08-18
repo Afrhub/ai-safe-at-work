@@ -57,7 +57,7 @@ not in the files.
 1. **No custom SMTP.** Blocks manager credentials, staff invitations and every password
    reset. The single item that appears in all three user journeys. Needs the domain move
    first, because SPF, DKIM and DMARC need a domain you control.
-2. **`attest-ai.com` serves a 123-Reg parking page** while every canonical, the sitemap,
+2. **`attest-ai.com` serves a GoDaddy parking page** while every canonical, the sitemap,
    robots.txt and llms.txt point at it. The codebase already migrated; only DNS has not.
 3. **`invite-seat` edge function source is not in the repo.** (`governance_state` and the
    rest of the governance schema are captured in migration 0009.)
@@ -81,7 +81,7 @@ checkout-thanks duplicate robots meta and wrong hreflang.
    submitted. I audited the submissions on 11 Aug: all seven across five forms are tests, so
    nothing has been missed yet, but the new `demo.html` depends on this.
 2. **Point `attest-ai.com` at Netlify.** Add the domain in Netlify FIRST, let the certificate
-   provision, then add the records at 123-Reg, then set it primary. Then Resend SMTP.
+   provision, then add the records at GoDaddy, then set it primary. Then Resend SMTP.
 3. **`docs/SPEC-organisations-auditor-reseller.md`**, in the order the spec gives. Do its two
    prerequisites first: fix `dbGet`, capture `governance_state` in a migration.
 

@@ -19,12 +19,12 @@ match the code, it is quoted exactly.
 
 ## Phase 1 — the domain (20 min + certificate wait)
 
-Order matters: **Netlify first**, then 123-Reg. Adding DNS records before Netlify knows
+Order matters: **Netlify first**, then GoDaddy. Adding DNS records before Netlify knows
 the domain leaves the cert unprovisioned and the site serving warnings.
 
 2. Netlify → site `aisafework` → Domain management → **Add domain `attest-ai.com`**
    (+ `www.attest-ai.com`). Netlify shows the required records.
-3. Wait for Netlify to show the domain as awaiting DNS, then at **123-Reg** replace the
+3. Wait for Netlify to show the domain as awaiting DNS, then at **GoDaddy** replace the
    parking records with what Netlify listed — normally:
    - `A` apex `attest-ai.com` → `75.2.60.5`  *(use the value Netlify shows if different)*
    - `CNAME` `www` → `aisafework.netlify.app`
@@ -36,8 +36,16 @@ the domain leaves the cert unprovisioned and the site serving warnings.
 
 ## Phase 2 — email (30 min, needs Phase 1)
 
+> **Registrar correction (18 Aug):** `attest-ai.com`'s nameservers are `domaincontrol.com`,
+> i.e. **GoDaddy** — every DNS record in Phases 1 and 2 goes in at GoDaddy, not 123-Reg.
+> Verified with `dig NS`. Tooling built for this phase:
+> `node scripts/phase2-dns-check.mjs` (pass/fail per record, re-run until 6/6);
+> `SUPABASE_ACCESS_TOKEN=… RESEND_SMTP_PASSWORD=… node scripts/phase2-supabase-auth-config.mjs`
+> (steps 7–9 in one idempotent command, `--dry-run` first);
+> `node tests/suites/e2e-password-reset.mjs` (the step-10 proof, once `E2E_IMAP_*` is in `.env.e2e`).
+
 6. **Resend**: add domain `attest-ai.com` → it lists SPF + DKIM records → add them at
-   123-Reg → wait for Resend to show **Verified**. Add the DMARC record it suggests.
+   GoDaddy → wait for Resend to show **Verified**. Add the DMARC record it suggests.
 7. **Supabase** (`hanjrsslhnuauaysbhun`) → Authentication → SMTP: enable custom SMTP with
    Resend's credentials. Sender: `no-reply@attest-ai.com` (or similar on the domain).
 8. Supabase → Authentication → **Rate limits**: raise the email rate limit from the
