@@ -153,7 +153,7 @@ wrong for about two weeks on a product that sells being current.
 - [ ] 🧑 **JC McKenny: first sign-in.** Auth is armed, his password works. He must do the
       first sign-in himself, because it forces TOTP enrolment and whoever completes it
       holds the authenticator secret.
-- [ ] 🧑 **Decide JC's seat credits.** Currently 0, so he can sign in but cannot invite.
+- [x] 🧑 **Decide JC's seat credits.** Set to 500 on 18 Aug. Temporary password issued the same day (handed over by phone; SMTP not yet live); no TOTP enrolled yet, so first browser sign-in shows the QR.
 - [ ] 🧑 **Stripe: create the account, verify the business, enable Bacs.** Days of
       waiting, so start early.
 - [ ] 🧑 **Add the Netlify env vars**: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`,
