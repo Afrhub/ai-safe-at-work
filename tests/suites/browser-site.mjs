@@ -438,6 +438,50 @@ export async function run() {
 
   // ─────────────────────────── certificate forgery ───────────────────────────
 
+  // ─────────────────────────── idle timeout ───────────────────────────
+
+  group("IDLE-01, ten minutes idle signs out");
+  await check("IDLE-01", "a gated page with a stale activity stamp bounces to sign-in", async () => {
+    await withPage(
+      async ({ page, record }) => {
+        // Signed-in context; the real timer takes ten minutes, so inject an activity
+        // stamp eleven minutes old and drive the checker directly.
+        await page.goto(`${BASE}/module-2.html`, { waitUntil: "domcontentloaded" });
+        await page.waitForFunction(() => window.AISW_IDLE, null, { timeout: 15_000 });
+        await page.evaluate((ms) => {
+          localStorage.setItem("aisw-last-activity", String(Date.now() - ms - 60_000));
+          window.AISW_IDLE._check();
+        }, 10 * 60 * 1000);
+        await page.waitForURL((u) => u.pathname.endsWith("/portal/login.html"), { timeout: 15_000 });
+        const url = new URL(page.url());
+        eq(url.searchParams.get("idle"), "1", "landed on login without the idle flag");
+        const tokenGone = await page.evaluate(() => localStorage.getItem("sb-hanjrsslhnuauaysbhun-auth-token") === null);
+        ok(tokenGone, "session token survived the idle sign-out");
+      },
+      { context: signedInContext() }
+    );
+  });
+
+  await check("IDLE-02", "recent activity keeps the session, and the timer is inert signed out", async () => {
+    await withPage(
+      async ({ page }) => {
+        await page.goto(`${BASE}/module-2.html`, { waitUntil: "domcontentloaded" });
+        await page.waitForFunction(() => window.AISW_IDLE, null, { timeout: 15_000 });
+        await page.evaluate(() => { window.AISW_IDLE.touch(); window.AISW_IDLE._check(); });
+        await page.waitForTimeout(800);
+        ok(page.url().includes("/module-2.html"), `active session was signed out: ${page.url()}`);
+      },
+      { context: signedInContext() }
+    );
+    await withPage(async ({ page }) => {
+      // Public module 1, no session: the script loads nowhere here, but the shared
+      // checker must never redirect a signed-out visitor if it ever does.
+      await page.goto(`${BASE}/module-1.html`, { waitUntil: "domcontentloaded" });
+      const hasIdle = await page.evaluate(() => Boolean(window.AISW_IDLE));
+      ok(!hasIdle, "idle-logout.js is loaded on the free ungated module 1");
+    });
+  });
+
   group("NEG-CERT-01, certificate forgery");
   await check("NEG-CERT-01", "cert.html?m=1&s=99&n=100 mints nothing signed out", async () => {
     await withPage(async ({ page, record }) => {

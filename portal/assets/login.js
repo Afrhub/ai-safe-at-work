@@ -64,6 +64,13 @@ sb.auth.onAuthStateChange((event) => {
     return route();
   }
   if (isRecovery) { show("step-reset"); say("Choose a new password."); return; }
+  // Bounced here by the idle timer: say so, and make sure no stale session routes past
+  // the form (the course pages clear the token themselves; the portal signs out first).
+  if (_p.get("idle") === "1") {
+    try { await sb.auth.signOut(); } catch (e) {}
+    say("You were signed out after 10 minutes of inactivity. Sign in again to continue.");
+    return;
+  }
   if (isAuthCallback) return;   // recovery/magic-link still exchanging -> onAuthStateChange routes it
   const { data: { session } } = await sb.auth.getSession();
   if (session) afterAuth();

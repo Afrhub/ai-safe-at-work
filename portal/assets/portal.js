@@ -65,7 +65,16 @@ export async function guard(allowedRoles) {
     location.replace(DASH[profile.role] || "login.html");
     return null;
   }
+  // Ten minutes idle signs out (assets/idle-logout.js, loaded by every authed page).
+  // Registering the real signOut here means expiry ends the session server-side too,
+  // rather than only clearing the local token.
+  if (window.AISW_IDLE) window.AISW_IDLE.onExpire(() => idleSignOut());
   return profile;
+}
+
+async function idleSignOut() {
+  try { await sb.auth.signOut(); } catch (e) {}
+  location.replace("login.html?idle=1");
 }
 
 export async function signOut() {
