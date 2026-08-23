@@ -22,7 +22,6 @@
     if (!/(^|\.)jardesigns/.test(from) && location.search.indexOf('flyin') < 0) return;
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     html.classList.add('flyin');
-    setTimeout(function () { html.classList.remove('flyin'); }, 3000);
   } catch (e) { return; }
 
   /* The hero comes back together out of the flight: each line starts where
@@ -39,10 +38,31 @@
     ['.hero-ctas',           0.70,  0.55]
   ];
 
-  addEventListener('DOMContentLoaded', function () {
-    if (!html.classList.contains('flyin')) return;
+  /* The failsafe and the finish share one landing, and it runs at most once.
+     They are not interchangeable: a backgrounded tab does not advance
+     animations at all, so `finished` never resolves there while timers keep
+     running — a failsafe that only dropped the class would leave the hero
+     pinned at opacity 0 by an animation frozen at time zero. */
+  var anims = [], els = [], landed = false;
+  function land() {
+    if (landed) return;
+    landed = true;
+    html.classList.remove('flyin');            /* first, or the parts blink out */
+    /* mark them revealed before letting go: a [data-reveal] element the
+       site's own observer hasn't reached yet would drop back to opacity 0 */
+    els.forEach(function (el) { el.classList.add('is-revealed'); });
+    anims.forEach(function (a) { a.cancel(); });
+  }
+  setTimeout(land, 3000);
 
-    var anims = [], els = [], last = null;
+  addEventListener('DOMContentLoaded', function () {
+    if (landed || !html.classList.contains('flyin')) return;
+
+    /* Nothing to fly through in a tab the reader is not looking at, and the
+       animations would not run anyway — show the page as it normally loads. */
+    if (document.hidden) { els = [].slice.call(document.querySelectorAll(PARTS.map(function (p) { return p[0]; }).join(','))); return land(); }
+
+    var last = null;
     PARTS.forEach(function (p, i) {
       var el = document.querySelector(p[0]);
       if (!el) return;
@@ -57,15 +77,12 @@
       last = a;
     });
 
-    if (!last) { html.classList.remove('flyin'); return; }
+    if (!last) return land();
 
-    var land = function () {
-      html.classList.remove('flyin');            /* first, or the parts blink out */
-      /* mark them revealed before letting go: a [data-reveal] element the
-         site's own observer hasn't reached yet would drop back to opacity 0 */
-      els.forEach(function (el) { el.classList.add('is-revealed'); });
-      anims.forEach(function (a) { a.cancel(); });
-    };
     last.finished.then(land).catch(land);
+    /* A tab hidden mid-flight freezes the animations where they stand; the
+       timeline only resumes on return, so land it now rather than leave a
+       half-assembled page waiting. */
+    document.addEventListener('visibilitychange', function () { if (document.hidden) land(); });
   });
 })();
