@@ -81,7 +81,7 @@ checkout-thanks duplicate robots meta and wrong hreflang.
    submitted. I audited the submissions on 11 Aug: all seven across five forms are tests, so
    nothing has been missed yet, but the new `demo.html` depends on this.
 2. **Point `attest-ai.com` at Netlify.** Add the domain in Netlify FIRST, let the certificate
-   provision, then add the records at GoDaddy, then set it primary. Then Resend SMTP.
+   provision, then add the records at 123-Reg, then set it primary. Then Resend SMTP.
 3. **`docs/SPEC-organisations-auditor-reseller.md`**, in the order the spec gives. Do its two
    prerequisites first: fix `dbGet`, capture `governance_state` in a migration.
 

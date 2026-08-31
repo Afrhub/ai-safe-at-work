@@ -29,11 +29,11 @@ permission to run it. `netlify` CLI is not installed; the token lives in
 
 ## Gate 2 — GoDaddy: point the domain at Netlify (3 min + wait)
 
-**Verified today:** nameservers are `ns43/ns44.domaincontrol.com` = GoDaddy. Netlify's
+**Verified today:** registrar is **123-Reg** (RDAP-confirmed); its nameservers are `ns43/ns44.domaincontrol.com` because 123-Reg is part of the GoDaddy group and uses their DNS estate. Netlify's
 apex load balancer resolves to `75.2.60.5` and `99.83.231.61` (dig'd from
 `apex-loadbalancer.netlify.com` tonight).
 
-GoDaddy → My Products → attest-ai.com → **DNS** → Manage DNS:
+123-Reg → attest-ai.com → **Manage DNS**:
 
 | Type | Name | Value | Action |
 |---|---|---|---|
@@ -53,7 +53,7 @@ Set as primary domain**. `P1-C` passes when `https://attest-ai.com` serves via N
 
 1. https://resend.com → sign up (the free tier covers auth mail comfortably).
 2. **Domains → Add domain** → `attest-ai.com` → region EU (Ireland) if offered.
-3. Resend shows **3–4 records**. Add each at GoDaddy DNS exactly as shown. They look like:
+3. Resend shows **3–4 records**. Add each at 123-Reg DNS exactly as shown. They look like:
 
 | Type | Name (as Resend shows) | Value (as Resend shows) |
 |---|---|---|
