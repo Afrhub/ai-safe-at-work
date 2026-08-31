@@ -28,7 +28,7 @@
  <p class="sub">Managers and resellers sign in with a password. Team members can use an email link.</p>
  <div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="username" required /></div>
  <div class="field"><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password" minlength="8" /></div>
- <button class="btn-primary" type="submit" id="login-btn">Continue</button>
+ <button class="btn-primary" type="submit" id="login-btn" disabled>Continue</button>
  <button type="button" id="magic" style="width:100%;margin-top:0.6rem;background:transparent;border:1px solid var(--border-bold);color:var(--text2);border-radius:var(--r-sm);padding:0.7rem;font-family:var(--font-display);font-weight:700;font-size:0.9rem;cursor:pointer">Email me a sign-in link</button>
  <p style="margin-top:0.9rem;font-size:0.82rem;text-align:center"><a href="#" id="forgot" style="color:var(--text2)">Forgot your password?</a></p>
  <p style="margin-top:0.6rem;font-size:0.82rem;text-align:center"><a href="?signup=1" id="to-signup" style="color:var(--accent);font-weight:700">New here? Create an account</a></p>
@@ -41,7 +41,7 @@
  <div class="field"><label for="su-email">Work email</label><input id="su-email" type="email" autocomplete="username" required /></div>
  <div class="field"><label for="su-pw">Password</label><input id="su-pw" type="password" autocomplete="new-password" minlength="8" required /></div>
  <div class="field"><label for="su-pw2">Confirm password</label><input id="su-pw2" type="password" autocomplete="new-password" minlength="8" required /></div>
- <button class="btn-primary" type="submit">Create account</button>
+ <button class="btn-primary" type="submit" disabled>Create account</button>
  <p style="margin-top:0.9rem;font-size:0.82rem;text-align:center"><a href="login.html" id="to-signin" style="color:var(--text2)">Already have an account? Sign in</a></p>
  </form>
 
@@ -51,7 +51,7 @@
  <p class="sub">Enter a new password for your account.</p>
  <div class="field"><label for="new-pw">New password</label><input id="new-pw" type="password" autocomplete="new-password" minlength="8" required /></div>
  <div class="field"><label for="new-pw2">Confirm new password</label><input id="new-pw2" type="password" autocomplete="new-password" minlength="8" required /></div>
- <button class="btn-primary" type="submit">Update password</button>
+ <button class="btn-primary" type="submit" disabled>Update password</button>
  </form>
 
  <!-- MFA enrol (managers/resellers, first sign-in) -->
@@ -60,7 +60,7 @@
  <p class="sub">Scan with an authenticator app (Google Authenticator, 1Password, Authy), then enter the 6-digit code.</p>
  <img id="qr" class="qr" alt="TOTP QR code" />
  <div class="field"><label for="enrol-code">6-digit code</label><input id="enrol-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" /></div>
- <button class="btn-primary" type="submit">Verify &amp; finish</button>
+ <button class="btn-primary" type="submit" disabled>Verify &amp; finish</button>
  </form>
 
  <!-- MFA challenge (managers/resellers, returning) -->
@@ -68,7 +68,7 @@
  <h1>Enter your code</h1>
  <p class="sub">Open your authenticator app and enter the current 6-digit code.</p>
  <div class="field"><label for="mfa-code">6-digit code</label><input id="mfa-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" /></div>
- <button class="btn-primary" type="submit">Verify</button>
+ <button class="btn-primary" type="submit" disabled>Verify</button>
  </form>
 
  <p id="msg" class="auth-msg" role="status"></p>

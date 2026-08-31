@@ -81,6 +81,11 @@ sb.auth.onAuthStateChange((event) => {
   if (session) afterAuth();
 })();
 
+// The form handlers below are what make these buttons safe; until they attach, a click
+// would native-submit the form (a GET that reloads the page and wipes the fields — seen
+// on a slow CDN load). Ship every submit disabled, enable here. Same rule as wireSignOut.
+document.querySelectorAll("form button[type=submit]").forEach((b) => { b.disabled = false; });
+
 // Password sign-in (managers / resellers)
 $("step-login").addEventListener("submit", async (e) => {
   e.preventDefault();
