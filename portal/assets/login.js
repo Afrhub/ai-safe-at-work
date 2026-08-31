@@ -3,11 +3,15 @@ import { sb, DASH, getRole, AUTH_DISABLED, DEMO } from "./portal.js";
 const $ = (id) => document.getElementById(id);
 const msg = $("msg");
 const say = (t, cls = "") => { msg.textContent = t; msg.className = "auth-msg " + cls; };
-const show = (id) => ["step-login", "step-enrol", "step-mfa", "step-reset"].forEach(s => $(s).hidden = (s !== id));
+const show = (id) => ["step-login", "step-enrol", "step-mfa", "step-reset", "step-signup"].forEach(s => $(s).hidden = (s !== id));
 
 async function route() {
-  const next = new URLSearchParams(location.search).get("next");
+  const params = new URLSearchParams(location.search);
+  const next = params.get("next");
   if (next && next.startsWith("/") && !next.startsWith("//")) return location.replace(next); // same-origin only
+  // A brand-new self-serve account returns to the landing page after setup, so the
+  // journey reads: sign up -> confirm -> authenticator -> front door -> Sign in.
+  if (params.get("fromsignup") === "1") return location.replace("/index.html");
   const p = await getRole();
   location.replace((p && DASH[p.role]) || "end-user.html");
 }
@@ -57,12 +61,13 @@ sb.auth.onAuthStateChange((event) => {
   // AIMP inspection: the login workflow is bypassed while AUTH_DISABLED, drop straight
   // into the platform as the demo account, no form. (Removed automatically when auth is armed.)
   if (AUTH_DISABLED) {
-    ["step-login", "step-enrol", "step-mfa", "step-reset"].forEach(s => { const e = $(s); if (e) e.hidden = true; });
+    ["step-login", "step-enrol", "step-mfa", "step-reset", "step-signup"].forEach(s => { const e = $(s); if (e) e.hidden = true; });
     say("Opening the platform…");
     const { data: { session } } = await sb.auth.getSession();
     if (!session) await sb.auth.signInWithPassword(DEMO);
     return route();
   }
+  if (_p.get("signup") === "1") { show("step-signup"); say(""); return; }
   if (isRecovery) { show("step-reset"); say("Choose a new password."); return; }
   // Bounced here by the idle timer: say so, and make sure no stale session routes past
   // the form (the course pages clear the token themselves; the portal signs out first).
@@ -145,4 +150,21 @@ $("step-mfa").addEventListener("submit", async (e) => {
   const v = await sb.auth.mfa.verify({ factorId: factor.id, challengeId: ch.data.id, code: $("mfa-code").value.trim() });
   if (v.error) return say(v.error.message, "err");
   route();
+});
+
+// Self-serve sign-up. Email confirmation is required (project setting), so the reply is
+// "check your email"; the confirmation link returns here with fromsignup=1, which routes
+// the finished account back to the landing page after authenticator setup.
+$("step-signup").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = $("su-email").value.trim().toLowerCase();
+  const pw = $("su-pw").value, pw2 = $("su-pw2").value;
+  if (pw.length < 8) return say("Use at least 8 characters.", "err");
+  if (pw !== pw2) return say("Those passwords do not match.", "err");
+  say("Creating your account…");
+  const emailRedirectTo = new URL("login.html?fromsignup=1", location.href).href;
+  const { data, error } = await sb.auth.signUp({ email, password: pw, options: { emailRedirectTo } });
+  if (error) return say(error.message, "err");
+  if (data.session) return afterAuth();   // autoconfirm path, if ever enabled
+  say("Check your email to confirm your account. The link brings you back here to set up two-step sign-in.", "ok");
 });

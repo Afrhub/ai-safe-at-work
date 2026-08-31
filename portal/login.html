@@ -31,7 +31,18 @@
  <button class="btn-primary" type="submit" id="login-btn">Continue</button>
  <button type="button" id="magic" style="width:100%;margin-top:0.6rem;background:transparent;border:1px solid var(--border-bold);color:var(--text2);border-radius:var(--r-sm);padding:0.7rem;font-family:var(--font-display);font-weight:700;font-size:0.9rem;cursor:pointer">Email me a sign-in link</button>
  <p style="margin-top:0.9rem;font-size:0.82rem;text-align:center"><a href="#" id="forgot" style="color:var(--text2)">Forgot your password?</a></p>
- <p style="margin-top:0.6rem;font-size:0.82rem;color:var(--text2)">No account yet? Access is set up when you buy a plan or when your manager invites you. <a href="/about.html#contact" style="color:var(--accent);font-weight:700">Get in touch</a>.</p>
+ <p style="margin-top:0.6rem;font-size:0.82rem;text-align:center"><a href="?signup=1" id="to-signup" style="color:var(--accent);font-weight:700">New here? Create an account</a></p>
+ </form>
+
+ <!-- Self-serve sign-up (added 20 Aug 2026): creates an end_user account. -->
+ <form id="step-signup" hidden>
+ <h1>Create your account</h1>
+ <p class="sub">Sign up with your work email. You'll confirm your address, then set up an authenticator app — every account uses two-step sign-in.</p>
+ <div class="field"><label for="su-email">Work email</label><input id="su-email" type="email" autocomplete="username" required /></div>
+ <div class="field"><label for="su-pw">Password</label><input id="su-pw" type="password" autocomplete="new-password" minlength="8" required /></div>
+ <div class="field"><label for="su-pw2">Confirm password</label><input id="su-pw2" type="password" autocomplete="new-password" minlength="8" required /></div>
+ <button class="btn-primary" type="submit">Create account</button>
+ <p style="margin-top:0.9rem;font-size:0.82rem;text-align:center"><a href="login.html" id="to-signin" style="color:var(--text2)">Already have an account? Sign in</a></p>
  </form>
 
  <!-- Password reset: set a new password after clicking the emailed reset link -->

@@ -7,6 +7,15 @@
 <meta name="color-scheme" content="light dark" />
 <script src="/assets/theme-boot.js?v=1"></script>
 <title>Attest AI · Adopt AI safely, securely and responsibly</title>
+<style>
+ /* Landing fade-in. CSS only (production CSP allows inline styles, not scripts);
+    honours prefers-reduced-motion. */
+ @keyframes gate-fade { from { opacity: 0 } to { opacity: 1 } }
+ body { animation: gate-fade 0.7s ease-out both; }
+ @media (prefers-reduced-motion: reduce) { body { animation: none } }
+ /* The big front-door CTA */
+ .hero-cta.xl { font-size: 1.25rem; padding: 1.05rem 2.4rem; font-weight: 800; letter-spacing: -0.01em; }
+</style>
 <meta name="description" content="Attest AI is the AI Governance Platform that helps organisations confidently embrace AI through continuous learning, practical governance and expert support. EU AI Act, GDPR, ISO/IEC 42001 and 27001." />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <link rel="canonical" href="https://attest-ai.com/" />
@@ -249,7 +258,8 @@ html[data-theme="dark"] .inc-card .ico { border-color: rgba(255,255,255,0.22); b
  <h1>Helping organisations adopt AI <em>safely, securely and responsibly.</em></h1>
  <p class="lede">Attest AI helps organisations take AI governance seriously: practical learning, continuous governance and expert consultancy to support you at every step of your AI compliance and AI governance journey.</p>
  <div class="hero-ctas">
- <a class="hero-cta primary" href="about.html#contact">Book a Demo →</a>
+ <a class="hero-cta primary xl" href="portal/login.html?signup=1">Sign up →</a>
+ <a class="hero-cta secondary" href="about.html#contact">Book a Demo</a>
  <a class="hero-cta secondary" href="msp.html">Become a Partner</a>
  </div>
  </div>
