@@ -31,6 +31,8 @@ const SUITES = [
   // Phase 2 proof: forgot-password email → link → new password. Skips until a mailbox
   // (E2E_IMAP_*) exists in .env.e2e and Supabase SMTP can send.
   ["password reset", "tests/suites/e2e-password-reset.mjs"],
+  // The self-serve front door: fade-in, big Sign up, form, client-side refusal.
+  ["signup front door", "tests/suites/e2e-signup.mjs"],
 ];
 
 let failed = 0;

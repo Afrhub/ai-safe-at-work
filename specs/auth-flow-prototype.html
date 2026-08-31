@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Auth flow prototype — Attest AI</title>
+<style>
+/* Attest "Sentinel" tokens — mirrors assets/style.css v9 (light-first) */
+:root{
+  --bg:#ffffff; --bg-soft:#f6f7f9; --dark:#0b0d12; --dark2:#12151c;
+  --accent:#fa582d; --accent-d:#e2491f; --accent-soft:#fff3ef; --accent-line:#ffd9cb;
+  --text:#14161c; --text2:#54596b; --text3:#6b7180;
+  --on-dark:#ffffff; --on-dark2:#c5cad6;
+  --border:#e6e8ee; --border-bold:#d6d9e2;
+  --green:#0e7d49; --red:#c4322f; --yellow:#b5750a; --blue:#2563c4;
+  --plate:#ffffff; --r:12px; --r-sm:8px; --r-btn:6px;
+  --font:'Atkinson Hyperlegible',system-ui,sans-serif;
+  --font-mono:'Atkinson Hyperlegible Mono',ui-monospace,monospace;
+  --shadow-card:0 1px 2px rgba(16,24,40,0.05);
+  --shadow-hover:0 16px 50px rgba(20,30,60,0.10);
+  --ease-out:cubic-bezier(0.23,1,0.32,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--bg-soft);color:var(--text);font-family:var(--font);line-height:1.6}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:1100px;margin:0 auto;padding:2.5rem 1.75rem 5rem}
+.eyebrow{font-family:var(--font-mono);font-size:0.68rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.8rem}
+h1{font-size:clamp(1.9rem,4.5vw,2.6rem);font-weight:800;letter-spacing:-0.03em;line-height:1.08;margin-bottom:0.8rem}
+.lede{color:var(--text2);max-width:66ch;margin-bottom:1.6rem}
+.lede strong{color:var(--text)}
+.smtp{background:#fff;border:1px solid var(--accent-line);border-left:4px solid var(--accent);border-radius:var(--r-sm);padding:0.9rem 1.1rem;font-size:0.88rem;color:var(--text2);max-width:66ch;margin-bottom:2.5rem}
+.smtp b{color:var(--accent-d)}
+
+/* ── Flow map ── */
+.lane{margin-bottom:1.4rem}
+.lane-label{font-family:var(--font-mono);font-size:0.64rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--text3);margin-bottom:0.55rem}
+.lane-nodes{display:flex;flex-wrap:wrap;gap:0.45rem;align-items:center}
+.node{background:var(--plate);border:1px solid var(--border);border-radius:var(--r-sm);padding:0.55rem 0.85rem;font-size:0.83rem;color:var(--text2);box-shadow:var(--shadow-card);transition:border-color 160ms ease,color 160ms ease;display:inline-flex;align-items:center;gap:0.5rem}
+.node b{font-family:var(--font-mono);font-size:0.62rem;color:var(--text3);font-weight:700}
+.node:hover{border-color:var(--border-bold);color:var(--text)}
+.node.active{border-color:var(--accent);color:var(--text);background:var(--accent-soft)}
+.node.active b{color:var(--accent)}
+.node.ext{border-style:dashed}
+.node.blocked{border-color:var(--accent-line)}
+.node.blocked::after{content:'✉ SMTP';font-family:var(--font-mono);font-size:0.56rem;font-weight:700;letter-spacing:0.1em;color:var(--accent-d);background:var(--accent-soft);border-radius:999px;padding:0.12rem 0.45rem}
+.arrow{color:var(--text3);font-size:0.8rem;user-select:none}
+
+/* ── Stage ── */
+.stage{margin-top:2.5rem;display:grid;grid-template-columns:minmax(0,430px) 1fr;gap:2.5rem;align-items:start}
+@media(max-width:880px){.stage{grid-template-columns:1fr}}
+.frame{background:var(--plate);border:1px solid var(--border);border-radius:var(--r);padding:2rem 1.8rem;min-height:440px;position:relative;box-shadow:var(--shadow-hover)}
+/* corner ticks, same device as portal .auth-card::before */
+.frame::before{content:'';position:absolute;inset:8px;pointer-events:none;
+  background:
+    linear-gradient(var(--border-bold),var(--border-bold)) top left/10px 1.5px,
+    linear-gradient(var(--border-bold),var(--border-bold)) top left/1.5px 10px,
+    linear-gradient(var(--border-bold),var(--border-bold)) bottom right/10px 1.5px,
+    linear-gradient(var(--border-bold),var(--border-bold)) bottom right/1.5px 10px;
+  background-repeat:no-repeat;opacity:0.55}
+.frame .url{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.05em;color:var(--text3);background:var(--bg-soft);border:1px solid var(--border);border-radius:999px;padding:0.3rem 0.8rem;margin-bottom:1.6rem;display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.screen{display:none}
+.screen.on{display:block;animation:in 240ms var(--ease-out)}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.s-eyebrow{font-family:var(--font-mono);font-size:0.62rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:0.55rem}
+.screen h2{font-size:1.5rem;font-weight:800;letter-spacing:-0.02em;line-height:1.12;margin-bottom:0.45rem}
+.screen .sub{color:var(--text2);font-size:0.9rem;margin-bottom:1.3rem;max-width:40ch}
+.f{margin-bottom:0.95rem}
+.f label{display:block;font-family:var(--font-mono);font-size:0.62rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);margin-bottom:0.35rem}
+.f input{width:100%;background:#fff;border:1px solid var(--border-bold);border-radius:var(--r-sm);padding:0.72rem 0.9rem;color:var(--text);font-family:var(--font);font-size:0.95rem}
+.f input:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.cta{width:100%;background:var(--accent);color:#fff;border:none;border-radius:var(--r-btn);padding:0.85rem 1.2rem;font-weight:800;font-size:0.95rem;transition:background 140ms ease,transform 140ms var(--ease-out)}
+.cta:hover{background:var(--accent-d);transform:translateY(-1px)}
+.ghost{width:100%;margin-top:0.6rem;background:transparent;border:1px solid var(--border-bold);color:var(--text2);border-radius:var(--r-btn);padding:0.72rem;font-weight:700;font-size:0.88rem}
+.ghost:hover{border-color:var(--accent);color:var(--text)}
+.tiny{margin-top:1rem;font-size:0.8rem;color:var(--text3);text-align:center}
+.tiny a{color:var(--accent);font-weight:700}
+.qr{width:150px;height:150px;margin:0.6rem auto 1rem;background:repeating-conic-gradient(#14161c 0% 25%,#fff 0% 50%) 0 0/16px 16px;border:1px solid var(--border);border-radius:4px}
+.okbox{background:#f2faf6;border:1px solid #bfe3d0;border-radius:var(--r-sm);padding:0.85rem 1rem;font-size:0.88rem;color:var(--text2)}
+.okbox b{color:var(--green)}
+.warnbox{background:var(--accent-soft);border:1px solid var(--accent-line);border-radius:var(--r-sm);padding:0.85rem 1rem;font-size:0.88rem;color:var(--text2)}
+.warnbox b{color:var(--accent-d)}
+.route{display:flex;flex-direction:column;gap:0.7rem;margin-top:0.5rem}
+.route .opt{border:1px solid var(--border);border-radius:var(--r-sm);padding:0.85rem 1rem;font-size:0.88rem;color:var(--text2);background:#fff}
+.route .opt b{color:var(--text);display:block}
+.route .opt.hot{border-color:var(--accent-line);background:var(--accent-soft)}
+
+/* ── Notes ── */
+.notes h3{font-size:1.15rem;font-weight:800;letter-spacing:-0.015em;margin-bottom:0.7rem}
+.meta{display:flex;flex-direction:column;gap:0.45rem;margin-bottom:1.2rem}
+.meta .row{display:flex;gap:0.7rem;font-size:0.85rem}
+.meta .k{font-family:var(--font-mono);font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);min-width:88px;padding-top:0.18rem}
+.meta .v{color:var(--text2)}
+.meta .v code{font-family:var(--font-mono);font-size:0.78rem;color:var(--accent-d)}
+.badge{display:inline-block;font-family:var(--font-mono);font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;border-radius:999px;padding:0.2rem 0.6rem;border:1px solid}
+.badge.built{color:var(--green);border-color:#bfe3d0;background:#f2faf6}
+.badge.gap{color:var(--red);border-color:#eec7c6;background:#fdf3f3}
+.badge.blocked{color:var(--accent-d);border-color:var(--accent-line);background:var(--accent-soft)}
+.notes p{font-size:0.9rem;color:var(--text2);margin-bottom:0.8rem}
+.notes p strong{color:var(--text)}
+.nav{display:flex;gap:0.6rem;margin-top:1.6rem}
+.nav button{background:#fff;border:1px solid var(--border-bold);color:var(--text2);border-radius:var(--r-btn);padding:0.55rem 1.1rem;font-size:0.85rem;font-weight:700}
+.nav button:hover{border-color:var(--accent);color:var(--text)}
+
+.recs{margin-top:4rem;border-top:1px solid var(--border);padding-top:2.5rem}
+.recs h2{font-size:1.5rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:1.2rem}
+.recs ol{padding-left:1.2rem;display:flex;flex-direction:column;gap:0.9rem;color:var(--text2);font-size:0.92rem}
+.recs li strong{color:var(--text)}
+.recs code{font-family:var(--font-mono);font-size:0.8rem;color:var(--accent-d)}
+kbd{font-family:var(--font-mono);font-size:0.7rem;border:1px solid var(--border-bold);border-radius:4px;padding:0.1rem 0.4rem;color:var(--text2);background:#fff}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <p class="eyebrow">Prototype · not linked from the live site</p>
+  <h1>Sign-up → sign-in, visualised.</h1>
+  <p class="lede">
+    Attest has no self-serve sign-up by design — accounts are <strong>provisioned</strong>: born from a purchase
+    (manager) or an invitation (staff). That's the enterprise-course pattern
+    (<strong>Coursera for Business</strong>, <strong>SANS</strong>: seats are granted, never self-registered),
+    with staff on <strong>magic links</strong> (Slack/Udemy Business pattern) so 25 non-technical employees never
+    hold a password. Click any node, or use <kbd>←</kbd> <kbd>→</kbd>.
+  </p>
+  <p class="smtp"><b>The whole journey is blocked at one link:</b> every lane below crosses an email step, and there is
+    no custom SMTP yet (HANDOFF broken-item #1 — needs the <code style="font-family:var(--font-mono)">attest-ai.com</code> domain move first for SPF/DKIM/DMARC).
+    The UI on either side of those steps is already built.</p>
+
+  <div class="lane">
+    <div class="lane-label">Lane 1 — Manager (buys a plan)</div>
+    <div class="lane-nodes">
+      <button class="node" data-s="checkout"><b>01</b> Checkout</button><span class="arrow">→</span>
+      <button class="node" data-s="provision"><b>02</b> Account provisioned</button><span class="arrow">→</span>
+      <button class="node ext blocked" data-s="credmail"><b>03</b> Credentials email</button><span class="arrow">→</span>
+      <button class="node" data-s="signin"><b>04</b> First sign-in</button><span class="arrow">→</span>
+      <button class="node" data-s="enrol"><b>05</b> MFA enrol</button><span class="arrow">→</span>
+      <button class="node" data-s="routed"><b>06</b> Manager portal</button>
+    </div>
+  </div>
+  <div class="lane">
+    <div class="lane-label">Lane 2 — Staff (invited, passwordless)</div>
+    <div class="lane-nodes">
+      <button class="node" data-s="invite"><b>07</b> Manager invites</button><span class="arrow">→</span>
+      <button class="node ext blocked" data-s="invitemail"><b>08</b> Invitation email</button><span class="arrow">→</span>
+      <button class="node" data-s="magic"><b>09</b> Magic link</button><span class="arrow">→</span>
+      <button class="node" data-s="routed"><b>06</b> Learner portal</button>
+    </div>
+  </div>
+  <div class="lane">
+    <div class="lane-label">Lane 3 — Returning (any role)</div>
+    <div class="lane-nodes">
+      <button class="node" data-s="signin"><b>04</b> Sign in</button><span class="arrow">→</span>
+      <button class="node" data-s="mfa"><b>10</b> 6-digit code</button><span class="arrow">→</span>
+      <button class="node" data-s="routed"><b>06</b> Routed by role</button>
+    </div>
+  </div>
+  <div class="lane">
+    <div class="lane-label">Lane 4 — Recovery</div>
+    <div class="lane-nodes">
+      <button class="node" data-s="forgot"><b>11</b> Forgot password</button><span class="arrow">→</span>
+      <button class="node ext blocked" data-s="resetmail"><b>12</b> Reset email</button><span class="arrow">→</span>
+      <button class="node" data-s="reset"><b>13</b> New password</button><span class="arrow">→</span>
+      <button class="node" data-s="signin"><b>04</b> Sign in</button>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="frame">
+      <span class="url" id="url"></span>
+
+      <section class="screen" id="s-checkout">
+        <p class="s-eyebrow">Checkout</p>
+        <h2>Buy a plan.</h2>
+        <p class="sub">Stripe Bacs Direct Debit. The buyer can nominate a different manager to run the seats.</p>
+        <div class="f"><label>Company</label><input value="Fairview Legal LLP"></div>
+        <div class="f"><label>Manager email (runs the seats)</label><input value="ops@fairviewlegal.co.uk"></div>
+        <button class="cta">Continue to payment</button>
+        <p class="tiny">Payment fails closed → Netlify order form fallback, button is never dead.</p>
+      </section>
+
+      <section class="screen" id="s-provision">
+        <p class="s-eyebrow">Server-side</p>
+        <h2>Account provisioned.</h2>
+        <p class="sub">The Stripe webhook creates the manager account and seat allowance. No form was ever shown.</p>
+        <div class="okbox"><b>Created →</b> manager account (role: manager), plan band resolved server-side by <span style="font-family:var(--font-mono);font-size:0.78rem">resolveBand(plan, headcount)</span></div>
+      </section>
+
+      <section class="screen" id="s-credmail">
+        <p class="s-eyebrow">External · email</p>
+        <h2>“Your Attest AI access.”</h2>
+        <p class="sub">Credentials email to the nominated manager: sign-in link + first-run instructions.</p>
+        <div class="warnbox"><b>Blocked:</b> no custom SMTP. This email cannot send today — the single break in an otherwise finished lane.</div>
+      </section>
+
+      <section class="screen" id="s-signin">
+        <p class="s-eyebrow">Attest AI · Sign in</p>
+        <h2>Sign in</h2>
+        <p class="sub">Managers and resellers use a password. Team members use an email link.</p>
+        <div class="f"><label>Email</label><input value="ops@fairviewlegal.co.uk"></div>
+        <div class="f"><label>Password</label><input type="password" value="••••••••••"></div>
+        <button class="cta">Continue</button>
+        <button class="ghost">Email me a sign-in link</button>
+        <p class="tiny"><a href="#" data-go="forgot">Forgot your password?</a></p>
+        <p class="tiny" style="text-align:left">No account yet? Access is set up when you buy a plan or when your manager invites you. <a href="#" data-go="checkout">Get in touch</a>.</p>
+      </section>
+
+      <section class="screen" id="s-enrol">
+        <p class="s-eyebrow">First sign-in · managers &amp; resellers</p>
+        <h2>Set up 2-factor</h2>
+        <p class="sub">Scan with Google Authenticator, 1Password or Authy, then enter the 6-digit code.</p>
+        <div class="qr" role="img" aria-label="TOTP QR code placeholder"></div>
+        <div class="f"><label>6-digit code</label><input inputmode="numeric" maxlength="6" placeholder="123 456"></div>
+        <button class="cta">Verify &amp; finish</button>
+      </section>
+
+      <section class="screen" id="s-invite">
+        <p class="s-eyebrow">Manager portal</p>
+        <h2>Invite your team.</h2>
+        <p class="sub">The manager adds staff emails against their seat allowance. Staff never get passwords.</p>
+        <div class="f"><label>Add team member</label><input value="a.khan@fairviewlegal.co.uk"></div>
+        <button class="cta">Send invitation</button>
+        <p class="tiny">Seats used: 12 of 25</p>
+      </section>
+
+      <section class="screen" id="s-invitemail">
+        <p class="s-eyebrow">External · email</p>
+        <h2>“You've been enrolled.”</h2>
+        <p class="sub">Invitation email to the team member: one button, no password to create.</p>
+        <div class="warnbox"><b>Blocked:</b> same SMTP gap. Invitations appear in all three user journeys — this is why it's broken-item #1.</div>
+      </section>
+
+      <section class="screen" id="s-magic">
+        <p class="s-eyebrow">Team member · passwordless</p>
+        <h2>Check your email.</h2>
+        <p class="sub">Clicking the link signs the team member straight in. Links are single-use and expire.</p>
+        <div class="okbox"><b>Why:</b> 25 employees at an SME will not manage passwords for a compliance course. Magic link = zero support tickets. (Slack / Udemy Business pattern.)</div>
+        <p class="tiny"><a href="#" data-go="signin">Manager or reseller? Sign in with a password</a></p>
+      </section>
+
+      <section class="screen" id="s-mfa">
+        <p class="s-eyebrow">Returning · managers &amp; resellers</p>
+        <h2>Enter your code</h2>
+        <p class="sub">Open your authenticator app and enter the current 6-digit code.</p>
+        <div class="f"><label>6-digit code</label><input inputmode="numeric" maxlength="6" placeholder="123 456"></div>
+        <button class="cta">Verify</button>
+      </section>
+
+      <section class="screen" id="s-routed">
+        <p class="s-eyebrow">Signed in</p>
+        <h2>Routed by role.</h2>
+        <p class="sub">One sign-in door; the session's role decides the portal:</p>
+        <div class="route">
+          <div class="opt hot"><b>manager → portal/manager.html</b>seats, invitations, team progress, audit</div>
+          <div class="opt"><b>team member → portal/end-user.html</b>modules, quizzes, certificate</div>
+          <div class="opt"><b>reseller → portal/reseller.html</b>client accounts and provisioning</div>
+        </div>
+      </section>
+
+      <section class="screen" id="s-forgot">
+        <p class="s-eyebrow">Reset password</p>
+        <h2>We'll email you a link.</h2>
+        <p class="sub">Managers and resellers only — team members never had a password to forget.</p>
+        <div class="f"><label>Email</label><input value="ops@fairviewlegal.co.uk"></div>
+        <button class="cta">Send reset link</button>
+        <p class="tiny"><a href="#" data-go="signin">← Back to sign in</a></p>
+      </section>
+
+      <section class="screen" id="s-resetmail">
+        <p class="s-eyebrow">External · email</p>
+        <h2>Reset link sent.</h2>
+        <div class="warnbox" style="margin-top:0.6rem"><b>Blocked:</b> password resets ride the same missing SMTP. Until it exists, a locked-out manager is locked out for good.</div>
+      </section>
+
+      <section class="screen" id="s-reset">
+        <p class="s-eyebrow">Reset password</p>
+        <h2>Choose a new password</h2>
+        <p class="sub">Minimum 8 characters. MFA still applies at the next sign-in.</p>
+        <div class="f"><label>New password</label><input type="password" value="••••••••••"></div>
+        <div class="f"><label>Confirm new password</label><input type="password" value="••••••••••"></div>
+        <button class="cta">Update password</button>
+      </section>
+    </div>
+
+    <aside class="notes">
+      <h3 id="n-title"></h3>
+      <div class="meta">
+        <div class="row"><span class="k">Maps to</span><span class="v" id="n-file"></span></div>
+        <div class="row"><span class="k">Backend</span><span class="v" id="n-api"></span></div>
+        <div class="row"><span class="k">Status</span><span class="v" id="n-status"></span></div>
+      </div>
+      <div id="n-body"></div>
+      <div class="nav">
+        <button id="prev">← Previous</button>
+        <button id="next">Next →</button>
+      </div>
+    </aside>
+  </div>
+
+  <section class="recs">
+    <h2>What to change (in order)</h2>
+    <ol>
+      <li><strong>Nothing about the screens — the flow design is already right.</strong> Gated sign-up, password+MFA for privileged roles, magic links for staff is exactly the enterprise-course pattern. The struggle to "visualise" it is that the journey only exists as hidden <code>&lt;form hidden&gt;</code> steps inside <code>portal/login.html</code> — this page is the missing map.</li>
+      <li><strong>Unblock SMTP</strong> (after the <code>attest-ai.com</code> domain move). Three of four lanes dead-end in an email that cannot send. Until then, every flow above is theatre.</li>
+      <li><strong>Say the provisioning rule out loud on the sign-in card.</strong> The current copy already does ("Access is set up when you buy a plan or when your manager invites you") — keep it; it is the honest replacement for a Sign up button.</li>
+      <li><strong>Keep role routing server-side</strong> — the session role decides manager/end-user/reseller portal, mirroring win2linux's <code>auth-me</code> rule.</li>
+    </ol>
+  </section>
+</main>
+
+<script>
+const SCREENS = {
+  checkout:  { url:'aisafework.netlify.app/checkout.html', title:'01 · Checkout (the real “sign-up”)', file:'<code>checkout.html</code>', api:'<code>netlify/functions/create-checkout-session.mjs</code> · Stripe Bacs', status:'<span class="badge built">built · inert until Stripe keys</span>', body:'<p>There is no sign-up form anywhere on Attest — the purchase <em>is</em> the sign-up. The buyer can nominate a different manager (<code>manager_email</code>), so the account holder and the card holder can differ.</p>' },
+  provision: { url:'(Stripe webhook, server-side)', title:'02 · Provisioning', file:'<code>netlify/functions/stripe-webhook.mjs</code>', api:'webhook → account + seats; price checked server-side', status:'<span class="badge built">built</span>', body:'<p>Price re-resolved by <code>resolveBand(plan, headcount)</code> — plan AND band, never trusted from the client.</p>' },
+  credmail:  { url:'(manager’s inbox)', title:'03 · Credentials email', file:'email template (to write)', api:'SMTP — does not exist', status:'<span class="badge blocked">blocked · SMTP</span>', body:'<p>HANDOFF broken-item #1, and it appears in all three user journeys. Needs the domain move first: SPF, DKIM and DMARC want a domain you control, and <code>attest-ai.com</code> is still a GoDaddy parking page.</p>' },
+  signin:    { url:'aisafework.netlify.app/portal/login.html', title:'04 · Sign in (one door, role-aware)', file:'<code>portal/login.html</code> <code>#step-login</code>', api:'<code>portal/assets/login.js</code> · auth ARMED since 31 Jul', status:'<span class="badge built">built</span>', body:'<p>One card, two methods: password (managers/resellers) or emailed link (team members). The “No account yet?” line does the work a Sign up button would — honestly.</p>' },
+  enrol:     { url:'portal/login.html · #step-enrol', title:'05 · MFA enrolment (first sign-in)', file:'<code>portal/login.html</code> <code>#step-enrol</code>', api:'TOTP QR + verify', status:'<span class="badge built">built</span>', body:'<p>Privileged roles only. Team members never see this — magic link is their whole ceremony.</p>' },
+  invite:    { url:'aisafework.netlify.app/portal/manager.html', title:'07 · Manager invites staff', file:'<code>portal/manager.html</code>', api:'invitation endpoint + seat count', status:'<span class="badge built">UI built · send blocked</span>', body:'<p>Bounces signed-out visitors to sign-in (armed 31 Jul). Invitations queue but cannot deliver until SMTP exists.</p>' },
+  invitemail:{ url:'(team member’s inbox)', title:'08 · Invitation email', file:'email template (to write)', api:'SMTP — does not exist', status:'<span class="badge blocked">blocked · SMTP</span>', body:'<p>One button: “Start your training”. No password, no account form — the seat was provisioned when the manager added them.</p>' },
+  magic:     { url:'portal/login.html → emailed link', title:'09 · Magic link (staff, passwordless)', file:'<code>portal/login.html</code> “Email me a sign-in link”', api:'single-use expiring token', status:'<span class="badge built">built</span>', body:'<p>The pattern Slack popularised and Udemy Business uses for enrolled learners: for a 25-seat SME, passwordless staff access is the difference between rollout and a support inbox.</p>' },
+  mfa:       { url:'portal/login.html · #step-mfa', title:'10 · MFA challenge (returning)', file:'<code>portal/login.html</code> <code>#step-mfa</code>', api:'TOTP verify', status:'<span class="badge built">built</span>', body:'<p>Same card, next step — no page reload, message area announces state via <code>role="status"</code>.</p>' },
+  routed:    { url:'(session role decides)', title:'06 · Portals, routed by role', file:'<code>portal/manager.html</code> · <code>end-user.html</code> · <code>reseller.html</code>', api:'session role from sign-in', status:'<span class="badge built">built</span>', body:'<p>Three portals, one door. The learner never chooses a portal — the role does.</p>' },
+  forgot:    { url:'portal/login.html · forgot', title:'11 · Forgot password', file:'<code>portal/login.html</code> forgot link', api:'reset-request endpoint', status:'<span class="badge built">UI built · send blocked</span>', body:'<p>Only exists for password-holding roles. Keep responses identical for known and unknown emails.</p>' },
+  resetmail: { url:'(manager’s inbox)', title:'12 · Reset email', file:'email template (to write)', api:'SMTP — does not exist', status:'<span class="badge blocked">blocked · SMTP</span>', body:'<p>The sharpest edge of the SMTP gap: a locked-out manager currently has no self-serve way back in.</p>' },
+  reset:     { url:'portal/login.html · #step-reset', title:'13 · New password', file:'<code>portal/login.html</code> <code>#step-reset</code>', api:'reset-confirm endpoint', status:'<span class="badge built">built</span>', body:'<p>8-character minimum matching the sign-in rule; MFA unaffected by a password reset.</p>' },
+};
+const order = ['checkout','provision','credmail','signin','enrol','routed','invite','invitemail','magic','mfa','forgot','resetmail','reset'];
+let cur = 'checkout';
+function show(id){
+  cur = id;
+  document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on', s.id==='s-'+id));
+  document.querySelectorAll('.node').forEach(n=>n.classList.toggle('active', n.dataset.s===id));
+  const d = SCREENS[id];
+  document.getElementById('url').textContent = d.url;
+  document.getElementById('n-title').textContent = d.title;
+  document.getElementById('n-file').innerHTML = d.file;
+  document.getElementById('n-api').innerHTML = d.api;
+  document.getElementById('n-status').innerHTML = d.status;
+  document.getElementById('n-body').innerHTML = d.body;
+}
+document.querySelectorAll('.node').forEach(n=>n.addEventListener('click',()=>show(n.dataset.s)));
+document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g){e.preventDefault();show(g.dataset.go)}});
+document.getElementById('prev').onclick=()=>show(order[(order.indexOf(cur)+order.length-1)%order.length]);
+document.getElementById('next').onclick=()=>show(order[(order.indexOf(cur)+1)%order.length]);
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')document.getElementById('next').click();if(e.key==='ArrowLeft')document.getElementById('prev').click()});
+show('checkout');
+</script>
+</body>
+</html>

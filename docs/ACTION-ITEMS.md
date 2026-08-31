@@ -198,6 +198,14 @@ wrong for about two weeks on a product that sells being current.
 
 ## Known structural gaps, decisions not yet made
 
+- [ ] 🧑 **Self-serve signup hands out the paid course (decided-by-request 30 Aug).** The
+      landing page now leads with Sign up; any self-serve account passes `course-gate.js`,
+      which is a client-side token-presence check. This was already true of the raw API
+      (signups were enabled), the button makes it a visible path. Options when revenue
+      matters: gate modules 2+ behind a seat/subscription check server-side (the
+      "move content behind an edge function" ponytail note in course-gate.js), or disable
+      public signups again. Decide before charging for the course.
+
 - [x] 🤖 **`dbGet` swallows permission errors into `localStorage`.** An RLS mistake would
       quietly move a customer's governance data into their own browser and look like an
       empty register. Fix before anything depends on who can read what.
