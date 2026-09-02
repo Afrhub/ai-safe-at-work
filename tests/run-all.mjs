@@ -35,6 +35,9 @@ const SUITES = [
   ["signup front door", "tests/suites/e2e-signup.mjs"],
   // Phase 5: a manager seats a team member and gets the credit back on removal.
   ["invite journey", "tests/suites/e2e-invite.mjs"],
+  // A new manager's first day: enrol, seed the pack, drive every statistic from another
+  // section, staff acknowledgement, back to the roster. Undoes every write.
+  ["manager onboarding", "tests/suites/e2e-manager-onboarding.mjs"],
 ];
 
 let failed = 0;
