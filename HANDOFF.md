@@ -1,6 +1,6 @@
 # HANDOFF — Attest AI / ai-safe-at-work
 
-Updated: 2 Sep 2026 · Everything committed, pushed and live. `git log -1` for the head.
+Updated: 2 Sep 2026 (late) · Everything committed, pushed and live; working tree clean. `git log -1` for the head.
 Supersedes the 26 Jul version. Full decision history in DOCTRINE.md; this file is the cold resume.
 
 ## What this is
@@ -31,22 +31,19 @@ Plans, Book a Demo and Become a Partner moved to a footer **Explore** column. Ne
 
 **Course page lists only Module 1**, as a clickable card to the free ungated page.
 
-**Quizzes for modules 2 to 12 are scored by the database (11 Aug).** `quiz_keys` seeded with
-120 rows by migration 0008; `record_quiz_result` extended to return per-question results;
-`quiz.js` submits once at the end straight to the RPC with the learner's own token, so
-`module_progress` and `audit_log` are finally written. The answer key is gone from those 11
-pages. Deliberately excluded: module 1 (free, ungated, no session to score against) and the
-9 string-id quizzes. Verified live as a signed-in user, 1/10 on wrong answers, nothing
-written because it did not pass.
+**Every quiz is server-scored (11 Aug for modules 1–12, 2 Sep for the nine role/sector
+tracks).** Modules → `record_quiz_result` → `module_progress`; tracks → `record_track_quiz_result`
+→ `track_progress` (migration 0010). No page carries an answer key. Module 1 is the one
+deliberate exception: signed out it is the free sample, marks itself, records nothing.
+Certificates render from `module_progress`; the manager roster counts the eleven from `modules.js`.
 
-**Test suites, ~120 checks.** `node tests/run-all.mjs`. Suites: pricing logic, webhook signature,
-manager nomination, exposure/headers, public site, authorisation (RLS), browser (Playwright).
-Browser suite resolves Playwright from `~/projects/mlr` via `createRequire`.
-**All suites green against live, 11 Aug evening: 226 passed, 0 failed.** The 13 skips are
-by design (destructive form posts, RLS checks needing credentials). CSP-01 now covers every
-module and sector page signed in, not a 12-page sample. Run against a local server and the
-exposure, header and redirect checks fail: those rules live in `netlify.toml`/`_headers`,
-not in the files.
+**Test board: 13 suites, 272 passed, 0 failed, 14 deliberate skips (2 Sep 2026), target
+`https://attest-ai.com`.** `node tests/run-all.mjs`. Unit (pricing, webhook sig, nomination),
+HTTP (exposure, public site, RLS), browser (Playwright, 112), and six journey suites against
+production: staff course + governance (`e2e-journeys`), first-time onboarding, password reset
+(skips: no mailbox), signup front door, invite, manager first day + teammate (screenshots to
+`tests/evidence/<run>/`). Journeys run as dedicated `e2e-*@attest-ai.com` accounts whose secrets
+live in `.env.e2e` (gitignored); without it they skip. Playwright resolves from `~/projects/mlr`.
 
 **Docs worth reading before touching anything:** `docs/ACTION-ITEMS.md` (34 items, P0→P4),
 `docs/USER-JOURNEYS.md` (three roles + the roles that have no row), `docs/Attest-AI-Test-Plan.pdf`,
@@ -72,30 +69,46 @@ the standards-map matrix (external `assets/risk-figure.js` + JSON data blocks,
 skip link (NAV-08), footer heading skips (A11Y-04); webhook NaN replay window;
 checkout-thanks duplicate robots meta and wrong hreflang.
 
-## Phases 1, 2, 4 and the machine half of 5 are DONE (1–2 Sep 2026)
+## This session, 1–2 Sep 2026 (commits 5ee0312 → cb35672)
 
-Phase 5 proven with test accounts on 2 Sep: manager invites a new email → `user_invited`
-in the auth log with a 1.08 s SMTP send → account, seat and credit all correct → the invitee's
-first sign-in forces authenticator enrolment → passes a module → manager's roster shows
-1/11. `tests/suites/e2e-invite.mjs` guards the seat/credit path every run. The one step that
-is JC's alone: his own first sign-in (it enrols *his* authenticator).
-
-## Phase 1 + 2 of the launch runbook are DONE (1–2 Sep 2026)
-
-`attest-ai.com` is on Netlify with a cert (both apex and www), DNS at 123-Reg. Resend
-sends from the domain (DKIM/SPF/MX verified). Supabase Auth uses Resend SMTP as
-`no-reply@attest-ai.com`, rate limit 30/h, redirects allow attest-ai.com/www/netlify.app.
-Proven: a real password-reset email arrived in an inbox at 21:52 on 2 Sep. So password
-resets, magic links and `invite-seat` emails all deliver now. Test board targets
-`https://attest-ai.com`. Phase 4 (form notifications) done 2 Sep by API → reidalastair@rocketmail.com.
-Remaining runbook: Phase 0/3 (Stripe), Phase 5 (JC invites staff).
+Launch runbook Phases 1, 2, 4 and 5 (machine half) executed and proven; production sweep;
+audit cuts; last client-scored quizzes moved server-side; test plan brought current.
+- **Domain live**: `attest-ai.com` on Netlify with cert (apex + www); DNS at 123-Reg (registrar
+  confirmed by RDAP; its `domaincontrol.com` nameservers are GoDaddy-group, which 123-Reg uses).
+- **Email delivers**: Resend domain verified (DKIM/SPF/MX); Supabase Auth on Resend SMTP as
+  `no-reply@attest-ai.com`, 30/h, redirects for attest-ai.com/www/netlify.app — applied by
+  `scripts/phase2-supabase-auth-config.mjs`; a real reset email arrived in a human inbox.
+- **Form notifications** on `order`/`demo`/`partner-enquiry` → reidalastair@rocketmail.com (James@
+  cannot receive: no MX). Orphan forms + test rows deleted. All by Netlify API.
+- **invite-seat** transcribed into `supabase/functions/`, reviewed, redeployed (v3, link →
+  attest-ai.com). Invite → enrol → module → roster proven; `e2e-invite` guards it.
+- **Landing**: fade-in, big Sign up, self-serve signup flow (creates end_user; confirmation
+  email). Auth buttons ship disabled until wired (a pre-wire click native-submitted the form).
+- **Idle logout**: 10 min, every authed page (`assets/idle-logout.js`).
+- **Audit cuts** (−11,415 lines): 28 dead tests, unlinked `v2/` + 3 Python feeders, dead
+  classifier engine, `.netlify/state.json`; dedupes (escaper, env parser, Stripe bands → 
+  `netlify/functions/bands.mjs`, Supabase constants → `tests/lib/supabase.mjs`).
+- **Migration 0010**: `track_keys`, `track_progress`, `record_track_quiz_result`; nine pages lose
+  their keys. Test plan QUIZ-01–06/FRM-03/07 rewritten. HANDOFF "broken" list emptied.
+- **Fixtures**: `e2e-manager`, `e2e-staff`, `e2e-newstarter`, `e2e-newmanager`, `e2e-freeagent`,
+  `e2e-teammate` (see `.env.e2e`). JC: temp password issued by phone 18 Aug, 500 credits, no
+  authenticator yet — his first browser sign-in enrols it.
 
 ## Next steps, ordered, first one startable cold
 
-1. **Stripe** (runbook Phases 0 and 3): account, Bacs verification, env vars, webhook, VAT.
-2. **JC's first sign-in, then his first invite** (runbook Phase 5, his to do; the flow is proven).
-3. **`docs/SPEC-organisations-auditor-reseller.md`**, in the order the spec gives. Do its two
-   prerequisites first: fix `dbGet`, capture `governance_state` in a migration.
+1. **Stripe** (🧑, runbook Phases 0 and 3): create account, start Bacs verification (days), then
+   4 Netlify env vars, webhook `/.netlify/functions/stripe-webhook` on the two `checkout.session.*`
+   events, VAT decision, one real £990 charge-and-refund.
+2. **JC's first sign-in and first invite** (🧑, Phase 5 human half). Then revoke the `phase2`
+   Supabase token if not already expired (24 h).
+3. **Decide the signup exposure** (🧑): a self-serve account passes the client-side course gate
+   (`course-gate.js`), so the paid course is free to anyone who signs up. Server-side seat check
+   or public signups off, before charging.
+4. **Webhook welcome email** (🤖): `stripe-webhook.mjs` provisions a manager but sends nothing;
+   now SMTP works, send a recovery/welcome link after `grant_credits`.
+5. **`docs/SPEC-organisations-auditor-reseller.md`** (🤖): its prerequisites (`dbGet`,
+   `governance_state` migration) are done.
+6. Optional cut from the audit: relocate `.audit/` (69 files, 17 MB) out of the site repo.
 
 ## End-to-end journeys, and the hole they found (11 Aug)
 
@@ -165,6 +178,26 @@ from the console mints nothing.
   video says so. A dead inline gate that would have paywalled it was removed on 31 Jul.
 - Portal pages are `Cache-Control: private, no-store`; marketing pages are `max-age=300`, so a change
   can look undeployed for five minutes. Verify with a cache-busting query, not a hard refresh.
+
+- **Leave a portal page at a person's pace in tests.** `goto` within milliseconds of landing aborts
+  the page's own `getUser`/reload fetch; supabase-js logs "Failed to fetch" and the AIMP shell
+  throws "unauthorised". Page objects drain `networkidle` before navigating (doctrine rule 8).
+- **GoTrue lists factors on `GET /auth/v1/user`**, not `GET /auth/v1/factors` (answers empty,
+  stranded a factor once). Un-enrolling needs aal2, i.e. the factor's own secret.
+- **Supabase Management API types `smtp_port` as a string** ("465"); a number is a 400.
+- **Netlify serves pretty URLs**: `/portal/login.html` becomes `/portal/login` in `location`;
+  match `/login(\.html)?$` in tests.
+- **A static button whose listener arrives with a module script has a dead-click window.**
+  Ship it `disabled`, enable at wire time (`wireSignOut`, auth submit buttons).
+- **Persist any captured TOTP secret the instant you have it**; two crashed runs stranded
+  factors that then needed SQL to remove.
+- **Netlify personal token** lives in `~/Library/Preferences/netlify/config.json` and works for
+  the REST API (domains, hooks, forms, submissions) — no `netlify` CLI installed.
+- **Computer-use can only READ browsers**; clicking needs the Claude-in-Chrome extension, which
+  cannot sign in with an Apple-SSO Claude account. Clipboard-read is the practical bridge.
+- **`timeout` is not on this Mac**; use `( cmd & pid=$!; sleep N; kill $pid )` or background tasks.
+- **Orphan-test sweeps: exclude what `run-all` lists.** `ls tests/*.mjs | grep -v run-all` also
+  removed the three live unit suites (restored from git before commit).
 
 ## Where things live
 `assets/` site JS+CSS · `portal/` the app (`aimp.js` = Governance Centre, 16 sections) ·
