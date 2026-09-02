@@ -1114,7 +1114,11 @@ again is a doctrine violation, not a style choice.
    never in the repo.** `e2e-manager@` / `e2e-staff@` / `e2e-newstarter@` — the last one
    self-resets its TOTP factor every run so enrolment stays first-time. Never enrol MFA on
    an account a human uses; whoever completes enrolment holds the authenticator.
-8. **GoTrue quirk:** factors are listed on `GET /auth/v1/user` (`user.factors`), not
+8. **A journey test leaves a portal page at a person's pace.** Navigating away within
+   milliseconds aborts the page's own in-flight `getUser`/reload fetches; supabase-js
+   logs "Failed to fetch" and the AIMP shell throws on the null profile. Every portal
+   page object drains `networkidle` before `goto`. Two 9/10 runs taught this.
+9. **GoTrue quirk:** factors are listed on `GET /auth/v1/user` (`user.factors`), not
    `GET /auth/v1/factors` — the latter answers empty and once stranded a factor.
 
 ## § Launch — future action points (as of 2026-08-14)

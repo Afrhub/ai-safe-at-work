@@ -27,6 +27,10 @@ export class GovernancePage {
   }
 
   async open() {
+    // Drain the current page's in-flight requests before leaving it. Navigating away
+    // mid-fetch makes supabase-js log "Failed to fetch" — a test-pace artefact, not
+    // something a person's hands produce.
+    await this.page.waitForLoadState("networkidle").catch(() => {});
     await this.page.goto(BASE + "/portal/governance.html", { waitUntil: "domcontentloaded" });
     await this.page.waitForLoadState("networkidle");
     await this.aiDocRows.first().waitFor({ state: "visible", timeout: 25_000 });

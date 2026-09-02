@@ -119,8 +119,10 @@ completed course a single REST call, which is the record `cert.html` prints. Mig
 drops it, captures the four undocumented governance tables and `ensure_governance_docs`,
 and is **applied to the live project**. The caller in `portal/assets/end-user.js` is gone.
 
-Two dedicated accounts do this work: `e2e-manager@attest-ai.com` and
-`e2e-staff@attest-ai.com`, the staff seated to the manager, both TOTP enrolled. Credentials
+Dedicated accounts do this work: `e2e-manager@` and `e2e-staff@` (staff seated to the
+manager, both TOTP enrolled), `e2e-newstarter@` (onboarding, self-resets its factor),
+`e2e-newmanager@` (manager first day, self-resets) and `e2e-freeagent@` (end_user with
+the course complete, seated to nobody — seating them proves the training statistic). Credentials
 and secrets live in `.env.e2e`, gitignored, never in the repo. Without that file the suite
 skips. `scripts/e2e-enrol-totp.mjs` enrols a factor for an account using only its own
 password, and prints the lines to paste.
