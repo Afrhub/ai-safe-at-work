@@ -79,3 +79,6 @@ docs/subscription-model.pdf
 
 # Remotion source for the platform demo. Only the rendered mp4 in assets/video/ ships.
 video-project/
+
+# Playwright evidence screenshots (ephemeral, sent to the user, never committed)
+tests/evidence/
