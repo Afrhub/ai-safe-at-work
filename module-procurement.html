@@ -35,7 +35,7 @@
 <link rel="stylesheet" href="assets/style.css?v=30" />
 <link rel="stylesheet" href="assets/quiz.css?v=3" />
 <script defer src="assets/cinema.js?v=23"></script>
-<script defer src="assets/quiz.js?v=5"></script>
+<script defer src="assets/quiz.js?v=6"></script>
 <style>
 .role-banner { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.95rem; border-radius: 2px; background: rgba(250,88,45, 0.08); border: 1px solid rgba(250,88,45, 0.32); color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.2rem; }
 .role-banner::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px rgba(250,88,45, 0.65); }
@@ -475,147 +475,135 @@
  <p>Ten procurement-judgement questions. Suggested pass: 8/10.</p>
 
  <div id="quiz-mount"></div>
- <script type="application/json" id="quiz-data">
- {
+ <script type="application/json" id="quiz-data">{
  "module": "proc",
  "moduleLabel": "Procurement track",
  "passThreshold": 8,
  "quizTitle": "Test your <em>understanding</em>.",
  "quizLede": "Ten questions drawn only from this track. Pass mark 8 out of 10. Retake as many times as you like.",
  "questions": [
- {
- "q": "An AI vendor's standard DPA doesn't address training-data use. Their sales rep says “we don't use customer data for training, it's just not written down”. How should you proceed?",
- "options": [
- "Accept the verbal assurance &mdash; sales reps speak for the vendor",
- "Require the assurance to land as a representation &amp; warranty in the DPA or addendum; if they refuse, that is your answer",
- "Proceed but add a note to your own file recording what the rep said",
- "Ask a different rep to confirm it in an email, which is sufficient",
- "Drop training-data concerns since the vendor is clearly acting in good faith"
- ],
- "correct": 1,
- "why": "Body: <em>Material assertions about training-data use must be contractual. A vendor that won't write it down may change practice without breaching contract &mdash; require it as a representation and warranty; refusal is the answer.</em>",
- "cite": "Sub-module: DPA review for AI vendors"
- },
- {
- "q": "Three shortlisted vendors: A is all-green; B is green-on-data-handling, amber-on-incident-response; C is amber-on-data-handling, green-on-incident-response. Between B and C, which is closer to procurement-ready?",
- "options": [
- "C &mdash; incident-response gaps are always the more serious risk",
- "Neither &mdash; any amber disqualifies a vendor outright",
- "B &mdash; data-handling gaps are architectural and hard to remediate, while incident-response terms are usually negotiable",
- "Whichever is cheaper, since both have one amber",
- "C &mdash; count the ambers and pick the one with fewer material greens"
- ],
- "correct": 2,
- "why": "Body: <em>Score severity-weighted, not count-weighted. Amber-on-data-handling can mean architectural decisions baked into the product; amber-on-incident-response is typically negotiable through better SLAs and notification windows.</em>",
- "cite": "Sub-module: the 37-question questionnaire as a buying instrument"
- },
- {
- "q": "Your AI vendor's sub-processor list includes “OpenAI” and you are a financial-services firm. What additional due diligence applies?",
- "options": [
- "Map DORA Article 28 concentration risk, run a Schrems II transfer-impact assessment, and flow OpenAI's downstream terms and change-notice through your DPA",
- "None &mdash; the vendor's own DPA fully covers any downstream processor",
- "Only a check that OpenAI has a cookie policy",
- "Ask the vendor to remove OpenAI from the stack as a condition of purchase",
- "Treat OpenAI as out of scope because you have no direct contract with them"
- ],
- "correct": 0,
- "why": "Body: <em>Indirect dependency on a shared sub-processor raises DORA Article 28 concentration risk, a Schrems II transfer-impact assessment for US processing, and downstream DPA / change-notice terms that must flow through your contract.</em>",
- "cite": "Sub-module: sub-processor disclosure"
- },
- {
- "q": "A vendor refuses a 30-day sub-processor notification window and offers 7 days. Is that acceptable?",
- "options": [
- "Yes &mdash; 7 days is plenty for due diligence and DPO consultation",
- "Yes &mdash; any written notice period is adequate",
- "No &mdash; demand 90 days with no compromise",
- "No &mdash; push back to 30 days, settle at 21 if needed, reject 7 unless tolerance is genuinely high, and document the outcome",
- "It doesn't matter, because sub-processor changes rarely affect you"
- ],
- "correct": 3,
- "why": "Body: <em>7 days rarely allows meaningful due diligence, DPO consultation, an objection process and alternative-vendor evaluation. Push to 30, settle at 21 if needed, and document why any shorter window was accepted.</em>",
- "cite": "Sub-module: sub-processor disclosure"
- },
- {
- "q": "An AI product is sometimes used in a high-risk Annex III context and sometimes for low-risk admin. Is the Article 26 deployer obligation engaged universally?",
- "options": [
- "Yes &mdash; once any high-risk use exists, every use of the tool is high-risk",
- "No &mdash; Article 26 never applies to procured tools, only to tools you build",
- "Yes &mdash; Article 26 applies to all deployers regardless of how they use a tool",
- "It cannot be determined without the provider's consent",
- "No &mdash; obligations track actual use: the high-risk use triggers Article 26 for that use, the low-risk use doesn't, so specify scope in your AUP"
- ],
- "correct": 4,
- "why": "Body: <em>It depends on your actual use. The high-risk use triggers Article 26 for that use; the low-risk use doesn't. Where one procurement covers both, document the scope split so deployer obligations track the actual use.</em>",
- "cite": "Sub-module: EU AI Act Articles 13 + 26"
- },
- {
- "q": "Vendor A is £15k/year, ships in 2 weeks, weak Article 13 documentation. Vendor B is £24k/year, ships in 6 weeks, comprehensive Article 13 documentation. The CFO says “go with A”. What is the strongest response?",
- "options": [
- "Agree &mdash; the £9k saving and faster ship always win",
- "Refuse to buy either until the price gap closes",
- "Explain that the £9k delta buys completed compliance work, so A's risk-adjusted TCO is higher; document the analysis and let the CFO override on the record",
- "Escalate over the CFO's head without giving any reasoning",
- "Pick A but quietly rebuild the Article 13 documentation without telling anyone"
- ],
- "correct": 2,
- "why": "Body: <em>The £9k delta is the cost of a vendor that has done its compliance work. A's risk-adjusted TCO is higher &mdash; weaker audit story, deployer-obligation risk, procurement-readiness gate. Document the analysis; let the CFO override, but document it.</em>",
- "cite": "Sub-module: total cost of ownership / risk-adjusted TCO"
- },
- {
- "q": "An AI vendor's standard contract caps liability at £5k. Your contract value is £80k/year and the AI affects customer-facing decisions. Proceed on the standard cap?",
- "options": [
- "Yes &mdash; standard caps are standard for a reason",
- "Yes &mdash; £5k is fine as long as you have your own insurance",
- "No &mdash; walk away immediately without attempting to negotiate",
- "It's irrelevant, because liability caps are unenforceable anyway",
- "No &mdash; the cap is misaligned with risk; negotiate up toward multiples of annual fees with uncapped carve-outs for IP indemnity, confidentiality breach and wilful misconduct"
- ],
- "correct": 4,
- "why": "Body: <em>The cap is misaligned with risk. Typical caps for material customer-affecting deployments run to 12x annual fees or higher, with carve-outs (IP indemnification, breach of confidentiality, wilful misconduct) left uncapped.</em>",
- "cite": "Sub-module: contracting for change / indemnification"
- },
- {
- "q": "You are procuring an AI tool for a UK NHS practice. The vendor says they are “not a medical device” but the tool affects clinical workflow. What is the correct procurement workflow?",
- "options": [
- "Accept the vendor's bare assertion and proceed",
- "Demand the intended-purpose statement, run it through MDR Rule 11 with the clinical lead, require CE/UKCA marking and a DCB0129 case file if it is a device, and engage the MHRA if classification is uncertain",
- "Classify it yourself as low-risk to avoid the paperwork",
- "Refer the whole question to the vendor's legal team and abide by their view",
- "Buy it now and resolve device classification after go-live"
- ],
- "correct": 1,
- "why": "Body: <em>Don't proceed on the vendor's assertion. Demand the intended-purpose statement, apply MDR Rule 11 with the clinical lead, require CE/UKCA marking plus a DCB0129 case file if it is a device, and engage MHRA if classification is genuinely uncertain.</em>",
- "cite": "Sub-module: sector-framework mapping (healthcare overlay)"
- },
- {
- "q": "Your AI vendor announces a model update; the email arrives 14 days before rollout, but your contract requires 60 days' notice. What should you do?",
- "options": [
- "Do nothing &mdash; 14 days is close enough to comply",
- "Silently accept the change and update your own records",
- "Cancel the whole contract on the spot without notice",
- "Require full 60-day notice in writing; if refused, treat it as material breach and invoke pause and termination rights, log it as an incident, and document the breach",
- "Wait to see whether the new model causes problems before reacting"
- ],
- "correct": 3,
- "why": "Body: <em>Require the full 60-day notice in writing; if refused, treat it as material breach and invoke pause and termination rights. Premature deployment of a model change is itself an incident &mdash; log it and document the breach.</em>",
- "cite": "Sub-module: contracting for change / model-swap notice"
- },
- {
- "q": "You are an MSP procuring AI tooling to deliver across a customer base spanning FS, healthcare, and public sector. What is the right procurement strategy?",
- "options": [
- "Procure to the most-stringent sector's requirements, insist on multi-tenant customer-level admin, audit-artefact handover and pass-through pricing, and require simultaneous readiness under DORA Art 13 + DCB0129 + Article 25",
- "Procure separate tools per sector with no shared baseline",
- "Buy the cheapest tool and add compliance later per customer",
- "Let each end customer procure their own tools independently",
- "Standardise on a single low-risk-only tool and refuse high-risk use cases"
- ],
- "correct": 0,
- "why": "Body: <em>Procure to the most-stringent sector (usually healthcare or public sector); those tools generally serve FS too. Require multi-tenant customer-level admin, customer-attribution audit and handover, pass-through pricing, and simultaneous readiness under DORA Art 13 + DCB0129 + Article 25.</em>",
- "cite": "Sub-module: buy / build / compose / defer (MSP strategy)"
- }
+  {
+   "q": "An AI vendor's standard DPA doesn't address training-data use. Their sales rep says “we don't use customer data for training, it's just not written down”. How should you proceed?",
+   "options": [
+    "Accept the verbal assurance &mdash; sales reps speak for the vendor",
+    "Require the assurance to land as a representation &amp; warranty in the DPA or addendum; if they refuse, that is your answer",
+    "Proceed but add a note to your own file recording what the rep said",
+    "Ask a different rep to confirm it in an email, which is sufficient",
+    "Drop training-data concerns since the vendor is clearly acting in good faith"
+   ],
+   "why": "Body: <em>Material assertions about training-data use must be contractual. A vendor that won't write it down may change practice without breaching contract &mdash; require it as a representation and warranty; refusal is the answer.</em>",
+   "cite": "Sub-module: DPA review for AI vendors"
+  },
+  {
+   "q": "Three shortlisted vendors: A is all-green; B is green-on-data-handling, amber-on-incident-response; C is amber-on-data-handling, green-on-incident-response. Between B and C, which is closer to procurement-ready?",
+   "options": [
+    "C &mdash; incident-response gaps are always the more serious risk",
+    "Neither &mdash; any amber disqualifies a vendor outright",
+    "B &mdash; data-handling gaps are architectural and hard to remediate, while incident-response terms are usually negotiable",
+    "Whichever is cheaper, since both have one amber",
+    "C &mdash; count the ambers and pick the one with fewer material greens"
+   ],
+   "why": "Body: <em>Score severity-weighted, not count-weighted. Amber-on-data-handling can mean architectural decisions baked into the product; amber-on-incident-response is typically negotiable through better SLAs and notification windows.</em>",
+   "cite": "Sub-module: the 37-question questionnaire as a buying instrument"
+  },
+  {
+   "q": "Your AI vendor's sub-processor list includes “OpenAI” and you are a financial-services firm. What additional due diligence applies?",
+   "options": [
+    "Map DORA Article 28 concentration risk, run a Schrems II transfer-impact assessment, and flow OpenAI's downstream terms and change-notice through your DPA",
+    "None &mdash; the vendor's own DPA fully covers any downstream processor",
+    "Only a check that OpenAI has a cookie policy",
+    "Ask the vendor to remove OpenAI from the stack as a condition of purchase",
+    "Treat OpenAI as out of scope because you have no direct contract with them"
+   ],
+   "why": "Body: <em>Indirect dependency on a shared sub-processor raises DORA Article 28 concentration risk, a Schrems II transfer-impact assessment for US processing, and downstream DPA / change-notice terms that must flow through your contract.</em>",
+   "cite": "Sub-module: sub-processor disclosure"
+  },
+  {
+   "q": "A vendor refuses a 30-day sub-processor notification window and offers 7 days. Is that acceptable?",
+   "options": [
+    "Yes &mdash; 7 days is plenty for due diligence and DPO consultation",
+    "Yes &mdash; any written notice period is adequate",
+    "No &mdash; demand 90 days with no compromise",
+    "No &mdash; push back to 30 days, settle at 21 if needed, reject 7 unless tolerance is genuinely high, and document the outcome",
+    "It doesn't matter, because sub-processor changes rarely affect you"
+   ],
+   "why": "Body: <em>7 days rarely allows meaningful due diligence, DPO consultation, an objection process and alternative-vendor evaluation. Push to 30, settle at 21 if needed, and document why any shorter window was accepted.</em>",
+   "cite": "Sub-module: sub-processor disclosure"
+  },
+  {
+   "q": "An AI product is sometimes used in a high-risk Annex III context and sometimes for low-risk admin. Is the Article 26 deployer obligation engaged universally?",
+   "options": [
+    "Yes &mdash; once any high-risk use exists, every use of the tool is high-risk",
+    "No &mdash; Article 26 never applies to procured tools, only to tools you build",
+    "Yes &mdash; Article 26 applies to all deployers regardless of how they use a tool",
+    "It cannot be determined without the provider's consent",
+    "No &mdash; obligations track actual use: the high-risk use triggers Article 26 for that use, the low-risk use doesn't, so specify scope in your AUP"
+   ],
+   "why": "Body: <em>It depends on your actual use. The high-risk use triggers Article 26 for that use; the low-risk use doesn't. Where one procurement covers both, document the scope split so deployer obligations track the actual use.</em>",
+   "cite": "Sub-module: EU AI Act Articles 13 + 26"
+  },
+  {
+   "q": "Vendor A is £15k/year, ships in 2 weeks, weak Article 13 documentation. Vendor B is £24k/year, ships in 6 weeks, comprehensive Article 13 documentation. The CFO says “go with A”. What is the strongest response?",
+   "options": [
+    "Agree &mdash; the £9k saving and faster ship always win",
+    "Refuse to buy either until the price gap closes",
+    "Explain that the £9k delta buys completed compliance work, so A's risk-adjusted TCO is higher; document the analysis and let the CFO override on the record",
+    "Escalate over the CFO's head without giving any reasoning",
+    "Pick A but quietly rebuild the Article 13 documentation without telling anyone"
+   ],
+   "why": "Body: <em>The £9k delta is the cost of a vendor that has done its compliance work. A's risk-adjusted TCO is higher &mdash; weaker audit story, deployer-obligation risk, procurement-readiness gate. Document the analysis; let the CFO override, but document it.</em>",
+   "cite": "Sub-module: total cost of ownership / risk-adjusted TCO"
+  },
+  {
+   "q": "An AI vendor's standard contract caps liability at £5k. Your contract value is £80k/year and the AI affects customer-facing decisions. Proceed on the standard cap?",
+   "options": [
+    "Yes &mdash; standard caps are standard for a reason",
+    "Yes &mdash; £5k is fine as long as you have your own insurance",
+    "No &mdash; walk away immediately without attempting to negotiate",
+    "It's irrelevant, because liability caps are unenforceable anyway",
+    "No &mdash; the cap is misaligned with risk; negotiate up toward multiples of annual fees with uncapped carve-outs for IP indemnity, confidentiality breach and wilful misconduct"
+   ],
+   "why": "Body: <em>The cap is misaligned with risk. Typical caps for material customer-affecting deployments run to 12x annual fees or higher, with carve-outs (IP indemnification, breach of confidentiality, wilful misconduct) left uncapped.</em>",
+   "cite": "Sub-module: contracting for change / indemnification"
+  },
+  {
+   "q": "You are procuring an AI tool for a UK NHS practice. The vendor says they are “not a medical device” but the tool affects clinical workflow. What is the correct procurement workflow?",
+   "options": [
+    "Accept the vendor's bare assertion and proceed",
+    "Demand the intended-purpose statement, run it through MDR Rule 11 with the clinical lead, require CE/UKCA marking and a DCB0129 case file if it is a device, and engage the MHRA if classification is uncertain",
+    "Classify it yourself as low-risk to avoid the paperwork",
+    "Refer the whole question to the vendor's legal team and abide by their view",
+    "Buy it now and resolve device classification after go-live"
+   ],
+   "why": "Body: <em>Don't proceed on the vendor's assertion. Demand the intended-purpose statement, apply MDR Rule 11 with the clinical lead, require CE/UKCA marking plus a DCB0129 case file if it is a device, and engage MHRA if classification is genuinely uncertain.</em>",
+   "cite": "Sub-module: sector-framework mapping (healthcare overlay)"
+  },
+  {
+   "q": "Your AI vendor announces a model update; the email arrives 14 days before rollout, but your contract requires 60 days' notice. What should you do?",
+   "options": [
+    "Do nothing &mdash; 14 days is close enough to comply",
+    "Silently accept the change and update your own records",
+    "Cancel the whole contract on the spot without notice",
+    "Require full 60-day notice in writing; if refused, treat it as material breach and invoke pause and termination rights, log it as an incident, and document the breach",
+    "Wait to see whether the new model causes problems before reacting"
+   ],
+   "why": "Body: <em>Require the full 60-day notice in writing; if refused, treat it as material breach and invoke pause and termination rights. Premature deployment of a model change is itself an incident &mdash; log it and document the breach.</em>",
+   "cite": "Sub-module: contracting for change / model-swap notice"
+  },
+  {
+   "q": "You are an MSP procuring AI tooling to deliver across a customer base spanning FS, healthcare, and public sector. What is the right procurement strategy?",
+   "options": [
+    "Procure to the most-stringent sector's requirements, insist on multi-tenant customer-level admin, audit-artefact handover and pass-through pricing, and require simultaneous readiness under DORA Art 13 + DCB0129 + Article 25",
+    "Procure separate tools per sector with no shared baseline",
+    "Buy the cheapest tool and add compliance later per customer",
+    "Let each end customer procure their own tools independently",
+    "Standardise on a single low-risk-only tool and refuse high-risk use cases"
+   ],
+   "why": "Body: <em>Procure to the most-stringent sector (usually healthcare or public sector); those tools generally serve FS too. Require multi-tenant customer-level admin, customer-attribution audit and handover, pass-through pricing, and simultaneous readiness under DORA Art 13 + DCB0129 + Article 25.</em>",
+   "cite": "Sub-module: buy / build / compose / defer (MSP strategy)"
+  }
  ]
- }
- </script>
+}</script>
 
  <div class="signature">
  <div class="label">Track complete</div>

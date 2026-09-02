@@ -35,7 +35,7 @@
 <link rel="stylesheet" href="assets/style.css?v=30" />
 <link rel="stylesheet" href="assets/quiz.css?v=3" />
 <script defer src="assets/cinema.js?v=23"></script>
-<script defer src="assets/quiz.js?v=5"></script>
+<script defer src="assets/quiz.js?v=6"></script>
 <style>
 .role-banner { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.95rem; border-radius: 2px; background: rgba(95, 168, 255, 0.10); border: 1px solid rgba(95, 168, 255, 0.32); color: var(--blue); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.2rem; }
 .role-banner::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 10px rgba(95, 168, 255, 0.55); }
@@ -504,147 +504,135 @@
  <p>Ten judgement questions exercising the public-sector overlay. Self-mark. Suggested pass: 8/10.</p>
 
  <div id="quiz-mount"></div>
- <script type="application/json" id="quiz-data">
-{
-  "module": "ps",
-  "moduleLabel": "Public sector overlay",
-  "passThreshold": 8,
-  "quizTitle": "Test your <em>understanding</em>.",
-  "quizLede": "Ten questions drawn only from this overlay. Pass mark 8 out of 10. Retake as many times as you like.",
-  "questions": [
-    {
-      "q": "A local authority deploys an AI tool to help triage housing-application backlogs. Does the EU AI Act high-risk regime and the Article 27 FRIA apply?",
-      "options": [
-        "Likely yes &mdash; housing-allocation prioritisation is Annex III §5(a) eligibility-for-public-services, and as a body governed by public law the authority must complete an Article 27 FRIA before first use",
-        "No &mdash; housing administration is expressly excluded from Annex III",
-        "Only if the tool makes the final decision with no human in the loop",
-        "Only the DPIA applies; the FRIA is optional for local authorities",
-        "It is minimal-risk, so only voluntary transparency applies"
-      ],
-      "correct": 0,
-      "why": "Body: <em>Housing-allocation prioritisation falls into Annex III §5(a) eligibility-for-public-services. As a body governed by public law the authority must complete an Article 27 FRIA before first use, with Article 27(3) notification to the market-surveillance authority and an ATRS record published before deployment.</em>",
-      "cite": "Annex III §5(a) &amp; Article 27 FRIA"
-    },
-    {
-      "q": "Your council uses free ChatGPT to draft responses to FOI requests. Is that acceptable?",
-      "options": [
-        "Yes, provided the drafter checks the output before sending",
-        "Yes, because FOI responses are public documents anyway",
-        "No &mdash; FOI requests can contain requester personal data and undecided authority positions, and a consumer LLM has no controlled retention; use an approved enterprise tool with a DPA, restricted to authorised drafters",
-        "No, but only because free ChatGPT is too slow for FOI deadlines",
-        "It is fine so long as the council later publishes a disclaimer"
-      ],
-      "correct": 2,
-      "why": "Body: <em>FOI requests can contain requester personal data and pre-response drafts contain undecided authority positions; a consumer LLM has no controlled retention. This raises AUP, UK GDPR, procurement-framework and ATRS issues. Fix: an approved enterprise tool with a proper DPA, restricted to authorised drafters, with an audit log retained.</em>",
-      "cite": "FOI drafting &amp; consumer-LLM risk"
-    },
-    {
-      "q": "You are publishing an ATRS Tier 1 record and the vendor refuses to let you describe how the algorithm works, citing commercial confidentiality. What is the right response?",
-      "options": [
-        "Accept the confidentiality claim and publish the record with that section left blank",
-        "The commercial-confidentiality position is wrong where the algorithm affects citizen decisions &mdash; ATRS is the floor; require disclosure as a procurement clause, escalate if already signed, and if the vendor still refuses, do not deploy",
-        "Publish only a Tier 2 record instead, which does not require the description",
-        "Redact the description permanently and note that the vendor objected",
-        "Refer the vendor to the ICO for a binding confidentiality ruling first"
-      ],
-      "correct": 1,
-      "why": "Body: <em>Where the algorithm affects citizen decisions the commercial-confidentiality position is wrong &mdash; ATRS is the floor for that disclosure. Require the disclosure as a procurement clause before contract; if already signed, escalate via legal and commercial; if the vendor still refuses, the algorithm should not be deployed and an alternative vendor should be found.</em>",
-      "cite": "ATRS transparency vs vendor confidentiality"
-    },
-    {
-      "q": "The council deploys an AI tool that helps grade student work. Does it engage the Annex III high-risk regime?",
-      "options": [
-        "No, because grading assistance keeps a human marker in the loop",
-        "Only if the grades feed a formal qualification",
-        "No, education tools are covered solely by UK GDPR, not the AI Act",
-        "Yes &mdash; Annex III §3 (education and vocational training, evaluating learning outcomes); high-risk, with Article 26 deployer duties, a mandatory FRIA, a PSED assessment and an ATRS record",
-        "Only once Article 86 takes effect, so nothing applies until then"
-      ],
-      "correct": 3,
-      "why": "Body: <em>Grading student work falls under Annex III §3 (education and vocational training, evaluating learning outcomes). It is high-risk: Article 26 deployer duties apply, an Article 27 FRIA is mandatory for a public body, Article 86 right-to-explanation engages when the high-risk regime does, deferred by the Digital Omnibus to 2 December 2027 for Annex III systems, a PSED assessment is required for disparate impact, and an ATRS record must be published before deployment.</em>",
-      "cite": "Annex III §3 education"
-    },
-    {
-      "q": "A councillor asks in a council meeting, \"What AI tools is the council using?\" What is the right answer to be ready with?",
-      "options": [
-        "\"That is commercially confidential and cannot be disclosed in public\"",
-        "\"We don't know &mdash; each department manages its own tools\"",
-        "The published ATRS register with Tier 1 summaries of every algorithmic tool in citizen-affecting use &mdash; or, if not yet mature, the in-scope inventory plus a committed publication date",
-        "\"None that make decisions, so there is nothing to report\"",
-        "A promise to answer in writing after checking with the vendors"
-      ],
-      "correct": 2,
-      "why": "Body: <em>Be ready with the published ATRS register &mdash; Tier 1 summaries of every algorithmic tool in citizen-affecting use. If you are not yet at published-register maturity, the right interim answer is that you are building the register and will publish by a stated date, and here is the in-scope inventory. \"We don't know\" is the unacceptable answer.</em>",
-      "cite": "ATRS register &amp; public accountability"
-    },
-    {
-      "q": "A citizen received an AI-assisted decision denying their benefit appeal and requests an explanation of the algorithm. From August 2026, what do they have a right to?",
-      "options": [
-        "The full source code and training data of the model",
-        "Nothing beyond the existing decision letter",
-        "Only a UK GDPR subject access response listing their personal data",
-        "A right to have the decision automatically overturned on request",
-        "Under EU AI Act Article 86, a clear and meaningful, citizen-understandable explanation of the AI's role and the main elements of the decision, combined with GDPR Article 22 safeguards and a route to LGSCO or PHSO"
-      ],
-      "correct": 4,
-      "why": "Body: <em>Article 86 gives a clear and meaningful explanation of the role of the AI system in the decision-making procedure and the main elements of the decision, understandable by the citizen rather than technical-only. Combine it with GDPR Article 22 safeguards (human intervention, express a view, contest the decision) and a complaint route to LGSCO or PHSO.</em>",
-      "cite": "Article 86 right-to-explanation"
-    },
-    {
-      "q": "Your council procured an AI tool via G-Cloud. Six months later the vendor updates the model. What is your obligation?",
-      "options": [
-        "None &mdash; vendor model updates are the supplier's responsibility",
-        "Rely on a material-change notification clause (verify it was negotiated), then re-run the FRIA, DPIA, ATRS record, bias metrics and PSED assessment, and log the change in the change register",
-        "Simply re-publish the existing ATRS record unchanged",
-        "Immediately halt the tool until a fresh procurement is run",
-        "Notify the ICO of the update within 72 hours regardless of impact"
-      ],
-      "correct": 1,
-      "why": "Body: <em>A material-change notification clause should have been negotiated in the original procurement &mdash; verify it was. Then update the FRIA, DPIA and ATRS record, re-test decision-impact and bias metrics, re-engage the PSED assessment, brief electeds if citizen-facing decisions change materially, and document the change in the change register.</em>",
-      "cite": "Model-update obligations post-procurement"
-    },
-    {
-      "q": "An AI-assisted council-tax-band review system disproportionately downgrades band placements for properties in one area. What is the escalation order?",
-      "options": [
-        "Keep it running while you gather more data to confirm the pattern",
-        "Halt the system immediately, engage the EHRC PSED analysis (s.149), notify the ICO under Article 33 if personal data is implicated, identify affected citizens and remediate, and brief Cabinet before press",
-        "Report to the press first for transparency, then investigate internally",
-        "Refer the matter to the vendor and await their fix before acting",
-        "Notify only the LGA and continue operating the system"
-      ],
-      "correct": 1,
-      "why": "Body: <em>Halt the system immediately; engage the EHRC PSED analysis as disparate impact likely engages s.149; notify the ICO under Article 33 if personal data is implicated; run the incident-management workflow; identify affected citizens and remediate; brief Cabinet before press; update the FRIA and ATRS; expect LGSCO and LGA interest; and hold a lessons-learned review.</em>",
-      "cite": "Disparate-impact incident escalation"
-    },
-    {
-      "q": "The NAO opens a value-for-money review of your authority's AI procurement spending. What documentation do you need?",
-      "options": [
-        "Only the signed vendor contract and the invoices",
-        "Just the published ATRS records",
-        "A full audit binder: procurement-route justification, FRIA/DPIA/PSED assessments, ATRS records, the value-for-money business case, supplier-evaluation matrix, outcome metrics, incident and change registers, training and complaint records, and governance minutes",
-        "The DPIA and the ICO correspondence alone",
-        "A summary memo from the finance director"
-      ],
-      "correct": 2,
-      "why": "Body: <em>The NAO's job is value-for-money and propriety, fed by: procurement-route justification at decision-time, FRIA/DPIA/PSED assessments, ATRS records, the value-for-money business case, supplier-evaluation matrix, post-deployment outcome metrics, incident and change registers, Article 4 staff-training records, citizen-complaint records, the AI-related FOI response log, and governance committee minutes.</em>",
-      "cite": "NAO value-for-money evidence"
-    },
-    {
-      "q": "An MSP wants to deliver an \"AI Safe@Work + ATRS + FRIA pack\" rollout for a UK local authority. What is the standard deliverable?",
-      "options": [
-        "A single AUP document and nothing more",
-        "A one-off staff webinar with slides",
-        "A verbal briefing to elected members only",
-        "An audit binder: the 30-day rollout guide and Copilot track plus this overlay, an AUP with a public-sector never-paste list, a DPIA with the public-task condition, a FRIA cross-referencing PSED s.149, ATRS Tier 1 and 2 drafts, an incident form, procurement evidence, a training register and a governance report template",
-        "Only the ATRS Tier 1 and Tier 2 record drafts"
-      ],
-      "correct": 3,
-      "why": "Body: <em>The standard deliverable is an audit binder that satisfies the ICO, NAO, select committee, LGSCO and the public via FOI: the 30-day rollout guide and Copilot track plus this overlay, an AUP with a public-sector never-paste list, a DPIA with the public-task Schedule 1 condition and Article 9 derogations, a FRIA cross-referencing PSED s.149, ATRS Tier 1 and 2 drafts, a public-sector incident form, procurement-framework evidence, a training register and a governance report template.</em>",
-      "cite": "MSP public-sector rollout deliverable"
-    }
-  ]
-}
- </script>
+ <script type="application/json" id="quiz-data">{
+ "module": "ps",
+ "moduleLabel": "Public sector overlay",
+ "passThreshold": 8,
+ "quizTitle": "Test your <em>understanding</em>.",
+ "quizLede": "Ten questions drawn only from this overlay. Pass mark 8 out of 10. Retake as many times as you like.",
+ "questions": [
+  {
+   "q": "A local authority deploys an AI tool to help triage housing-application backlogs. Does the EU AI Act high-risk regime and the Article 27 FRIA apply?",
+   "options": [
+    "Likely yes &mdash; housing-allocation prioritisation is Annex III §5(a) eligibility-for-public-services, and as a body governed by public law the authority must complete an Article 27 FRIA before first use",
+    "No &mdash; housing administration is expressly excluded from Annex III",
+    "Only if the tool makes the final decision with no human in the loop",
+    "Only the DPIA applies; the FRIA is optional for local authorities",
+    "It is minimal-risk, so only voluntary transparency applies"
+   ],
+   "why": "Body: <em>Housing-allocation prioritisation falls into Annex III §5(a) eligibility-for-public-services. As a body governed by public law the authority must complete an Article 27 FRIA before first use, with Article 27(3) notification to the market-surveillance authority and an ATRS record published before deployment.</em>",
+   "cite": "Annex III §5(a) &amp; Article 27 FRIA"
+  },
+  {
+   "q": "Your council uses free ChatGPT to draft responses to FOI requests. Is that acceptable?",
+   "options": [
+    "Yes, provided the drafter checks the output before sending",
+    "Yes, because FOI responses are public documents anyway",
+    "No &mdash; FOI requests can contain requester personal data and undecided authority positions, and a consumer LLM has no controlled retention; use an approved enterprise tool with a DPA, restricted to authorised drafters",
+    "No, but only because free ChatGPT is too slow for FOI deadlines",
+    "It is fine so long as the council later publishes a disclaimer"
+   ],
+   "why": "Body: <em>FOI requests can contain requester personal data and pre-response drafts contain undecided authority positions; a consumer LLM has no controlled retention. This raises AUP, UK GDPR, procurement-framework and ATRS issues. Fix: an approved enterprise tool with a proper DPA, restricted to authorised drafters, with an audit log retained.</em>",
+   "cite": "FOI drafting &amp; consumer-LLM risk"
+  },
+  {
+   "q": "You are publishing an ATRS Tier 1 record and the vendor refuses to let you describe how the algorithm works, citing commercial confidentiality. What is the right response?",
+   "options": [
+    "Accept the confidentiality claim and publish the record with that section left blank",
+    "The commercial-confidentiality position is wrong where the algorithm affects citizen decisions &mdash; ATRS is the floor; require disclosure as a procurement clause, escalate if already signed, and if the vendor still refuses, do not deploy",
+    "Publish only a Tier 2 record instead, which does not require the description",
+    "Redact the description permanently and note that the vendor objected",
+    "Refer the vendor to the ICO for a binding confidentiality ruling first"
+   ],
+   "why": "Body: <em>Where the algorithm affects citizen decisions the commercial-confidentiality position is wrong &mdash; ATRS is the floor for that disclosure. Require the disclosure as a procurement clause before contract; if already signed, escalate via legal and commercial; if the vendor still refuses, the algorithm should not be deployed and an alternative vendor should be found.</em>",
+   "cite": "ATRS transparency vs vendor confidentiality"
+  },
+  {
+   "q": "The council deploys an AI tool that helps grade student work. Does it engage the Annex III high-risk regime?",
+   "options": [
+    "No, because grading assistance keeps a human marker in the loop",
+    "Only if the grades feed a formal qualification",
+    "No, education tools are covered solely by UK GDPR, not the AI Act",
+    "Yes &mdash; Annex III §3 (education and vocational training, evaluating learning outcomes); high-risk, with Article 26 deployer duties, a mandatory FRIA, a PSED assessment and an ATRS record",
+    "Only once Article 86 takes effect, so nothing applies until then"
+   ],
+   "why": "Body: <em>Grading student work falls under Annex III §3 (education and vocational training, evaluating learning outcomes). It is high-risk: Article 26 deployer duties apply, an Article 27 FRIA is mandatory for a public body, Article 86 right-to-explanation engages when the high-risk regime does, deferred by the Digital Omnibus to 2 December 2027 for Annex III systems, a PSED assessment is required for disparate impact, and an ATRS record must be published before deployment.</em>",
+   "cite": "Annex III §3 education"
+  },
+  {
+   "q": "A councillor asks in a council meeting, \"What AI tools is the council using?\" What is the right answer to be ready with?",
+   "options": [
+    "\"That is commercially confidential and cannot be disclosed in public\"",
+    "\"We don't know &mdash; each department manages its own tools\"",
+    "The published ATRS register with Tier 1 summaries of every algorithmic tool in citizen-affecting use &mdash; or, if not yet mature, the in-scope inventory plus a committed publication date",
+    "\"None that make decisions, so there is nothing to report\"",
+    "A promise to answer in writing after checking with the vendors"
+   ],
+   "why": "Body: <em>Be ready with the published ATRS register &mdash; Tier 1 summaries of every algorithmic tool in citizen-affecting use. If you are not yet at published-register maturity, the right interim answer is that you are building the register and will publish by a stated date, and here is the in-scope inventory. \"We don't know\" is the unacceptable answer.</em>",
+   "cite": "ATRS register &amp; public accountability"
+  },
+  {
+   "q": "A citizen received an AI-assisted decision denying their benefit appeal and requests an explanation of the algorithm. From August 2026, what do they have a right to?",
+   "options": [
+    "The full source code and training data of the model",
+    "Nothing beyond the existing decision letter",
+    "Only a UK GDPR subject access response listing their personal data",
+    "A right to have the decision automatically overturned on request",
+    "Under EU AI Act Article 86, a clear and meaningful, citizen-understandable explanation of the AI's role and the main elements of the decision, combined with GDPR Article 22 safeguards and a route to LGSCO or PHSO"
+   ],
+   "why": "Body: <em>Article 86 gives a clear and meaningful explanation of the role of the AI system in the decision-making procedure and the main elements of the decision, understandable by the citizen rather than technical-only. Combine it with GDPR Article 22 safeguards (human intervention, express a view, contest the decision) and a complaint route to LGSCO or PHSO.</em>",
+   "cite": "Article 86 right-to-explanation"
+  },
+  {
+   "q": "Your council procured an AI tool via G-Cloud. Six months later the vendor updates the model. What is your obligation?",
+   "options": [
+    "None &mdash; vendor model updates are the supplier's responsibility",
+    "Rely on a material-change notification clause (verify it was negotiated), then re-run the FRIA, DPIA, ATRS record, bias metrics and PSED assessment, and log the change in the change register",
+    "Simply re-publish the existing ATRS record unchanged",
+    "Immediately halt the tool until a fresh procurement is run",
+    "Notify the ICO of the update within 72 hours regardless of impact"
+   ],
+   "why": "Body: <em>A material-change notification clause should have been negotiated in the original procurement &mdash; verify it was. Then update the FRIA, DPIA and ATRS record, re-test decision-impact and bias metrics, re-engage the PSED assessment, brief electeds if citizen-facing decisions change materially, and document the change in the change register.</em>",
+   "cite": "Model-update obligations post-procurement"
+  },
+  {
+   "q": "An AI-assisted council-tax-band review system disproportionately downgrades band placements for properties in one area. What is the escalation order?",
+   "options": [
+    "Keep it running while you gather more data to confirm the pattern",
+    "Halt the system immediately, engage the EHRC PSED analysis (s.149), notify the ICO under Article 33 if personal data is implicated, identify affected citizens and remediate, and brief Cabinet before press",
+    "Report to the press first for transparency, then investigate internally",
+    "Refer the matter to the vendor and await their fix before acting",
+    "Notify only the LGA and continue operating the system"
+   ],
+   "why": "Body: <em>Halt the system immediately; engage the EHRC PSED analysis as disparate impact likely engages s.149; notify the ICO under Article 33 if personal data is implicated; run the incident-management workflow; identify affected citizens and remediate; brief Cabinet before press; update the FRIA and ATRS; expect LGSCO and LGA interest; and hold a lessons-learned review.</em>",
+   "cite": "Disparate-impact incident escalation"
+  },
+  {
+   "q": "The NAO opens a value-for-money review of your authority's AI procurement spending. What documentation do you need?",
+   "options": [
+    "Only the signed vendor contract and the invoices",
+    "Just the published ATRS records",
+    "A full audit binder: procurement-route justification, FRIA/DPIA/PSED assessments, ATRS records, the value-for-money business case, supplier-evaluation matrix, outcome metrics, incident and change registers, training and complaint records, and governance minutes",
+    "The DPIA and the ICO correspondence alone",
+    "A summary memo from the finance director"
+   ],
+   "why": "Body: <em>The NAO's job is value-for-money and propriety, fed by: procurement-route justification at decision-time, FRIA/DPIA/PSED assessments, ATRS records, the value-for-money business case, supplier-evaluation matrix, post-deployment outcome metrics, incident and change registers, Article 4 staff-training records, citizen-complaint records, the AI-related FOI response log, and governance committee minutes.</em>",
+   "cite": "NAO value-for-money evidence"
+  },
+  {
+   "q": "An MSP wants to deliver an \"AI Safe@Work + ATRS + FRIA pack\" rollout for a UK local authority. What is the standard deliverable?",
+   "options": [
+    "A single AUP document and nothing more",
+    "A one-off staff webinar with slides",
+    "A verbal briefing to elected members only",
+    "An audit binder: the 30-day rollout guide and Copilot track plus this overlay, an AUP with a public-sector never-paste list, a DPIA with the public-task condition, a FRIA cross-referencing PSED s.149, ATRS Tier 1 and 2 drafts, an incident form, procurement evidence, a training register and a governance report template",
+    "Only the ATRS Tier 1 and Tier 2 record drafts"
+   ],
+   "why": "Body: <em>The standard deliverable is an audit binder that satisfies the ICO, NAO, select committee, LGSCO and the public via FOI: the 30-day rollout guide and Copilot track plus this overlay, an AUP with a public-sector never-paste list, a DPIA with the public-task Schedule 1 condition and Article 9 derogations, a FRIA cross-referencing PSED s.149, ATRS Tier 1 and 2 drafts, a public-sector incident form, procurement-framework evidence, a training register and a governance report template.</em>",
+   "cite": "MSP public-sector rollout deliverable"
+  }
+ ]
+}</script>
 
  <div class="signature">
  <div class="label">Overlay complete</div>

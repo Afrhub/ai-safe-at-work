@@ -192,17 +192,20 @@
   }
 
   // Modules 1 to 12 carry an integer id and are graded by record_quiz_result, so this file
-  // never decides a score for them. The six role tracks and three sector overlays use string
-  // ids ('copilot', 'fs' ...) that quiz_keys.module cannot hold, so they keep the old client
-  // scoring until that is migrated. One check, used everywhere the two paths differ.
+  // never decides a score for them. One check, used everywhere the two paths differ.
   //
   // Module 1 is the exception that has to bend both ways. It is the free ungated sample, so a
   // signed-out visitor must still be able to take it, and there is no session to grade
   // against. It is also one of the eleven modules the manager's completion record counts, so
   // for a signed-in learner it has to reach module_progress like the rest. Session present:
   // server-graded. No session: graded here, recorded nowhere, which is what a free sample is.
+  //
+  // The six role tracks and three sector overlays ('copilot', 'fs' ...) are graded by
+  // record_track_quiz_result (migration 0010). Their pages sit behind the checkout gate,
+  // so a session always exists; there is no client-scored path left for them.
   const serverScored = (state) =>
-    typeof state.cfg.module === 'number' && (state.cfg.module >= 2 || Boolean(sessionToken()));
+    typeof state.cfg.module === 'string' ||
+    (typeof state.cfg.module === 'number' && (state.cfg.module >= 2 || Boolean(sessionToken())));
 
   // Publishable key, public by design and already served in portal/config.js. RLS and the
   // learner's own bearer token do the work; nothing secret is needed to score a quiz.
@@ -214,7 +217,7 @@
   // must not be carried into a record sold as audit evidence. Dropped on first load of a
   // server-scored module; nothing writes them there any more.
   function purgeLegacyLocalResult(cfg) {
-    if (typeof cfg.module !== 'number') return;
+    if (typeof cfg.module !== 'number' && typeof cfg.module !== 'string') return;
     try { localStorage.removeItem(LS_PREFIX + cfg.module); } catch (e) {}
   }
 
@@ -230,17 +233,17 @@
     if (!token) throw new Error('no session');
     // record_quiz_result marks the answers, keeps the greatest score, and writes
     // module_progress plus an audit row under the learner's own identity.
-    const res = await fetch(SB_URL + '/rest/v1/rpc/record_quiz_result', {
+    const isTrack = typeof state.cfg.module === 'string';
+    const res = await fetch(SB_URL + '/rest/v1/rpc/' + (isTrack ? 'record_track_quiz_result' : 'record_quiz_result'), {
       method: 'POST',
       headers: {
         apikey: SB_ANON,
         Authorization: 'Bearer ' + token,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        p_module: state.cfg.module,
-        p_answers: state.answers.map((a) => (a ? a.chosen : -1))
-      })
+      body: JSON.stringify(isTrack
+        ? { p_track: state.cfg.module, p_answers: state.answers.map((a) => (a ? a.chosen : -1)) }
+        : { p_module: state.cfg.module, p_answers: state.answers.map((a) => (a ? a.chosen : -1)) })
     });
     if (!res.ok) throw new Error('record_quiz_result returned ' + res.status);
     return res.json();
@@ -347,7 +350,9 @@
     controls.appendChild(retry);
     // Only server-scored modules have a record behind them, so only they get the link.
     // Module 1 used to link here and would now land on "no verified pass".
-    if (pass && serverScored(state)) {
+    // Certificates are for the eleven course modules only; a track pass is recorded in
+    // track_progress and shown on the roster, but issues no certificate.
+    if (pass && serverScored(state) && typeof state.cfg.module === 'number') {
       const cert = el('a', {
         class: 'quiz-btn',
         href: `cert.html?m=${state.cfg.module}`
