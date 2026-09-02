@@ -14,7 +14,7 @@
 //     navigates to Stripe (on 200) or trips the fallback, which calls form.submit()
 //     — both reach production. Hanging lets a test count the call and stop there.
 
-const LIVE_ORIGIN = "https://aisafework.netlify.app";
+const LIVE_ORIGIN = "https://attest-ai.com"; // custom domain live 1 Sep 2026; netlify.app still answers
 
 export const BASE = (process.argv[2] || process.env.BASE_URL || LIVE_ORIGIN).replace(/\/$/, "");
 

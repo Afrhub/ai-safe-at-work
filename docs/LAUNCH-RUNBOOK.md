@@ -17,6 +17,8 @@ match the code, it is quoted exactly.
    **enable Bacs Direct Debit** (Settings → Payment methods). Verification takes days;
    nothing else blocks on it, so do this first and let it run.
 
+> **DONE 1–2 Sep 2026.** Domain live on Netlify with cert; Resend verified; Supabase SMTP applied and a real reset email delivered. Kept for the record.
+
 ## Phase 1 — the domain (20 min + certificate wait)
 
 Order matters: **Netlify first**, then GoDaddy. Adding DNS records before Netlify knows

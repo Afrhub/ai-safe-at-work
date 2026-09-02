@@ -5,7 +5,7 @@
 
 import { group, check, eq, ok, includes, excludes, skip, report, reset } from "../lib/harness.mjs";
 
-const BASE = process.argv[2] || process.env.BASE_URL || "https://aisafework.netlify.app";
+const BASE = process.argv[2] || process.env.BASE_URL || "https://attest-ai.com";
 
 const cache = new Map();
 async function page(path) {

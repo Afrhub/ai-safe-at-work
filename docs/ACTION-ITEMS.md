@@ -135,7 +135,7 @@ wrong for about two weeks on a product that sells being current.
 - [ ] 🧑 **Delete the orphaned forms** `tier1-order` and `foundation-order`. They still
       accept submissions nobody watches.
 - [ ] 🧑 **Delete the test form submissions** made 25 Jul.
-- [ ] 🧑 **Point `attest-ai.com` at Netlify.** Add the domain in Netlify FIRST, let the
+- [x] 🧑 **Point `attest-ai.com` at Netlify.** Done 1 Sep: cert issued, live. Add the domain in Netlify FIRST, let the
       certificate provision, then add the records at GoDaddy, then set it primary.
       Until this happens every canonical, the sitemap, `robots.txt` and `llms.txt` all
       tell Google the real site lives on a parking page.
@@ -146,10 +146,10 @@ wrong for about two weeks on a product that sells being current.
 
 ## P2, blocks customers actually getting in
 
-- [ ] 🧑 **Custom SMTP via Resend (AUTH-1).** No invite, magic link or password reset is
+- [x] 🧑 **Custom SMTP via Resend (AUTH-1).** Done 2 Sep; reset email proven delivered. No invite, magic link or password reset is
       delivered without it. Needs the domain above for SPF, DKIM and DMARC.
-- [ ] 🧑 **Raise the Supabase auth email rate limit** once SMTP is live.
-- [ ] 🧑 **Add the portal sign-in URL to the Supabase redirect allowlist.**
+- [x] 🧑 **Raise the Supabase auth email rate limit** — 30/h, applied 2 Sep.
+- [x] 🧑 **Add the portal sign-in URL to the Supabase redirect allowlist.** attest-ai.com, www and netlify.app, 2 Sep.
 - [ ] 🧑 **JC McKenny: first sign-in.** Auth is armed, his password works. He must do the
       first sign-in himself, because it forces TOTP enrolment and whoever completes it
       holds the authenticator secret.

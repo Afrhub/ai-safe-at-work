@@ -13,7 +13,7 @@
 
 import { group, check, eq, ok, skip, report, reset } from "../lib/harness.mjs";
 
-const BASE = process.env.BASE_URL || "https://aisafework.netlify.app";
+const BASE = process.env.BASE_URL || "https://attest-ai.com";
 const SUPABASE = "https://hanjrsslhnuauaysbhun.supabase.co";
 
 // The anon key is publishable by design and already served to every visitor, so

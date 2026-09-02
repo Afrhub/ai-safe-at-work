@@ -11,6 +11,8 @@ node scripts/phase2-dns-check.mjs
 It tells you which record has landed and which has not. Total hands-on time ~25 min plus
 DNS propagation waits.
 
+> **DONE 1–2 Sep 2026.** Domain live on Netlify with cert; Resend verified; Supabase SMTP applied and a real reset email delivered. Kept for the record.
+
 ---
 
 ## Gate 1 — Netlify: attach the domain (1 min)

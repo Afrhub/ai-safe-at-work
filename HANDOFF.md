@@ -1,11 +1,11 @@
 # HANDOFF — Attest AI / ai-safe-at-work
 
-Updated: 11 Aug 2026 · Everything committed, pushed and live. `git log -1` for the head.
+Updated: 2 Sep 2026 · Everything committed, pushed and live. `git log -1` for the head.
 Supersedes the 26 Jul version. Full decision history in DOCTRINE.md; this file is the cold resume.
 
 ## What this is
 Static site + Supabase (`hanjrsslhnuauaysbhun`) selling AI governance to UK/EU SMEs and MSPs.
-Live at **aisafework.netlify.app**. **git push = deploy** (Netlify site `89ac5015-…`).
+Live at **https://attest-ai.com** (since 1 Sep 2026; `aisafework.netlify.app` still answers). **git push = deploy** (Netlify site `89ac5015-…`).
 Pre-push hook validates JSON-LD and blocks secrets + forbidden files.
 
 Module 12's video was re-rendered and deployed: it narrated the pre-Omnibus Article 4
@@ -54,18 +54,16 @@ not in the files.
 
 ## Broken or untrue, in priority order
 
-1. **No custom SMTP.** Blocks manager credentials, staff invitations and every password
-   reset. The single item that appears in all three user journeys. Needs the domain move
-   first, because SPF, DKIM and DMARC need a domain you control.
-2. **`attest-ai.com` serves a GoDaddy parking page** while every canonical, the sitemap,
-   robots.txt and llms.txt point at it. The codebase already migrated; only DNS has not.
-3. **`invite-seat` edge function source is not in the repo.** (`governance_state` and the
+1. **`invite-seat` edge function source is not in the repo.** (`governance_state` and the
    rest of the governance schema are captured in migration 0009.)
-4. **9 quizzes are still client-scored** with their answer key in the page: the six role
+2. **9 quizzes are still client-scored** with their answer key in the page: the six role
    tracks and three sector overlays use string module ids (`copilot`, `fs` ...) that
    `quiz_keys.module` cannot hold. Modules 1 to 12 are done.
-5. **`docs/test-plan.html` QUIZ-01 to QUIZ-05 describe the old client scoring.** True of
+3. **`docs/test-plan.html` QUIZ-01 to QUIZ-05 describe the old client scoring.** True of
    `record_quiz_result`, false of what the pages did before 11 Aug. Rewrite.
+
+Fixed 1–2 Sep: no custom SMTP (Resend now, proven), `attest-ai.com` parking page (live on
+Netlify with cert).
 
 Fixed 11 Aug evening: the `pricing.html` robots contradiction (draft-era noindex header
 removed); `dbGet`/`dbSet` diverting silently into `localStorage` (visible alert banner now,
@@ -75,13 +73,21 @@ the standards-map matrix (external `assets/risk-figure.js` + JSON data blocks,
 skip link (NAV-08), footer heading skips (A11Y-04); webhook NaN replay window;
 checkout-thanks duplicate robots meta and wrong hreflang.
 
+## Phase 1 + 2 of the launch runbook are DONE (1–2 Sep 2026)
+
+`attest-ai.com` is on Netlify with a cert (both apex and www), DNS at 123-Reg. Resend
+sends from the domain (DKIM/SPF/MX verified). Supabase Auth uses Resend SMTP as
+`no-reply@attest-ai.com`, rate limit 30/h, redirects allow attest-ai.com/www/netlify.app.
+Proven: a real password-reset email arrived in an inbox at 21:52 on 2 Sep. So password
+resets, magic links and `invite-seat` emails all deliver now. Test board targets
+`https://attest-ai.com`. Remaining runbook: Phase 0/3 (Stripe), Phase 4 (form
+notifications), Phase 5 (JC invites staff).
+
 ## Next steps, ordered, first one startable cold
 
 1. **Netlify form notifications** (dashboard, free, minutes). Nothing tells anyone a form was
-   submitted. I audited the submissions on 11 Aug: all seven across five forms are tests, so
-   nothing has been missed yet, but the new `demo.html` depends on this.
-2. **Point `attest-ai.com` at Netlify.** Add the domain in Netlify FIRST, let the certificate
-   provision, then add the records at 123-Reg, then set it primary. Then Resend SMTP.
+   submitted. All seven submissions across five forms were tests as of 11 Aug.
+2. **Stripe** (runbook Phases 0 and 3): account, Bacs verification, env vars, webhook, VAT.
 3. **`docs/SPEC-organisations-auditor-reseller.md`**, in the order the spec gives. Do its two
    prerequisites first: fix `dbGet`, capture `governance_state` in a migration.
 

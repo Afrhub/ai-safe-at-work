@@ -71,7 +71,7 @@ export async function run() {
     ok(mail, "no reset email arrived within 2 minutes — Supabase SMTP not sending, or the mailbox is wrong");
     // Sender check needs headers; BODY[TEXT] does not carry them, so match the link host
     // as the proxy: a Supabase-default sender links to supabase.co, our sender links to us.
-    link = firstLink(mail.text, /hanjrsslhnuauaysbhun\.supabase\.co\/auth\/v1\/verify|attest-ai\.com|aisafework\.netlify\.app/);
+    link = firstLink(mail.text, /hanjrsslhnuauaysbhun\.supabase\.co\/auth\/v1\/verify|attest-ai\.com|attest-ai\.com/);
     ok(link, `no usable link in the email: ${mail.text.slice(0, 200)}`);
   });
 

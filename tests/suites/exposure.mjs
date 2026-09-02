@@ -9,7 +9,7 @@
 
 import { group, check, eq, ok, includes, report, reset } from "../lib/harness.mjs";
 
-const BASE = process.argv[2] || process.env.BASE_URL || "https://aisafework.netlify.app";
+const BASE = process.argv[2] || process.env.BASE_URL || "https://attest-ai.com";
 
 const head = async (path) => {
   const r = await fetch(`${BASE}${path}`, { redirect: "manual" });
