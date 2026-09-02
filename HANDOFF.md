@@ -80,14 +80,13 @@ sends from the domain (DKIM/SPF/MX verified). Supabase Auth uses Resend SMTP as
 `no-reply@attest-ai.com`, rate limit 30/h, redirects allow attest-ai.com/www/netlify.app.
 Proven: a real password-reset email arrived in an inbox at 21:52 on 2 Sep. So password
 resets, magic links and `invite-seat` emails all deliver now. Test board targets
-`https://attest-ai.com`. Remaining runbook: Phase 0/3 (Stripe), Phase 4 (form
-notifications), Phase 5 (JC invites staff).
+`https://attest-ai.com`. Phase 4 (form notifications) done 2 Sep by API → reidalastair@rocketmail.com.
+Remaining runbook: Phase 0/3 (Stripe), Phase 5 (JC invites staff).
 
 ## Next steps, ordered, first one startable cold
 
-1. **Netlify form notifications** (dashboard, free, minutes). Nothing tells anyone a form was
-   submitted. All seven submissions across five forms were tests as of 11 Aug.
-2. **Stripe** (runbook Phases 0 and 3): account, Bacs verification, env vars, webhook, VAT.
+1. **Stripe** (runbook Phases 0 and 3): account, Bacs verification, env vars, webhook, VAT.
+2. **JC invites his first staff member** (runbook Phase 5) — invites deliver now.
 3. **`docs/SPEC-organisations-auditor-reseller.md`**, in the order the spec gives. Do its two
    prerequisites first: fix `dbGet`, capture `governance_state` in a migration.
 

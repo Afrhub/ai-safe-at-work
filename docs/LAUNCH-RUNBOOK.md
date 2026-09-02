@@ -83,6 +83,11 @@ the domain leaves the cert unprovisioned and the site serving warnings.
 
 ## Phase 4 — the inbox actually watched (10 min)
 
+> **DONE 2 Sep 2026, entirely by API.** Email hooks on `order`, `demo`, `partner-enquiry`
+> → reidalastair@rocketmail.com (not James@attest-ai.com: the domain has no MX, so that
+> address bounces until a mailbox exists). Orphan forms and all five test submissions
+> deleted. Proven with a live demo-form submission, then removed.
+
 15. Netlify → Forms → **notifications**: route `order`, `demo` and `partner-enquiry`
     to James@attest-ai.com.
 16. Delete the orphaned forms `tier1-order` and `foundation-order`, and the seven test

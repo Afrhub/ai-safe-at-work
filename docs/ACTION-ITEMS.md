@@ -119,22 +119,22 @@ wrong for about two weeks on a product that sells being current.
 - [ ] 🧑 **Netlify env vars are completely empty.** Verified via the API: zero variables set.
       Nothing needs them today (the quiz scores through the publishable key), but Stripe and
       the webhook both do.
-- [ ] 🧑 **Netlify form notifications.** Checked the submissions while I was in there: all
+- [x] 🧑 **Netlify form notifications.** Done 2 Sep via API. Checked the submissions while I was in there: all
       seven across the five forms are tests, including one titled "TEST SUBMISSION - please
       delete" and one from your own Safari on 31 Jul. **No real enquiry has been missed.**
       I cannot delete submissions or configure notifications; both are dashboard only.
-- [ ] 🧑 **Orphaned forms `tier1-order` and `foundation-order` both have 0 submissions.** The
+- [x] 🧑 **Orphaned forms `tier1-order` and `foundation-order` both have 0 submissions.** Deleted 2 Sep via `DELETE /sites/{id}/forms/{form}`. The
       API can only enable or disable forms site-wide, so deleting them individually is
       dashboard only.
 
 ## P1, revenue is leaking today
 
-- [ ] 🧑 **Turn on Netlify form notifications.** Free, dashboard only, minutes. Nothing on
+- [x] 🧑 **Turn on Netlify form notifications.** Done 2 Sep: `submission_created` email hooks on `order`, `demo`, `partner-enquiry` → reidalastair@rocketmail.com (James@attest-ai.com cannot receive — the domain has no MX; switch the recipient once a mailbox exists). Proven with a live demo submission. Free, dashboard only, minutes. Nothing on
       the site tells anyone a form was submitted. Route `order`, `demo` and
       `partner-enquiry` to James@attest-ai.com. The new `demo.html` depends on this.
-- [ ] 🧑 **Delete the orphaned forms** `tier1-order` and `foundation-order`. They still
+- [x] 🧑 **Delete the orphaned forms** `tier1-order` and `foundation-order`. Done 2 Sep. They still
       accept submissions nobody watches.
-- [ ] 🧑 **Delete the test form submissions** made 25 Jul.
+- [x] 🧑 **Delete the test form submissions** made 25 Jul. All five deleted 2 Sep; inbox starts clean.
 - [x] 🧑 **Point `attest-ai.com` at Netlify.** Done 1 Sep: cert issued, live. Add the domain in Netlify FIRST, let the
       certificate provision, then add the records at GoDaddy, then set it primary.
       Until this happens every canonical, the sitemap, `robots.txt` and `llms.txt` all
