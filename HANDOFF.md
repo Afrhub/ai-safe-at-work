@@ -54,14 +54,15 @@ not in the files.
 
 ## Broken or untrue, in priority order
 
-1. **9 quizzes are still client-scored** with their answer key in the page: the six role
-   tracks and three sector overlays use string module ids (`copilot`, `fs` ...) that
-   `quiz_keys.module` cannot hold. Modules 1 to 12 are done.
-2. **`docs/test-plan.html` QUIZ-01 to QUIZ-05 describe the old client scoring.** True of
-   `record_quiz_result`, false of what the pages did before 11 Aug. Rewrite.
+Nothing known. Every quiz on the site is server-scored (migration 0010 closed the last
+nine on 2 Sep), the test plan describes what ships, and the board is green. Open items are
+decisions and dashboards, in ACTION-ITEMS and the runbook.
 
 Fixed 1–2 Sep: no custom SMTP (Resend now, proven), `attest-ai.com` parking page (live on
-Netlify with cert), `invite-seat` source missing from the repo (transcribed, reviewed, v3).
+Netlify with cert), `invite-seat` source missing from the repo (transcribed, reviewed, v3), the
+nine role-track/sector quizzes still client-scored (0010: `track_keys`, `track_progress`,
+`record_track_quiz_result`), the test plan describing pre-11-Aug scoring. Audit cuts landed
+the same day: 28 dead tests, the unlinked `v2/` site and its feeders, the dead classifier.
 
 Fixed 11 Aug evening: the `pricing.html` robots contradiction (draft-era noindex header
 removed); `dbGet`/`dbSet` diverting silently into `localStorage` (visible alert banner now,

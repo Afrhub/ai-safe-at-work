@@ -83,9 +83,10 @@ build, not three fixes, and they should ship together.
       shows, and saving it PATCHes that column rather than the browser. Module 1 issues no
       certificate: it is the free ungated sample, still client-scored, so there is no
       record behind it. New test NEG-CERT-01c covers the `localStorage` forgery.
-- [ ] 🤖 **Correct the test plan.** QUIZ-01 to QUIZ-05 in `docs/test-plan.html` describe
-      the 80% pass mark as enforced in `record_quiz_result`. True of the function,
-      false of the shipped course. Rewrite once the fix lands.
+- [x] 🤖 **Correct the test plan.** QUIZ-01 to QUIZ-06 rewritten 2 Sep to describe what
+      ships: every quiz server-scored (modules via `record_quiz_result`, tracks via
+      `record_track_quiz_result`), keys out of every page, certificate from the record.
+      FRM-03/07 brought current at the same time.
 
 ## P0c, paid content teaches superseded law
 

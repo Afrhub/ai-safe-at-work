@@ -273,12 +273,12 @@ per screen testing hides.</p>
 <h3>B6, Quizzes and certificates</h3>
 <table>
   <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
-  <tr><td class="id">QUIZ-01</td><td>Pass mark is 80</td><td>Score exactly 79 per cent, then exactly 80. <b>Expected</b> 79 fails, 80 passes. The threshold is enforced in <code>record_quiz_result</code>, not the browser.</td><td class="pri P1">P1</td></tr>
-  <tr><td class="id">QUIZ-02</td><td>Answers never sent</td><td>Inspect the network response for the quiz. <b>Expected</b> The correct answers are not present in any payload. Scoring happens against <code>quiz_keys</code> server side.</td><td class="pri P1">P1</td></tr>
-  <tr><td class="id">QUIZ-03</td><td>Fail writes nothing</td><td>Fail a quiz, query <code>module_progress</code>. <b>Expected</b> No row for that module.</td><td class="pri P1">P1</td></tr>
-  <tr><td class="id">QUIZ-04</td><td>Best score retained</td><td>Pass at 100, retake at 80. <b>Expected</b> Stored score stays 100.</td><td class="pri P2">P2</td></tr>
-  <tr><td class="id">QUIZ-05</td><td>Audit entry written</td><td>Pass a module, query <code>audit_log</code>. <b>Expected</b> A <code>module_completed</code> entry with module, score and total.</td><td class="pri P2">P2</td></tr>
-  <tr><td class="id">QUIZ-06</td><td>Certificate renders</td><td>Open <code>cert.html</code> after passing. <b>Expected</b> Name, module and score render and print to a single page.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">QUIZ-01</td><td>Pass mark is 80</td><td>Score exactly 79 per cent, then exactly 80, on any of the 21 quiz pages. <b>Expected</b> 79 fails, 80 passes. Enforced in <code>record_quiz_result</code> (modules 1 to 12) and <code>record_track_quiz_result</code> (the six role tracks and three sector overlays); the browser never computes a pass. Module 1 is the one exception: signed out it is the free sample and marks itself, records nothing and issues nothing.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">QUIZ-02</td><td>Answers never sent</td><td>View source and the network responses on every quiz page. <b>Expected</b> No <code>correct</code> value anywhere; <code>why</code> and <code>cite</code> stay (post-answer explanation). Scoring runs against <code>quiz_keys</code> / <code>track_keys</code>, both revoked from every client role.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">QUIZ-03</td><td>Fail writes nothing</td><td>Fail a module quiz, query <code>module_progress</code>; fail a track quiz, query <code>track_progress</code>. <b>Expected</b> No row for that module or track, and nothing in <code>audit_log</code>.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">QUIZ-04</td><td>Best score retained</td><td>Pass at 100, retake at 80. <b>Expected</b> Stored score stays 100 (<code>greatest()</code> on upsert), <code>updated_at</code> moves.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">QUIZ-05</td><td>Audit entry written</td><td>Pass a module, query <code>audit_log</code>. <b>Expected</b> <code>module_completed</code> with module, score and total; a track pass writes <code>track_completed</code> with track, score and total.</td><td class="pri P2">P2</td></tr>
+  <tr><td class="id">QUIZ-06</td><td>Certificate renders from the record</td><td>Open cert.html after passing. <b>Expected</b> Score, date and reference come from the learner’s <code>module_progress</code> row; the query string and <code>localStorage</code> mint nothing (NEG-CERT-01a/b/c). The eleven course modules certificate; a track pass does not.</td><td class="pri P2">P2</td></tr>
 </table>
 
 <h3>B7, Forms</h3>
@@ -286,11 +286,11 @@ per screen testing hides.</p>
   <tr><th style="width:66px">ID</th><th style="width:150px">Test</th><th>Steps and expected result</th><th style="width:26px">Pri</th></tr>
   <tr><td class="id">FRM-01</td><td>Three forms registered</td><td>POST to <code>order</code>, <code>demo</code>, <code>partner-enquiry</code>. <b>Expected</b> All return 200.</td><td class="pri P1">P1</td></tr>
   <tr><td class="id">FRM-02</td><td>Unknown form rejected</td><td>POST to a name that does not exist. <b>Expected</b> 404, proving detection is discriminating.</td><td class="pri P2">P2</td></tr>
-  <tr><td class="id">FRM-03</td><td>Orphaned forms removed</td><td>POST to <code>tier1-order</code> and <code>foundation-order</code>. <b>Expected once cleaned</b> 404. <b>Today</b> 200, which drops orders into a form nobody watches.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">FRM-03</td><td>Orphaned forms removed</td><td>POST to tier1-order and foundation-order. <b>Expected</b> 404. Both forms were deleted on 2 Sep 2026; only order, demo and partner-enquiry exist.</td><td class="pri P1">P1</td></tr>
   <tr><td class="id">FRM-04</td><td>Required fields</td><td>Submit each form empty. <b>Expected</b> Native validation blocks submission and focuses the first invalid field.</td><td class="pri P2">P2</td></tr>
   <tr><td class="id">FRM-05</td><td>Email format</td><td>Enter <code>notanemail</code>. <b>Expected</b> Rejected before submission.</td><td class="pri P2">P2</td></tr>
   <tr><td class="id">FRM-06</td><td>Headcount required</td><td>Submit the order form with no band. <b>Expected</b> Blocked, the select is required.</td><td class="pri P1">P1</td></tr>
-  <tr><td class="id">FRM-07</td><td>Notification delivered</td><td>Submit a live order. <b>Expected once configured</b> An email reaches James@attest-ai.com. <b>Today</b> Nothing is sent.</td><td class="pri P1">P1</td></tr>
+  <tr><td class="id">FRM-07</td><td>Notification delivered</td><td>Submit a live order. <b>Expected</b> A <code>submission_created</code> email reaches the configured recipient. Since 2 Sep 2026 all three forms notify <code>reidalastair@rocketmail.com</code>; James@attest-ai.com cannot receive until the domain has a mailbox (no MX).</td><td class="pri P1">P1</td></tr>
 </table>
 </section>
 
