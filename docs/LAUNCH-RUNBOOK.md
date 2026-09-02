@@ -96,6 +96,11 @@ the domain leaves the cert unprovisioned and the site serving warnings.
 
 ## Phase 5 — first real customer (JC) (15 min)
 
+> **Proven 2 Sep 2026 with the test accounts** (spec: `specs/phase-5-first-customer.md`):
+> invite email sent through Resend, account + seat + credit correct, invitee forced to
+> enrol an authenticator, module passed, roster updated. Step 18 done (500 credits).
+> Steps 19–20 are JC's own clicks; nothing he will meet is untested.
+
 18. Supabase → decide and set **JC's seat credits** (currently 0: he can sign in but
     cannot invite staff).
 19. JC does his **own first sign-in** — it forces TOTP enrolment and whoever completes

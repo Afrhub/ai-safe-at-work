@@ -54,16 +54,14 @@ not in the files.
 
 ## Broken or untrue, in priority order
 
-1. **`invite-seat` edge function source is not in the repo.** (`governance_state` and the
-   rest of the governance schema are captured in migration 0009.)
-2. **9 quizzes are still client-scored** with their answer key in the page: the six role
+1. **9 quizzes are still client-scored** with their answer key in the page: the six role
    tracks and three sector overlays use string module ids (`copilot`, `fs` ...) that
    `quiz_keys.module` cannot hold. Modules 1 to 12 are done.
-3. **`docs/test-plan.html` QUIZ-01 to QUIZ-05 describe the old client scoring.** True of
+2. **`docs/test-plan.html` QUIZ-01 to QUIZ-05 describe the old client scoring.** True of
    `record_quiz_result`, false of what the pages did before 11 Aug. Rewrite.
 
 Fixed 1–2 Sep: no custom SMTP (Resend now, proven), `attest-ai.com` parking page (live on
-Netlify with cert).
+Netlify with cert), `invite-seat` source missing from the repo (transcribed, reviewed, v3).
 
 Fixed 11 Aug evening: the `pricing.html` robots contradiction (draft-era noindex header
 removed); `dbGet`/`dbSet` diverting silently into `localStorage` (visible alert banner now,
@@ -72,6 +70,14 @@ the standards-map matrix (external `assets/risk-figure.js` + JSON data blocks,
 `assets/standards-map.js`); module-11's print button (inline onclick, never worked live);
 skip link (NAV-08), footer heading skips (A11Y-04); webhook NaN replay window;
 checkout-thanks duplicate robots meta and wrong hreflang.
+
+## Phases 1, 2, 4 and the machine half of 5 are DONE (1–2 Sep 2026)
+
+Phase 5 proven with test accounts on 2 Sep: manager invites a new email → `user_invited`
+in the auth log with a 1.08 s SMTP send → account, seat and credit all correct → the invitee's
+first sign-in forces authenticator enrolment → passes a module → manager's roster shows
+1/11. `tests/suites/e2e-invite.mjs` guards the seat/credit path every run. The one step that
+is JC's alone: his own first sign-in (it enrols *his* authenticator).
 
 ## Phase 1 + 2 of the launch runbook are DONE (1–2 Sep 2026)
 
@@ -86,7 +92,7 @@ Remaining runbook: Phase 0/3 (Stripe), Phase 5 (JC invites staff).
 ## Next steps, ordered, first one startable cold
 
 1. **Stripe** (runbook Phases 0 and 3): account, Bacs verification, env vars, webhook, VAT.
-2. **JC invites his first staff member** (runbook Phase 5) — invites deliver now.
+2. **JC's first sign-in, then his first invite** (runbook Phase 5, his to do; the flow is proven).
 3. **`docs/SPEC-organisations-auditor-reseller.md`**, in the order the spec gives. Do its two
    prerequisites first: fix `dbGet`, capture `governance_state` in a migration.
 

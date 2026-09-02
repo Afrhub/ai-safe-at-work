@@ -33,6 +33,8 @@ const SUITES = [
   ["password reset", "tests/suites/e2e-password-reset.mjs"],
   // The self-serve front door: fade-in, big Sign up, form, client-side refusal.
   ["signup front door", "tests/suites/e2e-signup.mjs"],
+  // Phase 5: a manager seats a team member and gets the credit back on removal.
+  ["invite journey", "tests/suites/e2e-invite.mjs"],
 ];
 
 let failed = 0;

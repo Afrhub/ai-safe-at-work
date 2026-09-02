@@ -150,7 +150,7 @@ wrong for about two weeks on a product that sells being current.
       delivered without it. Needs the domain above for SPF, DKIM and DMARC.
 - [x] 🧑 **Raise the Supabase auth email rate limit** — 30/h, applied 2 Sep.
 - [x] 🧑 **Add the portal sign-in URL to the Supabase redirect allowlist.** attest-ai.com, www and netlify.app, 2 Sep.
-- [ ] 🧑 **JC McKenny: first sign-in.** Auth is armed, his password works. He must do the
+- [ ] 🧑 **JC McKenny: first sign-in.** Everything he will touch is proven (2 Sep): invite sends, arrives, enrols, module passes, roster shows. Only his own authenticator enrolment remains, and it must be his. Auth is armed, his password works. He must do the
       first sign-in himself, because it forces TOTP enrolment and whoever completes it
       holds the authenticator secret.
 - [x] 🧑 **Decide JC's seat credits.** Set to 500 on 18 Aug. Temporary password issued the same day (handed over by phone; SMTP not yet live); no TOTP enrolled yet, so first browser sign-in shows the QR.
@@ -211,7 +211,7 @@ wrong for about two weeks on a product that sells being current.
       empty register. Fix before anything depends on who can read what.
 - [ ] 🤖 **`governance_state` is in no migration.** The entire manager portal lives in a
       table the repo cannot reproduce.
-- [ ] 🤖 **`invite-seat` edge function source is not in the repo.**
+- [x] 🤖 **`invite-seat` edge function source is not in the repo.** Transcribed 2 Sep to `supabase/functions/invite-seat/index.ts`, reviewed twice, redeployed as v3 (invite link on attest-ai.com, CORS pinned to portal origins, no orphan on seat failure, manager/reseller emails refused).
 - [ ] 🧑 **Which acknowledgement store is authoritative**, `governance_state` or
       `governance_acks`? They are unlinked, so a staff sign-off may never show on the
       manager roster.
