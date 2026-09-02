@@ -34,7 +34,7 @@ const desired = {
   smtp_admin_email: process.env.SMTP_SENDER || "no-reply@attest-ai.com",
   smtp_sender_name: process.env.SMTP_SENDER_NAME || "Attest AI",
   smtp_host: "smtp.resend.com",
-  smtp_port: 465,
+  smtp_port: "465", // the Management API types this as a string
   smtp_user: "resend",
   ...(smtpPass ? { smtp_pass: smtpPass } : {}),
   // Seconds between emails to the same address. Default 60 makes "resend the invite"
