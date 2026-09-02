@@ -1,7 +1,6 @@
-import { guard, sb, wireSignOut } from "./portal.js";
+import { guard, sb, wireSignOut, esc } from "./portal.js";
 
 const $ = id => document.getElementById(id);
-const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const cap = s => s ? s[0].toUpperCase() + s.slice(1).replace(/_/g, " ") : s;
 const DOC_NEXT = { draft: "ready", ready: "live", live: "draft" };
 

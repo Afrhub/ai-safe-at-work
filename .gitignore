@@ -82,3 +82,6 @@ video-project/
 
 # Playwright evidence screenshots (ephemeral, sent to the user, never committed)
 tests/evidence/
+
+# Netlify CLI state
+.netlify/

@@ -28,6 +28,7 @@
 // document back to draft, acknowledgement deleted.
 
 import { readFileSync, writeFileSync, rmSync, mkdirSync } from "node:fs";
+import { SB_URL as SB, SB_ANON as KEY } from "../lib/supabase.mjs";
 import { group, check, eq, ok, skip, report, reset } from "../lib/harness.mjs";
 import { BASE, available, unavailableReason, launch, newPage } from "../lib/browser.mjs";
 import { totp, nextFreshCode } from "../lib/totp.mjs";
@@ -37,6 +38,7 @@ import { GovernancePage } from "../pages/governance-page.mjs";
 import { EndUserPage } from "../pages/end-user-page.mjs";
 import { ModuleQuizPage } from "../pages/module-quiz-page.mjs";
 import { quizKey, COURSE_MODULES } from "../lib/e2e-fixtures.mjs";
+import { readEnvFile as readEnv, env } from "../lib/e2e-fixtures.mjs";
 
 // Evidence: one full-page screenshot per proof point, under tests/evidence/<run>/
 // (gitignored). The run directory is printed at the end.
@@ -46,13 +48,9 @@ let shot = 0;
 const snap = async (page, name) => { await page.screenshot({ path: `${EVIDENCE}${String(++shot).padStart(2, "0")}-${name}.png`, fullPage: true }); };
 
 const SUPABASE_POSTS = { allowPosts: ["supabase.co"] };
-const SB = "https://hanjrsslhnuauaysbhun.supabase.co";
-const KEY = "sb_publishable_wtK-KC8ibXtA0EvVIJZGqA_oY8wx_6E";
 const STATE_FILE = new URL("../../.env.e2e.newmanager", import.meta.url).pathname;
 const MATE_STATE = new URL("../../.env.e2e.teammate", import.meta.url).pathname;
 
-const readEnv = (p) => { try { return Object.fromEntries(readFileSync(p, "utf8").split("\n").map((l) => l.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*)\s*$/)).filter(Boolean).map((m) => [m[1], m[2].replace(/^["']|["']$/g, "")])); } catch (e) { return {}; } };
-const env = { ...readEnv(new URL("../../.env.e2e", import.meta.url).pathname), ...process.env };
 const NEWMANAGER = env.E2E_NEWMANAGER_EMAIL && env.E2E_NEWMANAGER_PASSWORD ? { email: env.E2E_NEWMANAGER_EMAIL, password: env.E2E_NEWMANAGER_PASSWORD } : null;
 const TEAMMATE = env.E2E_TEAMMATE_EMAIL && env.E2E_TEAMMATE_PASSWORD ? { email: env.E2E_TEAMMATE_EMAIL, password: env.E2E_TEAMMATE_PASSWORD } : null;
 const FREEAGENT = env.E2E_FREEAGENT_EMAIL && env.E2E_FREEAGENT_PASSWORD && env.E2E_FREEAGENT_TOTP_SECRET

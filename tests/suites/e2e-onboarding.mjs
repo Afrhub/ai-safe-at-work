@@ -21,29 +21,17 @@ import { readFileSync, writeFileSync, rmSync } from "node:fs";
 import { group, check, eq, ok, skip, report, reset } from "../lib/harness.mjs";
 import { BASE, available, unavailableReason, launch, newPage } from "../lib/browser.mjs";
 import { quizKey, COURSE_MODULES } from "../lib/e2e-fixtures.mjs";
+import { SB_URL, SB_ANON } from "../lib/supabase.mjs";
 import { totp, nextFreshCode } from "../lib/totp.mjs";
 import { PortalLoginPage } from "../pages/portal-login-page.mjs";
 import { ModuleQuizPage } from "../pages/module-quiz-page.mjs";
 import { EndUserPage } from "../pages/end-user-page.mjs";
 import { ManagerPage } from "../pages/manager-page.mjs";
+import { readEnvFile, env } from "../lib/e2e-fixtures.mjs";
 
 const SUPABASE_POSTS = { allowPosts: ["supabase.co"] };
-const SB_URL = "https://hanjrsslhnuauaysbhun.supabase.co";
-const SB_ANON = "sb_publishable_wtK-KC8ibXtA0EvVIJZGqA_oY8wx_6E";
 const STATE_FILE = new URL("../../.env.e2e.onboarding", import.meta.url).pathname;
 
-// ── Account and manager credentials, same .env.e2e as the journey suite ──────
-function readEnvFile(path) {
-  let raw;
-  try { raw = readFileSync(path, "utf8"); } catch (e) { return {}; }
-  const out = {};
-  for (const line of raw.split("\n")) {
-    const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*)\s*$/);
-    if (m) out[m[1]] = m[2].replace(/^["']|["']$/g, "");
-  }
-  return out;
-}
-const env = { ...readEnvFile(new URL("../../.env.e2e", import.meta.url).pathname), ...process.env };
 const NEWSTARTER = env.E2E_NEWSTARTER_EMAIL && env.E2E_NEWSTARTER_PASSWORD
   ? { email: env.E2E_NEWSTARTER_EMAIL, password: env.E2E_NEWSTARTER_PASSWORD }
   : null;

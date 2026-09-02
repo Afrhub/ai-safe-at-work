@@ -14,15 +14,9 @@ import { BASE, available, unavailableReason, launch, newPage } from "../lib/brow
 import { MANAGER, missingAccountsReason } from "../lib/e2e-fixtures.mjs";
 import { PortalLoginPage } from "../pages/portal-login-page.mjs";
 import { ManagerPage } from "../pages/manager-page.mjs";
-import { readFileSync } from "node:fs";
+import { env } from "../lib/e2e-fixtures.mjs";
 
 const SUPABASE_POSTS = { allowPosts: ["supabase.co"] };
-const env = (() => {
-  try {
-    const raw = readFileSync(new URL("../../.env.e2e", import.meta.url).pathname, "utf8");
-    return { ...Object.fromEntries(raw.split("\n").map((l) => l.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*)\s*$/)).filter(Boolean).map((m) => [m[1], m[2].replace(/^["']|["']$/g, "")])), ...process.env };
-  } catch (e) { return process.env; }
-})();
 const INVITEE = env.E2E_NEWSTARTER_EMAIL;
 
 export async function run() {

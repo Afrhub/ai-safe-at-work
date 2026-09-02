@@ -11,21 +11,15 @@
 // suite reports SKIP with the reason, never a false pass. Uses e2e-staff@, whose inbox
 // you point E2E_IMAP_* at, or any address you can read that owns a portal account.
 
+import { SB_URL as SB, SB_ANON as KEY } from "../lib/supabase.mjs";
 import { group, check, eq, ok, skip, report, reset } from "../lib/harness.mjs";
 import { BASE, available, unavailableReason, launch, newPage } from "../lib/browser.mjs";
 import { STAFF, missingAccountsReason } from "../lib/e2e-fixtures.mjs";
 import { mailboxConfigured, newestMessage, firstLink } from "../lib/mailbox.mjs";
 import { PortalLoginPage } from "../pages/portal-login-page.mjs";
-import { readFileSync } from "node:fs";
+import { env } from "../lib/e2e-fixtures.mjs";
 
 const SUPABASE_POSTS = { allowPosts: ["supabase.co"] };
-const envFile = (() => {
-  try {
-    const raw = readFileSync(new URL("../../.env.e2e", import.meta.url).pathname, "utf8");
-    return Object.fromEntries(raw.split("\n").map((l) => l.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*)\s*$/)).filter(Boolean).map((m) => [m[1], m[2].replace(/^["']|["']$/g, "")]));
-  } catch (e) { return {}; }
-})();
-const env = { ...envFile, ...process.env };
 // Which account gets reset: default e2e-staff, override with E2E_RESET_EMAIL/PASSWORD/TOTP_SECRET.
 const ACCOUNT = env.E2E_RESET_EMAIL
   ? { email: env.E2E_RESET_EMAIL, password: env.E2E_RESET_PASSWORD, totpSecret: env.E2E_RESET_TOTP_SECRET }
@@ -105,8 +99,6 @@ export async function run() {
     // Sign in with the temp password and set the original back through updateUser via the
     // portal's own reset form is not reachable without another email; use the auth REST
     // endpoint with the temp session instead — same call the form makes.
-    const SB = "https://hanjrsslhnuauaysbhun.supabase.co";
-    const KEY = "sb_publishable_wtK-KC8ibXtA0EvVIJZGqA_oY8wx_6E";
     const tok = await fetch(`${SB}/auth/v1/token?grant_type=password`, {
       method: "POST", headers: { apikey: KEY, "Content-Type": "application/json" },
       body: JSON.stringify({ email: ACCOUNT.email, password: tempPassword }),

@@ -14,12 +14,7 @@
 // Direct Debit). That needs business verification and is not instant.
 
 // The price lives HERE, never in the browser. The client sends a band key only.
-const BANDS = [
-  { key: "1-25", pence: 99000, label: "Attest AI Foundation, 1 to 25 staff, 12 months" },
-  { key: "26-50", pence: 175000, label: "Attest AI Foundation, 26 to 50 staff, 12 months" },
-  // "Over 50" is deliberately absent: that band is quoted on headcount, so it stays
-  // a form submission and never reaches Stripe.
-];
+import { BANDS } from "./bands.mjs";
 
 const json = (body, status) =>
   new Response(JSON.stringify(body), {

@@ -16,7 +16,7 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..", "..");
 
 // ── Accounts ──────────────────────────────────────────────────────────────────
-function readEnvFile(path) {
+export function readEnvFile(path) {
   let raw;
   try { raw = readFileSync(path, "utf8"); } catch (e) { return {}; }
   const out = {};
@@ -28,7 +28,7 @@ function readEnvFile(path) {
   return out;
 }
 
-const env = { ...readEnvFile(join(ROOT, ".env.e2e")), ...process.env };
+export const env = { ...readEnvFile(join(ROOT, ".env.e2e")), ...process.env };
 
 const account = (prefix) => {
   const email = env[`${prefix}_EMAIL`];

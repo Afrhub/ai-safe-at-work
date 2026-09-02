@@ -1,4 +1,4 @@
-import { guard, sb, wireSignOut } from "./portal.js";
+import { guard, sb, wireSignOut, esc } from "./portal.js";
 import { MODULES } from "./modules.js";
 const profile = await guard(["end_user"]);
 if (profile) {
@@ -31,7 +31,6 @@ if (profile) {
   document.getElementById("grid").innerHTML = tiles.join("");
 
   // ---- Company governance: read + acknowledge the org's published (live) policies ----
-  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const gov = document.getElementById("gov");
   const { data: liveDocs } = await sb.from("governance_docs")
     .select("id,title,href,category,manager_id").eq("status", "live").order("title");

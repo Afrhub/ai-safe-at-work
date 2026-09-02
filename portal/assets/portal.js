@@ -10,6 +10,9 @@ if (!cfg || !cfg.url || cfg.url.includes("YOUR-PROJECT")) {
 }
 export const sb = createClient(cfg.url, cfg.anon);
 
+// HTML escaper for every portal template string. One copy; was pasted into four modules.
+export const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
 // Where each role lands after sign-in. Staff go straight into the course, which
 // is what they signed in to do; their own progress, certificate and policy
 // sign-off live on end-user.html, linked from the course page.

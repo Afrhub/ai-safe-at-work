@@ -1,6 +1,5 @@
-import { guard, sb, wireSignOut } from "./portal.js";
+import { guard, sb, wireSignOut, esc } from "./portal.js";
 import { MODULES, TEMPLATES } from "./modules.js";
-const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const profile = await guard(["manager"]);
 if (profile) {
   document.getElementById("who").textContent = (profile.full_name || "") + " · Manager";

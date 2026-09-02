@@ -113,11 +113,6 @@
   status = 404
   force = true
 
-[[redirects]]
-  from = "/v2/scorm/README.md"
-  to = "/404.html"
-  status = 404
-  force = true
 
 [[redirects]]
   from = "/skills-lock.json"

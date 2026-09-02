@@ -1,5 +1,4 @@
-import { guard, sb, wireSignOut } from "./portal.js";
-const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+import { guard, sb, wireSignOut, esc } from "./portal.js";
 const profile = await guard(["reseller"]);
 if (profile) {
   document.getElementById("who").textContent = (profile.full_name || "") + " Â· Reseller";

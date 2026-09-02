@@ -10,18 +10,16 @@
 //   SUPABASE_URL
 //   SUPABASE_SERVICE_KEY   (the service-role key, bypasses RLS. Never expose to a browser.)
 //
-// ⚠️ TWO THINGS STILL BLOCK THE CUSTOMER ACTUALLY GETTING IN, both outside this file:
-//   1. AUTH-1: no custom SMTP, so the account created here cannot be emailed a
-//      sign-in link. Until that is configured, delivery of credentials is manual.
-// (A2 was actioned on 31 Jul 2026: AUTH_DISABLED is now false and the demo credential
-// is rotated, so a buyer is no longer dropped into the demo account. AUTH-1 remains.)
-// This function provisions correctly; it does not make the buyer reachable.
+// Since 2 Sep 2026 (runbook Phase 2) auth email delivers through Resend, so the manager
+// created here can reach their account with "Forgot your password?" on the sign-in
+// page; that link arrives. The remaining gap is that nothing here sends them a first
+// email proactively — the buyer must know to ask for a reset. A welcome/recovery send
+// after provisioning is the natural next step once Stripe is live (Phase 3).
 
 import { createHmac, timingSafeEqual } from "node:crypto";
 
-// Seats granted per band. Matches the headcount_band metadata that
-// create-checkout-session.mjs writes.
-const SEATS = { "1-25": 25, "26-50": 50 };
+// Seats granted per band, from the same table create-checkout-session prices from.
+import { SEATS } from "./bands.mjs";
 
 const TOLERANCE_SECONDS = 300; // reject replayed deliveries older than this
 
@@ -155,8 +153,8 @@ async function provision(session) {
       (payer && payer !== email ? `, nominated by payer ${payer}` : "")
   );
   console.warn(
-    `ACTION NEEDED: ${email} has no way to sign in yet. No SMTP (AUTH-1) means no ` +
-      `invite email, and AUTH_DISABLED (A2) still auto-demos the portal. Contact them manually.`
+    `${email} provisioned but not yet emailed: nothing here sends a welcome. They can use ` +
+      `"Forgot your password?" on the sign-in page (email delivers since 2 Sep 2026), or send one.`
   );
 }
 

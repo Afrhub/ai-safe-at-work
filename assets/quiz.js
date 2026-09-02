@@ -2,7 +2,6 @@
    AI SAFE@WORK, Quiz + Classifier engine
    - Reads inline <script type="application/json" id="quiz-data">
    - Renders MCQ flow with feedback + scoring
-   - Optional classifier widget for interactive practice
    - localStorage persistence (per-module score, attempts, timestamps)
    - Cert link unlocks at >= passThreshold
    ════════════════════════════════════════════════════════════ */
@@ -22,11 +21,6 @@
     catch (e) { console.error('quiz-data JSON parse error', e); return; }
     if (!cfg || !cfg.module) return;
     purgeLegacyLocalResult(cfg);
-
-    const classifierMount = document.getElementById('classifier-mount');
-    if (classifierMount && cfg.classifier) {
-      mountClassifier(classifierMount, cfg);
-    }
 
     const quizMount = document.getElementById('quiz-mount');
     if (quizMount) {
@@ -364,125 +358,6 @@
     return wrap;
   }
 
-  // ── CLASSIFIER ENGINE ─────────────────────────────────────
-  function mountClassifier(mount, cfg) {
-    const c = cfg.classifier;
-    if (!c || !Array.isArray(c.items) || c.items.length === 0) return;
-
-    const state = {
-      items: shuffle(c.items.slice()),
-      idx: 0,
-      results: [],
-      done: false
-    };
-
-    function build() {
-      mount.innerHTML = '';
-      const block = el('section', { class: 'classifier-block', 'aria-labelledby': 'cls-h' });
-      block.appendChild(el('span', { class: 'classifier-eyebrow' }, [c.eyebrow || 'Interactive · Demonstrate understanding']));
-      block.appendChild(el('h2', { class: 'classifier-title', id: 'cls-h' },
-        htmlNodes(c.title || 'Classify the <em>data</em>.')));
-      block.appendChild(el('p', { class: 'classifier-lede' }, [c.lede || '']));
-
-      const stage = el('div', { class: 'classifier-stage' });
-
-      // Left card, current item
-      const left = el('div', { class: 'clip-card' });
-      left.appendChild(clipboardSvg());
-      left.appendChild(el('div', { class: 'clip-counter' },
-        [state.done ? 'All items classified' : `Item ${state.idx + 1} of ${state.items.length}`]));
-
-      const item = state.items[state.idx] || state.items[state.items.length - 1];
-      left.appendChild(el('div', { class: 'clip-item' }, [item.label]));
-
-      if (!state.done) {
-        const actions = el('div', { class: 'clip-actions' });
-        const safe = el('button', { type: 'button', class: 'clip-btn safe' }, [
-          el('span', { class: 'glyph', 'aria-hidden': 'true' }, ['✓']),
-          el('span', {}, ['Safe to paste'])
-        ]);
-        const never = el('button', { type: 'button', class: 'clip-btn never' }, [
-          el('span', { class: 'glyph', 'aria-hidden': 'true' }, ['✗']),
-          el('span', {}, ['Never paste'])
-        ]);
-        safe.addEventListener('click', () => answer('safe'));
-        never.addEventListener('click', () => answer('never'));
-        actions.appendChild(safe); actions.appendChild(never);
-        left.appendChild(actions);
-      }
-      stage.appendChild(left);
-
-      // Right card, verdict / idle / done
-      const right = el('div');
-      const lastResult = state.results[state.results.length - 1];
-      if (state.done) {
-        const correct = state.results.filter(r => r.right).length;
-        right.className = 'clip-verdict ' + (correct === state.items.length ? 'right' : '');
-        right.appendChild(el('span', { class: 'v-label' }, ['Result']));
-        right.appendChild(el('div', { class: 'v-state' },
-          [`${correct} of ${state.items.length} correct`]));
-        right.appendChild(el('p', { class: 'v-why' }, [
-          correct === state.items.length
-            ? 'Perfect classification, you can spot the categories at speed. Take the knowledge check below.'
-            : 'Re-read the items you missed in the module above, then try the knowledge check below. You can retry the classifier any time.'
-        ]));
-        const bar = el('div', { class: 'clip-bar' });
-        state.results.forEach(r => bar.appendChild(el('span', { class: 'pip ' + (r.right ? 'right' : 'wrong') })));
-        right.appendChild(bar);
-      } else if (lastResult) {
-        right.className = 'clip-verdict ' + (lastResult.right ? 'right' : 'wrong');
-        right.appendChild(el('span', { class: 'v-label' }, [lastResult.right ? '✓ Correct' : '✗ Not quite']));
-        right.appendChild(el('div', { class: 'v-state' }, [lastResult.right ? 'Good call.' : 'Have another read.']));
-        right.appendChild(el('p', { class: 'v-why' }, [lastResult.why]));
-        if (lastResult.cite) right.appendChild(el('span', { class: 'v-cite' }, [`See: ${lastResult.cite}`]));
-        const bar = el('div', { class: 'clip-bar' });
-        for (let i = 0; i < state.items.length; i++) {
-          let cls = 'pip';
-          if (state.results[i]) cls += state.results[i].right ? ' right' : ' wrong';
-          bar.appendChild(el('span', { class: cls }));
-        }
-        right.appendChild(bar);
-      } else {
-        right.className = 'clip-verdict idle';
-        right.appendChild(idleSvg());
-        right.appendChild(el('div', { class: 'v-state' }, ['Pick safe or never. Feedback appears here.']));
-      }
-      stage.appendChild(right);
-
-      block.appendChild(stage);
-
-      if (state.done) {
-        const restart = el('button', { class: 'quiz-btn ghost', type: 'button' }, ['↺ Reset classifier']);
-        restart.addEventListener('click', () => {
-          state.items = shuffle(c.items.slice());
-          state.idx = 0;
-          state.results = [];
-          state.done = false;
-          build();
-        });
-        const controls = el('div', { class: 'quiz-controls' });
-        controls.appendChild(restart);
-        block.appendChild(controls);
-      }
-
-      mount.appendChild(block);
-    }
-
-    function answer(choice) {
-      const item = state.items[state.idx];
-      const right = item.answer === choice;
-      state.results.push({ right, why: item.why, cite: item.cite });
-      if (state.idx + 1 >= state.items.length) {
-        state.done = true;
-      } else {
-        state.idx += 1;
-      }
-      build();
-    }
-
-    build();
-  }
-
   // ── PERSISTENCE ───────────────────────────────────────────
   function saveResult(module, result) {
     try { localStorage.setItem(LS_PREFIX + module, JSON.stringify(result)); }
@@ -542,22 +417,6 @@
       node.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
-  function clipboardSvg() {
-    const ns = 'http://www.w3.org/2000/svg';
-    const svg = document.createElementNS(ns, 'svg');
-    svg.setAttribute('class', 'clip-svg');
-    svg.setAttribute('viewBox', '0 0 200 200');
-    svg.setAttribute('aria-hidden', 'true');
-    svg.innerHTML = '<g fill="none" stroke="#91a2ff" stroke-width="3"><rect x="40" y="30" width="120" height="150" rx="10"/><rect x="70" y="20" width="60" height="22" rx="6"/><line x1="60" y1="70" x2="140" y2="70"/><line x1="60" y1="90" x2="120" y2="90"/><line x1="60" y1="110" x2="135" y2="110"/><line x1="60" y1="130" x2="100" y2="130"/><line x1="60" y1="150" x2="125" y2="150"/></g>';
-    return svg;
-  }
-  function idleSvg() {
-    const ns = 'http://www.w3.org/2000/svg';
-    const svg = document.createElementNS(ns, 'svg');
-    svg.setAttribute('class', 'v-svg');
-    svg.setAttribute('viewBox', '0 0 100 100');
-    svg.setAttribute('aria-hidden', 'true');
-    svg.innerHTML = '<g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="50" cy="50" r="35"/><path d="M50 32 v22 l14 10"/></g>';
-    return svg;
-  }
+
+
 })();
