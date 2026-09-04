@@ -188,9 +188,10 @@ wrong for about two weeks on a product that sells being current.
 - [ ] 🤖 Band keys duplicated between `stripe-webhook.mjs:24` and
       `create-checkout-session.mjs:18-19`. Add a band to one and checkout takes money
       that fulfilment throws on. Extract to one module.
-- [ ] 🤖 `stripe-webhook.mjs:110-125` `grant_credits` is additive but the error path
-      releases the event, so a retry re-runs it. Safe today because nothing throws after
-      the grant. Any line added below it double-grants.
+- [x] 🤖 `stripe-webhook.mjs` `grant_credits` is additive but the error path
+      releases the event, so a retry re-runs it. Rule now sits in the code as a comment
+      above the first line below the grant (`sendWelcome`, 4 Sep), which swallows its own
+      failures for exactly this reason. Still true: anything that throws below it double-grants.
 - [ ] 🤖 `stripe-webhook.mjs:120` `full_name` PATCH result unchecked.
 - [ ] 🤖 `checkout.html` button says "Buy Foundation", copy above promises an invoice.
       Pick one story. The Over-50 band also says "Buy" but receives a quote.

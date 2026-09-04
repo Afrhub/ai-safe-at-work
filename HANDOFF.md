@@ -1,6 +1,6 @@
 # HANDOFF — Attest AI / ai-safe-at-work
 
-Updated: 2 Sep 2026 (late) · Everything committed, pushed and live; working tree clean. `git log -1` for the head.
+Updated: 4 Sep 2026 · Everything committed, pushed and live; working tree clean. `git log -1` for the head.
 Supersedes the 26 Jul version. Full decision history in DOCTRINE.md; this file is the cold resume.
 
 ## What this is
@@ -24,6 +24,9 @@ and `stripe-webhook.mjs`, no SDK (REST over fetch, no package.json). Both return
 order form, so the button is never dead. Price is resolved server-side by `resolveBand(plan, headcount)`
 — **plan AND band**, because `checkout.js` reuses the band keys `1-25`/`26-50` for Platform at
 different prices. Buyer can nominate a different manager at checkout (`manager_email`).
+After `grant_credits` the webhook calls `sendWelcome`, which asks GoTrue (`/auth/v1/recover`) to
+email the manager the same reset link as "Forgot your password?", landing on `/portal/login.html`.
+It never throws: anything that throws below the additive grant would double-credit on the retry.
 
 **Nav is three sections + Sign in** (3 Aug): Products · Course · Governance · [Sign in]. Who We Help,
 Plans, Book a Demo and Become a Partner moved to a footer **Explore** column. New pages: `governance.html`
@@ -104,11 +107,13 @@ audit cuts; last client-scored quizzes moved server-side; test plan brought curr
 3. **Decide the signup exposure** (🧑): a self-serve account passes the client-side course gate
    (`course-gate.js`), so the paid course is free to anyone who signs up. Server-side seat check
    or public signups off, before charging.
-4. **Webhook welcome email** (🤖): `stripe-webhook.mjs` provisions a manager but sends nothing;
-   now SMTP works, send a recovery/welcome link after `grant_credits`.
-5. **`docs/SPEC-organisations-auditor-reseller.md`** (🤖): its prerequisites (`dbGet`,
+4. **`docs/SPEC-organisations-auditor-reseller.md`** (🤖): its prerequisites (`dbGet`,
    `governance_state` migration) are done.
-6. Optional cut from the audit: relocate `.audit/` (69 files, 17 MB) out of the site repo.
+5. Optional cut from the audit: relocate `.audit/` (69 files, 17 MB) out of the site repo.
+
+Done 4 Sep: the webhook welcome email (`sendWelcome`, see Payments above; six unit checks in
+`tests/stripe-webhook.sig.mjs`). Unprovable end to end until Stripe is live, but the recover
+endpoint answered 200 to the same call with the same redirect from this Mac.
 
 ## End-to-end journeys, and the hole they found (11 Aug)
 

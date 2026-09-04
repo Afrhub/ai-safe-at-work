@@ -7,7 +7,7 @@
 
 import assert from "node:assert/strict";
 import { createHmac } from "node:crypto";
-import { verifySignature } from "../netlify/functions/stripe-webhook.mjs";
+import { verifySignature, sendWelcome } from "../netlify/functions/stripe-webhook.mjs";
 
 const SECRET = "whsec_test_not_a_real_secret";
 const BODY = JSON.stringify({ id: "evt_1", type: "checkout.session.async_payment_succeeded" });
@@ -43,3 +43,24 @@ assert.equal(verifySignature(BODY, "garbage", SECRET), false, "garbage header ac
 assert.equal(verifySignature(BODY, `t=${now()}`, SECRET), false, "header with no v1 accepted");
 
 console.log("stripe-webhook signature: 9 checks passed");
+
+// sendWelcome runs AFTER grant_credits, so it must never throw: a throw releases the
+// event, Stripe retries, and the additive grant credits the manager twice.
+process.env.SUPABASE_URL = "https://example.supabase.co";
+process.env.SUPABASE_SERVICE_KEY = "service-key";
+const realFetch = globalThis.fetch;
+let seen;
+globalThis.fetch = async (url, init) => { seen = { url, init }; return new Response("{}", { status: 200 }); };
+assert.equal(await sendWelcome("buyer@example.com"), true, "2xx not reported as sent");
+assert.match(seen.url, /\/auth\/v1\/recover\?redirect_to=https%3A%2F%2Fattest-ai\.com%2Fportal%2Flogin\.html$/, "wrong endpoint or redirect");
+assert.equal(JSON.parse(seen.init.body).email, "buyer@example.com", "email not in body");
+assert.equal(seen.init.headers.apikey, "service-key", "service key not sent");
+
+globalThis.fetch = async () => new Response("rate limited", { status: 429 });
+assert.equal(await sendWelcome("buyer@example.com"), false, "non-2xx not reported");
+
+globalThis.fetch = async () => { throw new Error("ECONNRESET"); };
+assert.equal(await sendWelcome("buyer@example.com"), false, "network error escaped");
+globalThis.fetch = realFetch;
+
+console.log("stripe-webhook welcome email: 6 checks passed");

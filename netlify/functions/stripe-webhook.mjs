@@ -10,11 +10,11 @@
 //   SUPABASE_URL
 //   SUPABASE_SERVICE_KEY   (the service-role key, bypasses RLS. Never expose to a browser.)
 //
-// Since 2 Sep 2026 (runbook Phase 2) auth email delivers through Resend, so the manager
-// created here can reach their account with "Forgot your password?" on the sign-in
-// page; that link arrives. The remaining gap is that nothing here sends them a first
-// email proactively — the buyer must know to ask for a reset. A welcome/recovery send
-// after provisioning is the natural next step once Stripe is live (Phase 3).
+// Since 2 Sep 2026 (runbook Phase 2) auth email delivers through Resend. After the
+// grant, sendWelcome() asks GoTrue for a password-recovery email to the manager: same
+// template and link as "Forgot your password?" on the sign-in page, which lands them on
+// login.html to set a password and enrol an authenticator. If that send fails the
+// manager still has the sign-in page's own reset button; it must never fail the event.
 
 import { createHmac, timingSafeEqual } from "node:crypto";
 
@@ -152,10 +152,34 @@ async function provision(session) {
     `provisioned ${email} as manager with ${seats} credits (band ${band})` +
       (payer && payer !== email ? `, nominated by payer ${payer}` : "")
   );
-  console.warn(
-    `${email} provisioned but not yet emailed: nothing here sends a welcome. They can use ` +
-      `"Forgot your password?" on the sign-in page (email delivers since 2 Sep 2026), or send one.`
-  );
+
+  // Nothing below the grant may throw: a throw releases the event, Stripe retries, and
+  // grant_credits is additive, so the manager would be credited twice.
+  await sendWelcome(email);
+}
+
+// The recovery link lands on the sign-in page, which handles the set-password step.
+const WELCOME_REDIRECT = "https://attest-ai.com/portal/login.html";
+
+// Ask GoTrue to email the manager a recovery link. Resolves true on 2xx, false otherwise,
+// and never throws (see the note above the call). GoTrue answers 200 for unknown
+// addresses too, so true means "accepted", not "delivered".
+export async function sendWelcome(email) {
+  try {
+    const r = await sb(`/auth/v1/recover?redirect_to=${encodeURIComponent(WELCOME_REDIRECT)}`, {
+      method: "POST",
+      body: JSON.stringify({ email, gotrue_meta_security: {} }),
+    });
+    if (!r.ok) {
+      console.error(`welcome email NOT sent to ${email}: ${r.status} ${await r.text()}. They can use "Forgot your password?" on the sign-in page.`);
+      return false;
+    }
+    console.log(`welcome (recovery) email requested for ${email}`);
+    return true;
+  } catch (err) {
+    console.error(`welcome email NOT sent to ${email}: ${err.message}. They can use "Forgot your password?" on the sign-in page.`);
+    return false;
+  }
 }
 
 export default async (req) => {
