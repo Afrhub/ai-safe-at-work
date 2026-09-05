@@ -96,10 +96,10 @@ export async function run() {
   let resetOk = false;
   await check("MGR-00", "the new manager starts with no authenticator", async () => {
     const prior = readEnv(STATE_FILE).E2E_NEWMANAGER_TOTP_SECRET || null;
-    const removed = await unenrol(NEWMANAGER, prior).catch((e) => { if (!prior) throw new Error("a factor exists but no secret is known — reset the account"); throw e; });
+    const removed = await unenrol(NEWMANAGER, prior).catch((e) => { if (!prior) throw new Error(`a factor exists but no secret is known — reset the account (${e.message})`); throw e; });
     try { rmSync(STATE_FILE); } catch (e) {}
     const mateSecret = readEnv(MATE_STATE).E2E_TEAMMATE_TOTP_SECRET || null;
-    const removedMate = await unenrol(TEAMMATE, mateSecret).catch((e) => { if (!mateSecret) throw new Error("teammate has a factor but no secret is known — reset the account"); throw e; });
+    const removedMate = await unenrol(TEAMMATE, mateSecret).catch((e) => { if (!mateSecret) throw new Error(`teammate has a factor but no secret is known — reset the account (${e.message})`); throw e; });
     try { rmSync(MATE_STATE); } catch (e) {}
     resetOk = true; ok(true, `removed ${removed} + ${removedMate} stale factor(s)`);
   });

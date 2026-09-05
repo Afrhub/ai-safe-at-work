@@ -5,7 +5,7 @@ Supersedes the 26 Jul version. Full decision history in DOCTRINE.md; this file i
 
 ## What this is
 Static site + Supabase (`hanjrsslhnuauaysbhun`) selling AI governance to UK/EU SMEs and MSPs.
-Live at **https://attest-ai.com** (since 1 Sep 2026; `aisafework.netlify.app` still answers). **git push = deploy** (Netlify site `89ac5015-…`).
+Live at **https://attest-ai.com** (since 1 Sep 2026; `aisafework.netlify.app` still answers). **git push = deploy** (Netlify site `89ac5015-5b19-4568-b337-d3fe38e9e805`).
 Pre-push hook validates JSON-LD and blocks secrets + forbidden files.
 
 Module 12's video was re-rendered and deployed: it narrated the pre-Omnibus Article 4
@@ -110,6 +110,14 @@ audit cuts; last client-scored quizzes moved server-side; test plan brought curr
 4. **`docs/SPEC-organisations-auditor-reseller.md`** (🤖): its prerequisites (`dbGet`,
    `governance_state` migration) are done.
 5. Optional cut from the audit: relocate `.audit/` (69 files, 17 MB) out of the site repo.
+
+**Board on 4 Sep after shipping**: 10 suites green, 3 journey suites (onboarding, invite,
+manager onboarding) failed only on `net::ERR_NETWORK_CHANGED`, this Mac's connection
+dropping mid-run; invite then passed 5/5 on rerun. Manager onboarding died at its
+undo step (MGR-09), so `e2e-newmanager` and `e2e-teammate` may carry a factor, a seat, an
+ack and a document; their secrets are in `.env.e2e.newmanager` / `.env.e2e.teammate`
+(gitignored) and MGR-00 un-enrols from those. Rerun `node tests/run-all.mjs` on a steady
+connection before trusting the board.
 
 Done 4 Sep: the webhook welcome email (`sendWelcome`, see Payments above; six unit checks in
 `tests/stripe-webhook.sig.mjs`). Unprovable end to end until Stripe is live, but the recover
