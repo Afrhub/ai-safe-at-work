@@ -78,6 +78,23 @@ async function unenrol(account, secret) {
   return 1;
 }
 
+const DOC_TITLE = "Acceptable Use Policy";
+
+// Leftovers from an interrupted run (MGR-09 never reached) break MGR-02..05 and MGR-08:
+// a seat still counted, the policy still live, E2E items still open. Undo them all as
+// the accounts themselves under RLS, exactly as MGR-09 would have. Idempotent.
+async function cleanSlate() {
+  const t = (await api("/auth/v1/token?grant_type=password", { body: { email: NEWMANAGER.email, password: NEWMANAGER.password } })).access_token;
+  const items = await api("/rest/v1/governance_items?title=like.E2E*", { method: "DELETE", token: t });
+  const docs = await api(`/rest/v1/governance_docs?title=eq.${encodeURIComponent(DOC_TITLE)}&status=neq.draft`, { method: "PATCH", token: t, body: { status: "draft" } });
+  const seats = await api("/rest/v1/seats?select=end_user_id", { method: "GET", token: t });
+  for (const s of seats) await api("/rest/v1/rpc/remove_seat", { token: t, body: { p_end_user: s.end_user_id } });
+  const staff = await aal2Token(FREEAGENT);
+  const acks = await api("/rest/v1/governance_acks?select=id", { method: "GET", token: staff.token });
+  for (const a of acks) await api(`/rest/v1/governance_acks?id=eq.${a.id}`, { method: "DELETE", token: staff.token });
+  return `${items.length} item(s), ${docs.length} doc(s), ${seats.length} seat(s), ${acks.length} ack(s)`;
+}
+
 const noise = (record) => {
   const out = [];
   if (record.csp.length) out.push(`CSP: ${record.csp.join(" | ")}`);
@@ -94,14 +111,15 @@ export async function run() {
   if (!NEWMANAGER || !FREEAGENT || !TEAMMATE) { await check("MGR", "fixtures configured", async () => skip("need E2E_NEWMANAGER_*, E2E_FREEAGENT_* and E2E_TEAMMATE_* in .env.e2e")); return report("e2e-manager-onboarding"); }
 
   let resetOk = false;
-  await check("MGR-00", "the new manager starts with no authenticator", async () => {
+  await check("MGR-00", "the new manager starts clean: no seats, items, live policy, acks or authenticator", async () => {
+    const swept = await cleanSlate();
     const prior = readEnv(STATE_FILE).E2E_NEWMANAGER_TOTP_SECRET || null;
     const removed = await unenrol(NEWMANAGER, prior).catch((e) => { if (!prior) throw new Error(`a factor exists but no secret is known — reset the account (${e.message})`); throw e; });
     try { rmSync(STATE_FILE); } catch (e) {}
     const mateSecret = readEnv(MATE_STATE).E2E_TEAMMATE_TOTP_SECRET || null;
     const removedMate = await unenrol(TEAMMATE, mateSecret).catch((e) => { if (!mateSecret) throw new Error(`teammate has a factor but no secret is known — reset the account (${e.message})`); throw e; });
     try { rmSync(MATE_STATE); } catch (e) {}
-    resetOk = true; ok(true, `removed ${removed} + ${removedMate} stale factor(s)`);
+    resetOk = true; ok(true, `swept ${swept}; removed ${removed} + ${removedMate} stale factor(s)`);
   });
   if (!resetOk) return report("e2e-manager-onboarding");
 
@@ -113,7 +131,6 @@ export async function run() {
     try { const b = await res.json(); if (b?.totp?.secret) { secret = b.totp.secret; writeFileSync(STATE_FILE, `E2E_NEWMANAGER_TOTP_SECRET=${secret}\n`); } } catch (e) {}
   });
   const login = new PortalLoginPage(m.page, m.record);
-  const DOC_TITLE = "Acceptable Use Policy";
   const RISK = `E2E risk ${Date.now()}`, INCIDENT = `E2E incident ${Date.now()}`;
 
   group("MGR, first sign-in");

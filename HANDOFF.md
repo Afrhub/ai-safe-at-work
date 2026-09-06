@@ -1,6 +1,6 @@
 # HANDOFF — Attest AI / ai-safe-at-work
 
-Updated: 4 Sep 2026 · Everything committed, pushed and live; working tree clean. `git log -1` for the head.
+Updated: 6 Sep 2026 · Everything committed, pushed and live; working tree clean. `git log -1` for the head.
 Supersedes the 26 Jul version. Full decision history in DOCTRINE.md; this file is the cold resume.
 
 ## What this is
@@ -111,13 +111,12 @@ audit cuts; last client-scored quizzes moved server-side; test plan brought curr
    `governance_state` migration) are done.
 5. Optional cut from the audit: relocate `.audit/` (69 files, 17 MB) out of the site repo.
 
-**Board on 4 Sep after shipping**: 10 suites green, 3 journey suites (onboarding, invite,
-manager onboarding) failed only on `net::ERR_NETWORK_CHANGED`, this Mac's connection
-dropping mid-run; invite then passed 5/5 on rerun. Manager onboarding died at its
-undo step (MGR-09), so `e2e-newmanager` and `e2e-teammate` may carry a factor, a seat, an
-ack and a document; their secrets are in `.env.e2e.newmanager` / `.env.e2e.teammate`
-(gitignored) and MGR-00 un-enrols from those. Rerun `node tests/run-all.mjs` on a steady
-connection before trusting the board.
+**Board on 6 Sep: 13 suites, 271 passed, 0 failed, 14 deliberate skips**, target attest-ai.com.
+The 4 Sep network drop had left `e2e-freeagent` seated to `e2e-newmanager` plus two E2E register
+items, which cascaded through MGR-02..08. MGR-00 now sweeps before every run (`cleanSlate`:
+E2E items, the live Acceptable Use Policy back to draft, every seat the fixture manager holds,
+the free agent's acks), as the accounts themselves under RLS. An interrupted run no longer
+needs hand cleanup, and SQL against production is not needed for it.
 
 Done 4 Sep: the webhook welcome email (`sendWelcome`, see Payments above; six unit checks in
 `tests/stripe-webhook.sig.mjs`). Unprovable end to end until Stripe is live, but the recover
