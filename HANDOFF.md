@@ -1,6 +1,6 @@
 # HANDOFF — Attest AI / ai-safe-at-work
 
-Updated: 6 Sep 2026 · Everything committed, pushed and live; working tree clean. `git log -1` for the head.
+Updated: 7 Sep 2026 · Everything committed, pushed and live; working tree clean. `git log -1` for the head.
 Supersedes the 26 Jul version. Full decision history in DOCTRINE.md; this file is the cold resume.
 
 ## What this is
@@ -54,7 +54,15 @@ live in `.env.e2e` (gitignored); without it they skip. Playwright resolves from 
 
 ## Broken or untrue, in priority order
 
-Nothing known. Every quiz on the site is server-scored (migration 0010 closed the last
+1. **Migration 0011 is written but NOT applied** (7 Sep). `remove_seat` is executable by `anon`
+   on the live project: 0005 revoked `assign_seat` only, and something recreated `remove_seat`
+   with PUBLIC EXECUTE outside the repo. Both seat functions also pass a null-session caller
+   through their role guard (`null <> 'manager'` is null, and `if null` does not raise); the
+   delete/insert that follows is what stops them today. 0011 revokes and rewrites both guards
+   with `is distinct from`. Apply it in the SQL editor (paste the file) or approve the MCP
+   apply; RLS-14 on the board fails until then, deliberately.
+
+Otherwise nothing known. Every quiz on the site is server-scored (migration 0010 closed the last
 nine on 2 Sep), the test plan describes what ships, and the board is green. Open items are
 decisions and dashboards, in ACTION-ITEMS and the runbook.
 
@@ -121,6 +129,28 @@ needs hand cleanup, and SQL against production is not needed for it.
 Done 4 Sep: the webhook welcome email (`sendWelcome`, see Payments above; six unit checks in
 `tests/stripe-webhook.sig.mjs`). Unprovable end to end until Stripe is live, but the recover
 endpoint answered 200 to the same call with the same redirect from this Mac.
+
+## Security audit, 7 Sep 2026
+
+Prompted by the review points: hand-rolled Stripe signature, XSS with no API tier, RLS.
+- **Webhook**: `verifySignature` is length-checked `timingSafeEqual`, 300 s replay window
+  enforced with the NaN case closed, rotation (several `v1`) handled; 9 unit checks. Live it
+  fails closed (503) without keys. EXP-03 now POSTs a fabricated paid session, unsigned and with
+  a bogus signature, and asserts 400 or 503, never 200; before it only asserted "not 404".
+- **RLS**: the seven authenticated checks (self-escalation, IDOR, mass-assign, direct seat
+  insert, `grant_credits`) had been SKIPPED on every board since they wanted `TEST_MANAGER_*`;
+  they now default to the e2e manager and all pass. RLS-01/08 were rewritten: a manager reads
+  own row + seated staff (the roster) and never the unseated free agent. RLS-14 added (above).
+  Supabase's security advisor: only `remove_seat` flagged for anon; four tables with RLS and no
+  policy are the intended deny-all (`audit_log`, `quiz_keys`, `track_keys`, `stripe_events`).
+- **XSS / CSP**: every user-controlled field in the portal templates goes through `esc()` or
+  `textContent`; the unescaped interpolations are static config. CSP is `script-src 'self'`
+  site-wide, no inline, no eval, `frame-ancestors 'none'`, `base-uri 'self'`. **Known
+  weakening**: the portal adds `https://cdn.jsdelivr.net` to `script-src` for supabase-js
+  (`portal/assets/portal.js` imports the `+esm` build, which pulls five sub-bundles). Any
+  HTML-injection foothold could load arbitrary npm code from there. Fix is to vendor the UMD
+  build under `portal/assets/vendor/` and drop the host: portal.js plus every portal page's
+  script tag, half a day. Not done; no foothold found.
 
 ## End-to-end journeys, and the hole they found (11 Aug)
 

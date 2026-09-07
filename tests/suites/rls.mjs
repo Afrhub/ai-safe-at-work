@@ -12,6 +12,7 @@
 //   TEST_MANAGER_EMAIL=...  TEST_MANAGER_PASSWORD=...  node tests/suites/rls.mjs
 
 import { group, check, eq, ok, skip, report, reset } from "../lib/harness.mjs";
+import { env } from "../lib/e2e-fixtures.mjs";
 
 const BASE = process.env.BASE_URL || "https://attest-ai.com";
 const SUPABASE = "https://hanjrsslhnuauaysbhun.supabase.co";
@@ -50,8 +51,10 @@ export async function run() {
   reset();
 
   const key = await anonKey();
-  const email = process.env.TEST_MANAGER_EMAIL;
-  const password = process.env.TEST_MANAGER_PASSWORD;
+  // The e2e manager fixture (.env.e2e) is the default so these checks run on every board;
+  // TEST_MANAGER_* still overrides for an ad-hoc account.
+  const email = process.env.TEST_MANAGER_EMAIL || env.E2E_MANAGER_EMAIL;
+  const password = process.env.TEST_MANAGER_PASSWORD || env.E2E_MANAGER_PASSWORD;
 
   group("AUTH, credentials");
   await check("AUTH-02", "wrong password is refused", async () => {
@@ -82,6 +85,12 @@ export async function run() {
     eq(rows.length, 0, `anonymous read returned ${rows.length} profile rows`);
   });
 
+  await check("RLS-14", "remove_seat is not executable signed out", async () => {
+    // 0011 revokes anon/public. Before it, anon reached the body and got 'no such seat' (400).
+    const r = await fetch(`${SUPABASE}/rest/v1/rpc/remove_seat`, { method: "POST", headers: { apikey: key, "Content-Type": "application/json" }, body: JSON.stringify({ p_end_user: "00000000-0000-0000-0000-000000000000" }) });
+    ok([401, 403, 404].includes(r.status), `anon reached remove_seat: ${r.status}`);
+  });
+
   await check("QUIZ-02", "quiz answer key is not readable", async () => {
     const r = await fetch(`${SUPABASE}/rest/v1/quiz_keys?select=*`, { headers: { apikey: key } });
     const rows = r.status === 200 ? await r.json() : [];
@@ -110,13 +119,20 @@ export async function run() {
 
   group("RLS, read scoping");
   let me = null;
-  await check("RLS-01", "reads own profile only", async () => {
+  // A manager reads their own row and the rows of staff they hold a seat for (the
+  // roster, policies profiles_mgr_read / mp_mgr). Nobody else's: the free agent is
+  // seated to no one, so its row and its progress must never appear.
+  let seated = [];
+  await check("RLS-01", "reads own profile and seated staff only", async () => {
+    seated = ((await call(`/rest/v1/seats?select=end_user_id`)).body || []).map((s) => s.end_user_id);
     const r = await call(`/rest/v1/profiles?select=id,email,role,credits_balance`);
     eq(r.status, 200);
     ok(Array.isArray(r.body), "expected an array");
-    me = r.body[0];
+    me = r.body.find((row) => row.id === uid);
+    ok(me, "own profile missing");
     for (const row of r.body) {
-      ok(row.id === uid || row.manager_id === uid, `leaked a profile that is not theirs: ${row.email}`);
+      ok(row.id === uid || seated.includes(row.id), `leaked a profile that is not theirs: ${row.email}`);
+      ok(row.email !== env.E2E_FREEAGENT_EMAIL, "the unseated free agent is visible");
     }
   });
 
@@ -201,7 +217,7 @@ export async function run() {
     const r = await call(`/rest/v1/module_progress?select=user_id`);
     eq(r.status, 200);
     for (const row of r.body || []) {
-      ok(row.user_id === uid, `leaked progress for ${row.user_id}`);
+      ok(row.user_id === uid || seated.includes(row.user_id), `leaked progress for ${row.user_id}`);
     }
   });
 

@@ -71,9 +71,15 @@ export async function run() {
     const r = await fetch(`${BASE}/.netlify/functions/create-checkout-session`, { method: "POST", body: "{}" });
     ok(r.status !== 404, "endpoint is missing, the functions directory is misconfigured");
   });
-  await check("EXP-03", "webhook endpoint responds", async () => {
-    const r = await fetch(`${BASE}/.netlify/functions/stripe-webhook`, { method: "POST", body: "{}" });
-    ok(r.status !== 404, "endpoint is missing");
+  await check("EXP-03", "webhook refuses a forged event, signed or not", async () => {
+    // A fabricated paid session. 503 while unconfigured, 400 once keys exist; never 200.
+    const forged = JSON.stringify({ id: "evt_forged", type: "checkout.session.async_payment_succeeded", data: { object: { customer_email: "attacker@example.com", metadata: { headcount_band: "1-25" } } } });
+    const unsigned = await fetch(`${BASE}/.netlify/functions/stripe-webhook`, { method: "POST", body: forged });
+    ok(unsigned.status !== 404, "endpoint is missing");
+    ok([400, 503].includes(unsigned.status), `unsigned forged event answered ${unsigned.status}`);
+    const t = Math.floor(Date.now() / 1000);
+    const signed = await fetch(`${BASE}/.netlify/functions/stripe-webhook`, { method: "POST", body: forged, headers: { "stripe-signature": `t=${t},v1=${"0".repeat(64)}` } });
+    ok([400, 503].includes(signed.status), `bogus-signature event answered ${signed.status}`);
   });
 
   group("EXP-05, deliberately public paths still work");
