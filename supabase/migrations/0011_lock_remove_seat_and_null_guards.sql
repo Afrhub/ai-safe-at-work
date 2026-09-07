@@ -7,8 +7,6 @@
 -- nothing follows that would succeed (the delete matches no rows, the insert violates
 -- not-null), but the guard should refuse, not rely on what comes after it.
 
-revoke execute on function public.remove_seat(uuid) from anon, public;
-
 create or replace function public.assign_seat(p_end_user uuid)
 returns seats language plpgsql security definer set search_path = public as $$
 declare s seats; v_owner uuid;
@@ -50,3 +48,7 @@ begin
   update profiles set credits_balance = credits_balance + 1 where id = auth.uid();
   update profiles set manager_id = null where id = p_end_user and manager_id = auth.uid();
 end $$;
+
+-- After the create: on a fresh database no earlier migration defines remove_seat (it was
+-- only ever created by hand), so a revoke placed first would abort the migration.
+revoke execute on function public.remove_seat(uuid) from anon, public;
