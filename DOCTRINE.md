@@ -968,7 +968,7 @@ Legend: ✅ done · 🟡 built/ready-to-arm · 🧑 human-only step remaining ·
 |---|---|---|---|
 | A1 | Canonical domain `attest-ai.com` live over HTTPS | 🧑 not done | Finish Netlify custom-domain + SSL, set primary, 301 the `*.netlify.app` origin |
 | A2 | Arm portal auth (flip `AUTH_DISABLED=false`, rotate/delete demo, redeploy) | 🟡 **code done** | Now a *flip*, not a build — front-door auth (password+TOTP, magic-link, reset) built this session; do it the instant real user data appears |
-| AUTH-1 | Supabase custom SMTP + raise rate limits + redirect allowlist | 🧑 not done | Configure SMTP (Resend), raise Auth email cap, allowlist `…/portal/login.html`. **Blocks all auth email** (hit the built-in cap 08 Jul) |
+| AUTH-1 | Supabase custom SMTP + raise rate limits + redirect allowlist | ✅ done 2–8 Sep 2026 | Configure SMTP (Resend), raise Auth email cap, allowlist `…/portal/login.html`. **Blocks all auth email** (hit the built-in cap 08 Jul) |
 | A3 | Business email `hello@attest-ai.com` (Google Workspace) | 🧑 not done | Add MX/SPF/DKIM/DMARC in 123reg DNS; create `hello@`; point Netlify demo-form notification at it |
 | A4 | Commercial (paid-tier) Terms | 🟡 **draft shipped** | Solicitor review, then it can leave `noindex` with B-track |
 | B1 | Payment rail (Stripe, UK) | 🤖+🧑 not started | Claude scaffolds Checkout + webhook → `grant_credits`/`invite-seat` (seams exist); human supplies Stripe account + keys |
