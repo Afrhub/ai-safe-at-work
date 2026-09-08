@@ -46,9 +46,14 @@ const desired = {
 };
 
 // Step 9: redirect allowlist — additive, keep whatever is there.
+// The `?*` twins matter: sign-up confirmations come back as login.html?fromsignup=1, and
+// GoTrue matches the allow-list against the full URL, so an exact entry misses them and the
+// link falls back to site_url (which was still the localhost default until 8 Sep 2026).
 const REDIRECTS_TO_ADD = [
   "https://attest-ai.com/portal/login.html",
+  "https://attest-ai.com/portal/login.html?*",
   "https://www.attest-ai.com/portal/login.html",
+  "https://www.attest-ai.com/portal/login.html?*",
   "https://aisafework.netlify.app/portal/login.html",
 ];
 
@@ -76,9 +81,12 @@ if (missing.length) {
   patch.uri_allow_list = [...currentRedirects, ...missing].join(",");
   report.push(`  uri_allow_list: + ${missing.join(", ")}`);
 }
-if (!current.site_url || /netlify\.app/.test(current.site_url)) {
-  // Only move site_url once the domain is really live; until then, keep netlify.app.
-  report.push(`  (site_url is ${JSON.stringify(current.site_url)} — leave until Phase 1 is done, then set to https://attest-ai.com)`);
+// Step 10: site_url. Every auth email link is built from it when the redirect is not
+// accepted; the factory default is http://localhost:3000. The domain has been live since 1 Sep.
+const SITE_URL = "https://attest-ai.com";
+if (current.site_url !== SITE_URL) {
+  patch.site_url = SITE_URL;
+  report.push(`  site_url: ${JSON.stringify(current.site_url)} -> ${SITE_URL}`);
 }
 
 if (!smtpPass) {
