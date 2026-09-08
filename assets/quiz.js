@@ -55,6 +55,13 @@
     } else if (state.phase === 'scoring') {
       block.appendChild(el('p', { class: 'quiz-lede', role: 'status', 'aria-live': 'polite' },
         ['Marking your answers…']));
+    } else if (state.phase === 'scoreError' && state.noSeat) {
+      block.appendChild(el('div', { class: 'quiz-feedback show wrong-fb', role: 'status' }, [
+        el('span', { class: 'verdict' }, ['This account is not on a team yet']),
+        el('div', {}, ['Knowledge checks are marked and recorded for seated team members. ' +
+          'Ask your manager to add you to their team, or see plans on the pricing page. ' +
+          'Module 1 stays open to everyone.'])
+      ]));
     } else if (state.phase === 'scoreError') {
       // Deliberately does NOT fall back to a local mark. This module's answers live on the
       // server, so an unscored attempt must read as unscored rather than as a pass or a fail.
@@ -245,7 +252,15 @@
         ? { p_track: state.cfg.module, p_answers: state.answers.map((a) => (a ? a.chosen : -1)) }
         : { p_module: state.cfg.module, p_answers: state.answers.map((a) => (a ? a.chosen : -1)) })
     });
-    if (!res.ok) throw new Error('record_quiz_result returned ' + res.status);
+    if (!res.ok) {
+      // 0012: an account with no seat is refused with 'no seat: …'. Surface that as a
+      // plain message, not as a marking failure to retry.
+      var msg = '';
+      try { msg = String((await res.json()).message || ''); } catch (e) {}
+      var err = new Error('record_quiz_result returned ' + res.status);
+      if (msg.indexOf('no seat') === 0) err.noSeat = true;
+      throw err;
+    }
     return res.json();
   }
 
@@ -288,6 +303,7 @@
         state.score = r.score;
       } catch (e) {
         // The client cannot score this itself, so say so rather than invent a mark.
+        state.noSeat = !!e.noSeat;
         state.phase = 'scoreError';
         render(mount, state);
         scrollIntoView(mount);

@@ -1,6 +1,10 @@
 // Shared portal engine: Supabase client, MFA-aware session guard, role router.
-// Static ES module, no build step. supabase-js from CDN.
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/+esm";
+// Static ES module, no build step. supabase-js is vendored (assets/vendor/supabase.js, the
+// 2.108.2 UMD build) and loaded by a classic <script> before this module on every portal
+// page, so the portal CSP is script-src 'self' with no CDN host (8 Sep 2026: an injection
+// foothold could otherwise load any npm package from jsDelivr).
+const { createClient } = window.supabase || {};
+if (!createClient) throw new Error("supabase-js not loaded: add <script src=\"assets/vendor/supabase.js\"> before the module script");
 
 const cfg = window.AISW_CONFIG;
 if (!cfg || !cfg.url || cfg.url.includes("YOUR-PROJECT")) {

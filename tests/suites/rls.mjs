@@ -85,6 +85,34 @@ export async function run() {
     eq(rows.length, 0, `anonymous read returned ${rows.length} profile rows`);
   });
 
+  // 0012: a course record needs a seat. The free agent is an end_user seated to nobody;
+  // all -1 answers score 0, so an accepted call records nothing either way.
+  group("SEAT, a course record needs a seat (0012)");
+  const rpcAs = async (acct, fn, body) => {
+    const t = (await signIn(key, acct.email, acct.password)).access_token;
+    return fetch(`${SUPABASE}/rest/v1/rpc/${fn}`, { method: "POST", headers: { apikey: key, Authorization: `Bearer ${t}`, "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  };
+  const FREE = { email: env.E2E_FREEAGENT_EMAIL, password: env.E2E_FREEAGENT_PASSWORD };
+  const STAFF = { email: env.E2E_STAFF_EMAIL, password: env.E2E_STAFF_PASSWORD };
+  const zeros = Array(10).fill(-1);
+  await check("SEAT-01", "an unseated account cannot record a module beyond 1", async () => {
+    const r = await rpcAs(FREE, "record_quiz_result", { p_module: 2, p_answers: zeros });
+    eq(r.status, 400, `expected 400, got ${r.status}`);
+    ok(/no seat/.test(await r.text()), "refusal does not say 'no seat'");
+  });
+  await check("SEAT-02", "an unseated account cannot record a track", async () => {
+    const r = await rpcAs(FREE, "record_track_quiz_result", { p_track: "dpo", p_answers: zeros });
+    eq(r.status, 400, `expected 400, got ${r.status}`);
+  });
+  await check("SEAT-03", "module 1 stays open to any signed-in account", async () => {
+    const r = await rpcAs(FREE, "record_quiz_result", { p_module: 1, p_answers: zeros });
+    eq(r.status, 200, `expected 200, got ${r.status}`);
+  });
+  await check("SEAT-04", "a seated member of staff is still marked", async () => {
+    const r = await rpcAs(STAFF, "record_quiz_result", { p_module: 2, p_answers: zeros });
+    eq(r.status, 200, `expected 200, got ${r.status}`);
+  });
+
   await check("RLS-14", "remove_seat is not executable signed out", async () => {
     // 0011 revokes anon/public. Before it, anon reached the body and got 'no such seat' (400).
     const r = await fetch(`${SUPABASE}/rest/v1/rpc/remove_seat`, { method: "POST", headers: { apikey: key, "Content-Type": "application/json" }, body: JSON.stringify({ p_end_user: "00000000-0000-0000-0000-000000000000" }) });
