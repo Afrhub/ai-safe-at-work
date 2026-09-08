@@ -31,7 +31,7 @@ which is what let a network blip on the name PATCH double-grant, and a crash str
 After the grant `sendWelcome` asks GoTrue (`/auth/v1/recover`) to email the manager the same
 reset link as "Forgot your password?", landing on `/portal/login.html`; it never throws.
 `grant_credits` itself is captured in 0013 (it lived only on the live project before).
-**0013 must be applied before the Stripe env vars exist**, or every paid event 500s.
+0013 is applied (8 Sep).
 
 **Nav is three sections + Sign in** (3 Aug): Products · Course · Governance · [Sign in]. Who We Help,
 Plans, Book a Demo and Become a Partner moved to a footer **Explore** column. New pages: `governance.html`
@@ -59,10 +59,12 @@ live in `.env.e2e` (gitignored); without it they skip. Playwright resolves from 
 
 ## Broken or untrue, in priority order
 
-1. **Migration 0013 is written but NOT applied** (8 Sep, Codex audit findings 1, 2, 10). Harmless
-   until Stripe keys exist (the webhook is 503), fatal after: every paid event would 500. Paste
-   the file into the SQL editor before runbook Phase 3. RLS-15 passes either way (404 before,
-   401/403 after).
+Nothing known.
+
+Fixed 8 Sep (later): migration 0013 applied. `fulfil_stripe_event` and `grant_credits` carry
+EXECUTE for postgres and the service role only (verified in pg); RLS-15 refuses anon and
+authenticated live. Codex re-review of the change: no findings; DB-level concurrency remains a
+P3 follow-up in ACTION-ITEMS.
 
 Fixed 8 Sep (late): migration 0012 applied by hand. A course record now needs a seat (or a
 manager/reseller account); module 1 stays open. SEAT-01..04 pass; every journey still records.
@@ -123,7 +125,7 @@ audit cuts; last client-scored quizzes moved server-side; test plan brought curr
 
 0. **Click a fresh sign-in link** (🧑) from attest-ai.com/portal/login to confirm it lands on
    the site, not localhost. The settings are verified saved; the email itself is not yet proven.
-1. **Stripe** (🧑, runbook Phases 0 and 3): apply 0013 first, create account, start Bacs
+1. **Stripe** (🧑, runbook Phases 0 and 3): create account, start Bacs
    verification (days), then 4 Netlify env vars, webhook `/.netlify/functions/stripe-webhook` on the two `checkout.session.*`
    events, VAT decision, one real £990 charge-and-refund.
 2. **JC's first sign-in and first invite** (🧑, Phase 5 human half). Then revoke the `phase2`
