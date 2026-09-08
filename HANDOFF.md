@@ -54,13 +54,11 @@ live in `.env.e2e` (gitignored); without it they skip. Playwright resolves from 
 
 ## Broken or untrue, in priority order
 
-1. **Migration 0011 is written but NOT applied** (7 Sep). `remove_seat` is executable by `anon`
-   on the live project: 0005 revoked `assign_seat` only, and something recreated `remove_seat`
-   with PUBLIC EXECUTE outside the repo. Both seat functions also pass a null-session caller
-   through their role guard (`null <> 'manager'` is null, and `if null` does not raise); the
-   delete/insert that follows is what stops them today. 0011 revokes and rewrites both guards
-   with `is distinct from`. Apply it in the SQL editor (paste the file) or approve the MCP
-   apply; RLS-14 on the board fails until then, deliberately.
+Nothing known.
+
+Fixed 8 Sep: migration 0011 applied by hand in the SQL editor. `remove_seat` no longer carries
+PUBLIC EXECUTE and both seat functions refuse a null session (`is distinct from`). RLS-14 passes;
+manager onboarding 15/15 through the rewritten functions.
 
 Fixed 8 Sep: auth email links landed on `http://localhost:3000`. Site URL was still the factory
 default (Phase 2 had deliberately left it); set to `https://attest-ai.com` in the dashboard, and
