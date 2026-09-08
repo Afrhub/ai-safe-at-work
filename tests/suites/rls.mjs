@@ -240,6 +240,15 @@ export async function run() {
     );
   });
 
+  await check("RLS-15", "fulfil_stripe_event is service-role only", async () => {
+    // 0013. Before it the function does not exist (404); after it, authenticated is refused.
+    const body = { p_event_id: "evt_rls15", p_event_type: "x", p_manager: uid, p_amount: 1 };
+    const r = await call(`/rest/v1/rpc/fulfil_stripe_event`, { method: "POST", body: JSON.stringify(body) });
+    ok([401, 403, 404].includes(r.status), `a signed-in manager reached fulfil_stripe_event: ${r.status}`);
+    const a = await fetch(`${SUPABASE}/rest/v1/rpc/fulfil_stripe_event`, { method: "POST", headers: { apikey: key, "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    ok([401, 403, 404].includes(a.status), `anon reached fulfil_stripe_event: ${a.status}`);
+  });
+
   group("RLS, cross tenant reads");
   await check("RLS-08", "no foreign module_progress", async () => {
     const r = await call(`/rest/v1/module_progress?select=user_id`);

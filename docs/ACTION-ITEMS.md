@@ -185,18 +185,62 @@ wrong for about two weeks on a product that sells being current.
       silently skips the check. HMAC still saves it. Add `Number.isFinite`.
 - [x] 🤖 `stripe-webhook.mjs:16` comment still says `AUTH_DISABLED is still true`. It was
       flipped to false the same day.
-- [ ] 🤖 Band keys duplicated between `stripe-webhook.mjs:24` and
+- [x] 🤖 (done 2 Sep, `netlify/functions/bands.mjs`) Band keys duplicated between `stripe-webhook.mjs:24` and
       `create-checkout-session.mjs:18-19`. Add a band to one and checkout takes money
       that fulfilment throws on. Extract to one module.
 - [x] 🤖 `stripe-webhook.mjs` `grant_credits` is additive but the error path
       releases the event, so a retry re-runs it. Rule now sits in the code as a comment
       above the first line below the grant (`sendWelcome`, 4 Sep), which swallows its own
       failures for exactly this reason. Still true: anything that throws below it double-grants.
-- [ ] 🤖 `stripe-webhook.mjs:120` `full_name` PATCH result unchecked.
+- [x] 🤖 (moot 8 Sep: the name is set inside `fulfil_stripe_event`) `stripe-webhook.mjs:120` `full_name` PATCH result unchecked.
 - [ ] 🤖 `checkout.html` button says "Buy Foundation", copy above promises an invoice.
       Pick one story. The Over-50 band also says "Buy" but receives a quote.
 - [x] 🤖 `checkout-thanks.html` has two `<meta name="robots">` tags with different values.
 - [x] 🤖 CTA casing drift, "Book a Demo" vs "Book a demo".
+
+## Codex audit, 8 Sep 2026 (gpt-6-astra, whole repo; verdicts are Claude's, checked against the code)
+
+- [x] 🤖 **P1** (done 8 Sep, 0013 written, 🧑 apply pending) `netlify/functions/stripe-webhook.mjs`
+      the `full_name` PATCH below the additive grant can reject on a network error, which
+      releases the event and Stripe's retry grants again. Fixed with the next item:
+      `fulfil_stripe_event` (claim + grant + name in one transaction), migration 0013.
+- [x] 🤖 **P1** (done 8 Sep, same change) `stripe-webhook.mjs` a hard crash between claim and
+      grant leaves the event marked processed and the customer unprovisioned. No claim exists
+      outside the transaction now.
+- [ ] 🤖 **P3** Follow-up from the Codex re-review of that change: the 16 webhook unit checks
+      prove the function's handling of the `fulfil_stripe_event` contract, not the SQL. A
+      database-level check (two concurrent deliveries, a raise after the credit update, a retry
+      after a lost response; assert balance and ledger rows) needs the service key and an applied
+      0013, so it runs on a Supabase branch or after Phase 3, not on this Mac.
+- [ ] 🤖 **P1** No policy or definer function requires `aal2`. TOTP is enforced by the browser only;
+      a password-only token reaches PostgREST and every RPC. Fix: `(auth.jwt()->>'aal') = 'aal2'`
+      in the policies and functions that guard records, with an allowance for enrolment. Needs a
+      migration and RLS checks.
+- [ ] 🤖 **P2** `assign_seat` is check-then-write: two managers can seat the same unowned user,
+      and one credit can be spent twice. No unique on `seats.end_user_id`, no `check >= 0` on
+      credits. Fix: `update … where credits_balance > 0` + raise on zero rows, `for update` on the
+      target profile, unique index on `end_user_id`.
+- [ ] 🤖 **P2** `portal/assets/aimp.js` the Governance Centre AUP editor publishes to
+      `governance_state` and toasts "staff can now acknowledge it", but staff read
+      `governance_docs`. The dashboard publish path does reach staff (MGR-04). Two paths, one
+      misleading. Fix: have the AIMP publish set the `governance_docs` AUP row live, or fix the toast.
+- [ ] 🤖 **P2** `aimp.js` `dbGet` failure returns the empty fallback with a banner but `dbSet`
+      still upserts, so a save after an outage overwrites a real register. Fix: load-failed flag
+      that `dbSet` refuses.
+- [ ] 🤖 **P2** `governance_acks` has no unique `(doc_id, end_user_id)`; a double tap inflates the
+      acknowledgement percentage. Acks also survive republishing (product decision).
+- [ ] 🤖 **P2** `assets/quiz.js` course pages use the stored access token and never refresh it; a
+      learner over an hour on the pages gets "could not mark" and retry does not help. Fix:
+      refresh via the stored refresh token when the JWT is near expiry.
+- [ ] 🤖 **P2** `portal/assets/login.js:11` the `next` check lets `/\evil.com` through (browsers
+      read it as `//evil.com`). Fix: `new URL(next, location.origin).origin === location.origin`.
+- [x] 🤖 **P2** (done 8 Sep, 0013) `grant_credits` is in no migration (0007 only references it).
+      Captured with the service-role-only grant it has live.
+- [ ] 🤖 **P3** `portal/assets/governance.js:55` the training stat counts any eleven done rows,
+      not the eleven sold modules (`manager.js` was fixed in August, this was not).
+- [ ] 🤖 **P3** `governance_acks` insert policy does not require the doc to be live and owned by
+      the stated manager. Harmless today (the dashboard filters by its own live docs); the policy
+      should say so.
 
 ## Known structural gaps, decisions not yet made
 

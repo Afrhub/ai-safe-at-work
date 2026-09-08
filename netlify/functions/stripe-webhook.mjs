@@ -10,6 +10,9 @@
 //   SUPABASE_URL
 //   SUPABASE_SERVICE_KEY   (the service-role key, bypasses RLS. Never expose to a browser.)
 //
+// Needs migration 0013 applied (fulfil_stripe_event, service role only) before the env vars
+// exist; without it every paid event 500s and Stripe retries until it is.
+//
 // Since 2 Sep 2026 (runbook Phase 2) auth email delivers through Resend. After the
 // grant, sendWelcome() asks GoTrue for a password-recovery email to the manager: same
 // template and link as "Forgot your password?" on the sign-in page, which lands them on
@@ -60,39 +63,6 @@ const sb = (path, init = {}) =>
     },
   });
 
-// Claim the event id. Returns false if this delivery was already processed.
-async function claimEvent(id, type) {
-  const r = await sb("/rest/v1/stripe_events", {
-    method: "POST",
-    headers: { Prefer: "return=representation,resolution=ignore-duplicates" },
-    body: JSON.stringify({ id, type }),
-  });
-  if (!r.ok) throw new Error(`claim failed: ${r.status} ${await r.text()}`);
-  const rows = await r.json();
-  return rows.length > 0; // empty = the id was already there
-}
-
-// Claiming happens before provisioning so two concurrent deliveries cannot both
-// provision. That means a failure after the claim has to hand the id back, or the
-// Stripe retry would see a duplicate and skip the work permanently.
-async function releaseEvent(id) {
-  try {
-    const r = await sb(`/rest/v1/stripe_events?id=eq.${encodeURIComponent(id)}`, { method: "DELETE" });
-    // fetch RESOLVES on 4xx and 5xx, so the catch below only ever sees network errors.
-    // Without this check a failed release is completely silent: the id stays claimed,
-    // Stripe's retry sees a duplicate and skips, and a paying customer is never
-    // provisioned with nothing logged anywhere.
-    if (!r.ok) {
-      console.error(
-        `RELEASE FAILED for ${id}: ${r.status} ${await r.text()}. Stripe will retry and ` +
-          `skip this event as a duplicate. Provision this customer by hand.`
-      );
-    }
-  } catch (err) {
-    console.error(`could not release event ${id}, retries will skip it:`, err.message);
-  }
-}
-
 async function findOrCreateUser(email) {
   const found = await sb(`/rest/v1/profiles?email=eq.${encodeURIComponent(email)}&select=id`);
   // Do NOT fall through on a failed lookup. A transient 500 reads as "no such user" and
@@ -123,7 +93,12 @@ export function managerEmailFor(session) {
   return (session?.customer_email || session?.customer_details?.email || "").trim().toLowerCase();
 }
 
-async function provision(session) {
+// One transaction on the database side (migration 0013, fulfil_stripe_event): claim the
+// event id, grant the credits, set the name. A redelivery answers duplicate:true and grants
+// nothing. Nothing here claims before the grant or releases after it, so there is no window
+// in which a crash or a network error can leave an event claimed-but-unfulfilled, or a retry
+// grant twice. User creation runs before the call and is idempotent (find-or-create).
+async function provision(session, event) {
   const email = managerEmailFor(session);
   const payer = (session.metadata?.payer_email || session.customer_email || "").trim().toLowerCase();
   const band = session.metadata?.headcount_band;
@@ -132,30 +107,33 @@ async function provision(session) {
 
   const userId = await findOrCreateUser(email);
 
-  // grant_credits() adds the credits AND promotes end_user → manager in one go
-  // (it deliberately leaves an existing reseller as a reseller).
-  const granted = await sb("/rest/v1/rpc/grant_credits", {
+  const r = await sb("/rest/v1/rpc/fulfil_stripe_event", {
     method: "POST",
-    body: JSON.stringify({ p_manager: userId, p_amount: seats }),
+    body: JSON.stringify({
+      p_event_id: event.id,
+      p_event_type: event.type,
+      p_manager: userId,
+      p_amount: seats,
+      p_full_name: session.metadata?.contact || null,
+    }),
   });
-  if (!granted.ok) throw new Error(`grant_credits failed: ${granted.status} ${await granted.text()}`);
-
-  const name = session.metadata?.contact;
-  if (name) {
-    await sb(`/rest/v1/profiles?id=eq.${userId}`, {
-      method: "PATCH",
-      body: JSON.stringify({ full_name: name }),
-    });
+  if (!r.ok) throw new Error(`fulfil_stripe_event failed: ${r.status} ${await r.text()}`);
+  const result = await r.json();
+  if (result.duplicate) {
+    console.log(`duplicate delivery ${event.id}, already fulfilled`);
+    return "duplicate";
   }
 
   console.log(
-    `provisioned ${email} as manager with ${seats} credits (band ${band})` +
+    `provisioned ${email} as manager with ${seats} credits (band ${band}, balance ${result.credits})` +
       (payer && payer !== email ? `, nominated by payer ${payer}` : "")
   );
 
-  // Nothing below the grant may throw: a throw releases the event, Stripe retries, and
-  // grant_credits is additive, so the manager would be credited twice.
+  // Below the grant nothing may throw: it would 500, Stripe would retry, and although the
+  // retry is now a duplicate (no second grant), the customer would read as unfulfilled in
+  // Stripe. sendWelcome swallows its own failures.
   await sendWelcome(email);
+  return "ok";
 }
 
 // The recovery link lands on the sign-in page, which handles the set-password step.
@@ -218,21 +196,13 @@ export default async (req) => {
     return new Response("ignored", { status: 200 });
   }
 
-  let claimed = false;
   try {
-    if (!(await claimEvent(event.id, event.type))) {
-      console.log(`duplicate delivery ${event.id}, already processed`);
-      return new Response("duplicate", { status: 200 });
-    }
-    claimed = true;
-    await provision(session);
+    const outcome = await provision(session, event);
+    return new Response(outcome, { status: 200 });
   } catch (err) {
-    // 500 makes Stripe retry, which is what we want for a transient failure. Hand
-    // the event id back first, otherwise the retry sees a duplicate and skips it.
-    if (claimed) await releaseEvent(event.id);
+    // 500 makes Stripe retry. Nothing was claimed unless the whole transaction committed,
+    // so the retry starts clean.
     console.error("fulfilment failed:", err.message);
     return new Response("fulfilment failed", { status: 500 });
   }
-
-  return new Response("ok", { status: 200 });
 };

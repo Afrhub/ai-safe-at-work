@@ -24,9 +24,14 @@ and `stripe-webhook.mjs`, no SDK (REST over fetch, no package.json). Both return
 order form, so the button is never dead. Price is resolved server-side by `resolveBand(plan, headcount)`
 — **plan AND band**, because `checkout.js` reuses the band keys `1-25`/`26-50` for Platform at
 different prices. Buyer can nominate a different manager at checkout (`manager_email`).
-After `grant_credits` the webhook calls `sendWelcome`, which asks GoTrue (`/auth/v1/recover`) to
-email the manager the same reset link as "Forgot your password?", landing on `/portal/login.html`.
-It never throws: anything that throws below the additive grant would double-credit on the retry.
+Fulfilment is one database transaction since 8 Sep (migration 0013, `fulfil_stripe_event`,
+service role only): claim the event id, `grant_credits`, set the name; a redelivery answers
+`duplicate:true` and grants nothing. The webhook no longer claims first and releases on error,
+which is what let a network blip on the name PATCH double-grant, and a crash strand a claim.
+After the grant `sendWelcome` asks GoTrue (`/auth/v1/recover`) to email the manager the same
+reset link as "Forgot your password?", landing on `/portal/login.html`; it never throws.
+`grant_credits` itself is captured in 0013 (it lived only on the live project before).
+**0013 must be applied before the Stripe env vars exist**, or every paid event 500s.
 
 **Nav is three sections + Sign in** (3 Aug): Products · Course · Governance · [Sign in]. Who We Help,
 Plans, Book a Demo and Become a Partner moved to a footer **Explore** column. New pages: `governance.html`
@@ -54,7 +59,10 @@ live in `.env.e2e` (gitignored); without it they skip. Playwright resolves from 
 
 ## Broken or untrue, in priority order
 
-Nothing known.
+1. **Migration 0013 is written but NOT applied** (8 Sep, Codex audit findings 1, 2, 10). Harmless
+   until Stripe keys exist (the webhook is 503), fatal after: every paid event would 500. Paste
+   the file into the SQL editor before runbook Phase 3. RLS-15 passes either way (404 before,
+   401/403 after).
 
 Fixed 8 Sep (late): migration 0012 applied by hand. A course record now needs a seat (or a
 manager/reseller account); module 1 stays open. SEAT-01..04 pass; every journey still records.
@@ -115,8 +123,8 @@ audit cuts; last client-scored quizzes moved server-side; test plan brought curr
 
 0. **Click a fresh sign-in link** (🧑) from attest-ai.com/portal/login to confirm it lands on
    the site, not localhost. The settings are verified saved; the email itself is not yet proven.
-1. **Stripe** (🧑, runbook Phases 0 and 3): create account, start Bacs verification (days), then
-   4 Netlify env vars, webhook `/.netlify/functions/stripe-webhook` on the two `checkout.session.*`
+1. **Stripe** (🧑, runbook Phases 0 and 3): apply 0013 first, create account, start Bacs
+   verification (days), then 4 Netlify env vars, webhook `/.netlify/functions/stripe-webhook` on the two `checkout.session.*`
    events, VAT decision, one real £990 charge-and-refund.
 2. **JC's first sign-in and first invite** (🧑, Phase 5 human half). Then revoke the `phase2`
    Supabase token if not already expired (24 h).

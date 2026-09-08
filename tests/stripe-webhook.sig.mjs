@@ -7,7 +7,7 @@
 
 import assert from "node:assert/strict";
 import { createHmac } from "node:crypto";
-import { verifySignature, sendWelcome } from "../netlify/functions/stripe-webhook.mjs";
+import handler, { verifySignature, sendWelcome } from "../netlify/functions/stripe-webhook.mjs";
 
 const SECRET = "whsec_test_not_a_real_secret";
 const BODY = JSON.stringify({ id: "evt_1", type: "checkout.session.async_payment_succeeded" });
@@ -64,3 +64,74 @@ assert.equal(await sendWelcome("buyer@example.com"), false, "network error escap
 globalThis.fetch = realFetch;
 
 console.log("stripe-webhook welcome email: 6 checks passed");
+
+// ── Fulfilment is one transaction; a retry never grants twice ────────────────────────
+// A mock of the database side: stripe_events as a Set, credits as a counter. The handler is
+// driven twice with the same signed paid event, with the welcome send failing on the first
+// delivery. The old code released the claim on that throw and the retry granted again.
+process.env.STRIPE_WEBHOOK_SECRET = SECRET;
+const db = { events: new Set(), grants: 0, rpcCalls: 0, lookups: 0, deletes: 0, welcomeFail: true, lookupFail: false, rpcFail: false };
+globalThis.fetch = async (url, init = {}) => {
+  const u = String(url);
+  if (u.includes("/rest/v1/profiles?email=")) {
+    db.lookups++;
+    return db.lookupFail ? new Response("boom", { status: 500 }) : new Response(JSON.stringify([{ id: "u1" }]), { status: 200 });
+  }
+  if (u.includes("/rest/v1/rpc/fulfil_stripe_event")) {
+    db.rpcCalls++;
+    if (db.rpcFail) return new Response("db down", { status: 500 });
+    const b = JSON.parse(init.body);
+    if (db.events.has(b.p_event_id)) return new Response(JSON.stringify({ duplicate: true }), { status: 200 });
+    db.events.add(b.p_event_id); db.grants++;
+    return new Response(JSON.stringify({ duplicate: false, credits: b.p_amount }), { status: 200 });
+  }
+  if (u.includes("/auth/v1/recover")) {
+    if (db.welcomeFail) throw new Error("ECONNRESET");
+    return new Response("{}", { status: 200 });
+  }
+  if (init.method === "DELETE") { db.deletes++; return new Response("[]", { status: 200 }); }
+  throw new Error("unexpected fetch " + u);
+};
+const paid = JSON.stringify({ id: "evt_paid_1", type: "checkout.session.async_payment_succeeded",
+  data: { object: { customer_email: "buyer@example.com", payment_status: "paid", metadata: { headcount_band: "1-25", contact: "Buyer Name" } } } });
+const deliver = (body) => handler(new Request("https://attest-ai.com/.netlify/functions/stripe-webhook", {
+  method: "POST", body, headers: { "stripe-signature": sign(body, SECRET, now()) } }));
+
+let r = await deliver(paid);
+assert.equal(r.status, 200, "first delivery should be 200 even though the welcome send failed");
+assert.equal(db.grants, 1, "first delivery grants once");
+db.welcomeFail = false;
+r = await deliver(paid);
+assert.equal(r.status, 200, "redelivery should be 200");
+assert.equal(await r.text(), "duplicate", "redelivery should read as duplicate");
+assert.equal(db.grants, 1, "REDELIVERY GRANTED AGAIN");
+assert.equal(db.deletes, 0, "nothing should ever release a claim");
+
+// Transaction failure: 500 so Stripe retries, and nothing was claimed.
+db.rpcFail = true;
+const paid2 = paid.replace("evt_paid_1", "evt_paid_2");
+r = await deliver(paid2);
+assert.equal(r.status, 500, "db failure should 500");
+assert.equal(db.events.has("evt_paid_2"), false, "failed fulfilment must not leave a claim");
+db.rpcFail = false;
+r = await deliver(paid2);
+assert.equal(r.status, 200); assert.equal(db.grants, 2, "retry after db failure grants exactly once");
+
+// A failed profile lookup stops before any grant: no second account, no credits.
+db.lookupFail = true; const before = db.rpcCalls;
+r = await deliver(paid.replace("evt_paid_1", "evt_paid_3"));
+assert.equal(r.status, 500); assert.equal(db.rpcCalls, before, "lookup failure must not reach fulfilment");
+db.lookupFail = false;
+
+// An unpaid completed session is ignored and touches nothing.
+const unpaid = JSON.stringify({ id: "evt_unpaid", type: "checkout.session.completed", data: { object: { customer_email: "x@example.com", payment_status: "unpaid", metadata: { headcount_band: "1-25" } } } });
+const lookupsBefore = db.lookups;
+r = await deliver(unpaid);
+assert.equal(r.status, 200); assert.equal(await r.text(), "ignored"); assert.equal(db.lookups, lookupsBefore, "unpaid event must not touch the database");
+
+// A bad signature never reaches the database.
+r = await handler(new Request("https://x/", { method: "POST", body: paid, headers: { "stripe-signature": `t=${now()},v1=${"0".repeat(64)}` } }));
+assert.equal(r.status, 400); assert.equal(db.grants, 2, "forged event granted");
+globalThis.fetch = realFetch;
+
+console.log("stripe-webhook fulfilment: 16 checks passed");
