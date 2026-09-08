@@ -40,8 +40,8 @@ tracks).** Modules → `record_quiz_result` → `module_progress`; tracks → `r
 deliberate exception: signed out it is the free sample, marks itself, records nothing.
 Certificates render from `module_progress`; the manager roster counts the eleven from `modules.js`.
 
-**Test board: 13 suites, 285 passed, 2 failed (SEAT-01/02 until 0012 is applied), 7
-deliberate skips (8 Sep 2026), target `https://attest-ai.com`.** `node tests/run-all.mjs`. Unit (pricing, webhook sig, nomination),
+**Test board: 13 suites, 294 passed, 0 failed, 7 deliberate skips (8 Sep 2026), target
+`https://attest-ai.com`.** `node tests/run-all.mjs`. Unit (pricing, webhook sig, nomination),
 HTTP (exposure, public site, RLS), browser (Playwright, 112), and six journey suites against
 production: staff course + governance (`e2e-journeys`), first-time onboarding, password reset
 (skips: no mailbox), signup front door, invite, manager first day + teammate (screenshots to
@@ -54,12 +54,10 @@ live in `.env.e2e` (gitignored); without it they skip. Playwright resolves from 
 
 ## Broken or untrue, in priority order
 
-1. **Migration 0012 is written but NOT applied** (8 Sep, the signup-exposure decision). Until
-   it lands, a self-serve account with no seat can record modules 2–12 and every track, so the
-   paid course is free to anyone who signs up. 0012 makes the two quiz RPCs refuse an account
-   with no seat unless it is a manager or reseller; module 1 stays open. Paste the file into
-   the SQL editor. SEAT-01 and SEAT-02 on the board fail until then, deliberately; quiz.js
-   already shows the "not on a team yet" message for the refusal.
+Nothing known.
+
+Fixed 8 Sep (late): migration 0012 applied by hand. A course record now needs a seat (or a
+manager/reseller account); module 1 stays open. SEAT-01..04 pass; every journey still records.
 
 Fixed 8 Sep: migration 0011 applied by hand in the SQL editor. `remove_seat` no longer carries
 PUBLIC EXECUTE and both seat functions refuse a null session (`is distinct from`). RLS-14 passes;
@@ -115,9 +113,8 @@ audit cuts; last client-scored quizzes moved server-side; test plan brought curr
 
 ## Next steps, ordered, first one startable cold
 
-0. **Apply 0012** (🧑, 2 min, SQL editor) and **click a fresh sign-in link** from
-   attest-ai.com/portal/login to confirm it lands on the site, not localhost. Then `node
-   tests/run-all.mjs` should read 287/0.
+0. **Click a fresh sign-in link** (🧑) from attest-ai.com/portal/login to confirm it lands on
+   the site, not localhost. The settings are verified saved; the email itself is not yet proven.
 1. **Stripe** (🧑, runbook Phases 0 and 3): create account, start Bacs verification (days), then
    4 Netlify env vars, webhook `/.netlify/functions/stripe-webhook` on the two `checkout.session.*`
    events, VAT decision, one real £990 charge-and-refund.
