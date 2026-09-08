@@ -1,6 +1,6 @@
 # HANDOFF — Attest AI / ai-safe-at-work
 
-Updated: 7 Sep 2026 · Everything committed, pushed and live; working tree clean. `git log -1` for the head.
+Updated: 8 Sep 2026 · Everything committed, pushed and live; working tree clean. `git log -1` for the head.
 Supersedes the 26 Jul version. Full decision history in DOCTRINE.md; this file is the cold resume.
 
 ## What this is
@@ -61,6 +61,11 @@ live in `.env.e2e` (gitignored); without it they skip. Playwright resolves from 
    delete/insert that follows is what stops them today. 0011 revokes and rewrites both guards
    with `is distinct from`. Apply it in the SQL editor (paste the file) or approve the MCP
    apply; RLS-14 on the board fails until then, deliberately.
+
+Fixed 8 Sep: auth email links landed on `http://localhost:3000`. Site URL was still the factory
+default (Phase 2 had deliberately left it); set to `https://attest-ai.com` in the dashboard, and
+`…/portal/login.html?*` added for apex and www so the sign-up return (`?fromsignup=1`) matches
+the allow-list instead of falling back. `scripts/phase2-supabase-auth-config.mjs` now does both.
 
 Otherwise nothing known. Every quiz on the site is server-scored (migration 0010 closed the last
 nine on 2 Sep), the test plan describes what ships, and the board is green. Open items are
