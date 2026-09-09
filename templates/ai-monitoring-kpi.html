@@ -82,7 +82,7 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <h1 class="page-title">AI Monitoring &amp; KPI Dashboard</h1>
  <p class="lede no-print">Pick a small set of measures that show whether AI governance is working, then track them every quarter. This is what the Steering Group reviews and the board sees. Aligns with ISO/IEC 42001 Clause 9.1.</p>
  <div class="print-row no-print">
- <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF →</button>
+ <button type="button" class="print-btn" data-print>Print / Save as PDF →</button>
  <span class="print-hint">Fill the figures each quarter. Replace the example numbers with your own.</span>
  </div>
 
@@ -160,5 +160,6 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 
+<script defer src="/assets/print-button.js?v=1"></script>
 </body>
 </html>

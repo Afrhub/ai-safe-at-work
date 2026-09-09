@@ -102,7 +102,7 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <h1 class="page-title">AI Governance: Executive Brief</h1>
  <p class="lede no-print">A one-page, plain-language summary of AI governance status for the board or executive team. Covers current state, compliance posture, strategic risks, and decisions needed. Aligns with EU AI Act Article 4 (oversight), ISO/IEC 38507 (board oversight of AI), and GDPR Article 5 (accountability).</p>
  <div class="print-row no-print">
- <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF →</button>
+ <button type="button" class="print-btn" data-print>Print / Save as PDF →</button>
  <span class="print-hint">This is a one-page brief. Use it for board papers, quarterly reviews, or investor meetings.</span>
  </div>
 
@@ -226,5 +226,6 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 
+<script defer src="/assets/print-button.js?v=1"></script>
 </body>
 </html>

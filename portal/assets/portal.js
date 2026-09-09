@@ -88,6 +88,9 @@ export async function signOut() {
   // Never strand a signed-in user on a dead button: end up at sign-in even if the
   // server call fails, the local session is cleared either way.
   try { await sb.auth.signOut(); } catch (e) {}
+  // supabase-js keeps the local session when the server call fails, and login.html would
+  // route straight back in. Clear it ourselves, the way idle-logout does.
+  try { localStorage.removeItem(`sb-${new URL(cfg.url).hostname.split(".")[0]}-auth-token`); } catch (e) {}
   location.replace("login.html");
 }
 

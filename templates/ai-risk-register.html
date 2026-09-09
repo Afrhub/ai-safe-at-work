@@ -204,7 +204,7 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <p class="lede no-print">Identify, assess, and track AI-specific risks: data leakage, hallucination, bias, vendor lock-in, and compliance gaps. Record severity, mitigation actions, and responsible owners. Aligns with ISO/IEC 42001 Clause 8.2, EU AI Act Article 27, GDPR Articles 32, 35.</p>
 
  <div class="print-row no-print">
- <button type="button" class="print-btn" onclick="window.print()">Print / Export →</button>
+ <button type="button" class="print-btn" data-print>Print / Export →</button>
  <span class="print-hint">Maintain in a shared spreadsheet. Review quarterly or when a new AI use case is introduced. Escalate High risks immediately.</span>
  </div>
 
@@ -410,5 +410,6 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 
+<script defer src="/assets/print-button.js?v=1"></script>
 </body>
 </html>

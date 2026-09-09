@@ -215,7 +215,7 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <p class="lede no-print">Register every AI agent that can take actions on its own, calling tools, APIs and MCP servers, browsing, or transacting. Record what each agent is authorised to do, its autonomy level, its human-in-the-loop checkpoints, and how to stop it. Aligns with EU AI Act Art 4 (AI literacy), Art 14 (human oversight), Art 26 (deployer obligations), and ISO/IEC 42001 Annex A operational controls.</p>
 
  <div class="print-row no-print">
- <button type="button" class="print-btn" onclick="window.print()">Print / Export as CSV →</button>
+ <button type="button" class="print-btn" data-print>Print / Export as CSV →</button>
  <span class="print-hint">Maintain this register in a shared spreadsheet. Review monthly. Update the same day an agent's tools, permissions, or autonomy level change.</span>
  </div>
 
@@ -408,5 +408,6 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 
+<script defer src="/assets/print-button.js?v=1"></script>
 </body>
 </html>

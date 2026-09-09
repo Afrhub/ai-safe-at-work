@@ -62,7 +62,9 @@
   }
 
   Promise.all([
-    api('module_progress?select=module,score,updated_at'),
+    // user_id filter: a manager reads seated staff rows through the roster policy, and
+    // without it a staff member's pass rendered as the manager's own certificate (9 Sep).
+    api('module_progress?select=module,score,updated_at&user_id=eq.' + encodeURIComponent(sess.uid)),
     api('profiles?select=full_name&id=eq.' + encodeURIComponent(sess.uid))
   ]).then(([rows, profile]) => {
     const name = ((profile && profile[0]) || {}).full_name || '';
@@ -253,10 +255,11 @@
   }
 
   async function api(path, opts) {
+    const token = window.AISW_SESSION ? (await window.AISW_SESSION.token()) || sess.token : sess.token;
     const res = await fetch(SB_URL + '/rest/v1/' + path, Object.assign({
       headers: {
         apikey: SB_ANON,
-        Authorization: 'Bearer ' + sess.token,
+        Authorization: 'Bearer ' + token,
         'Content-Type': 'application/json'
       }
     }, opts || {}));

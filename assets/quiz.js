@@ -236,7 +236,8 @@
   }
 
   async function submitForScoring(state) {
-    const token = sessionToken();
+    // sb-session.js refreshes an expiring token; without it fall back to the stored one.
+    const token = window.AISW_SESSION ? await window.AISW_SESSION.token() : sessionToken();
     if (!token) throw new Error('no session');
     // record_quiz_result marks the answers, keeps the greatest score, and writes
     // module_progress plus an audit row under the learner's own identity.

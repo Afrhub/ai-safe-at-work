@@ -5,10 +5,14 @@ const msg = $("msg");
 const say = (t, cls = "") => { msg.textContent = t; msg.className = "auth-msg " + cls; };
 const show = (id) => ["step-login", "step-enrol", "step-mfa", "step-reset", "step-signup"].forEach(s => $(s).hidden = (s !== id));
 
+function safeNext(n) { try { return new URL(n, location.origin).origin === location.origin; } catch { return false; } }
+
 async function route() {
   const params = new URLSearchParams(location.search);
   const next = params.get("next");
-  if (next && next.startsWith("/") && !next.startsWith("//")) return location.replace(next); // same-origin only
+  // Same-origin only. Resolve it: "/\\evil.com" reads as "//evil.com" to a browser, which
+  // the old startsWith check let through.
+  if (next && next.startsWith("/") && safeNext(next)) return location.replace(next);
   // A brand-new self-serve account returns to the landing page after setup, so the
   // journey reads: sign up -> confirm -> authenticator -> front door -> Sign in.
   if (params.get("fromsignup") === "1") return location.replace("/index.html");

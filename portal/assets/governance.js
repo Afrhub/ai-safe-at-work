@@ -1,3 +1,4 @@
+import { MODULES } from "./modules.js";
 import { guard, sb, wireSignOut, esc } from "./portal.js";
 
 const $ = id => document.getElementById(id);
@@ -24,16 +25,35 @@ if (profile) {
 
   await sb.rpc("ensure_governance_docs");
 
+  // PostgREST answers at most 1,000 rows per request. Acknowledgements are staff x live
+  // documents (50 staff x 24 docs = 1,200), so every list is paged to the end.
+  async function all(build) {
+    const out = []; const page = 1000;
+    for (let from = 0; ; from += page) {
+      const { data, error } = await build().range(from, from + page - 1);
+      if (error) throw error;
+      out.push(...(data || []));
+      if (!data || data.length < page) return out;
+    }
+  }
+  let lastDocs = [];
   async function load() {
-    const [{ data: docs }, { data: items }, { data: seats }, { data: acks }, { data: progress }] = await Promise.all([
-      sb.from("governance_docs").select("*").order("category", { ascending: true }).order("title", { ascending: true }),
-      sb.from("governance_items").select("*").order("created_at", { ascending: false }),
-      sb.from("seats").select("end_user_id"),
-      sb.from("governance_acks").select("doc_id,end_user_id"),
-      sb.from("module_progress").select("user_id,status"),   // seated staff, via mp_mgr RLS
-    ]);
-    allItems = items || [];
-    renderDashboard(docs || [], allItems, seats || [], acks || [], progress || []);
+    let docs, items, seats, acks, progress;
+    try {
+      [docs, items, seats, acks, progress] = await Promise.all([
+        all(() => sb.from("governance_docs").select("*").order("category", { ascending: true }).order("title", { ascending: true })),
+        all(() => sb.from("governance_items").select("*").order("created_at", { ascending: false })),
+        all(() => sb.from("seats").select("end_user_id")),
+        all(() => sb.from("governance_acks").select("doc_id,end_user_id")),
+        all(() => sb.from("module_progress").select("user_id,module,status")),   // seated staff, via mp_mgr RLS
+      ]);
+    } catch (e) {
+      // An outage must not read as "0 open incidents" or "no policies live".
+      $("stats").innerHTML = `<div class="gv-stat" role="alert"><div class="n">–</div><div class="l">Dashboard unavailable</div><div class="sub">Your records could not be loaded (${esc(e.message || "network")}). Reload; nothing has been lost.</div></div>`;
+      return;
+    }
+    lastDocs = docs; allItems = items;
+    renderDashboard(docs, allItems, seats, acks, progress);
     renderItems();
   }
 
@@ -50,10 +70,12 @@ if (profile) {
     const openIncidents = items.filter(i => i.kind === "incident" && i.status !== "closed").length;
 
     // AI literacy training (EU AI Act Art 4): staff who completed the AI Safe@Work course.
-    const COURSE_MODULES = 11;
+    // The eleven sold modules from modules.js (1 to 10 and 12), not any eleven rows: the
+    // finale (11) is not one of them and must not stand in for a missing module.
+    const COURSE = new Set(MODULES.map(m => m.n));
     const doneByUser = {};
-    progress.forEach(p => { if (p.status === "done") doneByUser[p.user_id] = (doneByUser[p.user_id] || 0) + 1; });
-    const trained = seats.filter(s => (doneByUser[s.end_user_id] || 0) >= COURSE_MODULES).length;
+    progress.forEach(p => { if (p.status === "done" && COURSE.has(p.module)) (doneByUser[p.user_id] ||= new Set()).add(p.module); });
+    const trained = seats.filter(s => (doneByUser[s.end_user_id]?.size || 0) >= COURSE.size).length;
     const trainPct = seatIds.size ? Math.round(trained / seatIds.size * 100) : 0;
 
     $("stats").innerHTML = `
@@ -169,6 +191,13 @@ if (profile) {
 
   async function docPill(e) {
     const btn = e.target.closest(".pill"); if (!btn) return;
+    // Nine GDPR documents ship with no content link yet. Staff cannot acknowledge what they
+    // cannot read, so a document without one stops at "ready".
+    const doc = lastDocs.find(d => d.id === btn.dataset.id);
+    if (doc && !doc.href && DOC_NEXT[btn.dataset.status] === "live") {
+      alert("This document has no content yet, so it cannot go live. Add the document first.");
+      return;
+    }
     btn.disabled = true;
     const { error } = await sb.from("governance_docs")
       .update({ status: DOC_NEXT[btn.dataset.status] || "draft", updated_at: new Date().toISOString() })

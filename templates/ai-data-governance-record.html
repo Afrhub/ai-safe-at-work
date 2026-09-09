@@ -215,7 +215,7 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <p class="lede no-print">One record per dataset feeding a high-risk or material AI system. Document where the data came from, its lawful basis, how representative it is, what bias and quality checks you ran, and how long you keep it. Aligns with EU AI Act Art 10 (data governance, relevance, representativeness, errors, completeness, bias), GDPR Art 5 &amp; Art 9 (lawfulness, special-category data), ISO/IEC 42001 Clause 7.4 &amp; Annex A data controls.</p>
 
  <div class="print-row no-print">
- <button type="button" class="print-btn" onclick="window.print()">Print / Export as CSV →</button>
+ <button type="button" class="print-btn" data-print>Print / Export as CSV →</button>
  <span class="print-hint">Keep one record per dataset. Review at each retraining and at least annually. Update when the source, lawful basis, or use changes.</span>
  </div>
 
@@ -438,5 +438,6 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 
+<script defer src="/assets/print-button.js?v=1"></script>
 </body>
 </html>

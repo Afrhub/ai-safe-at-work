@@ -23,6 +23,21 @@
   function allDone() { return NUMBERED.every(isDone); }
 
   window.AISW = { NUMBERED: NUMBERED, isDone: isDone, setDone: setDone, doneCount: doneCount, allDone: allDone, total: NUMBERED.length };
+  // The flags above are per browser. The learner's record is module_progress, written by
+  // record_quiz_result; when there is a session, pull it down so a second device or a
+  // shared browser shows the right unlock (9 Sep). Needs sb-session.js before this script.
+  function syncFromRecord() {
+    var S = window.AISW_SESSION; if (!S) return Promise.resolve();
+    return S.token().then(function (t) {
+      if (!t) return;
+      return fetch(S.url + '/rest/v1/module_progress?select=module&status=eq.done', {
+        headers: { apikey: S.anon, Authorization: 'Bearer ' + t }
+      }).then(function (r) { return r.ok ? r.json() : []; }).then(function (rows) {
+        var done = {}; (rows || []).forEach(function (r) { done[r.module] = true; });
+        NUMBERED.forEach(function (n) { setDone(n, !!done[n]); });
+      });
+    }).catch(function () {});
+  }
 
   function applyUnlock() {
     var unlocked = allDone();
@@ -53,12 +68,14 @@
           btn.textContent = d ? '✓ Module complete · tap to undo' : 'Mark this module complete';
         }
         btn.addEventListener('click', function () { setDone(n, !isDone(n)); sync(); applyUnlock(); });
+        btn.addEventListener('aisw-sync', sync);
         sync();
       })(btns[i]);
     }
 
     // Checklist gate page: element with [data-checklist-gate] is hidden
     // until all modules are complete; [data-checklist-locked] shows instead.
+    syncFromRecord().then(function () { applyUnlock(); var bs = document.querySelectorAll('[data-mark-complete]'); for (var k = 0; k < bs.length; k++) bs[k].dispatchEvent(new Event('aisw-sync')); });
     var gate = document.querySelector('[data-checklist-gate]');
     var lockedMsg = document.querySelector('[data-checklist-locked]');
     if (gate || lockedMsg) {

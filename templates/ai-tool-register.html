@@ -215,7 +215,7 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <p class="lede no-print">Track every AI tool in use, including consumer tools and shadow-AI instances. Record tool tier, data categories, approval status, and risk posture. Aligns with EU AI Act Art 4, Art 26 (deployer obligations), GDPR Art 5, ISO/IEC 42001 Clause 6.2.</p>
 
  <div class="print-row no-print">
- <button type="button" class="print-btn" onclick="window.print()">Print / Export as CSV →</button>
+ <button type="button" class="print-btn" data-print>Print / Export as CSV →</button>
  <span class="print-hint">Maintain this register in a shared spreadsheet. Review monthly. Update when tools change terms or when new tools are introduced.</span>
  </div>
 
@@ -400,5 +400,6 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 
+<script defer src="/assets/print-button.js?v=1"></script>
 </body>
 </html>

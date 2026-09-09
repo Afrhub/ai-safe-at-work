@@ -95,7 +95,7 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <p class="lede no-print">A starter ATRS record for any UK public-sector body deploying an algorithmic tool that affects citizens. Tier 1 (short, public-facing) plus Tier 2 (detailed, also public). Draft both, internal-review, publish before deployment. Mandatory for central government; recommended + de facto expected for local authorities, NDPBs, NHS, FE colleges, MATs.</p>
 
  <div class="print-row no-print">
- <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF →</button>
+ <button type="button" class="print-btn" data-print>Print / Save as PDF →</button>
  <span class="print-hint">Print A4. File alongside FRIA + DPIA + PSED s.149 assessment. Publish to your authority's ATRS register or the Cabinet Office repository.</span>
  </div>
 
@@ -295,5 +295,6 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 
+<script defer src="/assets/print-button.js?v=1"></script>
 </body>
 </html>

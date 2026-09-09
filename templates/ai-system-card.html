@@ -217,7 +217,7 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <p class="lede no-print">One card per AI system in use, the model and technical-documentation record that shows what the system is, what it does, how it is overseen, and how risky it is. This is your evidence artefact for EU AI Act Art 11 &amp; Annex IV (technical documentation), Art 13 (transparency), Art 14 (human oversight), and ISO/IEC 42001 Clause 8 (operation).</p>
 
  <div class="print-row no-print">
- <button type="button" class="print-btn" onclick="window.print()">Print / Export as PDF →</button>
+ <button type="button" class="print-btn" data-print>Print / Export as PDF →</button>
  <span class="print-hint">Keep one card per system. Review on the date below, and whenever the model, data, purpose, or risk tier changes.</span>
  </div>
 
@@ -436,5 +436,6 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 
+<script defer src="/assets/print-button.js?v=1"></script>
 </body>
 </html>

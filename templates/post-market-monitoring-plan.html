@@ -215,7 +215,7 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <p class="lede no-print">The living record of how you watch a high-risk AI system once it is in use, what you measure, the thresholds that trigger action, who reviews it, and how serious incidents get reported. Aligns with EU AI Act Art 72 (post-market monitoring system), Art 73 (reporting of serious incidents), Art 26(5) (deployer monitoring duty), and ISO/IEC 42001 Clause 9 (performance evaluation) &amp; Clause 10 (improvement).</p>
 
  <div class="print-row no-print">
- <button type="button" class="print-btn" onclick="window.print()">Print / Export as CSV →</button>
+ <button type="button" class="print-btn" data-print>Print / Export as CSV →</button>
  <span class="print-hint">Keep this plan alongside the AI System Card. Review on the cadence set below, and after every model, data, or usage change. Update the corrective-action log the same day as any breach.</span>
  </div>
 
@@ -460,5 +460,6 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 
+<script defer src="/assets/print-button.js?v=1"></script>
 </body>
 </html>

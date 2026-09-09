@@ -103,7 +103,7 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <h1 class="page-title">AI Governance Scorecard, <span class="fill">[Month/Quarter YYYY]</span></h1>
  <p class="lede no-print">Monthly or quarterly snapshot of AI governance maturity across seven dimensions: training completion, policy compliance, vendor oversight, risk mitigation, incident trends, tool coverage, and audit readiness. Used to brief leadership and track progress. Aligns with ISO/IEC 42001 Clause 9.1 (monitoring and measurement).</p>
  <div class="print-row no-print">
- <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF →</button>
+ <button type="button" class="print-btn" data-print>Print / Save as PDF →</button>
  <span class="print-hint">Refresh this scorecard monthly and present to leadership. Track month-on-month and quarter-on-quarter trends.</span>
  </div>
 
@@ -349,5 +349,6 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 
+<script defer src="/assets/print-button.js?v=1"></script>
 </body>
 </html>

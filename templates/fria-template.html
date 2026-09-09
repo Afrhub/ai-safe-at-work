@@ -98,7 +98,7 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <p class="lede no-print">For deployers of high-risk AI systems where Article 27 applies, primarily public bodies, plus certain private deployers (e.g. those providing public services, banking creditworthiness scoring, life and health insurance risk assessment). Done <strong>before</strong> first use of the system.</p>
 
  <div class="print-row no-print">
- <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF →</button>
+ <button type="button" class="print-btn" data-print>Print / Save as PDF →</button>
  <span class="print-hint">Notify the market-surveillance authority of the FRIA result via the template form the AI Office will publish (Art 27(5)). File internally for audit.</span>
  </div>
 
@@ -321,5 +321,6 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 
+<script defer src="/assets/print-button.js?v=1"></script>
 </body>
 </html>

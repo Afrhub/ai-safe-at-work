@@ -213,7 +213,7 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <p class="lede no-print">The gate before any new AI use goes live: someone requests it, someone assesses it, someone approves or refuses it, and the sign-off is recorded. Aligns with ISO/IEC 42001 Clause 6.1 (risk and opportunity assessment), EU AI Act Art 4 (AI literacy) and Art 26 (deployer obligations), and the GDPR Art 35 DPIA trigger check.</p>
 
  <div class="print-row no-print">
- <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF →</button>
+ <button type="button" class="print-btn" data-print>Print / Save as PDF →</button>
  <span class="print-hint">Use one copy per request. File completed forms with your AI Tool Register. Keep refused requests too, they are audit evidence of governance working.</span>
  </div>
 
@@ -373,5 +373,6 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 
+<script defer src="/assets/print-button.js?v=1"></script>
 </body>
 </html>

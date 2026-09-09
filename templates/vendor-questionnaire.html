@@ -240,7 +240,7 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <p class="lede no-print">Send this to any AI vendor before procurement. Most-blocking questions come first. Modelled on the CSA Consensus Assessments Initiative (CAIQ) with the AI Controls Matrix overlay, mapped to the standards a procurement team gets audited against.</p>
 
  <div class="print-row no-print">
- <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF →</button>
+ <button type="button" class="print-btn" data-print>Print / Save as PDF →</button>
  <span class="print-hint">Send as PDF. Most vendors prefer that to filling in a web form they don't trust.</span>
  </div>
 
@@ -398,5 +398,6 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 
+<script defer src="/assets/print-button.js?v=1"></script>
 </body>
 </html>

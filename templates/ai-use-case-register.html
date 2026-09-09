@@ -110,7 +110,7 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <h1 class="page-title">AI Use Case Register</h1>
  <p class="lede no-print">Record every way your organisation uses AI: what problem it solves, who uses it, what data it touches, whether a DPIA or FRIA has been done. Aligns with EU AI Act Articles 4, 27; GDPR Article 35; ISO/IEC 42001 Clause 6.2.</p>
  <div class="print-row no-print">
- <button type="button" class="print-btn" onclick="window.print()">Print / Export →</button>
+ <button type="button" class="print-btn" data-print>Print / Export →</button>
  <span class="print-hint">Maintain in a shared spreadsheet. Update whenever a new AI use case is introduced or an existing one changes.</span>
  </div>
 
@@ -274,5 +274,6 @@ html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9)
  <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
 </footer>
 
+<script defer src="/assets/print-button.js?v=1"></script>
 </body>
 </html>
