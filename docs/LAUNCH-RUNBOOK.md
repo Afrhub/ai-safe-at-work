@@ -60,6 +60,10 @@ the domain leaves the cert unprovisioned and the site serving warnings.
     the reset form.
 
 ## Phase 3 — Stripe wiring (20 min, needs Phase 0 verified)
+> **DONE IN THE SANDBOX 9 Sep 2026.** Sandbox keys and endpoint in Netlify, end-to-end sandbox
+> purchase fulfilled (see HANDOFF, Payments). For live money repeat steps 11–12 with the live
+> account's keys and a live endpoint, then 13–14. Trap: the sandbox and the account's own test
+> mode are separate environments; keys and endpoint must come from the same one.
 
 11. Netlify → Site configuration → **Environment variables**, add all four:
     | Name | Value |

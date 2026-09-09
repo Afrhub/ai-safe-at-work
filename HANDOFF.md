@@ -1,6 +1,6 @@
 # HANDOFF — Attest AI / ai-safe-at-work
 
-Updated: 8 Sep 2026 · Everything committed, pushed and live; working tree clean. `git log -1` for the head.
+Updated: 9 Sep 2026 · Everything committed, pushed and live; working tree clean. `git log -1` for the head.
 Supersedes the 26 Jul version. Full decision history in DOCTRINE.md; this file is the cold resume.
 
 ## What this is
@@ -18,10 +18,19 @@ itself from the audio.
 password was rotated out of the repo; `DEMO.password` is now `""` so flipping the flag back fails
 closed. `/portal/manager.html` bounces a signed-out visitor to sign-in. Do not set it back to true.
 
-**Payments built, inert.** Stripe Bacs Direct Debit via `netlify/functions/create-checkout-session.mjs`
-and `stripe-webhook.mjs`, no SDK (REST over fetch, no package.json). Both return 503 until
-`STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET` exist, and the checkout page falls back to the Netlify
-order form, so the button is never dead. Price is resolved server-side by `resolveBand(plan, headcount)`
+**Payments LIVE in the Stripe sandbox (9 Sep 2026), not yet live money.** Stripe Bacs Direct
+Debit via `netlify/functions/create-checkout-session.mjs` and `stripe-webhook.mjs`, no SDK (REST
+over fetch, no package.json). All four Netlify env vars are set (production context): the
+sandbox `sk_test_` key, the sandbox endpoint's `whsec_`, `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`.
+Proven end to end 9 Sep: sandbox checkout (Stripe's Bacs test account 10-88-00 / 00012345) →
+`checkout.session.completed` answered "ignored" → `async_payment_succeeded` ~20 s later answered
+"ok" → `stripe_events` row, `e2e-buyer@attest-ai.com` created as manager with 25 credits and the
+checkout name → Stripe "Resend" of the same event answered "duplicate", balance unchanged. The
+welcome email was requested (no mailbox to prove delivery). Without keys both functions 503 and
+the checkout page falls back to the Netlify order form, so the button is never dead.
+**Live cutover** (after Stripe verifies the business): the live account needs its own endpoint
+(same URL, same two events) and its own two keys; swap `STRIPE_SECRET_KEY` and
+`STRIPE_WEBHOOK_SECRET` in Netlify, redeploy, then the real £990 charge-and-refund. Price is resolved server-side by `resolveBand(plan, headcount)`
 — **plan AND band**, because `checkout.js` reuses the band keys `1-25`/`26-50` for Platform at
 different prices. Buyer can nominate a different manager at checkout (`manager_email`).
 Fulfilment is one database transaction since 8 Sep (migration 0013, `fulfil_stripe_event`,
@@ -125,7 +134,9 @@ audit cuts; last client-scored quizzes moved server-side; test plan brought curr
 
 0. **Click a fresh sign-in link** (🧑) from attest-ai.com/portal/login to confirm it lands on
    the site, not localhost. The settings are verified saved; the email itself is not yet proven.
-1. **Stripe** (🧑, runbook Phases 0 and 3): create account, start Bacs
+1. **Stripe live cutover** (🧑, waits on business verification; the sandbox half of Phases 0
+   and 3 is done, see Payments above): live endpoint + live keys into Netlify, VAT decision,
+   real £990 charge-and-refund. Old wording kept below for the steps: create account, start Bacs
    verification (days), then 4 Netlify env vars, webhook `/.netlify/functions/stripe-webhook` on the two `checkout.session.*`
    events, VAT decision, one real £990 charge-and-refund.
 2. **JC's first sign-in and first invite** (🧑, Phase 5 human half). Then revoke the `phase2`
@@ -256,6 +267,17 @@ from the console mints nothing.
   the REST API (domains, hooks, forms, submissions) — no `netlify` CLI installed.
 - **Computer-use can only READ browsers**; clicking needs the Claude-in-Chrome extension, which
   cannot sign in with an Apple-SSO Claude account. Clipboard-read is the practical bridge.
+- **Stripe has two test environments and they do not share anything.** The account's own
+  "Test mode" and each named **sandbox** (here "Attest sandbox", `acct_1UDg75RXD0QcISvE`) have
+  separate keys, endpoints and events. A key from one and an endpoint in the other means the
+  checkout succeeds and the webhook never fires, with no error anywhere; the tell is the
+  merchant name on the Checkout page. Stripe's Workbench cannot resend an event to an endpoint
+  created after the event; run a fresh purchase instead.
+- **Netlify secrets scanning fails the build if a "secret" value appears in the repo.** Marking
+  the public `SUPABASE_URL` as a secret broke every deploy (exit code 2, no build command).
+  `SECRETS_SCAN_OMIT_KEYS=SUPABASE_URL` exempts that key and keeps the scan on the real ones.
+- **The Netlify personal token can PATCH an env var's value but not create one or change
+  is_secret** (403); creating goes through the UI.
 - **`timeout` is not on this Mac**; use `( cmd & pid=$!; sleep N; kill $pid )` or background tasks.
 - **Orphan-test sweeps: exclude what `run-all` lists.** `ls tests/*.mjs | grep -v run-all` also
   removed the three live unit suites (restored from git before commit).
