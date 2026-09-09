@@ -54,7 +54,7 @@ tracks).** Modules → `record_quiz_result` → `module_progress`; tracks → `r
 deliberate exception: signed out it is the free sample, marks itself, records nothing.
 Certificates render from `module_progress`; the manager roster counts the eleven from `modules.js`.
 
-**Test board: 13 suites, 294 passed, 0 failed, 7 deliberate skips (8 Sep 2026), target
+**Test board: 13 suites, 312 passed, 0 failed, 7 deliberate skips (9 Sep 2026), target
 `https://attest-ai.com`.** `node tests/run-all.mjs`. Unit (pricing, webhook sig, nomination),
 HTTP (exposure, public site, RLS), browser (Playwright, 112), and six journey suites against
 production: staff course + governance (`e2e-journeys`), first-time onboarding, password reset
@@ -185,6 +185,12 @@ categories. Highlights of what changed on 9 Sep, all live:
 - `invite-seat` v4 reconciles a committed seat before deleting an account.
 - New fixture: `e2e-buyer@attest-ai.com`, manager with 25 credits, made by the sandbox
   purchase; no TOTP, no mailbox.
+- Codex re-reviewed the fixes and found five gaps in them (completion sync could wipe
+  local marks on an empty read; certificate trusted a stored user id; two definer
+  functions missed aal2; AUP mirror toasted success on zero rows; invite reconciliation
+  ignored its own read error). All closed the same day (d233cb7, 0015 applied, invite-seat
+  v5). Board 312/0 after. Lesson kept in the codex-review skill: review the fix, not just
+  the finding.
 
 ## Security audit, 7 Sep 2026
 
