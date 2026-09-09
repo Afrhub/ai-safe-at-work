@@ -54,7 +54,7 @@ tracks).** Modules → `record_quiz_result` → `module_progress`; tracks → `r
 deliberate exception: signed out it is the free sample, marks itself, records nothing.
 Certificates render from `module_progress`; the manager roster counts the eleven from `modules.js`.
 
-**Test board: 13 suites, 312 passed, 0 failed, 7 deliberate skips (9 Sep 2026), target
+**Test board: 13 suites, 312 passed, 0 failed, 7 deliberate skips (9 Sep 2026, after 0016), target
 `https://attest-ai.com`.** `node tests/run-all.mjs`. Unit (pricing, webhook sig, nomination),
 HTTP (exposure, public site, RLS), browser (Playwright, 112), and six journey suites against
 production: staff course + governance (`e2e-journeys`), first-time onboarding, password reset
@@ -132,8 +132,10 @@ audit cuts; last client-scored quizzes moved server-side; test plan brought curr
 
 ## Next steps, ordered, first one startable cold
 
-0. **Click a fresh sign-in link** (🧑) from attest-ai.com/portal/login to confirm it lands on
-   the site, not localhost. The settings are verified saved; the email itself is not yet proven.
+0. **JC and RA walk `docs/HUMAN-E2E.md`** (🧑, ~90 min including the course): first sign-in
+   with authenticator enrolment, self-serve sign-up, seat, course, roster, publish and
+   acknowledge, registers. Every step is automated on the board; this is the same route with
+   real mailboxes. It also proves the sign-in email lands on the site, not localhost.
 1. **Stripe live cutover** (🧑, waits on business verification; the sandbox half of Phases 0
    and 3 is done, see Payments above): live endpoint + live keys into Netlify, VAT decision,
    real £990 charge-and-refund. Old wording kept below for the steps: create account, start Bacs
