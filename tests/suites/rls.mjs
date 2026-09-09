@@ -13,6 +13,7 @@
 
 import { group, check, eq, ok, skip, report, reset } from "../lib/harness.mjs";
 import { env } from "../lib/e2e-fixtures.mjs";
+import { totp } from "../lib/totp.mjs";
 
 const BASE = process.env.BASE_URL || "https://attest-ai.com";
 const SUPABASE = "https://hanjrsslhnuauaysbhun.supabase.co";
@@ -26,7 +27,9 @@ async function anonKey() {
   return m[1];
 }
 
-async function signIn(key, email, password) {
+// 0014 requires aal2 for every record: a password-only token (aal1) reads nothing and every
+// RPC refuses it. With a TOTP secret the session is stepped up the way the portal does it.
+async function signIn(key, email, password, totpSecret) {
   const r = await fetch(`${SUPABASE}/auth/v1/token?grant_type=password`, {
     method: "POST",
     headers: { apikey: key, "Content-Type": "application/json" },
@@ -34,7 +37,15 @@ async function signIn(key, email, password) {
   });
   const d = await r.json();
   if (!d.access_token) throw new Error(`sign in failed: ${JSON.stringify(d).slice(0, 200)}`);
-  return d;
+  if (!totpSecret) return d;
+  const h = { apikey: key, Authorization: `Bearer ${d.access_token}`, "Content-Type": "application/json" };
+  const me = await (await fetch(`${SUPABASE}/auth/v1/user`, { headers: h })).json();
+  const f = (me.factors || []).find((x) => x.status === "verified");
+  if (!f) throw new Error(`${email} has no verified factor`);
+  const ch = await (await fetch(`${SUPABASE}/auth/v1/factors/${f.id}/challenge`, { method: "POST", headers: h })).json();
+  const v = await (await fetch(`${SUPABASE}/auth/v1/factors/${f.id}/verify`, { method: "POST", headers: h, body: JSON.stringify({ challenge_id: ch.id, code: totp(totpSecret) }) })).json();
+  if (!v.access_token) throw new Error(`aal2 step-up failed for ${email}: ${JSON.stringify(v).slice(0, 200)}`);
+  return v;
 }
 
 const api = (key, jwt) => async (path, init = {}) => {
@@ -89,11 +100,11 @@ export async function run() {
   // all -1 answers score 0, so an accepted call records nothing either way.
   group("SEAT, a course record needs a seat (0012)");
   const rpcAs = async (acct, fn, body) => {
-    const t = (await signIn(key, acct.email, acct.password)).access_token;
+    const t = (await signIn(key, acct.email, acct.password, acct.totp)).access_token;
     return fetch(`${SUPABASE}/rest/v1/rpc/${fn}`, { method: "POST", headers: { apikey: key, Authorization: `Bearer ${t}`, "Content-Type": "application/json" }, body: JSON.stringify(body) });
   };
-  const FREE = { email: env.E2E_FREEAGENT_EMAIL, password: env.E2E_FREEAGENT_PASSWORD };
-  const STAFF = { email: env.E2E_STAFF_EMAIL, password: env.E2E_STAFF_PASSWORD };
+  const FREE = { email: env.E2E_FREEAGENT_EMAIL, password: env.E2E_FREEAGENT_PASSWORD, totp: env.E2E_FREEAGENT_TOTP_SECRET };
+  const STAFF = { email: env.E2E_STAFF_EMAIL, password: env.E2E_STAFF_PASSWORD, totp: env.E2E_STAFF_TOTP_SECRET };
   const zeros = Array(10).fill(-1);
   await check("SEAT-01", "an unseated account cannot record a module beyond 1", async () => {
     const r = await rpcAs(FREE, "record_quiz_result", { p_module: 2, p_answers: zeros });
@@ -141,7 +152,8 @@ export async function run() {
     return report("rls");
   }
 
-  const session = await signIn(key, email, password);
+  const aal1 = await signIn(key, email, password);
+  const session = await signIn(key, email, password, process.env.TEST_MANAGER_TOTP_SECRET || env.E2E_MANAGER_TOTP_SECRET);
   const call = api(key, session.access_token);
   const uid = session.user.id;
 
@@ -247,6 +259,16 @@ export async function run() {
     ok([401, 403, 404].includes(r.status), `a signed-in manager reached fulfil_stripe_event: ${r.status}`);
     const a = await fetch(`${SUPABASE}/rest/v1/rpc/fulfil_stripe_event`, { method: "POST", headers: { apikey: key, "Content-Type": "application/json" }, body: JSON.stringify(body) });
     ok([401, 403, 404].includes(a.status), `anon reached fulfil_stripe_event: ${a.status}`);
+  });
+
+  group("RLS, aal2 (0014): a password-only token reaches no record");
+  await check("RLS-16", "aal1 token reads no seats and cannot record a quiz", async () => {
+    const h = { apikey: key, Authorization: `Bearer ${aal1.access_token}`, "Content-Type": "application/json" };
+    const seatsR = await fetch(`${SUPABASE}/rest/v1/seats?select=end_user_id`, { headers: h });
+    eq(seatsR.status, 200); eq((await seatsR.json()).length, 0, "aal1 token read seats");
+    const rpc = await fetch(`${SUPABASE}/rest/v1/rpc/record_quiz_result`, { method: "POST", headers: h, body: JSON.stringify({ p_module: 1, p_answers: Array(10).fill(-1) }) });
+    eq(rpc.status, 400, `aal1 token reached record_quiz_result: ${rpc.status}`);
+    ok(/authenticator required/.test(await rpc.text()), "refusal does not name the authenticator");
   });
 
   group("RLS, cross tenant reads");
