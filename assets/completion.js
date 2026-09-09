@@ -28,12 +28,18 @@
   // shared browser shows the right unlock (9 Sep). Needs sb-session.js before this script.
   function syncFromRecord() {
     var S = window.AISW_SESSION; if (!S) return Promise.resolve();
-    return S.token().then(function (t) {
-      if (!t) return;
-      return fetch(S.url + '/rest/v1/module_progress?select=module&status=eq.done', {
+    return Promise.all([S.token(), S.user()]).then(function (tu) {
+      var t = tu[0], u = tu[1];
+      if (!t || !u || !u.id) return;
+      // Filter by the learner: a manager's browser would otherwise inherit seated staff rows.
+      return fetch(S.url + '/rest/v1/module_progress?select=module&status=eq.done&user_id=eq.' + encodeURIComponent(u.id), {
         headers: { apikey: S.anon, Authorization: 'Bearer ' + t }
-      }).then(function (r) { return r.ok ? r.json() : []; }).then(function (rows) {
-        var done = {}; (rows || []).forEach(function (r) { done[r.module] = true; });
+      }).then(function (r) { return r.ok ? r.json() : null; }).then(function (rows) {
+        // A failed read, or an empty one (no records yet, or a session that has not yet
+        // stepped up to the authenticator and so sees nothing), must not wipe local marks.
+        // Only a record with rows is the truth; then it replaces the local flags exactly.
+        if (!rows || !rows.length) return;
+        var done = {}; rows.forEach(function (r) { done[r.module] = true; });
         NUMBERED.forEach(function (n) { setDone(n, !!done[n]); });
       });
     }).catch(function () {});
@@ -75,14 +81,20 @@
 
     // Checklist gate page: element with [data-checklist-gate] is hidden
     // until all modules are complete; [data-checklist-locked] shows instead.
-    syncFromRecord().then(function () { applyUnlock(); var bs = document.querySelectorAll('[data-mark-complete]'); for (var k = 0; k < bs.length; k++) bs[k].dispatchEvent(new Event('aisw-sync')); });
     var gate = document.querySelector('[data-checklist-gate]');
     var lockedMsg = document.querySelector('[data-checklist-locked]');
-    if (gate || lockedMsg) {
+    function applyGate() {
+      if (!(gate || lockedMsg)) return;
       var ok = allDone();
       if (gate) gate.style.display = ok ? '' : 'none';
       if (lockedMsg) lockedMsg.style.display = ok ? 'none' : '';
     }
+    applyGate();
+    syncFromRecord().then(function () {
+      applyUnlock(); applyGate();
+      var bs = document.querySelectorAll('[data-mark-complete]');
+      for (var k = 0; k < bs.length; k++) bs[k].dispatchEvent(new Event('aisw-sync'));
+    });
 
     // Print buttons: [data-print]. Was an inline onclick, dead under the production CSP
     // like every other inline script, so the checklist's print button never worked live.

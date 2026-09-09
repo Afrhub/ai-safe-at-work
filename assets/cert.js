@@ -61,12 +61,18 @@
     return;
   }
 
-  Promise.all([
-    // user_id filter: a manager reads seated staff rows through the roster policy, and
-    // without it a staff member's pass rendered as the manager's own certificate (9 Sep).
-    api('module_progress?select=module,score,updated_at&user_id=eq.' + encodeURIComponent(sess.uid)),
-    api('profiles?select=full_name&id=eq.' + encodeURIComponent(sess.uid))
-  ]).then(([rows, profile]) => {
+  // The learner's id comes from GoTrue for the bearer token in use, not from localStorage,
+  // which anyone can edit. A manager reads seated staff rows through the roster policy, so
+  // without the user_id filter a staff member's pass rendered as the manager's own
+  // certificate (Codex, 9 Sep), and with a forged stored id it could be pointed at a
+  // staff member's record; the server-derived id closes both.
+  (window.AISW_SESSION ? window.AISW_SESSION.user() : Promise.resolve(null)).then((u) => {
+    if (u && u.id) sess.uid = u.id;
+    return Promise.all([
+      api('module_progress?select=module,score,updated_at&user_id=eq.' + encodeURIComponent(sess.uid)),
+      api('profiles?select=full_name&id=eq.' + encodeURIComponent(sess.uid))
+    ]);
+  }).then(([rows, profile]) => {
     const name = ((profile && profile[0]) || {}).full_name || '';
     if (!moduleNum || moduleNum < 1 || moduleNum > 12) renderRegister(rows);
     else renderCertificate(moduleNum, rows.find(r => r.module === moduleNum), name);

@@ -28,5 +28,16 @@
     }).catch(function () { inflight = null; return s.access_token; });
     return inflight;
   }
-  window.AISW_SESSION = { url: URL_, anon: ANON, key: KEY, token: token, read: read };
+  // Identity comes from GoTrue, not from the stored JSON, which anyone can edit in devtools.
+  var userCache = null;
+  function user() {
+    if (userCache) return Promise.resolve(userCache);
+    return token().then(function (t) {
+      if (!t) return null;
+      return fetch(URL_ + '/auth/v1/user', { headers: { apikey: ANON, Authorization: 'Bearer ' + t } })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (u) { userCache = u && u.id ? { id: u.id, aal: (u.aal || null) } : null; return userCache; });
+    }).catch(function () { return null; });
+  }
+  window.AISW_SESSION = { url: URL_, anon: ANON, key: KEY, token: token, read: read, user: user };
 })();

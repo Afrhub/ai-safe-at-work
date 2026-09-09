@@ -63,23 +63,33 @@ async function dbSet(key, value){
     error = r.error; landed = !!(r.data && r.data.length);
     if (!error && !landed) {
       dbTrouble('Not saved: this record was changed in another tab or window since it loaded here. Reload to see the latest, then make the change again.');
+      await reloadAfterFailedSave();
       throw new Error('save conflict: ' + key);
     }
+    if (landed) REV[key] = r.data[0].updated_at; // the value the database stored, not our clock
   } else {
     const r = await sb.from("governance_state").insert({ manager_id: CURRENT_UID, key, value, updated_at: now }).select("updated_at");
     error = r.error; landed = !!(r.data && r.data.length);
     if (error && /duplicate|unique/i.test(error.message || '')) {
       // Created elsewhere since we loaded an empty fallback. Same rule: reload first.
       dbTrouble('Not saved: this record now exists from another tab or window. Reload, then make the change again.');
+      await reloadAfterFailedSave();
       throw new Error('save conflict: ' + key);
     }
+    if (landed) REV[key] = r.data[0].updated_at;
   }
   if (error || !landed) {
     dbTrouble('Your last change could not be saved. Nothing has been recorded — reload before continuing.');
+    await reloadAfterFailedSave();
     throw error || new Error('save failed: ' + key);
   }
-  REV[key] = now;
   return value;
+}
+// Callers mutate DB[...] before awaiting dbSet, so a failed save would leave the phantom
+// edit in memory for the next render. Pull the stored state back so what is shown is
+// what is saved. Best effort: a failed reload just leaves the banner up.
+async function reloadAfterFailedSave(){
+  try { await loadAll(); } catch(_) {}
 }
 function uid(prefix){ return prefix + '-' + Math.random().toString(36).slice(2,7).toUpperCase(); }
 function todayISO(){ return new Date().toISOString().slice(0,10); }
@@ -724,19 +734,24 @@ async function togglePublish(){
   // Staff read governance_docs, not this screen's state (Codex audit 9 Sep): mirror the
   // publish onto the pack's Acceptable Use Policy row so the acknowledgement obligation is
   // real. ensure_governance_docs seeds the pack if this manager has not opened the dashboard.
+  let mirrored = DEMO;
   if (!DEMO) {
     try {
-      await sb.rpc('ensure_governance_docs');
-      const { error } = await sb.from('governance_docs')
+      const seeded = await sb.rpc('ensure_governance_docs');
+      if (seeded.error) throw seeded.error;
+      const { data, error } = await sb.from('governance_docs')
         .update({ status: DB.aupStatus.published ? 'live' : 'ready', updated_at: new Date().toISOString() })
-        .eq('manager_id', CURRENT_UID).eq('doc_key', 'aup');
+        .eq('manager_id', CURRENT_UID).eq('doc_key', 'aup').select('id');
       if (error) throw error;
+      if (!data || !data.length) throw new Error('no Acceptable Use Policy row in the pack');
+      mirrored = true;
     } catch (e) {
-      dbTrouble('The policy status was saved here but could not be mirrored to the staff pack. Open the Governance dashboard and set the Acceptable Use Policy live there.');
+      dbTrouble('The policy status was saved here but could not be mirrored to the staff pack (' + esc(e.message || 'unknown') + '). Open the Governance dashboard and set the Acceptable Use Policy live there.');
     }
   }
   pageAUP();
-  toast(DB.aupStatus.published ? `Published as v${DB.aupStatus.version}, staff can now acknowledge it` : 'Policy unpublished');
+  if (mirrored) toast(DB.aupStatus.published ? `Published as v${DB.aupStatus.version}, staff can now acknowledge it` : 'Policy unpublished');
+  else toast('Saved here, but NOT yet visible to staff — see the notice above');
 }
 function renderAupDoc(){
   const o = DB.org;

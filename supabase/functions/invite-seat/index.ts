@@ -86,8 +86,12 @@ Deno.serve(async (req) => {
     // A lost response is not a failed seat: if the transaction committed, the seat row is
     // there and the credit is spent. Deleting the account then would cascade the seat away
     // and keep the charge (Codex audit, 9 Sep 2026). Reconcile before any cleanup.
-    const { data: committed } = await admin.from('seats').select('id').eq('end_user_id', endUserId).eq('manager_id', user.id).maybeSingle()
+    const { data: committed, error: checkErr } = await admin.from('seats').select('id').eq('end_user_id', endUserId).eq('manager_id', user.id).maybeSingle()
     if (committed) return json(200, { ok: true, email, invited, recovered: true })
+    // If the check itself failed we do not know whether the seat exists. Never delete on
+    // "unknown": leave the account, report, and let the manager retry (assign_seat will
+    // say "seat already assigned" if it did land).
+    if (checkErr) return json(500, { error: 'Could not confirm the seat. Please try again in a moment.' })
     // Never leave an invited-but-unseated account behind: the email has gone out, so the
     // person would arrive to nothing. Remove the account so a retry starts clean.
     if (invited) {

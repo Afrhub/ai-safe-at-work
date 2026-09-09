@@ -266,9 +266,21 @@ export async function run() {
     const h = { apikey: key, Authorization: `Bearer ${aal1.access_token}`, "Content-Type": "application/json" };
     const seatsR = await fetch(`${SUPABASE}/rest/v1/seats?select=end_user_id`, { headers: h });
     eq(seatsR.status, 200); eq((await seatsR.json()).length, 0, "aal1 token read seats");
-    const rpc = await fetch(`${SUPABASE}/rest/v1/rpc/record_quiz_result`, { method: "POST", headers: h, body: JSON.stringify({ p_module: 1, p_answers: Array(10).fill(-1) }) });
-    eq(rpc.status, 400, `aal1 token reached record_quiz_result: ${rpc.status}`);
-    ok(/authenticator required/.test(await rpc.text()), "refusal does not name the authenticator");
+    for (const t of ["module_progress?select=user_id", "track_progress?select=user_id", "governance_docs?select=id", "governance_items?select=id", "governance_acks?select=id", "governance_state?select=key"]) {
+      const r = await fetch(`${SUPABASE}/rest/v1/${t}`, { headers: h });
+      eq(r.status, 200, `${t}: ${r.status}`); eq((await r.json()).length, 0, `aal1 token read ${t}`);
+    }
+    for (const fn of ["record_quiz_result", "ensure_governance_docs", "has_course_access"]) {
+      const body = fn === "record_quiz_result" ? { p_module: 1, p_answers: Array(10).fill(-1) } : {};
+      const rpc = await fetch(`${SUPABASE}/rest/v1/rpc/${fn}`, { method: "POST", headers: h, body: JSON.stringify(body) });
+      const text = await rpc.text();
+      const refused = rpc.status === 400 && /authenticator required/.test(text);
+      const falsy = fn === "has_course_access" && rpc.status === 200 && text.trim() === "false";
+      ok(refused || falsy, `aal1 token reached ${fn}: ${rpc.status} ${text.slice(0, 80)}`);
+    }
+    // Own profile still reads at aal1: enrolment needs it.
+    const me = await fetch(`${SUPABASE}/rest/v1/profiles?select=id&id=eq.${uid}`, { headers: h });
+    eq((await me.json()).length, 1, "own profile must read at aal1 for enrolment");
   });
 
   group("RLS, cross tenant reads");
