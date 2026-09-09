@@ -38,14 +38,17 @@ if (profile) {
   }
   let lastDocs = [];
   async function load() {
-    let docs, items, seats, acks, progress;
+    let docs, items, seats, acks, progress, centre;
     try {
-      [docs, items, seats, acks, progress] = await Promise.all([
+      [docs, items, seats, acks, progress, centre] = await Promise.all([
         all(() => sb.from("governance_docs").select("*").order("category", { ascending: true }).order("title", { ascending: true })),
         all(() => sb.from("governance_items").select("*").order("created_at", { ascending: false })),
         all(() => sb.from("seats").select("end_user_id")),
         all(() => sb.from("governance_acks").select("doc_id,end_user_id")),
         all(() => sb.from("module_progress").select("user_id,module,status")),   // seated staff, via mp_mgr RLS
+        // The Governance Centre keeps its risk and incident registers in governance_state;
+        // the totals here must count them too, or the two screens disagree (Codex, 9 Sep).
+        all(() => sb.from("governance_state").select("key,value").in("key", ["risks", "incidents"])),
       ]);
     } catch (e) {
       // An outage must not read as "0 open incidents" or "no policies live".
@@ -53,11 +56,13 @@ if (profile) {
       return;
     }
     lastDocs = docs; allItems = items;
-    renderDashboard(docs, allItems, seats, acks, progress);
+    const centreOpen = (k) => (((centre || []).find(r => r.key === k) || {}).value || [])
+      .filter(x => !/closed|resolved|treated|accepted|retired/i.test(String(x.status || ""))).length;
+    renderDashboard(docs, allItems, seats, acks, progress, { risks: centreOpen("risks"), incidents: centreOpen("incidents") });
     renderItems();
   }
 
-  function renderDashboard(docs, items, seats, acks, progress) {
+  function renderDashboard(docs, items, seats, acks, progress, centre = { risks: 0, incidents: 0 }) {
     const total = docs.length, done = docs.filter(d => d.status !== "draft").length, draft = total - done;
     const liveDocs = docs.filter(d => d.status === "live");
     const seatIds = new Set(seats.map(s => s.end_user_id));
@@ -66,8 +71,8 @@ if (profile) {
     const required = seatIds.size * liveDocs.length;
     const ackPct = required ? Math.round(validAcks / required * 100) : 0;
     const count = k => items.filter(i => i.kind === k).length;
-    const openRisks = items.filter(i => i.kind === "risk" && i.status === "open").length;
-    const openIncidents = items.filter(i => i.kind === "incident" && i.status !== "closed").length;
+    const openRisks = items.filter(i => i.kind === "risk" && i.status === "open").length + centre.risks;
+    const openIncidents = items.filter(i => i.kind === "incident" && i.status !== "closed").length + centre.incidents;
 
     // AI literacy training (EU AI Act Art 4): staff who completed the AI Safe@Work course.
     // The eleven sold modules from modules.js (1 to 10 and 12), not any eleven rows: the

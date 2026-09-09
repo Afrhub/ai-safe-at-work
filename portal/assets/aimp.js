@@ -22,16 +22,27 @@ function dbTrouble(message){
   }
   b.textContent = message;
 }
+// Codex audit 9 Sep: a failed load used to return the empty fallback while saves stayed
+// enabled, so the next save overwrote a real register with nothing; a failed save resolved
+// as success, so editors closed and toasted "Saved"; and every save replaced the whole
+// register, so two tabs overwrote each other silently. Now: a failed load locks saving
+// until reload; a failed save throws (the caller's closeModal/toast never run); and each
+// key carries the updated_at it was loaded with, and a save only lands if the row still
+// has it (the other tab's change wins, and this one is told to reload).
+const REV = {};
+let LOAD_FAILED = false;
 async function dbGet(key, fallback){
   if (DEMO){
     try{ const r = sessionStorage.getItem("aimp-demo-" + key); return r ? JSON.parse(r) : fallback; }catch(_){ return fallback; }
   }
   try{
-    const { data, error } = await sb.from("governance_state").select("value").eq("key", key).maybeSingle();
+    const { data, error } = await sb.from("governance_state").select("value,updated_at").eq("key", key).maybeSingle();
     if (error) throw error;
+    REV[key] = data ? data.updated_at : null;
     return data ? data.value : fallback;
   }catch(e){
-    dbTrouble('Your governance records could not be loaded, so screens may look empty. This is a fault, not your data — reload, and contact support if it persists.');
+    LOAD_FAILED = true;
+    dbTrouble('Your governance records could not be loaded, so screens may look empty. Saving is switched off until you reload, so nothing is overwritten. This is a fault, not your data — contact support if it persists.');
     return fallback;
   }
 }
@@ -40,12 +51,34 @@ async function dbSet(key, value){
     try{ sessionStorage.setItem("aimp-demo-" + key, JSON.stringify(value)); }catch(_){}
     return value;
   }
-  try{
-    const { error } = await sb.from("governance_state").upsert({ manager_id: CURRENT_UID, key, value });
-    if (error) throw error;
-  }catch(e){
-    dbTrouble('Your last change could not be saved. Changes made while this message shows are not being recorded — reload before continuing.');
+  if (LOAD_FAILED) {
+    dbTrouble('Not saved: your records did not load in this session. Reload the page, then make the change again.');
+    throw new Error('save refused: load failed');
   }
+  const now = new Date().toISOString();
+  let error = null, landed = false;
+  if (REV[key]) {
+    const r = await sb.from("governance_state").update({ value, updated_at: now })
+      .eq("manager_id", CURRENT_UID).eq("key", key).eq("updated_at", REV[key]).select("updated_at");
+    error = r.error; landed = !!(r.data && r.data.length);
+    if (!error && !landed) {
+      dbTrouble('Not saved: this record was changed in another tab or window since it loaded here. Reload to see the latest, then make the change again.');
+      throw new Error('save conflict: ' + key);
+    }
+  } else {
+    const r = await sb.from("governance_state").insert({ manager_id: CURRENT_UID, key, value, updated_at: now }).select("updated_at");
+    error = r.error; landed = !!(r.data && r.data.length);
+    if (error && /duplicate|unique/i.test(error.message || '')) {
+      // Created elsewhere since we loaded an empty fallback. Same rule: reload first.
+      dbTrouble('Not saved: this record now exists from another tab or window. Reload, then make the change again.');
+      throw new Error('save conflict: ' + key);
+    }
+  }
+  if (error || !landed) {
+    dbTrouble('Your last change could not be saved. Nothing has been recorded — reload before continuing.');
+    throw error || new Error('save failed: ' + key);
+  }
+  REV[key] = now;
   return value;
 }
 function uid(prefix){ return prefix + '-' + Math.random().toString(36).slice(2,7).toUpperCase(); }
@@ -688,6 +721,20 @@ async function togglePublish(){
     DB.aupStatus.publishedDate = todayISO();
   }
   await dbSet('aup-status', DB.aupStatus);
+  // Staff read governance_docs, not this screen's state (Codex audit 9 Sep): mirror the
+  // publish onto the pack's Acceptable Use Policy row so the acknowledgement obligation is
+  // real. ensure_governance_docs seeds the pack if this manager has not opened the dashboard.
+  if (!DEMO) {
+    try {
+      await sb.rpc('ensure_governance_docs');
+      const { error } = await sb.from('governance_docs')
+        .update({ status: DB.aupStatus.published ? 'live' : 'ready', updated_at: new Date().toISOString() })
+        .eq('manager_id', CURRENT_UID).eq('doc_key', 'aup');
+      if (error) throw error;
+    } catch (e) {
+      dbTrouble('The policy status was saved here but could not be mirrored to the staff pack. Open the Governance dashboard and set the Acceptable Use Policy live there.');
+    }
+  }
   pageAUP();
   toast(DB.aupStatus.published ? `Published as v${DB.aupStatus.version}, staff can now acknowledge it` : 'Policy unpublished');
 }
@@ -1018,10 +1065,12 @@ function fieldHTML(c, value){
 }
 
 /* ============================= MODAL ============================= */
+let modalOpener = null;
 function showModal(title, bodyHTML, onSave, wide){
   const root = document.getElementById('modal-root');
-  root.innerHTML = `<div class="modal-bg" id="modalBg"><div class="modal" style="${wide?'max-width:880px;':''}">
-    <h3>${title}</h3>${bodyHTML}
+  modalOpener = document.activeElement;
+  root.innerHTML = `<div class="modal-bg" id="modalBg"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" style="${wide?'max-width:880px;':''}">
+    <h3 id="modalTitle">${title}</h3>${bodyHTML}
     <div class="modal-actions"><button class="btn ghost" id="modalCancel">Cancel</button><button class="btn gold" id="modalSave">Save</button></div>
   </div></div>`;
   /* A focused type=number input changes value when the wheel scrolls over it,
@@ -1033,8 +1082,24 @@ function showModal(title, bodyHTML, onSave, wide){
   document.getElementById('modalCancel').onclick = closeModal;
   document.getElementById('modalBg').addEventListener('click', e=>{ if(e.target.id==='modalBg') closeModal(); });
   document.getElementById('modalSave').onclick = onSave;
+  // Dialog semantics: initial focus inside, Tab stays inside, Escape closes, focus returns.
+  const dlg = root.querySelector('.modal');
+  const focusables = () => [...dlg.querySelectorAll('input,select,textarea,button,[href],[tabindex]:not([tabindex="-1"])')].filter(el => !el.disabled && el.offsetParent !== null);
+  (focusables()[0] || dlg).focus();
+  dlg.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { e.preventDefault(); closeModal(); return; }
+    if (e.key !== 'Tab') return;
+    const f = focusables(); if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
 }
-function closeModal(){ document.getElementById('modal-root').innerHTML=''; }
+function closeModal(){
+  document.getElementById('modal-root').innerHTML='';
+  if (modalOpener && modalOpener.focus) { try { modalOpener.focus(); } catch(_) {} }
+  modalOpener = null;
+}
 
 /* ============================= RISK ASSESSMENTS ============================= */
 function pageAssessments(){

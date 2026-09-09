@@ -83,6 +83,11 @@ Deno.serve(async (req) => {
   // exception texts are written for the manager to read, so they pass through.
   const { error: seatErr } = await caller.rpc('assign_seat', { p_end_user: endUserId })
   if (seatErr) {
+    // A lost response is not a failed seat: if the transaction committed, the seat row is
+    // there and the credit is spent. Deleting the account then would cascade the seat away
+    // and keep the charge (Codex audit, 9 Sep 2026). Reconcile before any cleanup.
+    const { data: committed } = await admin.from('seats').select('id').eq('end_user_id', endUserId).eq('manager_id', user.id).maybeSingle()
+    if (committed) return json(200, { ok: true, email, invited, recovered: true })
     // Never leave an invited-but-unseated account behind: the email has gone out, so the
     // person would arrive to nothing. Remove the account so a retry starts clean.
     if (invited) {
