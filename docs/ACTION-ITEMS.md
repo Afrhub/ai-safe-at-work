@@ -198,6 +198,42 @@ wrong for about two weeks on a product that sells being current.
 - [x] 🤖 `checkout-thanks.html` has two `<meta name="robots">` tags with different values.
 - [x] 🤖 CTA casing drift, "Book a Demo" vs "Book a demo".
 
+## Codex audit, 9 Sep 2026 (gpt-6-astra, OWASP Top 10 + functional + non-functional; all fixed the same day)
+
+- [x] 🤖 **P1** `assets/cert.js` certificate query had no `user_id` filter: a manager holding seats
+      read staff rows through the roster policy and could print a staff member's pass as their own
+      certificate. Filtered.
+- [x] 🤖 **P1** `privacy.html` said "no account system, no login, no data". Replaced with a notice
+      covering accounts, training and governance records, Stripe, Resend, London hosting, retention
+      and rights. 🧑 Confirm `hello@attest-ai.com` receives mail and the 90-day / six-year retention
+      statements are the policy you want.
+- [x] 🤖 **P2** `invite-seat` deleted the account on any seat error; a committed seat with a lost
+      response cascaded the seat away and kept the charge. Reconciles first (v4).
+- [x] 🤖 **P2** `portal.js` sign-out kept the local session on a server failure and login.html
+      routed straight back in. Clears the stored session itself.
+- [x] 🤖 **P2** `profiles.email` set once at creation; an Auth email change left invites and
+      fulfilment matching a stale address. Trigger on `auth.users` email update (0014).
+- [x] 🤖 **P2** `aimp.js` failed saves resolved as success ("Saved" over a failure banner). Throw.
+- [x] 🤖 **P2** `aimp.js` whole-register last-write-wins across tabs. Save lands only if the row
+      still carries the `updated_at` it loaded with.
+- [x] 🤖 **P2** `governance.js` discarded query errors and rendered zeros. "Dashboard unavailable".
+- [x] 🤖 **P2** `governance.js` no pagination past PostgREST's 1,000 rows. Every list paged.
+- [x] 🤖 **P2** Governance Centre registers (`governance_state`) and dashboard totals
+      (`governance_items`) never met. Dashboard now counts both. Full consolidation into one
+      table is still the right end state; not done.
+- [x] 🤖 **P2** No audit triggers on governance tables (A09). Documents, items and acks audited (0014).
+- [x] 🤖 **P2** 28 templates' print buttons were inline `onclick`, dead under CSP. `print-button.js`.
+- [x] 🤖 **P2** `completion.js` finale unlock was a browser-local flag. Synced from `module_progress`.
+- [x] 🤖 **P2** Nine GDPR documents seeded with no content link could be published and
+      acknowledged. Publish is blocked until a link exists; the documents themselves are still
+      to be written (🧑 decide whether to source them or drop them from the pack).
+- [x] 🤖 **P3** Governance Centre modal had no dialog semantics. role=dialog, focus trap, Escape,
+      focus restoration.
+- [ ] 🤖 **P3** Consolidate the Governance Centre registers into `governance_items` (one table,
+      one workflow). Half a day; the dashboard merge above is the stopgap.
+- [ ] 🧑 The nine GDPR documents without content: write or source them, or remove them from the
+      seeded pack.
+
 ## Codex audit, 8 Sep 2026 (gpt-6-astra, whole repo; verdicts are Claude's, checked against the code)
 
 - [x] 🤖 **P1** (done 8 Sep, 0013 written, 🧑 apply pending) `netlify/functions/stripe-webhook.mjs`
@@ -212,33 +248,33 @@ wrong for about two weeks on a product that sells being current.
       database-level check (two concurrent deliveries, a raise after the credit update, a retry
       after a lost response; assert balance and ledger rows) needs the service key and an applied
       0013, so it runs on a Supabase branch or after Phase 3, not on this Mac.
-- [ ] 🤖 **P1** No policy or definer function requires `aal2`. TOTP is enforced by the browser only;
+- [x] 🤖 **P1** (done 9 Sep, 0014, RLS-16) No policy or definer function requires `aal2`. TOTP is enforced by the browser only;
       a password-only token reaches PostgREST and every RPC. Fix: `(auth.jwt()->>'aal') = 'aal2'`
       in the policies and functions that guard records, with an allowance for enrolment. Needs a
       migration and RLS checks.
-- [ ] 🤖 **P2** `assign_seat` is check-then-write: two managers can seat the same unowned user,
+- [x] 🤖 **P2** (done 9 Sep, 0014) `assign_seat` is check-then-write: two managers can seat the same unowned user,
       and one credit can be spent twice. No unique on `seats.end_user_id`, no `check >= 0` on
       credits. Fix: `update … where credits_balance > 0` + raise on zero rows, `for update` on the
       target profile, unique index on `end_user_id`.
-- [ ] 🤖 **P2** `portal/assets/aimp.js` the Governance Centre AUP editor publishes to
+- [x] 🤖 **P2** (done 9 Sep: publish mirrors onto governance_docs) `portal/assets/aimp.js` the Governance Centre AUP editor publishes to
       `governance_state` and toasts "staff can now acknowledge it", but staff read
       `governance_docs`. The dashboard publish path does reach staff (MGR-04). Two paths, one
       misleading. Fix: have the AIMP publish set the `governance_docs` AUP row live, or fix the toast.
-- [ ] 🤖 **P2** `aimp.js` `dbGet` failure returns the empty fallback with a banner but `dbSet`
+- [x] 🤖 **P2** (done 9 Sep: load-failed lock) `aimp.js` `dbGet` failure returns the empty fallback with a banner but `dbSet`
       still upserts, so a save after an outage overwrites a real register. Fix: load-failed flag
       that `dbSet` refuses.
-- [ ] 🤖 **P2** `governance_acks` has no unique `(doc_id, end_user_id)`; a double tap inflates the
+- [x] 🤖 **P2** (done 9 Sep, 0014; republish still keeps acks, by decision) `governance_acks` has no unique `(doc_id, end_user_id)`; a double tap inflates the
       acknowledgement percentage. Acks also survive republishing (product decision).
-- [ ] 🤖 **P2** `assets/quiz.js` course pages use the stored access token and never refresh it; a
+- [x] 🤖 **P2** (done 9 Sep, assets/sb-session.js) `assets/quiz.js` course pages use the stored access token and never refresh it; a
       learner over an hour on the pages gets "could not mark" and retry does not help. Fix:
       refresh via the stored refresh token when the JWT is near expiry.
-- [ ] 🤖 **P2** `portal/assets/login.js:11` the `next` check lets `/\evil.com` through (browsers
+- [x] 🤖 **P2** (done 9 Sep) `portal/assets/login.js:11` the `next` check lets `/\evil.com` through (browsers
       read it as `//evil.com`). Fix: `new URL(next, location.origin).origin === location.origin`.
 - [x] 🤖 **P2** (done 8 Sep, 0013) `grant_credits` is in no migration (0007 only references it).
       Captured with the service-role-only grant it has live.
-- [ ] 🤖 **P3** `portal/assets/governance.js:55` the training stat counts any eleven done rows,
+- [x] 🤖 **P3** (done 9 Sep) `portal/assets/governance.js:55` the training stat counts any eleven done rows,
       not the eleven sold modules (`manager.js` was fixed in August, this was not).
-- [ ] 🤖 **P3** `governance_acks` insert policy does not require the doc to be live and owned by
+- [x] 🤖 **P3** (done 9 Sep, 0014) `governance_acks` insert policy does not require the doc to be live and owned by
       the stated manager. Harmless today (the dashboard filters by its own live docs); the policy
       should say so.
 

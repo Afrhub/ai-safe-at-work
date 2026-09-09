@@ -161,6 +161,31 @@ Done 4 Sep: the webhook welcome email (`sendWelcome`, see Payments above; six un
 `tests/stripe-webhook.sig.mjs`). Unprovable end to end until Stripe is live, but the recover
 endpoint answered 200 to the same call with the same redirect from this Mac.
 
+## Codex audits, 8–9 Sep 2026
+
+Two whole-repo passes (gpt-6-astra), 27 findings, 25 fixed by 9 Sep; the two left are in
+ACTION-ITEMS (register consolidation, the nine GDPR documents without content). Why the
+second pass found fifteen the first missed: the first prompt named the security hotspots
+and capped at 15; the second asked OWASP + functional + non-functional and excluded the
+first twelve. One LLM review is a sample, not a sweep; the codex-review skill now rotates
+categories. Highlights of what changed on 9 Sep, all live:
+- **aal2 is enforced by the database** (0014): every record-bearing policy and definer
+  function requires the authenticator; a password-only token reads nothing (RLS-16). The
+  RLS suite steps up with TOTP from `.env.e2e`.
+- **Certificates are scoped to the learner** (`user_id` filter); a manager could print a
+  staff member's pass in their own name.
+- **Governance Centre saves are honest**: failed load locks saving, failed save throws,
+  per-key `updated_at` revision check across tabs, AUP publish mirrors onto
+  `governance_docs`, dashboard counts the Centre's registers, audit triggers on
+  governance tables, modal is a real dialog.
+- **Course pages refresh the JWT** (`assets/sb-session.js`), finale unlock reads
+  `module_progress`, 28 template print buttons work under CSP.
+- **Privacy notice is true** (was "no accounts, no data"). 🧑 confirm the retention
+  periods and that `hello@attest-ai.com` is read.
+- `invite-seat` v4 reconciles a committed seat before deleting an account.
+- New fixture: `e2e-buyer@attest-ai.com`, manager with 25 credits, made by the sandbox
+  purchase; no TOTP, no mailbox.
+
 ## Security audit, 7 Sep 2026
 
 Prompted by the review points: hand-rolled Stripe signature, XSS with no API tier, RLS.
