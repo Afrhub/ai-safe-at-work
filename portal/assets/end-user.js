@@ -32,8 +32,11 @@ if (profile) {
 
   // ---- Company governance: read + acknowledge the org's published (live) policies ----
   const gov = document.getElementById("gov");
+  // Staff-facing documents only: the six internal GDPR records (RoPA, retention schedule,
+  // lawful-basis register, DSAR procedure, special-category policy, transfers policy) are the
+  // manager's and the ICO's, and are never acknowledged by staff (0016).
   const { data: liveDocs } = await sb.from("governance_docs")
-    .select("id,title,href,category,manager_id").eq("status", "live").order("title");
+    .select("id,title,href,category,manager_id").eq("status", "live").eq("audience", "staff").order("title");
   const { data: myAcks } = await sb.from("governance_acks").select("doc_id");
   const acked = new Set((myAcks || []).map(a => a.doc_id));
 

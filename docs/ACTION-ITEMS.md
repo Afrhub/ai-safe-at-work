@@ -205,8 +205,8 @@ wrong for about two weeks on a product that sells being current.
       certificate. Filtered.
 - [x] 🤖 **P1** `privacy.html` said "no account system, no login, no data". Replaced with a notice
       covering accounts, training and governance records, Stripe, Resend, London hosting, retention
-      and rights. 🧑 Confirm `hello@attest-ai.com` receives mail and the 90-day / six-year retention
-      statements are the policy you want.
+      and rights. Retention (90 days after closure, six years for payment records) confirmed as
+      standard practice 9 Sep. 🧑 Confirm `hello@attest-ai.com` is a mailbox someone reads.
 - [x] 🤖 **P2** `invite-seat` deleted the account on any seat error; a committed seat with a lost
       response cascaded the seat away and kept the charge. Reconciles first (v4).
 - [x] 🤖 **P2** `portal.js` sign-out kept the local session on a server failure and login.html
@@ -231,8 +231,10 @@ wrong for about two weeks on a product that sells being current.
       focus restoration.
 - [ ] 🤖 **P3** Consolidate the Governance Centre registers into `governance_items` (one table,
       one workflow). Half a day; the dashboard merge above is the stopgap.
-- [ ] 🧑 The nine GDPR documents without content: write or source them, or remove them from the
-      seeded pack.
+- [x] 🤖 (done 9 Sep, 0016) The nine GDPR documents without content: the three staff-facing ones
+      now have templates (Employee Privacy Notice, Data Protection Policy, Employee Monitoring
+      Policy); the six internal records carry `audience = 'internal'`, are hidden from staff and
+      excluded from the acknowledgement denominator.
 
 ## Codex audit, 8 Sep 2026 (gpt-6-astra, whole repo; verdicts are Claude's, checked against the code)
 

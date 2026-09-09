@@ -64,7 +64,9 @@ if (profile) {
 
   function renderDashboard(docs, items, seats, acks, progress, centre = { risks: 0, incidents: 0 }) {
     const total = docs.length, done = docs.filter(d => d.status !== "draft").length, draft = total - done;
-    const liveDocs = docs.filter(d => d.status === "live");
+    // Acknowledgement is owed only for staff-facing documents; internal records are
+    // ready/live for the manager's own tracking and never counted against staff (0016).
+    const liveDocs = docs.filter(d => d.status === "live" && (d.audience || "staff") === "staff");
     const seatIds = new Set(seats.map(s => s.end_user_id));
     const liveIds = new Set(liveDocs.map(d => d.id));
     const validAcks = acks.filter(a => liveIds.has(a.doc_id) && seatIds.has(a.end_user_id)).length;
@@ -97,7 +99,7 @@ if (profile) {
       <a class="tile" href="/templates/vendor-questionnaire.html"><span class="k">Diligence</span>${ico("/assets/hero-vendor-dd.jpg?v=1")}<h2>Vendors</h2><p>${count("vendor")} tracked. Score AI suppliers before you buy.</p><span class="arrow">Open diligence →</span></a>
       <a class="tile" href="/templates/ai-steering-group-tor.html"><span class="k">Oversight</span>${ico("/assets/hero-tor.jpg?v=1")}<h2>Steering group</h2><p>Define the group that owns AI governance and signs it off.</p><span class="arrow">Open ToR →</span></a>`;
 
-    const docRow = d => `<tr><td>${esc(d.title)}</td><td>${esc(d.category || "")}</td>`
+    const docRow = d => `<tr><td>${esc(d.title)}</td><td>${esc(d.category || "")}${(d.audience || "staff") === "internal" ? ' <span style="color:var(--text3)">· internal record, not acknowledged by staff</span>' : ""}</td>`
       + `<td><button type="button" class="pill ${esc(d.status)}" data-id="${esc(d.id)}" data-status="${esc(d.status)}">${esc(d.status)}</button></td>`
       + `<td>${d.href ? `<a href="${esc(d.href)}">Open →</a>` : ""}</td></tr>`;
     const fillDocs = (id, rows) => { $(id).querySelector("tbody").innerHTML = rows.map(docRow).join("") || `<tr><td colspan="4" style="color:var(--text3)">No documents yet.</td></tr>`; };
@@ -199,7 +201,7 @@ if (profile) {
     // Nine GDPR documents ship with no content link yet. Staff cannot acknowledge what they
     // cannot read, so a document without one stops at "ready".
     const doc = lastDocs.find(d => d.id === btn.dataset.id);
-    if (doc && !doc.href && DOC_NEXT[btn.dataset.status] === "live") {
+    if (doc && !doc.href && (doc.audience || "staff") === "staff" && DOC_NEXT[btn.dataset.status] === "live") {
       alert("This document has no content yet, so it cannot go live. Add the document first.");
       return;
     }

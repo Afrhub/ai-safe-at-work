@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<script src="../assets/course-gate.js?v=2" data-to="/checkout.html"></script>
+<meta name="robots" content="noindex, nofollow" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<meta name="color-scheme" content="dark light" />
+<script src="/assets/theme-boot.js?v=1"></script>
+<title>Data Protection Policy template · Attest AI</title>
+<meta name="description" content="A UK GDPR data protection policy for a small or medium organisation: principles, roles, breaches, rights, records. Edit and publish to staff." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Attest AI" />
+<meta property="og:title" content="Data Protection Policy template · Attest AI" />
+<meta property="og:description" content="A UK GDPR data protection policy for a small or medium organisation: principles, roles, breaches, rights, records. Edit and publish to staff." />
+<meta property="og:url" content="https://attest-ai.com/templates/data-protection-policy.html" />
+<meta property="og:image" content="https://attest-ai.com/og-card.png?v=3" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Data Protection Policy template · Attest AI" />
+<meta name="twitter:description" content="A UK GDPR data protection policy for a small or medium organisation: principles, roles, breaches, rights, records. Edit and publish to staff." />
+<meta name="twitter:image" content="https://attest-ai.com/og-card.png?v=3" />
+<link rel="preload" href="../assets/fonts/ahn-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../assets/fonts/ahm-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts/atkinson.css?v=1" />
+<link rel="stylesheet" href="../assets/style.css?v=30" />
+<script defer src="../assets/cinema.js?v=23"></script>
+<style>
+.template-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 2px;
+  background: rgba(250,88,45, 0.08);
+  border: 1px solid rgba(250,88,45, 0.32);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.template-tag::before {
+  content: '§';
+  color: var(--accent);
+  font-weight: 800;
+}
+.print-row { display: flex; gap: 0.8rem; margin: 1.5rem 0 2rem; align-items: center; flex-wrap: wrap; }
+.print-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--accent); color: #0b0e14;
+  font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.7rem 1.25rem; border-radius: 2px;
+  border: none; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 0 1px rgba(250,88,45,0.4), 0 8px 24px rgba(250,88,45,0.2);
+}
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(250,88,45,0.55), 0 12px 32px rgba(250,88,45,0.3); }
+.print-btn:active { transform: translateY(-1px) scale(0.97); }
+.print-hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text3); letter-spacing: 0.06em; }
+.fill {
+  display: inline-block;
+  padding: 0.1rem 0.55rem;
+  border-radius: 2px;
+  background: rgba(250,88,45, 0.10);
+  color: var(--accent);
+  border: 1px dashed rgba(250,88,45, 0.42);
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+}
+.policy-doc {
+  margin: 1.5rem 0;
+  padding: 2rem 2.2rem;
+  background: var(--plate);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  box-shadow: var(--shadow-card);
+}
+.policy-doc h2 { margin-top: 2.2rem; }
+.policy-doc h2:first-child { margin-top: 0; }
+.policy-doc h3 { margin-top: 1.6rem; }
+.policy-doc ol, .policy-doc ul { padding-left: 1.4rem; }
+.policy-doc li { margin-bottom: 0.55rem; }
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+.signoff {
+  margin-top: 2.4rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+.signoff .field { color: var(--text2); }
+.signoff .field strong { display: block; color: var(--accent); font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 0.4rem; }
+.signoff .field .line { display: block; min-height: 1.6rem; border-bottom: 1px solid var(--border-bold); margin-top: 0.4rem; }
+@media (max-width: 640px) { .signoff { grid-template-columns: 1fr; } }
+@media print {
+  .policy-doc { background: white !important; border: 1px solid #ccc !important; box-shadow: none !important; padding: 1rem 0 !important; }
+  .signoff .field strong { color: #46505e !important; }
+  .fill { background: white !important; color: #0b0e14 !important; border-color: #46505e !important; }
+}
+/* AUP artwork faded into the banner, hero-art pattern (matches manager/consultancy). */
+.page-hero::after {
+  content:''; position:absolute; top:0; right:0; bottom:0; z-index:0; pointer-events:none;
+  width:min(44%, 560px);
+  background:url('../assets/hero-aup.jpg?v=1') center 32% / cover no-repeat;
+  -webkit-mask-image: radial-gradient(118% 96% at 82% 42%, #000 22%, transparent 72%);
+          mask-image: radial-gradient(118% 96% at 82% 42%, #000 22%, transparent 72%);
+  opacity:0.9;
+}
+html[data-theme="dark"] .page-hero::after { opacity:0.72; filter:brightness(0.9); }
+@media (max-width: 900px) { .page-hero::after { display:none; } }
+@media print { .page-hero::after { display:none; } }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HowTo",
+      "name": "Acceptable Use Policy template",
+      "description": "Starter AUP for AI tools at work; edit the bracketed fields and ship.",
+      "url": "https://attest-ai.com/templates/data-protection-policy.html",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://attest-ai.com/#organization"
+      },
+      "totalTime": "PT45M",
+      "dateModified": "2026-05-19"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://attest-ai.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Templates",
+          "item": "https://attest-ai.com/templates/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Acceptable Use Policy template \u2014 AI Safe@Work",
+          "item": "https://attest-ai.com/templates/data-protection-policy.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- a11y:skip-link v1 -->
+<a class="skip-link" href="#main">Skip to main content</a>
+
+
+<header class="topbar no-print">
+ <a href="../index.html" class="brand"><img src="/assets/logo.png?v=2" alt="" class="brand-logo" style="height:6em;width:auto;vertical-align:-1.28em;margin-right:.45em" />Attest&nbsp;AI</a>
+ <nav class="topbar-nav">
+ <a href="../index.html#how-we-help">Products</a>
+ <a href="../course.html">Course</a>
+ <a href="../governance.html">Governance</a>
+ <a href="../portal/login.html" class="nav-pill pill-solid always-show">Sign in</a>
+ </nav>
+</header>
+
+<main id="main">
+ <span class="template-tag no-print">Template · Data Protection Policy v1.0</span>
+ <p class="eyebrow no-print">Editable policy starter</p>
+ <h1 class="page-title">Data Protection <em>Policy</em>.</h1>
+ <p class="lede no-print">The rules every member of staff follows when they handle personal data, and who is accountable for what. Short enough to be read, specific enough to be enforced. Aligns with UK GDPR Article 5 and 24, DPA 2018, and ISO/IEC 27001 A.5.34.</p>
+
+ <div class="print-row no-print">
+ <button type="button" class="print-btn" data-print>Print / Save as PDF →</button>
+ <span class="print-hint">Designed to print clean. Replace every bracketed field. Staff acknowledge this document from their portal once it is live.</span>
+ </div>
+
+ <article class="policy-doc">
+ <span class="section-tag">Policy statement</span>
+ <h2>Data Protection Policy of <span class="fill">[Company Name]</span></h2>
+ <p><strong>Effective:</strong> <span class="fill">[Date]</span> · <strong>Version:</strong> 1.0 · <strong>Owner:</strong> <span class="fill">[Role, e.g. Data Protection Lead / HR Director]</span> · <strong>Review cycle:</strong> Annual, or on any change in processing.</p>
+
+ <h2>1. Purpose and scope</h2>
+ <p>This policy sets out how <span class="fill">[Company Name]</span> protects the personal data it holds about staff, clients, suppliers and anyone else. It applies to everyone who works for us, on any device, in any system, including AI tools.</p>
+
+ <h2>2. The principles we follow</h2>
+ <ol>
+ <li><strong>Lawful, fair and transparent.</strong> We process personal data only where we have a lawful basis recorded in the Lawful Basis Register, and we tell people what we do in a privacy notice.</li>
+ <li><strong>Purpose limitation.</strong> Data collected for one purpose is not reused for another without checking the basis.</li>
+ <li><strong>Data minimisation.</strong> We hold what the purpose needs, no more.</li>
+ <li><strong>Accuracy.</strong> We correct data when told it is wrong.</li>
+ <li><strong>Storage limitation.</strong> We keep data for the periods in the Data Retention Schedule, then delete it.</li>
+ <li><strong>Integrity and confidentiality.</strong> We protect data against loss, misuse and unauthorised access with the measures in section 6.</li>
+ <li><strong>Accountability.</strong> We keep the records in section 8 that show we do the above.</li>
+ </ol>
+
+ <h2>3. Roles</h2>
+ <ul>
+ <li><strong><span class="fill">[Board / Owner / Managing Director]</strong> is accountable for compliance and approves this policy.</li>
+ <li><strong>Data Protection Lead:</strong> <span class="fill">[name and role]</span>. Maintains the registers, handles rights requests and breaches, advises on new processing. <span class="fill">[We are / are not]</span> required to appoint a statutory DPO under Article 37.</li>
+ <li><strong>Line managers</strong> ensure their teams follow this policy and complete training.</li>
+ <li><strong>Every member of staff</strong> follows the rules in section 5 and reports concerns without delay.</li>
+ </ul>
+
+ <h2>4. Special category and criminal offence data</h2>
+ <p>Health, ethnicity, religion, trade union membership, sexual orientation, biometric and genetic data, and criminal records are processed only where an Article 9 or 10 condition applies, recorded in the Lawful Basis Register, with the Appropriate Policy Document required by DPA 2018 Schedule 1.</p>
+
+ <h2>5. Rules for staff</h2>
+ <ul>
+ <li>Use company systems for personal data; not personal email, personal cloud storage or personal messaging.</li>
+ <li>Do not paste personal data into AI tools other than those approved in the Acceptable Use Policy, and never into free consumer tiers.</li>
+ <li>Share data on a need-to-know basis. Check the recipient before sending; use the correct email address and blind copy for group messages to outsiders.</li>
+ <li>Lock screens, use the password manager, enable multi-factor authentication where offered.</li>
+ <li>Do not take personal data off-site on removable media or paper unless approved.</li>
+ <li>Report a suspected breach or a rights request to <span class="fill">[privacy email]</span> the same day.</li>
+ </ul>
+
+ <h2>6. Security measures</h2>
+ <p>Access control by role; multi-factor authentication on core systems; encryption in transit and at rest for <span class="fill">[systems]</span>; backups tested <span class="fill">[quarterly]</span>; supplier assessment before any new processor is engaged; secure disposal of devices and paper. Detail lives in <span class="fill">[the information security policy]</span>.</p>
+
+ <h2>7. Individual rights</h2>
+ <p>Requests for access, rectification, erasure, restriction, portability or objection go to the Data Protection Lead and are answered within one month, extendable by two months for complex requests. The Subject Access Request Procedure sets out the steps. Identity is verified before any data is released.</p>
+
+ <h2>8. Records we keep</h2>
+ <ul>
+ <li>Records of Processing Activities (Article 30).</li>
+ <li>Lawful Basis and Legitimate Interests Register, with balancing tests.</li>
+ <li>Data Retention Schedule.</li>
+ <li>Data Protection Impact Assessments for high-risk processing, including new AI uses.</li>
+ <li>Breach log, including breaches not reported to the ICO and why.</li>
+ <li>Training and policy acknowledgement records (through the Attest AI platform).</li>
+ </ul>
+
+ <h2>9. Breaches</h2>
+ <p>Any loss, theft, unauthorised access or disclosure of personal data is reported internally at once. The Data Protection Lead assesses risk and, where required, notifies the ICO within 72 hours and affected people without undue delay, following the Personal Data Breach Response Plan.</p>
+
+ <h2>10. Suppliers and transfers</h2>
+ <p>Processors are engaged only under a written contract meeting Article 28. Transfers outside the UK use adequacy regulations, the UK IDTA or the Addendum to EU SCCs, with a transfer risk assessment.</p>
+
+ <h2>11. Training and acknowledgement</h2>
+ <p>All staff complete data protection training at induction and annually, and acknowledge this policy through their portal. Breach of this policy is a disciplinary matter.</p>
+
+ <div class="signoff">
+ <div class="field"><strong>Approved by</strong><span class="fill">[Name and role]</span><span class="line"></span></div>
+ <div class="field"><strong>Date</strong><span class="fill">[YYYY-MM-DD]</span><span class="line"></span></div>
+ <div class="field"><strong>Next review</strong><span class="fill">[YYYY-MM-DD]</span><span class="line"></span></div>
+ <div class="field"><strong>Version</strong>1.0<span class="line"></span></div>
+ </div>
+ </article>
+
+ <div class="callout note no-print">
+ <span class="callout-icon">i</span>
+ <div>
+ <div class="callout-title">How to roll this out</div>
+ <ol>
+ <li>Replace every <span class="fill">[bracketed]</span> field. None may remain.</li>
+ <li>Have your data protection lead and one HR reader check it against what you actually do.</li>
+ <li>Set it live on the Governance dashboard; every seated member of staff is then asked to acknowledge it in their portal.</li>
+ <li>Review annually and whenever a new tool, supplier or purpose is introduced.</li>
+ </ol>
+ </div>
+ </div>
+</main>
+
+<nav class="module-bottom-nav no-print">
+ <a class="nav-btn" href="../portal/governance.html">
+ <span class="nav-dir">Back to</span>
+ <span class="nav-title">← Governance dashboard</span>
+ </a>
+ <a class="nav-btn next" href="index.html">
+ <span class="nav-dir">Next template</span>
+ <span class="nav-title">All templates →</span>
+ </a>
+</nav>
+
+<footer class="site-foot no-print">
+ <div class="foot-brand">
+ <span class="fb-name"><img src="/assets/logo.png?v=2" alt="" />Attest&nbsp;AI</span>
+ <p>The AI Governance Platform, adopt AI safely, securely and responsibly.</p>
+ </div>
+ <div class="foot-col"><div class="foot-h">Explore</div><a href="../who-we-help.html">Who We Help</a><a href="../pricing.html">Plans</a><a href="../demo.html">Book a Demo</a><a href="../msp.html">Become a Partner</a></div>
+ <div class="foot-col"><div class="foot-h">Resources</div><a href="../resources.html">Resources</a><a href="../templates/">Templates</a><a href="../faq.html">FAQs</a><a href="../about.html#contact">Support</a></div>
+ <div class="foot-col"><div class="foot-h">Company</div><a href="../about.html">About</a><a href="../about.html#contact">Contact</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a></div>
+ <div class="foot-bottom">© 2026 Attest AI · AI Governance, Risk &amp; Compliance · UK / EU</div>
+</footer>
+
+<script defer src="/assets/print-button.js?v=1"></script>
+</body>
+</html>
