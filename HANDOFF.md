@@ -165,9 +165,11 @@ endpoint answered 200 to the same call with the same redirect from this Mac.
 
 ## Front-page feed (16 Sep 2026)
 
-`#ai-news` on index.html: AI governance, security and policy, rendered by `assets/news.js`
-from `/.netlify/functions/news`, which fetches, parses (no dependency), dedupes, sorts and
-caps three feeds at five items each, cached at the CDN for 30 min. Sources, verified live
+`#ai-news` on index.html is a one-row **pill strip under the hero, policy only** (changed
+from a section the same day): `assets/news.js` renders `/.netlify/functions/news?topic=policy`.
+The function fetches, parses (no dependency), dedupes, sorts and caps each source at five,
+tags each item `policy` or `security`, cached at the CDN for 30 min; without `?topic` it
+answers everything (NCSC included) for any future use. Sources, verified live
 16 Sep: gov.uk Atom scoped to DSIT + AI Security Institute + ICO with a relevance filter;
 European Commission digital-strategy RSS; NCSC RSS filtered to AI. Perplexity's recommended
 single source (IAPP Daily Dashboard) and both runners-up (Tech Policy Press, Euractiv)
@@ -177,7 +179,10 @@ three static fallback links so the section is never empty. Checks: `tests/news-p
 Fourth source (16 Sep): `research_briefs` (0017, public read, no browser writes), filled by the
 cloud routine **"Attest AI feed: research notes to the front page"** (`trig_018UoeRCpeZ6owDNp1eUZ1NH`,
 08:30 London daily, claude-sonnet-5, Supabase connector, WebSearch), 3–5 sourced items a day,
-`on conflict (link) do nothing`; shown as "Attest AI research note". Alastair's Cowork routine
+`on conflict (link) do nothing`; shown as "Attest AI research note" when the title reads as
+policy. Proven 16 Sep: second run wrote three rows and one reached the strip. That cloud
+environment blocks WebFetch to most sites, so the prompt takes dates from search results
+over a 7-day window; the first run, told to verify within 48 h, found nothing for that reason. Alastair's Cowork routine
 "Daily ai governance alerts" (`trig_01LGPw4eCdvmXHqNwtyfYp8D`, 08:00 London, paste-by-hand edit
 pack) is untouched; its two accidental duplicates were disabled 16 Sep. Its job_config cannot be
 partially updated (the API replaces it whole and Cowork's 75 KB system prompt sits inside), which
