@@ -11,7 +11,9 @@
 // source. If a feed changes shape it simply contributes nothing and the others carry on.
 
 export const SOURCES = [
-  { name: "UK Government", url: "https://www.gov.uk/search/all.atom?keywords=artificial%20intelligence&order=updated-newest" },
+  // Scoped to DSIT, the AI Security Institute and the ICO: the site-wide keyword search
+  // matched every document that mentioned AI anywhere (tribunal rulings, nuclear updates).
+  { name: "UK Government", url: "https://www.gov.uk/search/all.atom?keywords=artificial%20intelligence&organisations%5B%5D=department-for-science-innovation-and-technology&organisations%5B%5D=ai-security-institute&organisations%5B%5D=information-commissioner-s-office&order=updated-newest", filter: /\bAI\b|artificial intelligence|algorithm|machine learning|cyber|online safety|data (protection|privacy)|digital|technology/i },
   { name: "European Commission", url: "https://digital-strategy.ec.europa.eu/en/rss.xml" },
   { name: "NCSC", url: "https://www.ncsc.gov.uk/api/1/services/v1/all-rss-feed.xml", filter: /\bAI\b|artificial intelligence|machine learning|\bLLM|language model|chatbot/i },
 ];
@@ -53,9 +55,10 @@ export function parseFeed(xml, source) {
   return out;
 }
 
-export function merge(lists, max = MAX_ITEMS) {
+// Each source contributes at most perSource items so a busy one cannot drown the others.
+export function merge(lists, max = MAX_ITEMS, perSource = 5) {
   const seen = new Set();
-  return lists.flat()
+  return lists.map((l) => [...l].sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, perSource)).flat()
     .filter((i) => (seen.has(i.link) ? false : seen.add(i.link)))
     .sort((a, b) => (a.date < b.date ? 1 : -1))
     .slice(0, max);

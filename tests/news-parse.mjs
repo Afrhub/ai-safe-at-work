@@ -29,9 +29,14 @@ assert.equal(m.length, 3, "duplicate link across feeds removed");
 assert.equal(m[0].link, "https://www.gov.uk/x", "newest first");
 assert.equal(m[m.length - 1].title, "Older");
 assert.equal(merge([r, a], 2).length, 2, "cap honoured");
+const busy = Array.from({ length: 9 }, (_, i) => ({ title: `b${i}`, link: `https://b/${i}`, date: `2026-09-1${i}T00:00:00Z`, source: "busy" }));
+const quiet = [{ title: "q", link: "https://q/1", date: "2026-09-01T00:00:00Z", source: "quiet" }];
+const bal = merge([busy, quiet], 12, 5);
+assert.equal(bal.filter((i) => i.source === "busy").length, 5, "per-source cap");
+assert.ok(bal.some((i) => i.source === "quiet"), "quiet source still present");
 
 const ncsc = SOURCES.find((s) => s.name === "NCSC");
 assert.ok(ncsc.filter.test("New guidance on securing AI systems"), "NCSC filter keeps AI items");
 assert.ok(!ncsc.filter.test("Router firmware advisory"), "NCSC filter drops non-AI items");
 
-console.log("news feed parser: 12 checks passed");
+console.log("news feed parser: 14 checks passed");
