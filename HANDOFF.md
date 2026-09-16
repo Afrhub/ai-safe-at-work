@@ -1,6 +1,6 @@
 # HANDOFF — Attest AI / ai-safe-at-work
 
-Updated: 9 Sep 2026 · Everything committed, pushed and live; working tree clean. `git log -1` for the head.
+Updated: 16 Sep 2026 · Everything committed, pushed and live; working tree clean. `git log -1` for the head.
 Supersedes the 26 Jul version. Full decision history in DOCTRINE.md; this file is the cold resume.
 
 ## What this is
@@ -131,6 +131,13 @@ audit cuts; last client-scored quizzes moved server-side; test plan brought curr
   authenticator yet — his first browser sign-in enrols it.
 
 ## Next steps, ordered, first one startable cold
+
+Session of 16 Sep added the front-page AI policy pill strip (auto-scrolls; sources verified;
+`?topic=policy`), the `research_briefs` table (0017) and the cloud routine that fills it, and
+disabled two duplicate Cowork routines. Board last green 312/0 on 9 Sep; HOME-04/05 and the
+14 parser checks pass on 16 Sep; rerun `node tests/run-all.mjs` at the start of the next
+session before touching anything. Watch: Netlify Personal plan has 1,000 credits/month and
+every push is a build; batch pushes.
 
 0. **JC and RA walk `docs/HUMAN-E2E.md`** (🧑, ~90 min including the course): first sign-in
    with authenticator enrolment, self-serve sign-up, seat, course, roster, publish and
