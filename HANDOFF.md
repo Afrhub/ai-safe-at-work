@@ -163,6 +163,18 @@ Done 4 Sep: the webhook welcome email (`sendWelcome`, see Payments above; six un
 `tests/stripe-webhook.sig.mjs`). Unprovable end to end until Stripe is live, but the recover
 endpoint answered 200 to the same call with the same redirect from this Mac.
 
+## Front-page feed (16 Sep 2026)
+
+`#ai-news` on index.html: AI governance, security and policy, rendered by `assets/news.js`
+from `/.netlify/functions/news`, which fetches, parses (no dependency), dedupes, sorts and
+caps three feeds at five items each, cached at the CDN for 30 min. Sources, verified live
+16 Sep: gov.uk Atom scoped to DSIT + AI Security Institute + ICO with a relevance filter;
+European Commission digital-strategy RSS; NCSC RSS filtered to AI. Perplexity's recommended
+single source (IAPP Daily Dashboard) and both runners-up (Tech Policy Press, Euractiv)
+serve HTML to a server, so they cannot be used; recheck them before adding. The HTML carries
+three static fallback links so the section is never empty. Checks: `tests/news-parse.mjs`
+(14), HOME-04/05 in public-site.
+
 ## Codex audits, 8–9 Sep 2026
 
 Two whole-repo passes (gpt-6-astra), 27 findings, 25 fixed by 9 Sep; the two left are in
