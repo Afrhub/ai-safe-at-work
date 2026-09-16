@@ -174,6 +174,14 @@ single source (IAPP Daily Dashboard) and both runners-up (Tech Policy Press, Eur
 serve HTML to a server, so they cannot be used; recheck them before adding. The HTML carries
 three static fallback links so the section is never empty. Checks: `tests/news-parse.mjs`
 (14), HOME-04/05 in public-site.
+Fourth source (16 Sep): `research_briefs` (0017, public read, no browser writes), filled by the
+cloud routine **"Attest AI feed: research notes to the front page"** (`trig_018UoeRCpeZ6owDNp1eUZ1NH`,
+08:30 London daily, claude-sonnet-5, Supabase connector, WebSearch), 3–5 sourced items a day,
+`on conflict (link) do nothing`; shown as "Attest AI research note". Alastair's Cowork routine
+"Daily ai governance alerts" (`trig_01LGPw4eCdvmXHqNwtyfYp8D`, 08:00 London, paste-by-hand edit
+pack) is untouched; its two accidental duplicates were disabled 16 Sep. Its job_config cannot be
+partially updated (the API replaces it whole and Cowork's 75 KB system prompt sits inside), which
+is why the feed writer is a separate small routine. Manage at https://claude.ai/code/routines.
 
 ## Codex audits, 8–9 Sep 2026
 
