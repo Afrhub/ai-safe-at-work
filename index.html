@@ -45,8 +45,8 @@
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
 <link rel="stylesheet" href="assets/style.css?v=30" />
 <script defer src="assets/cinema.js?v=23"></script>
-<link rel="stylesheet" href="assets/news.css?v=2" />
-<script defer src="assets/news.js?v=2"></script>
+<link rel="stylesheet" href="assets/news.css?v=3" />
+<script defer src="assets/news.js?v=3"></script>
 
 <style>
 /* ── Homepage: Attest AI landing, built on the shared Sentinel system ── */
@@ -270,10 +270,10 @@ html[data-theme="dark"] .inc-card .ico { border-color: rgba(255,255,255,0.22); b
  <!-- AI POLICY PILL STRIP (rendered by assets/news.js from /.netlify/functions/news?topic=policy; the pills below are the fallback) -->
  <aside id="ai-news" class="news-strip" aria-label="AI policy news">
   <span class="news-strip-label">AI policy<span class="news-strip-live" id="news-stamp">live</span></span>
-  <ul class="news-pills" id="news-feed">
+  <div class="news-viewport"><ul class="news-pills" id="news-feed">
    <li><a class="news-pill" href="https://www.gov.uk/search/all?keywords=artificial%20intelligence&amp;organisations%5B%5D=department-for-science-innovation-and-technology&amp;order=updated-newest" rel="noopener" target="_blank"><span class="news-src">UK Government</span>Latest AI policy and guidance</a></li>
    <li><a class="news-pill" href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" rel="noopener" target="_blank"><span class="news-src">European Commission</span>The EU AI Act and its enforcement timeline</a></li>
-  </ul>
+  </ul></div>
  </aside>
 
  <!-- POSITIONING PREFACE -->
