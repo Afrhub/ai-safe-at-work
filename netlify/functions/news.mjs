@@ -79,8 +79,20 @@ async function fetchSource(s) {
   }
 }
 
+// Fourth source: the daily Cowork routine's research notes, written to research_briefs
+// (migration 0017) through its Supabase connector. Public read with the publishable key.
+const SB_URL = "https://hanjrsslhnuauaysbhun.supabase.co";
+const SB_ANON = "sb_publishable_wtK-KC8ibXtA0EvVIJZGqA_oY8wx_6E";
+async function fetchBriefs() {
+  try {
+    const r = await fetch(`${SB_URL}/rest/v1/research_briefs?select=day,title,link,source,created_at&order=day.desc,created_at.desc&limit=5`, { headers: { apikey: SB_ANON } });
+    if (!r.ok) return [];
+    return (await r.json()).map((b) => ({ title: b.title, link: b.link, date: new Date(b.day).toISOString(), source: b.source || "Attest AI research note" }));
+  } catch { return []; }
+}
+
 export default async () => {
-  const lists = await Promise.all(SOURCES.map(fetchSource));
+  const lists = await Promise.all([...SOURCES.map(fetchSource), fetchBriefs()]);
   const items = merge(lists);
   return new Response(JSON.stringify({ items, fetched: new Date().toISOString() }), {
     status: 200,
