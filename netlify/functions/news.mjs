@@ -13,9 +13,9 @@
 export const SOURCES = [
   // Scoped to DSIT, the AI Security Institute and the ICO: the site-wide keyword search
   // matched every document that mentioned AI anywhere (tribunal rulings, nuclear updates).
-  { name: "UK Government", url: "https://www.gov.uk/search/all.atom?keywords=artificial%20intelligence&organisations%5B%5D=department-for-science-innovation-and-technology&organisations%5B%5D=ai-security-institute&organisations%5B%5D=information-commissioner-s-office&order=updated-newest", filter: /\bAI\b|artificial intelligence|algorithm|machine learning|cyber|online safety|data (protection|privacy)|digital|technology/i },
-  { name: "European Commission", url: "https://digital-strategy.ec.europa.eu/en/rss.xml" },
-  { name: "NCSC", url: "https://www.ncsc.gov.uk/api/1/services/v1/all-rss-feed.xml", filter: /\bAI\b|artificial intelligence|machine learning|\bLLM|language model|chatbot/i },
+  { name: "UK Government", topic: "policy", url: "https://www.gov.uk/search/all.atom?keywords=artificial%20intelligence&organisations%5B%5D=department-for-science-innovation-and-technology&organisations%5B%5D=ai-security-institute&organisations%5B%5D=information-commissioner-s-office&order=updated-newest", filter: /\bAI\b|artificial intelligence|algorithm|machine learning|cyber|online safety|data (protection|privacy)|digital|technology/i },
+  { name: "European Commission", topic: "policy", url: "https://digital-strategy.ec.europa.eu/en/rss.xml" },
+  { name: "NCSC", topic: "security", url: "https://www.ncsc.gov.uk/api/1/services/v1/all-rss-feed.xml", filter: /\bAI\b|artificial intelligence|machine learning|\bLLM|language model|chatbot/i },
 ];
 
 const UA = "Mozilla/5.0 (compatible; AttestAI-news/1.0; +https://attest-ai.com)";
@@ -70,7 +70,7 @@ async function fetchSource(s) {
   try {
     const r = await fetch(s.url, { headers: { "User-Agent": UA, Accept: "application/rss+xml, application/atom+xml, application/xml, text/xml" }, signal: ctrl.signal });
     if (!r.ok) return [];
-    const items = parseFeed(await r.text(), s.name);
+    const items = parseFeed(await r.text(), s.name).map((i) => ({ ...i, topic: s.topic }));
     return s.filter ? items.filter((i) => s.filter.test(i.title)) : items;
   } catch {
     return [];
@@ -87,13 +87,18 @@ async function fetchBriefs() {
   try {
     const r = await fetch(`${SB_URL}/rest/v1/research_briefs?select=day,title,link,source,created_at&order=day.desc,created_at.desc&limit=5`, { headers: { apikey: SB_ANON } });
     if (!r.ok) return [];
-    return (await r.json()).map((b) => ({ title: b.title, link: b.link, date: new Date(b.day).toISOString(), source: b.source || "Attest AI research note" }));
+    return (await r.json()).map((b) => ({ title: b.title, link: b.link, date: new Date(b.day).toISOString(), source: b.source || "Attest AI research note", topic: POLICY_WORDS.test(b.title) ? "policy" : "security" }));
   } catch { return []; }
 }
 
-export default async () => {
+// ?topic=policy keeps regulation, guidance and law (the front-page pill strip); the default
+// answers everything. Research notes are classed by their title.
+export const POLICY_WORDS = /regulat|\bact\b|\blaw|legislat|guidance|policy|consultation|standard|code of practice|framework|commission|parliament|\bICO\b|\bEDPB\b|\bOECD\b|\bISO\b|\bNIST\b|compliance|enforce|toolkit|strategy|government/i;
+
+export default async (req) => {
+  const topic = new URL(req.url).searchParams.get("topic");
   const lists = await Promise.all([...SOURCES.map(fetchSource), fetchBriefs()]);
-  const items = merge(lists);
+  const items = merge(lists).filter((i) => !topic || (i.topic || "policy") === topic);
   return new Response(JSON.stringify({ items, fetched: new Date().toISOString() }), {
     status: 200,
     headers: {

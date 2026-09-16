@@ -88,16 +88,17 @@ export async function run() {
   }
 
   group("HOME, structured data");
-  await check("HOME-04", "front page carries the AI governance feed section", async () => {
+  await check("HOME-04", "front page carries the AI policy pill strip", async () => {
     const html = await (await fetch(`${BASE}/?cb=${Date.now()}`)).text();
     ok(/id=['"]ai-news['"]/.test(html), "section #ai-news missing");
     ok(/assets\/news\.js/.test(html), "news.js not loaded");
   });
   await check("HOME-05", "the news function answers with at least three current items", async () => {
-    const r = await fetch(`${BASE}/.netlify/functions/news`);
+    const r = await fetch(`${BASE}/.netlify/functions/news?topic=policy`);
     eq(r.status, 200);
     const d = await r.json();
     ok(Array.isArray(d.items) && d.items.length >= 3, `items: ${d.items?.length}`);
+    ok(d.items.every((i) => i.source !== "NCSC"), "security-only source leaked into the policy strip");
     for (const i of d.items) ok(/^https:\/\//.test(i.link) && i.title && i.source && i.date, "malformed item");
     const newest = new Date(d.items[0].date);
     ok(Date.now() - newest < 21 * 86400e3, `newest item is stale: ${d.items[0].date}`);

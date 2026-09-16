@@ -1,9 +1,13 @@
-/* Front-page feed (16 Sep 2026). Reads as a list, not cards. */
-.news-list{list-style:none;margin:1.4rem 0 0;padding:0;max-width:52rem}
-.news-list li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.3rem 1.2rem;padding:.7rem 0;border-top:1px solid var(--border,rgba(127,127,127,.25))}
-.news-list li:last-child{border-bottom:1px solid var(--border,rgba(127,127,127,.25))}
-.news-list a{flex:1 1 30rem;color:inherit;text-decoration:none;font-weight:600;line-height:1.35}
-.news-list a:hover,.news-list a:focus-visible{text-decoration:underline}
-.news-meta{flex:0 0 auto;font-family:var(--font-mono,ui-monospace,monospace);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text2,#6b7280);white-space:nowrap;align-self:center}
-.news-src{color:var(--accent,#c8471b)}
-.news-stamp{font-size:.8rem;color:var(--text2,#6b7280);margin-top:.9rem}
+/* AI policy pill strip under the hero (16 Sep 2026). One row, scrolls sideways, no autoplay. */
+.news-strip{display:flex;align-items:center;gap:1rem;padding:.55rem clamp(1rem,4vw,2.4rem);border-top:1px solid var(--border,rgba(127,127,127,.25));border-bottom:1px solid var(--border,rgba(127,127,127,.25));background:var(--bg2,transparent)}
+.news-strip-label{flex:0 0 auto;display:inline-flex;align-items:center;gap:.45rem;font-family:var(--font-mono,ui-monospace,monospace);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text2,#6b7280)}
+.news-strip-live{display:inline-block;padding:.1rem .4rem;border-radius:999px;background:var(--accent,#c8471b);color:#fff;font-size:.6rem;letter-spacing:.1em}
+.news-pills{list-style:none;margin:0;padding:0;display:flex;gap:.5rem;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:thin;-webkit-overflow-scrolling:touch;min-width:0;flex:1 1 auto}
+.news-pills li{flex:0 0 auto;scroll-snap-align:start}
+.news-pill{display:inline-flex;align-items:center;gap:.5rem;max-width:34rem;padding:.38rem .8rem .38rem .45rem;border:1px solid var(--border-bold,rgba(127,127,127,.45));border-radius:999px;color:inherit;text-decoration:none;font-size:.82rem;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.news-pill:hover,.news-pill:focus-visible{border-color:var(--accent,#c8471b);outline:none}
+.news-pill:focus-visible{box-shadow:0 0 0 2px var(--accent,#c8471b)}
+.news-src{flex:0 0 auto;font-family:var(--font-mono,ui-monospace,monospace);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent,#c8471b);border:1px solid currentColor;border-radius:999px;padding:.12rem .45rem}
+.news-date{flex:0 0 auto;font-family:var(--font-mono,ui-monospace,monospace);font-size:.62rem;color:var(--text2,#6b7280);margin-left:.2rem}
+@media (max-width:640px){.news-strip{flex-direction:column;align-items:flex-start;gap:.5rem}.news-pills{width:100%}}
+@media print{.news-strip{display:none}}

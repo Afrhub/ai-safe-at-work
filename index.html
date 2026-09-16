@@ -45,8 +45,8 @@
 <link rel="stylesheet" href="assets/fonts/atkinson.css?v=1" />
 <link rel="stylesheet" href="assets/style.css?v=30" />
 <script defer src="assets/cinema.js?v=23"></script>
-<link rel="stylesheet" href="assets/news.css?v=1" />
-<script defer src="assets/news.js?v=1"></script>
+<link rel="stylesheet" href="assets/news.css?v=2" />
+<script defer src="assets/news.js?v=2"></script>
 
 <style>
 /* ── Homepage: Attest AI landing, built on the shared Sentinel system ── */
@@ -267,6 +267,15 @@ html[data-theme="dark"] .inc-card .ico { border-color: rgba(255,255,255,0.22); b
  </div>
  </section>
 
+ <!-- AI POLICY PILL STRIP (rendered by assets/news.js from /.netlify/functions/news?topic=policy; the pills below are the fallback) -->
+ <aside id="ai-news" class="news-strip" aria-label="AI policy news">
+  <span class="news-strip-label">AI policy<span class="news-strip-live" id="news-stamp">live</span></span>
+  <ul class="news-pills" id="news-feed">
+   <li><a class="news-pill" href="https://www.gov.uk/search/all?keywords=artificial%20intelligence&amp;organisations%5B%5D=department-for-science-innovation-and-technology&amp;order=updated-newest" rel="noopener" target="_blank"><span class="news-src">UK Government</span>Latest AI policy and guidance</a></li>
+   <li><a class="news-pill" href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" rel="noopener" target="_blank"><span class="news-src">European Commission</span>The EU AI Act and its enforcement timeline</a></li>
+  </ul>
+ </aside>
+
  <!-- POSITIONING PREFACE -->
  <div class="trust" style="border-top:1px solid var(--border)"><div class="trust-in" style="display:block;text-align:center;max-width:900px">
  <p style="margin:0;color:var(--text2);font-size:0.95rem;line-height:1.6"><strong style="color:var(--text)">A note on what we are.</strong> Attest AI is not a certification or accreditation body, and we do not certify organisations against any standard. We help companies take AI governance seriously: the training, documents and evidence that support your AI compliance and governance journey, and that prepare you to work with an accredited body if you choose to pursue certification.</p>
@@ -285,19 +294,6 @@ html[data-theme="dark"] .inc-card .ico { border-color: rgba(255,255,255,0.22); b
  <p class="sub">AI adoption is accelerating across every industry, yet many organisations still lack the governance needed to use it safely.</p>
  <p class="sub">Without the right controls, businesses face risks including data leakage, inconsistent use, supplier uncertainty and increasing regulatory scrutiny.</p>
  <p class="lead-q">The question isn't whether your organisation is using AI.<br><span class="o">It's whether you're governing it.</span></p>
- </div></section>
-
-  <!-- AI GOVERNANCE NEWS (rendered by assets/news.js from /.netlify/functions/news; the items below are the fallback) -->
- <section id="ai-news" class="band"><div class="sec">
- <p class="eyebrow">This week in AI governance</p>
- <h2 class="big">What regulators and governments published.</h2>
- <p class="sub">A live feed of AI governance, security and policy from the UK Government, the European Commission and the National Cyber Security Centre. The same sources our course and templates track.</p>
- <ol class="news-list" id="news-feed">
-  <li><a href="https://www.gov.uk/search/all?keywords=artificial%20intelligence&amp;order=updated-newest" rel="noopener" target="_blank">Latest UK Government publications on artificial intelligence</a><span class="news-meta"><span class="news-src">UK Government</span></span></li>
-  <li><a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" rel="noopener" target="_blank">The EU AI Act: regulatory framework and enforcement timeline</a><span class="news-meta"><span class="news-src">European Commission</span></span></li>
-  <li><a href="https://www.ncsc.gov.uk/section/keep-up-to-date/reports-advisories" rel="noopener" target="_blank">NCSC reports and advisories, including AI security guidance</a><span class="news-meta"><span class="news-src">NCSC</span></span></li>
- </ol>
- <p class="news-stamp" id="news-stamp">Live items load from the three sources; these links are the sources themselves.</p>
  </div></section>
 
  <!-- WHO IS THIS FOR -->
