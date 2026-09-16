@@ -88,6 +88,21 @@ export async function run() {
   }
 
   group("HOME, structured data");
+  await check("HOME-04", "front page carries the AI governance feed section", async () => {
+    const html = await (await fetch(`${BASE}/?cb=${Date.now()}`)).text();
+    ok(/id=['"]ai-news['"]/.test(html), "section #ai-news missing");
+    ok(/assets\/news\.js/.test(html), "news.js not loaded");
+  });
+  await check("HOME-05", "the news function answers with at least three current items", async () => {
+    const r = await fetch(`${BASE}/.netlify/functions/news`);
+    eq(r.status, 200);
+    const d = await r.json();
+    ok(Array.isArray(d.items) && d.items.length >= 3, `items: ${d.items?.length}`);
+    for (const i of d.items) ok(/^https:\/\//.test(i.link) && i.title && i.source && i.date, "malformed item");
+    const newest = new Date(d.items[0].date);
+    ok(Date.now() - newest < 21 * 86400e3, `newest item is stale: ${d.items[0].date}`);
+  });
+
   await check("HOME-03", "all JSON-LD parses", async () => {
     for (const path of ["/index.html", "/pricing.html", "/faq.html", "/course.html"]) {
       const p = await page(path);
