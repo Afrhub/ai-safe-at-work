@@ -35,13 +35,13 @@
 /* Form styles match the contact cards on about.html. Kept inline because they are
    used on this page only. style-src allows unsafe-inline, script-src does not. */
 .demo-form { display:flex; flex-direction:column; gap:0.7rem; margin-top:0.5rem; }
-.demo-form label { display:flex; flex-direction:column; gap:0.3rem; font-family:var(--font-mono); font-size:var(--fs-13, 0.8125rem); letter-spacing:0.12em; text-transform:uppercase; color:var(--text3); }
+.demo-form label { display:flex; flex-direction:column; gap:0.3rem; font-family:var(--font-mono); font-size:var(--fs-13, 0.8125rem); font-weight:600; letter-spacing:0.02em; text-transform:uppercase; color:var(--text3); }
 .demo-form input, .demo-form textarea { font-family:var(--font-body); font-size:1rem; color:var(--text); background:var(--bg-soft); border:1px solid var(--border-bold); border-radius:var(--r-sm); padding:0.6rem 0.75rem; width:100%; }
 .demo-form input:focus, .demo-form textarea:focus { outline:2px solid var(--accent); outline-offset:1px; }
 .demo-form button.cta { align-self:flex-start; margin-top:0.4rem; cursor:pointer; border:none; background:var(--accent); color:#fff; font-family:var(--font-display); font-weight:800; font-size:0.95rem; padding:0.7rem 1.4rem; border-radius:var(--r-sm); transition:transform 140ms var(--ease-out); }
 .demo-form button.cta:hover { transform:translateY(-1px); }
-.demo-layout { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:start; margin-top:2rem; }
-@media (max-width: 860px) { .demo-layout { grid-template-columns:1fr; gap:1.8rem; } }
+.demo-layout { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:start; margin-top:0; }
+@media (max-width: 900px) { .demo-layout { grid-template-columns:1fr; gap:2rem; } }
 .demo-list { margin:1rem 0 0; padding-left:1.2rem; color:var(--text2); line-height:1.8; }
 </style>
 </head>
@@ -60,13 +60,13 @@
 </header>
 
 <main id="main">
- <p class="eyebrow">Book a demo</p>
- <h1 class="page-title">See it working, in <em>twenty minutes</em>.</h1>
- <p class="lede">A walkthrough of the whole thing: the training your staff take, the governance records it produces, and the portal you run it from. No slides, no obligation, and we will tell you plainly if it is not a fit.</p>
 
  <div class="demo-layout">
   <div>
-   <h2 style="margin-top:0">What we will show you</h2>
+ <p class="eyebrow">Book a demo</p>
+ <h1 class="page-title">See it working, in <em>twenty minutes</em>.</h1>
+ <p class="lede">A walkthrough of the whole thing: the training your staff take, the governance records it produces, and the portal you run it from. No slides, no obligation, and we will tell you plainly if it is not a fit.</p>
+   <h2>What we will show you</h2>
    <ul class="demo-list">
     <li>The AI Safe@Work course as a member of your staff sees it, including a module and its knowledge check.</li>
     <li>The Governance Centre: the registers, the risk matrix and the Acceptable Use Policy generated from what you have recorded.</li>
