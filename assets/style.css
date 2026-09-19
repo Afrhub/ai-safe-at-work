@@ -31,6 +31,7 @@
   --accent-2:    #ff8a5c;
   --accent-soft: #fff3ef;   /* tinted icon wells */
   --accent-line: #ffd9cb;
+  --accent-text: #b23f17;   /* orange as text: 5.8:1 on white, 5.4:1 on the soft band */
 
   /* ── Text ── */
   --text:        #14161c;
@@ -163,7 +164,7 @@ a:focus:not(:focus-visible), button:focus:not(:focus-visible), summary:focus:not
 .topbar-nav a { transition: color 160ms ease; position: relative; padding: 0.25rem 0; }
 .topbar-nav a::before { content: none; }
 .topbar-nav a::after { content: none; }
-.topbar-nav a:hover { color: var(--accent); }
+.topbar-nav a:hover { color: var(--accent-text); }
 .topbar-nav a.is-current { color: var(--text); }
 /* primary CTA button in the nav */
 .topbar-nav a.nav-cta { background: var(--accent); color: var(--on-accent); padding: 0.5rem 1rem; border-radius: var(--r-btn); font-weight: 700; transition: background 160ms ease; }
@@ -172,7 +173,7 @@ a:focus:not(:focus-visible), button:focus:not(:focus-visible), summary:focus:not
 .topbar-nav a.pill-solid { background: var(--accent); color: var(--on-accent); }
 .topbar-nav a.pill-solid:hover { background: var(--accent-2); color: var(--on-accent); }
 .topbar-nav a.pill-outline { border: 1.5px solid var(--border-bold); color: var(--text); }
-.topbar-nav a.pill-outline:hover { border-color: var(--accent); color: var(--accent); }
+.topbar-nav a.pill-outline:hover { border-color: var(--accent); color: var(--accent-text); }
 .topbar-nav a.pill-green { background: var(--green); color: #fff; }
 .topbar-nav a.pill-green:hover { background: #0a6339; color: #fff; }
 html[data-theme="dark"] .topbar-nav a.pill-outline { border-color: rgba(255,255,255,0.35); color: #fff; }
@@ -218,7 +219,7 @@ main {
   font-family: var(--font-body);
   font-size: var(--fs-13); font-weight: 800;
   letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-text);
   margin-bottom: 1rem;
 }
 .eyebrow::before { content: none; }
@@ -269,12 +270,12 @@ code {
   font-family: var(--font-mono);
   background: var(--bg-soft); border: 1px solid var(--border);
   padding: 2px 0.5rem; border-radius: var(--r-sm);
-  font-size: var(--fs-15); color: var(--accent-d);
+  font-size: var(--fs-15); color: var(--accent-text);
 }
 
 hr.section-divider { border: none; height: 1px; margin: 3.5rem 0; background: var(--border); }
 
-.accent { color: var(--accent); }
+.accent { color: var(--accent-text); }
 .muted  { color: var(--text3); }
 
 /* ════════════════════════════════════════════════════════════
@@ -352,7 +353,7 @@ html[data-theme="dark"] .gate-hero::before, html[data-theme="dark"] .page-hero::
   display: inline-flex; align-items: center; justify-content: center;
   border-radius: var(--r-sm);
   background: var(--accent-soft); border: 1px solid var(--accent-line);
-  color: var(--accent-d); flex-shrink: 0;
+  color: var(--accent-text); flex-shrink: 0;
 }
 .callout-title {
   font-family: var(--font-display); font-size: var(--fs-17); font-weight: 700;
@@ -381,13 +382,13 @@ html[data-theme="dark"] .gate-hero::before, html[data-theme="dark"] .page-hero::
 .callout.dont .callout-title::after  { content: 'PROHIBITED'; color: var(--red); }
 
 .callout.note  { --cl: rgba(250,88,45,0.12); }
-.callout.note .callout-title::after  { content: 'NOTE'; color: var(--accent-d); }
+.callout.note .callout-title::after  { content: 'NOTE'; color: var(--accent-text); }
 
 .callout.standard { --cl: rgba(250,88,45,0.12); }
-.callout.standard .callout-title::after { content: 'STANDARDS'; color: var(--accent-d); }
+.callout.standard .callout-title::after { content: 'STANDARDS'; color: var(--accent-text); }
 
 .callout.govern   { --cl: rgba(250,88,45,0.12); }
-.callout.govern .callout-title::after { content: 'ISO/IEC 42001'; color: var(--accent-d); }
+.callout.govern .callout-title::after { content: 'ISO/IEC 42001'; color: var(--accent-text); }
 
 /* dark mode: lift the wash a touch on the darker plate */
 html[data-theme="dark"] .callout.warn,
@@ -475,7 +476,7 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
 .objectives { --cl: rgba(250,88,45,0.12); background: var(--wash), var(--plate); padding: 1.5rem 1.5rem; margin: 1.5rem 0 2.5rem; }
 .objectives-title {
   font-family: var(--font-body); font-size: var(--fs-12); font-weight: 800;
-  letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-d); margin-bottom: 0.75rem;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-text); margin-bottom: 0.75rem;
 }
 .objectives ul { margin: 0; padding-left: 0; list-style: none; counter-reset: obj; }
 .objectives li {
@@ -487,7 +488,7 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
   counter-increment: obj; content: counter(obj, decimal-leading-zero);
   position: absolute; left: 0; top: 0.55rem;
   font-family: var(--font-mono); font-size: var(--fs-12); font-weight: 700;
-  color: var(--accent-d); letter-spacing: 0.06em;
+  color: var(--accent-text); letter-spacing: 0.06em;
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -515,7 +516,7 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
 .module-card:hover::before { width: 100%; }
 .module-num {
   font-family: var(--font-body); font-size: var(--fs-12); font-weight: 800;
-  color: var(--accent-d); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 0.5rem;
+  color: var(--accent-text); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 0.5rem;
 }
 .module-card h3 {
   font-family: var(--font-display); font-size: var(--fs-20); font-weight: 700;
@@ -592,7 +593,7 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
    stays for any page not yet swept. */
 .foot-col h4, .foot-col .foot-h { font-family: var(--font-body); font-size: var(--fs-12); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text2); margin: 0 0 1rem; }
 .foot-col a { display: block; font-size: var(--fs-15); color: var(--text3); padding: 0.5rem 0; }
-.foot-col a:hover { color: var(--accent); }
+.foot-col a:hover { color: var(--accent-text); }
 .site-foot .foot-bottom { grid-column: 1 / -1; border-top: 1px solid var(--border); margin-top: 1rem; padding-top: 1.5rem; font-size: var(--fs-13); color: var(--text3); }
 
 /* ════════════════════════════════════════════════════════════
@@ -602,6 +603,7 @@ html[data-theme="dark"] {
   --bg: #0b0d12; --bg-soft: #12151c; --bg-soft2: #1a1f29;
   --glass: rgba(255,255,255,0.03); --glass-hover: rgba(255,255,255,0.06);
   --accent-soft: rgba(250,88,45,0.12); --accent-line: rgba(250,88,45,0.35);
+  --accent-text: #fa582d;   /* 6.0:1 on the dark ground */
   --text: #eef2f7; --text2: #b6bdcc; --text3: #9aa3b6;
   --border: rgba(255,255,255,0.10); --border-bold: rgba(255,255,255,0.18);
   --green: #3ad08a; --red: #ff7a76; --yellow: #f0b54a; --blue: #6ea8ff;
