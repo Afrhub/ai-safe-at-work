@@ -89,7 +89,7 @@
   background: rgba(255,255,255,0.06);
   border-radius: 2px;
   overflow: hidden;
-  transition: background 0.4s var(--ease-out);
+  transition: background 240ms var(--ease-out);
 }
 .quiz-progress .pip.done {
   background: rgba(250,88,45,0.55);
