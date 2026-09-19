@@ -50,7 +50,7 @@ html[data-theme="dark"] .portal-top { background: rgba(6,6,8,0.92); }
 .field label { font-family: var(--font-mono); font-size: var(--fs-13); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text3); }
 .field input { background: rgba(255,255,255,0.04); border: 1px solid var(--border-bold); color: var(--text); border-radius: var(--r-sm); padding: 0.7rem 0.85rem; font-family: var(--font-body); font-size: 1rem; }
 .field input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
-.btn-primary { width: 100%; background: var(--accent); color: #0b0e14; border: none; border-radius: var(--r-sm); padding: 0.8rem; font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: transform 140ms var(--ease-out); }
+.btn-primary { width: 100%; background: var(--accent); color: #0b0e14; border: none; border-radius: var(--r-sm); padding: 0.8rem; font-family: var(--font-display); font-weight: 800; font-size: var(--fs-17); cursor: pointer; transition: transform 140ms var(--ease-out); }
 .btn-primary:hover { transform: translateY(-1px); }
 .btn-primary:active { transform: scale(0.98); }
 .auth-msg { font-size: var(--fs-13); margin-top: 0.9rem; min-height: 1.2em; }
@@ -76,7 +76,7 @@ html[data-theme="dark"] .portal-top { background: rgba(6,6,8,0.92); }
 .tile h2 { font-size: var(--fs-28); letter-spacing: -0.02em; margin: 0.7rem 0 0.5rem; }
 .tiles.big .tile h2 { font-size: var(--fs-34); }
 .tile p { color: var(--text2); font-size: var(--fs-16); line-height: 1.55; max-width: 36ch; }
-.tile .arrow { position: absolute; bottom: 1.6rem; left: 2rem; color: var(--accent); font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.1em; }
+.tile .arrow { position: absolute; bottom: 1.6rem; left: 2rem; color: var(--accent); font-family: var(--font-mono); font-size: var(--fs-12); letter-spacing: 0.1em; }
 
 /* Credits / stat strip */
 .statline { display: flex; gap: 2rem; flex-wrap: wrap; margin: 1.4rem 0; }
@@ -84,11 +84,11 @@ html[data-theme="dark"] .portal-top { background: rgba(6,6,8,0.92); }
 .statline .stat .l { font-family: var(--font-mono); font-size: var(--fs-11); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text3); margin-top: 0.3rem; }
 
 /* Tables (deals, seats) */
-.ptable { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 1rem; background: var(--plate); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
-.ptable th { background: rgba(250,88,45,0.05); color: var(--accent); text-align: left; padding: 0.7rem 0.9rem; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.ptable { width: 100%; border-collapse: collapse; font-size: var(--fs-15); margin-top: 1rem; background: var(--plate); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+.ptable th { background: rgba(250,88,45,0.05); color: var(--accent); text-align: left; padding: 0.7rem 0.9rem; font-family: var(--font-mono); font-size: var(--fs-11); letter-spacing: 0.14em; text-transform: uppercase; }
 .ptable td { padding: 0.7rem 0.9rem; border-top: 1px solid var(--border); color: var(--text2); }
 .chip { font-family: var(--font-mono); font-size: var(--fs-11); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 2px; border: 1px solid var(--border-bold); }
-.seat-remove { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text2); background: var(--glass); border: 1px solid var(--border-bold); border-radius: 999px; padding: 0.3rem 0.7rem; cursor: pointer; }
+.seat-remove { font-family: var(--font-mono); font-size: var(--fs-11); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text2); background: var(--glass); border: 1px solid var(--border-bold); border-radius: 999px; padding: 0.3rem 0.7rem; cursor: pointer; }
 .seat-remove:hover:not(:disabled) { border-color: var(--red); color: var(--red); }
 .seat-remove:disabled { opacity: 0.5; cursor: default; }
 .chip.registered { color: var(--accent); border-color: rgba(250,88,45,0.5); }
