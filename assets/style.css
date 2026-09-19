@@ -302,7 +302,7 @@ html[data-theme="dark"] .gate-hero::before, html[data-theme="dark"] .page-hero::
 /* interior page hero: full-bleed band; pulls up to meet the topbar */
 .page-hero {
   width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
-  margin-top: -3.5rem; margin-bottom: 3rem; padding: 4rem 2rem 3.5rem;
+  margin-top: -3.5rem; margin-bottom: 3rem; padding: 3rem 2rem 2.5rem;
 }
 .page-hero-inner { max-width: 1000px; margin: 0 auto; }
 .page-hero .eyebrow, .page-hero .page-title { margin-bottom: 1rem; }
