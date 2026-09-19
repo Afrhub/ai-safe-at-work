@@ -104,7 +104,7 @@ a { color: inherit; text-decoration: none; }
 /* ── WCAG 2.4.1 skip link ── */
 .skip-link {
   position: absolute; top: -100px; left: 0; z-index: 10000;
-  padding: 0.7rem 1.2rem;
+  padding: 0.75rem 1.25rem;
   background: var(--accent); color: #fff;
   font-family: var(--font-mono); font-size: var(--fs-13); font-weight: 700;
   letter-spacing: 0.06em; text-decoration: underline;
@@ -136,21 +136,21 @@ a:focus:not(:focus-visible), button:focus:not(:focus-visible), summary:focus:not
   position: sticky; top: 0; z-index: 80;
   display: flex; align-items: center; justify-content: space-between;
   gap: 1rem;
-  padding: 0.7rem 2rem;
-  flex-wrap: wrap; row-gap: 0.55rem;
+  padding: 0.75rem 2rem;
+  flex-wrap: wrap; row-gap: 0.5rem;
   background: rgba(255,255,255,0.88);
   backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
 .brand {
-  display: inline-flex; align-items: center; gap: 0.55rem;
+  display: inline-flex; align-items: center; gap: 0.5rem;
   font-family: var(--font-display);
   font-size: var(--fs-17); font-weight: 800; letter-spacing: -0.02em;
   color: var(--text);
 }
 .brand::before { content: none; }
 .topbar-nav {
-  display: flex; align-items: center; gap: 1.8rem;
+  display: flex; align-items: center; gap: 2rem;
   /* auto side margins centre the nav in whatever space the brand leaves, and
      keep it centred on its own row when a narrow viewport wraps the bar */
   flex-wrap: wrap; justify-content: center; margin-inline: auto;
@@ -159,15 +159,15 @@ a:focus:not(:focus-visible), button:focus:not(:focus-visible), summary:focus:not
   text-transform: none;
   color: var(--text2);
 }
-.topbar-nav a { transition: color 160ms ease; position: relative; padding: 0.2rem 0; }
+.topbar-nav a { transition: color 160ms ease; position: relative; padding: 0.25rem 0; }
 .topbar-nav a::before { content: none; }
 .topbar-nav a::after { content: none; }
 .topbar-nav a:hover { color: var(--accent); }
 .topbar-nav a.is-current { color: var(--text); }
 /* primary CTA button in the nav */
-.topbar-nav a.nav-cta { background: var(--accent); color: #fff; padding: 0.5rem 1.05rem; border-radius: var(--r-btn); font-weight: 700; transition: background 160ms ease; }
+.topbar-nav a.nav-cta { background: var(--accent); color: #fff; padding: 0.5rem 1rem; border-radius: var(--r-btn); font-weight: 700; transition: background 160ms ease; }
 .topbar-nav a.nav-cta:hover { background: var(--accent-d); color: #fff; }
-.topbar-nav a.nav-pill { padding: 0.5rem 1.15rem; border-radius: 999px; font-weight: 700; white-space: nowrap; flex-shrink: 0; transition: background 160ms ease, border-color 160ms ease, color 160ms ease; }
+.topbar-nav a.nav-pill { padding: 0.5rem 1.25rem; border-radius: 999px; font-weight: 700; white-space: nowrap; flex-shrink: 0; transition: background 160ms ease, border-color 160ms ease, color 160ms ease; }
 .topbar-nav a.pill-solid { background: var(--accent); color: #fff; }
 .topbar-nav a.pill-solid:hover { background: var(--accent-d); color: #fff; }
 .topbar-nav a.pill-outline { border: 1.5px solid var(--border-bold); color: var(--text); }
@@ -178,7 +178,7 @@ html[data-theme="dark"] .topbar-nav a.pill-outline { border-color: rgba(255,255,
 html[data-theme="dark"] .topbar-nav a.pill-outline:hover { border-color: #fff; }
 /* Pills no longer shrink, so they need slightly less room around them before
    the bar would rather wrap. Recovered from the gap, not from the pills. */
-@media (max-width: 1100px) { .topbar-nav { gap: 1.2rem; } }
+@media (max-width: 1100px) { .topbar-nav { gap: 1.25rem; } }
 
 /* Above the wrap point the bar is a three-column grid so the nav is centred on
    the viewport rather than on the space the brand happens to leave; the third
@@ -193,15 +193,15 @@ html[data-theme="dark"] .topbar-nav a.pill-outline:hover { border-color: #fff; }
    header wrap on anything narrow, so it comes down well before phone width.
    The inline style means this has to win with !important. */
 @media (max-width: 900px) {
-  .topbar { padding: 0.6rem 1rem; }
+  .topbar { padding: 0.5rem 1rem; }
   .topbar-nav { gap: 1rem; }
   .brand-logo { height: 2.6em !important; vertical-align: -0.72em !important; margin-right: 0.3em !important; }
 }
 @media (max-width: 700px) {
-  .topbar-nav { gap: 0.6rem; font-size: var(--fs-15); }
+  .topbar-nav { gap: 0.5rem; font-size: var(--fs-15); }
   .topbar-nav a:not(.always-show) { display: none; }
   .brand { font-size: var(--fs-15); }
-  .topbar-nav a.nav-pill { padding: 0.45rem 0.8rem; }
+  .topbar-nav a.nav-pill { padding: 0.5rem 0.75rem; }
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -213,12 +213,12 @@ main {
 }
 
 .eyebrow {
-  display: inline-flex; align-items: center; gap: 0.6rem;
+  display: inline-flex; align-items: center; gap: 0.5rem;
   font-family: var(--font-body);
   font-size: var(--fs-13); font-weight: 800;
   letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 0.9rem;
+  margin-bottom: 1rem;
 }
 .eyebrow::before { content: none; }
 .eyebrow::after { content: none; }
@@ -228,7 +228,7 @@ h1.page-title,
   font-family: var(--font-display);
   font-size: clamp(2.125rem, 5vw, 3.5rem);
   font-weight: 800; letter-spacing: -0.022em; line-height: 1.06;
-  margin-bottom: 1.1rem; max-width: 20ch; color: var(--text);
+  margin-bottom: 1rem; max-width: 20ch; color: var(--text);
 }
 h1.page-title em { font-style: normal; color: var(--accent); }
 
@@ -246,20 +246,20 @@ h2 {
   font-family: var(--font-display);
   font-size: var(--fs-28);
   font-weight: 800; letter-spacing: -0.018em; line-height: 1.12;
-  margin: 3rem 0 1.1rem; color: var(--text);
+  margin: 3rem 0 1rem; color: var(--text);
 }
 @media (min-width: 900px) { h2 { font-size: var(--fs-34); } }
 h3,
 .h3-style {
   font-family: var(--font-display);
   font-size: var(--fs-20); font-weight: 700; letter-spacing: -0.01em;
-  margin: 2.2rem 0 0.7rem; color: var(--text);
+  margin: 2rem 0 0.5rem; color: var(--text);
 }
 
 p { margin-bottom: 1rem; color: var(--text2); font-size: var(--fs-17); line-height: 1.6; }
 p strong { color: var(--text); font-weight: 700; }
 
-ul, ol { margin: 0.5rem 0 1.2rem 1.4rem; }
+ul, ol { margin: 0.5rem 0 1.25rem 1.5rem; }
 li { margin-bottom: 0.5rem; color: var(--text2); font-size: var(--fs-17); line-height: 1.6; }
 li strong { color: var(--text); }
 li::marker { color: var(--accent); }
@@ -267,7 +267,7 @@ li::marker { color: var(--accent); }
 code {
   font-family: var(--font-mono);
   background: var(--bg-soft); border: 1px solid var(--border);
-  padding: 0.13rem 0.42rem; border-radius: var(--r-sm);
+  padding: 2px 0.5rem; border-radius: var(--r-sm);
   font-size: var(--fs-15); color: var(--accent-d);
 }
 
@@ -329,7 +329,7 @@ html[data-theme="dark"] .gate-hero::before, html[data-theme="dark"] .page-hero::
    inverted to ink-on-paper for the light canvas)
    ════════════════════════════════════════════════════════════ */
 .module-banner {
-  position: relative; margin: 0 0 2.2rem;
+  position: relative; margin: 0 0 2rem;
   background: var(--bg-soft); border: 1px solid var(--border);
   border-radius: var(--r); box-shadow: var(--shadow-card); overflow: hidden;
 }
@@ -342,7 +342,7 @@ html[data-theme="dark"] .gate-hero::before, html[data-theme="dark"] .page-hero::
 .callout {
   --cl: rgba(250,88,45,0.12);   /* per-type tint, set below */
   display: grid; grid-template-columns: 42px 1fr; gap: 1rem;
-  align-items: start; padding: 1.3rem 1.4rem; margin: 1.5rem 0;
+  align-items: start; padding: 1.25rem 1.5rem; margin: 1.5rem 0;
   background: var(--wash), var(--plate);   /* corner washes, fading out by halfway across */
 }
 .callout .callout-icon {
@@ -355,15 +355,15 @@ html[data-theme="dark"] .gate-hero::before, html[data-theme="dark"] .page-hero::
 }
 .callout-title {
   font-family: var(--font-display); font-size: var(--fs-17); font-weight: 700;
-  letter-spacing: -0.01em; margin-bottom: 0.3rem; color: var(--text);
+  letter-spacing: -0.01em; margin-bottom: 0.25rem; color: var(--text);
 }
 .callout-title::after {
   font-family: var(--font-mono); font-size: var(--fs-11); font-weight: 700;
-  letter-spacing: 0.12em; vertical-align: 0.22em; margin-left: 0.6rem;
-  padding: 0.16rem 0.5rem; border-radius: 999px;
+  letter-spacing: 0.12em; vertical-align: 0.22em; margin-left: 0.5rem;
+  padding: 2px 0.5rem; border-radius: 999px;
   border: 1px solid currentColor; opacity: 0.9;
 }
-.callout p { margin-bottom: 0.4rem; font-size: var(--fs-17); }
+.callout p { margin-bottom: 0.5rem; font-size: var(--fs-17); }
 .callout p:last-child { margin-bottom: 0; }
 .callout ul, .callout ol { margin-bottom: 0; }
 
@@ -400,7 +400,7 @@ html[data-theme="dark"] .compare-cell.good  { --cl: rgba(58,208,138,0.16); }
 html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
 
 @media (max-width: 640px) {
-  .callout-title::after { display: inline-block; margin-left: 0; margin-top: 0.2rem; vertical-align: baseline; }
+  .callout-title::after { display: inline-block; margin-left: 0; margin-top: 0.25rem; vertical-align: baseline; }
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -409,9 +409,9 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
 .tag {
   display: inline-block; font-family: var(--font-mono);
   font-size: var(--fs-12); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-  padding: 0.24rem 0.7rem; border-radius: 999px;
+  padding: 0.25rem 0.75rem; border-radius: 999px;
   background: var(--bg-soft); color: var(--text3); border: 1px solid var(--border-bold);
-  margin-right: 0.35rem;
+  margin-right: 0.25rem;
 }
 .tag.accent { background: var(--accent-soft); color: var(--accent-d); border-color: var(--accent-line); }
 .tag.warn   { background: #fdecec; color: var(--red); border-color: #f6c9c8; }
@@ -426,7 +426,7 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
 .section-nav a {
   display: inline-block; font-family: var(--font-body); font-weight: 600;
   font-size: var(--fs-13); letter-spacing: 0;
-  padding: 0.35rem 0.85rem; border-radius: 999px;
+  padding: 0.25rem 0.75rem; border-radius: 999px;
   color: var(--text2); border: 1px solid var(--border-bold); background: var(--bg);
 }
 .section-nav a:hover, .section-nav a:focus-visible {
@@ -436,11 +436,11 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
 /* ════════════════════════════════════════════════════════════
    BUTTONS
    ════════════════════════════════════════════════════════════ */
-.hero-ctas { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 1.8rem 0 0.5rem; }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 2rem 0 0.5rem; }
 .hero-cta {
   display: inline-flex; align-items: center; gap: 0.5rem;
   font-family: var(--font-display); font-weight: 700; font-size: var(--fs-17); letter-spacing: 0;
-  padding: 0.8rem 1.5rem; border-radius: var(--r-btn);
+  padding: 0.75rem 1.5rem; border-radius: var(--r-btn);
   border: 1px solid transparent;
   transition: transform 140ms var(--ease-out), background 160ms ease, color 160ms ease, border-color 160ms ease;
 }
@@ -454,10 +454,10 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
    COMPARISON CELLS
    ════════════════════════════════════════════════════════════ */
 .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
-.compare-cell { padding: 1.3rem 1.4rem; }
+.compare-cell { padding: 1.25rem 1.5rem; }
 .compare-cell h4 {
   font-family: var(--font-display); font-size: var(--fs-16); font-weight: 700;
-  letter-spacing: -0.01em; margin-bottom: 0.6rem; padding-bottom: 0.5rem;
+  letter-spacing: -0.01em; margin-bottom: 0.5rem; padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--border);
 }
 .compare-cell.good, .compare-cell.bad { background: var(--wash), var(--plate); }
@@ -471,15 +471,15 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
 /* ════════════════════════════════════════════════════════════
    OBJECTIVES BLOCK
    ════════════════════════════════════════════════════════════ */
-.objectives { --cl: rgba(250,88,45,0.12); background: var(--wash), var(--plate); padding: 1.5rem 1.7rem; margin: 1.5rem 0 2.5rem; }
+.objectives { --cl: rgba(250,88,45,0.12); background: var(--wash), var(--plate); padding: 1.5rem 1.5rem; margin: 1.5rem 0 2.5rem; }
 .objectives-title {
   font-family: var(--font-body); font-size: var(--fs-12); font-weight: 800;
-  letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-d); margin-bottom: 0.8rem;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-d); margin-bottom: 0.75rem;
 }
 .objectives ul { margin: 0; padding-left: 0; list-style: none; counter-reset: obj; }
 .objectives li {
   color: var(--text); font-size: var(--fs-16); position: relative;
-  padding: 0.4rem 0 0.4rem 2.4rem; border-bottom: 1px solid var(--border);
+  padding: 0.5rem 0 0.5rem 2.5rem; border-bottom: 1px solid var(--border);
 }
 .objectives li:last-child { border-bottom: none; }
 .objectives li::before {
@@ -496,10 +496,10 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
   /* min() so a 300px track cannot exceed a narrower viewport; at 320px the
      fixed floor was pushing 8px of horizontal scroll onto the page */
   display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
-  gap: 1.2rem; margin: 2rem 0;
+  gap: 1.25rem; margin: 2rem 0;
 }
 .module-card {
-  display: block; padding: 1.6rem 1.7rem 1.5rem; cursor: pointer; overflow: hidden;
+  display: block; padding: 1.5rem 1.5rem 1.5rem; cursor: pointer; overflow: hidden;
   isolation: isolate;   /* keep the .bg-num watermark layered inside the card */
   transition: transform 0.28s var(--ease-quart), border-color 0.28s ease, box-shadow 0.28s ease;
 }
@@ -514,13 +514,13 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
 .module-card:hover::before { width: 100%; }
 .module-num {
   font-family: var(--font-body); font-size: var(--fs-12); font-weight: 800;
-  color: var(--accent-d); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 0.6rem;
+  color: var(--accent-d); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 0.5rem;
 }
 .module-card h3 {
   font-family: var(--font-display); font-size: var(--fs-20); font-weight: 700;
-  margin: 0 0 0.55rem; line-height: 1.25; letter-spacing: -0.01em; color: var(--text);
+  margin: 0 0 0.5rem; line-height: 1.25; letter-spacing: -0.01em; color: var(--text);
 }
-.module-card p { color: var(--text2); font-size: var(--fs-16); line-height: 1.6; margin: 0 0 0.95rem; }
+.module-card p { color: var(--text2); font-size: var(--fs-16); line-height: 1.6; margin: 0 0 1rem; }
 .module-card .bg-num {
   position: absolute; right: 0.9rem; bottom: -0.6rem; z-index: -1;
   font-size: var(--fs-56); font-weight: 800; line-height: 1; pointer-events: none;
@@ -537,7 +537,7 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
   padding: 2.5rem 0 0; border-top: 1px solid var(--border); margin-top: 3rem; gap: 1rem;
 }
 .nav-btn {
-  display: flex; flex-direction: column; padding: 1.1rem 1.4rem; min-width: 200px;
+  display: flex; flex-direction: column; padding: 1rem 1.5rem; min-width: 200px;
   transition: transform 0.28s var(--ease-quart), border-color 0.28s ease, box-shadow 0.28s ease;
 }
 .nav-btn:hover { border-color: var(--border-bold); box-shadow: var(--shadow-card-hover); transform: translateY(-2px); }
@@ -549,7 +549,7 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
 .nav-title { font-family: var(--font-display); font-size: var(--fs-17); font-weight: 700; letter-spacing: -0.01em; }
 .nav-btn.disabled { opacity: 0.35; pointer-events: none; }
 @media (max-width: 640px) {
-  .nav-btn { min-width: 0; flex: 1; padding: 0.85rem 1rem; }
+  .nav-btn { min-width: 0; flex: 1; padding: 0.75rem 1rem; }
   .nav-title { font-size: var(--fs-15); }
 }
 
@@ -557,12 +557,12 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
    CHECKLIST CARDS
    ════════════════════════════════════════════════════════════ */
 .checklist { display: grid; gap: 0.75rem; margin: 1.5rem 0; }
-.check-item { display: grid; grid-template-columns: 24px 1fr; gap: 0.9rem; align-items: start; padding: 1rem 1.2rem; }
+.check-item { display: grid; grid-template-columns: 24px 1fr; gap: 1rem; align-items: start; padding: 1rem 1.25rem; }
 .check-box {
   width: 22px; height: 22px; border: 1.5px solid var(--border-bold);
-  border-radius: var(--r-sm); display: inline-block; margin-top: 0.1rem; flex-shrink: 0; background: var(--bg);
+  border-radius: var(--r-sm); display: inline-block; margin-top: 0; flex-shrink: 0; background: var(--bg);
 }
-.check-item strong { display: block; color: var(--text); font-size: var(--fs-17); margin-bottom: 0.15rem; }
+.check-item strong { display: block; color: var(--text); font-size: var(--fs-17); margin-bottom: 0.25rem; }
 .check-item span { color: var(--text2); font-size: var(--fs-16); line-height: 1.6; }
 
 /* ════════════════════════════════════════════════════════════
@@ -576,13 +576,13 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
      came back when the top nav was cut to three items: Who We Help, Plans, Book a Demo
      and Become a Partner lost their nav slot and need somewhere to live. One column
      replacing two, so still leaner than before. */
-  display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 2.2rem 2.5rem;
+  display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 2rem 2.5rem;
 }
 @media (max-width: 860px) { .site-foot { grid-template-columns: 1fr 1fr; gap: 2rem; } }
 @media (max-width: 520px) { .site-foot { grid-template-columns: 1fr; } }
 .site-foot::before { content: none; }
 .site-foot a { transition: color 180ms ease; }
-.foot-brand { display: flex; flex-direction: column; gap: 0.7rem; }
+.foot-brand { display: flex; flex-direction: column; gap: 0.75rem; }
 .foot-brand .fb-name { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-display); font-weight: 800; font-size: var(--fs-17); color: var(--text); }
 .foot-brand .fb-name img { height: 2.6em; width: auto; }
 .foot-brand p { font-size: var(--fs-13); color: var(--text3); margin: 0; max-width: 32ch; line-height: 1.55; }
@@ -590,9 +590,9 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
    skipped the outline from h2 on most pages (A11Y-04). Styled divs now; the h4 rule
    stays for any page not yet swept. */
 .foot-col h4, .foot-col .foot-h { font-family: var(--font-body); font-size: var(--fs-12); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text2); margin: 0 0 0.9rem; }
-.foot-col a { display: block; font-size: var(--fs-15); color: var(--text3); padding: 0.28rem 0; }
+.foot-col a { display: block; font-size: var(--fs-15); color: var(--text3); padding: 0.5rem 0; }
 .foot-col a:hover { color: var(--accent); }
-.site-foot .foot-bottom { grid-column: 1 / -1; border-top: 1px solid var(--border); margin-top: 0.8rem; padding-top: 1.5rem; font-size: var(--fs-13); color: var(--text3); }
+.site-foot .foot-bottom { grid-column: 1 / -1; border-top: 1px solid var(--border); margin-top: 1rem; padding-top: 1.5rem; font-size: var(--fs-13); color: var(--text3); }
 
 /* ════════════════════════════════════════════════════════════
    DARK VARIANT — html[data-theme="dark"] (toggle opt-in)
@@ -722,7 +722,7 @@ html[data-theme="dark"] .theme-toggle .tt-sun  { display: none; }
 .vcta-bg.is-in { opacity: 1; }
 .vcta {
   position: relative; width: min(30rem, 100%);
-  padding: 2.1rem 2.1rem 1.8rem;
+  padding: 2rem 2rem 2rem;
   background: var(--bg, #fff);
   border: 1px solid var(--border, #e6e8ef);
   border-radius: 12px;
@@ -738,15 +738,15 @@ html[data-theme="dark"] .theme-toggle .tt-sun  { display: none; }
 }
 .vcta-bg.is-in .vcta { transform: none; }
 .vcta-eyebrow {
-  margin: 0 0 0.45rem; font-family: var(--font-mono, ui-monospace, monospace);
+  margin: 0 0 0.5rem; font-family: var(--font-mono, ui-monospace, monospace);
   font-size: var(--fs-11); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--accent, #fa582d);
 }
 .vcta h2 { margin: 0 0 0.6rem; font-size: var(--fs-28); line-height: 1.15; }
-.vcta-sub { margin: 0 0 1.4rem; color: var(--text2, #54596b); font-size: var(--fs-16); line-height: 1.6; }
+.vcta-sub { margin: 0 0 1.5rem; color: var(--text2, #54596b); font-size: var(--fs-16); line-height: 1.6; }
 .vcta-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
 .vcta-go {
-  display: inline-block; padding: 0.72rem 1.3rem;
+  display: inline-block; padding: 0.75rem 1.25rem;
   background: var(--accent, #fa582d); color: #fff;
   font-family: var(--font-display, inherit); font-weight: 800; font-size: var(--fs-17);
   border-radius: var(--r-sm, 8px); text-decoration: none;
@@ -801,11 +801,11 @@ html[data-theme="dark"] .theme-toggle .tt-sun  { display: none; }
 .dmodal-end.is-in { opacity: 1; }
 .dmodal-end-in { text-align: center; padding: 1rem; }
 .dmodal-end-h {
-  margin: 0 0 1.1rem; color: #fff;
+  margin: 0 0 1rem; color: #fff;
   font-family: var(--font-display, inherit); font-weight: 700; font-size: var(--fs-28);
 }
 .dmodal-buy {
-  display: inline-block; padding: 0.85rem 2.1rem;
+  display: inline-block; padding: 0.75rem 2rem;
   background: var(--accent, #fa582d); color: #fff;
   font-family: var(--font-display, inherit); font-weight: 800; font-size: var(--fs-17);
   border-radius: var(--r-sm, 8px); text-decoration: none;
@@ -821,14 +821,14 @@ html[data-theme="dark"] .theme-toggle .tt-sun  { display: none; }
 .dmodal-replay:hover { color: #fff; }
 @media (prefers-reduced-motion: reduce) { .dmodal-end { transition: none; } }
 .dmodal-bar {
-  display: flex; flex-wrap: wrap; gap: 0.8rem 1rem;
+  display: flex; flex-wrap: wrap; gap: 0.75rem 1rem;
   align-items: center; justify-content: space-between;
-  padding: 0.95rem 1.2rem;
+  padding: 1rem 1.25rem;
   border-top: 1px solid rgba(255, 255, 255, 0.09);
 }
 .dmodal-note { color: #b6bdcc; font-size: var(--fs-15); }
 .dmodal-go {
-  display: inline-block; padding: 0.66rem 1.25rem;
+  display: inline-block; padding: 0.75rem 1.25rem;
   background: var(--accent, #fa582d); color: #fff;
   font-family: var(--font-display, inherit); font-weight: 800; font-size: var(--fs-17);
   border-radius: var(--r-sm, 8px); text-decoration: none;
@@ -853,7 +853,7 @@ html[data-theme="dark"] .theme-toggle .tt-sun  { display: none; }
 .dmodal-skip {
   position: absolute; top: 0.7rem; right: 3.6rem; z-index: 3;
   display: inline-flex; align-items: center;
-  padding: 0.42rem 0.95rem;
+  padding: 0.5rem 1rem;
   background: rgba(11, 13, 18, 0.72);
   -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.28); border-radius: 999px;
