@@ -45,7 +45,7 @@
 </script>
 <style>
 .draft-banner { display: flex; align-items: center; gap: 0.8rem; background: rgba(224, 62, 62, 0.08); border: 1px solid rgba(224, 62, 62, 0.32); border-radius: 3px; padding: 0.9rem 1.2rem; margin: 1rem 0 2rem; font-family: var(--font-mono); font-size: 0.78rem; color: #ff8b8b; letter-spacing: 0.06em; }
-.draft-banner::before { content: 'DRAFT'; padding: 0.18rem 0.55rem; border-radius: 2px; background: rgba(224,62,62,0.18); color: #ff8b8b; border: 1px solid rgba(224,62,62,0.42); font-weight: 800; letter-spacing: 0.16em; font-size: 0.66rem; }
+.draft-banner::before { content: 'DRAFT'; padding: 0.18rem 0.55rem; border-radius: 2px; background: rgba(224,62,62,0.18); color: #ff8b8b; border: 1px solid rgba(224,62,62,0.42); font-weight: 800; letter-spacing: 0.16em; font-size: var(--fs-11, 0.6875rem); }
 .tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.1rem; margin: 2rem 0; }
 .tier { position: relative; background: var(--plate); border: 1px solid var(--border); border-radius: 3px; padding: 1.6rem 1.6rem 1.4rem; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: transform 0.32s var(--ease-out-strong), border-color 0.32s, box-shadow 0.32s; }
 .tier::before { content: ''; position: absolute; inset: 6px; pointer-events: none; z-index: 1; background: linear-gradient(var(--border-bold), var(--border-bold)) top left / 9px 1.5px, linear-gradient(var(--border-bold), var(--border-bold)) top left / 1.5px 9px, linear-gradient(var(--border-bold), var(--border-bold)) bottom right / 9px 1.5px, linear-gradient(var(--border-bold), var(--border-bold)) bottom right / 1.5px 9px; background-repeat: no-repeat; opacity: 0.4; transition: opacity 0.32s var(--ease-out-strong); }
@@ -53,7 +53,7 @@
 .tier.featured::before { background: linear-gradient(rgba(250,88,45,0.7), rgba(250,88,45,0.7)) top left / 11px 1.5px, linear-gradient(rgba(250,88,45,0.7), rgba(250,88,45,0.7)) top left / 1.5px 11px, linear-gradient(rgba(250,88,45,0.7), rgba(250,88,45,0.7)) bottom right / 11px 1.5px, linear-gradient(rgba(250,88,45,0.7), rgba(250,88,45,0.7)) bottom right / 1.5px 11px; background-repeat: no-repeat; opacity: 0.85; }
 .tier.featured { border-color: rgba(250,88,45, 0.5); box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 0 0 1px rgba(250,88,45,0.32), 0 32px 80px rgba(0,0,0,0.7), 0 0 60px rgba(250,88,45, 0.12); }
 @media (hover: hover) and (pointer: fine) { .tier:hover { transform: translateY(-4px); border-color: rgba(250,88,45, 0.42); box-shadow: var(--shadow-card-hover); } }
-.tier-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text3); margin-bottom: 0.7rem; }
+.tier-tag { display: inline-block; font-family: var(--font-mono); font-size: var(--fs-11, 0.6875rem); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text3); margin-bottom: 0.7rem; }
 .tier.featured .tier-tag { color: var(--accent); }
 .tier h3 { font-family: var(--font-display); font-size: 1.3rem; letter-spacing: -0.025em; margin: 0 0 0.45rem; color: var(--text); }
 .tier .who { font-size: 0.86rem; color: var(--text2); margin-bottom: 1.2rem; }
@@ -69,17 +69,17 @@
 .tier .cta:hover { transform: translateY(-2px); }
 .tier .cta:active { transform: translateY(-1px) scale(0.97); }
 .split-table { width: 100%; border-collapse: collapse; margin: 1.4rem 0 2rem; font-size: 0.88rem; background: var(--plate); border: 1px solid var(--border); border-radius: 3px; overflow: hidden; box-shadow: var(--shadow-card); }
-.split-table thead th { background: rgba(250,88,45, 0.05); color: var(--accent); text-align: left; padding: 0.78rem 0.95rem; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; border-bottom: 1px solid rgba(250,88,45,0.22); }
+.split-table thead th { background: rgba(250,88,45, 0.05); color: var(--accent); text-align: left; padding: 0.78rem 0.95rem; font-family: var(--font-mono); font-size: var(--fs-11, 0.6875rem); font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; border-bottom: 1px solid rgba(250,88,45,0.22); }
 .split-table tbody td { padding: 0.78rem 0.95rem; border-top: 1px solid var(--border); color: var(--text2); vertical-align: top; line-height: 1.5; }
 .split-table tbody td:first-child { color: var(--text); font-weight: 600; }
 .split-table .split { font-family: var(--font-mono); color: var(--accent-2); font-weight: 700; }
 .founding-card { background: linear-gradient(160deg, rgba(250,88,45,0.06), rgba(250,88,45,0.012)); border: 1px solid rgba(250,88,45,0.32); border-radius: 3px; padding: 1.8rem 2rem; margin: 2rem 0; box-shadow: var(--shadow-card); }
-.founding-card .tag { display: inline-block; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; padding: 0.18rem 0.55rem; border-radius: 2px; background: rgba(250,88,45,0.10); border: 1px solid rgba(250,88,45,0.34); }
+.founding-card .tag { display: inline-block; font-family: var(--font-mono); font-size: var(--fs-11, 0.6875rem); font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; padding: 0.18rem 0.55rem; border-radius: 2px; background: rgba(250,88,45,0.10); border: 1px solid rgba(250,88,45,0.34); }
 .founding-card h2 { margin-top: 0.4rem; }
 .bundle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0.7rem; margin: 1.4rem 0 2rem; }
 .bundle-card { padding: 0.95rem 1.1rem; background: var(--plate); border: 1px solid var(--border); border-radius: 3px; box-shadow: var(--shadow-card); transition: all 0.28s var(--ease-out-strong); }
 .bundle-card:hover { border-color: rgba(250,88,45,0.32); transform: translateY(-2px); }
-.bundle-card .label { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
+.bundle-card .label { font-family: var(--font-mono); font-size: var(--fs-11, 0.6875rem); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
 .bundle-card .text { font-size: 0.86rem; color: var(--text); line-height: 1.4; }
 </style>
 </head>

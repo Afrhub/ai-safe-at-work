@@ -22,8 +22,8 @@
   nav button.tab{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:none;color:#C7CCDB;padding:10px 12px;border-radius:8px;font-size:13.5px;margin-bottom:2px;transition:.12s;}
   nav button.tab:hover{background:rgba(255,255,255,.06);color:#fff;}
   nav button.tab.active{background:var(--gold);color:var(--navy);font-weight:600;}
-  nav .grp{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:#71789A;margin:14px 10px 6px;}
-  nav button.tab .n{font-family:'JetBrains Mono',monospace;font-size:10.5px;opacity:.65;min-width:20px;}
+  nav .grp{font-size:var(--fs-11, 0.6875rem);text-transform:uppercase;letter-spacing:.08em;color:#71789A;margin:14px 10px 6px;}
+  nav button.tab .n{font-family:'JetBrains Mono',monospace;font-size:var(--fs-11, 0.6875rem);opacity:.65;min-width:20px;}
   #sidebar .foot{padding:14px 18px;border-top:1px solid rgba(255,255,255,.1);font-size:11px;color:#7C84A2;}
 
   #main{flex:1;min-width:0;padding:30px 38px 70px;max-width:1180px;}
@@ -147,7 +147,7 @@ nav button.tab:hover { background: var(--plate); color: var(--text); }
 nav button.tab.active { background: var(--accent); color: #fff; font-weight: 700; }
 nav .grp { color: var(--text3); }
 #sidebar .foot { border-top: 1px solid var(--border); color: var(--text3); }
-#sidebar .foot button { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text2); background: transparent; border: 1px solid var(--border-bold); border-radius: 999px; padding: 5px 12px; cursor: pointer; margin-top: 6px; }
+#sidebar .foot button { font-family: var(--font-mono); font-size: var(--fs-11, 0.6875rem); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text2); background: transparent; border: 1px solid var(--border-bold); border-radius: 999px; padding: 5px 12px; cursor: pointer; margin-top: 6px; }
 #sidebar .foot button:hover { border-color: var(--accent); color: var(--accent); }
 #sidebar .foot a { color: var(--text3); }
 .btn { background: var(--accent); border-color: var(--accent); }
@@ -192,7 +192,7 @@ html[data-theme="dark"] .modal-bg { background: rgba(0,0,0,0.6); }
 .secnum {
   display: inline-block; margin-bottom: 8px;
   font-family: var(--mono, ui-monospace, monospace);
-  font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  font-size: var(--fs-11, 0.6875rem); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--ink-soft); background: rgba(0,0,0,0.04);
   padding: 2px 7px; border-radius: 3px;
 }
