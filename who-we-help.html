@@ -44,8 +44,21 @@
 }
 .aud-jump a:hover { border-color: var(--accent); color: var(--accent); }
 
-.aud { margin: 0 0 3.2rem; scroll-margin-top: 5rem; }
-.aud > h2 { margin: 0 0 0.4rem; }
+.aud { margin: 0 0 3rem; scroll-margin-top: 5rem; }
+.aud > h2 { margin: 0 0 0.5rem; }
+/* the seven segments sit two abreast; each segment stacks its two columns */
+.aud-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem 1.5rem; margin: 0 0 3rem; }
+.aud-grid .aud { margin: 0; }
+.aud-grid .aud > h2 { font-size: var(--fs-20); }
+.aud-grid .aud-cols { grid-template-columns: 1fr; }
+@media (max-width: 900px) { .aud-grid { grid-template-columns: 1fr; gap: 2rem; } }
+/* the chooser: three cards, first thing after the jump strip */
+.start-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1rem 0 0; }
+.start-card { display: grid; gap: 0.25rem; padding: 1.25rem 1.5rem; background: var(--plate); border: 1px solid var(--border); border-radius: var(--r); color: var(--text2); text-decoration: none; }
+.start-card:hover { border-color: var(--border-bold); }
+.start-card strong { color: var(--text); font-family: var(--font-display); font-size: var(--fs-20); }
+.start-card .start-k { font-family: var(--font-mono); font-size: var(--fs-12); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); }
+@media (max-width: 720px) { .start-cards { grid-template-columns: 1fr; } }
 .aud > .aud-line { margin: 0 0 1.3rem; color: var(--text2); max-width: 62ch; }
 
 /* challenges on the left, what we do about them on the right */
@@ -113,6 +126,18 @@
   <a href="#technology">Technology &amp; IT</a>
  </nav>
 
+ <section class="aud start" id="starting-point">
+  <h2>Where organisations usually start</h2>
+  <p class="aud-line">A guide, not a rule. Most organisations begin with training and documents, then move to the platform when governance needs to be continuous rather than annual.</p>
+  <div class="start-cards">
+   <a class="start-card" href="pricing.html"><span class="start-k">Small and growing businesses</span><strong>Foundation</strong><span>from £990 a year</span></a>
+   <a class="start-card" href="pricing.html"><span class="start-k">Mid-market and growing organisations</span><strong>Attest AI Platform</strong><span>from £249 a month, after Foundation</span></a>
+   <a class="start-card" href="consultancy.html"><span class="start-k">Regulated businesses and enterprise divisions</span><strong>Consultancy</strong><span>with the Platform, quoted per engagement</span></a>
+  </div>
+  <p class="start-note">Priced by organisation size, ex-VAT. See <a href="pricing.html" class="accent">full pricing</a> for the 1&ndash;25, 26&ndash;50 and larger bands. Attest AI is not a certification or accreditation body, and we do not certify organisations against any standard. We get you AI governance and compliance ready: the training, documents and evidence that support your journey, and that prepare you to work with an accredited body if you choose to pursue certification.</p>
+ </section>
+
+ <div class="aud-grid">
  <section class="aud" id="small">
   <h2>Small businesses</h2>
   <p class="aud-line">Your staff are already using AI. The question is whether anyone has written down what is allowed, and whether you could show a customer that you have.</p>
@@ -290,26 +315,7 @@
    </div>
   </div>
  </section>
-
- <section class="aud" id="starting-point">
-  <h2>Where organisations usually start</h2>
-  <p class="aud-line">A guide, not a rule. Most organisations begin with training and documents, then move to the platform when governance needs to be continuous rather than annual.</p>
-  <div class="start-wrap">
-   <table class="start-table">
-    <thead>
-     <tr><th>Organisation</th><th>Typical starting point</th></tr>
-    </thead>
-    <tbody>
-     <tr><td>Small business</td><td>Foundation, from £990 a year</td></tr>
-     <tr><td>Growing business</td><td>Foundation, then the Attest AI Platform</td></tr>
-     <tr><td>Mid-market</td><td>Attest AI Platform, from £249 a month</td></tr>
-     <tr><td>Regulated business</td><td>Platform plus Consultancy</td></tr>
-     <tr><td>Enterprise division</td><td>Consultancy</td></tr>
-    </tbody>
-   </table>
-  </div>
-  <p class="start-note">Priced by organisation size, ex-VAT. See <a href="pricing.html" class="accent">full pricing</a> for the 1&ndash;25, 26&ndash;50 and larger bands. Attest AI is not a certification or accreditation body, and we do not certify organisations against any standard. We get you AI governance and compliance ready: the training, documents and evidence that support your journey, and that prepare you to work with an accredited body if you choose to pursue certification.</p>
- </section>
+ </div>
 
  <section class="fit">
   <h2>Not sure where you fit?</h2>

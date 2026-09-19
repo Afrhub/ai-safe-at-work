@@ -246,7 +246,7 @@ h2 {
   font-family: var(--font-display);
   font-size: var(--fs-28);
   font-weight: 800; letter-spacing: -0.018em; line-height: 1.12;
-  margin: 3rem 0 1rem; color: var(--text);
+  margin: 2.5rem 0 1rem; color: var(--text);
 }
 @media (min-width: 900px) { h2 { font-size: var(--fs-34); } }
 h3,
