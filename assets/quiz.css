@@ -104,7 +104,7 @@
 /* ── Question card ── */
 .quiz-question {
   position: relative;
-  animation: quiz-fade-in 0.4s var(--ease-out);
+  animation: quiz-fade-in 0.24s var(--ease-out);
 }
 @keyframes quiz-fade-in {
   from { opacity: 0; transform: translateY(8px); }

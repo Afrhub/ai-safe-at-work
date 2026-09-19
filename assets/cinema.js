@@ -98,7 +98,7 @@
           lastParent = el.parentElement;
         }
         if (seenInGroup > 0) {
-          var delay = Math.min(seenInGroup * 55, 360);
+          var delay = Math.min(seenInGroup * 40, 120);
           el.style.transitionDelay = delay + 'ms';
         }
       });
