@@ -2,7 +2,7 @@
    pauses on hover or keyboard focus; manual scroll instead when reduced motion is preferred. */
 .news-strip{display:flex;align-items:center;gap:1rem;padding:.5rem clamp(1rem,4vw,2.4rem);border-top:1px solid var(--border,rgba(127,127,127,.25));border-bottom:1px solid var(--border,rgba(127,127,127,.25));background:var(--bg2,transparent)}
 .news-strip-label{flex:0 0 auto;display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-mono,ui-monospace,monospace);font-size:var(--fs-11);letter-spacing:.12em;text-transform:uppercase;color:var(--text2,#6b7280)}
-.news-strip-live{display:inline-block;padding:2px .5rem;border-radius:999px;background:var(--accent,#c8471b);color:#fff;font-size:var(--fs-11);letter-spacing:.1em}
+.news-strip-live{display:inline-block;padding:2px .5rem;border-radius:999px;background:var(--text3,#6b7180);color:#fff;font-size:var(--fs-11);letter-spacing:.1em}
 .news-viewport{flex:1 1 auto;min-width:0;overflow:hidden}
 .news-pills{list-style:none;margin:0;padding:0;display:flex;gap:.5rem;width:max-content;animation:news-scroll var(--news-dur,60s) linear infinite}
 .news-pills li{flex:0 0 auto}
@@ -13,7 +13,7 @@
 .news-pill{display:inline-flex;align-items:center;gap:.5rem;max-width:34rem;padding:.5rem .75rem;border:1px solid var(--border-bold,rgba(127,127,127,.45));border-radius:999px;color:inherit;text-decoration:none;font-size:var(--fs-13);line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .news-pill:hover,.news-pill:focus-visible{border-color:var(--accent,#c8471b);outline:none}
 .news-pill:focus-visible{box-shadow:0 0 0 2px var(--accent,#c8471b)}
-.news-src{flex:0 0 auto;font-family:var(--font-mono,ui-monospace,monospace);font-size:var(--fs-11);letter-spacing:.08em;text-transform:uppercase;color:var(--accent,#c8471b);border:1px solid currentColor;border-radius:999px;padding: 2px 0.5rem}
+.news-src{flex:0 0 auto;font-family:var(--font-mono,ui-monospace,monospace);font-size:var(--fs-11);letter-spacing:.08em;text-transform:uppercase;color:var(--text3,#6b7180);border:1px solid currentColor;border-radius:999px;padding: 2px 0.5rem}
 .news-date{flex:0 0 auto;font-family:var(--font-mono,ui-monospace,monospace);font-size:var(--fs-11);color:var(--text2,#6b7280);margin-left:.25rem}
 @media (max-width:640px){.news-strip{flex-direction:column;align-items:flex-start;gap:.5rem}.news-viewport{width:100%}}
 @media print{.news-strip{display:none}}
