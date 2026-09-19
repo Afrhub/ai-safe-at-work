@@ -255,11 +255,11 @@ h3,
   margin: 2.2rem 0 0.7rem; color: var(--text);
 }
 
-p { margin-bottom: 1rem; color: var(--text2); font-size: 1.0625rem; line-height: 1.7; }
+p { margin-bottom: 1rem; color: var(--text2); font-size: var(--fs-17); line-height: 1.6; }
 p strong { color: var(--text); font-weight: 700; }
 
 ul, ol { margin: 0.5rem 0 1.2rem 1.4rem; }
-li { margin-bottom: 0.5rem; color: var(--text2); font-size: 1.05rem; line-height: 1.65; }
+li { margin-bottom: 0.5rem; color: var(--text2); font-size: var(--fs-17); line-height: 1.6; }
 li strong { color: var(--text); }
 li::marker { color: var(--accent); }
 
