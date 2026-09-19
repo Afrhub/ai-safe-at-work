@@ -223,7 +223,8 @@ main {
 .eyebrow::before { content: none; }
 .eyebrow::after { content: none; }
 
-h1.page-title {
+h1.page-title,
+.gate h1 {
   font-family: var(--font-display);
   font-size: clamp(2.125rem, 5vw, 3.5rem);
   font-weight: 800; letter-spacing: -0.022em; line-height: 1.06;
