@@ -25,18 +25,19 @@ export async function run() {
     try { return await fn(s); } finally { await s.close(); }
   };
 
-  await check("SGN-01", "the landing page fades in and honours reduced motion", async () => {
-    await withPage(async ({ page }) => {
-      await page.goto(BASE + "/", { waitUntil: "domcontentloaded" });
-      const fade = await page.evaluate(() => getComputedStyle(document.body).animationName);
-      eq(fade, "gate-fade", `body animation is ${fade}`);
-    });
-    await withPage(async ({ page, context }) => {
-      await page.emulateMedia({ reducedMotion: "reduce" });
-      await page.goto(BASE + "/", { waitUntil: "domcontentloaded" });
-      const fade = await page.evaluate(() => getComputedStyle(document.body).animationName);
-      eq(fade, "none", "reduced-motion visitors still get the animation");
-    });
+  await check("SGN-01", "the landing page renders at once, with no fade in either motion mode", async () => {
+    // The 700ms body fade was removed (design audit finding 18): the page must be
+    // visible immediately, and there is nothing left for reduced motion to switch off.
+    for (const reducedMotion of ["no-preference", "reduce"]) {
+      await withPage(async ({ page }) => {
+        await page.emulateMedia({ reducedMotion });
+        await page.goto(BASE + "/", { waitUntil: "domcontentloaded" });
+        const fade = await page.evaluate(() => getComputedStyle(document.body).animationName);
+        eq(fade, "none", `body animation is ${fade} with reduced motion ${reducedMotion}`);
+        const opacity = await page.evaluate(() => getComputedStyle(document.body).opacity);
+        eq(opacity, "1", `body opacity is ${opacity} on load`);
+      });
+    }
   });
 
   await check("SGN-02", "a big Sign up leads the hero", async () => {
