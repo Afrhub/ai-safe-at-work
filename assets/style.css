@@ -200,7 +200,7 @@ html[data-theme="dark"] .topbar-nav a.pill-outline:hover { border-color: #fff; }
   .brand-logo { height: 2.6em !important; vertical-align: -0.72em !important; margin-right: 0.3em !important; }
 }
 @media (max-width: 700px) {
-  .topbar-nav { gap: 0.5rem; font-size: var(--fs-15); }
+  .topbar-nav { gap: 1rem; font-size: var(--fs-15); }
   .topbar-nav a:not(.always-show) { display: none; }
   .brand { font-size: var(--fs-15); }
   .topbar-nav a.nav-pill { padding: 0.5rem 0.75rem; }
@@ -255,7 +255,7 @@ h3,
 .h3-style {
   font-family: var(--font-display);
   font-size: var(--fs-20); font-weight: 700; letter-spacing: -0.01em;
-  margin: 2rem 0 0.5rem; color: var(--text);
+  margin: 1.5rem 0 0.5rem; color: var(--text);
 }
 
 p { margin-bottom: 1rem; color: var(--text2); font-size: var(--fs-17); line-height: 1.6; }
@@ -304,7 +304,7 @@ html[data-theme="dark"] .gate-hero::before, html[data-theme="dark"] .page-hero::
 /* interior page hero: full-bleed band; pulls up to meet the topbar */
 .page-hero {
   width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
-  margin-top: -3.5rem; margin-bottom: 3rem; padding: 3rem 2rem 2.5rem;
+  margin-top: -3.5rem; margin-bottom: 2rem; padding: 3rem 2rem 2.5rem;
 }
 .page-hero-inner { max-width: 1000px; margin: 0 auto; }
 .page-hero .eyebrow, .page-hero .page-title { margin-bottom: 1rem; }
@@ -570,7 +570,7 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
    FOOTER
    ════════════════════════════════════════════════════════════ */
 .site-foot {
-  max-width: 1100px; margin: 5rem auto 0; padding: 3rem 1.75rem 3.5rem;
+  max-width: 1100px; margin: 4rem auto 0; padding: 3rem 1.75rem;
   border-top: 1px solid var(--border);
   font-family: var(--font-body); color: var(--text3);
   /* brand + 3 columns. Plans and Services went on 31 Jul 2026 as nav duplicates. Explore
@@ -590,7 +590,7 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
 /* Footer column titles are navigation labels, not document structure: as <h4> they
    skipped the outline from h2 on most pages (A11Y-04). Styled divs now; the h4 rule
    stays for any page not yet swept. */
-.foot-col h4, .foot-col .foot-h { font-family: var(--font-body); font-size: var(--fs-12); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text2); margin: 0 0 1rem; }
+.foot-col h4, .foot-col .foot-h { font-family: var(--font-body); font-size: var(--fs-12); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text2); margin: 0 0 1rem; }
 .foot-col a { display: block; font-size: var(--fs-15); color: var(--text3); padding: 0.5rem 0; }
 .foot-col a:hover { color: var(--accent-text); }
 .site-foot .foot-bottom { grid-column: 1 / -1; border-top: 1px solid var(--border); margin-top: 1rem; padding-top: 1.5rem; font-size: var(--fs-13); color: var(--text3); }
@@ -632,6 +632,8 @@ html[data-theme="dark"] code { background: rgba(255,255,255,0.06); color: var(--
   background: var(--glass); cursor: pointer; padding: 0;
   transition: border-color 200ms ease, background 200ms ease;
 }
+/* 44px hit area around the 26px switch; the visual is unchanged */
+.theme-toggle::after { content: ''; position: absolute; inset: -9px; }
 .theme-toggle:hover { border-color: var(--accent); }
 .theme-toggle .tt-knob {
   position: absolute; top: 2px; left: 2px; width: 20px; height: 20px;
