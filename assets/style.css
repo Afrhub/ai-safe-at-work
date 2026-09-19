@@ -415,7 +415,7 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
   background: var(--bg-soft); color: var(--text3); border: 1px solid var(--border-bold);
   margin-right: 0.25rem;
 }
-.tag.accent { background: var(--accent-soft); color: var(--accent-d); border-color: var(--accent-line); }
+.tag.accent { background: var(--accent-soft); color: var(--accent-text); border-color: var(--accent-line); }
 .tag.warn   { background: #fdecec; color: var(--red); border-color: #f6c9c8; }
 .tag.ok     { background: #e7f6ee; color: var(--green); border-color: #b9e2cb; }
 
@@ -432,7 +432,7 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
   color: var(--text2); border: 1px solid var(--border-bold); background: var(--bg);
 }
 .section-nav a:hover, .section-nav a:focus-visible {
-  color: var(--accent-d); border-color: var(--accent-line); background: var(--accent-soft);
+  color: var(--accent-text); border-color: var(--accent-line); background: var(--accent-soft);
 }
 
 /* ════════════════════════════════════════════════════════════
