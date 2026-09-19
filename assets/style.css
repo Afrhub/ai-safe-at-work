@@ -863,3 +863,7 @@ html[data-theme="dark"] .theme-toggle .tt-sun  { display: none; }
   transition: background 0.18s ease, border-color 0.18s ease;
 }
 .dmodal-skip:hover { background: var(--accent, #fa582d); border-color: transparent; }
+
+/* Spacing utilities: the two inline margin-top values the pages used, on the 4px grid */
+.mt-32 { margin-top: 2rem; }
+.mt-40 { margin-top: 2.5rem; }
