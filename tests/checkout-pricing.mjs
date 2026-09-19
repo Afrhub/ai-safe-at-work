@@ -22,16 +22,16 @@ assert.equal(resolveBand("Foundation", "Over 50 (quote)"), null, "Over 50 should
 // These must NOT resolve. If any of them returns a band, a Platform buyer is being
 // charged a Foundation price.
 assert.equal(
-  resolveBand("Attest AI Platform", "1-25 (£249/mo, £2,490/yr)"),
+  resolveBand("Tethr Platform", "1-25 (£249/mo, £2,490/yr)"),
   null,
   "Platform 1-25 resolved to a Foundation price"
 );
 assert.equal(
-  resolveBand("Attest AI Platform", "26-50 (£499/mo, £4,990/yr)"),
+  resolveBand("Tethr Platform", "26-50 (£499/mo, £4,990/yr)"),
   null,
   "Platform 26-50 resolved to a Foundation price"
 );
-assert.equal(resolveBand("Attest AI Platform", "Over 50 (quote)"), null, "Platform Over 50 resolved");
+assert.equal(resolveBand("Tethr Platform", "Over 50 (quote)"), null, "Platform Over 50 resolved");
 
 // ── Anything unrecognised or missing is refused rather than guessed ──
 assert.equal(resolveBand("", "1-25 (£990/yr)"), null, "missing plan resolved");

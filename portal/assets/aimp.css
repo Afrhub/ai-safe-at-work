@@ -119,7 +119,7 @@
     body{background:#fff;}
     .doc{border:none;padding:0;}
   }
-/* ── Attest AI re-skin: white/orange Sentinel tokens + Atkinson fonts ── */
+/* ── Tethr re-skin: white/orange Sentinel tokens + Atkinson fonts ── */
 :root{
   --navy: var(--text); --navy2: #333a4c;
   --cream: var(--bg); --paper: var(--plate);

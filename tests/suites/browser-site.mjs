@@ -306,12 +306,12 @@ export async function run() {
     await withPage(async ({ page, record }) => {
       const c = new CheckoutPage(page, record);
       await c.open("platform");
-      eq(await c.plan(), "Attest AI Platform", "the hidden plan field would file this as the wrong product");
+      eq(await c.plan(), "Tethr Platform", "the hidden plan field would file this as the wrong product");
       const bands = (await c.bandLabels()).join(" | ");
       includes(bands, "£249");
       includes(bands, "£499");
       excludes(bands, "£990", "Platform is offering the Foundation price");
-      includes(await c.priceHeading.textContent(), "Attest AI Platform");
+      includes(await c.priceHeading.textContent(), "Tethr Platform");
       includes(await c.submitLabel(), "Platform");
     });
   });

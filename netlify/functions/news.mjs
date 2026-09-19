@@ -18,7 +18,7 @@ export const SOURCES = [
   { name: "NCSC", topic: "security", url: "https://www.ncsc.gov.uk/api/1/services/v1/all-rss-feed.xml", filter: /\bAI\b|artificial intelligence|machine learning|\bLLM|language model|chatbot/i },
 ];
 
-const UA = "Mozilla/5.0 (compatible; AttestAI-news/1.0; +https://attest-ai.com)";
+const UA = "Mozilla/5.0 (compatible; Tethr-news/1.0; +https://attest-ai.com)";
 const MAX_ITEMS = 12;
 
 const unescape = (s) => String(s || "")
@@ -87,7 +87,7 @@ async function fetchBriefs() {
   try {
     const r = await fetch(`${SB_URL}/rest/v1/research_briefs?select=day,title,link,source,created_at&order=day.desc,created_at.desc&limit=5`, { headers: { apikey: SB_ANON } });
     if (!r.ok) return [];
-    return (await r.json()).map((b) => ({ title: b.title, link: b.link, date: new Date(b.day).toISOString(), source: b.source || "Attest AI research note", topic: POLICY_WORDS.test(b.title) ? "policy" : "security" }));
+    return (await r.json()).map((b) => ({ title: b.title, link: b.link, date: new Date(b.day).toISOString(), source: b.source || "Tethr research note", topic: POLICY_WORDS.test(b.title) ? "policy" : "security" }));
   } catch { return []; }
 }
 

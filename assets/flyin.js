@@ -1,6 +1,6 @@
 /* ── arrival ──────────────────────────────────────────────────────────
    A reader coming from the JAR Designs wall has just flown through the
-   Attest AI card and watched its words come apart around them. The hero
+   Tethr card and watched its words come apart around them. The hero
    assembles itself the same way in reverse — same orange, same easing —
    so the two sites read as one movement rather than a navigation.
 

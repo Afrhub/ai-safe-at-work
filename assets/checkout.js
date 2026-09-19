@@ -1,6 +1,6 @@
 /* Plan-aware checkout.
  *
- * "Order Attest AI Platform" links here with ?plan=platform. Without this the
+ * "Order Tethr Platform" links here with ?plan=platform. Without this the
  * page always said Foundation, so a Platform buyer saw the wrong product at the
  * wrong price and their order was recorded as a Foundation order.
  *
@@ -17,7 +17,7 @@
     foundation: {
       eyebrow: 'Order · Foundation',
       title: 'Order <em>Foundation</em>.',
-      lede: 'Train your people and get the core governance documents in place, priced by the size of your organisation and renewed annually. Delivered through the Attest AI portal.',
+      lede: 'Train your people and get the core governance documents in place, priced by the size of your organisation and renewed annually. Delivered through the Tethr portal.',
       priceHead: 'Foundation &middot; &pound;990 <span style="font-size:0.7em;color:var(--text3);font-weight:400">per year, 1 to 25 staff</span>',
       priceNote: '&pound;1,750 per year for 26 to 50 staff. More than 50, we will quote on headcount. All prices exclude VAT.',
       bands: [
@@ -33,14 +33,14 @@
         'Annual refresher training',
         'Starter governance templates to fill in yourself (Acceptable Use Policy, core registers and risk assessment)',
         'Training completion records you can hand to an auditor',
-        'Team management through the Attest AI portal'
+        'Team management through the Tethr portal'
       ]
     },
     platform: {
-      eyebrow: 'Order · Attest AI Platform',
-      title: 'Order the <em>Attest AI Platform</em>.',
-      lede: 'Continuous AI governance, with the staff training included, priced by the size of your organisation and billed annually. Delivered through the Attest AI portal.',
-      priceHead: 'Attest AI Platform &middot; &pound;249 <span style="font-size:0.7em;color:var(--text3);font-weight:400">per month, 1 to 25 staff</span>',
+      eyebrow: 'Order · Tethr Platform',
+      title: 'Order the <em>Tethr Platform</em>.',
+      lede: 'Continuous AI governance, with the staff training included, priced by the size of your organisation and billed annually. Delivered through the Tethr portal.',
+      priceHead: 'Tethr Platform &middot; &pound;249 <span style="font-size:0.7em;color:var(--text3);font-weight:400">per month, 1 to 25 staff</span>',
       priceNote: '&pound;499 per month for 26 to 50 staff. Billed annually at &pound;2,490 and &pound;4,990. More than 50, we will quote on headcount. All prices exclude VAT.',
       bands: [
         ['1-25 (£249/mo, £2,490/yr)', '1 to 25 staff — £249 per month'],
@@ -121,10 +121,10 @@
       var hidden = document.createElement('input');
       hidden.type = 'hidden';
       hidden.name = 'plan';
-      hidden.value = key === 'platform' ? 'Attest AI Platform' : 'Foundation';
+      hidden.value = key === 'platform' ? 'Tethr Platform' : 'Foundation';
       form.appendChild(hidden);
     }
-    document.title = cfg.eyebrow.replace('Order · ', 'Order ') + ' · Attest AI';
+    document.title = cfg.eyebrow.replace('Order · ', 'Order ') + ' · Tethr';
   }
 
   if (document.readyState === 'loading') {

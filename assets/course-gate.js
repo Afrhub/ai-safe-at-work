@@ -1,4 +1,4 @@
-// Paywall: this content needs a signed-in Attest AI portal session.
+// Paywall: this content needs a signed-in Tethr portal session.
 //
 // The demo account USED to be excluded here. That exclusion existed because
 // AUTH_DISABLED made every visitor the demo account, so letting demo read the course

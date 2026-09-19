@@ -6,7 +6,7 @@
 //   RESEND_SMTP_PASSWORD    Resend → API Keys (Resend's SMTP password IS an API key, re_…)
 // Optional:
 //   SMTP_SENDER             default no-reply@attest-ai.com
-//   SMTP_SENDER_NAME        default "Attest AI"
+//   SMTP_SENDER_NAME        default "Tethr"
 //   AUTH_EMAILS_PER_HOUR    default 30
 //   --dry-run               show the diff, change nothing
 //
@@ -32,7 +32,7 @@ const desired = {
   // Step 7: Resend SMTP. Host/port/user are Resend's fixed values.
   external_email_enabled: true,
   smtp_admin_email: process.env.SMTP_SENDER || "no-reply@attest-ai.com",
-  smtp_sender_name: process.env.SMTP_SENDER_NAME || "Attest AI",
+  smtp_sender_name: process.env.SMTP_SENDER_NAME || "Tethr",
   smtp_host: "smtp.resend.com",
   smtp_port: "465", // the Management API types this as a string
   smtp_user: "resend",

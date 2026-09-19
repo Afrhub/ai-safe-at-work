@@ -444,7 +444,7 @@ function pageDashboard(){
 
   main.innerHTML = `
     <div class="pagehead">
-      <div><div class="eyebrow">Attest AI Platform</div>
+      <div><div class="eyebrow">Tethr Platform</div>
       <h2>${fieldVal(DB.org.companyName) ? esc(DB.org.companyName)+', ' : ''}AI Governance Centre</h2>
       <p>Live status across your governance documents, registers and staff sign-off, tracked in one place.</p></div>
       <div class="actions"><button class="btn gold" data-act="setTab" data-a1="aup">Open Acceptable Use Policy →</button></div>
@@ -1602,7 +1602,7 @@ function renderStaffTable(ackByStaff){
       const ack = ackByStaff[s.id];
       const acked = ack && ack.version===DB.aupStatus.version;
       const subj = encodeURIComponent(`Action needed: acknowledge the AI Acceptable Use Policy`);
-      const body = encodeURIComponent(`Hi ${s.name},\n\nPlease sign in to the Attest AI portal and acknowledge the AI Acceptable Use Policy (v${DB.aupStatus.version}):\n${PORTAL_LINK()}\n\nThanks,\n${DB.org.owner}`);
+      const body = encodeURIComponent(`Hi ${s.name},\n\nPlease sign in to the Tethr portal and acknowledge the AI Acceptable Use Policy (v${DB.aupStatus.version}):\n${PORTAL_LINK()}\n\nThanks,\n${DB.org.owner}`);
       return `<tr><td>${esc(s.name)}</td><td>${esc(s.email)}</td><td>${esc(s.role)}</td>
       <td>${acked?`<span class="badge active">Acknowledged ${fmtDate(ack.date)}</span>`:'<span class="badge open">Not yet</span>'}</td>
       <td style="white-space:nowrap;">
@@ -1653,7 +1653,7 @@ function copyAnnouncement(){
   // The link is the point: without it a manager pastes this into Slack and every
   // reader has to ask which link. Sign-in, not this page, because staff hold the
   // end_user role and guard(["manager"]) would bounce them straight back out.
-  const text = `AI Acceptable Use Policy (v${DB.aupStatus.version}) is now ${DB.aupStatus.published?'published':'in draft'} for ${DB.org.companyName}.\n\nPlease sign in to the Attest AI portal and confirm you have read it:\n${PORTAL_LINK()}\n\nQuestions to ${DB.org.dpoName} (${DB.org.incidentContact}).`;
+  const text = `AI Acceptable Use Policy (v${DB.aupStatus.version}) is now ${DB.aupStatus.published?'published':'in draft'} for ${DB.org.companyName}.\n\nPlease sign in to the Tethr portal and confirm you have read it:\n${PORTAL_LINK()}\n\nQuestions to ${DB.org.dpoName} (${DB.org.incidentContact}).`;
   navigator.clipboard?.writeText(text).then(()=>toast('Announcement copied to clipboard')).catch(()=>toast('Could not copy, select and copy manually'));
 }
 

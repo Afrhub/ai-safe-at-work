@@ -201,7 +201,7 @@
 
       <p class="cert-fineprint">
         Issued from your training record, not from this browser. The score, the date and the
-        reference are read back from the pass Attest AI recorded when you sat the quiz, and your
+        reference are read back from the pass Tethr recorded when you sat the quiz, and your
         manager's roster reads the same row. Reissue any time by retaking the quiz.
       </p>
 

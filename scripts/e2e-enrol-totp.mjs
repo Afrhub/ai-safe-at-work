@@ -52,7 +52,7 @@ if (Array.isArray(factors) && factors.some((f) => f.status === "verified")) {
 
 const factor = await api("/auth/v1/factors", {
   token,
-  body: { factor_type: "totp", friendly_name: `e2e-${Date.now()}`, issuer: "Attest AI" },
+  body: { factor_type: "totp", friendly_name: `e2e-${Date.now()}`, issuer: "Tethr" },
 });
 const secret = factor.totp.secret;
 
