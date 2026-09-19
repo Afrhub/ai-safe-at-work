@@ -589,7 +589,7 @@ html[data-theme="dark"] .compare-cell.bad   { --cl: rgba(255,122,118,0.16); }
 /* Footer column titles are navigation labels, not document structure: as <h4> they
    skipped the outline from h2 on most pages (A11Y-04). Styled divs now; the h4 rule
    stays for any page not yet swept. */
-.foot-col h4, .foot-col .foot-h { font-family: var(--font-body); font-size: var(--fs-12); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text2); margin: 0 0 0.9rem; }
+.foot-col h4, .foot-col .foot-h { font-family: var(--font-body); font-size: var(--fs-12); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text2); margin: 0 0 1rem; }
 .foot-col a { display: block; font-size: var(--fs-15); color: var(--text3); padding: 0.5rem 0; }
 .foot-col a:hover { color: var(--accent); }
 .site-foot .foot-bottom { grid-column: 1 / -1; border-top: 1px solid var(--border); margin-top: 1rem; padding-top: 1.5rem; font-size: var(--fs-13); color: var(--text3); }
@@ -742,9 +742,9 @@ html[data-theme="dark"] .theme-toggle .tt-sun  { display: none; }
   font-size: var(--fs-11); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--accent, #fa582d);
 }
-.vcta h2 { margin: 0 0 0.6rem; font-size: var(--fs-28); line-height: 1.15; }
+.vcta h2 { margin: 0 0 0.5rem; font-size: var(--fs-28); line-height: 1.15; }
 .vcta-sub { margin: 0 0 1.5rem; color: var(--text2, #54596b); font-size: var(--fs-16); line-height: 1.6; }
-.vcta-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+.vcta-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
 .vcta-go {
   display: inline-block; padding: 0.75rem 1.25rem;
   background: var(--accent, #fa582d); color: #fff;

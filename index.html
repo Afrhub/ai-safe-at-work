@@ -14,7 +14,7 @@
  body { animation: gate-fade 0.7s ease-out both; }
  @media (prefers-reduced-motion: reduce) { body { animation: none } }
  /* The big front-door CTA */
- .hero-cta.xl { font-size: var(--fs-17); padding: 1.05rem 2.4rem; font-weight: 800; letter-spacing: -0.01em; }
+ .hero-cta.xl { font-size: var(--fs-17); padding: 1rem 2.5rem; font-weight: 800; letter-spacing: -0.01em; }
 </style>
 <meta name="description" content="Attest AI is the AI Governance Platform that helps organisations confidently embrace AI through continuous learning, practical governance and expert support. EU AI Act, GDPR, ISO/IEC 42001 and 27001." />
 <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -73,18 +73,18 @@ main.gate { max-width: none; padding: 0; }
 html[data-theme="dark"] .hero-art { opacity: 0.78; filter: grayscale(0.1) contrast(1.05) brightness(0.92); }
 @media (max-width: 900px) { .hero-art { display: none; } }
 .gate-eyebrow {
-  display: inline-flex; align-items: center; gap: 0.6rem;
+  display: inline-flex; align-items: center; gap: 0.5rem;
   font-size: var(--fs-13); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
-  color: var(--accent); margin-bottom: 1.1rem;
+  color: var(--accent); margin-bottom: 1rem;
 }
 .gate h1 {
   font-family: var(--font-display); font-weight: 800;
   letter-spacing: -0.025em; line-height: 1.06;
-  color: var(--text); margin-bottom: 1.2rem; max-width: 19ch;
+  color: var(--text); margin-bottom: 1.25rem; max-width: 19ch;
 }
 .gate h1 em { font-style: normal; color: var(--accent); }
 .gate .lede { font-size: var(--fs-20); color: var(--text2); max-width: 58ch; margin: 0; border: none; padding: 0; }
-.gate-hero .hero-ctas { margin-top: 2.2rem; }
+.gate-hero .hero-ctas { margin-top: 2rem; }
 html[data-theme="dark"] .gate-hero .hero-cta.secondary { background: rgba(11,13,18,0.4); color: #fff; border-color: rgba(255,255,255,0.32); }
 html[data-theme="dark"] .gate-hero .hero-cta.secondary:hover { border-color: #fff; }
 
@@ -102,26 +102,26 @@ h2.big { font-size: var(--fs-34); letter-spacing: -0.02em; max-width: 22ch; marg
 .trust .badge { font-weight: 700; font-size: var(--fs-16); color: var(--text2); }
 
 /* the challenge */
-.lead-q { font-family: var(--font-display); font-size: var(--fs-28); font-weight: 800; letter-spacing: -0.02em; color: var(--text); margin-top: 1.8rem; line-height: 1.25; }
+.lead-q { font-family: var(--font-display); font-size: var(--fs-28); font-weight: 800; letter-spacing: -0.02em; color: var(--text); margin-top: 2rem; line-height: 1.25; }
 .lead-q .o { color: var(--accent); }
 
 /* meet attest, row + panel */
 .row { display: grid; grid-template-columns: 1.05fr 1fr; gap: 3.5rem; align-items: center; }
 @media (max-width: 880px) { .row { grid-template-columns: 1fr; gap: 2rem; } }
-.panel { --cl: rgba(250,88,45,0.10); background: var(--wash), var(--bg); border: 1px solid var(--border); border-radius: var(--r); box-shadow: var(--shadow-card); padding: 1rem 1.8rem; }
+.panel { --cl: rgba(250,88,45,0.10); background: var(--wash), var(--bg); border: 1px solid var(--border); border-radius: var(--r); box-shadow: var(--shadow-card); padding: 1rem 2rem; }
 .panel .pl { display: flex; gap: 0.75rem; align-items: flex-start; padding: 1rem 0; border-bottom: 1px solid var(--border); color: var(--text); font-weight: 600; font-size: var(--fs-16); }
 .panel .pl:last-child { border: none; }
 .panel .pl svg { width: 19px; height: 19px; stroke: var(--accent); stroke-width: 2.4; fill: none; flex-shrink: 0; margin-top: 2px; }
 
 /* included cards */
-.inc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.4rem; margin-top: 2.6rem; }
+.inc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
 @media (max-width: 820px) { .inc-grid { grid-template-columns: 1fr; } }
-.inc-card { --cl: rgba(250,88,45,0.10); background: var(--wash), var(--bg); border: 1px solid var(--border); border-radius: var(--r); box-shadow: var(--shadow-card); padding: 1.9rem 2rem; transition: transform 0.24s var(--ease-out), box-shadow 0.24s ease, border-color 0.24s ease; }
+.inc-card { --cl: rgba(250,88,45,0.10); background: var(--wash), var(--bg); border: 1px solid var(--border); border-radius: var(--r); box-shadow: var(--shadow-card); padding: 2rem 2rem; transition: transform 0.24s var(--ease-out), box-shadow 0.24s ease, border-color 0.24s ease; }
 .inc-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-card-hover); border-color: var(--border-bold); }
-.inc-card .ico { width: 54px; height: 54px; border-radius: 50%; background: center / cover no-repeat; border: 1px solid var(--border-bold); box-shadow: 0 1px 4px rgba(16,24,40,0.18); margin-bottom: 1.2rem; }
+.inc-card .ico { width: 54px; height: 54px; border-radius: 50%; background: center / cover no-repeat; border: 1px solid var(--border-bold); box-shadow: 0 1px 4px rgba(16,24,40,0.18); margin-bottom: 1.25rem; }
 html[data-theme="dark"] .inc-card .ico { border-color: rgba(255,255,255,0.22); box-shadow: 0 1px 6px rgba(0,0,0,0.5); }
 .inc-card h3 { font-family: var(--font-display); font-size: var(--fs-20); font-weight: 800; margin: 0 0 0.25rem; color: var(--text); }
-.inc-card .kt { font-size: var(--fs-13); font-weight: 700; color: var(--text3); margin-bottom: 0.9rem; }
+.inc-card .kt { font-size: var(--fs-13); font-weight: 700; color: var(--text3); margin-bottom: 1rem; }
 .inc-card ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
 .inc-card li { display: flex; gap: 0.5rem; align-items: flex-start; font-size: var(--fs-16); color: var(--text2); line-height: 1.45; margin: 0; }
 .inc-card li::marker { content: none; }
@@ -129,16 +129,16 @@ html[data-theme="dark"] .inc-card .ico { border-color: rgba(255,255,255,0.22); b
 .inc-card .note { font-size: var(--fs-13); color: var(--text3); margin-top: 1rem; font-style: italic; }
 
 /* checklist grid */
-.checks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem 2.2rem; margin-top: 2rem; }
+.checks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem 2rem; margin-top: 2rem; }
 @media (max-width: 680px) { .checks { grid-template-columns: 1fr; } }
 .chk { display: flex; gap: 0.75rem; align-items: flex-start; color: var(--text); font-weight: 600; font-size: var(--fs-17); line-height: 1.4; }
-.chk svg { width: 19px; height: 19px; stroke: var(--accent); stroke-width: 2.4; fill: none; flex-shrink: 0; margin-top: 3px; }
+.chk svg { width: 19px; height: 19px; stroke: var(--accent); stroke-width: 2.4; fill: none; flex-shrink: 0; margin-top: 4px; }
 
 /* partner chips */
-.chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.6rem; }
+.chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.5rem; }
 @media (max-width: 820px) { .chips { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px) { .chips { grid-template-columns: 1fr; } }
-.chip { display: flex; align-items: center; gap: 0.75rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--r); box-shadow: var(--shadow-card); padding: 1.1rem 1.3rem; font-weight: 700; font-size: var(--fs-16); color: var(--text); transition: transform 0.2s var(--ease-out), box-shadow 0.2s ease, border-color 0.2s ease; }
+.chip { display: flex; align-items: center; gap: 0.75rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--r); box-shadow: var(--shadow-card); padding: 1rem 1.25rem; font-weight: 700; font-size: var(--fs-16); color: var(--text); transition: transform 0.2s var(--ease-out), box-shadow 0.2s ease, border-color 0.2s ease; }
 .chip:hover { transform: translateY(-2px); box-shadow: var(--shadow-card-hover); border-color: var(--border-bold); }
 .chip .d { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
 
