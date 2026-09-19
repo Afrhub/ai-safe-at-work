@@ -5,11 +5,6 @@
   var list = document.getElementById('news-feed');
   var stamp = document.getElementById('news-stamp');
   if (!list) return;
-  // Fallback pills loop too: duplicate what the HTML shipped until the fetch replaces it.
-  if (list.children.length) {
-    var copy = list.innerHTML.replace(/<li>/g, '<li aria-hidden="true">').replace(/<a /g, '<a tabindex="-1" ');
-    list.innerHTML += copy; list.style.setProperty('--news-dur', (list.children.length * 6) + 's');
-  }
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
   var fmt = function (iso) {
     try { return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }); } catch (e) { return ''; }
@@ -23,12 +18,8 @@
           '<span class="news-src">' + esc(i.source) + '</span>' + esc(i.title) +
           '<span class="news-date">' + esc(fmt(i.date)) + '</span></a></li>';
       };
-      // The list is rendered twice so the loop is seamless: the animation moves exactly one
-      // copy's width (-50%) then restarts. The copy is hidden from assistive tech and Tab.
-      list.innerHTML = d.items.map(function (i) { return pill(i, false); }).join('') +
-                       d.items.map(function (i) { return pill(i, true); }).join('');
-      // About 12 seconds per pill so headlines are readable; hover or focus pauses it.
-      list.style.setProperty('--news-dur', (d.items.length * 12) + 's');
+      // A static row of the five newest items; the row scrolls sideways if it overflows.
+      list.innerHTML = d.items.slice(0, 5).map(function (i) { return pill(i, false); }).join('');
       if (stamp) { stamp.textContent = 'updated ' + fmt(d.fetched); }
     })
     .catch(function () {});
